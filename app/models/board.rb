@@ -19,4 +19,5 @@
 #
 
 class Board < ApplicationRecord
+  belongs_to :types
 end
