@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+type_array = %w{Surf Snow Skate}
+
+type_array.each do |t|
+  Type.find_or_create_by(
+  name: t
+  )
+end
+types = Type.all

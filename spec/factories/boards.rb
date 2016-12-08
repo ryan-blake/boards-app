@@ -13,6 +13,9 @@
 #  description :string
 #  length      :integer
 #  title       :string
+#  width       :integer
+#  type_id     :integer
+#  volume      :integer
 #
 
 FactoryGirl.define do
