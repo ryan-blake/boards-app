@@ -1,4 +1,55 @@
 <p id="notice"><%= notice %></p>
+<div class="btn">
+  <% if current_user && current_user.id == @board.user_id%>
+    <%= link_to "Edit", edit_board_path %>
+  <% end %>
+</div>
+<div class="container-fluid">
+<div class="jumbotron">
+<h2><%= @board.title %></h2>
+<h2><%= @board.type_id %></h2>
+
+
+<div class="well well-sm pull-right">
+  <strong>
+  <%= @board.make %>
+
+  </strong>
+</div>
+<div class="well well-sm text-centered">
+<%= @board.description %>
+</div>
+<div class="pull-right">
+ <div class="well well-sm text-center">
+  <strong>Foot Geear (bindings/stomp pad):</strong>
+    <% if @board.footgear == true %>
+      Yes  <% else %>  No
+    <%end %>
+   <br>
+   <strong> board age: </strong> <%= @board.age %> mi.
+
+    <h3> Dimensions</h3>
+    Length:<%= @board.length %><br>
+    Width:<%= @board.width %><br>
+    Depth:<%= @board.volume %><br>
+  </div>
+</div>
+<hr>
+
+<div class=" text-center">
+<div class="well">
+  <p> $<%= @board.price %> </p>
+<br>
+ </div>
+</div>
+</div>
+
+
+</div>
+
+
+
+
 
 <%= link_to 'Edit', edit_board_path(@board) %> |
 <%= link_to 'Back', boards_path %>

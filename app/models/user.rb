@@ -27,4 +27,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,  :confirmable
+  before_save { self.role ||= :member }
+  enum role: [:member, :admin]
+
+  has_many :boards, dependent: :destroy
 end

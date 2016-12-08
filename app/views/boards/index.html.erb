@@ -12,9 +12,17 @@
   <tbody>
     <% @boards.each do |board| %>
       <tr>
-        <td><%= link_to 'Show', board %></td>
+        <td><%= link_to board.title, board %></td>
+        <td>: <%=  board.make  %> </td>
+        <td>: <%=  board.length %> </td>
+        <strong> <td>: $<%=  board.price %> </td> </strong>
+
+
+
+        <%if board.user_id == current_user.id %>
         <td><%= link_to 'Edit', edit_board_path(board) %></td>
         <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
