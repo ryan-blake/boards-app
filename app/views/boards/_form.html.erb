@@ -20,7 +20,7 @@
          <%= f.label :title %>
          <%= f.text_field :title, class: 'form-control' %>
 
-         <%= f.label :type %>
+         <%= f.label :types %>
          <%= f.collection_select :type_id, Type.all, :id, :name, class: 'form-control' %>
        </div>
 
