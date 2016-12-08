@@ -23,4 +23,6 @@
 <br>
 
 <%= link_to 'New Board', new_board_path %>
+<% if signed_on %>
 <p><%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %></p>
+<% end %>
