@@ -8,9 +8,9 @@ class BoardsController < ApplicationController
     # make boardies be where board.boolean == false and board.arrived = false
     @user = current_user
     @charge = Charge.where(user_id: @user)
-    if @user && @charge
-    @boards = Board.find_by(title: @charge )
-end
+    if @user.present? && @charge.present? 
+      @boards = Board.find_by(title: @charge )
+    end
   end
 
   # GET /boards/1
