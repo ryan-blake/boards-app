@@ -54,8 +54,9 @@ gem 'high_voltage'
 gem 'pg'
 gem 'unicorn'
 gem 'unicorn-rails'
-gem 'annotate'
 gem 'rails_12factor'
+gem 'stripe'
+gem 'omniauth-stripe-connect'
 
 
 group :development do
@@ -65,6 +66,8 @@ group :development do
   gem 'rails_apps_testing'
   gem 'rails_layout'
   gem 'spring-commands-rspec'
+  gem 'annotate'
+
 end
 
 group :development, :test do
