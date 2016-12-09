@@ -64,6 +64,6 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through. update sanitizer for new.
   def user_params
-    params.require(:user).permit(:role, :publishable_key, :provider, :uid, :access_code, :name, :about, :email, :address, :city, :state, :zipcode, :latitude, :longitude)
+    params.require(:user).permit(:name, :role, :publishable_key, :provider, :uid, :access_code, :email, :address, :city, :state, :zipcode, :latitude, :longitude)
   end
 end

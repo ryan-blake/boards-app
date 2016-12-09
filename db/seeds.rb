@@ -12,4 +12,17 @@ type_array.each do |t|
   name: t
   )
 end
+
+User.create(
+ name: "ryan",
+ email: "ryan_blake@mac.com",
+ role: 1,
+ password: "testtest",
+ )
+
+ users = User.all
 types = Type.all
+
+
+puts"#{User.count} users"
+puts"#{Type.count} types"
