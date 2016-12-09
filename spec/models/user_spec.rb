@@ -20,6 +20,11 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  role                   :integer
+#  publishable_key        :string
+#  provider               :string
+#  uid                    :string
+#  access_code            :string
 #
 
 require 'rails_helper'

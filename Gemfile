@@ -56,7 +56,8 @@ gem 'unicorn'
 gem 'unicorn-rails'
 gem 'annotate'
 gem 'rails_12factor'
-
+gem 'omniauth-stripe-connect'
+gem 'stripe'
 
 group :development do
   gem 'better_errors'

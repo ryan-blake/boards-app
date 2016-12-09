@@ -20,13 +20,18 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  role                   :integer
+#  publishable_key        :string
+#  provider               :string
+#  uid                    :string
+#  access_code            :string
 #
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,  :confirmable
+         :recoverable, :rememberable, :trackable, :validatable,  :confirmable, :omniauthable
   before_save { self.role ||= :member }
   enum role: [:member, :admin]
 
