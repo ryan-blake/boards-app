@@ -10,6 +10,8 @@
     <td>
       <% if current_user && current_user.provider == nil %>
       <%= link_to image_tag('powered-by-stripe.png'), user_stripe_connect_omniauth_authorize_path %>
+      <% elsif current_user & current_user.provider != nil %>
+      <h2 style="color:white;"> CONNECTED </h2>
       <% end %>
     </td>
   </thead>
