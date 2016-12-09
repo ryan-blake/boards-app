@@ -1,0 +1,12 @@
+<%= form_for Charge.new do |f| %>
+  <%= f.hidden_field :amount, value: @total_price.round  %>
+  <%= f.hidden_field :item, value: @board.title %>
+  <%= f.hidden_field :owner_id, value: @board.user_id %>
+  <% @diff_price = @board.price.to_i * 100%>
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_utz2352HLZF5A7m4XpIkkUqC"
+    data-amount="<%= @total_price.to_i.ceil * 100 %>"
+    data-name="Rentboard" data-description="<%= number_to_currency(@total_price) %>"
+    data-image: "/assets/lab.png">
+  </script>
+  <% end %>

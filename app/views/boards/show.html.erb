@@ -40,6 +40,8 @@
 <div class="well">
   <p> $<%= @board.price %> </p>
 <br>
+<%= render partial: 'charge', locals: {board: @board} %>
+
  </div>
 </div>
 </div>

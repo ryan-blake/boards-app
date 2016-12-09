@@ -20,6 +20,12 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  role                   :integer
+#  publishable_key        :string
+#  provider               :string
+#  uid                    :string
+#  acces_code             :string
+#  stripe_user_id         :string
 #
 
 class User < ApplicationRecord
@@ -31,4 +37,8 @@ class User < ApplicationRecord
   enum role: [:member, :admin]
 
   has_many :boards, dependent: :destroy
+  has_many :paid_charges, class_name: 'Charge', foreign_key: 'user_id', dependent: :destroy
+  has_many :received_charges, class_name: 'Charge', foreign_key: 'vendor_id', dependent: :destroy
+a
+# mapping
 end

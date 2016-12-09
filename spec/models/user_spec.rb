@@ -20,6 +20,12 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  role                   :integer
+#  publishable_key        :string
+#  provider               :string
+#  uid                    :string
+#  acces_code             :string
+#  stripe_user_id         :string
 #
 
 require 'rails_helper'
