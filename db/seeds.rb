@@ -17,8 +17,19 @@ User.create(
  name: "ryan",
  email: "ryan_blake@mac.com",
  role: 1,
- password: "testtest",
+ publishable_key: ENV['PUBLISHABLE_KEY'],
+ provider: ENV['PROVIDER'],
+ uid: ENV['UID'],
+ access_code: ENV['ACCESS_CODE'],
+ password: "testtest"
  )
+ User.create(
+ name: "ar",
+ email: "r@mac.com",
+ role: 0,
+ password: "testtest"
+
+)
 
  users = User.all
 types = Type.all

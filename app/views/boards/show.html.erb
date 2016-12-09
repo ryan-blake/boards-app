@@ -39,7 +39,15 @@
 <div class=" text-center">
 <div class="well">
   <p> $<%= @board.price %> </p>
+  <% unless @board.user_id == current_user.id %>
+  <%= render partial: 'charge', locals: {board: @board} %>
+  <% else %>
+  <div class="btn btn-danger">
+   <%= link_to 'RE-LIST', relist_board_path(board: @board)%>
+  </div>
+<% end %>
 <br>
+
  </div>
 </div>
 </div>

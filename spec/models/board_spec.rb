@@ -16,6 +16,7 @@
 #  width       :integer
 #  type_id     :integer
 #  volume      :integer
+#  arrived     :boolean
 #
 
 require 'rails_helper'
