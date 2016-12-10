@@ -1,5 +1,6 @@
 <div class="jumbotron well"><h2><%= current_user.name%> </h2>
 </div>
+<% if @charge || @board %>
 <div class="well well-styled">
  <div class="well well-styled">
    <h4 style="text-decoration:underline;"> Board waiting arrival</h4>
@@ -36,17 +37,15 @@
 </div>
 
 <div class="well well-styled">
- <h4 style="text-decoration:underline;"> My boards </h4>
+   <h4 style="text-decoration:underline;"> My boards </h4>
 
 
-       <% my_boards = Board.find_by(user_id: current_user.id) %>
-       <% if my_boards %>
-         <h3> <strong><%= link_to my_boards.title, my_boards%></strong></h3>
+         <% my_boards = Board.find_by(user_id: current_user.id) %>
+         <% if my_boards %>
+           <h3> <strong><%= link_to my_boards.title, my_boards%></strong></h3>
 
- <% end %>
+   <% end %>
+  </div>
 </div>
 
-
-
-
-</div>
+<% end %>
