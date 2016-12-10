@@ -10,7 +10,7 @@ class BoardsController < ApplicationController
     @charge = Charge.where(user_id: @on.id)
       @boards = Board.find_by(title: @charge.item )
     end
-  end
+
 
   # GET /boards/1
   # GET /boards/1.json
