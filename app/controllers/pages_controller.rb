@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     @charge = Charge.where(user_id: @user)
 
     if @user && @charge
-        @boards = Board.where(title: @charge.item )
+        @boards = Board.where(title: @charge )
     end
   end
 end
