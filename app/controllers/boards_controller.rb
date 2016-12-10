@@ -9,7 +9,7 @@ class BoardsController < ApplicationController
     if current_user.present?
       @on = current_user
       @charge = Charge.where(user_id: @on.id)
-      @boards = Board.find_by(title: @charge.item )
+      @boards = Board.find(title: @charge.item )
       end
     end
 
