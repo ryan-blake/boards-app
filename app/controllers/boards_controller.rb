@@ -6,9 +6,11 @@ class BoardsController < ApplicationController
   def index
     @boardies = Board.all
     # make boardies be where board.boolean == false and board.arrived = false
-    @on = current_user
-    @charge = Charge.where(user_id: @on.id)
+    if signed_on
+      @on = current_user
+      @charge = Charge.where(user_id: @on.id)
       @boards = Board.find_by(title: @charge.item )
+      end
     end
 
 
