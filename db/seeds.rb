@@ -13,6 +13,9 @@ type_array.each do |t|
   )
 end
 
+types = Type.all
+
+
 User.create(
  name: "ryan",
  email: "ryan_blake@mac.com",
@@ -31,9 +34,27 @@ User.create(
 
 )
 
- users = User.all
-types = Type.all
+users = User.all
+
+10.times do
+  Board.create!(
+  title:       Faker::Hipster.word,
+  description: Faker::Hipster.paragraph,
+  length: Faker::Number.number(1),
+  width: Faker::Number.number(1),
+  volume: Faker::Number.number(1),
+  type: types.sample,
+  footgear: [true, false].sample,
+  arrived: [true, false].sample,
+  price: rand(10..40),
+  user_id: User.all.sample.id
+
+  )
+end
 
 
+boards = Board.all
+
+puts "#{Board.count} boards"
 puts"#{User.count} users"
 puts"#{Type.count} types"
