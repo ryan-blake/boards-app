@@ -10,8 +10,9 @@ class PagesController < ApplicationController
     @user = current_user
     @boards = Board.find_by(user_id: @user)
     @charge = Charge.where(user_id: @user)
+
     if @user && @charge
-        @boards = Board.find_by(title: @charge.item )
+        @boards = Board.where(title: @charge.item )
     end
   end
 end
