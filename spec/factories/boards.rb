@@ -18,6 +18,12 @@
 #  volume      :integer
 #  arrived     :boolean
 #  pending     :boolean
+#  address     :string
+#  city        :string
+#  string      :string
+#  integer     :string
+#  latitude    :float
+#  longitude   :float
 #
 
 FactoryGirl.define do

@@ -9,7 +9,7 @@ class BoardsController < ApplicationController
     if current_user.present?
       @on = current_user
       @charge = Charge.where(user_id: @on.id)
-    if @charge = nil
+    if @charge == nil
       @boards = Board.where(title: @charge.item )
       end
       end
@@ -83,7 +83,7 @@ class BoardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:title, :description, :user_id, :price, :lendth, :make, :age, :footgear, :width, :length, :name, :type_id, :volume, images_files: [])
+      params.require(:board).permit(:title, :description, :user_id, :price, :lendth, :make, :age, :footgear, :width, :length, :name, :type_id, :volume, :address, :city, :state, :zipcode, images_files: [])
     end
 
 end

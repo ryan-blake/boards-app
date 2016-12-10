@@ -26,6 +26,12 @@
 #  access_code            :string
 #  stripe_user_id         :string
 #  name                   :string
+#  address                :string
+#  city                   :string
+#  string                 :string
+#  integer                :string
+#  latitude               :float
+#  longitude              :float
 #
 
 require 'rails_helper'

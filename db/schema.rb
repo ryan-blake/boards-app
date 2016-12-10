@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161210214353) do
+ActiveRecord::Schema.define(version: 20161210231154) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at",  null: false
@@ -28,6 +28,12 @@ ActiveRecord::Schema.define(version: 20161210214353) do
     t.integer  "volume"
     t.boolean  "arrived"
     t.boolean  "pending"
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zipcode"
+    t.float    "latitude"
+    t.float    "longitude"
     t.index ["type_id"], name: "index_boards_on_type_id"
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
@@ -61,6 +67,7 @@ ActiveRecord::Schema.define(version: 20161210214353) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string   "name",                   default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -71,20 +78,24 @@ ActiveRecord::Schema.define(version: 20161210214353) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "role"
     t.string   "publishable_key"
     t.string   "provider"
     t.string   "uid"
     t.string   "access_code"
     t.string   "stripe_user_id"
-    t.string   "name"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.string   "address"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zipcode"
+    t.float    "latitude"
+    t.float    "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

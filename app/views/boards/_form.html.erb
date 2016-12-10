@@ -68,6 +68,27 @@
       <%= f.label :footgear %>
       <%= f.check_box :footgear %> <br />
     </div>
+    <div class="well col-lg-7">
+  <strong> Address released to Users after payment is received. </strong>
+    <div class="field">
+       <%= f.label :address %><br/>
+       <%= f.text_field :address %><br/>
+     </div>
+
+     <div class="field">
+      <%= f.label :city %><br />
+      <%= f.text_field :city %>
+     </div>
+     <div class="field">
+      <%= f.label :state %><br />
+      <%= f.text_field :state %>
+     </div>
+     <div class="field">
+      <%= f.label :zipcode %><br />
+      <%= f.number_field :zipcode %>
+     </div>
+   </div>
+
   </div>
 
   <div class="field">

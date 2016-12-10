@@ -26,6 +26,12 @@
 #  access_code            :string
 #  stripe_user_id         :string
 #  name                   :string
+#  address                :string
+#  city                   :string
+#  string                 :string
+#  integer                :string
+#  latitude               :float
+#  longitude              :float
 #
 
 class User < ApplicationRecord
@@ -39,5 +45,14 @@ class User < ApplicationRecord
   has_many :boards, dependent: :destroy
   has_many :paid_charges, class_name: 'Charge', foreign_key: 'user_id', dependent: :destroy
   has_many :received_charges, class_name: 'Charge', foreign_key: 'vendor_id', dependent: :destroy
+
+  # mapping
+  geocoded_by :full_address
+  after_validation :geocode
+
+
+  def full_address
+    [address, city, state, zipcode].join(', ')
+  end
 
 end

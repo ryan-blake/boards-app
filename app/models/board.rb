@@ -18,6 +18,12 @@
 #  volume      :integer
 #  arrived     :boolean
 #  pending     :boolean
+#  address     :string
+#  city        :string
+#  string      :string
+#  integer     :string
+#  latitude    :float
+#  longitude   :float
 #
 
 class Board < ApplicationRecord
@@ -25,4 +31,11 @@ class Board < ApplicationRecord
   belongs_to :type
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
+  # mapping
+  geocoded_by :full_address
+  after_validation :geocode, if: ->(obj){ obj.full_address.present? }
+
+  def full_address
+    [address, city, state, zipcode].join(', ')
+  end
 end
