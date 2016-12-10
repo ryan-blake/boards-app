@@ -8,7 +8,7 @@ class BoardsController < ApplicationController
     # make boardies be where board.boolean == false and board.arrived = false
     if current_user.present?
       @on = current_user
-      @charge = Charge.where(user_id: @on.id)
+      @charge = Charge.find(user_id: @on.id)
       @boards = Board.where(title: @charge.item )
       end
     end
