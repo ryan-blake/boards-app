@@ -17,6 +17,7 @@
 #  type_id     :integer
 #  volume      :integer
 #  arrived     :boolean
+#  pending     :boolean
 #
 
 require 'rails_helper'

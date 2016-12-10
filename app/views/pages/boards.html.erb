@@ -18,6 +18,8 @@
       <strong>Completed payment:</strong> <%= charge.completed %>
     </div>
     <% end %>
+    <% end %>
+    <% end %>
 </div>
 
 
@@ -32,24 +34,30 @@
          Charged: $<%= charge.price %>
        <% end %>
      <% end %>
-  <% end %>
- <% end %>
+<% end %>
 </div>
 
 <div class="well well-styled">
-   <h4 style="text-decoration:underline;"> My boards </h4>
-
-
-         <% my_boards = Board.where(user_id: current_user.id) %>
+   <h4 style="text-decoration:underline;"> My boards (must be connected to sell your boards) </h4>
+         <% my_boards = Board.where(user_id: current_user.id, pending: nil) %>
          <% if my_boards %>
-
-           <h3> <strong><% my_boards.each do |i| %>
-             <%= link_to i.title, i %>:
-             <% end%>
-           </strong></h3>
-
-   <% end %>
+           <h3>
+             <strong>
+            <% my_boards.each do |i| %>
+              <%= link_to i.title, i %>:
+            <% end%>
+            </strong></h3>
+           <% end %>
+           <hr>
+           <h4 style="text-decoration:underline;color:white;"> My shipments </h4>
+                 <% pending_boards = Board.where(user_id: current_user.id, pending: true) %>
+                 <% if pending_boards %>
+                   <h3>
+                     <strong>
+                    <% pending_boards.each do |i| %>
+                      <%= link_to i.title, i %>:
+                    <% end%>
+                    </strong></h3>
+                   <% end %>
   </div>
 </div>
-
-<% end %>
