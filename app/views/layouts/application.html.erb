@@ -17,6 +17,9 @@
       <li class="pull-left"><%= link_to 'snow', root_path %></li>
       <li class="pull-left"><%= link_to 'surf', root_path %></li>
       <li class="pull-left"><%= link_to 'skate', root_path %></li>
+      <% if user_signed_in? %>
+      <li><%= link_to 'My-spots', my_boards_path %></li>
+<% end %>
 
 
   </div>

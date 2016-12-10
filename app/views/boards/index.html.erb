@@ -1,6 +1,14 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
+<% unless current_user %>
+<div style="position:absolute; left:calc(50% - 20px;)">
+<p><%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %></p>
+</div>
+<% else %>
+
+<% if  current_user && current_user.provider != nil %>
 <h3 class="pull-right"><%= link_to 'New', new_board_path %></h3>
+<% end %>
 
 <% if current_user && current_user.provider == nil %>
 <%= link_to image_tag('powered-by-stripe.png'), user_stripe_connect_omniauth_authorize_path %>
@@ -36,37 +44,9 @@
 
 <br>
 </hr>
-<div class="well well-styled">
-   <% if @charge %>
- <div class="well well-styled">
-   <h4 style="text-decoration:underline;">Pending Arrival</h4>
-  <% @charge.each do |charge| %>
-   <% if charge.completed == false %>
-    <% my_charge = Charge.find_by(user_id: current_user.id, completed: false) %>
-    <%my_board = Board.find_by(title: charge.item ) %>
-    <% if my_charge.user_id === current_user.id && my_board.user_id != current_user.id%>
-    <h3><%= link_to my_board.title, my_board %></h3>
-      <div class="btn btn-success" style="text-decoration:none;">
-        <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: my_charge.id, token: my_charge.token, price: my_charge.price, customer_id: my_charge.customer_id, destination: my_charge.vendor.uid) %>
-      </div>
-      <% end %>
-     <div>
-      <strong>Reservation:</strong> <%= charge.item%>
-      <strong>Completed payment:</strong> <%= charge.completed %>
-    </div>
-    <% end %>
-  <% end %>
-  <% end %>
+
+
 
 
 </div>
-
-
-</div>
-</div>
-
-
-
-<% unless signed_on %>
-<p><%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %></p>
 <% end %>

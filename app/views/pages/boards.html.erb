@@ -1,0 +1,52 @@
+<div class="jumbotron well"><h2><%= current_user.name%> </h2>
+</div>
+<div class="well well-styled">
+ <div class="well well-styled">
+   <h4 style="text-decoration:underline;"> Board waiting arrival</h4>
+  <% @charge.each do |charge| %>
+  <% if charge.completed === false %>
+  <%= charge.item %>
+    <% my_charge = Charge.find_by(user_id: @user.id, completed: false) %>
+    <%my_board = Board.find_by(title: charge.item ) %>
+    <h3> <%= link_to my_board.title, my_board %></h3>
+      <div class="btn btn-primary">
+        <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: my_charge.id, token: my_charge.token, price: my_charge.price, customer_id: my_charge.customer_id, destination: my_charge.vendor.uid) %>
+      </div>
+     <div>
+      <strong>Reservation:</strong> <%= charge.item%>
+      <strong>Completed payment:</strong> <%= charge.completed %>
+    </div>
+    <% end %>
+</div>
+
+
+<div class="well well-styled">
+ <h4 style="text-decoration:underline;"> Bought boards </h4>
+
+  <% @charge.each do |charge| %>
+  <% if charge.completed === true %>
+       <% my_boards = Board.find_by(title: charge.item) %>
+       <% if my_boards %>
+         <h3> <strong><%= link_to my_boards.title, my_boards%></strong></h3>
+         Charged: $<%= charge.price %>
+       <% end %>
+     <% end %>
+  <% end %>
+ <% end %>
+</div>
+
+<div class="well well-styled">
+ <h4 style="text-decoration:underline;"> My boards </h4>
+
+
+       <% my_boards = Board.find_by(user_id: current_user.id) %>
+       <% if my_boards %>
+         <h3> <strong><%= link_to my_boards.title, my_boards%></strong></h3>
+
+ <% end %>
+</div>
+
+
+
+
+</div>

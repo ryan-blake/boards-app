@@ -9,7 +9,7 @@ class BoardsController < ApplicationController
     if current_user.present?
       @on = current_user
       @charge = Charge.where(user_id: @on.id)
-    unless @charge = nil
+    if @charge = nil
       @boards = Board.where(title: @charge.item )
       end
       end
