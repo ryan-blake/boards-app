@@ -70,6 +70,11 @@
     </div>
   </div>
 
+  <div class="field">
+      <%= f.label :images_files %><br>
+      <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %>
+  </div>
+
 
     </br>
 

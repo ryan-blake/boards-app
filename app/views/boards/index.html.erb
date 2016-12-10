@@ -27,6 +27,7 @@
   <tbody class="well">
     <% @boardies.each do |board| %>
       <tr>
+        <td><%= attachment_image_tag(board.images.first, :file, :fill, 100, 100) %></td>
         <td style="padding-left: 15px;"><%= link_to board.title, board %></td>
         <td>: <%=  board.make  %> </td>
         <td>: <%=  board.length %> </td>
