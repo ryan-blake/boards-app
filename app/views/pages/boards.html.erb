@@ -1,9 +1,10 @@
 <% if  user_signed_in? %>
-<div class="jumbotron well"><h2><%= current_user.name%> </h2>
+<div class="jumbotron well">
+  <h2><%= current_user.name%> </h2>
 </div>
+
 <% if @charge || @board %>
-<div class="well well-styled">
- <div class="well well-styled">
+ <div class="well well-styled col-md-6">
    <h4 style="text-decoration:underline;"> Board waiting arrival</h4>
   <% @charge.each do |charge| %>
   <% if charge.completed === false %>
@@ -21,15 +22,14 @@
     </div>
     <% end %>
     <% end %>
-    <% end %>
 </div>
 
 
-<div class="well well-styled">
+<div class="well well-styled col-md-6">
  <h4 style="text-decoration:underline;"> Bought boards </h4>
 
   <% @charge.each do |charge| %>
-  <% if charge.completed === true %>
+    <% if charge.completed === true %>
        <% my_boards = Board.find_by(title: charge.item) %>
        <% if my_boards %>
        <td><%= attachment_image_tag(my_boards.images.first, :file, :fill, 100, 100) %></td>
@@ -37,33 +37,56 @@
          Charged: $<%= charge.price %>
        <% end %>
      <% end %>
-<% end %>
+  <% end %>
 </div>
 
-<div class="well well-styled">
+<div class="well col-md-6">
  <h4 style="text-decoration:underline;"> My boards (must be connected to sell your boards) </h4>
    <% my_boards = Board.where(user_id: current_user.id, pending: nil) %>
    <% if my_boards %>
      <h3>
        <strong>
       <% my_boards.each do |i| %>
-      <td><%= attachment_image_tag(i.images.first, :file, :fill, 100, 100) %></td>
+      <div class="well ">
+        <td class="well" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
         <%= link_to i.title, i %>:
+      </div>
       <% end%>
-      </strong></h3>
+      </strong>
+    </div>
+    </h3>
      <% end %>
-     <hr>
-     <h4 style="text-decoration:underline;color:white;"> My shipments </h4>
+
+   <div class="well col-md-6">
+    <h4 style="text-decoration:underline;"> My pending shipment (out for shipping) </h4>
+   <% pending_boards = Board.where(user_id: current_user.id, pending: true) %>
+   <% if pending_boards %>
+   <h3>
+     <strong>
+    <% pending_boards.each do |i| %>
+    <div class="well ">
+      <td class="well" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
+      <%= link_to i.title, i %>:
+    </div>
+    <% end%>
+    </strong></h3>
+   <% end %>
+  </div>
+   <% end %>
+
+
+<!-- <div class="well">
+     <h4 style="text-decoration:underline;color:black;"> My shipments </h4>
        <% pending_boards = Board.where(user_id: current_user.id, pending: true) %>
        <% if pending_boards %>
          <h3>
           <strong>
+            <div class="well  col-md-12">
           <% pending_boards.each do |i| %>
-          <td><%= attachment_image_tag(i.images.first, :file, :fill, 100, 100) %></td>
+            <td class="well" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
             <%= link_to i.title, i %>:
           <% end%>
-          </strong></h3>
+          </strong>
+        </h3>
        <% end %>
-</div>
-</div>
-<% end %>
+       <% end %> -->

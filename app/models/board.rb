@@ -33,6 +33,9 @@ class Board < ApplicationRecord
   accepts_attachments_for :images, attachment: :file, append: true
   # mapping
 
+  geocoded_by :full_address
+  after_validation :geocode
+
   def full_address
     [address, city, state, zipcode].join(', ')
   end

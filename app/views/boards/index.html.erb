@@ -24,15 +24,14 @@
     </td>
   </thead>
 
-  <tbody class="well">
+  <tbody class="well container-fluid">
     <% @boardies.each do |board| %>
       <tr>
-        <td><%= attachment_image_tag(board.images.first, :file, :fill, 100, 100) %></td>
-        <td style="padding-left: 15px;"><%= link_to board.title, board %></td>
+        <td class="well"style=" width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 100, 100), board %></td>
+        <td style="text-align:center;" class="title-ind"><%= link_to board.title, board %></td>
         <td>: <%=  board.make  %> </td>
         <td>: <%=  board.length %> </td>
         <strong> <td>: $<%=  board.price %> </td> </strong>
-
 
         <%if current_user && board.user_id == current_user.id %>
         <td><%= link_to 'Edit', edit_board_path(board) %></td>
