@@ -47,8 +47,6 @@ class User < ApplicationRecord
   has_many :received_charges, class_name: 'Charge', foreign_key: 'vendor_id', dependent: :destroy
 
   # mapping
-  geocoded_by :full_address
-  after_validation :geocode
 
 
   def full_address

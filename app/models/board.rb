@@ -32,8 +32,6 @@ class Board < ApplicationRecord
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
   # mapping
-  geocoded_by :full_address
-  after_validation :geocode, if: ->(obj){ obj.full_address.present? }
 
   def full_address
     [address, city, state, zipcode].join(', ')
