@@ -16,6 +16,12 @@
 <h2 style="color:white;"> CONNECTED <%= current_user.uid %> </h2>
 <% end %>
 
+<div id="mapdisplay">
+    <%= render 'map' %>
+</div>
+<div id="results">
+    <%= render 'results' %>
+</div>
 
 <table class="well" style="width:100%;">
   <thead >
