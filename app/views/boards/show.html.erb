@@ -19,7 +19,7 @@
 <div class="well well-sm text-centered">
 <%= @board.description %>
 <% @board.images.each do |i| %>
-  <%= attachment_image_tag(i, :file, :fill, 350, 350) %>
+  <%= attachment_image_tag(i, :file, :limit, 500, 500) %>
 <% end %>
 </div>
 <div class="pull-right">

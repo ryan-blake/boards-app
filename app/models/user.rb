@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  name                   :string           default(""), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
@@ -13,23 +14,22 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string
 #  last_sign_in_ip        :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
 #  confirmation_token     :string
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #  role                   :integer
 #  publishable_key        :string
 #  provider               :string
 #  uid                    :string
 #  access_code            :string
 #  stripe_user_id         :string
-#  name                   :string
 #  address                :string
 #  city                   :string
-#  string                 :string
-#  integer                :string
+#  state                  :string
+#  zipcode                :integer
 #  latitude               :float
 #  longitude              :float
 #

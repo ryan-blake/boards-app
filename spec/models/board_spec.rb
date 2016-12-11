@@ -20,8 +20,8 @@
 #  pending     :boolean
 #  address     :string
 #  city        :string
-#  string      :string
-#  integer     :string
+#  state       :string
+#  zipcode     :integer
 #  latitude    :float
 #  longitude   :float
 #

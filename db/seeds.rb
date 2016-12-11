@@ -47,14 +47,22 @@ users = User.all
   footgear: [true, false].sample,
   arrived: [true, false].sample,
   price: rand(10..40),
-  user_id: User.all.sample.id
-
+  user_id: User.all.sample.id,
+  pending: [nil, true, false].sample
   )
+
+  boards = Board.all
+
 end
 
-
-boards = Board.all
-
+10.times do
+  Image.create!(
+  file_id: '2f94b80570baba87f3647a4fb71ebb40523f6df0ac3cae7abad2dd8d3b97',
+  board_id: Board.all.sample.id
+  )
+end
+images = Image.all
+puts "#{Image.count} boards"
 puts "#{Board.count} boards"
 puts"#{User.count} users"
 puts"#{Type.count} types"
