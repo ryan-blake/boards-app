@@ -4,7 +4,9 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.json
   def index
-    @boardies = Board.all
+    @boardies = Board.order('created_at DESC')
+
+
     # make boardies be where board.boolean == false and board.arrived = false
     if current_user.present?
       @on = current_user
