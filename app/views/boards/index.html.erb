@@ -26,9 +26,10 @@
 
   <tbody class="well container-fluid">
     <% @boardies.each do |board| %>
-      <tr>
-        <td class="well"style=" width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 100, 100), board %></td>
-        <td style="text-align:center;" class="title-ind"><%= link_to board.title, board %></td>
+      <tr class="col-sm-6 well">
+        <td class="well center-text" style=" width:30px;border-radius:50%;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 100, 100), board %></td>
+        <td  class="center-text title-ind"><%= link_to board.title, board %></td>
+
         <td>: <%=  board.make  %> </td>
         <td>: <%=  board.length %> </td>
         <strong> <td>: $<%=  board.price %> </td> </strong>
