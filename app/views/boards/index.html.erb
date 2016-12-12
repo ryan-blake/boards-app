@@ -16,7 +16,19 @@
 <h2 style="color:white;"> CONNECTED <%= current_user.uid %> </h2>
 <% end %>
 
-
+<div class="col-lg-8">
+ <div class="well" style="background:#c9d8eb; box-shadow: 1px 4px 9px 4px #fff; border-color: cyan;">
+<%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
+ <div class="col-sm-4">
+ <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %>
+</div>
+ <div class="col-sm-4">
+ <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'All radii'} , { :class => 'form-control' })  %>
+</div>
+ <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
+</div>
+<% end %>
+</div>
 <table class="well" style="width:100%;">
   <thead >
     <td>
@@ -31,7 +43,10 @@
         <td  class="center-text title-ind"><%= link_to board.title, board %></td>
 
         <td>: <%=  board.make  %> </td>
+
         <td>: <%=  board.length %> </td>
+        <td>Coordinates: <%= board.latitude %> <%= board.longitude %></td>
+
         <strong> <td>: $<%=  board.price %> </td> </strong>
 
         <%if current_user && board.user_id == current_user.id %>

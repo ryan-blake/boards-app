@@ -24,14 +24,16 @@ User.create(
  provider: ENV['PROVIDER'],
  uid: ENV['UID'],
  access_code: ENV['ACCESS_CODE'],
- password: "testtest"
+ password: "testtest",
+ zipcode: [76210, 90277, 76262, 76135].sample
+
  )
  User.create(
  name: "ar",
  email: "r@mac.com",
  role: 0,
- password: "testtest"
-
+ password: "testtest",
+ zipcode: [76210, 90277, 76262, 76135].sample
 )
 
 users = User.all
@@ -48,7 +50,8 @@ users = User.all
   arrived: [true, false].sample,
   price: rand(10..40),
   user_id: User.all.sample.id,
-  pending: [nil, true, false].sample
+  pending: [nil, true, false].sample,
+  zipcode: [76210, 90277, 76262, 76135].sample
   )
 
   boards = Board.all
@@ -61,8 +64,18 @@ end
   board_id: Board.all.sample.id
   )
 end
+
 images = Image.all
-puts "#{Image.count} boards"
+
+distance_array = %w(10 20 30 50 100 150 200 350 400)
+
+distance_array.each do |c|
+  Distance.find_or_create_by(
+    value: c
+  )
+end
+distances = Distance.all
+puts "#{Image.count} images"
 puts "#{Board.count} boards"
 puts"#{User.count} users"
 puts"#{Type.count} types"

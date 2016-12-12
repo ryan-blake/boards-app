@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
-  resources :boards
+  resources :boards do
+    collection do
+  get 'search'
+end
+end
   resources :charges
   get 'complete_charge' => 'charges#complete'
   get 'relist_board' => 'boards#relist'

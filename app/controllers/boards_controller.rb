@@ -4,9 +4,9 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.json
   def index
-    @boardies = Board.order('created_at DESC')
-
-
+    @boardies = Board.order('created_at ASC')
+    @boardies = Board.where(pending: nil)
+    @boardies = Board.where(arrived: false)
     # make boardies be where board.boolean == false and board.arrived = false
     if current_user.present?
       @on = current_user
@@ -77,6 +77,20 @@ class BoardsController < ApplicationController
     @board.arrived = false
     @board.save
   end
+
+
+  def search
+  if params[:value].to_i < 1
+    distance_in_miles = 2000
+  else
+    distance_in_miles = params[:value].to_i
+  end
+@boardies = Board.where("type_id like ? and (title like ? or description like ?)",
+          "%#{params[:type_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
+           .near([current_user.latitude, current_user.longitude], distance_in_miles)
+ render :index
+end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board
