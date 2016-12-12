@@ -41,4 +41,13 @@ class Board < ApplicationRecord
     [address, city, state, zipcode].join(', ')
   end
 
+
+  def lengths
+    @lengths = []
+
+    @boards.each do |i|
+      @lengths.push(i.length)
+    end
+    puts @lenghts.uniq!
+  end
 end

@@ -80,16 +80,16 @@ class BoardsController < ApplicationController
 
 
   def search
-  if params[:value].to_i < 1
-    distance_in_miles = 2000
-  else
-    distance_in_miles = params[:value].to_i
-  end
-@boardies = Board.where("type_id like ? and (title like ? or description like ?)",
-          "%#{params[:type_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
-           .near([current_user.latitude, current_user.longitude], distance_in_miles)
- render :index
-end
+    if params[:value].to_i < 1
+      distance_in_miles = 2000
+    else
+      distance_in_miles = params[:value].to_i
+    end
+  @boardies = Board.where("type_id like ? and (title like ? or description like ?)",
+            "%#{params[:type_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
+             .near([current_user.latitude, current_user.longitude], distance_in_miles)
+   render :index
+ end
 
   private
     # Use callbacks to share common setup or constraints between actions.
