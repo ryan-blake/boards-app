@@ -1,0 +1,5 @@
+class AddDistanceToBoards < ActiveRecord::Migration[5.0]
+  def change
+    add_column :boards, :distance_id, :integer
+  end
+end
