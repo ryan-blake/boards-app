@@ -4,9 +4,10 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.json
   def index
-    @boardies = Board.order('created_at ASC')
-    @boardies = Board.where(pending: nil)
-    @boardies = Board.where(arrived: false)
+    @boardies = Board.order('created_at ASC') &&
+
+@boardies =    Board.where(:pending => [nil]).where(:arrived => [nil, false])
+
     # make boardies be where board.boolean == false and board.arrived = false
     if current_user.present?
       @on = current_user
@@ -85,8 +86,10 @@ class BoardsController < ApplicationController
     else
       distance_in_miles = params[:value].to_i
     end
-    # casting seems to have changed geocoder locally but works on heroku. 
-  @boardies = Board.where("cast( type_id as text) like ? and (title like ? or description like ?)",
+    # casting seems to have changed geocoder locally but works on heroku.
+    @boardies = Board.where(pending: nil)
+    @boardies = Board.where(arrived: false)
+    @boardies = Board.where(:pending => [nil]).where(:arrived => [nil, false]).where("cast( type_id as text) like ? and (title like ? or description like ?)",
             "%#{params[:type_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
              .near([current_user.latitude, current_user.longitude], distance_in_miles)
    render :index

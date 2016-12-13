@@ -33,13 +33,6 @@ h3 :hover {
   color: grey;
 }
 
-.btn-outline {
-  position:absolute;
-  right:15px;
-  border:1px solid black;
-  padding:0px 10px 0px 10px;
-}
-
 .center-text {
   text-align: center;
 }
@@ -63,10 +56,11 @@ border: none;
 .title-ind a {
 text-decoration:none;
 color:black;
-font-family:arial;
-font-weight:700;
-font-size:20px;
+font-family:600;
+font-weight:thin;
+font-size:16px;
 }
+
 
 .well-title a {
   color: cyan;
@@ -110,9 +104,4 @@ font-size:20px;
 .btn-warning.btn-outline:hover,
 .btn-danger.btn-outline:hover {
     color: #fff;
-}
-
-.search-cat {
-  background:darkgrey;
-  box-shadow: 1px 4px 9px 4px #fff;
 }
