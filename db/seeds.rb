@@ -15,6 +15,16 @@ end
 
 types = Type.all
 
+category_array = %w{Longboard(surf) SUP Skis Cruiser(skate)}
+
+category_array.each do |t|
+  Category.find_or_create_by(
+  name: t
+  )
+end
+
+categories = Category.all
+
 
 User.create(
  name: "ryan",
@@ -47,6 +57,7 @@ users = User.all
   width: Faker::Number.number(1),
   volume: Faker::Number.number(1),
   type: types.sample,
+  category: categories.sample,
   footgear: [true, false].sample,
   arrived: [true, false].sample,
   price: rand(10..40),

@@ -35,7 +35,9 @@
  <div class="col-sm-4">
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you or (any)'} , { :class => 'form-control' })  %>
 </div>
-
+<div class="col-sm-4">
+<%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose a cat" },{ :class => 'form-control' }) %>
+</div>
  <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
 
 </div>
@@ -57,7 +59,9 @@
  <div class="col-sm-4">
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
 </div>
-
+<div class="col-sm-4">
+<%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose a cat" },{ :class => 'form-control' }) %>
+</div>
  <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
 
 </div>
@@ -96,6 +100,9 @@
      </li>
      <li>
       type: <%= board.type.name %>
+     </li>
+     <li>
+      type: <%= board.category.name %>
      </li>
      <li>
       <strong>$<%=  board.price %></strong>

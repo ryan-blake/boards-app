@@ -29,6 +29,7 @@
 class Board < ApplicationRecord
   belongs_to :user
   belongs_to :type
+  belongs_to :category
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
   # mapping

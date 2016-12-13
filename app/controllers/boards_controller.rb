@@ -89,8 +89,8 @@ class BoardsController < ApplicationController
     # casting seems to have changed geocoder locally but works on heroku.
     @boardies = Board.where(pending: nil)
     @boardies = Board.where(arrived: false)
-    @boardies = Board.where(:pending => [nil]).where(:arrived => [nil, false]).where("cast( type_id as text) like ? and (title like ? or description like ?)",
-            "%#{params[:type_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
+    @boardies = Board.where(:pending => [nil]).where(:arrived => [nil, false]).where("cast( type_id as text) like ? and category_id like ? and (title like ? or description like ?)",
+            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
 
              .near([request.location.latitude, request.location.longitude], distance_in_miles)
    render :index
@@ -105,8 +105,8 @@ class BoardsController < ApplicationController
    # casting seems to have changed geocoder locally but works on heroku.
    @boardies = Board.where(pending: nil)
    @boardies = Board.where(arrived: false)
-   @boardies = Board.where(:pending => [nil]).where(:arrived => [nil, false]).where("cast( type_id as text) like ? and (title like ? or description like ?)",
-           "%#{params[:type_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
+   @boardies = Board.where(:pending => [nil]).where(:arrived => [nil, false]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+           "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
 
             .near([current_user.latitude, current_user.longitude], distance_in_miles)
   render :index
@@ -120,7 +120,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:title, :description, :user_id, :price, :lendth, :make, :age, :footgear, :width, :length, :name, :type_id, :volume, :address, :city, :state, :zipcode, images_files: [])
+      params.require(:board).permit(:title, :description, :user_id, :price, :lendth, :make, :age, :footgear, :width, :length, :name, :type_id, :category_id, :volume, :address, :city, :state, :zipcode, images_files: [])
     end
 
 end
