@@ -36,7 +36,7 @@
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you or (any)'} , { :class => 'form-control' })  %>
 </div>
 <div class="col-sm-4">
-<%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose a cat" },{ :class => 'form-control' }) %>
+<%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose Category" },{ :class => 'form-control' }) %>
 </div>
  <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
 
@@ -60,7 +60,7 @@
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
 </div>
 <div class="col-sm-4">
-<%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose a cat" },{ :class => 'form-control' }) %>
+  <%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose Category" },{ :class => 'form-control' }) %>
 </div>
  <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
 
@@ -114,6 +114,7 @@
     <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %> -->
     <% end %>
+
 
   </tbody>
 </table>
