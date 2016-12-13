@@ -41,6 +41,7 @@ users = User.all
 10.times do
   Board.create!(
   title:       Faker::Hipster.word,
+  make:       Faker::Hipster.word,
   description: Faker::Hipster.paragraph,
   length: Faker::Number.number(1),
   width: Faker::Number.number(1),

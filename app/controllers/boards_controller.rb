@@ -91,7 +91,8 @@ class BoardsController < ApplicationController
     @boardies = Board.where(arrived: false)
     @boardies = Board.where(:pending => [nil]).where(:arrived => [nil, false]).where("cast( type_id as text) like ? and (title like ? or description like ?)",
             "%#{params[:type_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
-             .near([current_user.latitude, current_user.longitude], distance_in_miles)
+
+             .near([request.location.latitude, request.location.longitude], distance_in_miles)
    render :index
  end
 
