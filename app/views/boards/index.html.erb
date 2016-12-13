@@ -20,7 +20,9 @@
  <div class="well" style="background:#c9d8eb; box-shadow: 1px 4px 9px 4px #fff; border-color: cyan;">
 <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
  <div class="col-sm-4">
- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %>
+   <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
+
+ <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type" }) %>
 </div>
  <div class="col-sm-4">
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'All radii'} , { :class => 'form-control' })  %>
