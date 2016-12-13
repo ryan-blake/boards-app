@@ -5,7 +5,7 @@
   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_YirtzbkuH40uBtUkImZ9keyz"
     data-amount="<%= @total_price.to_i.ceil * 100 %>"
-    data-name="RentSpot" data-description="<%= number_to_currency(@board.price) %>"
-    data-image: "/assets/lab.png">
+    data-name="<%= @board.title %> " data-description="<%= number_to_currency(@board.price) %>"
+    data-image: "<%= attachment_image_tag(@board.images.first, :file, :fill, 140, 140)%>">
   </script>
   <% end %>
