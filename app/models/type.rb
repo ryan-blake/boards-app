@@ -9,4 +9,5 @@
 #
 
 class Type < ApplicationRecord
+  has_many :boards
 end
