@@ -35,6 +35,9 @@
  <div class="col-sm-4">
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you or (any)'} , { :class => 'form-control' })  %>
 </div>
+<div class="col-sm-3">
+  <%= collection_check_boxes(nil, :category_id, Category.all, :id, :name, {prompt: "Choose a category or (all)" },{ :class => 'form-control' }) %>
+</div>
 
  <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
 
@@ -56,6 +59,9 @@
 </div>
  <div class="col-sm-4">
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
+</div>
+<div class="col-sm-3">
+  <%= collection_check_boxes(:category_id, Category.all, :id, :name, {prompt: "Choose a category or (all)" },{ :class => 'form-control' }) %>
 </div>
 
  <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
@@ -88,6 +94,8 @@
      <li>
       <strong>Height: </strong><%= board.length %>
       <strong>width: </strong><%= board.width %>
+      <strong>cat: </strong><%= board.category_id %>
+
 
         <% if board.type_id == 1 %>
          <strong>Volume: </strong><%= board.volume %>

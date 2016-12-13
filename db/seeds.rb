@@ -38,7 +38,18 @@ User.create(
 
 users = User.all
 
-10.times do
+
+category_array = %w(Longboard(surf) SUP Skis Cruiser(skate))
+category_array.each do |c|
+  Category.find_or_create_by(
+    name: c,
+
+  )
+end
+categories = Category.all
+
+
+20.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -47,6 +58,7 @@ users = User.all
   width: Faker::Number.number(1),
   volume: Faker::Number.number(1),
   type: types.sample,
+  category: categories.sample,
   footgear: [true, false].sample,
   arrived: [true, false].sample,
   price: rand(10..40),
@@ -59,7 +71,7 @@ users = User.all
 
 end
 
-10.times do
+20.times do
   Image.create!(
   file_id: '2f94b80570baba87f3647a4fb71ebb40523f6df0ac3cae7abad2dd8d3b97',
   board_id: Board.all.sample.id
@@ -76,6 +88,8 @@ distance_array.each do |c|
   )
 end
 distances = Distance.all
+
+puts "#{Category.count} categories = 4?"
 puts "#{Image.count} images"
 puts "#{Board.count} boards"
 puts"#{User.count} users"

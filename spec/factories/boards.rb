@@ -24,6 +24,8 @@
 #  zipcode     :integer
 #  latitude    :float
 #  longitude   :float
+#  distance_id :integer
+#  category_id :integer
 #
 
 FactoryGirl.define do
