@@ -3,58 +3,52 @@
   <head>
     <title>RailsDevise</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <div class="container">
-<nav class="navbar navbar-inverse">
-<div class="container">
-  <div class="navbar-header">
-    <%= link_to 'boards app', root_path, class: 'navbar-brand' %>
-  </div>
-  <div id="navbar">
-    <ul class="nav navbar-nav">
-      <li class="pull-left"><%= link_to 'snow', root_path %></li>
-      <li class="pull-left"><%= link_to 'surf', root_path %></li>
-      <li class="pull-left"><%= link_to 'skate', root_path %></li>
-      <% if user_signed_in? %>
-      <li><%= link_to 'My-spots', my_boards_path %></li>
-<% end %>
-
-
-  </div>
-  <div style="padding-right:20px;" class="pull-right">
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <%= link_to 'still shreds', root_path, class: 'navbar-brand' %>
+        </div>
+        <div id="navbar">
+          <ul class="nav navbar-nav" style="text-decoration:none;float:left;">
+            <li class="float:left;clear: none;"><%= link_to 'snow', root_path %></li>
+            <li class="float:left;clear: none;"><%= link_to 'surf', root_path %></li>
+            <li class="float:left;clear: none;"><%= link_to 'skate', root_path %></li>
+          </ul>
+          <ul class="nav navbar-nav" style="float:right;">
+            <% if user_signed_in? %>
+              <li><%= link_to 'My-spots', my_boards_path %></li>
+            <% end %>
+        </div>
+        <div style="position:absolute;top:0;right:5px;" class="pull-right">
           <% if user_signed_in? %>
-            <li style="text-decoration:none;"> <%=   link_to current_user.email + "'s Profile", edit_user_registration_path %></li>
-                <li style="text-decoration:none;"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
-              </ul>
-
+            <li style="list-style-type:none;"> <%=   link_to current_user.email + "'s Profile", edit_user_registration_path %></li>
+            <li style="list-style-type:none;"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
             </li>
-
-
           <% else %>
             <li><%= link_to 'Log In', new_user_session_path %></li>
             <li><%= link_to 'Sign Up', new_user_registration_path %></li>
           <% end %>
         </ul>
         </div>
-</div>
-</nav>
-
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>">
-    <%= value %>
-  </div>
-<% end %>
-</div>
+      </div>
+    </nav>
 
 
-<div class="container">
-  <h1><%= yield :header %></h1>
-</div>
-  </head>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>">
+        <%= value %>
+      </div>
+    <% end %>
+    </div>
 
-  <body>
+    <div class="container">
+      <h1><%= yield :header %></h1>
+    </div>
+</head>
+<body>
     <%= yield %>
-  </body>
+</body>
 </html>

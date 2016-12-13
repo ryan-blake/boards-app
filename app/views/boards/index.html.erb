@@ -1,63 +1,71 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
 <% unless current_user %>
-<div style="position:absolute; left:calc(50% - 20px;)">
-<p><%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %></p>
-</div>
-<% else %>
+  <div style="position:absolute; left:calc(50% - 20px;)">
+    <p><%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %></p>
+  </div>
+  <% else %>
+  <% if  current_user && current_user.provider != nil %>
+    <h3 class="pull-right btn-outline" ><%= link_to 'New', new_board_path %></h3>
+  <% end %>
 
-<% if  current_user && current_user.provider != nil %>
-<h3 class="pull-right"><%= link_to 'New', new_board_path %></h3>
-<% end %>
+  <% if current_user && current_user.provider == nil %>
+    <%= link_to image_tag('powered-by-stripe.png'), user_stripe_connect_omniauth_authorize_path %>
+  <% elsif current_user && current_user.provider != nil %>
+    <h2 style="color:black;"> CONNECTED <%= current_user.uid %> </h2>
+  <% end %>
 
-<% if current_user && current_user.provider == nil %>
-<%= link_to image_tag('powered-by-stripe.png'), user_stripe_connect_omniauth_authorize_path %>
-<% elsif current_user && current_user.provider != nil %>
-<h2 style="color:white;"> CONNECTED <%= current_user.uid %> </h2>
-<% end %>
-
-<div class="col-lg-8">
- <div class="well" style="background:#c9d8eb; box-shadow: 1px 4px 9px 4px #fff; border-color: cyan;">
-<%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
- <div class="col-sm-4">
-   <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
-
- <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type" },{ :class => 'form-control' }) %>
-</div>
- <div class="col-sm-4">
- <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
-</div>
-
- <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
-
-</div>
-<% end %>
-</div>
-<table class="well" style="width:100%;">
-  <thead >
-    <td>
- <h1 style="padding-left: 25px;">Boards</h1>
-    </td>
-  </thead>
-
-  <tbody class="well container-fluid">
+  <div class="col-lg-8">
+   <div class="well search-cat">
+   <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
+   <div class="col-sm-4">
+     <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
+     <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type" },{ :class => 'form-control' }) %>
+   </div>
+   <div class="col-sm-4">
+    <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
+   </div>
+   <div style="position:relative;left:13px;">
+    <%= text_field_tag( :keyword )%> <%= submit_tag "search"  %>
+   </div>
+   </div>
+   <% end %>
+   </div>
+  <table class="well center-text" style="width:100%;">
+    <thead>
+      <td>
+        <h1 class="center-text" style="padding-left: 25px;">Boards</h1>
+      </td>
+    </thead>
+<!-- start board load -->
     <% @boardies.each do |board| %>
-      <tr class="col-sm-6 well">
-        <td class="well center-text" style=" width:30px;border-radius:50%;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 100, 100), board %></td>
-        <td  class="center-text title-ind"><%= link_to board.title, board %></td>
+    <tbody class="col-sm-6 col-md-4" >
+      <td class="well center-text"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board %>
+      <ul style="top:10px;position:relative;right:30px;list-style-type:none; text-align:left;">
+       <li class="center-text title-ind">
+          <%= link_to board.title, board %>
+       </li>
+       <li>
+        <%=  board.description.truncate(38)  %>
+       </li>
+       <li>
+        <strong>Height: </strong><%= board.length %>
+        <strong>width: </strong><%= board.width %>
 
-        <td>: <%=  board.make  %> </td>
+          <% if board.type_id == 1 %>
+           <strong>Volume: </strong><%= board.volume %>
+          <% end %>
 
-        <td>: <%=  board.length %> </td>
-        <td>Coordinates: <%= board.latitude %> <%= board.longitude %></td>
+       </li>
+       <li>
+        type: <%= board.type.name %>
+       </li>
+       <li>
+        <strong>$<%=  board.price %></strong>
+       </li>
+      </ul>
+      </td>
 
-        <strong> <td>: $<%=  board.price %> </td> </strong>
-
-        <%if current_user && board.user_id == current_user.id %>
-        <td><%= link_to 'Edit', edit_board_path(board) %></td>
-        <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
     <% end %>
   </tbody>
 </table>

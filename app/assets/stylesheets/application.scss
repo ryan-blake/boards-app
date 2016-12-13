@@ -19,7 +19,7 @@
 @import 'bootstrap/theme';
 
 body {
-  background: black;
+  background: snow;
 }
 
 h3 :hover {
@@ -31,6 +31,13 @@ h3 :hover {
 .buttons:link {
   font-style:none;
   color: grey;
+}
+
+.btn-outline {
+  position:absolute;
+  right:15px;
+  border:1px solid black;
+  padding:0px 10px 0px 10px;
 }
 
 .center-text {
@@ -56,11 +63,10 @@ border: none;
 .title-ind a {
 text-decoration:none;
 color:black;
-font-family:600;
-font-weight:thin;
-font-size:16px;
+font-family:arial;
+font-weight:700;
+font-size:20px;
 }
-
 
 .well-title a {
   color: cyan;
@@ -104,4 +110,9 @@ font-size:16px;
 .btn-warning.btn-outline:hover,
 .btn-danger.btn-outline:hover {
     color: #fff;
+}
+
+.search-cat {
+  background:darkgrey;
+  box-shadow: 1px 4px 9px 4px #fff;
 }
