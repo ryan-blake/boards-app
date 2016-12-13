@@ -30,7 +30,7 @@ User.create(
  )
  User.create(
  name: "ar",
- email: "r@mac.com",
+ email: "ryan_blake@me.com",
  role: 0,
  password: "testtest",
  zipcode: [76210, 90277, 76262, 76135].sample

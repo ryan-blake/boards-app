@@ -50,7 +50,7 @@ class User < ApplicationRecord
 
   # mapping
   geocoded_by :full_address
-  after_validation :geocode, if: ->(obj){ obj.address.present? or obj.address_changed? }
+  after_validation :geocode, if: ->(obj){ obj.full_address.present? }
 
   def full_address
     [address, city, state, zipcode].join(', ')
