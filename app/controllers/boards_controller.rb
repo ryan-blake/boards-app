@@ -85,7 +85,7 @@ class BoardsController < ApplicationController
     else
       distance_in_miles = params[:value].to_i
     end
-  @boardies = Board.where("type_id like ? and (title like ? or description like ?)",
+  @boardies = Board.where("cast( type_id as text) like ? and (title like ? or description like ?)",
             "%#{params[:type_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
              .near([current_user.latitude, current_user.longitude], distance_in_miles)
    render :index
