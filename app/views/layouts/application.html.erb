@@ -46,6 +46,22 @@
 
     <div class="container">
       <h1><%= yield :header %></h1>
+      <div class="col-lg-8">
+       <div class="well search-cat">
+       <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
+       <div class="col-sm-4">
+         <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
+         <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type" },{ :class => 'form-control' }) %>
+       </div>
+       <div class="col-sm-4">
+        <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
+       </div>
+       <div style="position:relative;left:13px;">
+        <%= text_field_tag( :keyword )%> <%= submit_tag "search"  %>
+       </div>
+       </div>
+       <% end %>
+       </div>
     </div>
 </head>
 <body>
