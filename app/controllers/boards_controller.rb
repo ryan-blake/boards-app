@@ -96,6 +96,22 @@ class BoardsController < ApplicationController
    render :index
  end
 
+ def search_signed_in
+   if params[:value].to_i < 1
+     distance_in_miles = 2000
+   else
+     distance_in_miles = params[:value].to_i
+   end
+   # casting seems to have changed geocoder locally but works on heroku.
+   @boardies = Board.where(pending: nil)
+   @boardies = Board.where(arrived: false)
+   @boardies = Board.where(:pending => [nil]).where(:arrived => [nil, false]).where("cast( type_id as text) like ? and (title like ? or description like ?)",
+           "%#{params[:type_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
+
+            .near([current_user.latitude, current_user.longitude], distance_in_miles)
+  render :index
+end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board

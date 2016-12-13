@@ -1,10 +1,5 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-<% unless current_user %>
-
-  <div style="position:absolute; left:calc(50% - 20px;)">
-    <p><%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %></p>
-  </div>
   <% else %>
   <% if  current_user && current_user.provider != nil %>
     <h3 class="pull-right btn-outline" ><%= link_to 'New', new_board_path %></h3>
@@ -25,10 +20,35 @@
     </thead>
 <!-- start board load -->
 
+<!-- test on local search -->
+<% if user_signed_in?  %>
+<div class="col-lg-8">
+ <div class="well" style="background:silver; box-shadow: 1px 4px 9px 4px black; border-color: snow;">
+
+<%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get}) do  %>
+
+ <div class="col-sm-4">
+   <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
+
+ <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type or (all)" },{ :class => 'form-control' }) %>
+</div>
+ <div class="col-sm-4">
+ <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you or (any)'} , { :class => 'form-control' })  %>
+</div>
+
+ <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
+
+</div>
+<% end %>
+</div>
+<% else %>
+<!-- end test search -->
 
 <div class="col-lg-8">
  <div class="well" style="background:silver; box-shadow: 1px 4px 9px 4px black; border-color: snow;">
+
 <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
+
  <div class="col-sm-4">
    <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
 
@@ -43,6 +63,7 @@
 </div>
 <% end %>
 </div>
+<% end %>
 <table class="well" style="width:100%;">
   <thead >
     <td>
@@ -92,4 +113,3 @@
 <br>
 
 </div>
-<% end %>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :boards do
     collection do
-  get 'search'
+  get 'search', 'search_signed_in'
 end
 end
   resources :charges
