@@ -27,7 +27,7 @@
 
 
 <div class="col-lg-8">
- <div class="well" style="background:#c9d8eb; box-shadow: 1px 4px 9px 4px #fff; border-color: cyan;">
+ <div class="well" style="background:silver; box-shadow: 1px 4px 9px 4px black; border-color: snow;">
 <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
  <div class="col-sm-4">
    <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
@@ -48,7 +48,9 @@
     <td>
     </td>
   </thead>
-
+<% if @boardies.length < 1 %>
+  <%= render partial: 'none' %>
+<% end %>
 <% @boardies.each do |board| %>
   <tbody class="col-sm-6 col-md-4" >
     <% if @boardies.length == 0 %>

@@ -4,39 +4,52 @@
     <%= link_to "Edit", edit_board_path %>
   <% end %>
 </div>
+
 <div class="container-fluid">
 <div class="jumbotron">
-<h2><%= @board.title %></h2>
-<h2><%= @board.type_id %></h2>
+  <div class="well well-sm pull-left">
+  <tr>
+    <td><h2><%= @board.title %></h2></td>
+    <td><h3><%= @board.type.name %>board</h3></td>
+    <strong>
+      <%= @board.make %>Brand
+      </strong>
+      <br>
+     <!-- bindings/trucks/stomp pad -->
+     <% if @board.type_id == 1 %>
+      <strong>Stomp pad </strong>
+      <% elsif @board.type_id === 2 %>
+      <strong> Bindings </strong>
+      <% else %>
+      <strong> Trucks </strong>
+      <% end %>
+      <% if @board.footgear == true %>
+        Yes  <% else %>  No:
+      <%end %>
+    </tr>
+    <strong> board age: </strong> <%= @board.age %> Years
+ </div>
+ <div class="">
+  <div style="text-align:center;"class="well well-sm ">
 
-
+     <h3> Dimensions</h3>
+     <strong>Length:</strong><%= @board.length %><br>
+     <strong>Width:</strong><%= @board.width %><br>
+     <% if @board.type_id == 1 %>
+     <strong>volume:</strong><%= @board.volume %><br>
+     <% end %>
+   </div>
+ </div>
 <div class="well well-sm pull-right">
-  <strong>
-  <%= @board.make %>
-
-  </strong>
+ <%= @board.description %>
 </div>
-<div class="well well-sm text-centered">
-<%= @board.description %>
+<tr>
 <% @board.images.each do |i| %>
-  <%= attachment_image_tag(i, :file, :limit, 500, 500) %>
+  <td style="" class="center-text" ><%= attachment_image_tag(i, :file, :limit, 500, 500) %></td>
 <% end %>
+</tr>
 </div>
-<div class="pull-right">
- <div class="well well-sm text-center">
-  <strong>Foot Geear (bindings/stomp pad):</strong>
-    <% if @board.footgear == true %>
-      Yes  <% else %>  No
-    <%end %>
-   <br>
-   <strong> board age: </strong> <%= @board.age %> mi.
 
-    <h3> Dimensions</h3>
-    Length:<%= @board.length %><br>
-    Width:<%= @board.width %><br>
-    Depth:<%= @board.volume %><br>
-  </div>
-</div>
 <hr>
 
 <div class=" text-center">
