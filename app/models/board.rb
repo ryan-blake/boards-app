@@ -24,6 +24,8 @@
 #  zipcode     :integer
 #  latitude    :float
 #  longitude   :float
+#  distance_id :integer
+#  category_id :integer
 #
 
 class Board < ApplicationRecord
@@ -39,7 +41,6 @@ class Board < ApplicationRecord
   validates :price, :presence => true
   validates :type, :presence => true
   validates :category, :presence => true
-  validates :zipcode, :presence => true
   validates :zipcode, :length => { :is => 5 }
 
 

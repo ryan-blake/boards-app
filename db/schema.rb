@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20161213215215) do
     t.integer  "width"
     t.integer  "type_id"
     t.integer  "volume"
-    t.boolean  "arrived",  default: false
-    t.boolean  "pending",  default: false
+    t.boolean  "arrived"
+    t.boolean  "pending"
     t.string   "address"
     t.string   "city"
     t.string   "state"

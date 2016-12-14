@@ -35,6 +35,9 @@ User.create(
  uid: ENV['UID'],
  access_code: ENV['ACCESS_CODE'],
  password: "testtest",
+ address: "123 test st",
+ city: "omaha",
+ state: ["tx", "ca"].sample,
  zipcode: [76210, 90277, 76262, 76135].sample
 
  )
@@ -43,12 +46,15 @@ User.create(
  email: "ryan_blake@me.com",
  role: 0,
  password: "testtest",
+ address: "123 test st",
+ city: "omaha",
+ state: ["tx", "ca"].sample,
  zipcode: [76210, 90277, 76262, 76135].sample
 )
 
 users = User.all
 
-10.times do
+20.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -72,7 +78,7 @@ end
 
 10.times do
   Image.create!(
-  file_id: ['2f94b80570baba87f3647a4fb71ebb40523f6df0ac3cae7abad2dd8d3b97','538fe895b2b2842d90b5091e63b6a53196ca42e99841489562bc50895180'].sample
+  file_id: ['2f94b80570baba87f3647a4fb71ebb40523f6df0ac3cae7abad2dd8d3b97','538fe895b2b2842d90b5091e63b6a53196ca42e99841489562bc50895180'].sample,
   board_id: Board.all.sample.id
   )
 end
@@ -83,8 +89,8 @@ distance_array = %w(10 20 30 50 100 150 200 350 400)
 distance_array.each do |c|
   Distance.find_or_create_by(
     value: c,
-    board_id: Board.all.sample.id
-  )
+  board_id: [1..20].sample
+    )
 end
 distances = Distance.all
 puts "#{Image.count} images"
