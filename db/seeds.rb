@@ -88,9 +88,9 @@ images = Image.all
 distance_array = %w(10 20 30 50 100 150 200 350 400)
 
 distance_array.each do |c|
-  Distance.find_or_create_by(
+  Distance.create!(
     value: c,
-  board_id: [1..20].sample
+  board_id: Board.all.sample.id
     )
 end
 
