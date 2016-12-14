@@ -28,15 +28,23 @@ body {
 }
 h3 :hover {
   text-decoration: none;
-  background-color: transparentize(gray, .9);
-  font-weight: bolder;
+  color: grey;
 }
 
 .btn-outline {
   padding-left:15px;
   padding-right:15px;
+  padding-bottom:3px;
   border: 1px solid black;
   margin-right:5%;
+    &:hover {
+      border: 1px solid grey;
+
+    }
+}
+
+.btn-width {
+  max-width:220px;
 }
 
 .usr-lnk a{

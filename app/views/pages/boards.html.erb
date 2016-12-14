@@ -22,6 +22,7 @@
     </div>
     <% end %>
     <% end %>
+    <% end %>
 </div>
 
 <div class="well well-styled col-md-6">
@@ -49,13 +50,13 @@
       <% my_boards.each do |i| %>
       <div class="well ">
         <td class="well" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
-        <%= link_to i.title, i %>:
+        <%= link_to i.title, i %>:</h3></h5> $<%= i.price %>: <%= i.make %>: <%= i.type.name %>: <%= i.category.name %>  </h5>
       </div>
-      <% end%>
-      </strong>
-    </div>
-    </h3>
-     <% end %>
+    <% end %>
+    <% end %>
+    </strong>
+  </div>
+<% end %>
 
    <div class="well col-md-6">
     <h4 style="text-decoration:underline;" class="center-text"> My pending shipment (out for shipping) </h4>
@@ -70,9 +71,7 @@
     </div>
     <% end%>
     </strong></h3>
-   <% end %>
   </div>
-   <% end %>
    <% else %>
    <h2 class="center-text"> login to continue</h2>
 <% end %>

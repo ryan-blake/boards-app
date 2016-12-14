@@ -32,7 +32,17 @@ class Board < ApplicationRecord
   belongs_to :category
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
-  # mapping
+  validates :title, :presence => true
+  validates :description, :presence => true
+  validates :make, :presence => true
+  validates :length, :presence => true
+  validates :price, :presence => true
+  validates :type, :presence => true
+  validates :category, :presence => true
+  validates :zipcode, :presence => true
+  validates :zipcode, :length => { :is => 5 }
+
+
 
   # mapping
   geocoded_by :full_address

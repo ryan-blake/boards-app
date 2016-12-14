@@ -4,9 +4,7 @@
       <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
 
       <ul>
-      <% board.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+
       </ul>
     </div>
   <% end %>
@@ -15,7 +13,7 @@
     <%= f.hidden_field :user_id, :value => current_user.id %>
 
   <div class="well">
-    <%= f.check_box :arrived, checked: false %> check to unlist this sale
+    <%= f.check_box :arrived %> check to unlist this sale
 
   </div>
 

@@ -2,7 +2,6 @@
   <% if board.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
-
       <ul>
       <% board.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,91 +9,78 @@
       </ul>
     </div>
   <% end %>
+
+
   <div class="actions  text-center">
     <%= f.hidden_field :user_id, :value => current_user.id %>
-    <%= f.check_box :arrived, checked: false %> yes
 
   <div class="well">
       <div class="well">
        <div class="form-group">
-         <%= f.label :title %>
-         <%= f.text_field :title, class: 'form-control' %>
-
-         <%= f.label :types %>
-         <%= f.collection_select :type_id, Type.all, :id, :name, class: 'form-control' %>
-         <%= f.collection_select :category_id, Category.all, :id, :name, class: 'form-control' %>
+        <%= f.label :types %>
+        <%= f.collection_select :type_id, Type.all, :id, :name, class: 'form-control' %>
+        <%= f.collection_select :category_id, Category.all, :id, :name, class: 'form-control' %>
+      <br>
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control' %>
        </div>
-
-      <div class="well pull-right">
+       <div class="form-group" style="display:flex;">
+         <%= f.label :description %>
+         <%= f.text_area :description, class: 'form-control' %>
+       </div>
+</div>
+      <div class="well-sm">
       <br>
         <div class="form-group">
           <%= f.label :make %>
-          <%= f.text_field :make, class: 'form-control' %>
+          <%= f.text_field :make, class: 'btn-width form-control' %>
         </div>
 
         <div class="form-group">
-          <p> age of board<p>
-          <%= f.label :age %><br/>
-         <%= f.number_field :age %>
+          <%= f.label :age %><strong>: Years</strong><br/>
+         <%= f.number_field :age, class: 'btn-width form-control' %>
        </div>
 
         <div class="form-group">
-          <p> price per day <p>
-          <%= f.label :price %><br/>
-         <%= f.number_field :price %>
-        </div>
-        <div class="form-group">
-          <%= f.label :length %><strong> Bow to Stern </strong><br/>
+          <%= f.label :length %><strong> / height of board (inches)</strong><br/>
          <%= f.number_field :length %>
         </div>
 
         <div class="form-group">
-          <%= f.label :width %><strong> Bow to Stern </strong><br/>
+          <%= f.label :width %> (inches)<br/>
          <%= f.number_field :width %>
         </div>
         <div class="form-group">
-          <%= f.label :volume %><strong> Bow to Stern </strong><br/>
+          <%= f.label :volume %><strong>: if applies </strong><br/>
          <%= f.number_field :volume %>
         </div>
 
-
-
-      </div>
-
-    <div class="form-group" style="display:flex;">
-      <%= f.label :description %>
-      <%= f.text_area :description, class: 'form-control' %>
+    <div class="form-group center-text" style="display:flex;">
+      <br>
+      <strong> Includes bindings/stomp-pad/trucks</strong><br/>
+      <%= f.check_box :footgear, class: 'form-control' %> <br />
     </div>
-    <div class="form-group" style="display:flex;">
-      <%= f.label :footgear %>
-      <%= f.check_box :footgear %> <br />
-    </div>
-    <div class="well col-lg-7">
-  <strong> Address released to Users after payment is received. </strong>
-    <div class="field">
-       <%= f.label :address %><br/>
-       <%= f.text_field :address %><br/>
-     </div>
 
-     <div class="field">
-      <%= f.label :city %><br />
-      <%= f.text_field :city %>
-     </div>
-     <div class="field">
-      <%= f.label :state %><br />
-      <%= f.text_field :state %>
-     </div>
+  </div>
+
+    <div class="well-sm">
+  <strong>  </strong>
+
      <div class="field">
       <%= f.label :zipcode %><br />
       <%= f.number_field :zipcode %>
      </div>
    </div>
 
-  </div>
+   <div class="form-group">
+     <p> price per day <p>
+     <%= f.label :price %><br/>
+    <%= f.number_field :price, class: 'btn-width form-control' %>
+   </div>
 
-  <div class="field">
+  <div>
       <%= f.label :images_files %><br>
-      <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %>
+      <btn class="center-text" style="position:absolute;left:calc(50% - 90px);"><%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %></btn>
   </div>
 
 
@@ -102,7 +88,7 @@
 
 
 
-  <div class="actions">
-    <%= f.submit %>
+  <div style="margin-top:20px;" class="actions">
+    <%= f.submit "submit", class: "btn btn-info" %>
   </div>
 <% end %>

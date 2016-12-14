@@ -1,13 +1,11 @@
-<p id="notice"><%= notice %></p>
-<div class="btn">
-  <% if current_user && current_user.id == @board.user_id%>
-    <%= link_to "Edit", edit_board_path %>
-  <% end %>
-</div>
+
 
 <div class="container-fluid">
 <div class="jumbotron">
   <div class="well well-sm pull-left">
+    <% if current_user && current_user.id == @board.user_id%>
+      <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right' %>
+      <% end %>
   <tr>
     <td><h2><%= @board.title %></h2></td>
     <td><h3><%= @board.type.name %>board</h3></td>
@@ -55,17 +53,21 @@
 
 <div class=" text-center">
  <div class="well">
-   <% if @board.pending != true && @board.user_id != current_user.id%>
+   <% if !user_signed_in? %>
+   <strong> $<%= @board.price %> </strong>
+   <h3 class="btn-outline" ><%= link_to 'Sign Up to Purchase', new_user_registration_path %></h3>
+
+   <% elsif @board.pending != true && @board.user_id != current_user.id%>
   <p> $<%= @board.price %> </p>
     <%= render partial: 'charge', locals: {board: @board} %>
   <% elsif  @board.user_id != current_user.id  %>
     <%= render partial: 'charge', locals: {board: @board} %>
   <% elsif @board.arrived === true %>
-  To list for sale check yes
       <%= render partial: 'forsale', locals: {board: @board} %>
   <% elsif @board.arrived == false  && @board.user_id == current_user.id%>
   <%= render partial: 'unlist', locals: {board: @board} %>
  <% end %>
+
 
  <br>
 
@@ -73,5 +75,9 @@
 </div>
 </div>
 
-
+<% if user_signed_in? %>
+<% if current_user.id == @board.user.id %>
+<%= button_to "delete", @board, :method=>:delete, :class=>:destroy %>
 <%= link_to 'Back', boards_path %>
+<% end %>
+<% end %>

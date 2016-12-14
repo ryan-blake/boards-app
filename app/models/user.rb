@@ -40,6 +40,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
   before_save { self.role ||= :member }
+  validates :zipcode, :length => { :is => 5 }
+  validates :state, :length => { :is => 2 }
+  validates :name, :presence => true
+  validates :address, :presence => true
+  validates :city, :presence => true
+  validates :name, :presence => true
+  validates :email, :presence => true
+
+
   enum role: [:member, :admin]
 
   has_many :boards, dependent: :destroy
