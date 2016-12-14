@@ -2,32 +2,27 @@
 <div class="jumbotron well">
   <h2><%= current_user.name%> </h2>
 </div>
-
 <% if @charge || @board %>
  <div class="well well-styled col-md-6">
    <h4 style="text-decoration:underline;" class="center-text"> Board waiting arrival</h4>
   <% @charge.each do |charge| %>
   <% if charge.completed === false %>
-  <%= charge.item %>
     <% my_charge = Charge.find_by(user_id: @user.id, completed: false) %>
     <%my_board = Board.find_by(title: charge.item ) %>
-    <td><%= attachment_image_tag(my_board.images.first, :file, :fill, 100, 100) %></td>
+    <td><%= link_to attachment_image_tag(my_board.images.first, :file, :fill, 100, 100), my_board %></td>
     <h3> <%= link_to my_board.title, my_board %></h3>
-      <div class="btn btn-primary">
-        <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: my_charge.id, token: my_charge.token, price: my_charge.price, customer_id: my_charge.customer_id, destination: my_charge.vendor.uid) %>
-      </div>
+        <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: my_charge.id, token: my_charge.token, price: my_charge.price, customer_id: my_charge.customer_id, destination: my_charge.vendor.uid), class: 'btn-success btn' %>
      <div>
-      <strong>Reservation:</strong> <%= charge.item%>
+      <strong>price:</strong> $<%= charge.price%>
       <strong>Completed payment:</strong> <%= charge.completed %>
     </div>
     <% end %>
     <% end %>
-    <% end %>
+  <% end %>
 </div>
 
 <div class="well well-styled col-md-6">
  <h4 style="text-decoration:underline;" class="center-text"> Bought boards </h4>
-
   <% @charge.each do |charge| %>
     <% if charge.completed === true %>
        <% my_boards = Board.find_by(title: charge.item) %>
@@ -40,23 +35,20 @@
   <% end %>
 </div>
 
-<div class="well col-md-6">
- <h4 style="text-decoration:underline;" class="center-text"> My boards
+  <div class="well col-md-6">
+  <h4 style="text-decoration:underline;" class="center-text"> My boards </h4>
    <% if current_user.provider == nil %> (must <%= link_to 'connect', user_stripe_connect_omniauth_authorize_path %> to sell) </h4> <% end %>
-   <% my_boards = Board.where(user_id: current_user.id, pending: nil) %>
+
+   <% my_boards = Board.where(user_id: current_user.id, pending: nil || false) %>
    <% if my_boards %>
-     <h3>
-       <strong>
       <% my_boards.each do |i| %>
-      <div class="well ">
-        <td class="well" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
-        <%= link_to i.title, i %>:</h3></h5> $<%= i.price %>: <%= i.make %>: <%= i.type.name %>: <%= i.category.name %>  </h5>
+      <div class="well">
+        <td class="" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
+        <%= link_to i.title, i %>:</h3></h5> $<%= i.price %>: <%= i.make %>: <%= i.type.name %>: <%= i.category.name %>  </h5>    </strong>
       </div>
-    <% end %>
-    <% end %>
-    </strong>
+      <% end %>
+   <% end %>
   </div>
-<% end %>
 
    <div class="well col-md-6">
     <h4 style="text-decoration:underline;" class="center-text"> My pending shipment (out for shipping) </h4>
@@ -69,9 +61,11 @@
       <td class="well" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
       <%= link_to i.title, i %>:
     </div>
+  </strong></h3>
+
     <% end%>
-    </strong></h3>
   </div>
    <% else %>
    <h2 class="center-text"> login to continue</h2>
+<% end %>
 <% end %>

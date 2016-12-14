@@ -65,10 +65,10 @@ users = User.all
   type: types.sample,
   category: categories.sample,
   footgear: [true, false].sample,
-  arrived: [true, false].sample,
   price: rand(10..40),
   user_id: User.all.sample.id,
   pending: [nil, true, false].sample,
+  arrived: [true, false].sample,
   zipcode: [76210, 90277, 76262, 76135].sample
   )
 

@@ -6,7 +6,12 @@
 </div>
 <div class="pull-right" style="width:163px;right:20px;top:15px;position:absolute;margin-top:20px;">
   <% if !user_signed_in? %>
-    <h3 class="btn-outline" ><%= link_to 'New listing', new_user_registration_path %></h3>
+    <h3 class="btn-outline"><%= link_to 'New listing', new_user_registration_path %></h3>
+ <% end %>
+</div>
+<div class="pull-right" style="width:210px;right:-40px;top:40px;position:absolute;margin-top:20px;">
+  <% if user_signed_in?  && current_user.provider == nil %>
+    <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn-outline btn' %>
  <% end %>
 </div>
 
@@ -24,11 +29,12 @@
       </td>
     </thead>
 <!-- start board load -->
+<br>
 
 <!-- test on local search -->
 <% if user_signed_in?  %>
 <div class="col-lg-8" style="position:relative;padding-top:20px;">
- <div class="well" style="margin:25px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
+ <div class="well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get}) do  %>
 
@@ -45,7 +51,7 @@
 </div>
 
 <div style="padding-top:15px;padding-left:15px;width:390px;">
- <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
+ <%= text_field_tag :keyword  %> <%= submit_tag "search", class: 'form-control' %>
 </div>
 </div>
 <% end %>
@@ -54,7 +60,7 @@
 <!-- end test search -->
 
 <div class="col-lg-8">
-  <div class="well" style="margin:25px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
+  <div class="well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 
 <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
 
@@ -70,7 +76,7 @@
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
 </div>
 <div style="padding-left:15px;width:390px;">
-  <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
+  <%= text_field_tag :keyword, '...', class: 'btn-width form-control'  %> <%= submit_tag "search", class: 'search-width form-control' %>
 </div>
 </div>
 <% end %>
