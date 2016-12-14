@@ -76,9 +76,9 @@ users = User.all
 
 end
 
-10.times do
+25.times do
   Image.create!(
-  file_id: ['2f94b80570baba87f3647a4fb71ebb40523f6df0ac3cae7abad2dd8d3b97','538fe895b2b2842d90b5091e63b6a53196ca42e99841489562bc50895180'].sample,
+  file_id: ['a94a79a998836df703073127b75e6cc8d35e0f98bc76bc7d7aa09cd2ee92','538fe895b2b2842d90b5091e63b6a53196ca42e99841489562bc50895180'].sample,
   board_id: Board.all.sample.id
   )
 end
@@ -86,14 +86,18 @@ end
 images = Image.all
 
 distance_array = %w(10 20 30 50 100 150 200 350 400)
+
 distance_array.each do |c|
   Distance.find_or_create_by(
     value: c,
   board_id: [1..20].sample
     )
 end
+
 distances = Distance.all
+puts "#{Distance.count} distance"
 puts "#{Image.count} images"
 puts "#{Board.count} boards"
 puts"#{User.count} users"
 puts"#{Type.count} types"
+puts"#{Category.count} types"
