@@ -5,7 +5,7 @@
 
 <% if @charge || @board %>
  <div class="well well-styled col-md-6">
-   <h4 style="text-decoration:underline;"> Board waiting arrival</h4>
+   <h4 style="text-decoration:underline;" class="center-text"> Board waiting arrival</h4>
   <% @charge.each do |charge| %>
   <% if charge.completed === false %>
   <%= charge.item %>
@@ -24,9 +24,8 @@
     <% end %>
 </div>
 
-
 <div class="well well-styled col-md-6">
- <h4 style="text-decoration:underline;"> Bought boards </h4>
+ <h4 style="text-decoration:underline;" class="center-text"> Bought boards </h4>
 
   <% @charge.each do |charge| %>
     <% if charge.completed === true %>
@@ -41,7 +40,8 @@
 </div>
 
 <div class="well col-md-6">
- <h4 style="text-decoration:underline;"> My boards (must be connected to sell your boards) </h4>
+ <h4 style="text-decoration:underline;" class="center-text"> My boards
+   <% if current_user.provider == nil %> (must <%= link_to 'connect', user_stripe_connect_omniauth_authorize_path %> to sell) </h4> <% end %>
    <% my_boards = Board.where(user_id: current_user.id, pending: nil) %>
    <% if my_boards %>
      <h3>
@@ -58,7 +58,7 @@
      <% end %>
 
    <div class="well col-md-6">
-    <h4 style="text-decoration:underline;"> My pending shipment (out for shipping) </h4>
+    <h4 style="text-decoration:underline;" class="center-text"> My pending shipment (out for shipping) </h4>
    <% pending_boards = Board.where(user_id: current_user.id, pending: true) %>
    <% if pending_boards %>
    <h3>
@@ -73,4 +73,6 @@
    <% end %>
   </div>
    <% end %>
+   <% else %>
+   <h2 class="center-text"> login to continue</h2>
 <% end %>

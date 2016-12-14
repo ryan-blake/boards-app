@@ -5,9 +5,7 @@ class BoardsController < ApplicationController
   # GET /boards.json
   def index
     @boardies = Board.order('created_at ASC') &&
-
-@boardies =    Board.where(:pending => [nil]).where(:arrived => [nil, false])
-
+    @boardies = Board.where(:pending => [nil]).where(:arrived => [false])
     # make boardies be where board.boolean == false and board.arrived = false
     if current_user.present?
       @on = current_user
@@ -18,10 +16,10 @@ class BoardsController < ApplicationController
       end
     end
 
-
   # GET /boards/1
   # GET /boards/1.json
   def show
+    @board = Board.find(params[:id])
   end
 
   # GET /boards/new
@@ -31,6 +29,7 @@ class BoardsController < ApplicationController
 
   # GET /boards/1/edit
   def edit
+    @board = Board.find(params[:id])
   end
 
   # POST /boards
@@ -120,7 +119,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:title, :description, :user_id, :price, :lendth, :make, :age, :footgear, :width, :length, :name, :type_id, :category_id, :volume, :address, :city, :state, :zipcode, images_files: [])
+      params.require(:board).permit(:title, :description, :arrived, :user_id, :price, :lendth, :make, :age, :footgear, :width, :length, :name, :type_id, :category_id, :volume, :address, :city, :state, :zipcode, images_files: [])
     end
 
 end

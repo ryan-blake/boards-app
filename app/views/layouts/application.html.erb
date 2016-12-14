@@ -13,35 +13,29 @@
 <nav class="navbar navbar-inverse">
 <div class="container">
   <div class="navbar-header">
-    <%= link_to 'boards app', root_path, class: 'navbar-brand' %>
+    <%= link_to 'still shreds', root_path, class: 'navbar-brand' %>
   </div>
   <div id="navbar">
     <ul class="nav navbar-nav">
-      <li class="pull-left"><%= link_to 'snow', root_path %></li>
-      <li class="pull-left"><%= link_to 'surf', root_path %></li>
-      <li class="pull-left"><%= link_to 'skate', root_path %></li>
       <% if user_signed_in? %>
-      <li><%= link_to 'My-spots', my_boards_path %></li>
+      <li class="my-pages"><%= link_to 'My-boards', my_boards_path %></li>
 <% end %>
 
 
   </div>
-  <div style="padding-right:20px;" class="pull-right">
+  <div style="padding-right:20px;list-style:none;top:1px;position:absolute;right:5px;" class="pull-right">
           <% if user_signed_in? %>
-            <li style="text-decoration:none;"> <%=   link_to current_user.email + "'s Profile", edit_user_registration_path %></li>
-                <li style="text-decoration:none;"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            <li class="usr-lnk"> <%=   link_to current_user.name.split(' ').shift.capitalize + "'s Profile", edit_user_registration_path %></li>
+                <li  class="usr-lnk"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
               </ul>
-
             </li>
-
-
           <% else %>
             <li><%= link_to 'Log In', new_user_session_path %></li>
             <li><%= link_to 'Sign Up', new_user_registration_path %></li>
           <% end %>
         </ul>
         </div>
-</div>
+  </div>
 </nav>
 
 <% flash.each do |key, value| %>

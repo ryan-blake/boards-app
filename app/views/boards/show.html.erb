@@ -44,8 +44,9 @@
  <%= @board.description %>
 </div>
 <tr>
+  <hr style="padding-top:30px;">
 <% @board.images.each do |i| %>
-  <td style="" class="center-text" ><%= attachment_image_tag(i, :file, :limit, 500, 500) %></td>
+  <td style="" class="center-text" ><%= attachment_image_tag(i, :file, :limit, 400, 400) %></td>
 <% end %>
 </tr>
 </div>
@@ -54,15 +55,16 @@
 
 <div class=" text-center">
  <div class="well">
+   <% if @board.pending != true && @board.user_id != current_user.id%>
   <p> $<%= @board.price %> </p>
- <% if !user_signed_in? %>
     <%= render partial: 'charge', locals: {board: @board} %>
   <% elsif  @board.user_id != current_user.id  %>
     <%= render partial: 'charge', locals: {board: @board} %>
-  <% else %>
-    <div class="btn btn-danger">
-    <%= link_to 'RE-LIST', relist_board_path(board: @board)%>
-  </div>
+  <% elsif @board.arrived === true %>
+  To list for sale check yes
+      <%= render partial: 'forsale', locals: {board: @board} %>
+  <% elsif @board.arrived == false  && @board.user_id == current_user.id%>
+  <%= render partial: 'unlist', locals: {board: @board} %>
  <% end %>
 
  <br>

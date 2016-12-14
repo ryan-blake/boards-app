@@ -10,9 +10,9 @@
       </ul>
     </div>
   <% end %>
-
   <div class="actions  text-center">
     <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.check_box :arrived, checked: false %> yes
 
   <div class="well">
       <div class="well">
@@ -22,6 +22,7 @@
 
          <%= f.label :types %>
          <%= f.collection_select :type_id, Type.all, :id, :name, class: 'form-control' %>
+         <%= f.collection_select :category_id, Category.all, :id, :name, class: 'form-control' %>
        </div>
 
       <div class="well pull-right">

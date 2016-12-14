@@ -1,15 +1,18 @@
 <!-- <p id="notice"><%= notice %></p> -->
-
-  <% else %>
+<div class="pull-right" style="right:20px;top:15px;position:absolute;padding-top:20px;padding-bottom:20px;">
   <% if  current_user && current_user.provider != nil %>
-    <h3 class="pull-right btn-outline" ><%= link_to 'New', new_board_path %></h3>
-  <% end %>
+    <h3 class="btn-outline" ><%= link_to 'New', new_board_path %></h3>
+     <% else %>
+</div>
+      <div class="text-center" style="margin-bottom:15px;"><%= link_to image_tag('powered-by-stripe.png'), user_stripe_connect_omniauth_authorize_path %></div>
+    <% end %>
+  </div>
 
-  <% if current_user && current_user.provider == nil %>
+  <!-- <% if current_user && current_user.provider == nil %>
     <%= link_to image_tag('powered-by-stripe.png'), user_stripe_connect_omniauth_authorize_path %>
   <% elsif current_user && current_user.provider != nil %>
     <h2 style="color:black;"> CONNECTED <%= current_user.uid %> </h2>
-  <% end %>
+  <% end %> -->
 
 
   <table class="well center-text" style="width:100%;">
@@ -22,8 +25,8 @@
 
 <!-- test on local search -->
 <% if user_signed_in?  %>
-<div class="col-lg-8">
- <div class="well" style="background:silver; box-shadow: 1px 4px 9px 4px black; border-color: snow;">
+<div class="col-lg-8" style="position:relative;padding-top:20px;">
+ <div class="well" style="background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get}) do  %>
 
@@ -32,14 +35,16 @@
 
  <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type or (all)" },{ :class => 'form-control' }) %>
 </div>
+<div class="col-sm-4">
+  <%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose Category" },{ :class => 'form-control' }) %>
+</div>
  <div class="col-sm-4">
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you or (any)'} , { :class => 'form-control' })  %>
 </div>
-<div class="col-sm-4">
-<%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose Category" },{ :class => 'form-control' }) %>
-</div>
- <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
 
+<div style="padding-top:15px;padding-left:15px;width:390px;">
+ <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
+</div>
 </div>
 <% end %>
 </div>
@@ -47,7 +52,7 @@
 <!-- end test search -->
 
 <div class="col-lg-8">
- <div class="well" style="background:silver; box-shadow: 1px 4px 9px 4px black; border-color: snow;">
+  <div class="well" style="background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 
 <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
 
@@ -56,14 +61,15 @@
 
  <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type" },{ :class => 'form-control' }) %>
 </div>
- <div class="col-sm-4">
- <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
-</div>
 <div class="col-sm-4">
   <%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose Category" },{ :class => 'form-control' }) %>
 </div>
- <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
-
+ <div class="col-sm-4">
+ <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
+</div>
+<div style="padding-left:15px;width:390px;">
+  <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
+</div>
 </div>
 <% end %>
 </div>
@@ -87,16 +93,17 @@
         <%= link_to board.title, board %>
      </li>
      <li>
-      <%=  board.description.truncate(38)  %>
+      <%=  board.description.truncate(25)  %>
      </li>
-     <li>
+     <li style="min-width:239px;">
       <strong>Height: </strong><%= board.length %>
       <strong>width: </strong><%= board.width %>
-
         <% if board.type_id == 1 %>
          <strong>Volume: </strong><%= board.volume %>
-        <% end %>
+        <% else %>
+        <strong>Volume: </strong> N/A
 
+        <% end %>
      </li>
      <li>
       type: <%= board.type.name %>

@@ -23,12 +23,30 @@ body {
   overflow-x: hidden;
 
 }
-
+.navbar-inverse {
+  max-height: 50px;
+}
 h3 :hover {
   text-decoration: none;
   background-color: transparentize(gray, .9);
   font-weight: bolder;
 }
+
+.btn-outline {
+  padding-left:15px;
+  padding-right:15px;
+  border: 1px solid black;
+  margin-right:5%;
+}
+
+.usr-lnk a{
+  color:white;
+
+  &:hover {
+    color:grey;
+  }
+}
+
 
 
 .buttons:link {
@@ -107,4 +125,18 @@ font-size:16px;
 .btn-warning.btn-outline:hover,
 .btn-danger.btn-outline:hover {
     color: #fff;
+}
+
+.my-pages {
+  position:absolute;
+  left:20px;
+  top:0px !important;
+}
+
+@media (max-width:770px) {
+  .my-pages a {
+    position:absolute;
+    left:85px;
+    top:-52px !important;
+  }
 }

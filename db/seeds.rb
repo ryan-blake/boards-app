@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-type_array = %w{Surf Snow Skate}
+type_array = %w{Surf Snow Skate Wake}
 
 type_array.each do |t|
   Type.find_or_create_by(
@@ -15,7 +15,7 @@ end
 
 types = Type.all
 
-category_array = %w{Longboard(surf) SUP Skis Cruiser(skate)}
+category_array = %w{Longboard(surf) SUP Skis(snow) Cruiser(skate) Skis(water)}
 
 category_array.each do |t|
   Category.find_or_create_by(
@@ -72,7 +72,7 @@ end
 
 10.times do
   Image.create!(
-  file_id: '2f94b80570baba87f3647a4fb71ebb40523f6df0ac3cae7abad2dd8d3b97',
+  file_id: ['2f94b80570baba87f3647a4fb71ebb40523f6df0ac3cae7abad2dd8d3b97','538fe895b2b2842d90b5091e63b6a53196ca42e99841489562bc50895180'].sample
   board_id: Board.all.sample.id
   )
 end
