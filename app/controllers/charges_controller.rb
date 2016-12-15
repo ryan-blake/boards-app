@@ -21,6 +21,7 @@ class ChargesController < ApplicationController
     @board.update_attribute(:arrived, true)
     @board.user_id = @charge.user_id
     @board.update_attribute(:pending, false)
+    @board.update_attribute(:customer_id, nil)
     @board.save
     redirect_to my_boards_path, flash: {notice: "Charge Successful"}
 
@@ -43,12 +44,14 @@ class ChargesController < ApplicationController
     item: params[:charge]["item"],
     token: params[:stripeToken],
     customer_id: customer.id,
-    completed: false
+    completed: false,
+    board_id: params[:charge]["board_id"]
     )
     @charge.update_attribute(:boolean, true)
     @charge.save
     @board = Board.where(title: @charge.item).first
     @board.arrived = false
+    @board.customer_id = current_user.id
     @board.update_attribute(:pending, true)
     @board.for_sale = false
     @board.save

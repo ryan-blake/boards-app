@@ -1,4 +1,4 @@
-<% if ( user_signed_in? && current_user.id === @board.user.id ) || (@board.for_sale == true ) %>
+<% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
 
 <div class="container-fluid">
 <div class="jumbotron">
@@ -81,5 +81,6 @@
 
 <% end %>
 <% end %>
-<% end %>
+<% else %>
 <p class="text-center"> Nothing Here</p>
+<% end %>
