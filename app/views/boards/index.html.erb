@@ -1,12 +1,12 @@
 <!-- <p id="notice"><%= notice %></p> -->
 <div class="pull-right" style="width:163px;right:20px;top:15px;position:absolute;margin-top:20px;">
   <% if  current_user && current_user.provider != nil %>
-    <h3 class="btn-outline" ><%= link_to 'New listing', new_board_path %></h3>
+    <h3 class="btn-outline" ><%= link_to 'Add listing', new_board_path %></h3>
  <% end %>
 </div>
 <div class="pull-right" style="width:163px;right:20px;top:15px;position:absolute;margin-top:20px;">
   <% if !user_signed_in? %>
-    <h3 class="btn-outline"><%= link_to 'New listing', new_user_registration_path %></h3>
+    <h3 class="btn-outline"><%= link_to 'Add listing', new_user_registration_path %></h3>
  <% end %>
 </div>
 <div class="pull-right" style="width:210px;right:-40px;top:40px;position:absolute;margin-top:20px;">
@@ -36,7 +36,7 @@
   <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get}) do  %>
 <div style="padding-left:15px;width:390px;">
-  <%= text_field_tag :keyword, '...', class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
+  <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
 </div>
  <div class="col-sm-4">
    <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
@@ -56,10 +56,10 @@
 <!-- end test search -->
 
 <div class="col-lg-8">
-  <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
+  <div class="well cat-well" style="margin:20px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
 <div style="padding-left:15px;width:390px;">
-  <%= text_field_tag :keyword, '...', class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
+  <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
 </div>
  <div class="col-sm-4">
    <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->

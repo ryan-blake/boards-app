@@ -87,7 +87,7 @@ class BoardsController < ApplicationController
     end
     # casting seems to have changed geocoder locally but works on heroku.
 
-    @boardies = Board.where(:for_sale => [true]).where(:arrived => [false]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+    @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
             "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
              .near([request.location.latitude, request.location.longitude], distance_in_miles)
    render :index
@@ -100,7 +100,7 @@ class BoardsController < ApplicationController
      distance_in_miles = params[:value].to_i
    end
    # casting seems to have changed geocoder locally but works on heroku.
-   @boardies = Board.where(:pending => [false]).where(:arrived => [false]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+   @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near([current_user.latitude, current_user.longitude], distance_in_miles)
   render :index

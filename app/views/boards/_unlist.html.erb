@@ -2,13 +2,11 @@
   <% if board.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
-
       <ul>
-
       </ul>
     </div>
   <% end %>
-
+<!-- can possibly be deleted  -->
   <div class="actions  text-center">
     <%= f.hidden_field :user_id, :value => current_user.id %>
 <% if @board.pending == false && @board.for_sale == true  %>
