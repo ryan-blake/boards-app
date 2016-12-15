@@ -22,7 +22,7 @@ class ChargesController < ApplicationController
     @board.user_id = @charge.user_id
     @board.update_attribute(:pending, false)
     @board.save
-    redirect_to root_path
+    redirect_to my_boards_path, flash: {notice: "Charge Successful"}
 
 
     rescue Stripe::CardError => e
@@ -50,7 +50,9 @@ class ChargesController < ApplicationController
     @board = Board.where(title: @charge.item).first
     @board.arrived = false
     @board.update_attribute(:pending, true)
+    @board.for_sale = false
     @board.save
+
 
     redirect_to  root_path
 

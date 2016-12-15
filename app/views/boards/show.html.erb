@@ -56,15 +56,15 @@
    <% if !user_signed_in? %>
    <strong> $<%= @board.price %> </strong>
    <h3 class="btn-outline" ><%= link_to 'Sign Up to Purchase', new_user_registration_path %></h3>
-   <% elsif @board.pending == false && @board.user_id != current_user.id %>
+   <% elsif @board.for_sale == true && @board.user_id != current_user.id %>
   <p> $<%= @board.price %> </p>
     <%= render partial: 'charge', locals: {board: @board} %>
-  <% elsif  @board.user_id != current_user.id  %> 
-    <%= render partial: 'charge', locals: {board: @board} %>
-  <% elsif @board.arrived === true %>
+  <% elsif  @board.user_id != current_user.id && @board.for_sale == true %>
+    <%= render partial: 'charge', locals: {board: @board} %> here
+  <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
       <%= render partial: 'forsale', locals: {board: @board} %>
-  <% elsif @board.arrived == false  && @board.user_id == current_user.id%>
-  <%= render partial: 'unlist', locals: {board: @board} %>
+  <% elsif @board.for_sale == false  && @board.user_id == current_user.id%>
+  <%= render partial: 'forsale', locals: {board: @board} %>
  <% end %>
 
 

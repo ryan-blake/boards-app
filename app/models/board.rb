@@ -26,6 +26,7 @@
 #  longitude   :float
 #  distance_id :integer
 #  category_id :integer
+#  for_sale    :boolean          default("t")
 #
 
 class Board < ApplicationRecord

@@ -8,24 +8,18 @@
   <% @charge.each do |charge| %>
   <% if charge.completed === false %>
     <% my_charge = Charge.find_by(user_id: @user.id, completed: false) %>
-    <%my_board = Board.find_by(title: charge.item ) %>
-    <% if my_board.pending == true %>
-    <td><%= link_to attachment_image_tag(my_board.images.first, :file, :fill, 100, 100), my_board %></td>
-    <h3> <%= link_to my_board.title, my_board %></h3>
-        <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: my_charge.id, token: my_charge.token, price: my_charge.price, customer_id: my_charge.customer_id, destination: my_charge.vendor.uid), class: 'btn-success btn' %>
+    <%my_boards = Board.where(title: charge.item, for_sale: false ) %>
+    <% my_boards.each do |i| %>
+    <% if i.pending == true %>
+    <td><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
+    <h3> <%= link_to i.title, i %></h3>
+        <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: charge.id, token: my_charge.token, price: my_charge.price, customer_id: my_charge.customer_id, destination: my_charge.vendor.uid), class: 'btn-success btn' %>
      <div>
-      <strong>price:</strong> $<%= charge.price%>
-      <strong>Completed payment:</strong> <%= charge.completed %>
+      <strong>price:</strong> $<%= i.price%>
+      <strong>Completed payment:</strong> <%= i %>
     </div>
+<% end %>
 
-    <% else %>
-    <td><%= link_to attachment_image_tag(my_board.images.first, :file, :fill, 100, 100), my_board %></td>
-    <h3> <%= link_to my_board.title, my_board %></h3>
-    <h3 style="color:red">Order was cancelled</h3>
-     <div>
-      <strong>price:</strong> $<%= charge.price%>
-      <strong>Completed payment:</strong> <%= charge.completed %>
-    </div>
     <% end %>
     <% end %>
     <% end %>
@@ -72,8 +66,8 @@
       <td class="well" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
       <%= link_to i.title, i %>:
     </div>
-  </strong></h3>
-
+    </strong>
+  </h3>
     <% end%>
   </div>
    <% else %>

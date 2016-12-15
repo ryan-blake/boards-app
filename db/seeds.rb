@@ -55,7 +55,7 @@ User.create(
 
 users = User.all
 
-20.times do
+10.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -68,9 +68,29 @@ users = User.all
   footgear: [true, false].sample,
   price: rand(10..40),
   user_id: User.all.sample.id,
-  pending: [nil, true, false].sample,
+  pending: false,
+  arrived: false,
+  zipcode: [76210, 90277, 76262, 76135].sample,
+  for_sale: true
+  )
+end
+10.times do
+  Board.create!(
+  title:       Faker::Hipster.word,
+  make:       Faker::Hipster.word,
+  description: Faker::Hipster.paragraph,
+  length: Faker::Number.number(1),
+  width: Faker::Number.number(1),
+  volume: Faker::Number.number(1),
+  type: types.sample,
+  category: categories.sample,
+  footgear: [true, false].sample,
+  price: rand(10..40),
+  user_id: User.all.sample.id,
+  pending: true,
   arrived: [true, false].sample,
-  zipcode: [76210, 90277, 76262, 76135].sample
+  zipcode: [76210, 90277, 76262, 76135].sample,
+  for_sale: false
   )
 
   boards = Board.all
