@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 20161213215215) do
 
   create_table "boards", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "make"
     t.integer  "age"
     t.integer  "price"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20161213215215) do
     t.integer  "width"
     t.integer  "type_id"
     t.integer  "volume"
-    t.boolean  "arrived"
-    t.boolean  "pending"
+    t.boolean  "arrived",     default: false
+    t.boolean  "pending",     default: false
     t.string   "address"
     t.string   "city"
     t.string   "state"

@@ -76,7 +76,7 @@
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
 </div>
 <div style="padding-left:15px;width:390px;">
-  <%= text_field_tag :keyword, '...', class: 'btn-width form-control'  %> <%= submit_tag "search", class: 'search-width form-control' %>
+  <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
 </div>
 </div>
 <% end %>

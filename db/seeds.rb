@@ -36,9 +36,9 @@ User.create(
  access_code: ENV['ACCESS_CODE'],
  password: "testtest",
  address: "123 test st",
- city: "omaha",
- state: ["tx", "ca"].sample,
- zipcode: [76210, 90277, 76262, 76135].sample
+ city: "roanoke",
+ state: ["tx", "tx"].sample,
+ zipcode: 76262
 
  )
  User.create(
@@ -47,9 +47,10 @@ User.create(
  role: 0,
  password: "testtest",
  address: "123 test st",
- city: "omaha",
- state: ["tx", "ca"].sample,
- zipcode: [76210, 90277, 76262, 76135].sample
+ city: "denton",
+ state: ["tx", "tx"].sample,
+ zipcode: 76210
+
 )
 
 users = User.all

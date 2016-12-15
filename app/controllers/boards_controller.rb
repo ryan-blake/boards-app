@@ -5,7 +5,7 @@ class BoardsController < ApplicationController
   # GET /boards.json
   def index
     @boardies = Board.order('created_at ASC') &&
-    @boardies = Board.where(:pending => [nil]).where(:arrived => [false])
+    @boardies = Board.where(:pending => [false]).where(:arrived => [false])
     # make boardies be where board.boolean == false and board.arrived = false
     if current_user.present?
       @on = current_user
@@ -86,11 +86,9 @@ class BoardsController < ApplicationController
       distance_in_miles = params[:value].to_i
     end
     # casting seems to have changed geocoder locally but works on heroku.
-    @boardies = Board.where(pending: nil)
-    @boardies = Board.where(arrived: false)
-    @boardies = Board.where(:pending => [nil]).where(:arrived => [nil, false]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
-            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
 
+    @boardies = Board.where(:pending => [false]).where(:arrived => [false]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
              .near([request.location.latitude, request.location.longitude], distance_in_miles)
    render :index
  end
@@ -102,9 +100,7 @@ class BoardsController < ApplicationController
      distance_in_miles = params[:value].to_i
    end
    # casting seems to have changed geocoder locally but works on heroku.
-   @boardies = Board.where(pending: nil)
-   @boardies = Board.where(arrived: false)
-   @boardies = Board.where(:pending => [nil]).where(:arrived => [nil, false]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+   @boardies = Board.where(:pending => [false]).where(:arrived => [false]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
 
             .near([current_user.latitude, current_user.longitude], distance_in_miles)

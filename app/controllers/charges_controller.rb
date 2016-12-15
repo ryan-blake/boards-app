@@ -22,7 +22,7 @@ class ChargesController < ApplicationController
     @board.user_id = @charge.user_id
     @board.update_attribute(:pending, false)
     @board.save
-    redirect_to  root_path
+    redirect_to root_path
 
 
     rescue Stripe::CardError => e
