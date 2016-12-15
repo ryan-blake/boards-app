@@ -1,4 +1,4 @@
-
+<% if ( user_signed_in? && current_user.id === @board.user.id ) || (@board.for_sale == true ) %>
 
 <div class="container-fluid">
 <div class="jumbotron">
@@ -78,5 +78,8 @@
 <% if current_user.id == @board.user.id %>
 <%= button_to "delete", @board, :method=>:delete, :class=>:destroy %>
 <%= link_to 'Back', boards_path %>
+
 <% end %>
 <% end %>
+<% end %>
+<p class="text-center"> Nothing Here</p>
