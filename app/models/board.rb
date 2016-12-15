@@ -16,8 +16,8 @@
 #  width       :integer
 #  type_id     :integer
 #  volume      :integer
-#  arrived     :boolean
-#  pending     :boolean
+#  arrived     :boolean          default("f")
+#  pending     :boolean          default("f")
 #  address     :string
 #  city        :string
 #  state       :string
