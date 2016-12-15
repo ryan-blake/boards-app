@@ -17,9 +17,11 @@
       <strong>price:</strong> $<%= charge.price%>
       <strong>Completed payment:</strong> <%= charge.completed %>
     </div>
+
+    <% else %>
     <td><%= link_to attachment_image_tag(my_board.images.first, :file, :fill, 100, 100), my_board %></td>
     <h3> <%= link_to my_board.title, my_board %></h3>
-    <h3>Order was cancelled</h3>
+    <h3 style="color:red">Order was cancelled</h3>
      <div>
       <strong>price:</strong> $<%= charge.price%>
       <strong>Completed payment:</strong> <%= charge.completed %>

@@ -1,3 +1,4 @@
+<% if current_user && current_user.provider != nil %>
 <%= form_for(board) do |f| %>
   <% if board.errors.any? %>
     <div id="error_explanation">
@@ -9,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-
 
   <div class="actions  text-center">
     <%= f.hidden_field :user_id, :value => current_user.id %>
@@ -91,4 +91,8 @@
   <div style="margin-top:20px;" class="actions">
     <%= f.submit "submit", class: "btn btn-info" %>
   </div>
+<% end %>
+<% else %>
+
+connect or log in to account to post
 <% end %>
