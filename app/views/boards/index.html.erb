@@ -29,30 +29,26 @@
       </td>
     </thead>
 <!-- start board load -->
-<br>
 
 <!-- test on local search -->
 <% if user_signed_in?  %>
-<div class="col-lg-8" style="position:relative;padding-top:20px;">
- <div class="well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
-
+<div class="col-lg-8" style="position:relative;margin-top:25px;">
+  <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get}) do  %>
-
+<div style="padding-left:15px;width:390px;">
+  <%= text_field_tag :keyword, '...', class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
+</div>
  <div class="col-sm-4">
    <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
-
- <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type or (all)" },{ :class => 'form-control' }) %>
+ <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type" },{ :class => 'cat-width form-control' }) %>
 </div>
 <div class="col-sm-4">
-  <%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose Category" },{ :class => 'form-control' }) %>
+  <%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose Category" },{ :class => 'cat-width form-control' }) %>
 </div>
  <div class="col-sm-4">
- <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you or (any)'} , { :class => 'form-control' })  %>
+ <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'cat-width form-control' })  %>
 </div>
 
-<div style="padding-top:15px;padding-left:15px;width:390px;">
- <%= text_field_tag :keyword  %> <%= submit_tag "search", class: 'form-control' %>
-</div>
 </div>
 <% end %>
 </div>
@@ -60,24 +56,22 @@
 <!-- end test search -->
 
 <div class="col-lg-8">
-  <div class="well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
-
+  <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
-
+<div style="padding-left:15px;width:390px;">
+  <%= text_field_tag :keyword, '...', class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
+</div>
  <div class="col-sm-4">
    <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
-
- <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type" },{ :class => 'form-control' }) %>
+ <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type" },{ :class => 'cat-width form-control' }) %>
 </div>
 <div class="col-sm-4">
-  <%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose Category" },{ :class => 'form-control' }) %>
+  <%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose Category" },{ :class => 'cat-width form-control' }) %>
 </div>
  <div class="col-sm-4">
- <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'form-control' })  %>
+ <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'cat-width form-control' })  %>
 </div>
-<div style="padding-left:15px;width:390px;">
-  <%= text_field_tag :keyword  %> <%= submit_tag "search" %>
-</div>
+
 </div>
 <% end %>
 </div>

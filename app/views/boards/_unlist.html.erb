@@ -11,14 +11,23 @@
 
   <div class="actions  text-center">
     <%= f.hidden_field :user_id, :value => current_user.id %>
-
+<% if @board.pending == false  %>
   <div class="well">
-    <%= f.check_box :arrived %> check to unlist this sale
-
+    <%= f.hidden_field :arrived, value: true %> unlist this sale
+    <div class="actions">
+      <%= f.submit 'submit', class:'btn btn-danger' %>
+    </div>
+<% else %>
+   Cancel Sale
+<%= f.hidden_field :pending, value: false %>
   </div>
-
-
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'cancel', class:'btn btn-danger' %>
   </div>
+<% end %>
+
+
+  <!-- <div class="actions">
+    <%= f.submit 'submit', class:'btn btn-info' %>
+  </div> -->
 <% end %>
