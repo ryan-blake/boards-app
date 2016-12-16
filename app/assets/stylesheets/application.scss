@@ -162,6 +162,11 @@ font-size:16px;
     left:85px;
     top:-52px !important;
   }
+  .cat-width {
+    position:relative;
+    top:-20px;
+    left: calc(50% - 100px);
+  }
 }
 
 @media (min-width:767px) {

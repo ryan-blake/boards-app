@@ -5,6 +5,11 @@
   <div class="well well-sm pull-left">
     <% if current_user && current_user.id == @board.user_id%>
       <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right' %>
+      <% if @board.customer_id != nil %>
+      <% @a = @board.customer_id %>
+      <% b = User.find(@a).full_address %>
+      <%= b %>
+      <% end %>
       <% end %>
   <tr>
     <td><h2><%= @board.title %></h2></td>

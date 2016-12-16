@@ -7,6 +7,7 @@ end
 end
   resources :charges
   get 'complete_charge' => 'charges#complete'
+  get 'complete_charge' => 'charges#retrieve'
   get 'relist_board' => 'boards#relist'
   get 'my_boards' => 'pages#boards'
 

@@ -1,5 +1,10 @@
 class ChargesController < ApplicationController
   def new
+
+    Stripe::Charge.all(
+     { customer: stripe_id },
+     stripe_account: connected_account_id
+   ).data
   end
 
   def complete
