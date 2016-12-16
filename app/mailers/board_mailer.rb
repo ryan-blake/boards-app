@@ -1,18 +1,11 @@
 class BoardMailer < ApplicationMailer
-  default from: "youremail.com"
+  default from: "stillshreds@stillshreds.com"
 
-   def new_buyer(user, board)
-
-
-     headers["Message-ID"] = "<comments/#{board.id}@your-app-name.example>"
-     headers["In-Reply-To"] = "<post/#{user.id}@your-app-name.example>"
-     headers["References"] = "<post/#{board.id}@your-app-name.example>"
-
-     @user = user
+   def new_board(board)
      @board = board
-    #  @comment = comment
+
+     mail to: @board.user.email, subject: "New board posted.. #{board.title}"
 
 
-     mail(to: user.email, subject: "New interest on #{board.name}")
    end
 end

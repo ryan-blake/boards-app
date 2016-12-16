@@ -1,6 +1,5 @@
 class ChargesController < ApplicationController
   def new
-
     Stripe::Charge.all(
      { customer: stripe_id },
      stripe_account: connected_account_id
@@ -60,6 +59,8 @@ class ChargesController < ApplicationController
     @board.update_attribute(:pending, true)
     @board.for_sale = false
     @board.save
+    ChargeMailer.new_charge_user(@charge).deliver_now
+    ChargeMailer.new_charge_vendor(@charge).deliver_now
 
 
     redirect_to  root_path
