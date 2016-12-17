@@ -20,6 +20,7 @@ class BoardsController < ApplicationController
   # GET /boards/1.json
   def show
     @board = Board.find(params[:id])
+
   end
 
   # GET /boards/new
@@ -45,7 +46,7 @@ class BoardsController < ApplicationController
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end
 
-      BoardMailer.new_board(@board).deliver_now
+      # BoardMailer.new_board(@board).deliver_now
     end
   end
 
