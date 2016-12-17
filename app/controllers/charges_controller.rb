@@ -39,9 +39,13 @@ class ChargesController < ApplicationController
 
     customer = Stripe::Customer.create(
       :email => current_user.email,
-      :card => params[:stripeToken]
+      :card => params[:stripeToken],
+
+
     )
+
     @charge = Charge.new(
+
     price: params[:charge]["amount"].to_i,
     user_id: current_user.id,
     vendor_id: params[:charge]["owner_id"].to_i,
@@ -49,9 +53,14 @@ class ChargesController < ApplicationController
     token: params[:stripeToken],
     customer_id: customer.id,
     completed: false,
-    board_id: params[:charge]["board_id"]
+    board_id: params[:charge]["board_id"],
+    address:  params[:stripeShippingAddressLine1]+ " " + params[:stripeShippingAddressCity]+ " " + params[:stripeShippingAddressState]+ " " + params[:stripeShippingAddressZip]+ " " + params[:stripeShippingAddressCountry]
+
     )
+    card = customer.sources.first
+
     @charge.update_attribute(:boolean, true)
+
     @charge.save
     @board = Board.where(title: @charge.item).first
     @board.arrived = false

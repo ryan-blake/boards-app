@@ -13,6 +13,8 @@
 #  boolean     :boolean          default("f")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  board_id    :string
+#  address     :string
 #
 
 require 'rails_helper'

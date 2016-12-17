@@ -27,6 +27,7 @@
 #  distance_id :integer
 #  category_id :integer
 #  for_sale    :boolean          default("t")
+#  customer_id :string
 #
 
 require 'rails_helper'
