@@ -15,11 +15,12 @@ end
 
 types = Type.all
 
-category_array = %w{Longboard(surf) SUP Skis(snow) Cruiser(skate) Skis(water)}
+category_array = %w{Longboard(surf) SUP Short Skis Cruiser(skate) Skis(water)}
 
 category_array.each do |t|
   Category.find_or_create_by(
-  name: t
+  name: t,
+  type_id: [1..4].sample
   )
 end
 

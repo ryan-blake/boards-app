@@ -29,6 +29,7 @@
 #  for_sale    :boolean          default("t")
 #  customer_id :string
 #  shipping    :boolean
+#  shipped     :boolean
 #
 
 FactoryGirl.define do

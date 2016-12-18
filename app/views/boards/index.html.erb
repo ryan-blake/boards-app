@@ -39,11 +39,11 @@
   <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
 </div>
  <div class="col-sm-4">
-   <!-- <%= collection_select( nil, :type_id, Type.all, :id, :name, { :include_blank => 'all'} , { :class => 'form-control' })  %> -->
- <%= collection_select(nil, :type_id, Type.all, :id, :name, {prompt: "Choose a type" },{ :class => 'cat-width form-control' }) %>
+
+ <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ :class => 'cat-width form-control' }) %>
 </div>
 <div class="col-sm-4">
-  <%= collection_select(nil, :category_id, Category.all, :id, :name, {prompt: "Choose Category" },{ :class => 'cat-width form-control' }) %>
+  <%= collection_select(nil, :category_id, Category.order(:name), :id, :name, {prompt: "Choose Category" },{ :class => 'cat-width form-control' }) %>
 </div>
  <div class="col-sm-4">
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'cat-width form-control' })  %>
