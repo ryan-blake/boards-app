@@ -99,7 +99,7 @@ end
 
 25.times do
   Image.create!(
-  file_id: ['a94a79a998836df703073127b75e6cc8d35e0f98bc76bc7d7aa09cd2ee92','538fe895b2b2842d90b5091e63b6a53196ca42e99841489562bc50895180'].sample,
+  file_id: ['d87fc98cd28b8e9fb89eeba8c5cbb696a4904c1bb115d89c5da2733b8097','538fe895b2b2842d90b5091e63b6a53196ca42e99841489562bc50895180'].sample,
   board_id: Board.all.sample.id
   )
 end
