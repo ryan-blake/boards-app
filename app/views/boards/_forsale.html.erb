@@ -20,7 +20,11 @@
     <%= f.submit 'submit', class:'btn btn-success' %>
   </div>
   <% elsif @board.for_sale == false && @board.pending == true && @board.user_id == current_user.id %>
-  <%= f.hidden_field :pending, value: false %>  Cancel Sale
+    <%= f.hidden_field :shipping, value: nil %>
+    <%= f.hidden_field :shipped, value: nil %>
+    <%= f.hidden_field :customer_id, value: "nil"  %>
+    <%= f.hidden_field :address, value: "" %>
+    <%= f.hidden_field :pending, value: false %>  Cancel Sale
   <div class="actions">
    <%= f.hidden_field :for_sale , value: false %>
    <%= f.submit 'cancel', class:'btn btn-danger' %>

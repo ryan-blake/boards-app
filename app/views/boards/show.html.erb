@@ -2,15 +2,36 @@
 
 <div class="container-fluid">
 <div class="jumbotron">
+  <div class="well">
+    <div class="text-center">
+        <% if current_user && current_user.id == @board.customer_id.to_i %>
+          <% if @board.shipping == nil %>
+             <h4 style="color:black;text-shadow:3px 3px white;"> You're almost their, select if you want this item shipped</h4>
+          <% end %>
+          <%= render partial: 'shipping', locals: {board: @board} %>
+    <% end %>
+    </div>
+    </div>
   <div class="well well-sm pull-left">
-    <% if current_user && current_user.id == @board.user_id%>
+    <% if (current_user && current_user.id == @board.user_id)%>
       <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right' %>
-      <% if @board.customer_id != nil %>
-      <% @a = @board.customer_id %>
-      <% b = User.find(@a).full_address %>
-      <%= b %>
+      <% if @board.shipping == nil && (@board.customer_id != nil && @board.customer_id != "nil") && @board.for_sale == false %>
+        <% @a = @board.customer_id %>
+        <% b = User.find(@a).email %>
+        contact <%= b %> for shipping info
+      <% elsif @board.shipping == true %>
+        <% @a = @board.customer_id %>
+        <% b = User.find(@a).email %>
+        Ship to <%= @board.address %>
+        send tracking number to <%= b %>
+      <% elsif @board.shipping == false %>
+        <% @a = @board.customer_id %>
+        contact <% b = User.find(@a).email %>
+        <%= b %>
+        for pickup info
       <% end %>
-      <% end %>
+    <% end %>
+
   <tr>
     <td><h2><%= @board.title %></h2></td>
     <td><h3><%= @board.type.name %>board</h3></td>
@@ -62,14 +83,22 @@
    <strong> $<%= @board.price %> </strong>
    <h3 class="btn-outline" ><%= link_to 'Sign Up to Purchase', new_user_registration_path %></h3>
    <% elsif @board.for_sale == true && @board.user_id != current_user.id %>
+
   <p> $<%= @board.price %> </p>
+
+
+
     <%= render partial: 'charge', locals: {board: @board} %>
+
+
+
   <% elsif  @board.user_id != current_user.id && @board.for_sale == true %>
     <%= render partial: 'charge', locals: {board: @board} %> here
   <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
       <%= render partial: 'forsale', locals: {board: @board} %>
   <% elsif @board.for_sale == false  && @board.user_id == current_user.id%>
   <%= render partial: 'forsale', locals: {board: @board} %>
+
  <% end %>
 
 

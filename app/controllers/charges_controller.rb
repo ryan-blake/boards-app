@@ -24,6 +24,10 @@ class ChargesController < ApplicationController
     @charge.update_attribute(:completed, true)
     @board.update_attribute(:arrived, true)
     @board.user_id = @charge.user_id
+    @board.update_attribute(:shipping, nil)
+    @board.update_attribute(:shipped, nil)
+    @board.update_attribute(:customer_id, nil)
+    @board.update_attribute(:address, nil)
     @board.update_attribute(:pending, false)
     @board.update_attribute(:customer_id, nil)
     @board.save
@@ -65,7 +69,7 @@ class ChargesController < ApplicationController
     # ChargeMailer.new_charge_vendor(@charge).deliver_now
 
 
-    redirect_to  root_path
+    redirect_to  my_boards_path
 
   end
 end

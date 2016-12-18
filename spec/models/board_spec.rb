@@ -28,6 +28,7 @@
 #  category_id :integer
 #  for_sale    :boolean          default("t")
 #  customer_id :string
+#  shipping    :boolean
 #
 
 require 'rails_helper'
