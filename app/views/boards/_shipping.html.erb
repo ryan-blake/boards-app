@@ -13,12 +13,13 @@
 
   <% if @board.shipping == nil && @board.shipped == nil %>
   <div class="actions  text-center">
+    <%= f.label :ship_it %>
     <%= f.check_box :shipping  %>
-    <%= f.submit 'Shipping', class:'btn btn-success' %>
+    <%= f.submit 'Submit', class:'btn btn-success' %>
   </div>
 
   <div class="actions  text-center">
-<% elsif @board.shipping == true && @board.shipped == nil %>
+<% elsif @board.shipping == true && @board.address == nil%>
     <div class="actions">
       <strong> Address released to Users after payment is received. </strong>
         <div class="field">

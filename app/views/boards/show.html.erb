@@ -6,7 +6,8 @@
     <div class="text-center">
         <% if current_user && current_user.id == @board.customer_id.to_i %>
           <% if @board.shipping == nil %>
-             <h4 style="color:black;text-shadow:3px 3px white;"> You're almost their, select if you want this item shipped</h4>
+          <h4 style="color:darkred;"> You're almost there!</h4>
+             <h4 style="color:black;text-shadow:-1px 1px slategrey;"> Select if you want this item shipped check the box.<br> Local pickups press submit.</h4>
           <% end %>
           <%= render partial: 'shipping', locals: {board: @board} %>
     <% end %>
