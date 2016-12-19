@@ -254,8 +254,9 @@ Devise.setup do |config|
     :scope => 'read_write',
     :stripe_landing => 'register'
 
-  config.omniauth :facebook, ENV['APP_ID'], ENV['APP_SECRET']
-  
+  config.omniauth :facebook, ENV['APP_ID'], ENV['APP_SECRET'],
+   :scope => 'email',
+
 
 
   # ==> Warden configuration
