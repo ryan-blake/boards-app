@@ -63,6 +63,7 @@ gem "refile-mini_magick"
 gem "refile-s3", '~> 0.2.0'
 gem 'geocoder'
 gem 'faker'
+gem 'omniauth-facebook'
 
 
 

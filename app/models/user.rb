@@ -38,7 +38,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :stripe_connect]
   before_save { self.role ||= :member }
   validates :zipcode, :length => { :is => 5 }
   validates :state, :length => { :is => 2 }
@@ -54,6 +54,7 @@ class User < ApplicationRecord
   has_many :boards, dependent: :destroy
   has_many :paid_charges, class_name: 'Charge', foreign_key: 'user_id', dependent: :destroy
   has_many :received_charges, class_name: 'Charge', foreign_key: 'vendor_id', dependent: :destroy
+  has_many :user_provider, :dependent => :destroy
 
   # mapping
 

@@ -1,4 +1,6 @@
 class OmniauthCallbacksController < ApplicationController
+
+
   def stripe_connect
     @user = current_user
     if @user.update_attributes({
@@ -15,4 +17,15 @@ class OmniauthCallbacksController < ApplicationController
       redirect_to new_user_registration_url
     end
   end
+
+  def facebook
+        @user = UserProvider.find_for_facebook_oauth(request.env["omniauth.auth"])
+
+        if @user.persisted?
+          sign_in_and_redirect @user, :event => :authentication
+        else
+          session["devise.facebook_data"] = request.env["omniauth.auth"]
+          redirect_to new_user_registration_url
+        end
+    end
 end

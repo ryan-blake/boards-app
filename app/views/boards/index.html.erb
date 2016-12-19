@@ -7,11 +7,15 @@
 <div class="pull-right" style="width:163px;right:20px;top:15px;position:absolute;margin-top:20px;">
   <% if !user_signed_in? %>
     <h3 class="btn-outline"><%= link_to 'Add listing', new_user_registration_path %></h3>
+    <div class="facebook-btn" style="color:white;position:absolute;left:-200px; top:-25px;">
+      <%= link_to 'Facebook log in', user_facebook_omniauth_authorize_path, class: 'btn-outline btn' %>
+      </div>
  <% end %>
 </div>
 <div class="pull-right" style="width:210px;right:-40px;top:40px;position:absolute;margin-top:20px;">
   <% if user_signed_in?  && current_user.provider == nil %>
     <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn-outline btn' %>
+
  <% end %>
 </div>
 

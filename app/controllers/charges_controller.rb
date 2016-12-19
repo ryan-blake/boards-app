@@ -9,7 +9,7 @@ class ChargesController < ApplicationController
   def complete
     @charge = Charge.find(params[:charge_id])
     @board = Board.find_by(user: @charge.vendor_id, arrived: false, title: @charge.item)
-
+   @vendor_uid = UserProvider.where(user_id: @charge.vendor_id).where(provider: "stripe_connect").first.uid
     Stripe.api_key = ENV["STRIPE_API_KEY"]
     token = params[:token]
     charge = Stripe::Charge.create({
