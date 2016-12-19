@@ -16,14 +16,51 @@ end
 
 types = Type.all
 
-category_array = %w{Longboard(surf) SUP Short Skis Cruiser(skate) Skis(water)}
+# category_array = %w{Longboard(surf) SUP Short Skis Cruiser(skate) Skis(water)}
+#
+# category_array.each do |t|
+#   Category.find_or_create_by(
+#   name: t,
+#   type_id: [1..4].sample
+#   )
+# end
 
-category_array.each do |t|
-  Category.find_or_create_by(
-  name: t,
-  type_id: [1..4].sample
-  )
-end
+Category.create(
+  name: "Shortboard",
+  type_id: Type.find_by(name: "Surf").id
+)
+Category.create(
+  name: "Longboard",
+  type_id: Type.find_by(name: "Surf").id
+)
+Category.create(
+  name: "Stand Up Paddle",
+  type_id: Type.find_by(name: "Surf").id
+)
+Category.create(
+  name: "Snowboard",
+  type_id: Type.find_by(name: "Snow").id
+)
+Category.create(
+  name: "Skis",
+  type_id: Type.find_by(name: "Snow").id
+)
+Category.create(
+  name: "Wakeboard",
+  type_id: Type.find_by(name: "Wake").id
+)
+Category.create(
+  name: "Skis",
+  type_id: Type.find_by(name: "Wake").id
+)
+Category.create(
+  name: "Skateboard",
+  type_id: Type.find_by(name: "Skate").id
+)
+Category.create(
+  name: "Cruiser",
+  type_id: Type.find_by(name: "Skate").id
+)
 
 categories = Category.all
 
