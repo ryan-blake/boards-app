@@ -6,6 +6,10 @@ class BoardsController < ApplicationController
   def index
     @boardies = Board.order('created_at ASC')
     @boardies = Board.where(:for_sale => [true]).where(:arrived => [false])
+
+
+    @types = Type.order(:name)
+    @categories = Category.order(:name)
     # make boardies be where board.boolean == false and board.arrived = false
     if current_user.present?
       @on = current_user
@@ -45,7 +49,6 @@ class BoardsController < ApplicationController
         format.html { render :new }
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end
-
       # BoardMailer.new_board(@board).deliver_now
     end
   end
@@ -72,12 +75,6 @@ class BoardsController < ApplicationController
       format.html { redirect_to boards_url, notice: 'Board was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def relist
-    @board = Board.find(params[:id])
-    @board.arrived = false
-    @board.save
   end
 
 
