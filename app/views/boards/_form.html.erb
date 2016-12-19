@@ -16,10 +16,10 @@
 
   <div class="well">
       <div class="well">
-       <div class="form-group">
+       <div  class="form-group">
         <%= f.label :types %>
         <%= f.collection_select :type_id, Type.all, :id, :name, class: 'form-control' %>
-        <%= f.collection_select :category_id, Category.all, :id, :name, class: 'form-control' %>
+        <%= f.label :category_id, "category" %> <br>
       <br>
         <%= f.label :title %>
         <%= f.text_field :title, class: 'form-control' %>

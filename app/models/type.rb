@@ -11,5 +11,4 @@
 class Type < ApplicationRecord
   has_many :boards
   has_many :categories
-  
 end

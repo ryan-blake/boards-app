@@ -12,6 +12,7 @@ type_array.each do |t|
   name: t
   )
 end
+ # Type.find_by(name: "Surf").id
 
 types = Type.all
 
