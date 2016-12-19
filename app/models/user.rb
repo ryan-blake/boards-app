@@ -40,11 +40,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook, :stripe_connect]
   before_save { self.role ||= :member }
-  validates :zipcode, :length => { :is => 5 }
-  validates :state, :length => { :is => 2 }
   validates :name, :presence => true
-  validates :address, :presence => true
-  validates :city, :presence => true
   validates :name, :presence => true
   validates :email, :presence => true
 
