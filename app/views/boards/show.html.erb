@@ -23,7 +23,7 @@
       <% elsif @board.shipping == true %>
         <% @a = @board.customer_id %>
         <% b = User.find(@a).email %>
-        Ship to <%= @board.address + @board.city + @board.zipcode.to_s + @board.state %>
+        Ship to <%= @board.address + " " + @board.city.capitalize + " " + @board.zipcode.to_s + @board.state.upcase %>
         send tracking number to <%= b %>
       <% elsif @board.shipping == false %>
         <% @a = @board.customer_id %>
