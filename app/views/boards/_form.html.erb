@@ -20,6 +20,7 @@
         <%= f.label :types %>
         <%= f.collection_select :type_id, Type.all, :id, :name, class: 'form-control' %>
         <%= f.label :category_id, "category" %> <br>
+        <%= f.grouped_collection_select :category_id, Type.order(:name),:categories, :name, :id, :name, include_blank: true, class: 'form-control' %>
       <br>
         <%= f.label :title %>
         <%= f.text_field :title, class: 'form-control' %>
