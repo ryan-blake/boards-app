@@ -105,6 +105,13 @@ class BoardsController < ApplicationController
   render :index
 end
 
+def update_boards
+  @boardies = Board.where("type_id = ?", params[:type_id])
+  respond_to do |format|
+    format.js
+  end
+end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board

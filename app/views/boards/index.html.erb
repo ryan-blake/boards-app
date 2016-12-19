@@ -85,6 +85,7 @@
 </div>
 <% end %>
 <table class="well" style="width:100%;">
+
   <thead >
     <td>
     </td>
@@ -98,7 +99,6 @@
       <%= render partial: 'none' %>
     <% end %>
     <td class="well center-text"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board %>
-
     <ul style="top:10px;position:relative;right:30px;list-style-type:none; text-align:left;">
      <li class="center-text title-ind">
         <%= link_to board.title, board %>

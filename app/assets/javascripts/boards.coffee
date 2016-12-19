@@ -12,3 +12,15 @@
 #       console.log('hi');
 #     else
 #       $('#category-select').empty()
+# $ ->
+#   $(document).on 'change', '#type-select', (evt) ->
+#     $.ajax 'index',
+#       type: 'GET'
+#       dataType: 'script'
+#       data: {
+#         type_id: $("#type-select option:selected").val()
+#       }
+#       error: (jqXHR, textStatus, errorThrown) ->
+#         console.log("AJAX Error: #{textStatus}")
+#       success: (data, textStatus, jqXHR) ->
+#         console.log("Dynamic country select OK!")
