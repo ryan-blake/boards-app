@@ -35,7 +35,7 @@ class BoardsController < ApplicationController
   # GET /boards/1/edit
   def edit
     @board = Board.find(params[:id])
-    # BoardMailer.tracking_number(board).deliver_now
+
   end
 
   # POST /boards
@@ -105,6 +105,8 @@ class BoardsController < ApplicationController
             .near([current_user.latitude, current_user.longitude], distance_in_miles)
   render :index
 end
+
+
 
 def update_boards
   @boardies = Board.where("type_id = ?", params[:type_id])

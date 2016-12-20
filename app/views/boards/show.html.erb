@@ -26,8 +26,9 @@
         Ship to <strong><%= @board.address + " " + @board.city.capitalize + " " + @board.state.upcase + ", " + @board.zipcode.to_s  %></strong>
         enter tracking number:
          <br>
-         <%= render partial: 'tracking', locals: {board: @board} %>
-         <%# Bootstrap modal %>
+         <% if !@board.tracking%>
+          <%= render partial: 'tracking', locals: {board: @board} %>
+         <% end %>
 
       <% elsif @board.shipping == false %>
         <% @a = @board.customer_id %>

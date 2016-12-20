@@ -47,7 +47,7 @@ class Board < ApplicationRecord
   validates :type, :presence => true
   validates :category, :presence => true
   validates :zipcode, :length => { :is => 5 }
-
+  after_save :check_for_tracking_number
 
 
   # mapping
@@ -61,10 +61,17 @@ class Board < ApplicationRecord
 
   def lengths
     @lengths = []
-
     @boards.each do |i|
       @lengths.push(i.length)
     end
     puts @lenghts.uniq!
   end
+
+  def check_for_tracking_number
+    if tracking_changed?
+       BoardMailer.tracking_number(self).deliver_now
+     end
+  end
+
+
 end

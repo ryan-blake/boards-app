@@ -13,4 +13,5 @@ class BoardMailer < ApplicationMailer
      @customer = User.where(id: a).first
      mail to: @customer.email, subject: "Tracking number .. #{board.title}"
    end
+
 end
