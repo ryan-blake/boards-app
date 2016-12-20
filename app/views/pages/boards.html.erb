@@ -61,8 +61,10 @@
    <% if pending_boards %>
    <h3>
      <strong>
+
     <% pending_boards.each do |i| %>
     <div class="well ">
+
       <td class="well" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
       <%= link_to i.title, i %>:
 

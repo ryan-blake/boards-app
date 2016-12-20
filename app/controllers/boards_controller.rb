@@ -7,7 +7,6 @@ class BoardsController < ApplicationController
     @boardies = Board.order('created_at ASC')
     @boardies = Board.where(:for_sale => [true]).where(:arrived => [false])
 
-
     @types = Type.order(:name)
     @categories = Category.order(:name)
     # make boardies be where board.boolean == false and board.arrived = false
@@ -25,6 +24,7 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find(params[:id])
     @user = current_user
+
   end
 
   # GET /boards/new
@@ -35,6 +35,7 @@ class BoardsController < ApplicationController
   # GET /boards/1/edit
   def edit
     @board = Board.find(params[:id])
+    # BoardMailer.tracking_number(board).deliver_now
   end
 
   # POST /boards
@@ -120,7 +121,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :age, :footgear, :width, :length, :name, :type_id, :category_id, :volume, :address, :city, :state, :zipcode, images_files: [])
+      params.require(:board).permit(:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :age, :footgear, :width, :length, :name, :type_id, :category_id, :volume, :address, :city, :state, :zipcode, images_files: [])
     end
 
 end

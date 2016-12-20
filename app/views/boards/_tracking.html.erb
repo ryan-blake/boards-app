@@ -1,0 +1,29 @@
+<% modal ||= false %>
+<% remote = modal ? true : false %>
+<%= form_for(@board, remote: remote, html: {role: :form, 'data-model' => 'board'}) do |f| %>
+
+  <% if @board.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@board.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+      <% @board.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%# Added Bootstrap classes, and help-block container for error messages %>
+  <div class="form-group">
+    <%= f.label :tracking_number, class: 'control-label' %><br>
+    <%= f.text_field :tracking, class: 'form-control' %>
+    <span class="help-block"></span>
+  </div>
+
+  <%# Added Bootstrap classes %>
+  <div class="actions">
+    <%= f.submit 'Submit', class: 'btn btn-success' %>
+  </div>
+
+<% end %>

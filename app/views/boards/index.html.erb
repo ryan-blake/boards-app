@@ -7,24 +7,16 @@
 <div class="pull-right" style="width:163px;right:20px;top:15px;position:absolute;margin-top:20px;">
   <% if !user_signed_in? %>
     <h3 class="btn-outline"><%= link_to 'Add listing', new_user_registration_path %></h3>
-    <div class="facebook-btn" style="color:white;position:absolute;left:-200px; top:-25px;">
+    <div class="facebook-btn" style="color:white;position:absolute;right:110%; top:20px;">
       <%= link_to 'Facebook log in', user_facebook_omniauth_authorize_path, class: 'btn-outline btn' %>
       </div>
  <% end %>
 </div>
-<div class="pull-right" style="width:210px;right:-40px;top:40px;position:absolute;margin-top:20px;">
+<div class="pull-right" style="width:210px;right:-50px;40px;top:30px;position:absolute;margin-top:20px;">
   <% if user_signed_in?  && current_user.provider == nil %>
     <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn-outline btn' %>
-
  <% end %>
 </div>
-
-  <!-- <% if current_user && current_user.provider == nil %>
-    <%= link_to image_tag('powered-by-stripe.png'), user_stripe_connect_omniauth_authorize_path %>
-  <% elsif current_user && current_user.provider != nil %>
-    <h2 style="color:black;"> CONNECTED <%= current_user.uid %> </h2>
-  <% end %> -->
-
 
   <table class="well center-text" style="width:100%;">
     <thead>
@@ -51,8 +43,6 @@
   <%= grouped_collection_select nil, :category_id, Type.all, :categories,
             :name, :id, :name, { include_blank: true },
                                                  { id: 'category-select' , class: " cat-width form-control"} %>
-
-
 </div>
  <div class="col-sm-4">
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'cat-width form-control' })  %>
@@ -82,7 +72,7 @@
 
 </div>
  <div class="col-sm-4">
- <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'cat-width form-control' })  %>
+ <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Max distance away (Mi.)'} , { :class => 'cat-width form-control' })  %>
 </div>
 </div>
 <% end %>

@@ -30,6 +30,7 @@
 #  customer_id :string
 #  shipping    :boolean
 #  shipped     :boolean
+#  tracking    :string
 #
 
 FactoryGirl.define do

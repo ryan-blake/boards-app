@@ -23,8 +23,12 @@
       <% elsif @board.shipping == true %>
         <% @a = @board.customer_id %>
         <% b = User.find(@a).email %>
-        Ship to <%= @board.address + " " + @board.city.capitalize + " " + @board.zipcode.to_s + @board.state.upcase %>
-        send tracking number to <%= b %>
+        Ship to <strong><%= @board.address + " " + @board.city.capitalize + " " + @board.state.upcase + ", " + @board.zipcode.to_s  %></strong>
+        enter tracking number:
+         <br>
+         <%= render partial: 'tracking', locals: {board: @board} %>
+         <%# Bootstrap modal %>
+
       <% elsif @board.shipping == false %>
         <% @a = @board.customer_id %>
         contact <% b = User.find(@a).email %>
