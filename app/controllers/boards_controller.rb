@@ -99,6 +99,8 @@ class BoardsController < ApplicationController
             "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
              .near([request.location.latitude, request.location.longitude], distance_in_miles)
    render :index
+   @boards = @boards.paginate(page: params[:page], per_page: 5)
+
  end
 
  def search_signed_in
@@ -114,6 +116,8 @@ class BoardsController < ApplicationController
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near([current_user.latitude, current_user.longitude], distance_in_miles)
   render :index
+  @boards = @boards.paginate(page: params[:page], per_page: 5)
+
 end
 
 
