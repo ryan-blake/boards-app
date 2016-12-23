@@ -85,6 +85,7 @@ class BoardsController < ApplicationController
   end
 
 
+
   def search
     if params[:value].to_i < 1
       distance_in_miles = 2000
@@ -97,9 +98,9 @@ class BoardsController < ApplicationController
     @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 
             "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
-             .near([request.location.latitude, request.location.longitude], distance_in_miles).paginate(page: params[:page], per_page: 5)
+             .near([request.location.latitude, request.location.longitude], distance_in_miles)
+      @boards = @boards.paginate(page: params[:page], per_page: 5)
    render :index
-   @boards = @boards.paginate(page: params[:page], per_page: 5)
 
  end
 
