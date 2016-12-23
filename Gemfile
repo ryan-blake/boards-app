@@ -64,7 +64,8 @@ gem "refile-s3", '~> 0.2.0'
 gem 'geocoder'
 gem 'faker'
 gem 'omniauth-facebook'
-
+gem 'will_paginate', '~> 3.1.0'
+gem 'bootstrap-will_paginate'
 
 
 group :development do

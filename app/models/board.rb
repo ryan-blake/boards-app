@@ -59,13 +59,7 @@ class Board < ApplicationRecord
   end
 
 
-  def lengths
-    @lengths = []
-    @boards.each do |i|
-      @lengths.push(i.length)
-    end
-    puts @lenghts.uniq!
-  end
+
 
   def check_for_tracking_number
     if tracking_changed?
