@@ -59,7 +59,9 @@
   <div class="well cat-well" style="margin:20px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
 <div style="padding-left:15px;width:390px;">
-  <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
+  <%= text_field_tag :search, params[:search],:id => 'geo-input' %>
+<%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ',:id => 'find', style: 'position:relative;top:-34px;left:190px;' %>
+
 </div>
 <div class="col-sm-4">
 <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
@@ -151,5 +153,31 @@ $(document).ready(function() {
     }
   });
 });
+</script>
+<script>
+  $(function(){
+
+    $("#geocomplete").geocomplete()
+      .bind("geocode:result", function(event, result){
+        $.log("Result: " + result.formatted_address);
+      })
+      .bind("geocode:error", function(event, status){
+        $.log("ERROR: " + status);
+      })
+      .bind("geocode:multiple", function(event, results){
+        $.log("Multiple: " + results.length + " results found");
+      });
+
+    $("#find").click(function(){
+      $("#geocomplete").trigger("geocode");
+    });
+
+
+    $("#examples a").click(function(){
+      $("#geocomplete").val($(this).text()).trigger("geocode");
+      return false;
+    });
+
+  });
 </script>
 <%= will_paginate @boards %>

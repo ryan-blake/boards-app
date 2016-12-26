@@ -20,7 +20,6 @@ class BoardsController < ApplicationController
     if @charge == nil
       @boards = Board.where(title: @charge.item )
       @boardies = Board.where(title: @charge.item )
-
       end
       end
     end
@@ -95,13 +94,21 @@ class BoardsController < ApplicationController
     # casting seems to have changed geocoder locally but works on heroku.
 
     # @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
-    @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+    if params[:search].present?
 
+      @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
             "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
-             .near([request.location.latitude, request.location.longitude], distance_in_miles)
-      @boards = @boards.paginate(page: params[:page], per_page: 5)
-   render :index
+                  .near(params[:search])
+                @boards = @boards.paginate(page: params[:page], per_page: 5)
+                render :index
 
+              else
+                @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+                      "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
+                  .near([request.location.latitude, request.location.longitude], distance_in_miles)
+                @boards = @boards.paginate(page: params[:page], per_page: 5)
+                render :index
+              end
  end
 
  def search_signed_in
