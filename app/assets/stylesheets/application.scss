@@ -74,7 +74,11 @@ h3 :hover {
   }
 }
 
-
+// powered by google --delete
+.pac-container:after {  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+    background-image: none !important;
+    height: 0px;
+}
 
 .buttons:link {
   font-style:none;

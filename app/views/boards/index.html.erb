@@ -54,6 +54,14 @@
 </div>
 <% else %>
 <!-- end test search -->
+<!--alien search  -->
+<%= form_tag boards_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search],:id => 'geo-input' %>
+    <%= submit_tag "Search Near", :name => nil %>
+  </p>
+<% end %>
+<!-- !!alien search -->
 
 <div class="col-lg-8">
   <div class="well cat-well" style="margin:20px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
@@ -152,4 +160,5 @@ $(document).ready(function() {
   });
 });
 </script>
+
 <%= will_paginate @boards %>

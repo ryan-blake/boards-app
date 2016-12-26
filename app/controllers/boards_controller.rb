@@ -5,12 +5,17 @@ class BoardsController < ApplicationController
   # GET /boards.json
   def index
     # @boardies = Board.order('created_at ASC')
-    @boards = Board.order('created_at ASC')
+    if params[:search].present?
+    @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
+    @boards = Board.near(params[:search])
 
+    @boards = @boards.paginate(page: params[:page], per_page: 5)
+  else
+    @boards = Board.order('created_at ASC')
     # @boardies = Board.where(:for_sale => [true]).where(:arrived => [false]).paginate(page: params[:page])
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
     @boards = @boards.paginate(page: params[:page], per_page: 5)
-
+end
      @types = Type.order(:name)
     @categories = Category.order(:name)
     # make boardies be where board.boolean == false and board.arrived = false
