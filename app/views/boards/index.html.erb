@@ -30,23 +30,23 @@
 
 <!-- test on local search -->
 <% if user_signed_in? && current_user.role == "admin"  %>
-<div class="col-lg-8" style="position:relative;margin-top:25px;">
+<div class="col-lg-9" style="position:relative;margin-top:25px;">
   <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get}) do  %>
 <div style="padding-left:15px;width:390px;">
-  <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
+<%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
 </div>
- <div class="col-sm-4">
- <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
+<div style="padding-left:15px;width:300px;margin-top:-30px;">
+  <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
+  <div class="">
+    <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'max distance (mi.)'} , { :class => 'form-control' })  %>
+ </div>
 </div>
-<!-- collection -->
-<div class="col-sm-4">
+ <div class="col-sm-4 types" style="margin-top:20px;">
+  <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
   <%= grouped_collection_select nil, :category_id, Type.all, :categories,
             :name, :id, :name, { include_blank: true },
                                                  { id: 'category-select' , class: " cat-width form-control"} %>
-</div>
- <div class="col-sm-4">
- <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Miles from you'} , { :class => 'cat-width form-control' })  %>
 </div>
 
 </div>
@@ -55,17 +55,20 @@
 <% else %>
 <!-- end test search -->
 <!--alien search  -->
-<%= form_tag boards_path, :method => :get do %>
+<!-- <%= form_tag boards_path, :method => :get do %>
   <p>
     <%= text_field_tag :search, params[:search],:id => 'geo-input' %>
     <%= submit_tag "Search Near", :name => nil %>
   </p>
-<% end %>
+<% end %> -->
 <!-- !!alien search -->
 
 <div class="col-lg-8">
   <div class="well cat-well" style="margin:20px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
 <%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
+<div style="z-index:999;">
+<%= text_field_tag :search, params[:search],:id => 'geo-input'  %>
+</div>
 <div style="padding-left:15px;width:390px;">
   <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
 </div>
@@ -78,10 +81,10 @@
            :name, :id, :name, { include_blank: true },
                                                 { id: 'category-select' , class: " cat-width form-control"} %>
 
-
 </div>
  <div class="col-sm-4">
  <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Max distance away (Mi.)'} , { :class => 'cat-width form-control' })  %>
+
 </div>
 </div>
 <% end %>

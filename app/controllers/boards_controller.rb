@@ -5,17 +5,17 @@ class BoardsController < ApplicationController
   # GET /boards.json
   def index
     # @boardies = Board.order('created_at ASC')
-    if params[:search].present?
-    @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
-    @boards = Board.near(params[:search])
-
-    @boards = @boards.paginate(page: params[:page], per_page: 5)
-  else
+  #   if params[:search].present?
+  #   @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
+  #   @boards = Board.near(params[:search])
+  #
+  #   @boards = @boards.paginate(page: params[:page], per_page: 5)
+  # else
     @boards = Board.order('created_at ASC')
     # @boardies = Board.where(:for_sale => [true]).where(:arrived => [false]).paginate(page: params[:page])
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
     @boards = @boards.paginate(page: params[:page], per_page: 5)
-end
+# end
      @types = Type.order(:name)
     @categories = Category.order(:name)
     # make boardies be where board.boolean == false and board.arrived = false
@@ -111,7 +111,7 @@ end
 
  def search_signed_in
    if params[:value].to_i < 1
-     distance_in_miles = 2000
+     distance_in_miles = 2
    else
      distance_in_miles = params[:value].to_i
    end
@@ -120,9 +120,8 @@ end
    @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
-            .near([current_user.latitude, current_user.longitude], distance_in_miles)
+            .near(params[:search], distance_in_miles).paginate(page: params[:page], per_page: 5)
   render :index
-  @boards = @boards.paginate(page: params[:page], per_page: 5)
 
 end
 
