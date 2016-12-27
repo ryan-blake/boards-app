@@ -16,4 +16,5 @@
 //= require jquery.geocomplete
 $(function() {
 $("#geo-input").geocomplete();
+country: "US"
 });

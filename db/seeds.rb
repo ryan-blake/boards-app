@@ -94,7 +94,7 @@ User.create(
 
 users = User.all
 
-10.times do
+20.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -113,7 +113,7 @@ users = User.all
   for_sale: true
   )
 end
-10.times do
+20.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
