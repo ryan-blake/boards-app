@@ -14,7 +14,7 @@ class BoardsController < ApplicationController
     @boards = Board.order('created_at ASC')
     # @boardies = Board.where(:for_sale => [true]).where(:arrived => [false]).paginate(page: params[:page])
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
-    @boards = @boards.paginate(page: params[:page], per_page: 5)
+    @boards = @boards.page(params[:page]).per(10)
 # end
      @types = Type.order(:name)
     @categories = Category.order(:name)
@@ -126,11 +126,12 @@ class BoardsController < ApplicationController
 
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+
    @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
-   @boards =  @boards.paginate(page: params[:page], per_page: 5)
+   @boards =  @boards.page(params[:page]).per(10)
 
   render :index
 
