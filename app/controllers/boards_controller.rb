@@ -110,10 +110,9 @@ class BoardsController < ApplicationController
  end
 
  def search_signed_in
-   if params[:value].to_i < 1
-     distance_in_miles = 2
-   elsif params[:value].to_i < 401
-     distance_in_miles = 2500
+   if params[:value].empty?
+     distance_in_miles = 3
+
    else
      distance_in_miles = params[:value]
    end
@@ -121,8 +120,7 @@ class BoardsController < ApplicationController
      @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 
              "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-
-             @boards =  @boards.page(params[:page]).per(10)
+             @boards =  @boards.page(params[:page]).per(5)
 
             render :index
    # casting seems to have changed geocoder locally but works on heroku.
