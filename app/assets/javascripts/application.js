@@ -18,7 +18,20 @@ $(function() {
 $("#geo-input").geocomplete();
 country: "US"
 });
-
+$(document).ready(function() {
+  var subcat;
+  subcat = $('#category-select').html();
+  return $('#type-select').change(function() {
+    var cat, options;
+    cat = jQuery('#type-select').children('option').filter(':selected').text();
+    options = $(subcat).filter("optgroup[label='" + cat + "']").html();
+    if (options) {
+      return $('#category-select').html(options);
+    } else {
+      return $('#category-select').empty();
+    }
+  });
+});
 (function() {
   $(document).on('click', '.toggle-window', function(e) {
     e.preventDefault();

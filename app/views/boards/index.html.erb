@@ -30,72 +30,33 @@
 
 
 <!-- test on local search -->
-<% if user_signed_in? && current_user.role == "admin"  %>
+<% if user_signed_in?  %>
 <div class="col-lg-9" style="position:relative;margin-top:25px;">
   <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
-<%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get}) do  %>
-<div style="padding-left:15px;width:390px;">
-<%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
-</div>
-<div style="padding-left:15px;width:300px;margin-top:-30px;">
-  <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
-  <div class="">
-    <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'max distance (mi.)'} , { :class => 'form-control' })  %>
- </div>
-</div>
- <div class="col-sm-4 types" style="margin-top:20px;">
-  <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
-  <%= grouped_collection_select nil, :category_id, Type.all, :categories,
-            :name, :id, :name, { include_blank: true },
-                                                 { id: 'category-select' , class: " cat-width form-control"} %>
-</div>
-
-</div>
-</div>
-<% end %>
-
-<% else %>
-<!-- end test search -->
-<!--alien search  -->
-<!-- <%= form_tag boards_path, :method => :get do %>
-  <p>
-    <%= text_field_tag :search, params[:search],:id => 'geo-input' %>
-    <%= submit_tag "Search Near", :name => nil %>
-  </p>
-<% end %> -->
-<!-- !!alien search -->
-
-<div class="col-lg-8">
-  <div class="well cat-well" style="margin:20px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
-<%= form_tag({controller: :boards, action: :search}, {method: :get}) do  %>
-<div style="z-index:999;">
-<%= text_field_tag :search, params[:search],:id => 'geo-input'  %>
-</div>
-<div style="padding-left:15px;width:390px;">
-  <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:190px;' %>
-</div>
-<div class="col-sm-4">
-<%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
-</div>
-<!-- collection -->
-<div class="col-sm-4" id="new_select">
- <%= grouped_collection_select nil, :category_id, Type.all, :categories,
-           :name, :id, :name, { include_blank: true },
-                                                { id: 'category-select' , class: " cat-width form-control"} %>
-
-</div>
- <div class="col-sm-4">
- <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'Max distance away (Mi.)'} , { :class => 'cat-width form-control' })  %>
-
-</div>
-</div>
-<% end %>
+  <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get}) do  %>
+  <div style="padding-left:15px;width:390px;">
+    <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
+  </div>
+  <div style="padding-left:15px;width:300px;margin-top:-30px;">
+    <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
+    <div class="">
+      <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'max distance (mi.)'} , { :class => 'form-control' })  %>
+    </div>
+  </div>
+  <div class="col-sm-4 types" style="margin-top:20px;">
+    <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
+    <%= grouped_collection_select nil, :category_id, Type.all, :categories,
+          :name, :id, :name, { include_blank: true },
+          { id: 'category-select' , class: " cat-width form-control"} %>
+  </div>
+  </div>
+  <% end %>
 </div>
 <% end %>
 <table class="well" style="width:100%;">
-
   <thead >
     <td>
+
     </td>
   </thead>
 <% if @boards.length < 1 %>
@@ -124,17 +85,16 @@
          <strong>Volume: </strong><%= board.volume %>
         <% else %>
         <strong>Volume: </strong> N/A
-
         <% end %>
      </li>
      <li>
-      type: <%= board.type.name %>
+      type: <%= board.type.name %> as  <%= board.category.name %>
      </li>
      <li>
-      type: <%= board.category.name %>
+
      </li>
-     <li>
-      <strong>$<%=  board.price %></strong>
+     <li class="center-text">
+       Make:<strong><%= board.make %></strong> Price: <strong>$<%=  board.price %></strong>
      </li>
     </ul>
     </td>
@@ -150,20 +110,5 @@
 <br>
 
 </div>
-<script type="text/javascript">
-$(document).ready(function() {
-  var subcat;
-  subcat = $('#category-select').html();
-  return $('#type-select').change(function() {
-    var cat, options;
-    cat = jQuery('#type-select').children('option').filter(':selected').text();
-    options = $(subcat).filter("optgroup[label='" + cat + "']").html();
-    if (options) {
-      return $('#category-select').html(options);
-    } else {
-      return $('#category-select').empty();
-    }
-  });
-});
-</script>
-<%= paginate @boards %>
+
+<div class="center-text"><%= paginate @boards %></div>

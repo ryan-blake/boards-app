@@ -4,17 +4,10 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.json
   def index
-    # @boardies = Board.order('created_at ASC')
-  #   if params[:search].present?
-  #   @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
-  #   @boards = Board.near(params[:search])
-  #
-  #   @boards = @boards.paginate(page: params[:page], per_page: 5)
-  # else
-    @boards = Board.order('created_at ASC')
-    # @boardies = Board.where(:for_sale => [true]).where(:arrived => [false]).paginate(page: params[:page])
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
-    @boards = @boards.page(params[:page]).per(10)
+    @boards = @boards.page(params[:page]).per(9)
+    @boards = @boards.order('created_at DESC')
+
 # end
      @types = Type.order(:name)
     @categories = Category.order(:name)
@@ -117,20 +110,22 @@ class BoardsController < ApplicationController
      distance_in_miles = params[:value]
    end
    if params[:search].empty?
-     @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+     @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
-             "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-             @boards =  @boards.page(params[:page]).per(5)
+             "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+
+             @boards = @boards.order('price DESC').page(params[:page]).per(9)
 
             render :index
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 else
-   @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+   @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
-           "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
+           "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
-   @boards =  @boards.page(params[:page]).per(10)
+            @boards = @boards.reorder('price').page(params[:page]).per(9)
+
 
   render :index
 end
