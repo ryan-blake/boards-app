@@ -228,6 +228,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    redis (3.3.2)
     refile-mini_magick (0.2.0)
       mini_magick (~> 4.0)
       refile (~> 0.5)
@@ -358,6 +359,7 @@ DEPENDENCIES
   rails_apps_pages
   rails_apps_testing
   rails_layout
+  redis (~> 3.0)
   refile!
   refile-mini_magick
   refile-s3 (~> 0.2.0)
@@ -380,4 +382,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.13.6
+   1.13.7
