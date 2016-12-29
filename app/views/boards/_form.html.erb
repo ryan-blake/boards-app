@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+  <% if @board.user == current_user %>
 
   <div class="actions  text-center">
     <%= f.hidden_field :user_id, :value => current_user.id %>
@@ -86,6 +87,7 @@
   </div>
 
 
+
     </br>
 
 
@@ -94,4 +96,6 @@
     <%= f.submit "submit", class: "btn btn-info" %>
   </div>
 <% end %>
+<% end %>
+
 <% end %>

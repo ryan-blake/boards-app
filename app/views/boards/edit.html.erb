@@ -1,8 +1,7 @@
 <div class="center-text">
-  <h1>Uh oh.</h1>
 
   <%= render 'form', board: @board %>
 
-  <%= link_to 'Show', @board %> |
-  <%= link_to 'Back', boards_path %>
+  <div class="well center-text">  back to <strong><%= link_to attachment_image_tag(@board.images.first, :file, :fill, 140, 140), @board %> <%= @board.title %>  </strong></div>
+  <!-- <%= link_to 'Back', boards_path %> -->
 </div>

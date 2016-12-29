@@ -131,7 +131,7 @@ else
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
    @boards =  @boards.page(params[:page]).per(10)
-
+raise
   render :index
 end
 
