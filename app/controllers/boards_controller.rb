@@ -132,6 +132,9 @@ end
 
 end
 
+def sort_order
+  @baords = @boards.reorder("price #{@order.order}")
+end
 
 
 def update_boards

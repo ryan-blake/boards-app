@@ -23,6 +23,17 @@
       <td>
         <h1 class="center-text" style="padding-left: 25px;">Boards</h1>
         <%= paginate @boards %>
+        <div>
+
+          <% @order = [{"name"=>"ascending", "order"=>"ASC"}, {"name"=>"descending", "order"=>"DESC"}] %>
+
+        <%= form_tag({controller: :boards, action: :sort_order}, {method: :get}) do  %>
+        <div style="padding-left:15px;width:390px;">
+          <%= select_tag "order", options_for_select(@order.collect {|p| [ p['name'], p['order'] ] }) %>
+<%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
+        </div>
+
+        <%end%>
 
       </td>
     </thead>
