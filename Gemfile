@@ -66,6 +66,8 @@ gem 'faker'
 gem 'omniauth-facebook'
 gem 'kaminari'
 gem 'geocomplete_rails'
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git', branch: 'master'
+gem 'ajax-datatables-rails'
 
 
 group :development do

@@ -8,18 +8,21 @@ class BoardsController < ApplicationController
     @boards = @boards.page(params[:page]).per(9)
     @boards = @boards.order('created_at DESC')
 
-# end
-     @types = Type.order(:name)
+    @types = Type.order(:name)
     @categories = Category.order(:name)
-    # make boardies be where board.boolean == false and board.arrived = false
+
     if current_user.present?
       @on = current_user
       @charge = Charge.where(user_id: @on.id)
-    if @charge == nil
-      @boards = Board.where(title: @charge.item )
-      @boardies = Board.where(title: @charge.item )
+      if @charge == nil
+        @boards = Board.where(title: @charge.item )
+        @boardies = Board.where(title: @charge.item )
 
       end
+    end
+      respond_to do |format|
+        format.html
+        format.json { render json: BoardDatatable.new(view_context) }
       end
     end
 
@@ -132,9 +135,6 @@ end
 
 end
 
-def sort_order
-  @baords = @boards.reorder("price #{@order.order}")
-end
 
 
 def update_boards

@@ -12,8 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require jquery.geocomplete
+//= require dataTables/jquery.dataTables
+//= require_tree .
+
+
 $(function() {
 $("#geo-input").geocomplete();
 country: "US"

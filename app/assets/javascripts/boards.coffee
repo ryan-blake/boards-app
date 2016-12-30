@@ -7,6 +7,12 @@
   $("#type-select").change ->
     $("#category-select").show();
 
+ $ ->
+  $('#boards-table').dataTable
+    processing: true
+    serverSide: true
+    ajax: $('#boards-table').data('source')
+    pagingType: 'full_numbers'
 # jQuery ->
 #   subcat = $('#category-select').html()
 #   $('#category-select').click ->

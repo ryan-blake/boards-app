@@ -7,6 +7,17 @@ GIT
       rest-client (~> 2)
       sinatra (~> 2.0.0.beta2)
 
+GIT
+  remote: git://github.com/rweng/jquery-datatables-rails.git
+  revision: d486b31b192a2924b1913e080ad23460e6b96d31
+  branch: master
+  specs:
+    jquery-datatables-rails (3.4.0)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
+      sass-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,6 +60,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
+    ajax-datatables-rails (0.3.1)
+      railties (>= 3.1)
     annotate (2.6.5)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -329,6 +342,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ajax-datatables-rails
   annotate
   better_errors
   binding_of_caller
@@ -346,6 +360,7 @@ DEPENDENCIES
   high_voltage
   hub
   jbuilder (~> 2.5)
+  jquery-datatables-rails!
   jquery-rails
   kaminari
   launchy
