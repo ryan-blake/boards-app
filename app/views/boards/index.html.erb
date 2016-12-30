@@ -21,7 +21,7 @@
   <table class="well center-text" style="width:100%;">
     <thead>
       <td>
-        <h1 class="center-text" style="padding-left: 25px;">Boards</h1>
+        <h1 class="center-text" style="padding-left: 25px;">Boards </h1>
         <%= paginate @boards %>
         <div>
 
@@ -64,6 +64,8 @@
   <% end %>
 </div>
 <% end %>
+<th><%= sortable "price" %></th>
+
 <table class="well" style="width:100%;">
   <thead >
     <td>

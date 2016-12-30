@@ -1,5 +1,6 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   # GET /boards
   # GET /boards.json
@@ -7,6 +8,7 @@ class BoardsController < ApplicationController
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
     @boards = @boards.page(params[:page]).per(9)
     @boards = @boards.order('created_at DESC')
+    @boards = Board.where(:for_sale => [true]).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
 # end
      @types = Type.order(:name)
@@ -114,7 +116,7 @@ class BoardsController < ApplicationController
 
              "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
 
-             @boards = @boards.order('price DESC').page(params[:page]).per(9)
+             @boards = @boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(9).order(sort_column + ' ' + sort_direction)
 
             render :index
    # casting seems to have changed geocoder locally but works on heroku.
@@ -124,7 +126,7 @@ else
 
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
-            @boards = @boards.reorder('price').page(params[:page]).per(9)
+            @boards = @boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
 
   render :index
@@ -146,6 +148,13 @@ def update_boards
 end
 
   private
+  def sort_column
+    Board.column_names.include?(params[:sort]) ? params[:sort] : "price"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_board
       @board = Board.find(params[:id])
