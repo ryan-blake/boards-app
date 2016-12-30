@@ -1,0 +1,54 @@
+<table class="well" style="width:100%;">
+  <thead >
+    <td>
+
+    </td>
+  </thead>
+<% if @boards.length < 1 %>
+
+  <%= render partial: 'none' %>
+<% end %>
+<% @boards.each do |board| %>
+  <tbody class="col-sm-6 col-md-4" >
+    <% if @boards.length == 0 %>
+      <%= render partial: 'none' %>
+    <% end %>
+
+    <td class="well center-text"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board %>
+    <ul style="top:10px;position:relative;right:30px;list-style-type:none; text-align:left;">
+     <li class="center-text title-ind">
+        <%= link_to board.title, board %>
+     </li>
+     <li>
+      <%=  board.description.truncate(25)  %>
+      <%=  board.zipcode  %>
+     </li>
+     <li style="min-width:239px;">
+      <strong>Height: </strong><%= board.length %>
+      <strong>width: </strong><%= board.width %>
+        <% if board.type_id == 1 %>
+         <strong>Volume: </strong><%= board.volume %>
+        <% else %>
+        <strong>Volume: </strong> N/A
+        <% end %>
+     </li>
+     <li>
+      type: <%= board.type.name %> as  <%= board.category.name %>
+     </li>
+     <li>
+
+     </li>
+     <li class="center-text">
+       Make:<strong><%= board.make %></strong> Price: <strong>$<%=  board.price %></strong>
+     </li>
+    </ul>
+    </td>
+    <!-- <%if current_user && board.user_id == current_user.id %>
+    <td><%= link_to 'Edit', edit_board_path(board) %></td>
+    <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %> -->
+    <% end %>
+
+
+  </tbody>
+</table>
