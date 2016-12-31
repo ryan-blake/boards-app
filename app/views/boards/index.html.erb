@@ -58,16 +58,17 @@
     <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
     <%= grouped_collection_select nil, :category_id, Type.all, :categories,
           :name, :id, :name, { include_blank: true },
-          { id: 'category-select' , class: " cat-width form-control"} %>
+          { id: 'category-select' , class: "cat-width abc form-control"} %>
   <% end %>
   </div>
 </div>
-<td>
+<td class="filtering">
   <ti> <strong> Sort by: </strong> </ti>
-  <ti class="btn btn-outline"><%= sortable "created_at" %> </ti>
+  <ti class="btn btn-outline" style="padding-left:8px;"><%= sortable "created_at" %> </ti>
   <ti class="btn btn-outline"><%= sortable "price" %></ti>
-  <ti class="btn btn-outline"><%= sortable "length" %></ti>
+  <ti class="btn btn-outline center-text" ><%= sortable "length" %></ti>
 </td>
+
 <%= render partial: 'search' %>
 
 <br>

@@ -142,6 +142,7 @@ font-size:16px;
     transition: all .5s;
 }
 
+
 .btn-primary.btn-outline {
     color: #428bca;
 }
@@ -253,6 +254,20 @@ font-size:16px;
     position:relative;
     top:-20px;
     left: calc(50% - 100px);
+  }
+}
+
+@media (max-width: 400px) {
+  .filtering .btn-outline {
+    max-width: 70px;
+  }
+  .filtering .btn-outline a {
+    font-size: 9px;
+    font-weight:bold;
+  }
+
+  .abc {
+    width:20px;
   }
 
 }
