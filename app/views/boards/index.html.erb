@@ -59,14 +59,15 @@
     <%= grouped_collection_select nil, :category_id, Type.all, :categories,
           :name, :id, :name, { include_blank: true },
           { id: 'category-select' , class: " cat-width form-control"} %>
-  </div>
   <% end %>
   </div>
 </div>
-
- <td><%= sortable "price" %></td>
- <td><%= sortable "created_at" %></td>
-
+<td>
+  <ti> <strong> Sort by: </strong> </ti>
+  <ti class="btn btn-outline"><%= sortable "created_at" %> </ti>
+  <ti class="btn btn-outline"><%= sortable "price" %></ti>
+  <ti class="btn btn-outline"><%= sortable "length" %></ti>
+</td>
 <%= render partial: 'search' %>
 
 <br>

@@ -134,9 +134,7 @@ end
 
 end
 
-def sort_order
-  @baords = @boards.reorder("price #{@order.order}")
-end
+
 
 
 def update_boards
@@ -149,11 +147,11 @@ end
 
   private
   def sort_column
-    Board.column_names.include?(params[:sort]) ? params[:sort] : "price"
+    Board.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
   end
     # Use callbacks to share common setup or constraints between actions.
     def set_board
