@@ -99,7 +99,7 @@ class BoardsController < ApplicationController
 
             "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
              .near([request.location.latitude, request.location.longitude], distance_in_miles)
-      @boards = @boards.paginate(page: params[:page], per_page: 5)
+      @boards = @boards.reorder(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 5)
    render :index
 
  end
@@ -116,7 +116,7 @@ class BoardsController < ApplicationController
 
              "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
 
-             @boards = @boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(9).order(sort_column + ' ' + sort_direction)
+             @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
             render :index
    # casting seems to have changed geocoder locally but works on heroku.
@@ -126,10 +126,10 @@ else
 
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
-            @boards = @boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
-
+            @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
   render :index
+
 end
 
 end
