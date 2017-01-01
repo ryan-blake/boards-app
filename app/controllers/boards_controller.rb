@@ -118,7 +118,11 @@ class BoardsController < ApplicationController
 
              @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
-            render :index
+             respond_to do |format|
+               format.html {render :index}
+               format.js
+             end
+
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 else

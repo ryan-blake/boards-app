@@ -47,6 +47,3 @@ $(document).ready(function() {
     }
   });
 })();
-
-// timeago_helper
-$('.timeago').timeago()
