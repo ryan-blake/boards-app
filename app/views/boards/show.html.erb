@@ -37,7 +37,9 @@
         for pickup info
       <% end %>
     <% end %>
-
+<div>
+  Posted: <%= time_ago_in_words(@board.created_at) %> ago
+</div>
   <tr>
     <td><h2><%= @board.title %></h2></td>
     <td><h3><%= @board.type.name %>board</h3></td>
