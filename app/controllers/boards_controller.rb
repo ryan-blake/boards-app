@@ -1,6 +1,7 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
+  respond_to :html, :js
 
   # GET /boards
   # GET /boards.json
@@ -119,9 +120,8 @@ class BoardsController < ApplicationController
              @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
              respond_to do |format|
-               format.html {render :index}
-               format.js
-             end
+                    format.js
+                end
 
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
@@ -130,9 +130,11 @@ else
 
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
-            @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
-  render :index
+            respond_to do |format|
+                   format.js {render 'search_signed_in' }
+               end
 
 end
 
