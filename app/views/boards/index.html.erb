@@ -22,20 +22,10 @@
     <thead>
       <td>
         <h1 class="center-text" style="padding-left: 25px;">Boards </h1>
-        <%= paginate @boards %>
-        <div>
-
-          <!-- <% @order = [{"name"=>"ascending", "order"=>"ASC"}, {"name"=>"descending", "order"=>"DESC"}] %>
-
-        <%= form_tag({controller: :boards, action: :sort_order}, {method: :get}) do  %>
-        <div style="padding-left:15px;width:390px;">
-          <%= select_tag "order", options_for_select(@order.collect {|p| [ p['name'], p['order'] ] }) %>
-<%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
-        </div>
-
-        <%end%> -->
 
       </td>
+      </div>
+
     </thead>
 <!-- start board load -->
 
@@ -44,7 +34,7 @@
 
 <div class="col-lg-9" style="position:relative;margin-top:25px;">
   <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
-  <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get}) do  %>
+  <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
   <div style="padding-left:15px;width:390px;">
     <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
   </div>
@@ -62,17 +52,11 @@
   <% end %>
   </div>
 </div>
-<td class="filtering">
-  <ti> <strong> Sort by: </strong> </ti>
-  <ti class="btn btn-outline" style="padding-left:8px;"><%= sortable "created_at" %> </ti>
-  <ti class="btn btn-outline"><%= sortable "price" %></ti>
-  <ti class="btn btn-outline center-text" ><%= sortable "length" %></ti>
-</td>
+</div>
 
-<%= render partial: 'search' %>
+  <%= render partial: 'search_signed_in' %>
 
 <br>
 
-</div>
 
 <div class="center-text"><%= paginate @boards %></div>

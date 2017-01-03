@@ -1,0 +1,2 @@
+$('#results').html('<%= escape_javascript render 'search_signed_in' %>');
+$('#paginator').html('<%= escape_javascript(paginate(@boards, :remote => true)) %>');
