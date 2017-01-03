@@ -1,10 +1,17 @@
-
 <table class="well" id="results" style="width:100%;">
   <thead >
     <td>
       <div class="center-text" id="paginator">
       <%= paginate @boards, remote: true %>
       </div>
+      <tr>
+        <td class="filtering center-text">
+          <ti> <strong> Sort by: </strong> </ti>
+          <ti class="btn btn-outline" style="padding-left:8px;"><%= sortable "created_at", "Date" %> </ti>
+          <ti class="btn btn-outline"><%= sortable "price" %></ti>
+          <ti class="btn btn-outline center-text" ><%= sortable "length", "Height" %></ti>
+        </td>
+      </tr>
     </td>
   </thead>
 <% if @boards.length < 1 %>
