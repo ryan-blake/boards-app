@@ -1,3 +1,4 @@
+<!-- partial rendered on from index -->
 <table class="well" id="results" style="width:100%;">
   <thead >
     <td>
@@ -24,7 +25,7 @@
     <% end %>
 
     <td class="well center-text"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board %>
-    <ul style="top:10px;position:relative;right:30px;list-style-type:none; text-align:left;">
+    <ul class="main-well-ul">
      <li class="center-text title-ind">
         <%= link_to board.title, board %>
      </li>
@@ -32,7 +33,7 @@
       <%=  board.description.truncate(25)  %>
       <%=  board.zipcode  %>
      </li>
-     <li style="min-width:239px;">
+     <li class="well-width">
       <strong>Height: </strong><%= board.length %>
       <strong>width: </strong><%= board.width %>
         <% if board.type_id == 1 %>

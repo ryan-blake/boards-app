@@ -100,6 +100,16 @@ h3 :hover {
   text-align: center;
 }
 
+.main-well-ul {
+top:5px;
+position:relative;
+list-style-type:none;
+text-align:right;
+}
+
+.well-width {
+  min-width:225px;
+}
 .well-styled {
 box-shadow: 0px 0px 3px 1px #888;
 border-radius: 10px;

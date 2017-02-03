@@ -34,7 +34,6 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find(params[:id])
     @user = current_user
-
   end
 
   # GET /boards/new
