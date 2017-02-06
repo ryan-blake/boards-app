@@ -27,7 +27,12 @@
     <td class="well center-text"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board %>
     <ul class="main-well-ul">
      <li class="center-text title-ind">
-        <%= link_to board.title, board %>
+       <!-- new link to modal -->
+       <div style="color:red;padding-top: 150px;">
+
+
+        </div>
+        <%= link_to board.title, board, remote: true %>
      </li>
      <li>
       <%=  board.description.truncate(25)  %>

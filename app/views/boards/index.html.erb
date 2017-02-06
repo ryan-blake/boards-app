@@ -55,7 +55,9 @@
 </div>
 
   <%= render partial: 'search_signed_in' %>
-
+  <% if @board.present? %>
+     <%= render partial: 'show' %>
+  <% end %>
 <br>
 
 
