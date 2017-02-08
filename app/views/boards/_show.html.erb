@@ -2,6 +2,9 @@
 
 <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-header">
+      <button style="color:white" aria-hidden="true" class="close" data-dismiss="modal" type="button">X</button>
+    </div>
     <div class="modal-content">
         <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
 
