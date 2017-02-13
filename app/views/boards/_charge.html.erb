@@ -8,5 +8,6 @@
     data-amount="<%= @total_price.to_i.ceil * 100 %>"
     data-name="<%= @board.title %> " data-description="<%= number_to_currency(@board.price) %>"
     data-image= "<%= attachment_image_tag(@board.images.first, :file, :fill, 140, 140)%>"
-  </script>
+    })();
+    </script>
   <% end %>
