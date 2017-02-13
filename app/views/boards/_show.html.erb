@@ -1,7 +1,6 @@
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
 
 <div class="container-fluid">
-<div class="jumbotron">
   <div class="well">
     <div class="text-center">
         <% if current_user && current_user.id == @board.customer_id.to_i %>
