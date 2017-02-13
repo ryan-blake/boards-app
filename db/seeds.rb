@@ -138,7 +138,7 @@ end
 
 25.times do
   Image.create!(
-  file_id: ['b48e94cb5e3f89fde42820ba7d0840653cb999b65ba3c16e9a8f4ee835b1','c5fc067f1e1df54fbb415f5f8e4ae7e2d2a79d5836c9e4cd86336b769dad','0ef76e914d27cf9fe915155db07a3985fd8ab268bfd6de45e62f841437d0'].sample,
+  file_id: ['bba550316014f9abc161dad4a3dfb506f6846ccccda7d940c1c1220b6cf8','c5fc067f1e1df54fbb415f5f8e4ae7e2d2a79d5836c9e4cd86336b769dad','0ef76e914d27cf9fe915155db07a3985fd8ab268bfd6de45e62f841437d0'].sample,
   board_id: Board.all.sample.id
   )
 end

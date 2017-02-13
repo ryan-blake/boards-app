@@ -34,7 +34,14 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find(params[:id])
     @user = current_user
-
+    if current_user.present?
+      @on = current_user
+      @charge = Charge.where(user_id: @on.id)
+      if @charge == nil
+        @boards = Board.where(title: @charge.item )
+        @boardies = Board.where(title: @charge.item )
+      end
+    end
   end
 
   # GET /boards/new
