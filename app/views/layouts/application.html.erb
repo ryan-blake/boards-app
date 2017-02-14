@@ -19,8 +19,8 @@
     <ul class="nav navbar-nav">
       <% if user_signed_in? %>
       <li class="my-pages"><%= link_to 'My-boards', my_boards_path %></li>
+       <li class="my-pages"><%= link_to 'My-page', user_path(current_user) %></li>
 <% end %>
-
 
   </div>
   <div style="padding-right:20px;list-style:none;top:1px;position:absolute;right:5px;" class="pull-right">

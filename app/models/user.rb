@@ -45,7 +45,7 @@ class User < ApplicationRecord
   validates :email, :presence => true
 
   enum role: [:member, :admin]
-
+  has_many :reviews, dependent: :destroy
   has_many :boards, dependent: :destroy
   has_many :paid_charges, class_name: 'Charge', foreign_key: 'user_id', dependent: :destroy
   has_many :received_charges, class_name: 'Charge', foreign_key: 'vendor_id', dependent: :destroy

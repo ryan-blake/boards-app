@@ -1,11 +1,23 @@
 <div class="center-text">
-  <%= @user.name %> fuckin blake
+  <%= @user.name %> 
+</b>
+  <% @user.reviews.each do |r| %>
+    <% r.rating.times do %>
+    <%= image_tag "Star.png", :size => "25x25"%>
+    <% end %>
+  <% end %>
+<h3>
+</div>
+<div class="create_review well center-text">
+   <h4> Create Review: </h4>
+   <%= render partial: 'form' %>
 </div>
 
 <div class="well jumbotron">
   <% womp = @user.boards.all %>
   <% womp.each do |i| %>
-  <div class="well center-text"><strong><%= link_to attachment_image_tag(i.images.first, :file, :fill, 140, 140), i %> <%= i.title %>  </strong> 
+  <div class="well center-text"><strong><%= link_to attachment_image_tag(i.images.first, :file, :fill, 140, 140), i %> <%= i.title %>  </strong>
 </div>
+
 
   <% end %>

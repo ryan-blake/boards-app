@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229161417) do
+ActiveRecord::Schema.define(version: 20170214181307) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at",                  null: false
@@ -104,6 +104,16 @@ ActiveRecord::Schema.define(version: 20161229161417) do
     t.datetime "updated_at",      null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "title"
+    t.string   "author"
+    t.integer  "rating"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "types", force: :cascade do |t|

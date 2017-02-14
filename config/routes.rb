@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  get 'messages/create'
-
-  get 'conversations/create'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
-  resources :users, :only => [:show]
+  resources :users do
+     resources :reviews
+  end
+
   resources :boards do
     collection do
       get 'search', 'search_signed_in', 'sort_order'
@@ -15,12 +15,16 @@ Rails.application.routes.draw do
   get 'complete_charge' => 'charges#complete'
   get 'complete_charge' => 'charges#retrieve'
 
+  get 'messages/create'
+  get 'conversations/create'
   resources :conversations, only: [:create] do
     member do
       post :close
     end
     resources :messages, only: [:create]
   end
+
+
   get 'relist_board' => 'boards#relist'
   get 'my_boards' => 'pages#boards'
   get 'profile' => 'pages#profile'
