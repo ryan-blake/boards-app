@@ -5,8 +5,9 @@ class PagesController < ApplicationController
     @boardies = Board.all
 
     @charge  = Charge.new
-
   end
+
+
 
   def boards
     @user = current_user

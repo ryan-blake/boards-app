@@ -4,13 +4,14 @@ Rails.application.routes.draw do
   get 'conversations/create'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+  resources :users, :only => [:show]
   resources :boards do
     collection do
       get 'search', 'search_signed_in', 'sort_order'
     end
   end
 
-  resources :charges
+ resources :charges
   get 'complete_charge' => 'charges#complete'
   get 'complete_charge' => 'charges#retrieve'
 
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   end
   get 'relist_board' => 'boards#relist'
   get 'my_boards' => 'pages#boards'
+  get 'profile' => 'pages#profile'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'boards#index'

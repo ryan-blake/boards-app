@@ -1,0 +1,11 @@
+<div class="center-text">
+  <%= @user.name %> fuckin blake
+</div>
+
+<div class="well jumbotron">
+  <% womp = @user.boards.all %>
+  <% womp.each do |i| %>
+  <div class="well center-text"><strong><%= link_to attachment_image_tag(i.images.first, :file, :fill, 140, 140), i %> <%= i.title %>  </strong> 
+</div>
+
+  <% end %>
