@@ -1,6 +1,6 @@
 <div class="center-text">
 
-  <%= render 'form', board: @board %>
+  <%= render 'edit', board: @board %>
 
   <div class="well center-text">  back to <strong><%= link_to attachment_image_tag(@board.images.first, :file, :fill, 140, 140), @board %> <%= @board.title %>  </strong></div>
   <!-- <%= link_to 'Back', boards_path %> -->

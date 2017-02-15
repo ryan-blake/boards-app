@@ -1,5 +1,15 @@
+<div class="center-text">
 <h1>New Board</h1>
+</div>
 
 <%= render 'form', board: @board %>
 
+<div class="center-text">
+<% if user_signed_in?  && current_user.provider == nil %>
+  <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn btn-primary' %>
+<% end %>
+<br>
+<hr>
 <%= link_to 'Back', boards_path %>
+
+</div>
