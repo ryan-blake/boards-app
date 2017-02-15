@@ -1,11 +1,9 @@
 <div class="center-text">
-  <%= @user.name %> 
+  <%= @user.name %>
 </b>
-  <% @user.reviews.each do |r| %>
-    <% r.rating.times do %>
-    <%= image_tag "Star.png", :size => "25x25"%>
-    <% end %>
-  <% end %>
+    <% @user.reviews.average(:rating).to_i.times do %>
+          <%= image_tag "Star.png", :size => "25x25" %>
+        <% end %>
 <h3>
 </div>
 <div class="create_review well center-text">
