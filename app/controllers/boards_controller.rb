@@ -59,6 +59,7 @@ class BoardsController < ApplicationController
   # POST /boards.json
   def create
     @board = Board.new(board_params)
+    @user = current_user
     respond_to do |format|
       if @board.save
         format.html { redirect_to @board, notice: 'Board was successfully created.' }
@@ -68,6 +69,8 @@ class BoardsController < ApplicationController
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end
       # BoardMailer.new_board(@board).deliver_now
+      @user.tokens += -2
+      @user.save
     end
   end
 
