@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :users do
      resources :reviews
@@ -11,7 +12,9 @@ Rails.application.routes.draw do
     end
   end
 
- resources :charges
+  resources :charges, only: [:new, :create, :complete]
+  resources :tokens, only: [:new, :create]
+
   get 'complete_charge' => 'charges#complete'
   get 'complete_charge' => 'charges#retrieve'
 

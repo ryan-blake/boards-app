@@ -1,10 +1,46 @@
 class ChargesController < ApplicationController
+
   def new
-    Stripe::Charge.all(
-     { customer: stripe_id },
-     stripe_account: connected_account_id
-   ).data
+    # Stripe::Charge.all(
+    #  { customer: stripe_id },
+    #  stripe_account: connected_account_id).data
   end
+
+
+
+  def create
+
+    customer = Stripe::Customer.create(
+      :email => current_user.email,
+      :card => params[:stripeToken]
+    )
+
+    @charge = Charge.new(
+      price: params[:charge]["amount"].to_i,
+      user_id: current_user.id,
+      vendor_id: params[:charge]["owner_id"].to_i,
+      item: params[:charge]["item"],
+      token: params[:stripeToken],
+      customer_id: customer.id,
+      completed: false,
+      board_id: params[:charge]["board_id"],
+    )
+
+    @charge.update_attribute(:boolean, true)
+    @charge.save
+    @board = Board.where(id: @charge.board_id).first
+    @board.update_attribute(:arrived, false)
+    @board.customer_id = current_user.id
+    @board.update_attribute(:pending, true)
+    @board.for_sale = false
+    @board.save
+    # ChargeMailer.new_charge_user(@charge).deliver_now
+    # ChargeMailer.new_charge_vendor(@charge).deliver_now
+
+    redirect_to  my_boards_path
+
+  end
+
 
   def complete
     @charge = Charge.find(params[:charge_id])
@@ -38,37 +74,4 @@ class ChargesController < ApplicationController
       redirect_to charges_path
   end
 
-  def create
-
-    customer = Stripe::Customer.create(
-      :email => current_user.email,
-      :card => params[:stripeToken]
-    )
-
-    @charge = Charge.new(
-      price: params[:charge]["amount"].to_i,
-      user_id: current_user.id,
-      vendor_id: params[:charge]["owner_id"].to_i,
-      item: params[:charge]["item"],
-      token: params[:stripeToken],
-      customer_id: customer.id,
-      completed: false,
-      board_id: params[:charge]["board_id"],
-    )
-
-    @charge.update_attribute(:boolean, true)
-    @charge.save
-    @board = Board.where(id: @charge.board_id).first
-    @board.update_attribute(:arrived, false)
-    @board.customer_id = current_user.id
-    @board.update_attribute(:pending, true)
-    @board.for_sale = false
-    @board.save
-    # ChargeMailer.new_charge_user(@charge).deliver_now
-    # ChargeMailer.new_charge_vendor(@charge).deliver_now
-
-
-    redirect_to  my_boards_path
-
-  end
 end

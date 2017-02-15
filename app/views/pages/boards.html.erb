@@ -1,6 +1,7 @@
 <% if  user_signed_in? %>
 <div class="jumbotron well">
-  <h2><%= current_user.name%> </h2>
+  <h2><%= current_user.tokens.to_s + " tokens " %> </h2>
+  <%= link_to "purchase tokens", new_token_path %>
 </div>
 <% if @charge || @board %>
  <div class="well well-styled col-md-6">
