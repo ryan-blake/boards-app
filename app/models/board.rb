@@ -67,6 +67,4 @@ class Board < ApplicationRecord
        BoardMailer.tracking_number(self).deliver_now
      end
   end
-
-
 end

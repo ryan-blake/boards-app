@@ -1,4 +1,4 @@
-<!-- <p id="notice"><%= notice %></p> -->
+  <!-- <p id="notice"><%= notice %></p> -->
 <div class="pull-right" style="width:163px;right:20px;top:15px;position:absolute;margin-top:20px;">
   <% if  current_user && current_user.provider != nil %>
     <h3 class="btn-outline" ><%= link_to 'Add listing', new_board_path %></h3>
@@ -49,6 +49,10 @@
           :name, :id, :name, { prompt: "Choose board type" },
           { id: 'cat-select' , class: "cat-width form-control"} %>
     <%= collection_select(nil, :brand_id, Brand.order(:name), :id, :name, {prompt: "Choose a brand" },{ id:'brand-select', class: " cat-width form-control" }) %>
+    </div>
+    <div class="col-sm-5 types" style="margin-top:-20px;">
+
+    </div>
   <% end %>
   </div>
 </div>

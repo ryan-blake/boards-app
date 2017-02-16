@@ -142,7 +142,8 @@ else
    @boards = Board.where(:for_sale => [true]).where("cast( brand_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
            "%#{params[:brand_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
-            .near(params[:search], distance_in_miles)
+            .near(params[:search], distance_in_miles)            
+
    @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
             respond_to do |format|
