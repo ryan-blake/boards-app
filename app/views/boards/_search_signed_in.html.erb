@@ -41,6 +41,8 @@
             <div class="modal-content">
             </div>
           </div>
+          <div class="center-text" id="paginator">
+          </div>
         </div>
 
 
@@ -77,5 +79,13 @@
 
 
   </tbody>
+  <thead >
+    <td>
+      <div class="center-text" id="paginator">
+      <%= paginate @boards, remote: true %>
+      </div>
+
+    </td>
+  </thead>
 </table>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
