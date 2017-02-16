@@ -45,10 +45,10 @@
     </div>
   </div>
   <div class="col-sm-4 types" style="margin-top:20px;">
-    <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
     <%= grouped_collection_select nil, :category_id, Type.all, :categories,
-          :name, :id, :name, { include_blank: true },
-          { id: 'category-select' , class: "cat-width form-control"} %>
+          :name, :id, :name, { prompt: "Choose board type" },
+          { id: 'cat-select' , class: "cat-width form-control"} %>
+    <%= collection_select(nil, :brand_id, Brand.order(:name), :id, :name, {prompt: "Choose a brand" },{ id:'brand-select', class: " cat-width form-control" }) %>
   <% end %>
   </div>
 </div>

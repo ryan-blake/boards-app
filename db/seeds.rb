@@ -16,6 +16,17 @@ end
 
 types = Type.all
 
+brand_array = %w{brand1 Brand2 Brand3 Brand4}
+
+brand_array.each do |t|
+  Brand.find_or_create_by(
+  name: t
+  )
+end
+ # Type.find_by(name: "Surf").id
+
+brands = Brand.all
+
 # category_array = %w{Longboard(surf) SUP Short Skis Cruiser(skate) Skis(water)}
 #
 # category_array.each do |t|
@@ -102,6 +113,7 @@ users = User.all
   length: Faker::Number.number(1),
   width: Faker::Number.number(1),
   volume: Faker::Number.number(1),
+  brand: brands.sample,
   type: types.sample,
   category: categories.sample,
   footgear: [true, false].sample,
@@ -121,6 +133,7 @@ end
   length: Faker::Number.number(1),
   width: Faker::Number.number(1),
   volume: Faker::Number.number(1),
+  brand: brands.sample,
   type: types.sample,
   category: categories.sample,
   footgear: [true, false].sample,
@@ -160,4 +173,5 @@ puts "#{Image.count} images"
 puts "#{Board.count} boards"
 puts"#{User.count} users"
 puts"#{Type.count} types"
-puts"#{Category.count} types"
+puts"#{Category.count} categories"
+puts"#{Brand.count} brands"

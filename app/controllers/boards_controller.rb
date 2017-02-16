@@ -126,9 +126,9 @@ class BoardsController < ApplicationController
      distance_in_miles = params[:value]
    end
    if params[:search].empty?
-     @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+     @boards = Board.where(:for_sale => [true]).where("cast( brand_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
-             "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+             "%#{params[:brand_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
 
              @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
@@ -139,9 +139,9 @@ class BoardsController < ApplicationController
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 else
-   @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+   @boards = Board.where(:for_sale => [true]).where("cast( brand_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
-           "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
+           "%#{params[:brand_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
    @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
