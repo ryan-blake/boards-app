@@ -7,7 +7,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  type_id    :integer
-#
+
 
 class Category < ApplicationRecord
   has_many :boards

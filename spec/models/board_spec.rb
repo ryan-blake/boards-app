@@ -31,6 +31,7 @@
 #  shipping    :boolean
 #  shipped     :boolean
 #  tracking    :string
+#  board_id    :integer
 #
 
 require 'rails_helper'

@@ -31,6 +31,7 @@
 #  shipping    :boolean
 #  shipped     :boolean
 #  tracking    :string
+#  board_id    :integer
 #
 
 FactoryGirl.define do

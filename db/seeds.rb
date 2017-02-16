@@ -16,14 +16,17 @@ end
 
 types = Type.all
 
-# category_array = %w{Longboard(surf) SUP Short Skis Cruiser(skate) Skis(water)}
-#
-# category_array.each do |t|
-#   Category.find_or_create_by(
-#   name: t,
-#   type_id: [1..4].sample
-#   )
-# end
+brand_array = %w{Oneal WOmp Smith Burton}
+
+brand_array.each do |t|
+  Brand.find_or_create_by(
+  name: t
+  )
+end
+ # Type.find_by(name: "Surf").id
+
+brands = Brand.all
+
 
 Category.create(
   name: "Shortboard",
@@ -102,6 +105,7 @@ users = User.all
   length: Faker::Number.number(1),
   width: Faker::Number.number(1),
   volume: Faker::Number.number(1),
+  brand: brands.sample,
   type: types.sample,
   category: categories.sample,
   footgear: [true, false].sample,
@@ -121,6 +125,7 @@ end
   length: Faker::Number.number(1),
   width: Faker::Number.number(1),
   volume: Faker::Number.number(1),
+  brand: brands.sample,
   type: types.sample,
   category: categories.sample,
   footgear: [true, false].sample,
@@ -131,10 +136,28 @@ end
   zipcode: [76210, 90277, 76262, 76135].sample,
   for_sale: false
   )
-
   boards = Board.all
 
 end
+boards = Board.all
+
+brands = []
+
+boards.each do |i|
+    brand = ""
+    brand = i.brand
+    brands << brand
+  end
+	brands = brands.uniq
+
+  brands.each do |t|
+    Brand.find_or_create_by(
+    name: t
+    )
+  end
+
+
+
 
 25.times do
   Image.create!(
@@ -150,8 +173,8 @@ distance_array = %w(10 20 30 50 100 150 200 350 400)
 distance_array.each do |c|
   Distance.create!(
     value: c,
-  board_id: Board.all.sample.id
-    )
+    board_id: Board.all.sample.id
+  )
 end
 
 distances = Distance.all
@@ -160,4 +183,5 @@ puts "#{Image.count} images"
 puts "#{Board.count} boards"
 puts"#{User.count} users"
 puts"#{Type.count} types"
+puts "#{Brand.count} brands"
 puts"#{Category.count} types"
