@@ -4,10 +4,15 @@
   <%= f.hidden_field :owner_id, value: @board.user_id %>
   <%= f.hidden_field :board_id, value: @board.id %>
 
-
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+<script>
+alert("hi");
+</script>
+    <script src="https://checkout.stripe.com/checkout.js" class="btn btn-outline stripe-button"
         data-key="<%= ENV["publishable_key"] %>"
         data-amount="<%= @total_price.to_i.ceil * 100 %>"
         data-name="<%= @board.title %> " data-description="<%= number_to_currency(@board.price) %>">
-</script>
+<%= @board.title %>
+    </script>
+
+
   <% end %>
