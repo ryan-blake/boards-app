@@ -2,17 +2,35 @@
   <%= f.hidden_field :amount, value: @board.price.round  %>
   <%= f.hidden_field :item, value: @board.title %>
   <%= f.hidden_field :owner_id, value: @board.user_id %>
-  <%= f.hidden_field :board_id, value: @board.id %>
+  <%= f.hidden_field :object_id, value: @board.id %>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
 
-<script>
-alert("hi");
-</script>
-    <script src="https://checkout.stripe.com/checkout.js" class="btn btn-outline stripe-button"
-        data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
-        data-amount="<%= @total_price.to_i.ceil * 100 %>"
-        data-name="<%= @board.title %> " data-description="<%= number_to_currency(@board.price) %>">
-<%= @board.title %>
-    </script>
+  <button id="customButton">Purchase</button>
 
+  <script>
+  var handler = StripeCheckout.configure({
+    key: 'pk_test_jjbQhruH64ZMu5yyRC0lP6Aw',
+    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+    locale: 'auto',
+    token: function(token) {
+      // You can access the token ID with `token.id`.
+      // Get the token ID to your server-side code for use.
+    }
+  });
 
-  <% end %>
+  document.getElementById('customButton').addEventListener('click', function(e) {
+    // Open Checkout with further options:
+    handler.open({
+      name: '<%= @board.title %>',
+      description: '2 widgets',
+      amount: 2000
+    });
+    e.preventDefault();
+  });
+
+  // Close Checkout on page navigation:
+  window.addEventListener('popstate', function() {
+    handler.close();
+  });
+  </script>
+<% end %>

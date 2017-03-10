@@ -39,6 +39,36 @@
 <div>
   Posted: <%= time_ago_in_words(@board.created_at) %> ago
 </div>
+<!-- chaeckout custohm -->
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+<button id="stripe-button">Purchase</button>
+
+<script src="https://checkout.stripe.com/checkout.js">
+var handler = StripeCheckout.configure({
+  key: 'pk_test_jjbQhruH64ZMu5yyRC0lP6Aw',
+  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+  locale: 'auto',
+  token: function(token) {
+    // You can access the token ID with `token.id`.
+    // Get the token ID to your server-side code for use.
+  }
+});
+
+document.getElementById('customButton').addEventListener('click', function(e) {
+  // Open Checkout with further options:
+  handler.open({
+    name: 'bids',
+    description: '2 widgets',
+    amount: 100
+  });
+  e.preventDefault();
+});
+
+// Close Checkout on page navigation:
+
+</script>
+
   <tr>
     <td><h2><%= @board.title %></h2></td>
     <td><h3><%= @board.type.name %>board</h3></td>
@@ -82,14 +112,12 @@
 </tr>
 </div>
 
+
 <hr>
 
 <div class=" text-center">
  <div class="well">
-   <% if !user_signed_in? %>
-   <strong> $<%= @board.price %> </strong>
-   <h3 class="btn-outline" ><%= link_to 'Sign Up to Purchase', new_user_registration_path %></h3>
-   <% elsif @board.for_sale == true && @board.user_id != current_user.id %>
+   <% if @board.for_sale == true && current_user != @board.user %>
 
   <p> $<%= @board.price %> </p>
 
