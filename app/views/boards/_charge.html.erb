@@ -8,7 +8,7 @@
 alert("hi");
 </script>
     <script src="https://checkout.stripe.com/checkout.js" class="btn btn-outline stripe-button"
-        data-key="<%= ENV["publishable_key"] %>"
+        data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
         data-amount="<%= @total_price.to_i.ceil * 100 %>"
         data-name="<%= @board.title %> " data-description="<%= number_to_currency(@board.price) %>">
 <%= @board.title %>
