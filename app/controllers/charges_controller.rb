@@ -24,9 +24,10 @@ class ChargesController < ApplicationController
       customer_id: customer.id,
       completed: false,
       board_id: params[:charge]["board_id"],
+      boolean: true
     )
 
-    @charge.update_attribute(:boolean, true)
+    
     @charge.save
     @board = Board.where(id: @charge.board_id).first
     @board.update_attribute(:arrived, false)
