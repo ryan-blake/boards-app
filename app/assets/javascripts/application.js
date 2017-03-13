@@ -47,14 +47,3 @@ country: "US"
     }
   });
 })();
-
-var handler = StripeCheckout.configure({
-    key: 'pk_test_2xN4CjS8O6TCrDyTN3AhOo0b',
-    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-    token: function (token) {
-        $("#stripeToken").val(token.id);
-        $("#stripeEmail").val(token.email);
-        $("#amount").val($("#amount").val() * 100);
-        $("#myForm").submit();
-    }
-});

@@ -29,7 +29,7 @@ class ChargesController < ApplicationController
 
 
     @charge.save
-    @board = Board.where(id: @charge.board_id).first
+    @board.find(@charge.board_id)
     @board.update_attribute(:arrived, false)
     @board.customer_id = current_user.id
     @board.update_attribute(:pending, true)
