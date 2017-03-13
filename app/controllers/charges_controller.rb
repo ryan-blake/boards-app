@@ -9,7 +9,9 @@ class ChargesController < ApplicationController
 
 
   def create
+    board =  Board.find(params[:id])
 
+    )
     customer = Stripe::Customer.create(
       :email => current_user.email,
       :card => params[:stripeToken]
@@ -23,11 +25,11 @@ class ChargesController < ApplicationController
       token: params[:stripeToken],
       customer_id: customer.id,
       completed: false,
-      board_id: params[:charge]["board_id"],
+      board_id: board.id,
       boolean: true
     )
 
-    
+
     @charge.save
     @board = Board.where(id: @charge.board_id).first
     @board.update_attribute(:arrived, false)

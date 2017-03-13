@@ -31,6 +31,7 @@
 #  shipping    :boolean
 #  shipped     :boolean
 #  tracking    :string
+#  brand_id    :integer
 #
 
 require 'rails_helper'
