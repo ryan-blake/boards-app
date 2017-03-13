@@ -1,6 +1,7 @@
 <%= form_for Charge.new do |f| %>
   <%= f.hidden_field :amount, value: @board.price.round  %>
   <%= f.hidden_field :item, value: @board.title %>
+  <%= f.hidden_field :board_id, value: @board.id %>
   <%= f.hidden_field :owner_id, value: @board.user_id %>
   <%= f.hidden_field :object_id, value: @board.id %>
   <script src="https://checkout.stripe.com/checkout.js"></script>
@@ -9,7 +10,7 @@
 
   <script>
   var handler = StripeCheckout.configure({
-    key: 'ENV['PUBLISHABLE_KEY']',
+    key: 'pk_test_jjbQhruH64ZMu5yyRC0lP6Aw',
     image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
     locale: 'auto',
     token: function(token) {
