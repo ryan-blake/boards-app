@@ -1,37 +1,35 @@
-<%= form_for Charge.new do |f| %>
-  <%= f.hidden_field :amount, value: @board.price.round  %>
-  <%= f.hidden_field :item, value: @board.title %>
-  <%= f.hidden_field :board_id, value: @board.id %>
-  <%= f.hidden_field :owner_id, value: @board.user_id %>
-  <%= f.hidden_field :object_id, value: @board.id %>
-  <script src="https://checkout.stripe.com/checkout.js"></script>
 
-  <button id="customButton">Purchase</button>
+  <%= form_tag new_charge_path, id: 'chargeForm' do %>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <%= hidden_field_tag 'stripeToken' %>
+    <%= hidden_field_tag 'stripeEmail' %>
+    <%= hidden_field_tag :amount, value: @board.price.round, :id => 'amount'%>
+    <%= hidden_field_tag :item, value: @board.title %>
+    <%= hidden_field_tag :board_id, value: @board.id %>
+    <%= hidden_field_tag :owner_id, value: @board.user_id %>
+    <%= hidden_field_tag :object_id, value: @board.id %>
+    <button id="customButton" class="btn btn-large btn-primary">Buy Now</button>
 
-  <script>
-  var handler = StripeCheckout.configure({
-    key: 'pk_test_jjbQhruH64ZMu5yyRC0lP6Aw',
-    image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-    locale: 'auto',
-    token: function(token) {
-      // You can access the token ID with `token.id`.
-      // Get the token ID to your server-side code for use.
-    }
-  });
+    <script>
+      var handler = StripeCheckout.configure({
+        key: '<%= ENV["stripe_publishable_key"] %>',
+        image: '/assets/star.png',
+        token: function(token, args) {
+          document.getElementById("stripeToken").value = token.id;
+          document.getElementById("stripeEmail").value = token.email;
+          document.getElementById("chargeForm").submit();
+        }
+      });
 
-  document.getElementById('customButton').addEventListener('click', function(e) {
-    // Open Checkout with further options:
-    handler.open({
-      name: '<%= @board.title %>',
-      description: '2 widgets',
-      amount: 2000
-    });
-    e.preventDefault();
-  });
-
-  // Close Checkout on page navigation:
-  window.addEventListener('popstate', function() {
-    handler.close();
-  });
-  </script>
-<% end %>
+      document.getElementById('customButton').addEventListener('click', function(e) {
+        // Open Checkout with further options
+        handler.open({
+          name: 'My Company',
+          description: 'Product ($60.00)',
+          amount: 60*100,
+          shippingAddress: true
+        });
+        e.preventDefault();
+      });
+    </script>
+  <% end %>
