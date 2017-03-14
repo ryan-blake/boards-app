@@ -1,102 +1,13 @@
-
-<!--  -->
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
-  <!-- jQuery is used only for this example; it isn't required to use Stripe -->
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-  <script type="text/javascript">
-    // This identifies your website in the createToken call below
-    Stripe.setPublishableKey('<%= ENV['STRIPE_PUBLISHABLE_KEY']%>');
-
-    var stripeResponseHandler = function(status, response) {
-      var $form = $('#payment-form');
-
-      if (response.error) {
-        // Show the errors on the form
-        $form.find('.payment-errors').text(response.error.message);
-        $form.find('button').prop('disabled', false);
-      } else {
-        // token contains id, last4, and card type
-        var token = response.id;
-        // Insert the token into the form so it gets submitted to the server
-        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-        // and re-submit
-        $form.get(0).submit();
-      }
-    };
-
-    jQuery(function($) {
-      $('#payment-form').submit(function(e) {
-        var $form = $(this);
-
-        // Disable the submit button to prevent repeated clicks
-        $form.find('button').prop('disabled', true);
-
-        Stripe.card.createToken({
-            number: $('.card-number').val(),
-            cvc: $('.card-cvc').val(),
-            exp_month: $('.card-expiry-month').val(),
-            exp_year: $('.card-expiry-year').val()}, stripeResponseHandler);
-
-        // Prevent the form from submitting with the default action
-        return false;
-      });
-    });
-  </script>
-</head>
-<body>
-
-<!--  form -->
-<div class="container">
-    <div class="row Row one">
-        <div class="col-sm-12 col-md-10">
-        <h1>Make your contribution</h1>
-           <%= form_for Charge.new,  :html => {:id => "payment-form"}, method: 'post' do |f| %>
-
-             <%= f.hidden_field :amount, value: @board.price.round  %>
-             <%= f.hidden_field :item, value: @board.title %>
-             <%= f.hidden_field :owner_id, value: @board.user_id %>
-             <%= f.hidden_field :board_id, value: @board.id %>
+<%= form_for Charge.new do |f| %>
+  <%= f.hidden_field :amount, value: @board.price.round  %>
+  <%= f.hidden_field :item, value: @board.title %>
+  <%= f.hidden_field :owner_id, value: @board.user_id %>
+  <%= f.hidden_field :board_id, value: @board.id %>
 
 
-                <div class= "field">
-                  <%= label_tag :card_number, "Credit Card Number" %><br>
-                  <%= text_field_tag :card_number, nil, name: nil, class: ' card-number form-control', :required => true %><br>
-                </div>
-
-                <div class= "field">
-                  <%= label_tag :card_code, "Security Code (cvc)" %><br>
-                  <%= text_field_tag :card_code, nil, name: nil, class: 'card-cvc form-control', :required => true %><br>
-                </div>
-
-                <div class= "field">
-                  <%= label_tag :card_month, "Expiration" %>
-                  <%= select_month nil, {add_month_numbers: true}, {name: nil, class: "card-expiry-month"} %>
-                  <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, class: "card-expiry-year"}%>
-                </div>
-
-
-                <div class= "field">
-                    <%= label_tag :amount, @board.price %><br>
-                    <%= text_field_tag :amount %>
-                </div>
-
-
-
-                <div class= "actions">
-                  <%= f.submit 'Submit', :class => 'contribution-submit' %>
-                </div>
-
-          <div id="stripe_error">
-              <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
-          </div>
-
-          <% end %>
-        </div>
-    </div>
-    <!-- <div class="row"></div> -->
-</div>
-
-
-<!--  -->
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
+        data-amount="<%= @total_price.to_i.ceil * 100 %>"
+        data-name="<%= @board.title %> " data-description="<%= number_to_currency(@board.price) %>">
+</script>
+  <% end %>
