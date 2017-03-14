@@ -311,6 +311,7 @@ GEM
     unicorn-rails (2.2.1)
       rack
       unicorn
+    vuejs-rails (2.2.1)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.4.0)
@@ -376,6 +377,7 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   unicorn-rails
+  vuejs-rails
   web-console
 
 RUBY VERSION

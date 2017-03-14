@@ -66,6 +66,8 @@ gem 'faker'
 gem 'omniauth-facebook'
 gem 'kaminari'
 gem 'geocomplete_rails'
+gem 'vuejs-rails'
+gem 'rails-assets-jquery.payment'
 
 
 group :development do

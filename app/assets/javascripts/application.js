@@ -11,9 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.payment
 //= require jquery_ujs
 //= require_tree .
 //= require jquery.geocomplete
+//= require bootstrap-sass
+//= require vue
+//= require ./main
 $(function() {
 $("#geo-input").geocomplete();
 country: "US"
