@@ -5,16 +5,31 @@
     <% end %>
   </div>
   <article>
-    <%= label_tag(:amount, '$20 minimum: post 10 boards with 10 tokens') %>
+    <%= label_tag(:amount, '$10 minimum: 2 tokens per listing') %>
     <%= text_field_tag(:amount) %>
   </article>
   <article>
     <%= hidden_field_tag(:stripeToken) %>
     <% @token = true %>
-
   </article>
   <button id='tokenButton'>Purchase</button>
 <% end %>
+
+<div class="well">
+  <thead>
+    <tr>
+      <strong>Tokens</strong>
+    </tr>
+  </thead>
+  <tbody>
+    <ul>
+      <td><li> $10 = 10 tokens </li></td>
+      <td><li>$20 = 23 tokens</li></td>
+      <td><li>$30 = 36 tokens</li></td>
+    </ul>
+  </tbody>
+
+
 
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
