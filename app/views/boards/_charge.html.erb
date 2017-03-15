@@ -1,43 +1,85 @@
-<%= form_for Charge.new do |f| %>
-  <%= f.hidden_field :amount, value: @board.price.round, :id => "amount"  %>
-  <%= f.hidden_field :item, value: @board.title %>
-  <%= f.hidden_field :owner_id, value: @board.user_id %>
-  <%= f.hidden_field :board_id, value: @board.id %>
 
 
+  <div class="main">
+ <h1>Payment Form </h1>
+ <div class="content">
+
+    <%= javascript_include_tag "easyResponsiveTabs.js" %>
+       <script type="text/javascript">
+         $(document).ready(function () {
+           $('#horizontalTab').easyResponsiveTabs({
+             type: 'default', //Types: default, vertical, accordion
+             width: 'auto', //auto or any width like 600px
+             fit: true   // 100% fit in a container
+           });
+         });
+
+       </script>
+         <div class="sap_tabs">
+           <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+             <div class="pay-tabs">
+               <h2>Select Payment Method</h2>
+                 <ul class="resp-tabs-list">
+                   <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Credit Card</span></li>
+                   <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Net Banking</span></li>
+                   <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span>PayPal</span></li>
+                   <li class="resp-tab-item" aria-controls="tab_item-3" role="tab"><span>Debit Card</span></li>
+                   <div class="clear"></div>
+                 </ul>
+             </div>
+             <div class="resp-tabs-container">
+               <div class="tab-1 resp-tab-content-active" aria-labelledby="tab_item-0">
+                 <div class="payment-info">
+                   <h3>Personal Information</h3>
+
+                  <!--  <script type="text/javascript">
+                     Stripe.setPublishableKey("<%= ENV['STRIPE_TEST_PUBLISHABLE_KEY'] %>");
+                   </script>
+                  -->
 
 
+    <%= form_for (Charge.new), url: charges_path, :html => {:id => "stripe-form"}, method: 'post' do |f| %>
 
-<div class="btn btn-primary" id="customButton"> buy </div>
-  <script src="https://checkout.stripe.com/checkout.js"></script>
-  <script>
-  var handler = StripeCheckout.configure({
-      key: 'ENV['STRIPE_PUBLISHABLE_KEY']',
-      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-      token: function (token) {
-          $("#stripeToken").val(token.id);
-          $("#stripeEmail").val(token.email);
-          $("#amount").val($("#amount").val() * 100);
-          $("#myForm").submit();
-      }
-  });
-  
+         <div class="tab-for">
+           <%= f.hidden_field :email, :value => current_user.email %>
+         </div>
+              <div class="tab-for">
+             <%= f.hidden_field :currency, value: 'usd' %>
+             <%= f.hidden_field :description, value: 'paid' %>
 
-    $('#customButton').on('click', function (e) {
-        var amount = $("#amount").val() * 100;
-        var displayAmount = parseFloat(Math.floor($("#amount").val() * 100) / 100).toFixed(2);
-        // Open Checkout with further options
-        handler.open({
-            name: '<%= @board.title %>',
-            description: 'Custom amount ($' +  + ')',
-            amount: findElementbyID("#amount")
-        });
-        e.preventDefault();
-    });
+             <%= f.hidden_field :amount, value: @board.price.round  %>
+             <%= f.hidden_field :item, value: @board.title %>
+             <%= f.hidden_field :owner_id, value: @board.user_id %>
+             <%= f.hidden_field :board_id, value: @board.id %>
 
-    // Close Checkout on page navigation
-    $(window).on('popstate', function () {
-        handler.close();
-    });
-</script>
-<% end %>
+
+         </div>
+
+               <h3 class="pay-title">Credit Card Info</h3>
+
+           <div class="tab-for">
+                  <h5><%= label_tag :card_number, "Card Number" %></h5>
+                  <%= text_field_tag :card_number, nil, name: nil, class: ' card-number form-control', :required => true %>
+               </div>
+             <div class="transaction">
+               <div class="tab-form-left user-form">
+                 <h5><%= label_tag :card_month, "Expiration" %> </h5>
+             <%= select_month nil, {add_month_numbers: true}, {name: nil, class: "card-expiry-month"} %>
+             <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, class: "card-expiry-year"}%>
+                     </div>
+               <div class="tab-form-right user-form-rt">
+                 <h5><%= label_tag :card_code, "Security Code (cvc)" %></h5>
+                 <%= text_field_tag :card_code, nil, name: nil, class: 'card-cvc form-control', :required => true %>
+               </div>
+               <div class="clear"></div>
+             </div>
+
+             <%= f.submit 'Pay '+ "#{@board.price}", :class => 'contribution-submit' %>
+    <% end %>
+  </div>
+ </div>
+</div>
+</div>
+</div>
+</div>
+</div>
