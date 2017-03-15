@@ -12,11 +12,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :charges, only: [:new, :create, :complete]
+  resources :charges
   resources :tokens, only: [:new, :create]
 
-  get 'complete_charge' => 'charges#complete'
-  get 'retrieve_charge' => 'charges#retrieve'
 
   get 'messages/create'
   get 'conversations/create'
