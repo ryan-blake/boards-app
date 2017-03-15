@@ -5,14 +5,16 @@ class ChargesController < ApplicationController
     #  { customer: stripe_id },
     #  stripe_account: connected_account_id).data
   end
+def show
 
+end
 
 
   def create
 
     customer = Stripe::Customer.create(
       :email => current_user.email,
-      :card => params[:stripeToken]
+      :card => card_token
     )
 
     @charge = Charge.new(
