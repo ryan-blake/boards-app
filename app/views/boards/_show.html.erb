@@ -144,7 +144,7 @@ $('#customButton').on('click', function (e) {
     handler.open({
         name: '<%= @board.title %>',
         description: 'Custom amount ($' + displayAmount + ')',
-        amount: amount
+        amount: amount)
     });
     e.preventDefault();
 });
@@ -152,5 +152,6 @@ $('#customButton').on('click', function (e) {
 // Close Checkout on page navigation
 $(window).on('popstate', function () {
     handler.close();
+
 });
   </script>
