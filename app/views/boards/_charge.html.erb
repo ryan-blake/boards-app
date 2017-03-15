@@ -1,13 +1,42 @@
 <%= form_for Charge.new do |f| %>
-  <%= f.hidden_field :amount, value: @board.price.round  %>
+  <%= f.hidden_field :amount, value: @board.price.round, :id => "amount"  %>
   <%= f.hidden_field :item, value: @board.title %>
   <%= f.hidden_field :owner_id, value: @board.user_id %>
   <%= f.hidden_field :board_id, value: @board.id %>
 
 
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
-        data-amount="<%= @total_price.to_i.ceil * 100 %>"
-        data-name="<%= @board.title %> " data-description="<%= number_to_currency(@board.price) %>">
+
+
+
+<div class="btn btn-primary" id="customButton"> buy </div>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <script>
+  var handler = StripeCheckout.configure({
+      key: 'ENV['STRIPE_PUBLISHABLE_KEY']',
+      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+      token: function (token) {
+          $("#stripeToken").val(token.id);
+          $("#stripeEmail").val(token.email);
+          $("#amount").val($("#amount").val() * 100);
+          $("#myForm").submit();
+      }
+  });
+
+    $('#customButton').on('click', function (e) {
+        var amount = $("#amount").val() * 100;
+        var displayAmount = parseFloat(Math.floor($("#amount").val() * 100) / 100).toFixed(2);
+        // Open Checkout with further options
+        handler.open({
+            name: '<%= @board.title %>',
+            description: 'Custom amount ($' +  + ')',
+            amount: findElementbyID("#amount")
+        });
+        e.preventDefault();
+    });
+
+    // Close Checkout on page navigation
+    $(window).on('popstate', function () {
+        handler.close();
+    });
 </script>
-  <% end %>
+<% end %>
