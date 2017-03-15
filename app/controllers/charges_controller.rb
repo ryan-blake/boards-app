@@ -11,9 +11,10 @@ class ChargesController < ApplicationController
   def create
 
     customer = Stripe::Customer.create(
-      :email => current_user.email,
-      :card => params[:stripeToken]
-    )
+         email: params[:stripeEmail],
+         card: params[:stripeToken]
+       )
+    
 
     @charge = Charge.new(
       price: params[:charge]["amount"].to_i,

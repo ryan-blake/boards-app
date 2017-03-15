@@ -96,6 +96,7 @@
 
 <div class="pay">
   <%= render partial: 'charge', locals: {board: @board} %>
+  
 </div>
 
   <% elsif  @board.user_id != current_user.id && @board.for_sale == true %>
