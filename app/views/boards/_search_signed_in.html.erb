@@ -25,7 +25,8 @@
     <% if @boards.length == 0 %>
       <%= render partial: 'none' %>
     <% end %>
-    <td class="center-text"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board %>
+    <td class="center-text">
+      <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, target: :_blank %>
     <ul class="main-well-ul">
      <li class="center-text title-ind">
        <!-- new link to modal -->
