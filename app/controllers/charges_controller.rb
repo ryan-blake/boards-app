@@ -10,11 +10,28 @@ class ChargesController < ApplicationController
 
   def create
 
+
+    if !current_user
+      user_email = params[:stripeEmail]
+      @user = User.where(:email => user_email)
+      if @user.present?
+        redirect_to new_user_session_path , :notice => "Email is already in use, please login or use a different email."
+      else
+      current_user = User.create!(
+      name: user_email,
+      email: user_email,
+      role: 0,
+      password: Faker::Code.asin,
+    )
+
+    current_user.send_reset_password_instructions
+
+
     customer = Stripe::Customer.create(
-         email: params[:stripeEmail],
-         card: params[:stripeToken]
-       )
-    
+        :email => params[:stripeEmail],
+      :card => params[:stripeToken]
+    )
+
 
     @charge = Charge.new(
       price: params[:charge]["amount"].to_i,
@@ -35,12 +52,17 @@ class ChargesController < ApplicationController
     @board.update_attribute(:pending, true)
     @board.for_sale = false
     @board.save
+
     # ChargeMailer.new_charge_user(@charge).deliver_now
     # ChargeMailer.new_charge_vendor(@charge).deliver_now
-
-    redirect_to  my_boards_path
-
+    unless current_user.sign_in_count < 1
+      redirect_to  my_boards_path
+    else
+      redirect_to new_user_session_path, :notice => "Please check your email for login instructions."
+    end
+   end
   end
+ end
 
 
   def complete
