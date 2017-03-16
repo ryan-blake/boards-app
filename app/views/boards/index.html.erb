@@ -3,7 +3,9 @@
   <table class="well center-text" style="width:100%;">
     <thead>
       <td>
-        <h1 class="center-text" style="padding-left: 25px;"><%= current_user.name + " Boards"%> </h1>
+        <%if current_user %>
+          <h1 class="center-text" style="padding-left: 25px;"><%= current_user.name + " Boards"%> </h1>
+        <% end %>
       </td>
       </div>
 
