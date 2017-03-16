@@ -6,17 +6,13 @@ class ChargesController < ApplicationController
     #  stripe_account: connected_account_id).data
   end
 
-
-
   def create
 
-    unless !current_user
-
+  if current_user.present?
   customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
     :card => params[:stripeToken]
   )
-
 
   @charge = Charge.new(
     price: params[:charge]["amount"].to_i,
@@ -42,12 +38,12 @@ class ChargesController < ApplicationController
 
   # ChargeMailer.new_charge_user(@charge).deliver_now
   # ChargeMailer.new_charge_vendor(@charge).deliver_now
-  end
-    if !current_user
+
+    else !current_user
       user_email = params[:stripeEmail]
       @user = User.where(:email => user_email)
       if @user.present?
-        redirect_to new_user_session_path , :notice => "Email is already in use, please login or use a different email."
+        redirect_to new_user_session_path , :notice => "Howdy, Email is already in use, please login or use a different email to complete your purchase."
       else
       current_user = User.create!(
       name: user_email,
@@ -87,12 +83,9 @@ class ChargesController < ApplicationController
     # ChargeMailer.new_charge_vendor(@charge).deliver_now
 
       redirect_to new_user_session_path, :notice => "HOWDY, Your board is ordered. Check your email to create your password and your account confirmation."
-    end
-    end
    end
+ end
 end
-
-
 
   def complete
     @charge = Charge.find(params[:charge_id])
@@ -126,4 +119,5 @@ end
       redirect_to charges_path
 
 
+    end
 end
