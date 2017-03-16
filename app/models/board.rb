@@ -59,8 +59,6 @@ class Board < ApplicationRecord
   end
 
 
-
-
   def check_for_tracking_number
     if tracking_changed?
        BoardMailer.tracking_number(self).deliver_now

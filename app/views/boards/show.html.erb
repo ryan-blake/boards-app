@@ -13,7 +13,7 @@
     <% end %>
     </div>
     </div>
-  <div class="well well-sm pull-left">
+  <div class="well-sm pull-left">
     <% if (current_user && current_user.id == @board.user_id)%>
       <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right' %>
       <% if @board.shipping == nil && (@board.customer_id != nil && @board.customer_id != "nil") && @board.for_sale == false %>
@@ -40,47 +40,60 @@
 <div>
   Posted: <%= time_ago_in_words(@board.created_at) %> ago
 </div>
-  <tr>
-    <td><h2><%= @board.title %></h2></td>
-    <td><h3><%= @board.type.name %>board</h3></td>
-    <strong>
-      <%= @board.make %>Brand
-      </strong>
-      <br>
-     <!-- bindings/trucks/stomp pad -->
-     <% if @board.type_id == 1 %>
-      <strong>Stomp pad </strong>
-      <% elsif @board.type_id === 2 %>
-      <strong> Bindings </strong>
-      <% else %>
-      <strong> Trucks </strong>
-      <% end %>
-      <% if @board.footgear == true %>
-        Yes  <% else %>  No:
-      <%end %>
-    </tr>
-    <strong> board age: </strong> <%= @board.age %> Years
+    <h3>Dimensions</h3>
+    <% unless @board.type_id == 2%>
+    <strong>Length:</strong><% num = @board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%=b[1].round(2)%>''<br>
+    <% else %>
+    <strong>length:</strong><%= @board.length %>''<br>
+    <% end %>
+    <strong>Width:</strong><%= @board.width %><br>
+    <% if @board.type_id == 1 %>
+    <strong>volume:</strong><%= @board.volume %><br>
+    <% end %>
  </div>
- <div class="">
-  <div style="text-align:center;"class="well well-sm ">
 
-     <h3> Dimensions</h3>
-     <strong>Length:</strong><%= @board.length %><br>
-     <strong>Width:</strong><%= @board.width %><br>
-     <% if @board.type_id == 1 %>
-     <strong>volume:</strong><%= @board.volume %><br>
-     <% end %>
-   </div>
- </div>
-<div class="well well-sm pull-right">
- <%= @board.description %>
+  <div style="text-align:center;"class=" well-sm ">
+    <tr>
+      <td><h2><%= @board.title %></h2></td>
+      <td><h3><%= @board.type.name %>board</h3></td>
+      <strong>
+        <%= @board.make %>Brand
+        </strong>
+        <br>
+       <!-- bindings/trucks/stomp pad -->
+       <% if @board.type_id == 1 %>
+        <strong>Stomp pad </strong>
+        <% elsif @board.type_id === 2 %>
+        <strong> Bindings </strong>
+        <% else %>
+        <strong> Trucks </strong>
+        <% end %>
+        <% if @board.footgear == true %>
+          Yes  <% else %>  No:
+        <%end %>
+      </tr>
+      <strong> board age: </strong> <%= @board.age %> Years
+
+ <hr class="style13">
+   <%= @board.description %>
+
 </div>
-<tr>
+<br>
+  <% @board.images.each do |i| %>
+    <div class="well col-sm-6 center-text" style="padding-right:-10px;float:left;max-width:400px;width:100%;" class="center-text"><%= attachment_image_tag(i, :file, :limit, 300, 400) %></div>
+  <% end %>
+  </tr>
+</div>
+</div>
+
   <hr style="padding-top:30px;">
-<% @board.images.each do |i| %>
-  <td style="" class="center-text" ><%= attachment_image_tag(i, :file, :limit, 300, 400) %></td>
-<% end %>
+
+
+
 </tr>
+</div>
+
+
 </div>
 
 <hr>

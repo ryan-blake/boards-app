@@ -33,6 +33,9 @@
        <div class="title-bar center-text">
          <%= link_to board.title, board, remote: true, data: { toggle: "modal", target: "#newModal" } %>
       </div>
+      <div class="length-ribbon">
+        <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
+      </div>
        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-header">
@@ -45,13 +48,11 @@
           </div>
         </div>
      </li>
-     <li>
-      <%=  board.description.truncate(25)  %>
+     <li class="info-row">
+      <%=  board.description.truncate(33)  %>
       <%=  board.zipcode  %>
      </li>
-     <li class="well-width">
-      <strong>Height: </strong><%= board.length %>
-
+     <li class="well-width info-row">
       <strong>width: </strong><%= board.width %>
         <% if board.type_id == 1 %>
          <strong>Volume: </strong><%= board.volume %>
@@ -62,10 +63,12 @@
      <li>
       type: <%= board.type.name %> as  <%= board.category.name %>
      </li>
+     Make:<strong><%= board.make %></strong> Price: <strong>$<%=  board.price %></strong>
 
-     <li class="center-text">
-       Make:<strong><%= board.make %></strong> Price: <strong>$<%=  board.price %></strong>
-     </li>
+<br>
+     <li class="pull-left" style="top:-30px;">
+        <button class="btn btn-sort"><%= link_to 'view', board, target: :_blank%></button></li>
+        <%= render partial: 'charge', locals: {board: board} %>
     </ul>
     <hr class="style13">
     </td>
