@@ -10,7 +10,39 @@ class ChargesController < ApplicationController
 
   def create
 
+    unless !current_user
 
+  customer = Stripe::Customer.create(
+      :email => params[:stripeEmail],
+    :card => params[:stripeToken]
+  )
+
+
+  @charge = Charge.new(
+    price: params[:charge]["amount"].to_i,
+    user_id: current_user.id,
+    vendor_id: params[:charge]["owner_id"].to_i,
+    item: params[:charge]["item"],
+    token: params[:stripeToken],
+    customer_id: customer.id,
+    completed: false,
+    board_id: params[:charge]["board_id"],
+  )
+
+  @charge.update_attribute(:boolean, true)
+  @charge.save
+  @board = Board.where(id: @charge.board_id).first
+  @board.update_attribute(:arrived, false)
+  @board.customer_id = current_user.id
+  @board.update_attribute(:pending, true)
+  @board.for_sale = false
+  @board.save
+  redirect_to  my_boards_path
+
+
+  # ChargeMailer.new_charge_user(@charge).deliver_now
+  # ChargeMailer.new_charge_vendor(@charge).deliver_now
+  end
     if !current_user
       user_email = params[:stripeEmail]
       @user = User.where(:email => user_email)
@@ -23,9 +55,7 @@ class ChargesController < ApplicationController
       role: 0,
       password: Faker::Code.asin,
     )
-
     current_user.send_reset_password_instructions
-
 
     customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
@@ -55,14 +85,13 @@ class ChargesController < ApplicationController
 
     # ChargeMailer.new_charge_user(@charge).deliver_now
     # ChargeMailer.new_charge_vendor(@charge).deliver_now
-    unless current_user.sign_in_count < 1
-      redirect_to  my_boards_path
-    else
-      redirect_to new_user_session_path, :notice => "HOWDY! check your email for creating your password and confirming your account."
+
+      redirect_to new_user_session_path, :notice => "HOWDY, Your board is ordered. Check your email to create your password and your account confirmation."
+    end
     end
    end
-  end
- end
+end
+
 
 
   def complete
@@ -95,6 +124,6 @@ class ChargesController < ApplicationController
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to charges_path
-  end
+
 
 end
