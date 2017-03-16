@@ -17,22 +17,33 @@
       </div>
  <% end %>
 </div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
+   <div class="modal-dialog modal-lg" role="document">
+     <div class="modal-header">
+       <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+     </div>
+     <div class="modal-content">
+     </div>
+   </div>
+ </div>
 <div class="pull-right" style="width:210px;right:-50px;40px;top:30px;position:absolute;margin-top:50px;">
   <% if user_signed_in?  && current_user.provider == nil %>
     <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn-sort btn' %>
  <% end %>
 </div>
+<!-- Need to finish payment -->
 <% if @charge || @board %>
  <div class="well well-styled col-md-6">
    <h4 style="text-decoration:underline;" class="center-text"> Board waiting arrival</h4>
   <% @charge.each do |charge| %>
   <% if charge.completed === false %>
     <% my_charge = Charge.find_by(user_id: @user.id, completed: false) %>
-    <%my_boards = Board.where(title: charge.item, for_sale: false ) %>
+    <%my_boards = Board.where(title: charge.item, for_sale: false, id: charge.board_id) %>
     <% my_boards.each do |i| %>
     <% if i.pending == true %>
     <td><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
-    <h3> <%= link_to i.title, i %></h3>
+    <h3> <%= link_to i.title, i, remote: true, data: { toggle: "modal", target: "#newModal" } %></h3>
         <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: charge.id, token: my_charge.token, price: my_charge.price, customer_id: my_charge.customer_id, destination: my_charge.vendor.uid), class: 'btn-success btn' %>
      <div>
       <strong>price:</strong> $<%= i.price%>
@@ -124,3 +135,4 @@
    <h2 class="center-text"> login to continue</h2>
 <% end %>
 <% end %>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
