@@ -1,5 +1,9 @@
-<p>Welcome <%= @email %>!</p>
+<div style="width:100%; background-color:grey;">
+<h2 style="color:grey;width:200px;height:40px;background-color:black;">Hello <%= @user.name %></h2>
 
-<p>You can confirm your account email through the link below:</p>
+
+  <%= @email %>!</p>
+
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+</div>

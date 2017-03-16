@@ -44,6 +44,7 @@ class User < ApplicationRecord
   validates :name, :presence => true
   validates :email, :presence => true
 
+
   enum role: [:member, :admin]
   has_many :reviews, dependent: :destroy
   has_many :boards, dependent: :destroy

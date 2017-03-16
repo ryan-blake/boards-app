@@ -1,5 +1,5 @@
 <!-- partial rendered on from index -->
-<table class="well" id="results" style="width:100%;">
+<table class="" id="results" style="width:100%;">
   <thead >
     <td>
       <div class="center-text" id="paginator">
@@ -8,31 +8,34 @@
       <tr>
         <td class="filtering center-text">
           <ti> <strong> Sort by: </strong> </ti>
-          <ti class="btn btn-outline" style="padding-left:8px;"><%= sortable "created_at", "Date" %> </ti>
-          <ti class="btn btn-outline"><%= sortable "price" %></ti>
-          <ti class="btn btn-outline center-text" ><%= sortable "length", "Height" %></ti>
+          <ti class="btn btn-sort" style="padding-left:8px;"><%= sortable "created_at", "Date" %> </ti>
+          <ti class="btn btn-sort"><%= sortable "price" %></ti>
+          <ti class="btn btn-sort center-text" ><%= sortable "length", "Height" %></ti>
         </td>
       </tr>
     </td>
   </thead>
+
 <% if @boards.length < 1 %>
   <%= render partial: 'none' %>
 <% end %>
+
 <% @boards.each do |board| %>
-  <tbody class="col-sm-6 col-md-4" >
+  <tbody class="col-sm-6 col-md-4">
     <% if @boards.length == 0 %>
       <%= render partial: 'none' %>
     <% end %>
-
-    <td class="well center-text"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board %>
+    <td class="center-text">
+      <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, target: :_blank %>
     <ul class="main-well-ul">
      <li class="center-text title-ind">
        <!-- new link to modal -->
-
+       <div class="title-bar center-text">
          <%= link_to board.title, board, remote: true, data: { toggle: "modal", target: "#newModal" } %>
-
-
-
+      </div>
+      <div class="length-ribbon">
+        <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
+      </div>
        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-header">
@@ -44,15 +47,12 @@
           <div class="center-text" id="paginator">
           </div>
         </div>
-
-
      </li>
-     <li>
-      <%=  board.description.truncate(25)  %>
+     <li class="info-row">
+      <%=  board.description.truncate(33)  %>
       <%=  board.zipcode  %>
      </li>
-     <li class="well-width">
-      <strong>Height: </strong><%= board.length %>
+     <li class="well-width info-row">
       <strong>width: </strong><%= board.width %>
         <% if board.type_id == 1 %>
          <strong>Volume: </strong><%= board.volume %>
@@ -63,22 +63,25 @@
      <li>
       type: <%= board.type.name %> as  <%= board.category.name %>
      </li>
-     <li>
+     Make:<strong><%= board.make %></strong> Price: <strong>$<%=  board.price %></strong>
 
-     </li>
-     <li class="center-text">
-       Make:<strong><%= board.make %></strong> Price: <strong>$<%=  board.price %></strong>
-     </li>
+<br>
+     <li class="pull-left" style="top:-30px;">
+        <button class="btn btn-sort"><%= link_to 'view', board, target: :_blank%></button></li>
+        <%= render partial: 'charge', locals: {board: board} %>
     </ul>
+    <hr class="style13">
     </td>
+
     <!-- <%if current_user && board.user_id == current_user.id %>
     <td><%= link_to 'Edit', edit_board_path(board) %></td>
     <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %> -->
     <% end %>
-
-
   </tbody>
+
+
+
   <thead >
     <td>
       <div class="center-text" id="paginator">

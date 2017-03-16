@@ -1,7 +1,26 @@
-<% if  user_signed_in? %>
+<% if user_signed_in?%>
 <div class="jumbotron well">
   <h2><%= current_user.tokens.to_s + " tokens " %> </h2>
-  <%= link_to "purchase tokens", new_token_path %>
+    <div class="btn btn-sort" style="link-style:none;"><%= link_to "purchase tokens", new_token_path %></div>
+</div>
+
+<div class="pull-right" style="width:163px;right:20px;top:15px;position:absolute;margin-top:20px;">
+  <% if  current_user && current_user.provider != nil %>
+    <h3 class="btn-outline" ><%= link_to 'Add listing', new_board_path %></h3>
+ <% end %>
+</div>
+<div class="pull-right" style="width:163px;right:20px;top:15px;position:absolute;margin-top:50px;">
+  <% if !user_signed_in? %>
+    <h3 class="btn-sort"><%= link_to 'Add listing', new_user_registration_path %></h3>
+    <div class="facebook-btn" style="color:white;position:absolute;right:110%; top:20px;">
+      <%= link_to 'Facebook log in', user_facebook_omniauth_authorize_path, class: 'btn-sort btn' %>
+      </div>
+ <% end %>
+</div>
+<div class="pull-right" style="width:210px;right:-50px;40px;top:30px;position:absolute;margin-top:50px;">
+  <% if user_signed_in?  && current_user.provider == nil %>
+    <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn-sort btn' %>
+ <% end %>
 </div>
 <% if @charge || @board %>
  <div class="well well-styled col-md-6">
