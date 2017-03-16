@@ -1,7 +1,6 @@
   class UsersController < ApplicationController
 before_action :set_user, only: [:show, :edit, :update, :destroy, :create]
-validates :email, uniqueness: true,
-  :message => "Login to contine"
+
 
 # GET /users
 # GET /users.json
