@@ -58,7 +58,7 @@ class ChargesController < ApplicationController
     unless current_user.sign_in_count < 1
       redirect_to  my_boards_path
     else
-      redirect_to new_user_session_path, :notice => "Please check your email for login instructions."
+      redirect_to new_user_session_path, :notice => "HOWDY! check your email for creating your password and confirming your account."
     end
    end
   end

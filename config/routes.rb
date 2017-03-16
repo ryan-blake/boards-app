@@ -12,11 +12,14 @@ Rails.application.routes.draw do
     end
   end
 
+
+
   resources :charges, only: [:new, :create, :complete]
   resources :tokens, only: [:new, :create]
 
-  post 'complete_charge' => 'charges#complete'
-  post 'complete_charge' => 'charges#retrieve'
+  get 'complete_charge' => 'charges#complete'
+  get 'complete_charge' => 'charges#retrieve'
+
 
   get 'messages/create'
   get 'conversations/create'
