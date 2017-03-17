@@ -1,21 +1,23 @@
 
-<div class="center-text">
+<div class="center-text" style="min-height:100px;">
   <%= @user.company %>
-</b>
+</br>
     <% @user.reviews.average(:rating).to_i.times do %>
           <%= image_tag "Star.png", :size => "25x25" %>
         <% end %>
-<h3>
-</div>
-<div class="create_review well pull-left center-text" style="height:300px;width:100%;">
-  <div class="pull-left">
-   <h4> Create Review: </h4>
+  <div class="pull-left" style="padding-left:20px;">
    <%= render partial: 'form' %>
    </div>
+</div>
+
+
+<hr class="style13">
+
    <!-- test on local search -->
 
-   <div class="col-lg-9 pull-right" style="position:relative;margin-top:-259px;width:80%;">
-     <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
+     <div class="col-lg-1" style="position:relative;margin-top:2px;width:100%;">
+
+     <div class="cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
      <%= form_tag({controller: :users, action: :search_signed_in}, {method: :get, remote: true}) do  %>
      <div style="padding-left:15px;width:390px;">
        <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
@@ -26,7 +28,6 @@
          <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
 
        </div>
-       <%= @user.name %>
 
      </div>
      <div class="col-sm-4 types" style="margin-top:60px;">
@@ -39,8 +40,11 @@
      </div>
    </div>
    </div>
-</div>
 
+   <hr class="style13">
+
+
+<div style="position:absolute;top:400px;">
   <%= render partial: 'search_signed_in', locals: {user: @user} %>
-
+</div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

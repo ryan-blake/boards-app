@@ -1,6 +1,8 @@
 <!-- partial rendered on from index -->
 <table class="container-fluid" id="results" style="width:100%;">
+
   <thead >
+
     <td>
       <div class="center-text" id="paginator">
       <%= paginate @boards, remote: true %>
@@ -16,9 +18,6 @@
     </td>
   </thead>
 
-<% if @boards.length < 1 %>
-  <%= render partial: 'boards/none' %>
-<% end %>
 
 <% @boards.each do |board| %>
   <tbody class="col-sm-6 col-md-4 col-lg-4">
@@ -59,16 +58,19 @@
         <% else %>
         <strong>Volume: </strong> N/A
         <% end %>
+       <br>
      </li>
-     <li>
-      type: <%= board.type.name %> as  <%= board.category.name %>
+     <li style="float:right;left:25%;position:absolute;top:50px;">
+       <strong style="font-size:20px;"><%=  board.make %></strong>
      </li>
-     Make:<strong><%= board.make %></strong> Price: <strong>$<%=  board.price %></strong>
-
-<br>
-     <li class="pull-left" style="top:-30px;">
-        <button class="btn btn-sort"><%= link_to 'view', board, target: :_blank%></button></li>
-        <%= render partial: 'boards/charge', locals: {board: board} %>
+    <br>
+      <li class="pull-left" style="top:-30px;">
+        <button class="btn btn-sort"><%= link_to 'view', board, target: :_blank%></button>
+      </li>
+        <li style="float:left;left:35%;position:absolute;padding-top:5px;">
+          <strong style="font-size:20px;">$<%=  board.price %></strong>
+        </li>
+      <li>  <%= render partial: 'boards/charge', locals: {board: board} %></li>
     </ul>
     <hr class="style13">
     </td>
