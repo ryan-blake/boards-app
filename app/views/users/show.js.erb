@@ -1,2 +1,2 @@
-$('#results').html('<%= escape_javascript render 'boards/search_signed_in' %>');
+$('#results').html('<%= escape_javascript render 'search_signed_in', locals: {user: @user} %>');
 $('#paginator').html('<%= escape_javascript(paginate(@boards, :remote => true)) %>');

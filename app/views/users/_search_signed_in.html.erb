@@ -17,13 +17,13 @@
   </thead>
 
 <% if @boards.length < 1 %>
-  <%= render partial: 'none' %>
+  <%= render partial: 'boards/none' %>
 <% end %>
 
 <% @boards.each do |board| %>
   <tbody class="col-sm-6 col-md-4 col-lg-4">
     <% if @boards.length == 0 %>
-      <%= render partial: 'none' %>
+      <%= render partial: 'boards/none' %>
     <% end %>
     <td class="center-text">
       <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, target: :_blank %>

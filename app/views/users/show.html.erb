@@ -14,29 +14,33 @@
    </div>
    <!-- test on local search -->
 
-   <div class="col-lg-9" style="position:relative;margin-top:-27px;width:100%;">
+   <div class="col-lg-9 pull-right" style="position:relative;margin-top:-259px;width:80%;">
      <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
      <%= form_tag({controller: :users, action: :search_signed_in}, {method: :get, remote: true}) do  %>
      <div style="padding-left:15px;width:390px;">
        <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
      </div>
-     <div style="padding-left:15px;width:300px;margin-top:-30px;">
-       <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
+     <div style="left:50px;top:70px;position:absolute;">
+       <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'distance from (mi.)'} , { :class => 'form-control' })  %>
        <div class="">
-         <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'max distance (mi.)'} , { :class => 'form-control' })  %>
+         <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
+
        </div>
+       <%= @user.name %>
+
      </div>
-     <div class="col-sm-4 types" style="margin-top:20px;">
+     <div class="col-sm-4 types" style="margin-top:60px;">
        <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
        <%= grouped_collection_select nil, :category_id, Type.all, :categories,
              :name, :id, :name, { include_blank: true },
              { id: 'category-select' , class: "cat-width form-control"} %>
+
      <% end %>
      </div>
    </div>
    </div>
 </div>
 
-  <%= render partial: 'boards/search_signed_in' %>
+  <%= render partial: 'search_signed_in', locals: {user: @user} %>
 
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

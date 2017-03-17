@@ -1,6 +1,7 @@
   class UsersController < ApplicationController
 before_action :set_user, only: [:show, :edit, :update, :destroy, :create]
 helper_method :sort_column, :sort_direction
+respond_to :html, :js
 
 # GET /users
 # GET /users.json
@@ -64,6 +65,9 @@ end
 
 
  def search_signed_in
+   @user = User.find(params[:id])
+@boards = @user.boards.where(:for_sale => true)
+
    if params[:value].empty?
      distance_in_miles = 3
 
@@ -71,11 +75,11 @@ end
      distance_in_miles = params[:value]
    end
    if params[:search].empty?
-     @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+     @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
              "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
 
-             @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+             @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
              respond_to do |format|
                     format.js
@@ -83,18 +87,23 @@ end
 
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+
   else
-    @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+    @user = User.find(params[:id])
+  @boards = @user.boards.where(:for_sale => true)
+
+    @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id]).("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
-    @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+    @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
             respond_to do |format|
                    format.js {render 'search_signed_in' }
                end
 
   end
+
 end
 
 private
@@ -118,6 +127,6 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through. update sanitizer for new.
   def user_params
-    params.require(:user).permit(:name, :role, :publishable_key, :provider, :uid, :access_code, :email, :address, :city, :state, :zipcode, :latitude, :longitude)
+    params.require(:user).permit(:name, :role, :publishable_key, :provider, :uid, :access_code, :email, :address, :city, :state, :zipcode, :latitude, :longitude, :company)
   end
 end
