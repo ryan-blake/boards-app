@@ -2,7 +2,7 @@ class OmniauthCallbacksController < ApplicationController
 
 
   def stripe_connect
-    
+    if current_user
     current_user.update_attributes({
       provider: request.env["omniauth.auth"].provider,
       uid: request.env["omniauth.auth"].uid,
