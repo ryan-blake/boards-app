@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users do
      resources :reviews
   collection do
-    get 'search', 'search_user_boards', 'sort_order'
+    get 'search', 'search_signed_in', 'sort_order'
   end
 end
   resources :boards do

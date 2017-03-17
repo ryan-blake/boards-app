@@ -12,75 +12,31 @@
    <h4> Create Review: </h4>
    <%= render partial: 'form' %>
    </div>
+   <!-- test on local search -->
+
+   <div class="col-lg-9" style="position:relative;margin-top:-27px;width:100%;">
+     <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
+     <%= form_tag({controller: :users, action: :search_signed_in}, {method: :get, remote: true}) do  %>
+     <div style="padding-left:15px;width:390px;">
+       <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
+     </div>
+     <div style="padding-left:15px;width:300px;margin-top:-30px;">
+       <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
+       <div class="">
+         <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'max distance (mi.)'} , { :class => 'form-control' })  %>
+       </div>
+     </div>
+     <div class="col-sm-4 types" style="margin-top:20px;">
+       <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
+       <%= grouped_collection_select nil, :category_id, Type.all, :categories,
+             :name, :id, :name, { include_blank: true },
+             { id: 'category-select' , class: "cat-width form-control"} %>
+     <% end %>
+     </div>
+   </div>
+   </div>
 </div>
-<% @boards.each do |board| %>
-    <% if @boards.length == 0 %>
-      <%= render partial: 'none' %>
-    <% end %>
-    <div class="col-sm-6 col-md-4">
-    <td class="center-text col-sm-6">
-      <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, target: :_blank %>
-    <ul class="main-well-ul">
-     <li class="center-text title-ind">
-       <!-- new link to modal -->
-       <div class="title-bar center-text">
-         <%= link_to board.title, board, remote: true, data: { toggle: "modal", target: "#newModal" } %>
-      </div>
-      <div class="length-ribbon">
-        <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
-      </div>
-       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-header">
-              <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-content">
-            </div>
-          </div>
-          <div class="center-text" id="paginator">
-          </div>
-        </div>
-     </li>
-     <li class="info-row">
-      <%=  board.description.truncate(33)  %>
-      <%=  board.zipcode  %>
-     </li>
-     <li class="well-width info-row">
-      <strong>width: </strong><%= board.width %>
-        <% if board.type_id == 1 %>
-         <strong>Volume: </strong><%= board.volume %>
-        <% else %>
-        <strong>Volume: </strong> N/A
-        <% end %>
-     </li>
-     <li>
-      type: <%= board.type.name %> as  <%= board.category.name %>
-     </li>
-     Make:<strong><%= board.make %></strong> Price: <strong>$<%=  board.price %></strong>
 
-<br>
-     <li class="pull-left" style="top:-30px;">
-        <button class="btn btn-sort"><%= link_to 'view', board, target: :_blank%></button></li>
-            <%= render partial: 'boards/charge', locals: {board: board} %>
-    </ul>
-    <hr class="style13">
-    </td>
-</div>
-    <!-- <%if current_user && board.user_id == current_user.id %>
-    <td><%= link_to 'Edit', edit_board_path(board) %></td>
-    <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %> -->
-    <% end %>
-  </tbody>
+  <%= render partial: 'boards/search_signed_in' %>
 
-
-
-  <thead >
-    <td>
-      <div class="center-text" id="paginator">
-      </div>
-
-    </td>
-  </thead>
-</table>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
