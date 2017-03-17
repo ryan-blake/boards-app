@@ -1,6 +1,6 @@
 
 <div class="center-text">
-  <%= @user.name %>
+  <%= @user.company %>
 </b>
     <% @user.reviews.average(:rating).to_i.times do %>
           <%= image_tag "Star.png", :size => "25x25" %>
