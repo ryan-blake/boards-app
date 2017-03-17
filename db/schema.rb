@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170215173359) do
+ActiveRecord::Schema.define(version: 20170317000840) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at",                  null: false
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20170215173359) do
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "tokens",                 default: 4
+    t.string   "company"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

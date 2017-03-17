@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :users do
      resources :reviews
+  collection do
+    get 'search', 'search_user_boards', 'sort_order'
   end
-
+end
   resources :boards do
     collection do
       get 'search', 'search_signed_in', 'sort_order'
