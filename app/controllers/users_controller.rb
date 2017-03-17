@@ -12,6 +12,7 @@ def show
   @user = User.find(params[:id])
   @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id])
 
+
 end
 
 def new

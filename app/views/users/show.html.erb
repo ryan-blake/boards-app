@@ -7,15 +7,80 @@
         <% end %>
 <h3>
 </div>
-<div class="create_review well center-text">
+<div class="create_review well pull-left center-text" style="height:300px;width:100%;">
+  <div class="pull-left">
    <h4> Create Review: </h4>
    <%= render partial: 'form' %>
+   </div>
 </div>
+<% @boards.each do |board| %>
+    <% if @boards.length == 0 %>
+      <%= render partial: 'none' %>
+    <% end %>
+    <div class="col-sm-6 col-md-4">
+    <td class="center-text col-sm-6">
+      <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, target: :_blank %>
+    <ul class="main-well-ul">
+     <li class="center-text title-ind">
+       <!-- new link to modal -->
+       <div class="title-bar center-text">
+         <%= link_to board.title, board, remote: true, data: { toggle: "modal", target: "#newModal" } %>
+      </div>
+      <div class="length-ribbon">
+        <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
+      </div>
+       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-header">
+              <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-content">
+            </div>
+          </div>
+          <div class="center-text" id="paginator">
+          </div>
+        </div>
+     </li>
+     <li class="info-row">
+      <%=  board.description.truncate(33)  %>
+      <%=  board.zipcode  %>
+     </li>
+     <li class="well-width info-row">
+      <strong>width: </strong><%= board.width %>
+        <% if board.type_id == 1 %>
+         <strong>Volume: </strong><%= board.volume %>
+        <% else %>
+        <strong>Volume: </strong> N/A
+        <% end %>
+     </li>
+     <li>
+      type: <%= board.type.name %> as  <%= board.category.name %>
+     </li>
+     Make:<strong><%= board.make %></strong> Price: <strong>$<%=  board.price %></strong>
 
-<div class="well jumbotron">
-  <% @boards.each do |i| %>
-  <div class="well center-text"><strong><%= link_to attachment_image_tag(i.images.first, :file, :fill, 140, 140), i %> <%= i.title %>  </strong>
+<br>
+     <li class="pull-left" style="top:-30px;">
+        <button class="btn btn-sort"><%= link_to 'view', board, target: :_blank%></button></li>
+            <%= render partial: 'boards/charge', locals: {board: board} %>
+    </ul>
+    <hr class="style13">
+    </td>
 </div>
+    <!-- <%if current_user && board.user_id == current_user.id %>
+    <td><%= link_to 'Edit', edit_board_path(board) %></td>
+    <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %> -->
+    <% end %>
+  </tbody>
 
 
-  <% end %>
+
+  <thead >
+    <td>
+      <div class="center-text" id="paginator">
+      </div>
+
+    </td>
+  </thead>
+</table>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
