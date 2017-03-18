@@ -1,12 +1,10 @@
 <!-- partial rendered on from index -->
-<table class="container-fluid center-text" id="results" style="width:100%;">
+<table class="container-fluid" id="results" style="width:100%;">
 
   <thead >
-
     <td>
       <div class="center-text" id="paginator">
       <%= paginate @boards, remote: true %>
-
       </div>
       <tr>
         <td class="filtering center-text">
@@ -19,12 +17,15 @@
     </td>
   </thead>
 
+  <% if @boards.length == 0 %>
+    <%= render partial: 'boards/none' %>
+  <% end %>
 
   <% @boards.each do |board| %>
-  <tbody class="col-sm-6 col-md-4 " style="min-width:300px;">
-      <% if @boards.length == 0 %>
-        <%= render partial: 'boards/none' %>
-      <% end %>
+  <tbody class="col-sm-6 col-md-4 center-text" style="min-width:300px;">
+    <% if @boards.length == 0 %>
+      <%= render partial: 'boards/none' %>
+    <% end %>
       <td class="center-text">
         <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
       <ul class="main-well-ul">
