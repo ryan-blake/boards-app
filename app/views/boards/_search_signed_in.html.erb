@@ -26,12 +26,12 @@
       <%= render partial: 'none' %>
     <% end %>
     <td class="center-text">
-      <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, target: :_blank %>
+      <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
     <ul class="main-well-ul">
      <li class="center-text title-ind">
        <!-- new link to modal -->
        <div class="title-bar center-text">
-         <%= link_to board.title, board, remote: true, data: { toggle: "modal", target: "#newModal" } %>
+         <%= link_to board.title, board, target: :_blank  %>
       </div>
       <div class="length-ribbon">
         <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>

@@ -6,7 +6,7 @@
 
 <!-- test on local search -->
 <div class="col-lg-1" style="position:relative;margin-top:-27px;width:100%;">
-  <div class=" cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
+  <div class=" cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 10px 9px 4px grey; border-color: white;">
   <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
   <div style="padding-left:15px;width:390px;">
     <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>

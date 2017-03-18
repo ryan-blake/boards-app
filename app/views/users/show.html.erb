@@ -19,12 +19,12 @@
 
      <div class="col-lg-1" style="position:relative;margin-top:2px;width:100%;">
 
-     <div class="cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
+     <div class="cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 10px 9px 4px grey; border-color: white;">
      <%= form_tag({controller: :users, action: :search_signed_in}, {method: :get, remote: true}) do  %>
      <div style="padding-left:15px;width:390px;">
        <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
      </div>
-     <div style="left:50px;top:70px;position:absolute;">
+     <div style="left:50px;top:40px;position:absolute;">
        <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'distance from (mi.)'} , { :class => 'form-control' })  %>
        <div class="">
          <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
@@ -32,7 +32,7 @@
        </div>
 
      </div>
-     <div class="col-sm-4 types" style="margin-top:60px;">
+     <div class="col-sm-4 types" style="margin-top:70px;">
        <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: " cat-width form-control" }) %>
        <%= grouped_collection_select nil, :category_id, Type.all, :categories,
              :name, :id, :name, { include_blank: true },
@@ -46,7 +46,7 @@
    <hr class="style13">
 
 
-<div style="position:absolute;top:400px;">
+<div style="position:absolute;top:450px;">
   <%= render partial: 'search_signed_in', locals: {user: @user} %>
 </div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
