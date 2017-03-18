@@ -1,13 +1,9 @@
 
-<<<<<<< HEAD
-<div class="center-text">
-  <%= @user.company %>
-</b>
-=======
+
 <div class="center-text" style="min-height:100px;">
   <%= @user.company %>
 </br>
->>>>>>> m2
+
     <% @user.reviews.average(:rating).to_i.times do %>
           <%= image_tag "Star.png", :size => "25x25" %>
         <% end %>
