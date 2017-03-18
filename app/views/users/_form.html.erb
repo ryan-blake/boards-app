@@ -16,8 +16,8 @@
   <%= f.select( :rating, options_for_select(1..5) )%>
 </div>
 
-<div class="actions">
-  <%= f.submit "submit" %>
+<div class="actions" style="float:right;">
+  <%= f.submit "submit", :class => 'btn btn-sort', :style => 'color:black !important;' %>
 </div>
 
 <% end %>

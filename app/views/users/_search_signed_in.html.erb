@@ -1,11 +1,12 @@
 <!-- partial rendered on from index -->
-<table class="container-fluid" id="results" style="width:100%;">
+<table class="container-fluid center-text" id="results" style="width:100%;">
 
   <thead >
 
     <td>
       <div class="center-text" id="paginator">
       <%= paginate @boards, remote: true %>
+
       </div>
       <tr>
         <td class="filtering center-text">
@@ -20,7 +21,7 @@
 
 
   <% @boards.each do |board| %>
-  <tbody class="col-sm-6 col-md-4">
+  <tbody class="col-sm-6 col-md-4 " style="min-width:300px;">
       <% if @boards.length == 0 %>
         <%= render partial: 'boards/none' %>
       <% end %>
