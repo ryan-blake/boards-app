@@ -104,7 +104,6 @@
    <strong> $<%= @board.price %> </strong>
    <h3 class="btn-outline" ><%= link_to 'Sign Up to Purchase', new_user_registration_path %></h3>
    <% elsif @board.for_sale == true && @board.user_id != current_user.id %>
-
   <p> $<%= @board.price %> </p>
 
 

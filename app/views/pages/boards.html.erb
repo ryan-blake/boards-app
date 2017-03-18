@@ -30,10 +30,9 @@
 </div>
 <!-- !chattttt -->
 
-
 <div class="pull-right" style="width:163px;right:0px;top:35px;position:absolute;margin-top:20px;">
   <% if  current_user && current_user.provider != nil %>
-    <h3 class="btn btn-sort" ><%= link_to 'Add listing', new_board_path %></h3>
+    <h3 class="btn btn-sort"><%= link_to 'Add listing', new_board_path %></h3>
  <% end %>
 </div>
 <div class="pull-right" style="width:163px;right:20px;top:15px;position:absolute;margin-top:50px;">
@@ -46,86 +45,28 @@
 </div>
 <div class="pull-right" style="width:210px;right:-50px;40px;top:30px;position:absolute;margin-top:50px;">
   <% if user_signed_in?  && current_user.provider == nil %>
-    <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn-sort btn' %>
+    <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn-sort btn', style: 'color:black' %>
  <% end %>
 </div>
+
 <!-- Need to finish payment -->
-<% if @charge || @board %>
- <div class="well well-styled col-md-6">
-   <h4 style="text-decoration:underline;" class="center-text"> Board waiting arrival</h4>
-  <% @charge.each do |charge| %>
-  <% if charge.completed === false %>
-    <% my_charge = Charge.find_by(user_id: @user.id, completed: false) %>
-    <%my_boards = Board.where(title: charge.item, for_sale: false, id: charge.board_id) %>
-    <% my_boards.each do |i| %>
-    <% if i.pending == true %>
-    <td><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
-    <h3> <%= link_to i.title, i, remote: true, data: { toggle: "modal", target: "#newModal" } %></h3>
-        <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: charge.id, token: my_charge.token, price: my_charge.price, customer_id: my_charge.customer_id, destination: my_charge.vendor.uid), class: 'btn-success btn' %>
-        <%= link_to i.user.name , conversations_path(user_id: i.user.id), remote: true, method: :post %>
-     <div>
-      <strong>price:</strong> $<%= i.price%>
-      <strong>Completed payment:</strong> <%= i %>
-    </div>
-<% end %>
-
-    <% end %>
-    <% end %>
-    <% end %>
-  <% end %>
+<div class=" col-md-3 well center-text" style="background:#fff !important;">
+  <%= render partial: 'pending_boards' %>
+</div>
+<div class=" col-md-3 well center-text" style="background:#fff !important;">
+  <%= render partial: 'bought_boards' %>
 </div>
 
-<div class="well well-styled col-md-6">
- <h4 style="text-decoration:underline;" class="center-text"> Bought boards </h4>
-  <% @charge.each do |charge| %>
-    <% if charge.completed === true %>
-       <% my_boards = Board.find_by(title: charge.item) %>
-       <% if my_boards %>
-       <td><%= attachment_image_tag(my_boards.images.first, :file, :fill, 100, 100) %></td>
-         <h3> <strong><%= link_to my_boards.title, my_boards%></strong></h3>
-         Charged: $<%= charge.price %>
-       <% end %>
-     <% end %>
-  <% end %>
+<div class="inventory col-md-3 well center-text" style="background:#fff !important;">
+  <%= render partial: 'inventory_boards' %>
 </div>
 
-  <div class="well col-md-6">
-  <h4 style="text-decoration:underline;" class="center-text"> My boards </h4>
-   <% if current_user.provider == nil %> (must <%= link_to 'connect', user_stripe_connect_omniauth_authorize_path %> to sell) </h4> <% end %>
-
-   <% my_boards = Board.where(user_id: current_user.id, pending: nil || false) %>
-   <% if my_boards %>
-      <% my_boards.each do |i| %>
-      <div class="well">
-        <td class="" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
-        <%= link_to i.title, i %>:</h3></h5> $<%= i.price %>: <%= i.make %>: <%= i.type.name %>: <%= i.category.name %>  </h5>    </strong>
-      </div>
-      <% end %>
-   <% end %>
-  </div>
-
-   <div class="well col-md-6">
-    <h4 style="text-decoration:underline;" class="center-text"> My pending shipment (out for shipping) </h4>
-   <% pending_boards = Board.where(user_id: current_user.id, pending: true) %>
-   <% if pending_boards %>
-   <h3>
-     <strong>
-
-    <% pending_boards.each do |i| %>
-    <div class="well ">
-
-      <td class="well" style="width:30px;border-radius:50%;text-align:center;background-color:lightgrey;overflow:hidden;"><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i %></td>
-      <%= link_to i.title, i %>:
-
-    </div>
-    </strong>
-  </h3>
-    <% end%>
-  </div>
+<div class="shipped col-md-3 well center-text" style="background:#fff !important;">
+  <%= render partial: 'shipped_boards' %>
+</div>
 
   <% else %>
   <h2 class="center-text"> login to continue</h2>
- <% end %>
  <% end %>
 
 <!-- modal -->

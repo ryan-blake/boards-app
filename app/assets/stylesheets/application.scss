@@ -17,7 +17,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import 'bootstrap/theme';
-
+#pending-pay {
+  display:hidden;
+}
 html, body {
   overflow-x: hidden;
  margin: 0;

@@ -1,0 +1,25 @@
+
+    <h4 style="text-decoration:underline;" class="center-text"> My pending shipment (out for shipping) </h4>
+   <% pending_boards = Board.where(user_id: current_user.id, pending: true) %>
+   <% if pending_boards %>
+     <% pending_boards.each do |i| %>
+     <div style="min-height:100px;">
+      <hr class="style13">
+        <%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: { toggle: "modal", target: "#newModal" } %>
+      <br>
+      <strong>
+        <%= link_to i.title, i %>
+      </strong>
+     </div>
+      <% end%>
+    <% end%>
+    <!-- modal -->
+      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
+         <div class="modal-dialog modal-lg" role="document">
+           <div class="modal-header">
+             <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           </div>
+           <div class="modal-content">
+           </div>
+         </div>
+       </div>

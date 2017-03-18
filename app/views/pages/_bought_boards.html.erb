@@ -1,0 +1,13 @@
+<!-- refine the purpose of this  -->
+ <h4 style="text-decoration:underline;" class="center-text"> Bought boards </h4>
+  <% @charge.each do |charge| %>
+    <% if charge.completed === true %>
+       <% my_boards = Board.find_by(title: charge.item) %>
+       <% if my_boards %>
+       <hr class="style13">
+       <td> <%= link_to attachment_image_tag(my_boards.images.first, :file, :fill, 100, 100), my_boards, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
+         <h3> <strong><%= link_to my_boards.title, my_boards%></strong></h3>
+         Charged: $<%= charge.price %>
+       <% end %>
+     <% end %>
+  <% end %>
