@@ -1,22 +1,12 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-  <table class="well center-text" style="width:100%;">
-    <thead>
-      <td>
-        <%if current_user %>
-          <h1 class="center-text" style="padding-left: 25px;"><%= current_user.name + " Boards"%> </h1>
-        <% end %>
-      </td>
-      </div>
-
-    </thead>
 <!-- start board load -->
 
+<hr class="style13">
 
 <!-- test on local search -->
-
-<div class="col-lg-9" style="position:relative;margin-top:-30px;width:100%;">
-  <div class="well cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
+<div class="col-lg-1" style="position:relative;margin-top:-27px;width:100%;">
+  <div class=" cat-well" style="margin:10px 0;background:azure; box-shadow: 1px 4px 9px 4px grey; border-color: white;">
   <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
   <div style="padding-left:15px;width:390px;">
     <%= text_field_tag :keyword, nil, class: 'form-control enter-width'  %><%= submit_tag "search", class: 'search-width form-control ', style: 'position:relative;top:-34px;left:195px;' %>
@@ -37,6 +27,7 @@
 </div>
 </div>
 
+<<<<<<< HEAD
   <%= render partial: 'search_signed_in' %>
 
 
@@ -45,3 +36,8 @@
      <%= render partial: 'show' %>
   <% end %>
 <br>
+=======
+<div>
+<%= render partial: 'search_signed_in' %>
+</div>
+>>>>>>> m2

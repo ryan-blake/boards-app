@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :users do
      resources :reviews
   collection do
+<<<<<<< HEAD
     get 'search', 'search_user_boards', 'sort_order'
+=======
+    get 'search', 'users/search_signed_in/:id', 'sort_order', to: "users#search_signed_in"
+>>>>>>> m2
   end
 end
   resources :boards do

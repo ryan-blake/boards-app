@@ -61,6 +61,10 @@ Category.create(
   name: "Cruiser",
   type_id: Type.find_by(name: "Skate").id
 )
+Category.create(
+  name: "Electric",
+  type_id: Type.find_by(name: "Skate").id
+)
 
 categories = Category.all
 

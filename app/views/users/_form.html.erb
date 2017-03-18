@@ -3,19 +3,18 @@
 
 
  <%= form_for([@user, @user.reviews.build]) do |f| %>
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :title %><br/>
     <%= f.text_field :title %><br/>
 </div>
 <div class="field">
   <%= f.label :author %><br />
   <%= f.text_field :author %>
-</div>
+</div> -->
 <div class="field">
   <%= f.label :rating %><br />
   <%= f.select( :rating, options_for_select(1..5) )%>
 </div>
-
 
 <div class="actions">
   <%= f.submit "submit" %>
