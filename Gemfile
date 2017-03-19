@@ -66,6 +66,7 @@ gem 'faker'
 gem 'omniauth-facebook'
 gem 'kaminari'
 gem 'geocomplete_rails'
+gem 'font-awesome-sass'
 
 
 group :development do
