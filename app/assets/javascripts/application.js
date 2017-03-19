@@ -19,9 +19,7 @@ $("#geo-input").geocomplete();
 country: "US"
 });
 
-$('#pending-pay-btn').click(function (){
-  $('#pending-pay').toggle();
-});
+
 
 $(document).ready(function() {
   var subcat;

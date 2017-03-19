@@ -51,7 +51,7 @@ box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
 //
 .navbar-inverse {
-  max-height: 50px;
+  max-height: 20px;
 }
 h3 :hover {
   text-decoration: none;
@@ -80,11 +80,11 @@ a:hover, a:visited, a:link, a:active
 }
 
 
-.btn-width {
-  max-width:220px;
+.head-nav-btns {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
-
-
 .enter-width {
   width:70%;
   background: ghostwhite;
@@ -357,6 +357,13 @@ font-size:16px;
   color:black;
 }
 
+.hidden {
+  display:hidden;
+}
+
+.shows {
+  display:inline;
+}
 
 
 // responsive
@@ -414,7 +421,7 @@ font-size:16px;
 
 @media (min-width:768px) {
 .cat-well{
-  height:135px;
+  height:145px;
   }
   .types {
     position:absolute;

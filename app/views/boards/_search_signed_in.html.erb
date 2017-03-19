@@ -48,11 +48,11 @@
           </div>
         </div>
      </li>
-     <li class="">
+     <li class="center-text">
       <%=  board.description.truncate(33)  %>
       <%=  board.zipcode  %>
      </li>
-     <li class="well-width ">
+     <li class="center-text ">
       <strong>width: </strong><%= board.width %>
         <% if board.type_id == 1 %>
          <strong>Volume: </strong><%= board.volume %>
@@ -61,23 +61,22 @@
         <% end %>
      </li>
      <li>
-       <br>
      </li>
-     <li style="float:right;left:25%;position:absolute;top:50px;">
+     <li class="center-text">
        <strong style="font-size:20px;"><%=  board.make %></strong>
      </li>
-     <br>
-           <li class="pull-left" style="top:-30px;">
-             <button class="btn btn-sort"><%= link_to 'view', board, target: :_blank%></button>
-           </li>
-             <li style="float:left;left:35%;position:absolute;padding-top:5px;">
-               <strong style="font-size:20px;">$<%=  board.price %></strong>
-             </li>
-           <li>  <%= render partial: 'boards/charge', locals: {board: board} %></li>
+     <li class="center-text" style="padding-top:5px;">
+       <strong style="padding:1px 5px 1px 5px;border: .5px solid black;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
+       <li>
+       <li class="pull-left">
+         <button class="btn btn-sort"><%= link_to 'view', board%></button>
+       </li>
+
+           <%= render partial: 'boards/charge', locals: {board: board} %>
+         </li>
          </ul>
          <hr class="style13">
          </td>
-
 </tbody>
 
 
