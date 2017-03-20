@@ -116,7 +116,7 @@ a:hover, a:visited, a:link, a:active
     height: 0px;
 }
 .btn-sort {
-  color: #FFFFFF;
+  color: black !important;
   background-color: #FFFFFF;
   text-decoration: none;
   border-color: #707070;
@@ -373,6 +373,8 @@ font-size:16px;
   font-size:25px;
   font-weight:300;
   font-family: arial;
+  padding-bottom:3px;
+  padding-top:3px;
 }
 
 .btn-next {
@@ -390,6 +392,26 @@ font-size:16px;
   display:block;
   max-width:50%;
 }
+
+.description-modal {
+  padding-right: 90px;
+  min-height:250px;
+  clear:all;
+  position:relative;
+  display:block;
+  max-width:50%;
+}
+
+
+@media (max-width:1100px) {
+  .description-modal {
+    padding-top: 50px;
+    max-width:100% !important;
+    padding-left:10%;
+    padding-right:10%;
+  }
+}
+
 // responsive
 @media (max-width:770px) {
   .my-pages a {
@@ -413,6 +435,8 @@ font-size:16px;
     padding-right:10%;
   }
 
+
+
 }
 // effective for width < 400px
 @media (max-width: 400px) {
@@ -431,6 +455,7 @@ font-size:16px;
 
   .title {
     font-size: 14px;
+    padding-top:2px;
   }
 
 }
