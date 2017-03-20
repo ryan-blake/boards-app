@@ -34,6 +34,8 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find(params[:id])
     @user = current_user
+    @images = @board.images.page(params[:page]).per(1)
+
     if current_user.present?
       @on = current_user
       @charge = Charge.where(user_id: @on.id)

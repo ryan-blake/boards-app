@@ -15,6 +15,7 @@
       </tr>
     </td>
   </thead>
+
   <% if @boards.length == 0 %>
     <%= render partial: 'boards/none' %>
   <% end %>
@@ -67,7 +68,7 @@
          <strong style="padding:1px 5px 1px 5px;border: .5px solid black;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
          <li>
          <li class="pull-left">
-           <button class="btn btn-sort"><%= link_to 'view', board%></button>
+           <button class="btn btn-sort"><%= link_to 'view', board, target: :_blank  %></button>
          </li>
 
              <%= render partial: 'boards/charge', locals: {board: board} %>

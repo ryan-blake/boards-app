@@ -1,18 +1,18 @@
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
-
 <div class="container-fluid">
-<div class="jumbotron">
-  <div class="well">
-    <div class="text-center">
-        <% if current_user && current_user.id == @board.customer_id.to_i %>
-          <% if @board.shipping == nil %>
+  <!-- shipping detail? try to clean up and gather data from stripe token -->
+  <% if current_user && current_user.id == @board.customer_id.to_i %>
+    <% if @board.shipping == nil %>
+    <div class="">
+      <div class="text-center">
           <h4 style="color:darkred;"> You're almost there!</h4>
              <h4 style="color:black;text-shadow:-1px 1px slategrey;"> Select if you want this item shipped check the box.<br> Local pickups press submit.</h4>
           <% end %>
           <%= render partial: 'shipping', locals: {board: @board} %>
     <% end %>
+      </div>
     </div>
-    </div>
+    <!-- edit button plus contact for shipping, is contact for shipping necessary -->
   <div class="well-sm pull-left">
     <% if (current_user && current_user.id == @board.user_id)%>
       <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right' %>
@@ -21,6 +21,7 @@
         <% b = User.find(@a).email %>
         contact <%= b %> for shipping info
       <% elsif @board.shipping == true %>
+      <!-- shipping address -->
         <% @a = @board.customer_id %>
         <% b = User.find(@a).email %>
         Ship to <strong><%= @board.address + " " + @board.city.capitalize + " " + @board.state.upcase + ", " + @board.zipcode.to_s  %></strong>
@@ -29,7 +30,6 @@
          <% if !@board.tracking%>
           <%= render partial: 'tracking', locals: {board: @board} %>
          <% end %>
-
       <% elsif @board.shipping == false %>
         <% @a = @board.customer_id %>
         contact <% b = User.find(@a).email %>
@@ -37,104 +37,45 @@
         for pickup info
       <% end %>
     <% end %>
-<div>
-  Posted: <%= time_ago_in_words(@board.created_at) %> ago
+  </div>
+    <!-- begin view -->
+<div class="title center-text">
+  <strong><%= @board.title %></strong>
 </div>
-    <h3>Dimensions</h3>
-    <% unless @board.type_id == 2%>
-    <strong>Length:</strong><% num = @board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%=b[1].round(2)%>''<br>
-    <% else %>
-    <strong>length:</strong><%= @board.length %>''<br>
-    <% end %>
-    <strong>Width:</strong><%= @board.width %><br>
-    <% if @board.type_id == 1 %>
-    <strong>volume:</strong><%= @board.volume %><br>
-    <% end %>
- </div>
+<div class="image-box center-text" id="images">
+  <%= render partial: 'images' %>
+  <hr class="style13">
+</div>
 
-  <div style="text-align:center;"class=" well-sm ">
-    <tr>
-      <td><h2><%= @board.title %></h2></td>
-      <td><h3><%= @board.type.name %>board</h3></td>
-      <strong>
-        <%= @board.make %>Brand
-        </strong>
-        <br>
-       <!-- bindings/trucks/stomp pad -->
-       <% if @board.type_id == 1 %>
-        <strong>Stomp pad </strong>
-        <% elsif @board.type_id === 2 %>
-        <strong> Bindings </strong>
-        <% else %>
-        <strong> Trucks </strong>
-        <% end %>
-        <% if @board.footgear == true %>
-          Yes  <% else %>  No:
-        <%end %>
-      </tr>
-      <strong> board age: </strong> <%= @board.age %> Years
-
- <hr class="style13">
-   <%= @board.description %>
-
+<div class="dimensions" style="min-height:200px;">
+  <table class="col-sm-3 col-md-5" style="position:absolute;top:530px;">
+    <thead>
+      <th class="col-sm-3"> Height: </th>
+      <th class="col-sm-3"> Width: </th>
+      <th class="col-sm-3"> Make: </th>
+      <th class="col-sm-3"> New: </th>
+      <th class="col-sm-3"> Addon: </th>
+    </thead>
+    <tbody>
+      <td class="col-sm-3"> <%= @board.length %> </td>
+      <td class="col-sm-3"> <%= @board.width %> </td>
+      <td class="col-sm-3"> <%= @board.make %> </td>
+      <td class="col-sm-3"> <%= @board.age %> </td>
+      <td class="col-sm-3"> <%= @board.footgear %> </td>
+    </tbody>
+</div>
+<div class="description pull-right">
+  <%= @board.description %>
 </div>
 <br>
-  <% @board.images.each do |i| %>
-    <div class="well col-sm-6 center-text" style="padding-right:-10px;float:left;max-width:400px;width:100%;" class="center-text"><%= attachment_image_tag(i, :file, :limit, 300, 400) %></div>
+<hr class="style13">
+<div class="payment center-text" style="padding-top:30px;padding-bottom:30px;">
+ <% if current_user && current_user.id == @board.user_id %>
+ <strong style="font-size:30px;">$<%= @board.price %></strong>
+ <% else %>
+ <strong style="font-size:30px;">$<%= @board.price %></strong>
+  <%= render partial: 'chargeshow', locals: {board: @board} %>
   <% end %>
-  </tr>
-</div>
 </div>
 
-  <hr style="padding-top:30px;">
-
-
-
-</tr>
-</div>
-
-
-</div>
-
-<hr>
-
-<div class=" text-center">
- <div class="well">
-   <% if !user_signed_in? %>
-   <strong> $<%= @board.price %> </strong>
-   <h3 class="btn-outline" ><%= link_to 'Sign Up to Purchase', new_user_registration_path %></h3>
-   <% elsif @board.for_sale == true && @board.user_id != current_user.id %>
-  <p> $<%= @board.price %> </p>
-
-
-
-    <%= render partial: 'chargeshow', locals: {board: @board} %>
-
-
-
-  <% elsif  @board.user_id != current_user.id && @board.for_sale == true %>
-    <%= render partial: 'charge', locals: {board: @board} %> here
-  <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
-      <%= render partial: 'forsale', locals: {board: @board} %>
-  <% elsif @board.for_sale == false  && @board.user_id == current_user.id%>
-  <%= render partial: 'forsale', locals: {board: @board} %>
-
- <% end %>
-
-
- <br>
-
- </div>
-</div>
-</div>
-
-<% if user_signed_in? %>
-<% if current_user.id == @board.user.id %>
-<%= button_to "delete", @board, :method=>:delete, :class=>:destroy %>
-<%= link_to 'Back', boards_path %>
-
-<% end %>
-<% end %>
-<% else %>
-<p class="text-center"> Nothing Here</p>
 <% end %>
