@@ -13,7 +13,7 @@
       </div>
     </div>
     <!-- edit button plus contact for shipping, is contact for shipping necessary -->
-  <div class="well-sm pull-left">
+  <div class="well-sm pull-left" style="position:absolute;top:0;">
     <% if (current_user && current_user.id == @board.user_id)%>
       <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right' %>
       <% if @board.shipping == nil && (@board.customer_id != nil && @board.customer_id != "nil") && @board.for_sale == false %>

@@ -17,7 +17,7 @@
   <div class="actions">
     <%= f.hidden_field :pending , value: false %>
     <%= f.hidden_field :for_sale , value: true %>  List Board
-    <%= f.submit 'submit', class:'btn btn-success' %>
+    <%= f.submit 'submit', class:'btn btn-success', remote: true %>
   </div>
   <% elsif @board.for_sale == false && @board.pending == true && @board.user_id == current_user.id %>
     <%= f.hidden_field :shipping, value: nil %>
@@ -27,13 +27,13 @@
     <%= f.hidden_field :pending, value: false %>  Cancel Sale
   <div class="actions">
    <%= f.hidden_field :for_sale , value: false %>
-   <%= f.submit 'cancel', class:'btn btn-danger' %>
+   <%= f.submit 'cancel', class:'btn btn-danger', remote: true %>
   </div>
   <% elsif @board.for_sale == true && @board.pending == false %>
   <%= f.hidden_field :pending, value: false %>  Delist Board
   <div class="actions">
    <%= f.hidden_field :for_sale , value: false %>
-   <%= f.submit 'cancel', class:'btn btn-danger' %>
+   <%= f.submit 'cancel', class:'btn btn-danger', remote: true %>
   <% else %>
   uh oh - forsale
 <% end %>
