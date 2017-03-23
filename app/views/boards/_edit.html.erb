@@ -63,6 +63,7 @@
       <%= f.check_box :footgear, class: 'form-control' %> <br />
     </div>
 
+
   </div>
 
     <div class="well-sm">
@@ -87,9 +88,16 @@
   </div>
 
 
-
     </br>
-
+<% board.images.each do |i| %>
+  <%= attachment_image_tag(i, :file, :fill, 100, 100) %>
+<% end %>
+<br>
+    <%= f.fields_for :images do |image_fields| %>
+      <%= image_fields.check_box :_destroy %>
+      <%= image_fields.label :x %>
+      <%= attachment_image_tag(image_fields.object, :file, :fill, 250, 250) %>
+  <% end %>
 
 
   <div style="margin-top:20px;" class="actions">

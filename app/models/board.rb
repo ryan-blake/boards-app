@@ -39,6 +39,8 @@ class Board < ApplicationRecord
   belongs_to :category
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
+
+
   validates :title, :presence => true
   validates :description, :presence => true
   validates :make, :presence => true
