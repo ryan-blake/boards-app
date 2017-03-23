@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'search', 'users/search_signed_in/:id', 'sort_order', to: "users#search_signed_in"
   end
 end
+
   resources :boards do
     collection do
       get 'search', 'search_signed_in', 'sort_order'

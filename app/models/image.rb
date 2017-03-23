@@ -10,6 +10,8 @@
 #
 
 class Image < ApplicationRecord
+
+
   belongs_to :board
   attachment :file, type: :image
 end

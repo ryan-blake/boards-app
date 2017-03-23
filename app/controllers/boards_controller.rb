@@ -24,10 +24,14 @@ class BoardsController < ApplicationController
         @boardies = Board.where(title: @charge.item )
       end
     end
-
-
-
     end
+
+  def remove_image
+    @image = Board.find(params[:id]).images
+    @image.image.destroy
+    redirect_to request.referer
+  end
+
 
   # GET /boards/1
   # GET /boards/1.json
@@ -183,7 +187,8 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :age, :footgear, :width, :length, :name, :type_id, :category_id, :volume, :address, :city, :state, :zipcode, images_files: [])
+      params.require(:board).permit(:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :age, :footgear, :width, :length, :name, :type_id, :category_id, :volume, :address,
+      :city, :state, :zipcode, images_files: [], images_attributes: [ :id, :file, :_destroy])
     end
 
 end
