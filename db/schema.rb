@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170317000840) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.string   "make"
-    t.integer  "age"
+    t.boolean  "used"
     t.integer  "price"
     t.boolean  "footgear"
     t.integer  "user_id"
