@@ -102,6 +102,7 @@ users = User.all
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
+  used:       [true, false].sample,
   description: Faker::Hipster.paragraph,
   length: Faker::Number.number(1),
   width: Faker::Number.number(1),
@@ -121,6 +122,7 @@ end
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
+  used:       [true, false].sample,
   description: Faker::Hipster.paragraph,
   length: Faker::Number.number(1),
   width: Faker::Number.number(1),

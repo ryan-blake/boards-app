@@ -14,10 +14,14 @@
 //= require jquery_ujs
 //= require_tree .
 //= require jquery.geocomplete
+
+
 $(function() {
 $("#geo-input").geocomplete();
 country: "US"
 });
+
+
 $(document).ready(function() {
   var subcat;
   subcat = $('#category-select').html();
@@ -32,6 +36,8 @@ $(document).ready(function() {
     }
   });
 });
+
+
 (function() {
   $(document).on('click', '.toggle-window', function(e) {
     e.preventDefault();
@@ -46,4 +52,5 @@ $(document).ready(function() {
       messages_list.scrollTop(height);
     }
   });
+
 })();

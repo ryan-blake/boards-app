@@ -1,6 +1,5 @@
-<!-- partial rendered on from index -->
 <table class="container-fluid" id="results" style="width:100%;">
-  <thead >
+  <thead>
     <td>
       <div class="center-text" id="paginator">
       <%= paginate @boards, remote: true %>
@@ -16,85 +15,71 @@
     </td>
   </thead>
 
-<% if @boards.length < 1 %>
-  <%= render partial: 'none' %>
-<% end %>
-
+  <% if @boards.length == 0 %>
+    <%= render partial: 'boards/none' %>
+  <% end %>
+  <% if current_user %>
+  <% @boards = @boards.where.not(:user_id => current_user) %>
+  <% end %>
 <% @boards.each do |board| %>
-<tbody class="col-sm-6 col-md-4">
-    <% if @boards.length == 0 %>
-      <%= render partial: 'none' %>
-    <% end %>
-    <td class="center-text">
-      <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
-    <ul class="main-well-ul">
-     <li class="center-text title-ind">
-       <!-- new link to modal -->
-       <div class="title-bar center-text">
-         <%= link_to board.title, board, target: :_blank  %>
-      </div>
-      <div class="length-ribbon">
-        <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
-      </div>
-       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-header">
-              <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-content">
-            </div>
-          </div>
-          <div class="center-text" id="paginator">
-          </div>
-        </div>
-     </li>
-     <li class="">
-      <%=  board.description.truncate(33)  %>
-      <%=  board.zipcode  %>
-     </li>
-     <li class="well-width ">
-      <strong>width: </strong><%= board.width %>
-        <% if board.type_id == 1 %>
-         <strong>Volume: </strong><%= board.volume %>
+  <tbody class="col-sm-6 col-md-4 center-text" style="min-width:300px;min-height:410px;">
+      <!-- if no image load other boards image in results -->
+      <td class="center-text" style="min-height:240px;">
+        <% if board.images == true %>
+          <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
         <% else %>
-        <strong>Volume: </strong> N/A
+          <%= link_to attachment_image_tag(Board.find(20).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
         <% end %>
-     </li>
-     <li>
-       <br>
-     </li>
-     <li style="float:right;left:25%;position:absolute;top:50px;">
-       <strong style="font-size:20px;"><%=  board.make %></strong>
-     </li>
-     <br>
-           <li class="pull-left" style="top:-30px;">
-             <button class="btn btn-sort"><%= link_to 'view', board, target: :_blank%></button>
-           </li>
-             <li style="float:left;left:35%;position:absolute;padding-top:5px;">
-               <strong style="font-size:20px;">$<%=  board.price %></strong>
-             </li>
-           <li>  <%= render partial: 'boards/charge', locals: {board: board} %></li>
-         </ul>
-         <hr class="style13">
-         </td>
 
-</tbody>
+        <ul class="main-well-ul">
+          <li class="center-text title-ind">
+            <!-- new link to modal -->
+            <div class="title-bar center-text">
+              <%= link_to board.title, board, target: :_blank  %>
+            </div>
+            <div class="length-ribbon">
+              <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
+            </div>
+          </li>
+          <li class="center-text" style="min-width:242px;">
+            <%=  board.description.truncate(33)  %>
+          </li>
+          <li class="center-text">
+            <strong style="font-size:20px;">
+              <%= board.make %>
+            </strong>
+          </li>
+          <li class="center-text" style="padding-top:5px;">
+            <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">
+              $<%= board.price %>
+            </strong>
+            <button class="btn btn-sort pull-right">
+              <%= link_to 'view', board, target: :_blank  %>
+            </button>
+            <br>
+            <hr class="style13">
+            </ul>
+        </td>
+      </tbody>
+      <% end %>
+<!-- modal -->
+      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
+         <div class="modal-dialog modal-lg" role="document">
+           <div class="modal-header">
+             <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+           </div>
+           <div class="modal-content">
+           </div>
+         </div>
+         <div class="center-text" id="paginator">
+         </div>
+       </div>
 
-
-    <!-- <%if current_user && board.user_id == current_user.id %>
-    <td><%= link_to 'Edit', edit_board_path(board) %></td>
-    <td><%= link_to 'Destroy', board, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %> -->
-    <% end %>
-
-
-
-  <thead >
-    <td>
-      <div class="center-text" id="paginator">
-      <%= paginate @boards, remote: true %>
-      </div>
-
-    </td>
-  </thead>
-</table>
+    <tbody>
+      <td>
+        <div class="center-text" id="paginator">
+        <%= paginate @boards, remote: true %>
+        </div>
+      </td>
+    </tbody>
+  </table>

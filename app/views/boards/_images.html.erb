@@ -1,0 +1,17 @@
+
+
+<% @images.each do |i| %>
+<%= attachment_image_tag(i, :file, :fill, 350, 350) %>
+<br>
+<% if @one == 1 %>
+<div style="padding-top:10px;">
+<strong> 1 of 1 </strong>
+</div>
+<% else %>
+<button class="btn-next">
+  <%= link_to_previous_page @images,'', class: 'fa fa-chevron-left fa-2x', style: 'color:black !important;text-decoration:none;', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>"}, remote: true %>
+  <%= link_to_next_page @images,' ', class: 'fa fa-chevron-right fa-2x', style: 'color:black !important;text-decoration:none;',   data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>"}, remote: true %>
+</button>
+
+<% end %>
+<% end %>

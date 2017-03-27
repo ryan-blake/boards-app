@@ -6,7 +6,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  make        :string
-#  age         :integer
+#  used        :boolean
 #  price       :integer
 #  footgear    :boolean
 #  user_id     :integer

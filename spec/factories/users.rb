@@ -32,6 +32,8 @@
 #  zipcode                :integer
 #  latitude               :float
 #  longitude              :float
+#  tokens                 :integer          default("4")
+#  company                :string
 #
 
 FactoryGirl.define do
