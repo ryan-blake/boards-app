@@ -84,7 +84,7 @@
  <% else %>
  <div id="pay1">
  <strong style="font-size:30px;">$<%= @board.price %></strong>
-  <%= render partial: 'chargeshow', locals: {board: @board} %>
+  <%= render partial: 'charge', locals: {board: @board} %>
   <% end %>
 </div>
 
