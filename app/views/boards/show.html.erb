@@ -1,3 +1,4 @@
+
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
 <div class="container-fluid">
   <!-- shipping detail? try to clean up and gather data from stripe token -->
@@ -13,11 +14,11 @@
       </div>
     </div>
     <!-- edit button plus contact for shipping, is contact for shipping necessary -->
-  <div class="well-sm pull-left">
+  <div class="well-sm pull-left" style="position:absolute;top:0;">
     <% if (current_user && current_user.id == @board.user_id)%>
-      <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-left' %>
-      <td><%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure you want to delete this listing? '}, class: 'btn btn-warning' %></td>
+      <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right' %>
       <% if @board.shipping == nil && (@board.customer_id != nil && @board.customer_id != "nil") && @board.for_sale == false %>
+      <td><%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure you want to delete this listing? '}, class: 'btn btn-warning' %></td>
         <% @a = @board.customer_id %>
         <% b = User.find(@a).email %>
         contact <%= b %> for shipping info
@@ -42,14 +43,16 @@
     <!-- begin view -->
 <div class="title center-text">
   <strong><%= @board.title %></strong>
+
 </div>
-<div class="image-box center-text" id="images">
-  <%= render partial: 'images' %>
+  <div class="image-box center-text" id="images">
+    <%= render partial: 'images' %>
+  </div>
+  <hr class="style13">
 </div>
-<hr class="style13">
 
 
-<div class="dimensions" style="min-height:200px;">
+<div class="dimensions" style="min-height:250px;">
   <table class="col-sm-3 col-md-5" style="position:absolute;top:530px;">
     <thead>
       <th class="col-sm-3"> Height: </th>
@@ -73,21 +76,22 @@
       <% end %>
     </tbody>
 </div>
-<div class="description pull-right">
+
+<div class="description pull-right" style="top:30px;">
   <%= @board.description %>
+
 </div>
 <br>
 <hr class="style13">
+</table>
 <div class="payment center-text" style="padding-top:30px;padding-bottom:30px;">
  <% if current_user && current_user.id == @board.user_id %>
  <strong style="font-size:30px;">$<%= @board.price %></strong>
  <% else %>
- <div id="pay1">
  <strong style="font-size:30px;">$<%= @board.price %></strong>
-  <%= render partial: 'charge', locals: {board: @board} %>
+ <%= render partial: 'chargeshow', locals: {board: @board} %>
   <% end %>
 </div>
-
 <div class="form-group">
   <div class="form-group">
    <input id="checkbox" type="checkbox">
@@ -104,19 +108,12 @@
    </div>
  </div>
 </div>
-<div id="div-id" style="display:none">
-Lorem ipsum dolor sit amet, justo tamquam vix et, nec ut illum omnesque consequat. Sea ex idque placerat. Has no admodum pericula sapientem. Sit mollis noluisse definitionem ei. Ea illud discere deleniti qui, verear eruditi dissentiunt in pri.
-</div>
-
-
-</div>
-<% end %>
 <% if !current_user %>
-
-
   <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
       <%= render partial: 'forsale', locals: {board: @board} %>
   <% elsif @board.for_sale == false  && @board.user_id == current_user.id%>
   <%= render partial: 'forsale', locals: {board: @board} %>
-
  <% end %>
+</div>
+
+<% end %>

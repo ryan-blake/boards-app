@@ -42,6 +42,7 @@
     <!-- begin view -->
 <div class="title center-text">
   <strong><%= @board.title %></strong>
+
 </div>
 <div class="image-box center-text" id="images">
   <%= link_to attachment_image_tag(@board.images.first, :file, :fill, 350, 350), @board %>
@@ -66,18 +67,24 @@
       <td class="col-sm-3"> <%= @board.used %> </td>
     </tbody>
 </div>
+
 <div class="description-modal pull-right" style="top:30px;">
   <%= @board.description %>
+
 </div>
 <br>
 <hr class="style13">
+
+</table>
 <div class="payment center-text" style="padding-top:30px;padding-bottom:30px;">
  <% if current_user && current_user.id == @board.user_id %>
  <strong style="font-size:30px;">$<%= @board.price %></strong>
  <% else %>
  <strong style="font-size:30px;">$<%= @board.price %></strong>
-  <%= render partial: 'charge', locals: {board: @board} %>
+ <%= render partial: 'charge', locals: {board: @board} %>
+
   <% end %>
+</div>
 </div>
 
 <% end %>
