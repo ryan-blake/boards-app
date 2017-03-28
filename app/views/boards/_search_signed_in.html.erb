@@ -1,4 +1,10 @@
   <table class="container-fluid" id="results" style="width:100%;">
+    <% if @boards.length == 0 %>
+      <%= render partial: 'boards/none' %>
+    <% end %>
+    <% if current_user %>
+    <% @boards = @boards.where.not(:user_id => current_user) %>
+    <% end %>
     <thead>
       <td>
         <div class="center-text" id="paginator">
@@ -15,12 +21,6 @@
       </td>
     </thead>
 
-    <% if @boards.length == 0 %>
-      <%= render partial: 'boards/none' %>
-    <% end %>
-    <% if current_user %>
-    <% @boards = @boards.where.not(:user_id => current_user) %>
-    <% end %>
   <% @boards.each do |board| %>
     <tbody class="col-sm-6 col-md-4 center-text" style="min-width:300px;min-height:410px;">
         <!-- if no image load other boards image in results -->
