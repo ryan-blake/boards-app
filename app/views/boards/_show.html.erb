@@ -45,12 +45,7 @@
 
 </div>
 <div class="image-box center-text" id="images">
-  <!-- if seeded data doesn't have an image find one that does. -->
-  <% if board.images == true %>
   <%= link_to attachment_image_tag(@board.images.first, :file, :fill, 350, 350), @board %>
-  <% else %>
-    <%= link_to attachment_image_tag(Board.find(20).images.first, :file, :fill, 350, 350), @board %>
-  <% end %>
   <br>
   <button class="btn-next"><%= link_to 'expand', @board, target: :_blank  %>
 </button>
@@ -86,10 +81,41 @@
  <strong style="font-size:30px;">$<%= @board.price %></strong>
  <% else %>
  <strong style="font-size:30px;">$<%= @board.price %></strong>
- <%= render partial: 'charge', locals: {board: @board} %>
+ <div class="form-group">
+  <input id="checkbox" type="checkbox">
+</div>
+ <div id="delivery" style="display:none;">
+   <div class="form-group">
+    ship it
+    <%= render partial: 'charge', locals: {board: @board} %>
+   </div>
+ </div>
+ <div id="pickup" style="display:none;">
+   <div class="form-group">
+     pickup
+     <%= render partial: 'charge', locals: {board: @board} %>
+   </div>
+ </div>
 
   <% end %>
 </div>
 </div>
 
 <% end %>
+<script>
+$(document).ready(function() {
+var checkbox = document.getElementById('checkbox');
+var delivery_div = document.getElementById('delivery');
+var pickup_div = document.getElementById('pickup');
+
+checkbox.onclick = function() {
+   if(this.checked) {
+     delivery_div.style['display'] = 'block';
+     pickup_div.style['display'] = 'none';
+   } else {
+     pickup_div.style['display'] = 'block';
+     delivery_div.style['display'] = 'none';
+   }
+};
+});
+</script>

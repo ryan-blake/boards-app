@@ -89,25 +89,24 @@
  <strong style="font-size:30px;">$<%= @board.price %></strong>
  <% else %>
  <strong style="font-size:30px;">$<%= @board.price %></strong>
- <%= render partial: 'chargeshow', locals: {board: @board} %>
-  <% end %>
+ <div class="form-group">
+  <input id="checkbox" type="checkbox">
 </div>
-<div class="form-group">
-  <div class="form-group">
-   <input id="checkbox" type="checkbox">
- </div>
-
  <div id="delivery" style="display:none;">
    <div class="form-group">
-     HIDDEN delivery
+    ship it
+<%= render partial: 'chargeshow', locals: {board: @board} %>
    </div>
  </div>
  <div id="pickup" style="display:none;">
    <div class="form-group">
      pickup
+   <%= render partial: 'chargepickup', locals: {board: @board} %>
    </div>
  </div>
+  <% end %>
 </div>
+
 <% if !current_user %>
   <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
       <%= render partial: 'forsale', locals: {board: @board} %>
