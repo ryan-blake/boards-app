@@ -45,7 +45,12 @@
 
 </div>
 <div class="image-box center-text" id="images">
+  <!-- if seeded data doesn't have an image find one that does. -->
+  <% if board.images == true %>
   <%= link_to attachment_image_tag(@board.images.first, :file, :fill, 350, 350), @board %>
+  <% else %>
+    <%= link_to attachment_image_tag(Board.find(20).images.first, :file, :fill, 350, 350), @board %>
+  <% end %>
   <br>
   <button class="btn-next"><%= link_to 'expand', @board, target: :_blank  %>
 </button>
