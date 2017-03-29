@@ -45,10 +45,8 @@
 
 </div>
 <div class="image-box center-text" id="images">
-  <%= link_to attachment_image_tag(@board.images.first, :file, :fill, 350, 350), @board %>
-  <br>
-  <button class="btn-next"><%= link_to 'expand', @board, target: :_blank  %>
-</button>
+  <%= render partial: 'images' %>
+</div>
   <hr class="style13">
 </div>
 

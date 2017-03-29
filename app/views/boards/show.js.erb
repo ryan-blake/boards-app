@@ -3,3 +3,19 @@ $("#newModal .modal-content").html('<%= j render partial: "show" %>');
 $("#newModal").modal()
 $("#pickup").html("<%=j render partial: 'charge' %>");
 $("#delivery").html("<%=j render partial: 'chargeshow' %>");
+
+$(document).ready(function() {
+var checkbox = document.getElementById('checkbox');
+var delivery_div = document.getElementById('delivery');
+var pickup_div = document.getElementById('pickup');
+
+checkbox.onclick = function() {
+   if(this.checked) {
+     delivery_div.style['display'] = 'block';
+     pickup_div.style['display'] = 'none';
+   } else {
+     pickup_div.style['display'] = 'block';
+     delivery_div.style['display'] = 'none';
+   }
+};
+});

@@ -10,9 +10,10 @@
         <% if current_user.present? %>
           data-email="<%=current_user.email %>"
         <% end %>
-        data-shippingAddress='true'
-        data-billingAddress='true'
+        data-shipping-address='true'
+        data-billing-address='true'
         data-amount="<%= @total_price.to_i.ceil * 100 %>"
         data-name="<%=  @board.title %> " data-description="<%= number_to_currency( @board.price) %>">
 </script>
+<% @board = Board.find(params[:id]) %>
   <% end %>

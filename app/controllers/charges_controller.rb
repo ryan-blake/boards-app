@@ -26,7 +26,7 @@ class ChargesController < ApplicationController
 
   )
 
-  
+
   @charge.update_attribute(:boolean, true)
   @charge.save
   @board = Board.where(id: @charge.board_id).first
@@ -42,10 +42,11 @@ class ChargesController < ApplicationController
   # ChargeMailer.new_charge_vendor(@charge).deliver_now
 
     else !current_user
+      @board = Board.where(:id => params[:charge][:board_id]).first
       user_email = params[:stripeEmail]
-
       if User.where(:email => user_email).exists?
-        redirect_to new_user_session_path , :notice => "Howdy, Email is already in use, please login or use a different email to complete your purchase."
+
+        redirect_to @board, flash: {notice: "Howdy, #{params[:stripeEmail]} is already in use please login or use a different email to continue with your purchase."}
       else
       current_user = User.create!(
       name: user_email,
