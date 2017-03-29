@@ -11,7 +11,7 @@ class ChargesController < ApplicationController
   if current_user
   customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
-    :card => params[:stripeToken]
+      :card => params[:stripeToken]
   )
 
   @charge = Charge.new(
@@ -23,13 +23,19 @@ class ChargesController < ApplicationController
     customer_id: customer.id,
     completed: false,
     board_id: params[:charge]["board_id"],
-
+    shipping:params[:charge]["shipping"]
   )
 
 
   @charge.update_attribute(:boolean, true)
   @charge.save
   @board = Board.where(id: @charge.board_id).first
+  if @charge.shipping == true
+    @board.address = params[:stripeShippingAddressLine1]
+    @board.zipcode = parmas[:stripeShippingAddressZip]
+    @board.city = parmas[:stripeShippingAddressCity]
+    @board.state = params[:stripeShippingAddressCity]
+  end
   @board.update_attribute(:arrived, false)
   @board.customer_id = current_user.id
   @board.update_attribute(:pending, true)
@@ -48,6 +54,7 @@ class ChargesController < ApplicationController
 
         redirect_to @board, flash: {notice: "Howdy, #{params[:stripeEmail]} is already in use please login or use a different email to continue with your purchase."}
       else
+        # if shipping == true add stripe params for shipping to User as shipping address
       current_user = User.create!(
       name: user_email,
       email: user_email,
@@ -58,7 +65,7 @@ class ChargesController < ApplicationController
 
     customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
-      :card => params[:stripeToken]
+        :card => params[:stripeToken]
     )
 
     @charge = Charge.new(

@@ -76,32 +76,35 @@
 </table>
 <div class="payment center-text" style="padding-top:30px;padding-bottom:30px;">
  <% if current_user && current_user.id == @board.user_id %>
- <strong style="font-size:30px;">$<%= @board.price %></strong>
- <% else %>
- <strong style="font-size:30px;">$<%= @board.price %></strong>
- <div class="form-group">
-  <span>
-    <label for="checkbox_pick">Pick Up:</label>
-    <input id="checkbox_pick" type="checkbox">
-  </span>
- </div>
-
- <div id="delivery" style="display:none;">
-   <div class="form-group">
-    <%= render partial: 'chargeshow', locals: {board: @board} %>
-   </div>
- </div>
- <div id="pickup" style="display:none;">
-   <div class="form-group">
-     <%= render partial: 'charge', locals: {board: @board} %>
-   </div>
- </div>
-
+  <strong style="font-size:30px;">
+    $<%= @board.price %>
+  </strong>
+   <% else %>
+     <strong style="font-size:30px;">
+       $<%= @board.price %>
+     </strong>
+     <div class="form-group">
+      <span>
+        <label for="checkbox_pick">
+          Pick Up:
+        </label>
+        <input id="checkbox_pick" type="checkbox">
+      </span>
+     </div>
+     <div id="delivery" style="display:none;">
+       <div class="form-group">
+        <%= render partial: 'chargeshow', locals: {board: @board} %>
+       </div>
+     </div>
+     <div id="pickup" style="display:none;">
+       <div class="form-group">
+         <%= render partial: 'charge', locals: {board: @board} %>
+       </div>
+     </div>
   <% end %>
 </div>
-</div>
-
 <% end %>
+
 <script>
 $(document).ready(function() {
 var checkbox1 = document.getElementById('checkbox_pick');
@@ -109,8 +112,7 @@ var delivery_div = document.getElementById('delivery');
 var pickup_div = document.getElementById('pickup');
 delivery_div.style['display'] = 'block';
 
-checkbox1.onclick = function() {
-
+  checkbox1.onclick = function() {
    if(this.checked) {
      delivery_div.style['display'] = 'none';
      pickup_div.style['display'] = 'block';
@@ -119,8 +121,6 @@ checkbox1.onclick = function() {
      pickup_div.style['display'] = 'none';
      checkbox1.checked = false;
    }
-};
+  };
 });
-
-
 </script>

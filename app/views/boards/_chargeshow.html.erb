@@ -4,6 +4,7 @@
   <%= f.hidden_field :item, value:  @board.title %>
   <%= f.hidden_field :owner_id, value:  @board.user_id %>
   <%= f.hidden_field :board_id, value:  @board.id %>
+  <%= f.hidden_field :shipping, value:  true %>
 
 
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
