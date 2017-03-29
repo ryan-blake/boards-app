@@ -6,11 +6,11 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.json
   def index
+
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
     @boards = @boards.page(params[:page]).per(9)
     @boards = @boards.order('created_at DESC')
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
-
 # end
     @types = Type.order(:name)
     @categories = Category.order(:name)
@@ -24,7 +24,7 @@ class BoardsController < ApplicationController
         @boardies = Board.where(title: @charge.item )
       end
     end
-    end
+  end
 
   def remove_image
     @image = Board.find(params[:id]).images
@@ -60,15 +60,14 @@ class BoardsController < ApplicationController
   # GET /boards/1/edit
   def edit
     @board = Board.find(params[:id])
-
   end
 
   # POST /boards
   # POST /boards.json
   def create
     @board = Board.new(board_params)
-    @user = current_user
-    respond_to do |format|
+     @user = current_user
+     respond_to do |format|
       if @board.save
         format.html { redirect_to @board, notice: 'Board was successfully created.' }
         format.json { render :show, status: :created, location: @board }
@@ -117,6 +116,9 @@ class BoardsController < ApplicationController
     # casting seems to have changed geocoder locally but works on heroku.
 
     # @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+    if current_user
+     @boards = @boards.where.not(:user_id => current_user)
+     end
     @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 
             "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \

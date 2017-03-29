@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users do
      resources :reviews
   collection do
-    get 'search', 'users/search_signed_in/:id', 'sort_order', to: "users#search_signed_in"
+      get 'search', 'users/search_signed_in/:id', 'sort_order', to: "users#search_signed_in"
   end
 end
 
@@ -14,7 +14,6 @@ end
       get 'search', 'search_signed_in', 'sort_order'
     end
   end
-
 
 
   resources :charges, only: [:new, :create, :complete]
