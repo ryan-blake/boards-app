@@ -80,17 +80,19 @@
  <% else %>
  <strong style="font-size:30px;">$<%= @board.price %></strong>
  <div class="form-group">
-  <input id="checkbox" type="checkbox", "true">
-</div>
+  <span>
+    <label for="checkbox_pick">Pick Up:</label>
+    <input id="checkbox_pick" type="checkbox">
+  </span>
+ </div>
+
  <div id="delivery" style="display:none;">
    <div class="form-group">
-    ship it
-    <%= render partial: 'charge', locals: {board: @board} %>
+    <%= render partial: 'chargeshow', locals: {board: @board} %>
    </div>
  </div>
  <div id="pickup" style="display:none;">
    <div class="form-group">
-     pickup
      <%= render partial: 'charge', locals: {board: @board} %>
    </div>
  </div>
@@ -102,19 +104,23 @@
 <% end %>
 <script>
 $(document).ready(function() {
-var checkbox = document.getElementById('checkbox');
+var checkbox1 = document.getElementById('checkbox_pick');
 var delivery_div = document.getElementById('delivery');
 var pickup_div = document.getElementById('pickup');
+delivery_div.style['display'] = 'block';
 
-checkbox.onclick = function() {
+checkbox1.onclick = function() {
+
    if(this.checked) {
+     delivery_div.style['display'] = 'none';
+     pickup_div.style['display'] = 'block';
+   } else {
      delivery_div.style['display'] = 'block';
      pickup_div.style['display'] = 'none';
-   } else {
-     pickup_div.style['display'] = 'block';
-     delivery_div.style['display'] = 'none';
+     checkbox1.checked = false;
    }
 };
 });
+
 
 </script>

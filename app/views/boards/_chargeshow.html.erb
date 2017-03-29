@@ -1,3 +1,4 @@
+<H3> Ship it: </H3>
 <%= form_for Charge.new do |f| %>
   <%= f.hidden_field :amount, value:  @board.price.round  %>
   <%= f.hidden_field :item, value:  @board.title %>
