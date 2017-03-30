@@ -40,6 +40,7 @@ class ChargesController < ApplicationController
   @board.customer_id = current_user.id
   @board.update_attribute(:pending, true)
   @board.for_sale = false
+  @board.shipping = params[:charge]["shipping"]
   @board.save
   redirect_to  my_boards_path
 
@@ -92,6 +93,7 @@ class ChargesController < ApplicationController
     @board.customer_id = current_user.id
     @board.update_attribute(:pending, true)
     @board.for_sale = false
+    @board.shipping = params[:charge]["shipping"]
     @board.save
 
     # ChargeMailer.new_charge_user(@charge).deliver_now
@@ -130,6 +132,7 @@ end
     @board.update_attribute(:latitude, nil)
     @board.update_attribute(:pending, false)
     @board.update_attribute(:customer_id, nil)
+    @board.update_attribute(:shipping, nil)
     @board.save
     redirect_to my_boards_path, flash: {notice: "Charge Successful"}
 

@@ -1,6 +1,6 @@
 
     <h4 style="text-decoration:underline;" class="center-text"> My pending shipment (out for shipping) </h4>
-   <% pending_boards = Board.where(user_id: current_user.id, pending: true) %>
+   <% pending_boards = Board.where(user_id: current_user.id, pending: true).order('updated_at DESC') %>
    <% if pending_boards %>
      <% pending_boards.each do |i| %>
      <div style="min-height:100px;">
@@ -9,6 +9,11 @@
       <br>
       <strong>
         <%= link_to i.title, i %>
+        <% if i.shipping == true %>
+          <strong style="color:red;">ship it</strong>
+          <% else %>
+          <strong style="color:red;">pick up</strong>
+          <% end %>
       </strong>
      </div>
       <% end%>
