@@ -67,11 +67,11 @@
        Dropdown
        <span class="caret"></span>
      </button>
-     <ul class="dropdown-menu">
-       <li><button type="button" class="btn btn-default" id="btn-pending-m">pending</button></li>
-       <li><button type="button" class="btn btn-default" id="btn-active-m">active</button></li>
-       <li><button type="button" class="btn btn-default" id="btn-inventory-m">inventory</button></li>
-       <li><button type="button" class="btn btn-default" id="btn-shipped-m">shipped</button></li>
+     <ul class="dropdown-menu"style="width:100%;">
+       <li><button style="width:100%;" type="button" class="btn btn-default" id="btn-pending-m">pending</button></li>
+       <li><button style="width:100%;" type="button" class="btn btn-default" id="btn-active-m">active</button></li>
+       <li><button style="width:100%;" type="button" class="btn btn-default" id="btn-inventory-m">inventory</button></li>
+       <li><button style="width:100%;" type="button" class="btn btn-default" id="btn-shipped-m">shipped</button></li>
      </ul>
    </div>
 </div>
@@ -100,18 +100,18 @@
 
  <script>
  $(document).ready(function() {
- var activeBtn = document.getElementById('btn-active');
- var pendingBtn = document.getElementById('btn-pending');
- var inventoryBtn = document.getElementById('btn-inventory');
- var shippedBtn = document.getElementById('btn-shipped');
- var activeBtnM = document.getElementById('btn-active-m');
- var pendingBtnM = document.getElementById('btn-pending-m');
- var inventoryBtnM = document.getElementById('btn-inventory-m');
- var shippedBtnM = document.getElementById('btn-shipped-m');
- var pendingPG = document.getElementById('pending');
- var activePG = document.getElementById('active');
- var inventoryPG = document.getElementById('inventory');
- var shippedPG = document.getElementById('shipped');
+   var activeBtn = document.getElementById('btn-active');
+   var pendingBtn = document.getElementById('btn-pending');
+   var inventoryBtn = document.getElementById('btn-inventory');
+   var shippedBtn = document.getElementById('btn-shipped');
+   var activeBtnM = document.getElementById('btn-active-m');
+   var pendingBtnM = document.getElementById('btn-pending-m');
+   var inventoryBtnM = document.getElementById('btn-inventory-m');
+   var shippedBtnM = document.getElementById('btn-shipped-m');
+   var pendingPG = document.getElementById('pending');
+   var activePG = document.getElementById('active');
+   var inventoryPG = document.getElementById('inventory');
+   var shippedPG = document.getElementById('shipped');
    pendingPG.style['display'] = 'block';
    activePG.style['display'] = 'none';
    inventoryPG.style['display'] = 'none';

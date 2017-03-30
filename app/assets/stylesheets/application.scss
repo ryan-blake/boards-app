@@ -443,6 +443,13 @@ font-size:16px;
   }
   .dash-nav-mobile {
     display: block;
+    position:absolute;
+    top:210px;
+    width:100%;
+  }
+  .dash-data {
+    width: 100% !important;
+    left: 0 !important;
   }
 
   .navbar {
