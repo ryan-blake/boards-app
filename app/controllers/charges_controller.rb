@@ -32,8 +32,8 @@ class ChargesController < ApplicationController
   @board = Board.where(id: @charge.board_id).first
   if @charge.shipping == true
     @board.address = params[:stripeShippingAddressLine1]
-    @board.zipcode = parmas[:stripeShippingAddressZip]
-    @board.city = parmas[:stripeShippingAddressCity]
+    @board.zipcode = params[:stripeShippingAddressZip]
+    @board.city = params[:stripeShippingAddressCity]
     @board.state = params[:stripeShippingAddressCity]
   end
   @board.update_attribute(:arrived, false)
@@ -82,6 +82,13 @@ class ChargesController < ApplicationController
     @charge.update_attribute(:boolean, true)
     @charge.save
     @board = Board.where(id: @charge.board_id).first
+    if @charge.shipping == true
+      @board.address = params[:stripeShippingAddressLine1]
+      @board.zipcode = params[:stripeShippingAddressZip]
+      @board.city = params[:stripeShippingAddressCity]
+      @board.state = params[:stripeShippingAddressState]
+      @board.state = params[:stripeShippingAddressCity]
+    end
     @board.update_attribute(:arrived, false)
     @board.customer_id = current_user.id
     @board.update_attribute(:pending, true)
@@ -117,6 +124,11 @@ end
     @board.update_attribute(:shipped, nil)
     @board.update_attribute(:customer_id, nil)
     @board.update_attribute(:address, nil)
+    @board.update_attribute(:city, nil)
+    @board.update_attribute(:state, nil)
+    @board.update_attribute(:zipcode, nil)
+    @board.update_attribute(:longitude, nil)
+    @board.update_attribute(:latitude, nil)
     @board.update_attribute(:pending, false)
     @board.update_attribute(:customer_id, nil)
     @board.save
