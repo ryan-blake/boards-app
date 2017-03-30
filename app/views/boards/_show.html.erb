@@ -80,6 +80,7 @@
     $<%= @board.price %>
   </strong>
    <% else %>
+   <% if @board.for_sale == true %>
      <strong style="font-size:30px;">
        $<%= @board.price %>
      </strong>
@@ -101,6 +102,7 @@
          <%= render partial: 'charge', locals: {board: @board} %>
        </div>
      </div>
+  <% end %>
   <% end %>
 </div>
 <% end %>
