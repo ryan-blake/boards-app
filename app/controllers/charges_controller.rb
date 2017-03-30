@@ -34,7 +34,7 @@ class ChargesController < ApplicationController
     @board.address = params[:stripeShippingAddressLine1]
     @board.zipcode = params[:stripeShippingAddressZip]
     @board.city = params[:stripeShippingAddressCity]
-    @board.state = params[:stripeShippingAddressCity]
+    @board.state = params[:stripeShippingAddressState]
   end
   @board.update_attribute(:arrived, false)
   @board.customer_id = current_user.id
@@ -87,7 +87,6 @@ class ChargesController < ApplicationController
       @board.zipcode = params[:stripeShippingAddressZip]
       @board.city = params[:stripeShippingAddressCity]
       @board.state = params[:stripeShippingAddressState]
-      @board.state = params[:stripeShippingAddressCity]
     end
     @board.update_attribute(:arrived, false)
     @board.customer_id = current_user.id
