@@ -424,6 +424,8 @@ font-size:16px;
 .image-box {
   min-height: 375px;
 }
+// burger animation
+
 
 // responsive
 @media (max-width:1100px) {
@@ -441,6 +443,10 @@ font-size:16px;
   }
   .dash-nav-mobile {
     display: block;
+  }
+
+  .navbar {
+    height:10px;
   }
 
   .dash-data {
