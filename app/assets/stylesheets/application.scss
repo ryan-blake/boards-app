@@ -113,6 +113,22 @@ a:hover, a:visited, a:link, a:active
   }
 }
 
+.dash-data {
+  position:absolute;
+  top:220px;
+  left:105px;
+  display: block;
+  width:65%;
+}
+
+.dash-nav-desktop {
+
+}
+
+.dash-nav-mobile {
+ display: none;
+}
+
 // powered by google --delete
 .pac-container:after {  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
     background-image: none !important;
@@ -409,6 +425,7 @@ font-size:16px;
   min-height: 375px;
 }
 
+// responsive
 @media (max-width:1100px) {
   .description-modal {
     padding-top: 50px;
@@ -418,7 +435,22 @@ font-size:16px;
   }
 }
 
-// responsive
+@media (max-width:895px) {
+  .dash-nav-desktop {
+    display: none;
+  }
+  .dash-nav-mobile {
+    display: block;
+  }
+
+  .dash-data {
+    position:absolute;
+    top:250px;
+    left:15px;
+    display: block;
+    width:65%;
+  }
+}
 @media (max-width:770px) {
   .my-pages a {
     position:absolute;
