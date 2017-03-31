@@ -1,3 +1,2 @@
-$('#results').html('<%= escape_javascript render 'active_boards' %>');
-$('.paginator').html('<%= escape_javascript(paginate(my_boards, :remote => true)) %>');
-console.log("hi")
+$('#paginator').html('<%= escape_javascript(paginate(@my_boards, :remote => true)) %>');
+$("#results").html("<%=j render partial: 'active_boards' %>");
