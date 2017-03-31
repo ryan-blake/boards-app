@@ -1,9 +1,13 @@
+<div class="active">
 <h4 style="text-decoration:underline;" class="center-text"> Active Inventory </h4>
  <% if current_user.provider == nil %> (must <%= link_to 'connect', user_stripe_connect_omniauth_authorize_path %> to sell) </h4> <% end %>
-   <% my_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true, pending: false) %>
+ <% @my_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true, pending: false).page(params[:page]).per(9) %>
+ <div id="paginator1">
+   <%= paginate @my_boards, remote: true %>
+ </div>
 
    <thead>
-   <% my_boards.each do |i| %>
+   <% @my_boards.each do |i| %>
      <hr class="style13">
    <td>
    <%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: {toggle: "modal", targe: "#newModal"} %>
@@ -17,3 +21,5 @@
   </td>
     <% end %>
 </thead>
+
+</div>

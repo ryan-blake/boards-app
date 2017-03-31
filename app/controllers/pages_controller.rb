@@ -8,6 +8,10 @@ class PagesController < ApplicationController
   end
 
   def boards
+
+
+    
+
     @user = current_user
     # @boards = Board.find_by(user_id: @user)
     @boardies = Board.find_by(user_id: @user)

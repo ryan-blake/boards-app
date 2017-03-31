@@ -7,29 +7,7 @@
 <!-- chat -->
 
 
-<div class="col-md-3 col-sm-4 pull-right">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">User list</h3>
-    </div>
-    <div class="panel-body">
-      <ul>
-        <% @users.each do |user| %>
-          <li><%= link_to user.email, conversations_path(user_id: user), remote: true, method: :post %></li>
-         <% end %>
-      </ul>
-    </div>
-  </div>
-  <div class="" id="" style="min-width:300px;">
-    <ul id="conversations-list">
-      <% @conversations.each do |conversation| %>
-        <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
-      <% end %>
-    </ul>
-  </div>
-</div>
 
-</div>
 <!-- !chattttt -->
 
 <div class="pull-right" style="width:163px;right:0px;top:35px;position:absolute;margin-top:20px;">
@@ -80,9 +58,11 @@
 <div class="dash-data">
 <!-- Need to finish payment -->
 <div class="col-md-12 well center-text" id="pending" style="background:#fff !important;">
+
   <%= render partial: 'pending_boards' %>
 </div>
 <div class="col-md-12 well center-text" id="active" style="background:#fff !important;">
+
   <%= render partial: 'active_boards' %>
 </div>
 
@@ -97,7 +77,29 @@
   <% else %>
   <h2 class="center-text"> login to continue</h2>
  <% end %>
+ <div class="msg-center col-md-3 col-sm-4 pull-right">
+   <div class="panel panel-primary">
+     <div class="panel-heading">
+       <h3 class="panel-title">User list</h3>
+     </div>
+     <div class="panel-body">
+       <ul>
+         <% @users.each do |user| %>
+           <li><%= link_to user.email, conversations_path(user_id: user), remote: true, method: :post %></li>
+          <% end %>
+       </ul>
+     </div>
+   </div>
+   <div class="" id="" style="">
+     <ul id="conversations-list" style="">
+       <% @conversations.each do |conversation| %>
+         <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
+       <% end %>
+     </ul>
+   </div>
+ </div>
 
+ </div>
  <script>
  $(document).ready(function() {
    var activeBtn = document.getElementById('btn-active');

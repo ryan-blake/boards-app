@@ -1,4 +1,4 @@
-
+<div class="shipped">
     <h4 style="text-decoration:underline;" class="center-text"> My pending shipment (out for shipping) </h4>
    <% pending_boards = Board.where(user_id: current_user.id, pending: true).order('updated_at DESC') %>
    <% if pending_boards %>
@@ -21,4 +21,4 @@
      </div>
       <% end%>
     <% end%>
-    <!-- modal -->
+</div>

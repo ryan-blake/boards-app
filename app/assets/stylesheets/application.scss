@@ -337,12 +337,19 @@ font-size:16px;
     }
 }
 .messages-list {
-  max-height: 200px;
+  max-height: 150px;
   overflow-y: auto;
   overflow-x: hidden;
 }
+#conversations-list {
+width: 100%;
+margin-left:0px;
+margin-right:0px;
+}
 
-
+.msg-center {
+  width: calc(31% - 70px);
+}
 .message-sent {
   position: relative;
   background-color: #D9EDF7;
@@ -435,7 +442,9 @@ font-size:16px;
 }
 // burger animation
 
-
+.new_message .btn {
+  width:100%;
+}
 // responsive
 @media (max-width:1100px) {
   .description-modal {
@@ -472,6 +481,13 @@ font-size:16px;
     display: block;
     width:65%;
   }
+
+  .msg-center {
+    position:fixed;
+    bottom:0px;
+    width:100%;
+  }
+
 }
 @media (max-width:770px) {
   .my-pages a {
