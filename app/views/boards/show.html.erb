@@ -34,7 +34,22 @@
 
 </div>
   <div class="image-box center-text" id="images">
-    <%= render partial: 'images' %>
+
+    <% @images.each do |i| %>
+    <%= attachment_image_tag(i, :file, :fill, 350, 350) %>
+    <br>
+    <% if @one == 1 %>
+    <div style="padding-top:10px;">
+    <strong> 1 of 1 </strong>
+    </div>
+    <% else %>
+    <button class="btn-next">
+      <%= link_to_previous_page @images,'', class: 'fa fa-chevron-left fa-2x', style: 'color:black !important;text-decoration:none;', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>"}, remote: true %>
+      <%= link_to_next_page @images,' ', class: 'fa fa-chevron-right fa-2x', style: 'color:black !important;text-decoration:none;',   data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>"}, remote: true %>
+    </button>
+
+    <% end %>
+    <% end %>
   </div>
   <hr class="style13">
 </div>
@@ -72,26 +87,33 @@
 </table>
 <div class="payment center-text" style="padding-top:30px;padding-bottom:30px;">
  <% if current_user && current_user.id == @board.user_id %>
- <strong style="font-size:30px;">$<%= @board.price %></strong>
- <% else %>
-  <% if @board.for_sale == true %>
-     <strong style="font-size:30px;">$<%= @board.price %></strong>
+  <strong style="font-size:30px;">
+    $<%= @board.price %>
+  </strong>
+   <% else %>
+   <% if @board.for_sale == true %>
+     <strong style="font-size:30px;">
+       $<%= @board.price %>
+     </strong>
      <div class="form-group">
-      <input id="checkbox" type="checkbox">
-    </div>
+      <span>
+        <label for="checkbox_pick">
+          Pick Up:
+        </label>
+        <input id="checkbox_pick" type="checkbox">
+      </span>
+     </div>
      <div id="delivery" style="display:none;">
        <div class="form-group">
-        ship it
-    <%= render partial: 'chargeshow', locals: {board: @board} %>
+        <%= render partial: 'chargeshow', locals: {board: @board} %>
        </div>
      </div>
-     <div id="pickup" style="display:none;">
+     <div id="pickup" style="display:none;" class="center-text">
        <div class="form-group">
-         pickup
-       <%= render partial: 'chargepickup', locals: {board: @board} %>
+         <%= render partial: 'charge', locals: {board: @board} %>
        </div>
      </div>
-    <% end %>
+   <% end %>
   <% end %>
 </div>
 
@@ -104,3 +126,23 @@
 </div>
 
 <% end %>
+
+<script>
+$(document).ready(function() {
+var checkbox1 = document.getElementById('checkbox_pick');
+var delivery_div = document.getElementById('delivery');
+var pickup_div = document.getElementById('pickup');
+delivery_div.style['display'] = 'block';
+
+  checkbox1.onclick = function() {
+   if(this.checked) {
+     delivery_div.style['display'] = 'none';
+     pickup_div.style['display'] = 'block';
+   } else {
+     delivery_div.style['display'] = 'block';
+     pickup_div.style['display'] = 'none';
+     checkbox1.checked = false;
+   }
+  };
+});
+</script>
