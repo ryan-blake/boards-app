@@ -7,6 +7,9 @@
       <hr class="style13">
         <%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: { toggle: "modal", target: "#newModal" } %>
       <br>
+      <strong style="font-size:15px;text-decoration:none">Chat with
+      <%= link_to i.user.name.capitalize , conversations_path(user_id: i.customer_id), remote: true, method: :post %>
+      </strong>
       <strong>
         <%= link_to i.title, i %>
         <% if i.shipping == true %>
