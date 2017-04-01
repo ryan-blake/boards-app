@@ -10,7 +10,7 @@ class BoardsController < ApplicationController
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
     @boards = @boards.page(params[:page]).per(9)
     @boards = @boards.order('created_at DESC')
-    @boards = Board.where(:for_sale => [true]).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+    @boards = Board.where(:for_sale => [true]).where(:pending => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 # end
     @types = Type.order(:name)
     @categories = Category.order(:name)
@@ -139,13 +139,17 @@ class BoardsController < ApplicationController
      @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
              "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-
-             @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+             if (params[:new] == "on") && (params[:used] != params[:new])
+               @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+             elsif (params[:used] == "on") && (params[:used] != params[:new])
+                 @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+             else
+                  @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
              respond_to do |format|
                     format.js
                 end
-
+              end
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 else
@@ -153,14 +157,19 @@ else
 
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
-   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+            if (params[:new] == "on") && (params[:used] != params[:new])
+              @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+            elsif (params[:used] == "on") && (params[:used] != params[:new])
+                @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+            else
+                 @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
             respond_to do |format|
                    format.js {render 'search_signed_in' }
                end
 
-end
-
+             end
+          end
 end
 
 

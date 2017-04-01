@@ -80,26 +80,38 @@ end
      @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
              "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+             if (params[:new] == "on") && (params[:used] != params[:new])
+               @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+             elsif (params[:used] == "on") && (params[:used] != params[:new])
+                 @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
+             else
              @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
              respond_to do |format|
                     format.js
                 end
-
+end
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 else
+
   @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
-    @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+            if (params[:new] == "on") && (params[:used] != params[:new])
+              @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+            elsif (params[:used] == "on") && (params[:used] != params[:new])
+                @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+
+            else
+              @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
             respond_to do |format|
                    format.js {render 'search_signed_in' }
                end
-
+             end
   end
 
 end
@@ -117,10 +129,14 @@ private
   def sort_direction
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
   end
-    # Use callbacks to share common setup or constraints between actions.
-    def set_board
-      @board = Board.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_board
+    @board = Board.find(params[:id])
+  end
+
+  def boolean_board()
+     self.downcase == "true"
+   end
 
 
   # Never trust parameters from the scary internet, only allow the white list through. update sanitizer for new.

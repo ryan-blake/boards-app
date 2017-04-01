@@ -67,5 +67,4 @@ class Board < ApplicationRecord
      end
   end
 
-
 end

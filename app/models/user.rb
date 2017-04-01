@@ -65,6 +65,4 @@ class User < ApplicationRecord
     [address, city, state, zipcode].join(', ')
   end
 
-
-
 end
