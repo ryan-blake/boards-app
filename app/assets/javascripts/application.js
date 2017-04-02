@@ -21,6 +21,76 @@ $("#geo-input").geocomplete();
 country: "US"
 });
 
+$(document).ready(function() {
+  var activeBtn = document.getElementById('btn-active');
+  var pendingBtn = document.getElementById('btn-pending');
+  var inventoryBtn = document.getElementById('btn-inventory');
+  var shippedBtn = document.getElementById('btn-shipped');
+  var activeBtnM = document.getElementById('btn-active-m');
+  var pendingBtnM = document.getElementById('btn-pending-m');
+  var inventoryBtnM = document.getElementById('btn-inventory-m');
+  var shippedBtnM = document.getElementById('btn-shipped-m');
+  var pendingPG = document.getElementById('pending');
+  var activePG = document.getElementById('active');
+  var inventoryPG = document.getElementById('inventory');
+  var shippedPG = document.getElementById('shipped');
+  pendingPG.style['display'] = 'block';
+  activePG.style['display'] = 'none';
+  inventoryPG.style['display'] = 'none';
+  shippedPG.style['display'] = 'none';
+
+ activeBtn.onclick = function() {
+     activePG.style['display'] = 'block';
+     pendingPG.style['display'] = 'none';
+     inventoryPG.style['display'] = 'none';
+     shippedPG.style['display'] = 'none';
+  };
+  pendingBtn.onclick = function() {
+     pendingPG.style['display'] = 'block';
+     activePG.style['display'] = 'none';
+     inventoryPG.style['display'] = 'none';
+     shippedPG.style['display'] = 'none';
+  };
+  inventoryBtn.onclick = function() {
+     inventoryPG.style['display'] = 'block';
+     activePG.style['display'] = 'none';
+     pendingPG.style['display'] = 'none';
+     shippedPG.style['display'] = 'none';
+  };
+  shippedBtn.onclick = function() {
+     shippedPG.style['display'] = 'block';
+     activePG.style['display'] = 'none';
+     inventoryPG.style['display'] = 'none';
+     pendingPG.style['display'] = 'none';
+  };
+ //mobile
+ activeBtnM.onclick = function() {
+    activePG.style['display'] = 'block';
+    pendingPG.style['display'] = 'none';
+    inventoryPG.style['display'] = 'none';
+    shippedPG.style['display'] = 'none';
+ };
+ pendingBtnM.onclick = function() {
+    pendingPG.style['display'] = 'block';
+    activePG.style['display'] = 'none';
+    inventoryPG.style['display'] = 'none';
+    shippedPG.style['display'] = 'none';
+ };
+ inventoryBtnM.onclick = function() {
+    inventoryPG.style['display'] = 'block';
+    activePG.style['display'] = 'none';
+    pendingPG.style['display'] = 'none';
+    shippedPG.style['display'] = 'none';
+ };
+ shippedBtnM.onclick = function() {
+    shippedPG.style['display'] = 'block';
+    activePG.style['display'] = 'none';
+    inventoryPG.style['display'] = 'none';
+    pendingPG.style['display'] = 'none';
+ };
+});
+
+
 
 $(document).ready(function() {
   var subcat;
@@ -37,6 +107,7 @@ $(document).ready(function() {
   });
 });
 // shipping hidden charge form
+// shipping hidden charge form
 $(document).ready(function() {
 var checkbox = document.getElementById('checkbox');
 var delivery_div = document.getElementById('delivery');
@@ -52,7 +123,6 @@ checkbox.onclick = function() {
    }
 };
 });
-
 (function() {
   $(document).on('click', '.toggle-window', function(e) {
     e.preventDefault();
@@ -67,5 +137,4 @@ checkbox.onclick = function() {
       messages_list.scrollTop(height);
     }
   });
-
 })();

@@ -86,24 +86,33 @@
 </table>
 <div class="payment center-text" style="padding-top:30px;padding-bottom:30px;">
  <% if current_user && current_user.id == @board.user_id %>
- <strong style="font-size:30px;">$<%= @board.price %></strong>
- <% else %>
- <strong style="font-size:30px;">$<%= @board.price %></strong>
- <div class="form-group">
-  <input id="checkbox" type="checkbox">
-</div>
- <div id="delivery" style="display:none;">
-   <div class="form-group">
-    ship it
-<%= render partial: 'chargeshow', locals: {board: @board} %>
-   </div>
- </div>
- <div id="pickup" style="display:none;">
-   <div class="form-group">
-     pickup
-   <%= render partial: 'chargepickup', locals: {board: @board} %>
-   </div>
- </div>
+  <strong style="font-size:30px;">
+    $<%= @board.price %>
+  </strong>
+   <% else %>
+   <% if @board.for_sale == true %>
+     <strong style="font-size:30px;">
+       $<%= @board.price %>
+     </strong>
+     <div class="form-group">
+      <span>
+        <label for="checkbox_pick">
+          Pick Up:
+        </label>
+        <input id="checkbox_pick_up" type="checkbox">
+      </span>
+     </div>
+     <div id="delivery_id" style="display:none;">
+       <div class="form-group">
+        <%= render partial: 'chargeshow' %>
+       </div>
+     </div>
+     <div id="pickup_id" style="display:none;" class="center-text">
+       <div class="form-group">
+         <%= render partial: 'charge'%>
+       </div>
+     </div>
+   <% end %>
   <% end %>
 </div>
 
@@ -116,3 +125,22 @@
 </div>
 
 <% end %>
+
+<script>
+$(document).ready(function() {
+var checkbox_s = document.getElementById('checkbox_pick_up');
+var delivery_id = document.getElementById('delivery_id');
+var pickup_id = document.getElementById('pickup_id');
+delivery_div.style['display'] = 'block';
+  checkbox_s.onclick = function() {
+   if(this.checked) {
+     delivery_id.style['display'] = 'none';
+     pickup_id.style['display'] = 'block';
+   } else {
+     delivery_id.style['display'] = 'block';
+     pickup_id.style['display'] = 'none';
+     checkbox_s.checked = false;
+   }
+  };
+});
+</script>
