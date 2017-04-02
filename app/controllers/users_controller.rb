@@ -13,7 +13,7 @@ def show
   @user = User.find(params[:id])
   @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id])
   @boards = @boards.order('created_at DESC')
-  @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+  @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
 
 
 end
@@ -67,12 +67,13 @@ end
 
  def search_signed_in
    @user = User.find(params[:id])
-   @boards = @user.boards.where(:for_sale => true)
+   @boards = @user.boards.where(:for_sale => true).where(:pending => [false])
 
    if params[:value].empty?
      distance_in_miles = 3
 
    else
+
      distance_in_miles = params[:value]
    end
    if params[:search].empty?
