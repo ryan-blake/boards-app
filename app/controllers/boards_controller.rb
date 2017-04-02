@@ -8,9 +8,9 @@ class BoardsController < ApplicationController
   def index
 
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
-    @boards = @boards.page(params[:page]).per(9)
+    @boards = @boards.page(params[:page]).per(5)
     @boards = @boards.order('created_at DESC')
-    @boards = Board.where(:for_sale => [true]).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+    @boards = Board.where(:for_sale => [true]).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
 # end
     @types = Type.order(:name)
     @categories = Category.order(:name)
@@ -140,7 +140,7 @@ class BoardsController < ApplicationController
 
              "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
 
-             @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+             @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
 
              respond_to do |format|
                     format.js
@@ -153,7 +153,7 @@ else
 
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
-   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
+   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
 
             respond_to do |format|
                    format.js {render 'search_signed_in' }
