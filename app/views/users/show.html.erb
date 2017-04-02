@@ -47,7 +47,8 @@
         <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
       </span>
     </div><!-- /input-group -->
-    <span><%= check_box :new, :id => "checkbox"%> </span> new <span><%= check_box :new, :id => "checkbox"%> </span> used
+    New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
+    Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
 <div class="col-lg-12">
