@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<%= week_calendar number_of_weeks: 2, events: @board.events do |date, events| %>
+
+<%= date.strftime('%x') %>
+
+<hr>
+  <% events.each do |event| %>
+  <!-- create array of booking length -->
+<% a = [] %>
+ <% a = *event.start_time.to_date..event.end_time.to_date %>
+<%= a %>
+
+  <% @half_day = 0 %>
+  <!-- same day bookings -->
+
+
+<!-- bookings on different days -->
+    <div>
+      <% if @half_day === 0 %>
+      <!-- <strong><%= event.name %> <%=event.start_time.strftime("%I:%M:%S")  %> -->
+      <!-- Display proper rent times -->
+          <% @difference = distance_of_time_in_words event.start_time, event.end_time  %>
+          <% @difference = @difference.to_i + 1 %>
+            <% @multiple_day_count = @difference.to_i  %>
+          <%= @difference.to_i %> days
+      <% end %>
+
+<!-- bookings cost -->
+        <%if event.user == current_user %>
+          <strong><%= event.user.name %><strong>
+            <% if @difference < 1 %>
+             <% @total_price = event.board.price  * @difference %>
+             <% @total_price = @total_price.ceil%>
+            <% elsif @difference.to_i > 1 %>
+              <% @total_price = event.board.price  * @difference.to_i %>
+              <%= @total_price %>
+            <% else %>
+              <% @difference = 1 %>
+              <% @total_price = event.board.price %>
+              <%= @total_price %>
+            <% end %>
+            <% unless event.booked %>
+            <!-- connect -->
+             <%= render partial: 'charge', locals: {board: @board} %>
+             <% else %>
+             <h2>payed</h2>
+             <%end%>
+            <br>
+          <%else%>
+          <strong> booked
+        <% end %>
+         <%=event.end_time.strftime("%D") %></strong>
+    </div>
+     <% if event.user == current_user || current_user.role == "admin" %>
+       <%= link_to 'Cancel', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+     <%  end %>
+  <%  end %>
+
+
+<% end %>
+<br>

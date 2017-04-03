@@ -70,6 +70,14 @@
 
 </div>
 <br>
+<% if @board.rental %>
+<div id="events_calendar">
+  <%= render 'events/calendar', locals: {events: @events, board: @board} %>
+</div>
+<%= render 'events/form', event: Event.new, board: @board %>
+
+<% else %>
+
 <hr class="style13">
 
 </table>
@@ -94,12 +102,15 @@
      <%= render partial: 'charge', locals: {board: @board} %>
    </div>
  </div>
+ <% end %>
 
   <% end %>
 </div>
+<% end %>
+
 </div>
 
-<% end %>
+
 <script>
 $(document).ready(function() {
 var checkbox = document.getElementById('checkbox');

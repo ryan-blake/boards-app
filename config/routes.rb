@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :events
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :users do
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
 end
 
   resources :boards do
+    resources :events, only: [:create, :destroy, :show]
     collection do
       get 'search', 'search_signed_in', 'sort_order'
     end

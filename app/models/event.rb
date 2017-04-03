@@ -39,3 +39,5 @@ def future_reservations_only
    errors.add(:start_time, "cannot be in the past")
   end
 end
+
+end
