@@ -67,7 +67,9 @@ gem 'omniauth-facebook'
 gem 'kaminari'
 gem 'geocomplete_rails'
 gem 'font-awesome-sass'
-
+gem "simple_calendar"
+gem 'validates_timeliness', '~> 4.0'
+gem 'validates_overlap'
 
 group :development do
   gem 'better_errors'

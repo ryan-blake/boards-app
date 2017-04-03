@@ -1,0 +1,7 @@
+class AddUserToEvent < ActiveRecord::Migration[5.0]
+  def change
+    add_reference :events, :user, index: true, foreign_key: true
+    add_reference :events, :board, index: true, foreign_key: true
+    add_reference :events, :charge, index: true, foreign_key: true
+  end
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170317000840) do
+ActiveRecord::Schema.define(version: 20170403165725) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at",                  null: false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20170317000840) do
     t.datetime "updated_at",                  null: false
     t.string   "board_id"
     t.string   "address"
+    t.boolean  "shipping"
     t.index ["user_id"], name: "index_charges_on_user_id"
   end
 
@@ -86,6 +87,23 @@ ActiveRecord::Schema.define(version: 20170317000840) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_distances_on_board_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "tag"
+    t.string   "repeat"
+    t.boolean  "payed",      default: false
+    t.boolean  "booked",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "user_id"
+    t.integer  "board_id"
+    t.integer  "charge_id"
+    t.index ["board_id"], name: "index_events_on_board_id"
+    t.index ["charge_id"], name: "index_events_on_charge_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "images", force: :cascade do |t|

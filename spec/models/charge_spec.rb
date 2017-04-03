@@ -15,6 +15,7 @@
 #  updated_at  :datetime         not null
 #  board_id    :string
 #  address     :string
+#  shipping    :boolean
 #
 
 require 'rails_helper'
