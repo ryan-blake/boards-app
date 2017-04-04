@@ -10,7 +10,7 @@ class BoardsController < ApplicationController
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
     @boards = @boards.page(params[:page]).per(5)
     @boards = @boards.order('created_at DESC')
-    @boards = Board.where(:for_sale => [true]).where(:arrived => [false]).where(:rental => [true]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+    @boards = Board.where(:for_sale => [true]).where(:arrived => [false]).where(:rental => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
 # end
     @types = Type.order(:name)
     @categories = Category.order(:name)
