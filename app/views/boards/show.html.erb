@@ -84,6 +84,8 @@
 <br>
 <hr class="style13">
 </table>
+<%= render 'events/form', event: Event.new, board: @board %>
+
 <div class="payment center-text" style="padding-top:30px;padding-bottom:30px;">
  <% if current_user && current_user.id == @board.user_id %>
   <strong style="font-size:30px;">

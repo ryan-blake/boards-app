@@ -14,6 +14,10 @@
 //= require jquery_ujs
 //= require_tree .
 //= require jquery.geocomplete
+//= require moment
+//= require bootstrap-datetimepicker
+
+
 
 
 $(function() {

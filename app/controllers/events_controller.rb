@@ -16,7 +16,7 @@ end
 
 # GET /events/new
 def new
-  @board = Spot.find(params[:spot_id])
+  @board = Board.find(params[:board_id])
   @event = Event.new
 end
 
@@ -27,18 +27,18 @@ end
 # POST /events
 # POST /events.json
 def create
-  @board = Spot.find(params[:spot_id])
+  @board = Board.find(params[:board_id])
   @user = current_user
   @event = @board.events.build(event_params)
   @event.user = current_user
-  @unbooked = Event.where(user_id: @user.id, spot_id: @board.id, booked: false)
+  # @unbooked = Event.where(user_id: @user.id, board_id: @board.id, booked: false)
 
   respond_to do |format|
     if @event.save
       format.html { redirect_to @board, notice: 'Event was successfully created.' }
       format.json { render :show, status: :created, location: @event }
     else
-      format.html { redirect_to @board, notice: 'Reservation creation failed.' }
+      format.html { redirect_to @board, notice: 'Reservation creation failed. Make sure dates are valid' }
       format.json { render json: @board.errors, status: :unprocessable_entity }
     end
   end
@@ -80,7 +80,7 @@ private
   end
 
   def set_current_events
-  @some_events = Event.where spot_id: @board.id
+  @some_events = Event.where board_id: @board.id
   @current_events =  @some_events.where start_time >= Time.now
 
 end

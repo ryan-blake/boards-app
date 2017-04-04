@@ -70,12 +70,13 @@
 
 </div>
 <br>
+<div style="position:relative">
 <% if @board.rental %>
-<div id="events_calendar">
-  <%= render 'events/calendar', locals: {events: @events, board: @board} %>
+<div class="center-text" id="datepick">
+<%= render partial: 'events/form', locals:{ event: @event, board: @board }%>
 </div>
-<%= render 'events/form', event: Event.new, board: @board %>
 
+</div>
 <% else %>
 
 <hr class="style13">
@@ -112,6 +113,11 @@
 
 
 <script>
+
+$('.date#datetimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+
+$('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+
 $(document).ready(function() {
 var checkbox = document.getElementById('checkbox');
 var delivery_div = document.getElementById('delivery');
@@ -131,3 +137,6 @@ checkbox.onclick = function() {
 });
 
 </script>
+<style>
+#datepick{z-index:-1 !important;}
+</style>

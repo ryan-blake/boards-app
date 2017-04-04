@@ -10,11 +10,11 @@ class BoardsController < ApplicationController
     @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
     @boards = @boards.page(params[:page]).per(5)
     @boards = @boards.order('created_at DESC')
-    @boards = Board.where(:for_sale => [true]).where(:arrived => [false]).where(:rental => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+    @boards = Board.where(:for_sale => [true]).where(:arrived => [false]).where(:rental => [true]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
 # end
     @types = Type.order(:name)
     @categories = Category.order(:name)
-
+@event = Event.new
 
     if current_user.present?
       @on = current_user
@@ -41,7 +41,7 @@ class BoardsController < ApplicationController
     @images= @board.images
     @one = @images.length
     @images = @board.images.page(params[:page]).per(1)
-
+@event =  Event.new
     if current_user.present?
       @on = current_user
       @charge = Charge.where(user_id: @on.id)
