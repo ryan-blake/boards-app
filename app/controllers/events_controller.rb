@@ -30,6 +30,7 @@ def create
   @board = Board.find(params[:board_id])
   @user = current_user
   @event = @board.events.build(event_params)
+
   @event.user = current_user
   # @unbooked = Event.where(user_id: @user.id, board_id: @board.id, booked: false)
 
