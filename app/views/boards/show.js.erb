@@ -5,3 +5,5 @@ $("#pickup").html("<%=j render partial: 'charge' %>");
 $("#delivery").html("<%=j render partial: 'chargeshow' %>");
 $("#images").html("<%=j render partial: 'images' %>");
 $("#datepick").html("<%= j render 'events/form'%>")
+$('.date#datetimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+$('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');

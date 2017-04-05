@@ -1,4 +1,3 @@
-$("#results").html("<%=j render partial: 'search_signed_in' %>");
 $(document).ready(function() {
 var checkbox = document.getElementById('checkbox');
 var delivery_div = document.getElementById('delivery');

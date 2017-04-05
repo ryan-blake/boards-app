@@ -20,10 +20,13 @@
 
 
 
+
+
 $(function() {
 $("#geo-input").geocomplete();
 country: "US"
 });
+
 
 $(document).ready(function() {
   var activeBtn = document.getElementById('btn-active');
