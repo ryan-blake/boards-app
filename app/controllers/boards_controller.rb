@@ -3,6 +3,7 @@ class BoardsController < ApplicationController
   helper_method :sort_column, :sort_direction
   respond_to :html, :js
 
+
   # GET /boards
   # GET /boards.json
   def index
