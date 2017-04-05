@@ -12,6 +12,8 @@ end
 def show
   # @board = Spot.find(params[:spot_id])
   # @event = Event.find(params[:id])
+  @charge = Charge.new
+
 end
 
 # GET /events/new
@@ -29,20 +31,69 @@ end
 def create
   @board = Board.find(params[:board_id])
   @user = current_user
-  @event = @board.events.build(event_params)
+  # @charge = Charge.new
+  @event = Event.create(
+  board_id: @board.id,
+  start_time:  params["@event"]["start_time"],
+  end_time:  params["@event"]["end_time"]
 
-  @event.user = current_user
+  )
+    charge_error = nil
+
+    if @event.valid?
+      begin
+        customer = Stripe::Customer.create(
+          :email => params[:stripeEmail],
+          :card  => params[:stripeToken])
+
+
+          @charge = Charge.new(
+            price: @board.price.round.to_i * 100,
+            user_id: current_user.id,
+            vendor_id: @board.user_id,
+            item: @board.title,
+            token: params[:stripeToken],
+            customer_id: customer.id,
+            completed: false,
+            board_id: @board.id,
+          )
+
+      rescue Stripe::CardError => e
+        charge_error = e.message
+      end
+      if charge_error
+        flash[:error] = charge_error
+        render :new
+      else
+        @event.save
+        @charge.save
+        if @charge
+          Stripe.api_key = ENV["STRIPE_API_KEY"]
+          token = params[:stripeToken]
+          charge = Stripe::Charge.create({
+            :amount => @charge.price*100,
+            :description => 'Rails Stripe customer',
+            :customer => @charge.customer_id,
+            :currency => 'usd',
+            :destination => @charge.vendor.uid,
+            :application_fee => 200+(@charge.price*3)+ 31
+            },
+          )
+          @charge.update_attribute(:completed, true)
+          redirect_to my_boards_path, flash: {notice: "Charge Successful"}
+end
+
+      end
+    else
+      flash[:error] = 'one or more errors in your order'
+      render :new
+    end
+
+
+
   # @unbooked = Event.where(user_id: @user.id, board_id: @board.id, booked: false)
 
-  respond_to do |format|
-    if @event.save
-      format.html { redirect_to @board, notice: 'Event was successfully created.' }
-      format.json { render :show, status: :created, location: @event }
-    else
-      format.html { redirect_to @board, notice: 'Reservation creation failed. Make sure dates are valid' }
-      format.json { render json: @board.errors, status: :unprocessable_entity }
-    end
-  end
+
 end
 
 # PATCH/PUT /events/1

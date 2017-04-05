@@ -25,8 +25,8 @@ class Event < ApplicationRecord
 
 # validate :unbooked_events, :on => :create
 
-belongs_to :user
 belongs_to :board
+
 
 # validates :name, presence: true
 # validate all events are paid for first
