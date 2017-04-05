@@ -25,3 +25,8 @@ $('#customButton').on('click', function (e) {
 $(window).on('popstate', function () {
     handler.close();
 });
+
+
+$('.date#datetimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+
+$('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');

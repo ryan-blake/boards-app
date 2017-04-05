@@ -41,6 +41,7 @@ class BoardsController < ApplicationController
     @images= @board.images
     @one = @images.length
     @images = @board.images.page(params[:page]).per(1)
+    @event = Event.new
 
     if current_user.present?
       @on = current_user

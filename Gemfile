@@ -70,6 +70,8 @@ gem 'font-awesome-sass'
 gem "simple_calendar"
 gem 'validates_timeliness', '~> 4.0'
 gem 'validates_overlap'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails'
 
 group :development do
   gem 'better_errors'
