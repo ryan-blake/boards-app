@@ -10,44 +10,44 @@
       </ul>
     </div>
   <% end %>
-<div class="well col-md-8">
+<div class="col-md-4">
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.label :note %><br>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
   </div>
 
-
-
-  <div class="field pull-left" style="display:flex;" id="datepick">
-    <div>
-       <%= f.label :start_time %>
-       <%# f.datetime_select :start_time, :ampm => true, :minute_step => 5 %>
-       <div class='input-group date' id='datetimepicker'>
-         <input type='text' class="form-control" name="@event[start_time]" id="@event_time" <% if @event.start_time %>value="<%= @event.start_time.strftime("%m/%d/%Y %I:%M %p") %><% end %>">
-         <span class="input-group-addon">
-           <span class="glyphicon glyphicon-calendar"></span>
-         </span>
-       </div>
-     </div>
-  <div class="field pull-right" style="display:flex;">
-    <div>
-       <%= f.label :end_time %>
-       <%# f.datetime_select :start_time, :ampm => true, :minute_step => 5 %>
-       <div class='input-group date' id='datetimepicker1'>
-         <input type='text' class="form-control" name="@event[end_time]" id="@event_end_time" <% if @event.end_time %>value="<%= @event.end_time.strftime("%m/%d/%Y %I:%M %p") %><% end %>">
-         <span class="input-group-addon">
-           <span class="glyphicon glyphicon-calendar"></span>
-         </span>
-       </div>
+<!--  -->
+<div class="field col-sm-12" style="display:flex;width:100%;">
+  <div>
+     <%= f.label :pick_up_date %>
+     <%# f.datetime_select :start_time, :ampm => true, :minute_step => 5 %>
+     <div class='input-group date' id='datetimepicker'>
+       <input type='text' class="form-control" name="@event[start_time]" id="@event_start_time" <% if @event.start_time %>value="<%= @event.start_time.strftime("%m/%d/%Y %I:%M %p") %><% end %>">
+       <span class="input-group-addon">
+         <span class="glyphicon glyphicon-calendar"></span>
+       </span>
      </div>
    </div>
-  </div>
+</div>
+
+<div class="field col-sm-12" style="display:flex;width:100%;">
+  <div>
+     <%= f.label :drop_off_date %>
+     <%# f.datetime_select :start_time, :ampm => true, :minute_step => 5 %>
+     <div class='input-group date' id='datetimepicker1'>
+       <input type='text' class="form-control" name="@event[end_time]" id="@event_end_time" <% if @event.end_time %>value="<%= @event.end_time.strftime("%m/%d/%Y %I:%M %p") %><% end %>">
+       <span class="input-group-addon">
+         <span class="glyphicon glyphicon-calendar"></span>
+       </span>
+     </div>
+   </div>
+</div>
 
 
-  <br><br>
-  <div class=" btn btn-success form-control" style="display:inline;, text:">
-    <%= f.submit %>
-  </div>
+  <br>
+  <%= f.submit "Book it", class: "btn btn-success text-center form-control"  %>
+
 
   </div>
 

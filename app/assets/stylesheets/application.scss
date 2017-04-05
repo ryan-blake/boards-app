@@ -442,10 +442,15 @@ margin-right:0px;
 .image-box {
  min-height: 375px;
 }
-// burger animation
+// calendar
 
+// !calendar
 .new_message .btn {
  width:100%;
+}
+.remove-submit-btn-style {
+  background: none;
+  border: none;
 }
 // responsive
 @media (max-width:1100px) {
@@ -454,6 +459,7 @@ margin-right:0px;
    max-width:100% !important;
    padding-left:10%;
    padding-right:10%;
+   margin-bottom:20px;
  }
 }
 

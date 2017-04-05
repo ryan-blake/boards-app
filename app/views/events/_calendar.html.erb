@@ -13,7 +13,25 @@
 
   <% @half_day = 0 %>
   <!-- same day bookings -->
-
+  <% if event.end_time && event.start_time %>
+    <% if event.end_time.strftime("%D") === event.start_time.strftime("%D") %>
+      <% diff = event.end_time.strftime("%H").to_i, event.start_time.strftime("%H").to_i %>
+      <% diff_1 = diff[0] %>
+      <% diff_2 = diff[1] %>
+      <% diff =  diff_1 - diff_2 %>
+      <%= diff %> hours
+      <!-- HALF DAY PRICING -->
+      <% if diff < 6 %>
+        <% @half_day = 1 %>
+        <% @difference = 0.75 %>
+       <% else %>
+         <% @half_day = 2 %>
+         <% @difference = 1 %>
+      <% end %>
+    <% end %>
+    <% else %>
+    <% @multiple_days = true %>
+  <% end %>
 
 <!-- bookings on different days -->
     <div>
