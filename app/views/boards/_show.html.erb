@@ -71,12 +71,13 @@
 </div>
 <br>
 <% if @board.rental %>
-<div style="display:block;">
+<div style="display:inline;">
   <%= render 'events/form', event: Event.new, board: @board %>
 </div>
-<div id="events_calendar" style="max-width:100%;margin-top:100px;padding-bottom:30px;">
-  <%= render 'events/calendar', locals: {events: @events, board: @board} %>
-</div>
+
+  <div id="events_calendar" style="max-width:100%;margin-top:10px;padding-bottom:30px;">
+    <%= render 'events/calendar', locals: {events: @events, board: @board} %>
+  </div>
 
 
 <% else %>

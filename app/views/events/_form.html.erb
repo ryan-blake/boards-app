@@ -1,4 +1,4 @@
-<div>
+<div style="position:relative;">
 <%= form_for [@board, @event] do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
@@ -10,10 +10,8 @@
       </ul>
     </div>
   <% end %>
-
-
-<!--  -->
-<div class="field col-sm-12" style="display:flex;width:100%;">
+<br>
+<div class="field col-sm-12" style="width:100%;">
   <div>
      <%= f.label :pick_up_date %>
      <%# f.datetime_select :start_time, :ampm => true, :minute_step => 5 %>
@@ -26,8 +24,7 @@
    </div>
 </div>
 
-<div class="field col-sm-12" style="display:flex;width:100%;">
-  <div>
+<div class="field col-sm-12" style="width:100%;">
      <%= f.label :drop_off_date %>
      <%# f.datetime_select :start_time, :ampm => true, :minute_step => 5 %>
      <div class='input-group date' id='datetimepicker1'>
@@ -36,15 +33,10 @@
          <span class="glyphicon glyphicon-calendar"></span>
        </span>
      </div>
-   </div>
 </div>
 <br>
-<div class=" col-md-4" style="padding:20px;" id ="pay_now_rent">
+<div class="center-text col-md-4" style="padding:20px;position:relative;" id ="pay_now_rent">
   <%f.submit %>
-    <%= f.hidden_field :amount, value:  @board.price.round  %>
-    <%= f.hidden_field :item, value:  @board.title %>
-    <%= f.hidden_field :owner_id, value:  @board.user_id %>
-    <%= f.hidden_field :board_id, value:  @board.id %>
 
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
       data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
@@ -56,13 +48,13 @@
       ></script>
 
   <hr class="style13">
-<% end %>
 </div>
+<% end %>
 <script>
 $(document).ready(function() {
 var pay = document.getElementById('pay_now_rent');
 pay.style['display'] = 'block';
 
-
 });
 </script>
+</div>
