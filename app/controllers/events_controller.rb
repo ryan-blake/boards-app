@@ -30,16 +30,38 @@ end
 # POST /events.json
 def create
   @board = Board.find(params[:board_id])
-  @user = current_user
+  if current_user
+    @user = current_user
+
+  else
+    user_email = params[:stripeEmail]
+
+    if User.where(:email => user_email).exists?
+      redirect_to new_user_session_path , :notice => "Howdy, Email is already in use, please login or use a different email to complete your purchase."
+    else
+    current_user = User.create!(
+    name: user_email,
+    email: user_email,
+    role: 0,
+    password: Faker::Code.asin,
+    )
+
+
+    # current_user.send_reset_password_instructions
+    @user = current_user
+    @user_new = current_user
+    end
+
+  end
 
 
   # @charge = Charge.new
   @event = Event.create!(
-  board_id: @board.id,
-  start_time:  params["@event"]["start_time"],
-  end_time:  params["@event"]["end_time"],
-  user_id: @user.id,
-  name: @user.email
+    board_id: @board.id,
+    start_time:  params["@event"]["start_time"],
+    end_time:  params["@event"]["end_time"],
+    user_id: @user.id,
+    name: @user.email
   )
     charge_error = nil
 
@@ -48,7 +70,6 @@ def create
         customer = Stripe::Customer.create(
           :email => params[:stripeEmail],
           :card  => params[:stripeToken])
-
 
           @charge = Charge.new(
             price: @board.price.to_i.ceil * 100,
@@ -90,14 +111,16 @@ def create
           @event.charge_id = @charge.id
           @event.save
           redirect_to my_boards_path, flash: {notice: "Charge Successful"}
-end
+        end
 
       end
     else
       flash[:error] = 'one or more errors in your order'
       render :new
     end
-
+if @user_new
+  @user_new.send_reset_password_instructions
+end
 
 
   # @unbooked = Event.where(user_id: @user.id, board_id: @board.id, booked: false)
