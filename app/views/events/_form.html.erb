@@ -39,7 +39,7 @@
    </div>
 </div>
 <br>
-<div class=" col-md-4" style="z-index:99999;" id ="pay_now_rent">
+<div class=" col-md-4" style="padding:20px;" id ="pay_now_rent">
   <%f.submit %>
     <%= f.hidden_field :amount, value:  @board.price.round  %>
     <%= f.hidden_field :item, value:  @board.title %>
@@ -60,7 +60,6 @@
 </div>
 <script>
 $(document).ready(function() {
-var end_time = document.getElementById('datetimepicker1');
 var pay = document.getElementById('pay_now_rent');
 pay.style['display'] = 'block';
 
