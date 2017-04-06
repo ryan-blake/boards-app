@@ -110,7 +110,7 @@ def create
           @charge.update_attribute(:completed, true)
           @event.charge_id = @charge.id
           @event.save
-          redirect_to my_boards_path, if !@user_new flash: {notice: "Charge Successful"} else flash: {notice: "Charge Successful, check your email for your password and account confirmation."}
+          redirect_to my_boards_path, if !@user_new flash: {notice: "Charge Successful"} else flash: {notice: "Charge Successful, check your email for your password and account confirmation."} end
         end
 
       end
