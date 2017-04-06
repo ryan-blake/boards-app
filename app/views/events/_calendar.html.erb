@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+
 
 <%= week_calendar number_of_weeks: 2, events: @board.events do |date, events| %>
 
@@ -11,66 +11,7 @@
  <% a = *event.start_time.to_date..event.end_time.to_date %>
 <%= a %>
 
-  <% @half_day = 0 %>
-  <!-- same day bookings -->
-  <% if event.end_time && event.start_time %>
-    <% if event.end_time.strftime("%D") === event.start_time.strftime("%D") %>
-      <% diff = event.end_time.strftime("%H").to_i, event.start_time.strftime("%H").to_i %>
-      <% diff_1 = diff[0] %>
-      <% diff_2 = diff[1] %>
-      <% diff =  diff_1 - diff_2 %>
-      <%= diff %> hours
-      <!-- HALF DAY PRICING -->
-      <% if diff < 6 %>
-        <% @half_day = 1 %>
-        <% @difference = 0.75 %>
-       <% else %>
-         <% @half_day = 2 %>
-         <% @difference = 1 %>
-      <% end %>
-    <% end %>
-    <% else %>
-    <% @multiple_days = true %>
-  <% end %>
 
-<!-- bookings on different days -->
-    <div>
-      <% if @half_day === 0 %>
-      <!-- <strong><%= event.name %> <%=event.start_time.strftime("%I:%M:%S")  %> -->
-      <!-- Display proper rent times -->
-          <% @difference = distance_of_time_in_words event.start_time, event.end_time  %>
-          <% @difference = @difference.to_i + 1 %>
-            <% @multiple_day_count = @difference.to_i  %>
-          <%= @difference.to_i %> days
-      <% end %>
-
-<!-- bookings cost -->
-
-        <%if event.user_id == current_user.id %>
-          <strong><%= current_user.name %><strong>
-            <% if @difference < 1 %>
-             <% @total_price = event.board.price  * @difference %>
-             <% @total_price = @total_price.ceil%>
-            <% elsif @difference.to_i > 1 %>
-              <% @total_price = event.board.price  * @difference.to_i %>
-              <%= @total_price %>
-            <% else %>
-              <% @difference = 1 %>
-              <% @total_price = event.board.price %>
-              <%= @total_price %>
-            <% end %>
-            <% unless event.booked %>
-            <!-- connect -->
-             <%= render partial: 'charge', locals: {board: @board} %>
-             <% else %>
-             <h2>payed</h2>
-             <%end%>
-            <br>
-          <%else%>
-          <strong> booked
-        <% end %>
-         <%=event.end_time.strftime("%D") %></strong>
-    </div>
      <% if event.user_id == current_user.id || current_user.role == "admin" %>
        <%= link_to 'Cancel', event, method: :delete, data: { confirm: 'Are you sure?' } %>
      <%  end %>

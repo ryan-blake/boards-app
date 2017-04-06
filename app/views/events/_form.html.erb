@@ -35,9 +35,8 @@
      </div>
 </div>
 <br>
-<div class="center-text col-md-4" style="padding:20px;position:relative;" id ="pay_now_rent">
+<div class="center-text" style="padding:0px; position: relative; max-height: 30px;margin-bottom:2px;display: block;" id="pay_now_rent">
   <%f.submit %>
-
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
       data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
       <% if current_user.present? %>
@@ -47,9 +46,9 @@
             data-amount="<%= @board.price.to_i.ceil * 100 %>"
       ></script>
 
-  <hr class="style13">
 </div>
 <% end %>
+
 <script>
 $(document).ready(function() {
 var pay = document.getElementById('pay_now_rent');

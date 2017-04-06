@@ -412,6 +412,11 @@ margin-right:0px;
  padding-top:3px;
 }
 
+.image-box {
+ min-height: 375px;
+ min-height: 375px;
+}
+
 .btn-next {
  border: 1px solid black;
  background-color:white;
@@ -433,14 +438,22 @@ margin-right:0px;
 .description-modal {
  padding-right: 90px;
  min-height:250px;
- clear:all;
+ clear:none;
  position:relative;
  display:block;
  max-width:50%;
+ padding-bottom:10px;
 }
 
-.image-box {
- min-height: 375px;
+.rent-dates {
+  position:relative;
+  display:inline-block;
+}
+
+#events_calendar {
+  position:relative;
+  display:inline-block;
+  min-width:100%;
 }
 // calendar
 
@@ -460,6 +473,7 @@ margin-right:0px;
    padding-left:10%;
    padding-right:10%;
    margin-bottom:20px;
+   padding-bottom:100px;
  }
 }
 
@@ -544,10 +558,7 @@ margin-right:0px;
  }
  .simple-calendar {
    .day {
-     .day {
-
-       font-size:8px;
-
+     font-size:8px;
    }
  }
 }
@@ -583,5 +594,6 @@ margin-right:0px;
    right:20%;
    top:28%;
  }
+
 
 }
