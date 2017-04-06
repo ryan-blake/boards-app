@@ -73,7 +73,7 @@ def create
 
           @charge = Charge.new(
             price: @board.price.to_i.ceil * 100,
-            user_id: current_user.id,
+            user_id: @user.id,
             vendor_id: @board.user_id,
             item: @board.title,
             token: params[:stripeToken],
@@ -110,7 +110,7 @@ def create
           @charge.update_attribute(:completed, true)
           @event.charge_id = @charge.id
           @event.save
-          redirect_to my_boards_path, flash: {notice: "Charge Successful"}
+          redirect_to my_boards_path, if !@user_new flash: {notice: "Charge Successful"} else flash: {notice: "Charge Successful, check your email for your password and account confirmation."}
         end
 
       end
