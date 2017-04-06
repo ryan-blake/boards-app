@@ -39,8 +39,13 @@
    </div>
 </div>
 <br>
-<div class=" col-md-4" style="z-index:99999;">
+<div class=" col-md-4" style="z-index:99999;" id ="pay_now_rent">
   <%f.submit %>
+    <%= f.hidden_field :amount, value:  @board.price.round  %>
+    <%= f.hidden_field :item, value:  @board.title %>
+    <%= f.hidden_field :owner_id, value:  @board.user_id %>
+    <%= f.hidden_field :board_id, value:  @board.id %>
+
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
       data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
       <% if current_user.present? %>
@@ -50,8 +55,15 @@
             data-amount="<%= @board.price.to_i.ceil * 100 %>"
       ></script>
 
-  </div>
   <hr class="style13">
-
 <% end %>
 </div>
+<script>
+$(document).ready(function() {
+var end_time = document.getElementById('datetimepicker1');
+var pay = document.getElementById('pay_now_rent');
+pay.style['display'] = 'block';
+
+
+});
+</script>
