@@ -42,7 +42,7 @@ class BoardsController < ApplicationController
     @one = @images.length
     @images = @board.images.page(params[:page]).per(1)
     @event = Event.new
-@charge = Charge.new
+    @charge = Charge.new
     if current_user.present?
       @on = current_user
       @charge = Charge.where(user_id: @on.id)

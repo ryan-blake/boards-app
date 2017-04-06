@@ -31,12 +31,15 @@ end
 def create
   @board = Board.find(params[:board_id])
   @user = current_user
+
+
   # @charge = Charge.new
-  @event = Event.create(
+  @event = Event.create!(
   board_id: @board.id,
   start_time:  params["@event"]["start_time"],
-  end_time:  params["@event"]["end_time"]
-
+  end_time:  params["@event"]["end_time"],
+  user_id: @user.id,
+  name: @user.email
   )
     charge_error = nil
 
@@ -48,7 +51,7 @@ def create
 
 
           @charge = Charge.new(
-            price: @board.price.round.to_i * 100,
+            price: @board.price.to_i.ceil * 100,
             user_id: current_user.id,
             vendor_id: @board.user_id,
             item: @board.title,
@@ -56,16 +59,18 @@ def create
             customer_id: customer.id,
             completed: false,
             board_id: @board.id,
+            start_time: @event.start_time,
+            end_time: @event.end_time
           )
 
       rescue Stripe::CardError => e
         charge_error = e.message
       end
+
       if charge_error
         flash[:error] = charge_error
         render :new
       else
-        @event.save
         @charge.save
         if @charge
           Stripe.api_key = ENV["STRIPE_API_KEY"]
@@ -76,10 +81,12 @@ def create
             :customer => @charge.customer_id,
             :currency => 'usd',
             :destination => @charge.vendor.uid,
-            :application_fee => 200+(@charge.price*3)+ 31
+            :application_fee => @charge.price * 3
             },
           )
           @charge.update_attribute(:completed, true)
+          @event.charge_id = @charge.id
+          @event.save
           redirect_to my_boards_path, flash: {notice: "Charge Successful"}
 end
 

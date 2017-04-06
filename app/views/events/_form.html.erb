@@ -1,3 +1,4 @@
+<div>
 <%= form_for [@board, @event] do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
@@ -9,9 +10,7 @@
       </ul>
     </div>
   <% end %>
-<div class=" col-md-">
 
-  </div>
 
 <!--  -->
 <div class="field col-sm-12" style="display:flex;width:100%;">
@@ -39,9 +38,8 @@
      </div>
    </div>
 </div>
-
-
-  <br>
+<br>
+<div class=" col-md-4" style="z-index:99999;">
   <%f.submit %>
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
       data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
@@ -52,5 +50,8 @@
             data-amount="<%= @board.price.to_i.ceil * 100 %>"
       ></script>
 
+  </div>
+  <hr class="style13">
 
 <% end %>
+</div>
