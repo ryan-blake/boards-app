@@ -118,7 +118,7 @@ def create
       flash[:error] = 'one or more errors in your order'
       render :new
     end
-if @user_new
+if @user_new != nil
   @user_new.send_reset_password_instructions
 end
 
