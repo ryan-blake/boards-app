@@ -10,6 +10,7 @@ class OmniauthCallbacksController < ApplicationController
       publishable_key: request.env["omniauth.auth"].info.stripe_publishable_key
     })
       # anything else you need to do in response..
+      @user = current_user
       sign_in_and_redirect @user, :event => :authentication
       flash[:notice] = "Signed in with #{current_user.provider.to_s.titleize} successfully."
     else
