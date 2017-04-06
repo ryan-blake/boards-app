@@ -110,7 +110,8 @@ def create
           @charge.update_attribute(:completed, true)
           @event.charge_id = @charge.id
           @event.save
-          redirect_to my_boards_path, if !@user_new flash: {notice: "Charge Successful"} else flash: {notice: "Charge Successful, check your email for your password and account confirmation."} end
+
+          redirect_to my_boards_path, flash: {notice: "Charge Successful"}
         end
 
       end
@@ -167,5 +168,5 @@ private
   @some_events = Event.where board_id: @board.id
   @current_events =  @some_events.where start_time >= Time.now
 
-end
+  end
 end
