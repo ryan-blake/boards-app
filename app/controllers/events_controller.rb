@@ -71,7 +71,7 @@ def create
           Stripe.api_key = ENV["STRIPE_API_KEY"]
           token = params[:stripeToken]
           charge = Stripe::Charge.create({
-            :amount => @charge.price*100,
+            :amount => @charge.price,
             :description => 'Rails Stripe customer',
             :customer => @charge.customer_id,
             :currency => 'usd',
