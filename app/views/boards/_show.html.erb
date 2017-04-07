@@ -59,13 +59,15 @@
         <th class="col-sm-3"> Height: </th>
         <th class="col-sm-3"> Width: </th>
         <th class="col-sm-3"> Make: </th>
-        <th class="col-sm-3"> New: </th>
+        <% if @board.used == true %>
+        <th class="col-sm-3"> Used </th>
+        <% end %>
       </thead>
       <tbody>
         <td class="col-sm-3"> <%= @board.length %> </td>
         <td class="col-sm-3"> <%= @board.width %> </td>
         <td class="col-sm-3"> <%= @board.make %> </td>
-        <td class="col-sm-3"> <%= @board.used %> </td>
+        
       </tbody>
   </div>
 </table>

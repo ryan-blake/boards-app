@@ -9,10 +9,13 @@
   <!-- create array of booking length -->
 <% a = [] %>
  <% a = *event.start_time.to_date..event.end_time.to_date %>
-<%= a %>
-
-<% if current_user %>
-     <% if event.user_id == current_user.id || current_user.role == "admin" %>
+  <% if current_user && event.user_id == current_user.id %>
+  <strong style="color:orange;"> your booking</strong>
+  <% else %>
+  <strong style="color:red;">booked</strong>
+  <% end %>
+ <% if current_user %>
+     <% if current_user.role == "admin" %>
        <%= link_to 'Cancel', event, method: :delete, data: { confirm: 'Are you sure?' } %>
        <%  end %>
      <%  end %>
