@@ -48,7 +48,6 @@ class Board < ApplicationRecord
   validates :make, :presence => true
   validates :length, :presence => true
   validates :price, :presence => true
-  validates :type, :presence => true
   validates :category, :presence => true
   validates :zipcode, :length => { :is => 5 }
   after_save :check_for_tracking_number
