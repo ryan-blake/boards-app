@@ -37,8 +37,9 @@ def create
     user_email = params[:stripeEmail]
 
     if User.where(:email => user_email).exists?
-      redirect_to new_user_session_path , :notice => "Howdy, Email is already in use, please login or use a different email to complete your purchase."
-      break
+      redirect_to new_user_session_path, :notice => "Howdy, Email is already in use, please login or use a different email to complete your purchase." and return
+       
+
     else
     current_user = User.create!(
     name: user_email,
