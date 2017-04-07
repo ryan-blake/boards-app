@@ -1,4 +1,3 @@
-
 <%= form_for(board) do |f| %>
   <% if board.errors.any? %>
     <div id="error_explanation">
@@ -9,8 +8,8 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
-<!--  -->
+    <% end %>
+<% if current_user.provider != nil %>
 <div class="title center-text">
 <%= f.label :title %>
   <td><%= f.text_field :title, class: 'btn-width form-control' %></td>
@@ -19,8 +18,6 @@
 <div class="image-box center-text" id="images">
   <%= f.label :add_images %><br>
   <btn class="center-text" style="position:absolute;left:calc(50% - 90px);"><%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %></btn>
-
-
 
 </div>
 
@@ -79,5 +76,6 @@
   <div style="margin-top:20px;" class="actions">
     <%= f.submit "update", class: "btn btn-info" %>
   </div>
-<% end %>
-<% end %>
+
+  <% end %>
+  <% end %>
