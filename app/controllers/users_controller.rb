@@ -11,10 +11,8 @@ end
 
 def show
   @user = User.find(params[:id])
-  @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id])
-  @boards = @boards.order('created_at DESC')
-  @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-
+  @boards = Board.where(:for_sale => true).order('created_at DESC')
+  @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id], :rental => false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
 end
 
@@ -76,11 +74,14 @@ end
      distance_in_miles = params[:value]
    end
    if params[:search].empty?
-     @boards = @user.boards.where(:for_sale => true)
      @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
              "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-
+             if params[:rental] == "on"
+               @boards =  @boards.where(:rental => true)
+             else
+               @boards = @boards.where(:rental => false)
+             end
              if (params[:new] == "on") && (params[:used] != params[:new])
                     @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
                   elsif (params[:used] == "on") && (params[:used] != params[:new])
@@ -100,6 +101,11 @@ else
 
            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
+            if params[:rental] == "on"
+              @boards =  @boards.where(:rental => true)
+            else
+              @boards = @boards.where(:rental => false)
+            end
             if (params[:new] == "on") && (params[:used] != params[:new])
                          @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(9)
                        elsif (params[:used] == "on") && (params[:used] != params[:new])

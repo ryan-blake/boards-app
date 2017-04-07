@@ -7,10 +7,8 @@ class BoardsController < ApplicationController
   # GET /boards.json
   def index
 
-    @boards = Board.where(:for_sale => [true]).where(:arrived => [false])
-    @boards = @boards.page(params[:page]).per(5)
-    @boards = @boards.order('created_at DESC')
-    @boards = Board.where(:for_sale => [true]).where(:arrived => [false]).where(:rental => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+
+    @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
 # end
     @types = Type.order(:name)
     @categories = Category.order(:name)
@@ -108,27 +106,6 @@ class BoardsController < ApplicationController
 
 
 
-  def search
-    if params[:value].to_i < 1
-      distance_in_miles = 2000
-    else
-      distance_in_miles = params[:value].to_i
-    end
-    # casting seems to have changed geocoder locally but works on heroku.
-
-    # @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
-    if current_user
-     @boards = @boards.where.not(:user_id => current_user)
-     end
-    @boards = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
-
-            "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
-             .near([request.location.latitude, request.location.longitude], distance_in_miles)
-      @boards = @boards.reorder(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 5)
-   render :index
-
- end
-
  def search_signed_in
    if params[:value].empty?
      distance_in_miles = 3
@@ -146,17 +123,16 @@ class BoardsController < ApplicationController
                @boards = @boards.where(:rental => false)
              end
              if (params[:new] == "on") && (params[:used] != params[:new])
-                          @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
-                        elsif (params[:used] == "on") && (params[:used] != params[:new])
-                            @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+                @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+              elsif (params[:used] == "on") && (params[:used] != params[:new])
+                  @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+              else
+                   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
 
-                        else
-                             @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
-
-                        respond_to do |format|
-                               format.js
-                           end
-                         end
+              respond_to do |format|
+                     format.js
+              end
+             end
 
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",

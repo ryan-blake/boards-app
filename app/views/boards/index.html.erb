@@ -4,7 +4,6 @@
 
 <hr class="style13">
 
-<!-- test on local search -->
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
      <div class="row">
        <div class="col-lg-6">
@@ -42,7 +41,7 @@
     </div><!-- /input-group -->
     New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
     Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
-    Rental:<span class="check-box-search"><%= check_box_tag :rental,params[:rental], false%> </span>
+    Rental:<span class="check-box-search"><%= check_box_tag :rental, params[:rental] %> </span>
 
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
@@ -50,7 +49,7 @@
    <div class="input-group">
      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
      <span class="input-group-btn">
-       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Searching..."} %>
+       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
      </span>
    </div><!-- /input-group -->
  </div><!-- /.col-lg-6 -->
