@@ -22,20 +22,20 @@
     </thead>
 
   <% @boards.each do |board| %>
-    <tbody class="col-sm-6 col-md-4 center-text" style="min-width:300px;min-height:410px;">
+    <tbody class="tbody-search col-sm-6 col-md-4 center-text">
         <!-- if no image load other boards image in results -->
-        <td class="center-text" style="min-height:240px;">
+        <td class="center-text" >
           <% if board.images == true %>
-            <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
-          <% else %>
-            <%= link_to attachment_image_tag(Board.find(10).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+              <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+            <% else %>
+              <%= link_to attachment_image_tag(Board.find(10).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
           <% end %>
 
       <ul class="main-well-ul">
-         <li class="center-text title-ind">
+         <li class="center-text title-link">
            <!-- new link to modal -->
            <div class="title-bar center-text">
-             <%= link_to board.title, board, target: :_blank  %>
+             <%= link_to board.title.truncate(23), board, target: :_blank  %>
           </div>
           <%if current_user && board.user_id == current_user.id %>
            <li><%= link_to 'Edit', edit_board_path(board) %></li>
@@ -44,11 +44,11 @@
             <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
           </div>
          </li>
-         <li class="center-text" style="min-width:242px;">
+         <li class="center-text">
           <%=  board.description.truncate(33)  %>
          </li>
          <li class="center-text">
-           <strong style="font-size:20px;"><%=  board.make %></strong>
+           <strong class="make-li"><%=  board.make %></strong>
          </li>
          <li class="center-text" style="padding-top:5px;">
            <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>

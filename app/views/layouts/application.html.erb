@@ -9,37 +9,34 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <div class="container">
+    <div class="container"  style="padding-bottom:50px !important;">
       <nav class="navbar navbar-inverse">
-        <div class="container" style="width:100% !important;padding: 0px 0px 0px 10px !important;">
+        <div class="container" style="">
         <div class="navbar-header">
-          <%= link_to 'still shreds', root_path, class: 'navbar-brand' %>
+          <%= link_to 'WoJoi', root_path, class: 'navbar-brand' %>
         </div>
-        <div style="" class="head-nav-btns">
+
           <!--  -->
-          <% if current_user %>
-          <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default"><%=   link_to current_user.name.split(' ').shift.capitalize + "'s Profile", edit_user_registration_path %></button>
+          <div class="btn-group head-nav-btns" role="group" aria-label="...">
+            <% if current_user %>
+            <button type="button" class="btn btn-inverse"><%=   link_to current_user.name.split(' ').shift.capitalize + "'s Profile", edit_user_registration_path %></button>
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Dropdown
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><%= link_to 'My-boards', my_boards_path(current_user) %></li>
-                <li><%= link_to 'My-page', user_path(current_user) %></li>
+                <li><%= link_to 'Dashboard', my_boards_path(current_user) %></li>
+                <li><%= link_to 'Store', user_path(current_user) %></li>
               </ul>
             </div>
-            <button type="button" class="btn btn-default" style="min-width:50px;min-height:33px;max-height:33px;font-size:10px;"><%= link_to 'Log out', destroy_user_session_path, method: :delete, style: 'left: 5px;position: absolute;top: 10px;' %></button>
-
-          <% else %>
-            <button type="button" class="btn btn-default"><%= link_to 'Log In', new_user_session_path %></button>
-            <button type="button" class="btn btn-default"><%= link_to 'Sign Up', new_user_registration_path %></button>
+            <button type="button" class="btn btn-inverse" style=""><%= link_to 'Log out', destroy_user_session_path, method: :delete, style: 'left: 5px;position: absolute;top: 10px;' %></button>
+            <% else %>
+              <button type="button" class="btn btn-inverse"><%= link_to 'Log In', new_user_session_path %></button>
+              <button type="button" class="btn btn-inverse"><%= link_to 'Sign Up', new_user_registration_path %></button>
             <% end %>
-
           </div>
           <!--  -->
-        </div>
   </div>
 </nav>
 </div>

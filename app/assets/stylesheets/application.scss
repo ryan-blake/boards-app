@@ -1,7 +1,4 @@
 /*
-* This is a manifest file that'll be compiled into application.css, which will include all the files
-* listed below.
-*
 * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
 * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
 *
@@ -20,29 +17,24 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-
-div.hidden { display: none; }
-
-
-#pending-pay {
- display:hidden;
-}
 html, body {
  overflow-x: hidden;
 margin: 0;
-}
-
-body {
- background: snow;
+background: snow;
 width: 100%;
-
 }
+//
+// body {
+//   background: snow;
+//  width: 100%;
+//
+// }
 
 ul {
  padding-left: 0px;
  list-style: none;
 }
-//
+
 hr.style13 {
  border: 0;
  height: 2px;
@@ -56,93 +48,45 @@ hr.style14 {
 border: 0;
 box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
+
+div.hidden { display: none; }
+
 //
 .navbar-inverse {
  max-height: 20px;
+ min-width:100%;
+ position:fixed;
+ z-index: 999;
+ left:0px;
+ top:0px;
+ padding-bottom:30px;
+ border-radius: 0;
+ background-color: #AD90D4;
+ a {
+   color:white;
+   text-decoration: none;
+ }
 }
+
+
+a.navbar-brand{
+  color: white !important;
+}
+
 h3 :hover {
  text-decoration: none;
  color: grey;
 }
 
-.btn-outline {
- padding-left:15px;
- padding-right:15px;
- padding-bottom:3px;
- border: 1px solid black;
- margin-right:5%;
-   &:hover {
-     border: 1px solid grey;
-
-   }
-   a {
-     color: white;
-     text-decoration: none;
-   }
+.buttons:link {
+ font-style:none;
+ color: grey;
 }
 
-a:hover, a:visited, a:link, a:active
-{
-   text-decoration: none;
+.center-text {
+ text-align: center;
 }
-
-
-.head-nav-btns {
- position: absolute;
- top: 0;
- right: 0;
-}
-.enter-width {
- width:70%;
- background: ghostwhite;
-
-}
-.cat-width {
- max-width:190px;
- background: ghostwhite;
-}
-.search-width {
- max-width:90px;
- background: lightgrey;
-}
-.usr-lnk a{
- color:white;
-
- &:hover {
-   color:grey;
- }
-}
-
-.dash-data {
- position:absolute;
- top:205px;
- left:84px;
- display: block;
- width:69%;
-}
-
-.dash-nav-desktop button{
-height:50px;
-}
-
-.dash-nav-mobile {
-display: none;
-}
-
-.shipping-container {
- width:400px;
- height:150px;
- background-color: rgba(230, 250, 250, .5);
- position:absolute;
- padding-top:20px;
- padding-left:10px;
-}
-
-// powered by google --delete
-.pac-container:after {  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
-   background-image: none !important;
-   height: 0px;
-}
+//
 .btn-sort {
  color: black !important;
  background-color: #FFFFFF;
@@ -193,13 +137,101 @@ fieldset[disabled] .btn-sort.active {
  background-color: #000000;
 }
 
-.buttons:link {
- font-style:none;
- color: grey;
+//newinverse
+.btn-inverse {
+  color: #ffffff !important;
+  background-color: #AD90D4;
+  text-decoration: none;
+  border-color: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-height:48px;
+  min-width:65px;
+  border-radius:0;
 }
 
-.center-text {
- text-align: center;
+.btn-inverse:hover,
+.btn-inverse:focus,
+.btn-inverse:active,
+.btn-inverse.active,
+.open .dropdown-toggle.btn-inverse {
+  color: #ffffff;
+  background-color: #BBB9BD;
+  border-color: #F0F0F0;
+}
+
+.btn-inverse:active,
+.btn-inverse.active,
+.open .dropdown-toggle.btn-inverse {
+  background-image: none;
+}
+
+.btn-inverse.disabled,
+.btn-inverse[disabled],
+fieldset[disabled] .btn-inverse,
+.btn-inverse.disabled:hover,
+.btn-inverse[disabled]:hover,
+fieldset[disabled] .btn-inverse:hover,
+.btn-inverse.disabled:focus,
+.btn-inverse[disabled]:focus,
+fieldset[disabled] .btn-inverse:focus,
+.btn-inverse.disabled:active,
+.btn-inverse[disabled]:active,
+fieldset[disabled] .btn-inverse:active,
+.btn-inverse.disabled.active,
+.btn-inverse[disabled].active,
+fieldset[disabled] .btn-inverse.active {
+  background-color: #AD90D4;
+  border-color: #F0F0F0;
+}
+
+.btn-inverse .badge {
+  color: #AD90D4;
+  background-color: #ffffff;
+}
+// oldinverse
+
+.head-nav-btns {
+ position: absolute;
+ top: 0;
+ right: 0;
+}
+
+//
+
+.dash-data {
+ position:absolute;
+ top:205px;
+ left:84px;
+ display: block;
+ width:69%;
+}
+
+.dash-nav-desktop button{
+height:50px;
+background-color:#AD90D4;
+color:white;
+border-color:white;
+}
+.dash-nav-desktop button:hover,
+.dash-nav-desktop button:focus,
+.dash-nav-desktop button:active,
+.dash-nav-desktop button.active,
+.open .dropdown-toggle.btn-inverse {
+  color: #ffffff;
+  background-color: #BBB9BD;
+  border-color: #fff;
+  text-decoration:none;
+}
+.dash-nav-mobile {
+display: none;
+}
+
+// powered by google --delete
+.pac-container:after {  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+   background-image: none !important;
+   height: 0px;
 }
 
 .main-well-ul {
@@ -209,37 +241,26 @@ list-style-type:none;
 text-align:right;
 }
 
-.well-width {
- min-width:270px;
-}
-.well-styled {
-box-shadow: 0px 0px 3px 1px #888;
-border-radius: 10px;
-background: #white;
-padding-left: 12px;
-border: none;
-}
-.well-styled img {
-border-radius: 0%;
+.tbody-search {
+  min-width:300px;min-height:410px;padding-left:5%;
 }
 
-.well img {
- border-radius: 0%;
- box-shadow: 1px 2px 10px white;
+.description-li {
+  min-width:242px;
 }
 
-.title-ind a {
+.title-link a {
 text-decoration:none;
 color:black;
 font-family:600;
 font-weight:thin;
-font-size:16px;
+font-size:13px;
 }
 
-
-.well-title a {
- color: cyan;
+.make-li {
+  font-size:20px;
 }
+
 .alert-alert {
  @extend .alert-warning;
 }
@@ -247,46 +268,6 @@ font-size:16px;
 .alert-notice {
  @extend .alert-info;
  max-width:180px;
-}
-.btn-outline {
-   background-color: transparent;
-   color: inherit;
-   transition: all .5s;
-}
-
-
-.btn-primary.btn-outline {
-   color: #428bca;
-}
-
-.btn-success.btn-outline {
-   color: #5cb85c;
-}
-
-.btn-info.btn-outline {
-   color: #5bc0de;
-}
-
-.btn-warning.btn-outline {
-   color: #f0ad4e;
-}
-
-.btn-danger.btn-outline {
-   color: #d9534f;
-}
-
-.btn-primary.btn-outline:hover,
-.btn-success.btn-outline:hover,
-.btn-info.btn-outline:hover,
-.btn-warning.btn-outline:hover,
-.btn-danger.btn-outline:hover {
-   color: #fff;
-}
-
-.my-pages {
- position:absolute;
- top:0px !important;
-
 }
 
 .pagination a, .pagination span.current, .pagination span.gap {
@@ -336,6 +317,7 @@ font-size:16px;
        border: none;
    }
 }
+//
 .messages-list {
  max-height: 150px;
  overflow-y: auto;
@@ -365,7 +347,7 @@ margin-right:0px;
  padding: 10px;
  float: left;
 }
-
+//
 .filtering {
  padding-bottom:20px;
 }
@@ -455,16 +437,18 @@ margin-right:0px;
   display:inline-block;
   min-width:100%;
 }
-// calendar
 
-// !calendar
+.payment {
+  padding-top:20px;
+  padding-bottom:70px;
+}
+
 .new_message .btn {
  width:100%;
 }
-.remove-submit-btn-style {
-  background: none;
-  border: none;
-}
+
+
+
 // responsive
 @media (max-width:1100px) {
  .description-modal {
@@ -475,6 +459,7 @@ margin-right:0px;
    margin-bottom:20px;
    padding-bottom:100px;
  }
+
 }
 
 @media (max-width:995px) {
@@ -490,10 +475,6 @@ margin-right:0px;
  .dash-data {
    width: 100% !important;
    left: 0 !important;
- }
-
- .navbar {
-   height:10px;
  }
 
  .dash-data {
@@ -533,8 +514,6 @@ margin-right:0px;
    padding-right:10%;
  }
 
-
-
 }
 // effective for width < 400px
 @media (max-width: 400px) {
@@ -564,25 +543,12 @@ margin-right:0px;
 }
 
 @media (max-width: 350px) {
-  .enter-width {
-    max-width:150px;
-  }
 
   .search-width {
     left:140px !important;
     width:80px;
   }
 
-}
-
-@media (min-width:409px) and (max-width: 415px) {
-  .enter-width {
-    max-width: 240px;
-  }
-  .search-width {
-    left:230px !important;
-    width:100px;
-  }
 }
 
 @media (min-width:768px) {
@@ -594,6 +560,18 @@ margin-right:0px;
    right:20%;
    top:28%;
  }
+ .payment {
+   padding-top:70px;
+   padding-bottom:40px;
+ }
+}
 
-
+@media (min-width:409px) and (max-width: 415px) {
+  .enter-width {
+    max-width: 240px;
+  }
+  .search-width {
+    left:230px !important;
+    width:100px;
+  }
 }

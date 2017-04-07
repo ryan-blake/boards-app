@@ -50,8 +50,8 @@
   <div class="image-box center-text" id="images">
     <%= render partial: 'images', locals: {board: @board}  %>
   </div>
-  <hr class="style13">
 
+  <hr class="style13" style="position:absolute:top:440px;">
 
   <div class="dimensions-modal" style="min-height:200px;">
     <table class="col-sm-3 col-md-5" style="position:absolute;top:450px;">
@@ -67,10 +67,18 @@
         <td class="col-sm-3"> <%= @board.length %> </td>
         <td class="col-sm-3"> <%= @board.width %> </td>
         <td class="col-sm-3"> <%= @board.make %> </td>
-        
+        <% if @board.type_id == 1 && @board.volume.present %>
+             <th class="col-sm-3">Voume:</th>
+             <% end %>
+        <% if @board.type_id == 1 %>
+         <td class="col-sm-3">
+         <%= @board.volume %>
+        <% end %>
       </tbody>
   </div>
+
 </table>
+
 <!-- section -->
   <div class="description-modal pull-right" style=";position:relative;clear:all;">
     <%= @board.description %>
@@ -90,9 +98,8 @@
   <% else %>
 
 <!-- section -->
-<hr class="style13">
 
-    <div class="payment center-text" style="padding-top:30px;padding-bottom:30px;">
+    <div class="payment center-text">
       <% if current_user && current_user.id == @board.user_id %>
         <strong style="font-size:30px;">$<%= @board.price %></strong>
       <% else %>
