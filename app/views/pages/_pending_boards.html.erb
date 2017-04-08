@@ -10,7 +10,7 @@
     <td><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: { toggle: "modal", target: "#newModal" }  %></td>
     <h3> <%= link_to i.title, i%> $<%= i.price %></h3>
     <strong style="font-size:15px;text-decoration:none">Chat with
-    <%= link_to i.user.name.capitalize , conversations_path(user_id: i.user.id), remote: true, method: :post %>
+      <%= link_to i.user.name.capitalize , conversations_path(user_id: i.user.id), remote: true, method: :post %>
     </strong>
         <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: charge.id, token: my_charge.token, price: my_charge.price, customer_id: my_charge.customer_id, destination: my_charge.vendor.uid), class: 'btn-success btn' %>
     <% end %>

@@ -7,14 +7,14 @@ class BoardsController < ApplicationController
   # GET /boards.json
   def index
 
-
+    @user = current_user
     @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
 # end
     @types = Type.order(:name)
     @categories = Category.order(:name)
 
-
     if current_user.present?
+
       @on = current_user
       @charge = Charge.where(user_id: @on.id)
       if @charge == nil
@@ -28,6 +28,13 @@ class BoardsController < ApplicationController
     @image = Board.find(params[:id]).images
     @image.image.destroy
     redirect_to request.referer
+  end
+
+  def boards
+    if current_user.present?
+      @charge = Charge.where(:user_id => @user.id)
+      @my_sales = Charge.where(:vendor_id => @user.id)
+    end
   end
 
 

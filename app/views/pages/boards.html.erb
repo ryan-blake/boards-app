@@ -75,10 +75,30 @@
        <h3 class="panel-title">User list</h3>
      </div>
      <div class="panel-body">
-       <ul>
+       <ul>    <% if current_user.present? %>
+             <% @charge = Charge.where(:user_id => @user.id) %>
+             <% @my_sales = Charge.where(:vendor_id => @user.id) %>
+           <% end %>
+         <!-- links to VENODRS that user has purchased from. Need  -->
+        <% user_names = [] %>
+         <% @charge.each do |i| %>
+           <% user_names << i.vendor %>
+         <% end %>
+         <!-- lnks to Users who have purchased from  -->
+         <% @my_sales.each do |i| %>
+          <% user_names << i.user %>
+         <% end %>
+         <% user_names.uniq.each do |i| %>
+         <% if i.company != nil %>
+           <li><%= link_to i.company, conversations_path(user_id: i), remote: true, method: :post %></li>
+         <% else %>
+           <li><%= link_to i.name, conversations_path(user_id: i), remote: true, method: :post %></li>
+           <%end%>
+         <%end%>
+<!--
          <% @users.each do |user| %>
            <li><%= link_to user.email, conversations_path(user_id: user), remote: true, method: :post %></li>
-          <% end %>
+          <% end %> -->
        </ul>
      </div>
    </div>
