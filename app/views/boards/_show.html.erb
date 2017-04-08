@@ -67,7 +67,7 @@
         <td class="col-sm-3"> <%= @board.length %> </td>
         <td class="col-sm-3"> <%= @board.width %> </td>
         <td class="col-sm-3"> <%= @board.make %> </td>
-        <% if @board.type_id == 1 && @board.volume.present %>
+        <% if @board.type_id == 1 && @board.volume %>
              <th class="col-sm-3">Voume:</th>
              <% end %>
         <% if @board.type_id == 1 %>

@@ -51,6 +51,13 @@ box-shadow: 0 10px 10px -10px #8c8b8b inset;
 
 div.hidden { display: none; }
 
+.facebook-btn {
+  padding-top:10px;
+}
+.mobile-nav {
+  display: none;
+}
+
 //
 .navbar-inverse {
  max-height: 20px;
@@ -60,6 +67,7 @@ div.hidden { display: none; }
  left:0px;
  top:0px;
  padding-bottom:30px;
+ border:none;
  border-radius: 0;
  background-color: #AD90D4;
  a {
@@ -447,6 +455,22 @@ margin-right:0px;
  width:100%;
 }
 
+.search-bar {
+  position:fixed;
+  top:10px;
+  z-index:999;
+  width:50%;
+  left: 25%;
+}
+
+#top {
+  position:absolute;top:1px;
+}
+
+.shop-search-form {
+  padding-top:10px;
+}
+
 
 // responsive
 @media (max-width:1100px) {
@@ -514,6 +538,15 @@ margin-right:0px;
    padding-right:10%;
  }
 
+ .mobile-nav {
+   display:block;
+   top:0;
+   right:0;
+   position:absolute;
+ }
+ .head-nav-btns {
+   display: none;
+ }
 }
 // effective for width < 400px
 @media (max-width: 400px) {

@@ -22,7 +22,7 @@
             <button type="button" class="btn btn-inverse"><%=   link_to current_user.name.split(' ').shift.capitalize + "'s Profile", edit_user_registration_path %></button>
             <div class="btn-group" role="group">
               <button type="button" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
+                Menu
                 <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
@@ -35,6 +35,22 @@
               <button type="button" class="btn btn-inverse"><%= link_to 'Log In', new_user_session_path %></button>
               <button type="button" class="btn btn-inverse"><%= link_to 'Sign Up', new_user_registration_path %></button>
             <% end %>
+          </div>
+          <!--  -->
+          <div class="btn-group mobile-nav" role="group">
+            <button type="button" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu  dropdown-menu-right" style="">
+              <% if current_user %>
+              <li><%= link_to 'Dashboard', my_boards_path(current_user) %></li>
+              <li><%= link_to 'Store', user_path(current_user) %></li>
+              <li><%=   link_to current_user.name.split(' ').shift.capitalize + "'s Profile", edit_user_registration_path %></li>
+              <% else %>
+                <button type="button" class="btn btn-inverse"><%= link_to 'Log In', new_user_session_path %></button>
+                <button type="button" class="btn btn-inverse"><%= link_to 'Sign Up', new_user_registration_path %></button>
+              <% end %>
+            </ul>
           </div>
           <!--  -->
   </div>

@@ -2,23 +2,22 @@
 
 <!-- start board load -->
 
-<hr class="style13">
 
+<span id="top"></span>
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
      <div class="row board-search-form">
-       <div class="col-lg-6">
+       <!-- <div class="col-lg-6">
          <div class="input-group">
            <span class="input-group-btn">
              <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: "form-control" }) %>
             </span>
-         </div><!-- /input-group -->
-       </div><!-- /.col-lg-6 -->
-
+         </div>
+       </div> -->
      <div class="col-lg-6">
        <div class="input-group">
          <span class="input-group-btn">
          <%= grouped_collection_select nil, :category_id, Type.all, :categories,
-               :name, :id, :name, { include_blank: true },
+               :name, :id, :name, {prompt: "Choose a type" },
                { id: 'category-select' , class: "form-control"} %>
          </span>
        </div><!-- /input-group -->
@@ -45,7 +44,7 @@
 
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
-<div class="col-lg-12">
+<div class="col-lg-12 search-bar">
    <div class="input-group">
      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
      <span class="input-group-btn">
@@ -56,6 +55,8 @@
 </div><!-- /.row -->
 <% end %>
 <br>
-<hr class="style13" style="">
+
 <%= render partial: 'search_signed_in'%>
 </div>
+
+<div style="position:fixed;bottom:10px;right:30px;"><a href="#top"><i class="fa fa-caret-up" aria-hidden="true"></i></a></div>

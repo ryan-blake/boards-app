@@ -94,21 +94,21 @@ $(document).ready(function() {
 });
 
 
-
-$(document).ready(function() {
-  var subcat;
-  subcat = $('#category-select').html();
-  return $('#type-select').change(function() {
-    var cat, options;
-    cat = jQuery('#type-select').children('option').filter(':selected').text();
-    options = $(subcat).filter("optgroup[label='" + cat + "']").html();
-    if (options) {
-      return $('#category-select').html(options);
-    } else {
-      return $('#category-select').empty();
-    }
-  });
-});
+// 
+// $(document).ready(function() {
+//   var subcat;
+//   subcat = $('#category-select').html();
+//   return $('#type-select').change(function() {
+//     var cat, options;
+//     cat = jQuery('#type-select').children('option').filter(':selected').text();
+//     options = $(subcat).filter("optgroup[label='" + cat + "']").html();
+//     if (options) {
+//       return $('#category-select').html(options);
+//     } else {
+//       return $('#category-select').empty();
+//     }
+//   });
+// });
 // shipping hidden charge form
 // shipping hidden charge form
 $(document).ready(function() {
