@@ -71,10 +71,10 @@
  <% end %>
  <div class="msg-center col-md-3 col-sm-4 pull-right">
    <div class="panel panel-primary">
-     <div class="panel-heading">
+     <div class="panel-heading" id="panel-title">
        <h3 class="panel-title">User list</h3>
      </div>
-     <div class="panel-body">
+     <div class="panel-body" id="chat-list">
        <ul>    <% if current_user.present? %>
              <% @charge = Charge.where(:user_id => @user.id) %>
              <% @my_sales = Charge.where(:vendor_id => @user.id) %>

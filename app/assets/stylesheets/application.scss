@@ -462,6 +462,11 @@ margin-right:0px;
   width:50%;
   left: 25%;
 }
+#chat-list {
+  max-height:150px;
+   overflow-y:scroll;
+   display:none;
+}
 
 #top {
   position:absolute;top:1px;

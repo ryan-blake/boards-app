@@ -94,7 +94,7 @@ $(document).ready(function() {
 });
 
 
-// 
+//
 // $(document).ready(function() {
 //   var subcat;
 //   subcat = $('#category-select').html();
@@ -111,6 +111,19 @@ $(document).ready(function() {
 // });
 // shipping hidden charge form
 // shipping hidden charge form
+$(document).ready(function() {
+var chatlist = document.getElementById('chat-list');
+var panel = document.getElementById('panel-title')
+
+panel.onclick = function() {
+  if (chatlist.style.display == 'none') {
+     chatlist.style['display'] = 'block';
+  } else {
+    chatlist.style['display'] = 'none';
+  }
+};
+});
+
 $(document).ready(function() {
 var checkbox = document.getElementById('checkbox');
 var delivery_div = document.getElementById('delivery');
