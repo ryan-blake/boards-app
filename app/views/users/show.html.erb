@@ -21,22 +21,22 @@
 <span id="top"></span>
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
      <div class="row shop-search-form">
-       <!-- <div class="col-lg-6">
+       <div class="col-lg-6">
          <div class="input-group">
            <span class="input-group-btn">
-             <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: "form-control" }) %>
+           <%= grouped_collection_select nil, :category_id, Type.all, :categories,
+                 :name, :id, :name, {prompt: "Choose type" },
+                 { id: '' , class: "form-control"} %>
+           </span>
+         </div><!-- /input-group -->
+       </div><!-- /.col-lg-6 -->
+       <div class="col-lg-6">
+         <div class="input-group">
+           <span class="input-group-btn">
+           <%= collection_select(nil, :make, Board.where(:user_id => @user.id).order(:make).uniq.sort, :make, :make, {prompt: "Choose make"},{ class: "form-control" }) %>
             </span>
          </div>
-       </div> -->
-     <div class="col-lg-6">
-       <div class="input-group">
-         <span class="input-group-btn">
-         <%= grouped_collection_select nil, :category_id, Type.all, :categories,
-               :name, :id, :name, {prompt: "Choose a type" },
-               { id: 'category-select' , class: "form-control"} %>
-         </span>
-       </div><!-- /input-group -->
-     </div><!-- /.col-lg-6 -->
+       </div>
    </div><!-- /.row -->
 
    <div class="row">

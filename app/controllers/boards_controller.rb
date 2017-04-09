@@ -114,8 +114,6 @@ class BoardsController < ApplicationController
 
 
  def search_signed_in
-    @makes = Board.order(:make)
-    @makes = @makes.uniq
    if params[:value].empty?
      distance_in_miles = 3
 
