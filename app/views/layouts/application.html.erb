@@ -5,7 +5,7 @@
     <%= csrf_meta_tags %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="Still shreds is the number one source for selling and buying gently used surf | skate | snow | boards.">
+    <meta name="description" content=" is the number one source for selling and buying gently used surf | skate | snow | boards.">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
@@ -30,7 +30,7 @@
                 <li><%= link_to 'Store', user_path(current_user) %></li>
               </ul>
             </div>
-            <button type="button" class="btn btn-inverse" style=""><%= link_to 'Log out', destroy_user_session_path, method: :delete, style: 'left: 5px;position: absolute;top: 10px;' %></button>
+            <button type="button" class="btn btn-inverse" style=""><%= link_to 'Log out', destroy_user_session_path, method: :delete %></button>
             <% else %>
               <button type="button" class="btn btn-inverse"><%= link_to 'Log In', new_user_session_path %></button>
               <button type="button" class="btn btn-inverse"><%= link_to 'Sign Up', new_user_registration_path %></button>
