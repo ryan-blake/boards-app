@@ -6,13 +6,6 @@
 <span id="top"></span>
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
      <div class="row board-search-form">
-       <!-- <div class="col-lg-6">
-         <div class="input-group">
-           <span class="input-group-btn">
-             <%= collection_select(nil, :type_id, Type.order(:name), :id, :name, {prompt: "Choose a type" },{ id:'type-select', class: "form-control" }) %>
-            </span>
-         </div>
-       </div> -->
      <div class="col-lg-6">
        <div class="input-group">
          <span class="input-group-btn">
@@ -22,22 +15,29 @@
          </span>
        </div><!-- /input-group -->
      </div><!-- /.col-lg-6 -->
+     <div class="col-lg-6">
+       <div class="input-group">
+         <span class="input-group-btn">
+           <%= collection_select(nil, :make, Board.order(:make), :make, :make, {prompt: "Choose make"},{ class: "form-control" }) %>
+          </span>
+       </div>
+     </div>
    </div><!-- /.row -->
 
    <div class="row">
   <div class="col-lg-6">
     <div class="input-group">
       <span class="input-group-btn">
-        <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'distance from (mi.)'} , { :class => 'form-control' })  %>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-btn">
         <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
       </span>
     </div><!-- /input-group -->
+    <div class="col-lg-6">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'distance from (mi.)'} , { :class => 'form-control' })  %>
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
     New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
     Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
     Rental:<span class="check-box-search"><%= check_box_tag :rental, params[:rental] %> </span>
