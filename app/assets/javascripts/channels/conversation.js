@@ -18,7 +18,8 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
       else {
         $('#conversations-list').append(data['window']);
         conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
-        conversation.find('.panel-body').toggle();
+        conversation.removeClass('panel-default').addClass('panel-success');
+
       }
     }
     else {
@@ -40,4 +41,5 @@ $(document).on('submit', '.new_message', function(e) {
   var values = $(this).serializeArray();
   App.conversation.speak(values);
   $(this).trigger('reset');
+  conversation.find('.panel-notice').toggle();
 });

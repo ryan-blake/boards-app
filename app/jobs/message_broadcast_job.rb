@@ -37,8 +37,8 @@ class MessageBroadcastJob < ApplicationJob
 
   def render_window(conversation, user)
     ApplicationController.render(
-      partial: 'conversations/conversation',
-      locals: { conversation: conversation, user: user }
-    )
-  end
+       partial: 'conversations/conversation',
+       locals: { conversation: conversation, user: user }
+     )
+   end
 end

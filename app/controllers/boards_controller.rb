@@ -7,6 +7,19 @@ class BoardsController < ApplicationController
   # GET /boards.json
   def index
 
+      @user = current_user
+      # @boards = Board.find_by(user_id: @user)
+      @boardies = Board.find_by(user_id: @user)
+      @charge = Charge.where(user_id: @user)
+      if @user && @charge
+          @boardies = Board.where(title: @charge )
+      end
+      session[:conversations] ||= []
+      @users = User.all.where.not(id: current_user)
+      @conversations = Conversation.includes(:recipient, :messages)
+        .find(session[:conversations])
+
+
     @user = current_user
     @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
 # end

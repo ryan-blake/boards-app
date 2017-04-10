@@ -9,4 +9,5 @@ protected
     devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit({ roles: [] }, :email, :password, :password_confirmation, :name, :address, :city, :state, :zipcode) }
     devise_parameter_sanitizer.permit(:account_update) { |u| u.permit({ roles: [] }, :email, :password, :current_password, :password_confirmation, :name, :address, :city, :state, :zipcode) }
   end
+
 end
