@@ -483,6 +483,17 @@ margin-right:0px;
     color:black;
   }
 }
+.gel {
+  min-height: 20px;
+padding: 0;
+margin-bottom: 0px;
+background-color: #f5f5f5;
+border: 1px solid #e3e3e3;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+}
+
 
 
 // responsive
@@ -506,7 +517,7 @@ margin-right:0px;
  .dash-nav-mobile {
    display: block;
    position:absolute;
-   top:210px;
+   top:150px;
    width:100%;
  }
  .dash-data {
@@ -525,8 +536,10 @@ margin-right:0px;
  .msg-center {
    position:fixed;
    bottom:0px;
-   width:100%;
+   width:75%;
+   left:0px;
  }
+
 
 }
 @media (max-width:770px) {

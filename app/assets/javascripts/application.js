@@ -114,15 +114,38 @@ $(document).ready(function() {
 $(document).ready(function() {
 var chatlist = document.getElementById('chat-list');
 var panel = document.getElementById('panel-title')
+var expand = document.getElementById('expand-chat')
+var hide = document.getElementById('hide-chat')
 
 panel.onclick = function() {
   if (chatlist.style.display == 'none') {
      chatlist.style['display'] = 'block';
+     expand.style['display'] = 'none';
+     hide.style['display'] = 'block';
   } else {
     chatlist.style['display'] = 'none';
+    hide.style['display'] = 'none';
+    expand.style['display'] = 'block';
   }
 };
 });
+
+
+$(document).ready(function() {
+var open = document.getElementById('showTokens');
+var tokenpartial = document.getElementById('tokenPartial');
+
+open.onclick = function() {
+  if (tokenpartial.style.display == 'none') {
+     tokenpartial.style['display'] = 'block';
+
+  } else {
+    tokenpartial.style['display'] = 'none';
+
+  }
+};
+});
+
 
 $(document).ready(function() {
 var checkbox = document.getElementById('checkbox');

@@ -1,4 +1,4 @@
-<div style="max-width:400px;width:100%;height:40px;">
+<div id="purchaseTokens" style="max-width:400px;width:100%;height:40px;">
 <%= form_tag tokens_path do %>
   <thead>
     <tr>
@@ -8,27 +8,16 @@
         <% end %>
       </div>
       <article>
-        <%= label_tag(:amount, '$10 minimum: 2 tokens per listing') %>
-        <%= text_field_tag(:amount) %>
-      </article>
-      <article>
+        <%= label_tag(:amount, '$2 per listing($20 minimum)') %>
+        <%= text_field_tag(:amount)%>
         <%= hidden_field_tag(:stripeToken) %>
         <% @token = true %>
       </article>
-      <button class="center-text" id='tokenButton'>Purchase</button>
+      <button class="pull-right btn btn-sort" id='tokenButton'>Purchase</button>
     <% end %>
   </tr>
-    <tr>
-      <strong>Tokens</strong>
-    </tr>
   </thead>
-  <tbody>
-    <ul>
-      <td><li> $10 = 10 tokens </li></td>
-      <td><li>$20 = 23 tokens</li></td>
-      <td><li>$30 = 36 tokens</li></td>
-    </ul>
-  </tbody>
+
 
 
 
@@ -36,7 +25,7 @@
 
 <script>
 var handler = StripeCheckout.configure({
-  key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+  key: '<%= Rails.configuration.stripe[:STRIPE_PUBLISHABLE_KEY] %>',
   locale: 'auto',
   name: 'Boards',
   description: 'Token purchase',
