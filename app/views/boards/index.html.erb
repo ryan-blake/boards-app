@@ -14,7 +14,7 @@
      <div class="col-lg-6">
        <div class="input-group">
          <span class="input-group-btn">
-           <%= collection_select(nil, :make, Board.order(:make).distinct.sort, :make, :make, {prompt: "Choose make"},{ class: "form-control" }) %>
+           <%= collection_select(nil, :make, Board.where(:for_sale => true).order(:make).distinct.sort, :make, :make, {prompt: "Choose make"},{ class: "form-control" }) %>
           </span>
        </div>
      </div>

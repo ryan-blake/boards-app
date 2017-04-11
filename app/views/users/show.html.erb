@@ -20,7 +20,7 @@
 
 
 <span id="top"></span>
-<%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
+<%= form_tag({controller: :users, action: :search_signed_in}, {method: :get, remote: true}) do  %>
      <div class="row shop-search-form">
        <div class="col-lg-6">
          <div class="input-group">
@@ -34,7 +34,7 @@
        <div class="col-lg-6">
          <div class="input-group">
            <span class="input-group-btn">
-           <%= collection_select(nil, :make, Board.where(:user_id => @user.id).order(:make).distinct.sort, :make, :make, {prompt: "Choose make"},{ class: "form-control" }) %>
+           <%= collection_select(nil, :make, Board.where(:user_id => @user.id, :for_sale => true).order(:make).distinct.sort, :make, :make, {prompt: "Choose make"},{ class: "form-control" }) %>
             </span>
          </div>
        </div>
