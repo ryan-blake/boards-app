@@ -22,19 +22,18 @@
 
 
 <%= f.fields_for :images do |image_fields| %>
-<div class="col-sm-1" style="position:absolute;top:250px;">
-  <%= image_fields.check_box :_destroy %>
+<div class="col-sm-1" style="position:absolute;top:75px;">
   <%= image_fields.label :remove %>
+
+  <%= image_fields.check_box :_destroy, class: 'form-control center-text' %>
   <br>
   <%= attachment_image_tag(image_fields.object, :file, :fill, 150, 150, format: "jpg") %>
 </div>
 <% end %>
 </div>
-
-
-<div class="dimensions" style="width:100%;min-height:150px;">
-  <table class="" style="position:absolute;top:400px;">
-    <thead style="max-width:100%;">
+<div class="dimensions" style="">
+  <table class="" style="">
+    <thead style="min-width:100%;">
       <th ><%= f.label :make %></th>
       <th ><%= f.label :category_id, "category" %> <br></th>
         <th class="col-sm-3"><%= f.label :zipcode %><br /></th>
@@ -47,9 +46,7 @@
       <thead>
         <th class="col-sm-3"><%= f.label :width %> (inches)<br/></th>
         <th class="col-sm-3"><%= f.label :volume %><strong>: if applies </strong><br/></strong></th>
-
         <th ><%= f.label :length %><strong> / height of board (inches)</strong><br/></strong></th>
-
       </thead>
       <tbody>
         <td class="col-sm-3"><%= f.number_field :width, class: 'form-control' %></td>
@@ -66,13 +63,11 @@
         <td class="col-sm-3"><%= f.check_box :used, class: 'form-control' %> <br /></td>
 
       </tbody>
-</table>
-</div>
-<hr class="style14">
-<!-- section -->
+    </table>
+    </div>
 
     <%= f.label :description %>
-    <%= f.text_area :description, class: 'form-control', style: 'min-height:80px;'%>
+    <%= f.text_area :description, class: 'form-control', style: 'min-height:80px;min-width:100%;'%>
 
 
 <%= f.label :price %><br/>
@@ -82,9 +77,12 @@
 <!--  -->
 
 
-
   <div style="margin-top:20px;" class="actions">
     <%= f.submit "update", class: "btn btn-info" %>
   </div>
-<% end %>
-<% end %>
+
+
+<!-- section -->
+
+  <% end %>
+  <% end %>

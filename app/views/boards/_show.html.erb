@@ -53,8 +53,8 @@
 
   <hr class="style13" style="position:absolute:top:440px;">
 
-  <div class="dimensions-modal" style="min-height:200px;">
-    <table class="col-sm-3 col-md-5" style="position:absolute;top:450px;">
+  <div class="dimensions-modal" style="">
+    <table class="col-sm-3 col-md-5" style="">
       <thead>
         <th class="col-sm-3"> Height: </th>
         <th class="col-sm-3"> Width: </th>
@@ -75,9 +75,8 @@
          <%= @board.volume %>
         <% end %>
       </tbody>
-  </div>
-
 </table>
+</div>
 
 <!-- section -->
   <div class="description-modal pull-right" style=";position:relative;clear:all;">
@@ -85,15 +84,17 @@
   </div>
 <!-- section -->
   <% if @board.rental %>
+  <div class="rental-div" style="min-height:100%;">
     <div class="rent-dates">
       <%= render 'events/form', locals: {events: @events, board: @board} %>
     <!-- section -->
     </div>
     <hr>
+
     <div id="events_calendar" style="max-width:100%;padding-bottom:30px;">
       <%= render 'events/calendar', locals: {events: @events, board: @board} %>
     </div>
-
+</div>
 
   <% else %>
 

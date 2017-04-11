@@ -37,10 +37,7 @@ $(document).ready(function() {
   var activePG = document.getElementById('active');
   var inventoryPG = document.getElementById('inventory');
   var shippedPG = document.getElementById('shipped');
-  pendingPG.style['display'] = 'block';
-  activePG.style['display'] = 'none';
-  inventoryPG.style['display'] = 'none';
-  shippedPG.style['display'] = 'none';
+
 
  activeBtn.onclick = function() {
      activePG.style['display'] = 'block';
@@ -149,21 +146,6 @@ open.onclick = function() {
 
 
 
-$(document).ready(function() {
-var checkbox = document.getElementById('checkbox');
-var delivery_div = document.getElementById('delivery');
-var pickup_div = document.getElementById('pickup');
-
-checkbox.onclick = function() {
-   if(this.checked) {
-     delivery_div.style['display'] = 'block';
-     pickup_div.style['display'] = 'none';
-   } else {
-     pickup_div.style['display'] = 'block';
-     delivery_div.style['display'] = 'none';
-   }
-};
-});
 (function() {
   $(document).on('click', '.toggle-window', function(e) {
     e.preventDefault();

@@ -1,3 +1,4 @@
+
 <%= form_for(board) do |f| %>
   <% if board.errors.any? %>
     <div id="error_explanation">
@@ -9,7 +10,7 @@
       </ul>
     </div>
     <% end %>
-<% if current_user.provider == nil %>
+<% if current_user.provider != nil %>
 <div class="title center-text">
 <%= f.label :title %>
   <td><%= f.text_field :title, class: 'btn-width form-control' %></td>
@@ -19,10 +20,8 @@
   <%= f.label :add_images %><br>
   <btn class="center-text" style="position:absolute;left:calc(50% - 90px);"><%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %></btn>
 </div>
-
-
-<div class="dimensions" style="width:100%;min-height:150px;">
-  <table class="" style="position:absolute;top:400px;">
+<div class="dimensions" style="">
+  <table class="" style="">
     <thead style="max-width:100%;">
       <th ><%= f.label :make %></th>
       <th ><%= f.label :category_id, "category" %> <br></th>
@@ -53,13 +52,11 @@
         <td class="col-sm-3"><%= f.check_box :used, class: 'form-control' %> <br /></td>
 
       </tbody>
-</table>
-</div>
-<hr class="style14">
-<!-- section -->
+    </table>
+    </div>
 
     <%= f.label :description %>
-    <%= f.text_area :description, class: 'form-control', style: 'min-height:80px;'%>
+    <%= f.text_area :description, class: 'form-control', style: 'min-height:80px;min-width:100%;'%>
 
 
 <%= f.label :price %><br/>
@@ -69,10 +66,12 @@
 <!--  -->
 
 
-
   <div style="margin-top:20px;" class="actions">
     <%= f.submit "update", class: "btn btn-info" %>
   </div>
+
+
+<!-- section -->
 
   <% end %>
   <% end %>

@@ -21,7 +21,7 @@ class BoardsController < ApplicationController
 
 
     @user = current_user
-    @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+    @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 # end
     @types = Type.order(:name)
     @categories = Category.order(:name)
@@ -143,11 +143,11 @@ class BoardsController < ApplicationController
                @boards = @boards.where(:rental => false)
              end
              if (params[:new] == "on") && (params[:used] != params[:new])
-                @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+                @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
               elsif (params[:used] == "on") && (params[:used] != params[:new])
-                  @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+                  @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
               else
-                   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+                   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
               respond_to do |format|
                      format.js
@@ -167,11 +167,11 @@ else
               @boards = @boards.where(:rental => false)
             end
             if (params[:new] == "on") && (params[:used] != params[:new])
-                         @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+                         @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
                        elsif (params[:used] == "on") && (params[:used] != params[:new])
-                           @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+                           @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
                        else
-                            @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(5)
+                            @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
                        respond_to do |format|
                               format.js

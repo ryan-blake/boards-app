@@ -1,4 +1,4 @@
-
+<div>
 <h4 style="text-decoration:underline;" class="center-text"> Inactive inventory </h4>
  <% if current_user.provider == nil %> (must <%= link_to 'connect', user_stripe_connect_omniauth_authorize_path %> to sell) </h4> <% end %>
    <% my_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false) %>
@@ -20,3 +20,4 @@
   </thead>
     <% end %>
 <% end %>
+</div>

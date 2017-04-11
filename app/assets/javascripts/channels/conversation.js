@@ -41,5 +41,5 @@ $(document).on('submit', '.new_message', function(e) {
   var values = $(this).serializeArray();
   App.conversation.speak(values);
   $(this).trigger('reset');
-  conversation.find('.panel-notice').toggle();
+
 });
