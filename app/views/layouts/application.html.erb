@@ -19,7 +19,6 @@
           <!--  -->
           <div class="btn-group head-nav-btns" role="group" aria-label="...">
             <% if current_user %>
-            <button type="button" class="btn btn-inverse"><%=   link_to current_user.name.split(' ').shift.capitalize + "'s Profile", edit_user_registration_path %></button>
             <div class="btn-group" role="group">
               <button type="button" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Menu
@@ -28,6 +27,8 @@
               <ul class="dropdown-menu">
                 <li><%= link_to 'Dashboard', my_boards_path(current_user) %></li>
                 <li><%= link_to 'Store', user_path(current_user) %></li>
+                <li><%=   link_to "User info", edit_user_registration_path %></li>
+
               </ul>
             </div>
             <button type="button" class="btn btn-inverse" style=""><%= link_to 'Log out', destroy_user_session_path, method: :delete %></button>
