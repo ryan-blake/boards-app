@@ -147,6 +147,8 @@ open.onclick = function() {
 });
 
 
+
+
 $(document).ready(function() {
 var checkbox = document.getElementById('checkbox');
 var delivery_div = document.getElementById('delivery');

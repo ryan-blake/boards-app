@@ -1,22 +1,19 @@
-<div id="purchaseTokens" style="max-width:400px;width:100%;height:40px;">
+<div id="purchaseTokens" style="max-width:200px;width:100%;height:20px;">
 <%= form_tag tokens_path do %>
-  <thead>
-    <tr>
         <% if flash[:error].present? %>
         <div id="error_explanation">
           <p><%= flash[:error] %></p>
         <% end %>
       </div>
-      <article>
-        <%= label_tag(:amount, '$2 per listing($20 minimum)') %>
-        <%= text_field_tag(:amount)%>
+        <%= label_tag(:amount, '$2 per listing') %>
+        <br>
+      <span>  <%= text_field_tag(:amount,nil, {:class => 'form-control', :style => 'font-size:10px;width:100px;', :placeholder => '$20.00 minimum'})%>
         <%= hidden_field_tag(:stripeToken) %>
+        <button style="" class="btn btn-success" id='tokenButton'>Purchase</button></span>
         <% @token = true %>
-      </article>
-      <button class="pull-right btn btn-sort" id='tokenButton'>Purchase</button>
+     </article>
     <% end %>
-  </tr>
-  </thead>
+
 
 
 

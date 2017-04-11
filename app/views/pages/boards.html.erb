@@ -2,7 +2,7 @@
 <div class="jumbotron gel" id="msg-area">
   <h2><%= current_user.tokens.to_s + " tokens " %> </h2>
     <div class="btn btn-sort" style="link-style:none;" id="showTokens">Get Tokens</div>
-    <div id="tokenPartial" style="display:none;top:35px;position:absolute;left:25%;">
+    <div id="tokenPartial" style="display:none;top:35px;position:absolute;left:33%;">
       <%= render partial: 'tokens/new' %>
     </div>
 
@@ -14,10 +14,10 @@
     <h3 class="btn btn-sort"><%= link_to 'Add listing', new_board_path %></h3>
  <% end %>
 </div>
-<div class="pull-right" style="width:163px;right:20px;top:15px;position:absolute;margin-top:50px;">
+<div class="pull-right" style="width:163px;right:0px;top:15px;position:absolute;margin-top:50px;">
   <% if !user_signed_in? %>
     <h3 class="btn-sort"><%= link_to 'Add listing', new_user_registration_path %></h3>
-    <div class="facebook-btn" style="color:white;position:absolute;right:110%; top:20px;">
+    <div class="facebook-btn" style="color:white;position:absolute;top:20px;">
       <%= link_to 'Facebook log in', user_facebook_omniauth_authorize_path, class: 'btn-sort btn' %>
       </div>
  <% end %>

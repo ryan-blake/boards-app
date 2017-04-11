@@ -1,26 +1,31 @@
 <div style="max-width:400px;width:100%;height:40px;">
 <%= form_tag tokens_path do %>
   <thead>
-    <tr>
+    <th>
         <% if flash[:error].present? %>
         <div id="error_explanation">
           <p><%= flash[:error] %></p>
         <% end %>
       </div>
+    </th>
       <article>
+        <th>
         <%= label_tag(:amount, '$10 minimum: 2 tokens per listing') %>
         <%= text_field_tag(:amount) %>
+        </th>
       </article>
       <article>
+        <tbody>
+          <td>
         <%= hidden_field_tag(:stripeToken) %>
         <% @token = true %>
+          </td>
       </article>
-      <button class="center-text" id='tokenButton'>Purchase</button>
+      <td>
+      <button class="pull-left" id='tokenButton'>Purchase</button>
+      </td>
+    </tbody>
     <% end %>
-  </tr>
-    <tr>
-      <strong>Tokens</strong>
-    </tr>
   </thead>
   <tbody>
     <ul>
