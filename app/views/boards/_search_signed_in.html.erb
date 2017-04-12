@@ -13,13 +13,19 @@
         <tr>
           <td class="filtering center-text">
             <ti> <strong> Sort by: </strong> </ti>
-            <ti class="btn btn-sort" style="padding-left:8px;"><%= sortable "created_at", "Date" %> </ti>
-            <ti class="btn btn-sort"><%= sortable "price" %></ti>
-            <ti class="btn btn-sort center-text" ><%= sortable "length", "Height" %></ti>
+           </ti>
+            <div  <i style="display:inline;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
+            <div  <i style="display:none;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
+            <div <i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></div>
+            <div  <i style="display:none;" class="btn btn-sort"> <%= sortable "price" %></i></div>
+            <div  <i style="display:inline;" class="btn btn-sort"> <%= sortable "length", 'height' %></i></div>
+            <div  <i style="display:none;" class="btn btn-sort"> <%= sortable "length", 'height' %></i></div>
+           </ti>
           </td>
         </tr>
       </td>
     </thead>
+
 
   <% @boards.each do |board| %>
     <tbody class="tbody-search col-sm-6 col-md-4 center-text">
@@ -52,7 +58,7 @@
          </li>
          <li class="center-text" style="padding-top:5px;">
            <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
-             <button class="btn btn-sort pull-right"><%= link_to 'view', board, target: :_blank  %></button>
+             <button class="btn btn-sort pull-right view_btn"><%= link_to 'view', board, target: :_blank  %></button>
              <br>
              <hr class="style13">
            </td>

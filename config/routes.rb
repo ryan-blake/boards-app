@@ -11,11 +11,12 @@ Rails.application.routes.draw do
 end
 
   resources :boards do
-    resources :events, only: [:create, :destroy, :show]
+    resources :events, only: [:create, :destroy, :show, :board_dash]
     collection do
-      get 'search', 'search_signed_in', 'sort_order'
+      get 'search', 'search_signed_in', 'sort_order', 'board_dash'
     end
   end
+  get'dash' => 'boards#board_dash'
 
 
   resources :charges, only: [:new, :create, :complete]
@@ -23,7 +24,6 @@ end
 
   get 'complete_charge' => 'charges#complete'
   get 'complete_charge' => 'charges#retrieve'
-
 
   get 'messages/create'
   get 'conversations/create'

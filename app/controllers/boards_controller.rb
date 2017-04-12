@@ -43,10 +43,19 @@ class BoardsController < ApplicationController
     redirect_to request.referer
   end
 
-  def boards
-    if current_user.present?
-      @charge = Charge.where(:user_id => @user.id)
-      @my_sales = Charge.where(:vendor_id => @user.id)
+  def board_dash
+    if current_user
+      @user = current_user
+      @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true, pending: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+      @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+      @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+      @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+      session[:conversations] ||= []
+      @users = User.all.where.not(id: current_user)
+      @conversations = Conversation.includes(:recipient, :messages)
+      .find(session[:conversations])
+else
+  redirect_to root_path
     end
   end
 
@@ -196,6 +205,10 @@ end
   private
   def sort_column
     Board.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  def sort_updated
+    Board.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
   end
 
   def sort_direction

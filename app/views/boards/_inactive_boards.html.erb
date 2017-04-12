@@ -1,0 +1,101 @@
+<!-- <div>
+
+<h4 style="text-decoration:underline;" class="center-text"> Inactive inventory </h4>
+ <% if current_user.provider == nil %> (must <%= link_to 'connect', user_stripe_connect_omniauth_authorize_path %> to sell) </h4> <% end %>
+
+   <% @inactive_boards.each do |i| %>
+   <thead>
+     <hr class="style13">
+
+   <td>
+   <%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: {toggle: "modal", targe: "#newModal"} %>
+   <br>
+    $<%= i.price %><%= link_to i.title, i%>
+    <% if i.for_sale == true && i.pending == false %>
+      <strong style="color:red;">active</strong>
+      <% else %>
+      <strong style="color:red;">inactive</strong>
+      <% end %>
+  </td>
+  </thead>
+
+<% end %>
+</div> -->
+
+<table class="container-fluid" id="inactive_results" style="width:100%;">
+  <thead>
+    <td>
+      <div class="center-text" id="paginate_inactive">
+      <%= paginate @inactive_boards, remote: true %>
+      </div>
+      <tr>
+        <td class="filtering center-text">
+          <ti> <strong> Sort by: </strong> </ti>
+          <ti class="btn btn-sort" style="padding-left:8px;"><%= sortable "created_at", "Date" %> </ti>
+          <ti class="btn btn-sort" style="padding-left:8px;"><%= sortable "updated_at", "updated" %> </ti>
+
+          <ti class="btn btn-sort"><%= sortable "price" %></ti>
+          <ti class="btn btn-sort center-text" ><%= sortable "length", "Height" %></ti>
+        </td>
+      </tr>
+    </td>
+  </thead>
+
+  <% if @inactive_boards.length == 0 %>
+    <%= render partial: 'boards/none' %>
+  <% end %>
+<% @inactive_boards.each do |board| %>
+  <tbody class="tbody-search col-sm-6 col-md-4 center-text">
+      <!-- if no image load other boards image in results -->
+      <td class="center-text tbody-td-well">
+        <% if board.images.first != nil %>
+            <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+          <% else %>
+            <%= link_to attachment_image_tag(Board.find(17).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+        <% end %>
+
+    <ul class="main-well-ul">
+       <li class="center-text title-link">
+         <!-- new link to modal -->
+         <div class="title-bar center-text">
+           <%= link_to board.title.truncate(23), board, target: :_blank  %>
+        </div>
+        <%if current_user && board.user_id == current_user.id %>
+         <li><%= link_to 'Edit', edit_board_path(board) %></li>
+        <% end %>
+        <div class="length-ribbon">
+          <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
+        </div>
+       </li>
+       <li class="center-text" style="min-width:242px;">
+        <%=  board.description.truncate(33)  %>
+       </li>
+       <li class="center-text">
+         <strong style="font-size:20px;"><%=  board.make %></strong>
+       </li>
+       <li class="center-text" style="padding-top:5px;">
+         <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
+             <% if board.for_sale == true && board.pending == false %>
+
+               <strong style="color:red;">active</strong>
+               <% else %>
+               <strong style="color:red;">inactive</strong>
+               <% end %>
+           <button class="btn btn-sort pull-right"><%= link_to 'view', board, target: :_blank  %></button>
+           <br>
+           <hr class="style13">
+         </td>
+         </ul>
+      </tbody>
+      <% end %>
+
+  
+
+    <tbody >
+      <td>
+        <div class="center-text" id="paginator">
+        <%= paginate @inactive_boards, remote: true %>
+        </div>
+      </td>
+    </tbody>
+  </table>

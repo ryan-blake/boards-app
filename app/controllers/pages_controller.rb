@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   def boards
     if current_user
     @user = current_user
-      @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true, pending: false)
+      @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true, pending: false).page(params[:page]).per(8)
       @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false)
       @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true)
       @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false)
