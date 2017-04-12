@@ -1,4 +1,4 @@
-<% if ( current_user && current_user.provider != nil ) && (@board.for_sale == true) %>
+<% if ( current_user && current_user.provider != nil ) && (@board.shipping != true || false ) %>
 <%= form_for(board) do |f| %>
   <% if board.errors.any? %>
     <div id="error_explanation">
