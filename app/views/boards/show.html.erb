@@ -22,13 +22,6 @@
         <% @a = @board.customer_id %>
         <% b = User.find(@a).email %>
         contact <%= b %> for shipping info
-      <% elsif @board.shipping == true %>
-      <!-- shipping address -->
-        <% @a = @board.customer_id %>
-        <% b = User.find(@a).email %>
-        Ship to <strong><%= @board.address + " " + @board.city.capitalize + " " + @board.state.upcase + ", " + @board.zipcode.to_s  %></strong>
-        enter tracking number:
-         <br>
          <% if !@board.tracking%>
           <%= render partial: 'tracking', locals: {board: @board} %>
          <% end %>

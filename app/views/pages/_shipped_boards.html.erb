@@ -1,8 +1,5 @@
-
-    <h4 style="text-decoration:underline;" class="center-text"> My pending shipment (out for shipping) </h4>
-   <% pending_boards = Board.where(user_id: current_user.id, pending: true) %>
-   <% if pending_boards %>
-     <% pending_boards.each do |i| %>
+ <h4 style="text-decoration:underline;" class="center-text"> My pending shipment (out for shipping) </h4>
+     <% @shipping_boards.each do |i| %>
      <div style="min-height:100px;">
       <hr class="style13">
       <%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: {toggle: "modal", targe: "#newModal"} %>
@@ -11,6 +8,5 @@
         <%= link_to i.title, i %>
       </strong>
      </div>
-      <% end%>
     <% end%>
     <!-- modal -->

@@ -1,0 +1,14 @@
+<h4 style="text-decoration:underline;" class="center-text"> My pick up orders</h4>
+<% @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false) %>
+ <% @pickup_boards.each do |i| %>
+ <div style="min-height:100px;">
+  <hr class="style13">
+  <%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: {toggle: "modal", targe: "#newModal"} %>
+  <br>
+  <strong>
+    <%= link_to i.title, i %>
+  </strong>
+ </div>
+
+<% end%>
+<!-- modal -->

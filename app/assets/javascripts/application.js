@@ -29,14 +29,17 @@ $(document).ready(function() {
   var pendingBtn = document.getElementById('btn-pending');
   var inventoryBtn = document.getElementById('btn-inventory');
   var shippedBtn = document.getElementById('btn-shipped');
+  var pickUpBtn = document.getElementById('btn-pickup');
   var activeBtnM = document.getElementById('btn-active-m');
   var pendingBtnM = document.getElementById('btn-pending-m');
   var inventoryBtnM = document.getElementById('btn-inventory-m');
   var shippedBtnM = document.getElementById('btn-shipped-m');
+  var pickUpBtnM = document.getElementById('btn-pickup-m');
   var pendingPG = document.getElementById('pending');
   var activePG = document.getElementById('active');
   var inventoryPG = document.getElementById('inventory');
   var shippedPG = document.getElementById('shipped');
+  var pickUpPG = document.getElementById('pickUp');
 
 
  activeBtn.onclick = function() {
@@ -44,24 +47,35 @@ $(document).ready(function() {
      pendingPG.style['display'] = 'none';
      inventoryPG.style['display'] = 'none';
      shippedPG.style['display'] = 'none';
+     pickUpPG.style['display'] = 'none';
   };
   pendingBtn.onclick = function() {
      pendingPG.style['display'] = 'block';
      activePG.style['display'] = 'none';
      inventoryPG.style['display'] = 'none';
      shippedPG.style['display'] = 'none';
+     pickUpPG.style['display'] = 'none';
   };
   inventoryBtn.onclick = function() {
      inventoryPG.style['display'] = 'block';
      activePG.style['display'] = 'none';
      pendingPG.style['display'] = 'none';
      shippedPG.style['display'] = 'none';
+     pickUpPG.style['display'] = 'none';
   };
   shippedBtn.onclick = function() {
      shippedPG.style['display'] = 'block';
      activePG.style['display'] = 'none';
      inventoryPG.style['display'] = 'none';
      pendingPG.style['display'] = 'none';
+     pickUpPG.style['display'] = 'none';
+  };
+  pickUpBtn.onclick = function() {
+     pickUpPG.style['display'] = 'block';
+     activePG.style['display'] = 'none';
+     inventoryPG.style['display'] = 'none';
+     pendingPG.style['display'] = 'none';
+     shippedPG.style['display'] = 'none';
   };
  //mobile
  activeBtnM.onclick = function() {
@@ -69,24 +83,35 @@ $(document).ready(function() {
     pendingPG.style['display'] = 'none';
     inventoryPG.style['display'] = 'none';
     shippedPG.style['display'] = 'none';
+    pickUpPG.style['display'] = 'none';
  };
  pendingBtnM.onclick = function() {
     pendingPG.style['display'] = 'block';
     activePG.style['display'] = 'none';
     inventoryPG.style['display'] = 'none';
     shippedPG.style['display'] = 'none';
+    pickUpPG.style['display'] = 'none';
  };
  inventoryBtnM.onclick = function() {
     inventoryPG.style['display'] = 'block';
     activePG.style['display'] = 'none';
     pendingPG.style['display'] = 'none';
     shippedPG.style['display'] = 'none';
+    pickUpPG.style['display'] = 'none';
  };
  shippedBtnM.onclick = function() {
     shippedPG.style['display'] = 'block';
     activePG.style['display'] = 'none';
     inventoryPG.style['display'] = 'none';
     pendingPG.style['display'] = 'none';
+    pickUpPG.style['display'] = 'none';
+ };
+ pickUpBtnM.onclick = function() {
+    pickUpPG.style['display'] = 'block';
+    activePG.style['display'] = 'none';
+    inventoryPG.style['display'] = 'none';
+    pendingPG.style['display'] = 'none';
+    shippedPG.style['display'] = 'none';
  };
 });
 

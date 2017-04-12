@@ -32,8 +32,10 @@
 <div class="dash-nav-desktop btn-group-vertical pull-left" role="group" aria-label="...">
   <button type="button" class="btn btn-default" id="btn-pending">pending</button>
   <button type="button" class="btn btn-default" style="display:block;" id="btn-active">active</button>
-  <button type="button" class="btn btn-default" id="btn-inventory">inventory</button>
-  <button type="button" class="btn btn-default" id="btn-shipped">shipped</button>
+  <button type="button" class="btn btn-default" id="btn-inventory">inactive</button>
+  <button type="button" class="btn btn-default" id="btn-shipped">shipping</button>
+  <button type="button" class="btn btn-default" id="btn-pickup">picking up</button>
+
 </div>
 <!--!nav desktop  -->
 
@@ -47,8 +49,10 @@
      <ul class="dropdown-menu"style="width:100%;">
        <li><button type="button" class="btn btn-default" id="btn-pending-m">pending</button></li>
        <li><button type="button" class="btn btn-default" id="btn-active-m">active</button></li>
-       <li><button type="button" class="btn btn-default" id="btn-inventory-m">inventory</button></li>
-       <li><button type="button" class="btn btn-default" id="btn-shipped-m">shipped</button></li>
+       <li><button type="button" class="btn btn-default" id="btn-inventory-m">inactive</button></li>
+       <li><button type="button" class="btn btn-default" id="btn-shipped-m">shipping</button></li>
+       <li><button type="button" class="btn btn-default" id="btn-pickup-m">picking up</button></li>
+
      </ul>
    </div>
 </div>
@@ -57,18 +61,21 @@
 <div class="dash-data">
 <!-- Need to finish payment -->
 <div style="display:none;" class="col-md-12 center-text"  id="active">
-  <%= render partial: 'active_boards' %>
+  <%= render partial: 'active_boards' || "none" %>
 </div>
 <div style="display:block;" class="col-md-12 center-text" id="pending">
   <%= render partial: 'pending_boards' %>
 </div>
 
 <div  style="display:none;" class="col-md-12 center-text" id="inventory">
-  <%= render partial: 'inventory_boards' %>
+  <%= render partial: 'inactive_boards' %>
 </div>
 
 <div  style="display:none;" class="col-md-12 center-text" id="shipped">
   <%= render partial: 'shipped_boards' %>
+</div>
+<div  style="display:none;" class="col-md-12 center-text" id="pickUp">
+  <%= render partial: 'pick_boards' %>
 </div>
 </div>
   <% else %>

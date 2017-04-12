@@ -23,13 +23,14 @@ class ChargesController < ApplicationController
     customer_id: customer.id,
     completed: false,
     board_id: params[:charge]["board_id"],
-
+    shipping: params[:charge]["shipping"]
   )
 
-  
+
   @charge.update_attribute(:boolean, true)
   @charge.save
   @board = Board.where(id: @charge.board_id).first
+  @board.shipping = params[:charge]["shipping"]
   @board.update_attribute(:arrived, false)
   @board.customer_id = current_user.id
   @board.update_attribute(:pending, true)
@@ -69,12 +70,14 @@ class ChargesController < ApplicationController
       customer_id: customer.id,
       completed: false,
       board_id: params[:charge]["board_id"],
+      shipping: params[:charge]["shipping"]
     )
 
     @charge.update_attribute(:boolean, true)
     @charge.save
     @board = Board.where(id: @charge.board_id).first
     @board.update_attribute(:arrived, false)
+    @board.shipping = params[:charge]["shipping"]
     @board.customer_id = current_user.id
     @board.update_attribute(:pending, true)
     @board.for_sale = false

@@ -50,7 +50,7 @@ class Board < ApplicationRecord
   validates :price, :presence => true
   validates :category, :presence => true
   validates :zipcode, :length => { :is => 5 }
-  after_save :check_for_tracking_number
+  # after_save :check_for_tracking_number
 
 
   # mapping
@@ -62,11 +62,11 @@ class Board < ApplicationRecord
   end
 
 
-  def check_for_tracking_number
-    if tracking_changed?
-       BoardMailer.tracking_number(self).deliver_now
-     end
-  end
+  # def check_for_tracking_number
+  #   if tracking_changed?
+  #      BoardMailer.tracking_number(self).deliver_now
+  #    end
+  # end
 
 
 end

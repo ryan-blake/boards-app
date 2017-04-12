@@ -1,6 +1,6 @@
 <% modal ||= false %>
 <% remote = modal ? true : false %>
-<%= form_for(@board, remote: remote, html: {role: :form, 'data-model' => 'board'}) do |f| %>
+<%= form_for(@board, :remote => true, html: {role: :form, 'data-model' => 'board'}) do |f| %>
 
   <% if @board.errors.any? %>
     <div id="error_explanation">
@@ -23,7 +23,7 @@
 
   <%# Added Bootstrap classes %>
   <div class="actions">
-    <%= f.submit 'Submit', class: 'btn btn-success' %>
+    <%= button_tag "send!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Sending..."} %>
   </div>
 
 
