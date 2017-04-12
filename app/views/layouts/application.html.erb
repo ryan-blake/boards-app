@@ -44,7 +44,7 @@
             </button>
             <ul class="dropdown-menu  dropdown-menu-right" style="">
               <% if current_user %>
-              <li><%= link_to 'Dashboard', my_boards_path(current_user) %></li>
+              <li><%= link_to 'Dashboard', dash_path %></li>
               <li><%= link_to 'Store', user_path(current_user) %></li>
               <li><%=   link_to current_user.name.split(' ').shift.capitalize + "'s Profile", edit_user_registration_path %></li>
               <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
