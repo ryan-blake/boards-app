@@ -243,6 +243,13 @@ border-color:white;
 display: none;
 }
 
+.dash-data-title {
+  text-decoration:underline;
+  position:absolute;
+  top: -70px;
+  right: -30%;
+}
+
 // powered by google --delete
 .pac-container:after {  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
    background-image: none !important;
@@ -373,9 +380,6 @@ margin-right:0px;
  padding-bottom:20px;
 }
 
-.dash-data-title {
-  text-decoration:underline;position:absolute;top:-75px;right:-210px;
-}
 .title-bar{
  height:20px;
  background-color: rgba(230, 250, 250, 1);
@@ -566,9 +570,10 @@ position:relative
    top:150px;
    width:100%;
  }
- .dash-data {
-   width: 100% !important;
-   left: 0 !important;
+
+ .dash-data-title {
+   top: -80px;
+   right: 2%;
  }
 
  .dash-data {
@@ -577,6 +582,8 @@ position:relative
    left:15px;
    display: block;
    width:65%;
+   width: 100% !important;
+   left: 0 !important;
  }
 
  .msg-center {
