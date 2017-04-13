@@ -6,7 +6,6 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.json
   def index
-
       @user = current_user
       # @boards = Board.find_by(user_id: @user)
       @boardies = Board.find_by(user_id: @user)
@@ -18,7 +17,6 @@ class BoardsController < ApplicationController
       @users = User.all.where.not(id: current_user)
       @conversations = Conversation.includes(:recipient, :messages)
         .find(session[:conversations])
-
 
     @user = current_user
     @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
@@ -37,11 +35,6 @@ class BoardsController < ApplicationController
     end
   end
 
-  def remove_image
-    @image = Board.find(params[:id]).images
-    @image.image.destroy
-    redirect_to request.referer
-  end
 
   def board_dash
     if current_user
@@ -54,8 +47,8 @@ class BoardsController < ApplicationController
       @users = User.all.where.not(id: current_user)
       @conversations = Conversation.includes(:recipient, :messages)
       .find(session[:conversations])
-else
-  redirect_to root_path
+    else
+      redirect_to root_path
     end
   end
 
@@ -115,9 +108,9 @@ else
     respond_to do |format|
       if @board.update(board_params)
         format.html { redirect_to @board, notice: 'Board was successfully updated.' }
-        format.json { render :show, status: :ok, location: @board }
+        format.js
       else
-        format.html { render :edit }
+        format.js
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end
     end

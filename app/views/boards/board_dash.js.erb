@@ -1,8 +1,14 @@
-$("#active_results").html("<%=j render partial: 'active_boards' %>");
-$("#inactive_results").html("<%=j render partial: 'inactive_boards' %>");
 $("#pending_results").html("<%=j render partial: 'pending_boards' %>");
 $("#shipping_results").html("<%=j render partial: 'shipped_boards' %>");
 $("#picking_up_results").html("<%=j render partial: 'pick_boards' %>");
-$('#paginate_active').html('<%= escape_javascript(paginate(@active_boards, :remote => true)) %>');
+
+
+
+$("#active").html("<%=j render partial: 'active_boards' %>");
+$('#paginate_active').html('<%= escape_javascript(paginate(@active_boards, :remote => true, :params => params[:for_sale])) %>');
+
 // still paginates other escape_javascripts while not clicking on them
+
+
 $('#paginate_inactive').html('<%= escape_javascript(paginate(@inactive_boards, :remote => true)) %>');
+$("#inactive_results").html("<%=j render partial: 'inactive_boards' %>");

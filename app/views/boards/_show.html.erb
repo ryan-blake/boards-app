@@ -126,7 +126,7 @@
 </div>
 <% end %>
 
-<div>
+<div id="forsale">
   <% if !current_user %>
     <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
         <%= render partial: 'forsale', locals: {board: @board} %>

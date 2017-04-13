@@ -25,7 +25,17 @@ width: 100%;
 height:100%;
 -webkit-overflow-scrolling: touch;
  overflow-y: scroll;
+}
 
+
+#cancel-btn {
+  display:block;
+}
+#list-btn {
+  display:block;
+}
+#delist-btn {
+  display:block;
 }
 //
 // body {

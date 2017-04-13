@@ -23,8 +23,8 @@
     <table class="container-fluid" id="active_results" style="width:100%;">
       <thead>
         <td>
-          <div class="center-text" id="paginator">
-          <%= paginate @active_boards, remote: true %>
+          <div class="center-text" id="paginate_active">
+            <%= paginate @active_boards, remote: true, window: 1 , :params => params[:for_sale] %>
           </div>
           <tr>
             <td class="filtering center-text">
@@ -90,7 +90,7 @@
         <tbody >
           <td>
             <div class="center-text" id="paginator"style="padding-bottom:20px;">
-            <%= paginate @active_boards, remote: true %>
+            <%= paginate @active_boards, remote: true, window: 1 %>
             </div>
           </td>
         </tbody>
