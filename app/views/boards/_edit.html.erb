@@ -1,10 +1,10 @@
 <% if ( current_user && current_user.provider != nil ) && (@board.shipping != true || false ) %>
-<%= form_for(board) do |f| %>
-  <% if board.errors.any? %>
+<%= form_for(@board) do |f| %>
+  <% if @board.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
       <ul>
-      <% board.errors.full_messages.each do |message| %>
+      <% @board.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
