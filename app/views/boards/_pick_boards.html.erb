@@ -1,4 +1,4 @@
-<h4 style="text-decoration:underline;" class="center-text"> My pick up orders</h4>
+<h4 class="dash-data-title"> My pick up orders</h4>
 <% @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false) %>
  <% @pickup_boards.each do |i| %>
  <div style="min-height:100px;">

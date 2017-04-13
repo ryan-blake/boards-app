@@ -348,10 +348,10 @@ margin-right:0px;
 }
 
 .msg-center {
- width: calc(31% - 70px);
- bottom: 0px;
- right: 0px;
- position: fixed;
+  width: calc(37% - 70px);
+  bottom: 0px;
+  right: -10px;
+  position: fixed;
 }
 .message-sent {
  position: relative;
@@ -373,6 +373,9 @@ margin-right:0px;
  padding-bottom:20px;
 }
 
+.dash-data-title {
+  text-decoration:underline;position:absolute;top:-75px;right:-210px;
+}
 .title-bar{
  height:20px;
  background-color: rgba(230, 250, 250, 1);
@@ -570,7 +573,7 @@ position:relative
 
  .dash-data {
    position:absolute;
-   top:180px;
+   top:199px;
    left:15px;
    display: block;
    width:65%;
