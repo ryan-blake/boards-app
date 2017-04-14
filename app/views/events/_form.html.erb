@@ -1,4 +1,5 @@
 <div style="position:relative;">
+  <% if @board && @event %>
 <%= form_for [@board, @event] do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
@@ -47,6 +48,7 @@
       ></script>
 
 </div>
+<% end %>
 <% end %>
 
 <script>

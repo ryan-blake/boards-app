@@ -1,7 +1,6 @@
 <% modal ||= false %>
 <% remote = modal ? true : false %>
 <%= form_for(@board, html: {role: :form, 'data-model' => 'board'}, :remote => true) do |f| %>
-
   <div class="actions  text-center">
 
 <% if @board.for_sale === false && @board.pending == false %>

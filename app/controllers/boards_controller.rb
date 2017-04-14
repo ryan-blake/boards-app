@@ -81,6 +81,9 @@ class BoardsController < ApplicationController
   # GET /boards/1/edit
   def edit
     @board = Board.find(params[:id])
+    respond_to do |format|
+        format.js
+      end
   end
 
   # POST /boards
@@ -107,8 +110,9 @@ class BoardsController < ApplicationController
   def update
     respond_to do |format|
       if @board.update(board_params)
-        format.html { redirect_to @board, notice: 'Board was successfully updated.' }
+
         format.js
+
       else
         format.js
         format.json { render json: @board.errors, status: :unprocessable_entity }

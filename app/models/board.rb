@@ -53,6 +53,7 @@ class Board < ApplicationRecord
   after_save :check_for_tracking_number
 
 
+
   # mapping
   geocoded_by :full_address
   after_validation :geocode, if: ->(obj){ obj.full_address.present? }
