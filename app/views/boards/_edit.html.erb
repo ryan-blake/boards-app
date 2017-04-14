@@ -22,7 +22,7 @@
 
 
 <%= f.fields_for :images do |image_fields| %>
-<div class="col-sm-1" style="position:absolute;top:75px;">
+<div class="col-sm-1" style="position:absolute;top:75px;width:100%;">
   <%= image_fields.label :remove %>
 
   <%= image_fields.check_box :_destroy, class: 'form-control center-text' %>
