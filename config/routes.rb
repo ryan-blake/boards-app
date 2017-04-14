@@ -17,6 +17,8 @@ end
     end
   end
   get'dash' => 'boards#board_dash'
+  get'active' => 'boards#active'
+
 
 
   resources :charges, only: [:new, :create, :complete]

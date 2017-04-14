@@ -37,6 +37,7 @@
   <button type="button" class="btn btn-default" id="btn-shipped">shipping</button>
   <button type="button" class="btn btn-default" id="btn-pickup">picking up</button>
 
+<button> <%= link_to 'active boards', active_path %>
 </div>
 <!--!nav desktop  -->
 
@@ -62,7 +63,7 @@
 <div class="dash-data">
 <!-- Need to finish payment -->
 <div style="display:none;" class="col-md-12 center-text"  id="active">
-  <%= render partial: 'active_boards' || "none" %>
+  <%= render 'active_boards' || "none" %>
 </div>
 <div style="display:block;" class="col-md-12 center-text" id="pending">
   <%= render partial: 'pending_boards' %>

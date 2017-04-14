@@ -35,7 +35,10 @@ class BoardsController < ApplicationController
     end
   end
 
+def active
+  @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true, pending: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
 
+end
   def board_dash
     if current_user
       @user = current_user
