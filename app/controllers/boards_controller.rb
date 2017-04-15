@@ -39,8 +39,6 @@ class BoardsController < ApplicationController
   def board_dash
     if current_user
       @user = current_user
-      @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true, pending: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
-      @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
       @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
       @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
       session[:conversations] ||= []
@@ -51,7 +49,14 @@ class BoardsController < ApplicationController
       redirect_to root_path
     end
   end
-
+  def active_boards
+    @user = current_user
+    @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true, pending: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+  end
+  def inactive_boards
+    @user = current_user
+    @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+  end
 
   # GET /boards/1
   # GET /boards/1.json

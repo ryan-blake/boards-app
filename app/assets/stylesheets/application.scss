@@ -30,6 +30,10 @@ height:100%;
   overflow-y:auto;
 }
 
+.btn-group-vertical a{
+  text-decoration: none;
+  color:black;
+}
 #forsale {
   position: absolute;
   right: 2%;
@@ -596,11 +600,14 @@ position:relative
 
  .msg-center {
    position:fixed;
-   bottom:-20px;
+   bottom:0px;
    width:75%;
    left:0px;
  }
 
+ .bottom {
+   padding-bottom:60px;
+ }
  .panel-default {
    width:130%;
  }
