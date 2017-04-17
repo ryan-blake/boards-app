@@ -25,12 +25,17 @@
       <h3 class="panel-title">User list </h3>
       <span><i class="fa fa-angle-double-up fa-2x" id="expand-chat" style="position:absolute;top:5px;right:25px;" aria-hidden="true"></i></span>
       <span><i class="fa fa-angle-double-down fa-2x" id="hide-chat" style="display:none;position:absolute;top:7px;right:25px;" aria-hidden="true"></i></span>
+
+
      </div>
     <div class="panel-body" style="width:120%" id="chat-list">
+
+
       <ul>
        <% if current_user%>
             <% @charge = Charge.where(:user_id => @user.id) %>
             <% @my_sales = Charge.where(:vendor_id => @user.id) %>
+
         <!-- links to VENODRS that user has purchased from. Need  -->
        <% user_names = [] %>
         <% @charge.each do |i| %>
@@ -48,6 +53,10 @@
           <%end%>
         <%end%>
         <% end %>
+<!--
+        <% @users.each do |user| %>
+          <li><%= link_to user.email, conversations_path(user_id: user), remote: true, method: :post %></li>
+         <% end %> -->
       </ul>
     </div>
   </div>
