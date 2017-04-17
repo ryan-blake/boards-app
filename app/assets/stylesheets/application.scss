@@ -28,11 +28,14 @@ height:100%;
 .modal {
   overflow-y:auto;
 }
-
-.container-fluid {
-  -webkit-overflow-scrolling: touch;
+.momentum {
+    height: 100%;
+    width: 100%;
+    overflow-y:scroll;
+    -webkit-overflow-scrolling: touch;
 
 }
+
 
 .btn-group-vertical a{
   text-decoration: none;
