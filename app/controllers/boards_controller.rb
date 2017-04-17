@@ -18,19 +18,19 @@ class BoardsController < ApplicationController
       @conversations = Conversation.includes(:recipient, :messages)
         .find(session[:conversations])
 
-    @user = current_user
-    @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-# end
-    @types = Type.order(:name)
-    @categories = Category.order(:name)
+      @user = current_user
+      @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+  # end
+      @types = Type.order(:name)
+      @categories = Category.order(:name)
 
-    if current_user.present?
+      if current_user.present?
 
-      @on = current_user
-      @charge = Charge.where(user_id: @on.id)
-      if @charge == nil
-        @boards = Board.where(title: @charge.item )
-        @boardies = Board.where(title: @charge.item )
+        @on = current_user
+        @charge = Charge.where(user_id: @on.id)
+        if @charge == nil
+          @boards = Board.where(title: @charge.item )
+          @boardies = Board.where(title: @charge.item )
       end
     end
   end

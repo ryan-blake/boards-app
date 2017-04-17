@@ -516,13 +516,15 @@ position:relative
 
 #chat-list {
   max-height:150px;
-   overflow-y:scroll;
-   display:none;
+  overflow-y: scroll;
+  width:120%;
+  display:none;
 }
 
 #top {
   display:block;position:relative;top:-50px;
 }
+
 
 .shop-search-form {
   margin-top:-17px;
@@ -604,6 +606,8 @@ position:relative
    width:75%;
    left:0px;
    max-height: 230px;
+   font-size:8px;
+
  }
  .panel {
    margin-bottom:0px;
@@ -616,7 +620,12 @@ position:relative
    width:130%;
  }
 
-
+ .messages-list {
+   max-height:72px !important;
+ }
+ textarea.form-control {
+      height: 35px !important;
+ }
 }
 @media (max-width:770px) {
  .my-pages a {

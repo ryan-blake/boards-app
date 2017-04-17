@@ -133,6 +133,7 @@ $(document).ready(function() {
 // });
 // shipping hidden charge form
 // shipping hidden charge form
+
 $(document).ready(function() {
 var chatlist = document.getElementById('chat-list');
 var panel = document.getElementById('panel-title')
