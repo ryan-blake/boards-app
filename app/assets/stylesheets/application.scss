@@ -26,7 +26,10 @@ height:100%;
  overflow-y: visible;
 }
 
-
+.momentum {
+  -webkit-overflow-scrolling: touch;
+   overflow-y: scroll;
+}
 
 .btn-group-vertical a{
   text-decoration: none;
