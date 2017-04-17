@@ -1,9 +1,9 @@
-  <table class="container-fluid " id="results" style="width:100%;">
+  <table class="container-fluid index-results " id="results" style="width:100%;">
     <% if @boards.length == 0 %>
-      <%= render partial: 'boards/none' %>
-    <% end %>
-    <% if current_user %>
-    <% @boards = @boards.where.not(:user_id => current_user) %>
+        <%= render partial: 'boards/none' %>
+      <% end %>
+      <% if current_user %>
+      <% @boards = @boards.where.not(:user_id => current_user) %>
     <% end %>
     <thead>
       <td>
@@ -14,7 +14,7 @@
           <td class="filtering center-text">
             <ti> <strong> Sort by: </strong> </ti>
            </ti>
-            <div  <i style="display:inline;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
+            <div  <i style="display:inline;" class="btn btn-sort"> <%= sortable "created_at", "Date" %></i></div>
             <div <i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></div>
             <div  <i style="display:inline;" class="btn btn-sort"> <%= sortable "length", 'height' %></i></div>
            </ti>
@@ -22,7 +22,6 @@
         </tr>
       </td>
     </thead>
-
 
   <% @boards.each do |board| %>
     <tbody class="tbody-search col-sm-6 col-md-4 center-text">
