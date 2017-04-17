@@ -57,6 +57,31 @@ class BoardsController < ApplicationController
     @user = current_user
     @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
   end
+  def shipped_boards
+    @user = current_user
+    @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+  end
+  def pending_boards
+    @user = current_user
+      @on = current_user
+      @charge = Charge.where(user_id: @user.id, completed: false)
+      if @charge == nil
+        @boards = Board.where(title: @charge.item )
+        @boardies = Board.where(title: @charge.item )
+      end
+
+      @charge.each do |i|
+        @pending_boards = Board.where(title: i.item, for_sale: false, id: i.board_id, :pending => true)
+
+      end
+      if @pending_boards
+      @pending_boards = @pending_boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+    end
+    end
+  def pick_boards
+    @user = current_user
+     @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+  end
 
   # GET /boards/1
   # GET /boards/1.json

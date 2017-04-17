@@ -1,0 +1,2 @@
+$("#shipped").html("<%=j render partial: 'shipped_boards' %>");
+$('#paginator').html('<%= escape_javascript(paginate(@shipping_boards, window: 1, :remote => true)) %>');

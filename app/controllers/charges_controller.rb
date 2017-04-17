@@ -36,7 +36,7 @@ class ChargesController < ApplicationController
   @board.update_attribute(:pending, true)
   @board.for_sale = false
   @board.save
-  redirect_to  my_boards_path
+  redirect_to  root_path
 
 
   # ChargeMailer.new_charge_user(@charge).deliver_now
@@ -93,7 +93,8 @@ end
 
   def complete
     @charge = Charge.find(params[:charge_id])
-    @board = Board.find_by(user: @charge.vendor_id, arrived: false, title: @charge.item)
+     @board = Board.find_by(id: @charge.board_id,  arrived: false)
+
     Stripe.api_key = ENV["STRIPE_API_KEY"]
     token = params[:token]
     charge = Stripe::Charge.create({

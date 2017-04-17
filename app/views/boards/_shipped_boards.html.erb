@@ -1,12 +1,16 @@
- <h4 class="dash-data-title"> out for shipping</h4>
-     <% @shipping_boards.each do |i| %>
+<h4 class="dash-data-title"> out for shipping</h4>
+<% if @shipping_boards.length == 0%>
+  <%= render partial: 'none' %>
+ <% else %>
+   <% @shipping_boards.each do |i| %>
      <div style="min-height:100px;">
       <hr class="style13">
-      <%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: {toggle: "modal", targe: "#newModal"} %>
+       <%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: {toggle: "modal", targe: "#newModal"} %>
       <br>
       <strong>
         <%= link_to i.title, i %>
       </strong>
      </div>
-    <% end%>
+  <% end%>
+<% end %>
     <!-- modal -->

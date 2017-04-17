@@ -1,14 +1,83 @@
-<h4 class="dash-data-title"> My pick up orders</h4>
-<% @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false) %>
- <% @pickup_boards.each do |i| %>
- <div style="min-height:100px;">
-  <hr class="style13">
-  <%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: {toggle: "modal", targe: "#newModal"} %>
-  <br>
-  <strong>
-    <%= link_to i.title, i %>
-  </strong>
- </div>
 
-<% end%>
-<!-- modal -->
+<h4 class="dash-data-title"> pickup Inventory </h4>
+<table class="container-fluid" id="results" style="width:100%;">
+  <% if @pickup_boards.length == 0 %>
+    <%= render partial: 'boards/none' %>
+  <% end %>
+
+  <thead>
+    <td>
+      <div class="center-text" id="paginate_active">
+        <%= paginate @pickup_boards,  window: 1,remote: true %>
+      </div>
+      <tr>
+        <td class="filtering center-text">
+          <ti> <strong> Sort by: </strong> </ti>
+         </ti>
+          <div  <i style="display:inline;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
+          <div  <i style="display:none;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
+          <div <i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></div>
+          <div  <i style="display:none;" class="btn btn-sort"> <%= sortable "price" %></i></div>
+          <div  <i style="display:inline;" class="btn btn-sort"> <%= sortable "length", 'height' %></i></div>
+          <div  <i style="display:none;" class="btn btn-sort"> <%= sortable "length", 'height' %></i></div>
+         </ti>
+        </td>
+      </tr>
+    </td>
+  </thead>
+
+
+<% @pickup_boards.each do |board| %>
+  <tbody class="tbody-search col-sm-6 col-md-4 center-text">
+      <!-- if no image load other boards image in results -->
+      <td class="center-text" >
+        <% if board.images.first != nil %>
+            <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+          <% else %>
+            <%= link_to attachment_image_tag(Board.find(17).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+        <% end %>
+
+    <ul class="main-well-ul">
+       <li class="center-text title-link">
+         <!-- new link to modal -->
+         <div class="title-bar center-text">
+           <%= link_to board.title.truncate(23), board, target: :_blank  %>
+        </div>
+        <%if current_user && board.user_id == current_user.id %>
+         <li><%= link_to 'Edit', edit_board_path(board) %></li>
+        <% end %>
+        <div class="length-ribbon">
+          <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
+        </div>
+       </li>
+       <li class="center-text">
+        <%=  board.description.truncate(33)  %>
+       </li>
+       <li class="center-text">
+         <strong class="make-li"><%=  board.make %></strong>
+       </li>
+       <li class="center-text" style="padding-top:5px;">
+         <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
+         <% if board.for_sale == true && board.pending == false %>
+
+           <strong style="color:red;">active</strong>
+           <% else %>
+           <strong style="color:red;">inactive</strong>
+           <% end %>
+           <button class="btn btn-sort pull-right view_btn"><%= link_to 'view', board, target: :_blank  %></button>
+           <br>
+           <hr class="style13">
+         </td>
+         </ul>
+      </tbody>
+      <% end %>
+
+
+    <tbody >
+      <td>
+        <div class="center-text bottom" id="paginator">
+        <%= paginate @pickup_boards,  window: 1,remote: true %>
+        </div>
+      </td>
+    </tbody>
+  </table>

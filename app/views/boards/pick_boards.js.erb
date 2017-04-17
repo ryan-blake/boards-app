@@ -1,0 +1,2 @@
+$("#pickUp").html("<%=j render partial: 'pick_boards' %>");
+$('#paginator').html('<%= escape_javascript(paginate(@pickup_boards, window: 1, :remote => true)) %>');

@@ -1,21 +1,12 @@
 
   <h4 class="dash-data-title"> Board waiting arrival</h4>
-<% if @charge || @board %>
-  <% @charge.each do |charge| %>
-  <% if charge.completed === false %>
-    <% my_charge = Charge.find_by(user_id: @user.id, completed: false) %>
-    <%my_boards = Board.where(title: charge.item, for_sale: false, id: charge.board_id).page(params[:page]).per(5) %>
-    <% my_boards.each do |i| %>
-    <% if i.pending == true %>
+<% @pending_boards.each do |i| %>
     <hr class="style13">
     <td><%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: { toggle: "modal", target: "#newModal" }  %></td>
     <h3> <%= link_to i.title, i%> $<%= i.price %></h3>
     <strong style="font-size:15px;text-decoration:none">Chat with
       <%= link_to i.user.name.capitalize , conversations_path(user_id: i.user.id), remote: true, method: :post %>
     </strong>
-        <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: charge.id, token: my_charge.token, price: my_charge.price, customer_id: my_charge.customer_id, destination: my_charge.vendor.uid), class: 'btn-success btn' %>
-    <% end %>
-   <% end %>
-   <% end %>
-   <% end %>
+      <%charge = Charge.find_by(board_id: i.id, user_id: current_user.id, completed: false) %>
+        <%= link_to 'complete purchase / arrived!', complete_charge_path(charge_id: charge.id, token: charge.token, price: charge.price, customer_id: charge.customer_id, destination: charge.vendor.uid), class: 'btn-success btn' %>
   <% end %>
