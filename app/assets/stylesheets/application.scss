@@ -231,9 +231,9 @@ fieldset[disabled] .btn-inverse.active {
 .dash-data {
  position:absolute;
  top:180px;
- left:84px;
+ left:42px;
  display: block;
- width:69%;
+ width:66%;
 }
 
 .dash-nav-desktop {
@@ -371,10 +371,11 @@ margin-right:0px;
 }
 
 .msg-center {
-  width: calc(37% - 70px);
+  width: calc(40% - 70px);
   bottom: 0px;
   right: -10px;
   position: fixed;
+  z-index:888;
 }
 .message-sent {
  position: relative;
@@ -579,6 +580,10 @@ position:relative
 }
 
 @media (max-width:995px) {
+
+  .pagination {
+    margin-bottom: 50px;
+  }
  .dash-nav-desktop {
    display: none;
  }
@@ -611,7 +616,6 @@ position:relative
    left:0px;
    max-height: 230px;
    font-size:8px;
-
  }
  .panel {
    margin-bottom:0px;

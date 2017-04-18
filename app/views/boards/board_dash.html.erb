@@ -28,7 +28,8 @@
     <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn-sort btn', style: 'color:black' %>
  <% end %>
 </div>
-<div class="msg-center col-md-3 col-sm-4 pull-right" style="z-index:800">
+<!-- chat -->
+<div class="msg-center col-md-3 col-sm-4 pull-right">
   <div class="panel panel-primary">
     <div class="panel-heading" id="panel-title">
       <h3 class="panel-title">User list </h3>
@@ -69,12 +70,11 @@
     </ul>
   </div>
 </div>
-
 <!-- nav desktop -->
 <div class="dash-nav-desktop btn-group-vertical pull-left" role="group" aria-label="...">
-  <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote:true %></button>
+  <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
   <button type="button" class="btn btn-default" id="btn-pending">pending</button>
-  <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true %></button>
+  <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_boards_path, remote:true %></button>
   <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  pick_boards_boards_path, remote:true %></button>
 
