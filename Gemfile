@@ -72,7 +72,7 @@ gem 'validates_timeliness', '~> 4.0'
 gem 'validates_overlap'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails'
-
+gem 'jquery-fileupload-rails'
 
 
 group :development do

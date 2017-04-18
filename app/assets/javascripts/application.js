@@ -15,6 +15,7 @@
 //= require jquery.geocomplete
 //= require moment
 //= require bootstrap-datetimepicker
+//= require jquery-fileupload/basic
 //= require_tree .
 
 
