@@ -1,3 +1,7 @@
+<% unless @images.present? %>
+    <%= attachment_image_tag(Board.find(3).images.first, :file, :fill, 240, 240) %>
+<% end %>
+
 <% if @images %>
   <% @images.each do |i| %>
     <%= attachment_image_tag(i, :file, :fill, 350, 350) %>
