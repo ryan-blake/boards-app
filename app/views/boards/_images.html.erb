@@ -1,3 +1,7 @@
+<% unless @images.present? %>
+    <%= attachment_image_tag(Board.find(3).images.first, :file, :fill, 240, 240) %>
+<% end %>
+
 <% if @images %>
   <% @images.each do |i| %>
     <%= attachment_image_tag(i, :file, :fill, 350, 350) %>
@@ -11,7 +15,6 @@
     <%= link_to_previous_page @images,'', class: 'fa fa-chevron-left fa-2x', style: 'color:black !important;text-decoration:none;', data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>"}, remote: true %>
     <%= link_to_next_page @images,' ', class: 'fa fa-chevron-right fa-2x', style: 'color:black !important;text-decoration:none;',   data: {disable_with: "<i class='fa fa-spinner fa-spin'></i>"}, remote: true %>
   </button>
-
   <% end %>
   <% end %>
 <% end %>
