@@ -25,7 +25,7 @@
         <% if board.images.first != nil %>
             <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
           <% else %>
-            <%= link_to attachment_image_tag(Board.find(17).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+            <%= link_to attachment_image_tag(Board.find(64).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
         <% end %>
 
     <ul class="main-well-ul">

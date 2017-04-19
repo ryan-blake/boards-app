@@ -22,14 +22,18 @@
 
 
 <%= f.fields_for :images do |image_fields| %>
-<div class="col-sm-1" style="position:absolute;top:75px;width:100%;">
+<div class="col-sm-5" style="position:relative;top:60px;;max-height:100px;max-width:100px;">
+<div class="max-width:20px;">
   <%= image_fields.label :remove %>
-
-  <%= image_fields.check_box :_destroy, class: 'form-control center-text' %>
-  <br>
-  <%= attachment_image_tag(image_fields.object, :file, :fill, 150, 150, format: "jpg") %>
+  <span style="max-width:20px;">
+  <%= image_fields.check_box :_destroy, class: 'form-control' %>
+  </span>
+</div>
+  <%= attachment_image_tag(image_fields.object, :file, :fill, 75, 75) %>
 </div>
 <% end %>
+
+
 </div>
 <div class="dimensions" style="">
   <table class="" style="">
