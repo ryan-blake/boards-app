@@ -14,6 +14,7 @@
 #  user_id    :integer
 #  board_id   :integer
 #  charge_id  :integer
+#  name       :string
 #
 
 FactoryGirl.define do

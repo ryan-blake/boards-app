@@ -34,6 +34,7 @@
 #  longitude              :float
 #  tokens                 :integer          default("4")
 #  company                :string
+#  stripe_account         :string
 #
 
 FactoryGirl.define do

@@ -116,7 +116,7 @@ end
     @board.update_attribute(:pending, false)
     @board.update_attribute(:customer_id, nil)
     @board.save
-    redirect_to my_boards_path, flash: {notice: "Charge Successful"}
+    redirect_to dash_path, flash: {notice: "Charge Successful"}
 
 
     rescue Stripe::CardError => e

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405194642) do
+ActiveRecord::Schema.define(version: 20170421010105) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at",                  null: false
@@ -138,6 +138,25 @@ ActiveRecord::Schema.define(version: 20170405194642) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "stripe_accounts", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "business_name"
+    t.string   "account_type"
+    t.integer  "dob_month"
+    t.integer  "dob_day"
+    t.integer  "dob_year"
+    t.string   "address_city"
+    t.string   "string"
+    t.string   "address_state"
+    t.string   "address_line1"
+    t.string   "address_postal"
+    t.boolean  "tos"
+    t.boolean  "boolean"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "tokens", force: :cascade do |t|
     t.integer  "price"
     t.string   "item"
@@ -195,6 +214,7 @@ ActiveRecord::Schema.define(version: 20170405194642) do
     t.float    "longitude"
     t.integer  "tokens",                 default: 4
     t.string   "company"
+    t.string   "stripe_account"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

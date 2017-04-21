@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :events
+  # mngd
+  get 'terms', to: 'pages#terms'
+  resources :stripe_accounts
+  resources :bank_accounts
+
+  # !mngd
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :users do
@@ -18,7 +23,6 @@ end
   end
 
   get'dash' => 'boards#board_dash'
-
 
   resources :charges, only: [:new, :create, :complete]
   resources :tokens, only: [:new, :create]
@@ -39,6 +43,8 @@ end
   get 'relist_board' => 'boards#relist'
   get 'my_boards' => 'pages#boards'
   get 'profile' => 'pages#profile'
+
+  resources :events
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'boards#index'

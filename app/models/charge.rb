@@ -16,6 +16,8 @@
 #  board_id    :string
 #  address     :string
 #  shipping    :boolean
+#  start_time  :datetime
+#  end_time    :datetime
 #
 
 class Charge < ApplicationRecord

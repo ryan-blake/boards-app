@@ -31,6 +31,7 @@
 #  shipping    :boolean
 #  shipped     :boolean
 #  tracking    :string
+#  rental      :boolean          default("f")
 #
 
 FactoryGirl.define do
