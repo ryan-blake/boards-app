@@ -20,13 +20,8 @@
 
 
 
-$(function() {
-$("#geo-input").geocomplete();
-country: "US"
-});
 
-
-//
+// alter to match if board.type (selected) display only makes where boards == type selected
 // $(document).ready(function() {
 //   var subcat;
 //   subcat = $('#category-select').html();

@@ -1,3 +1,12 @@
+<% content_for(:header) do %>
+<script>
+$(function() {
+$("#geo-input").geocomplete();
+country: "US"
+});
+
+</script>
+<% end %>
 <span id="top" name="top" style="display:block;position:relative;top:-50px;"></span>
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
      <div class="row board-search-form">
