@@ -45,6 +45,52 @@ class BoardsController < ApplicationController
       @users = User.all.where.not(id: current_user)
       @conversations = Conversation.includes(:recipient, :messages)
       .find(session[:conversations])
+
+      # stripe account data
+      if current_user.stripe_account
+    @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
+
+    @payments = Stripe::Charge.list(
+      {
+        limit: 100,
+        expand: ['data.source_transfer', 'data.application_fee']
+      },
+      { stripe_account: current_user.stripe_account }
+    )
+
+    @transfers = Stripe::Transfer.list(
+      {
+        limit: 100
+      },
+      { stripe_account: current_user.stripe_account }
+    )
+
+    @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
+
+    # Retrieve transactions with an available_on date in the future
+    transactions = Stripe::BalanceTransaction.all(
+      {
+        limit: 100,
+        available_on: {gte: Time.now.to_i}
+      },{ stripe_account: current_user.stripe_account })
+
+    balances = Hash.new
+
+    # Iterate through transactions and sum values for each available_on date
+    transactions.auto_paging_each do |txn|
+      if balances.key?(txn.available_on)
+        balances[txn.available_on] += txn.net
+      else
+        balances[txn.available_on] = txn.net
+      end
+    end
+
+
+    # Sort the results
+    @transactions = balances.sort_by {|date,net| date}
+
+    # end new data from connect
+    end
     else
       redirect_to root_path
     end
