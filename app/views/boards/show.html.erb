@@ -1,4 +1,25 @@
+<% content_for(:header) do %>
+<script>
+$(document).ready(function() {
+var checkbox = document.getElementById('checkbox');
+var delivery_div = document.getElementById('delivery');
+var pickup_div = document.getElementById('pickup');
+delivery_div.style['display'] = 'block';
 
+checkbox.onclick = function() {
+   if(this.checked) {
+     pickup_div.style['display'] = 'block';
+     delivery_div.style['display'] = 'none';
+
+   } else {
+     delivery_div.style['display'] = 'block';
+     pickup_div.style['display'] = 'none';
+   }
+};
+});
+
+</script>
+<% end %>
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
 <div class="container-fluid">
   <!-- shipping detail? try to clean up and gather data from stripe token -->
@@ -84,28 +105,24 @@
   </strong>
    <% else %>
    <% if @board.for_sale == true %>
-     <strong style="font-size:30px;">
-       $<%= @board.price %>
-     </strong>
-     <div class="form-group">
-      <span>
-        <label for="checkbox_pick">
-          Pick Up:
-        </label>
-        <input id="checkbox_pick_up" type="checkbox">
-      </span>
-     </div>
-     <div id="delivery_id" style="display:none;">
-       <div class="form-group">
-        <%= render partial: 'chargeshow' %>
-       </div>
-     </div>
-     <div id="pickup_id" style="display:none;" class="center-text">
-       <div class="form-group">
-         <%= render partial: 'charge'%>
-       </div>
-     </div>
-   <% end %>
+      <strong style="font-size:30px;">$<%= @board.price %></strong>
+      <div class="form-group">
+        pick up
+        <input id="checkbox" type="checkbox", "true">
+      </div>
+      <div id="delivery" style="display:none;">
+        <div class="form-group">
+          ship it
+          <%= render partial: 'chargeshow', locals: {board: @board} %>
+        </div>
+      </div>
+      <div id="pickup" style="display:none;">
+        <div class="form-group">
+          pick up
+          <%= render partial: 'charge', locals: {board: @board} %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
 
@@ -118,22 +135,3 @@
 </div>
 
 <% end %>
-
-<script>
-$(document).ready(function() {
-var checkbox_s = document.getElementById('checkbox_pick_up');
-var delivery_id = document.getElementById('delivery_id');
-var pickup_id = document.getElementById('pickup_id');
-delivery_div.style['display'] = 'block';
-  checkbox_s.onclick = function() {
-   if(this.checked) {
-     delivery_id.style['display'] = 'none';
-     pickup_id.style['display'] = 'block';
-   } else {
-     delivery_id.style['display'] = 'block';
-     pickup_id.style['display'] = 'none';
-     checkbox_s.checked = false;
-   }
-  };
-});
-</script>

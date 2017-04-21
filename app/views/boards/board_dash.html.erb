@@ -1,6 +1,6 @@
 
 <% if user_signed_in?%>
-  <%= content_for :page_title, "Add a new bank account" %>
+  <%= content_for :page_title,   current_user.name.capitalize   + "'s Dashboard" %>
   <% content_for(:header) do %>
   <script>
   $(document).ready(function() {
@@ -19,7 +19,6 @@
     var inventoryPG = document.getElementById('inventory');
     var shippedPG = document.getElementById('shipped');
     var pickUpPG = document.getElementById('pickUp');
-
 
    activeBtn.onclick = function() {
        activePG.style['display'] = 'block';
@@ -93,6 +92,7 @@
       shippedPG.style['display'] = 'none';
    };
   });
+  // tokensJS
   $(document).ready(function() {
   var open = document.getElementById('showTokens');
   var tokenpartial = document.getElementById('tokenPartial');
@@ -106,6 +106,7 @@
     }
   };
   });
+  // chatJS
   $(document).ready(function() {
   var chatlist = document.getElementById('chat-list');
   var panel = document.getElementById('panel-title')
