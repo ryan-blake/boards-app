@@ -159,7 +159,7 @@
     <h3 class="btn btn-sort"><%= link_to 'Add listing', new_board_path %></h3>
  <% end %>
 </div>
-<% unless @stripe_account.verification.fields_needed.empty? %>
+<% unless @stripe_account %>
 <% if @stripe_account.verification.fields_needed  %>
 <% unless @stripe_account.verification.fields_needed == ["legal_entity.ssn_last_4"] || ["legal_enity.business_tax_id"] %>
   <div class="row">
