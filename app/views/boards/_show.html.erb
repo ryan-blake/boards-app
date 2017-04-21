@@ -1,3 +1,29 @@
+<% content_for(:header) do %>
+<script>
+$(document).ready(function() {
+var checkbox = document.getElementById('checkbox');
+var delivery_div = document.getElementById('delivery');
+var pickup_div = document.getElementById('pickup');
+delivery_div.style['display'] = 'block';
+
+checkbox.onclick = function() {
+   if(this.checked) {
+     pickup_div.style['display'] = 'block';
+     delivery_div.style['display'] = 'none';
+
+   } else {
+     delivery_div.style['display'] = 'block';
+     pickup_div.style['display'] = 'none';
+   }
+};
+});
+
+$('.date#datetimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+
+$('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+
+</script>
+<% end %>
 <div id="show-view">
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
 <div class="container-fluid">
