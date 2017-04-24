@@ -26,11 +26,13 @@
   <tbody class="tbody-search col-sm-6 col-md-4 center-text">
       <!-- if no image load other boards image in results -->
       <td class="center-text" >
+        <div  style="min-height:240px;">
         <% if board.images.first != nil %>
             <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
           <% else %>
             <%= link_to attachment_image_tag(Board.find(3).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
         <% end %>
+        </div>
 
     <ul class="main-well-ul">
        <li class="center-text title-link">

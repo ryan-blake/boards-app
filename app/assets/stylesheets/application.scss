@@ -292,7 +292,10 @@ text-align:right;
 }
 
 .tbody-search {
-  min-width:300px;min-height:410px;padding-left:5%;
+  min-width:300px;
+  min-height:410px;
+  padding-left:5%;
+  max-height:410px;
 }
 
 .description-li {
@@ -419,12 +422,13 @@ margin-right:0px;
 }
 
 .length-ribbon {
- height:20px;
- background-color: rgba(230, 250, 250, 1);
- position:absolute;
- top: -235px;
- width:32%;
- right:1px;
+  height: 20px;
+ background-color: #e6fafa;
+ position: absolute;
+ top: -245px;
+ width: 35%;
+ padding-top: 0px;
+ right: -25px;
 }
 
 .info-row {
@@ -458,6 +462,7 @@ margin-right:0px;
 
 .image-box {
  min-height: 375px;
+ max-height: 375px;
  position:relative;
 }
 
