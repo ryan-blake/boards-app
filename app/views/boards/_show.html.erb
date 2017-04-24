@@ -18,9 +18,6 @@ checkbox.onclick = function() {
 };
 });
 
-$('.date#datetimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
-
-$('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
 
 </script>
 <% end %>
@@ -154,35 +151,10 @@ $('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, 
 <% end %>
 
 <div id="forsale">
-  <% if !current_user %>
-    <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
-        <%= render partial: 'forsale', locals: {board: @board} %>
-    <% elsif @board.for_sale == false  && @board.user_id == current_user.id%>
+  <% if current_user  && @board.user_id == current_user.id%>
+    <% %>
     <%= render partial: 'forsale', locals: {board: @board} %>
+    <% else %>
    <% end %>
 </div>
 </div>
-<script>
-$(document).ready(function() {
-var checkbox = document.getElementById('checkbox');
-var delivery_div = document.getElementById('delivery');
-var pickup_div = document.getElementById('pickup');
-delivery_div.style['display'] = 'block';
-
-checkbox.onclick = function() {
-   if(this.checked) {
-     pickup_div.style['display'] = 'block';
-     delivery_div.style['display'] = 'none';
-
-   } else {
-     delivery_div.style['display'] = 'block';
-     pickup_div.style['display'] = 'none';
-   }
-};
-});
-
-$('.date#datetimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
-
-$('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
-
-</script>
