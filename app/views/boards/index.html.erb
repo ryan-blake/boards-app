@@ -6,6 +6,19 @@ $("#geo-input").geocomplete();
 country: "US"
 });
 
+$(document).ready(function() {
+var openExtended = document.getElementById('open-extended');
+var extended = document.getElementById('extended-search');
+
+openExtended.onclick = function() {
+   if(this.style.display == 'block') {
+     this.style['display'] = 'none';
+     extended.style['display'] = 'block';
+   }
+};
+});
+
+
 </script>
 <% end %>
 <span id="top" name="top" style="display:block;position:relative;top:-50px;"></span>
@@ -41,7 +54,21 @@ country: "US"
         <span class="input-group-btn">
           <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'distance from (mi.)'} , { :class => 'form-control' })  %>
         </span>
+
       </div><!-- /input-group -->
+
+      <span id="open-extended" style="display:block;"> open </span>
+      <div id="extended-search" style="display:none;">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <%= collection_select(nil, :company, User.all.order(:company).distinct.sort, :company, :company, {prompt: "Choose co"},{ class: "form-control" }) %>
+             </span>
+          </div>
+        </div>
+      </div><!-- /exteneded -search-->
+
+
     </div><!-- /.col-lg-6 -->
     New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
     Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>

@@ -229,6 +229,7 @@ class BoardsController < ApplicationController
               elsif (params[:used] == "on") && (params[:used] != params[:new])
                   @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
               else
+
                    @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
               respond_to do |format|
@@ -263,6 +264,7 @@ else
 end
 
 end
+
 
 
 
