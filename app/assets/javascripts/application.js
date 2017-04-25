@@ -16,8 +16,8 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require refile
+//= require photoswipe
 //= require_tree .
-
 
 
 
