@@ -16,6 +16,7 @@ jQuery ->
         $(this).find("input[type=submit]").removeAttr "disabled"  unless $(this).find("input.uploading").length
         $("#progress-bar").slideUp('fast')
 
+
  # jQuery ->
  #  $("#category-select").hide();
  #

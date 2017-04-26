@@ -83,6 +83,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   #redis
+  config.action_controller.asset_host = 'd19qkfznh6cgmt.cloudfront.net'
   config.web_socket_server_url = "wss://secret-reef-80535.herokuapp.com/cable"
   config.action_cable.allowed_request_origins = ['https://secret-reef-80535.herokuapp.com', 'http://secret-reef-80535.herokuapp.com']
 
