@@ -1,4 +1,4 @@
-<div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+<!-- <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
   <% @board.images.each_with_index do |image_id, index| %>
     <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
       <a href="https://avatars3.githubusercontent.com/u/13131?v=3&s=500" itemprop="contentUrl"
@@ -16,4 +16,23 @@
     </figure>
   <% end %>
 </div>
+      <%= render 'photo' %> -->
+      <!--  -->
+      <div id="main-container">
+      	<div class="row">
+
+          <% @board.images.each_with_index do |photo, index| %>
+      		  <div class="photo col-xs-6 col-md-3">
+      		    <a href="https://avatars3.githubusercontent.com/u/13131?v=3&s=500" class="thumbnail" data-width="<%= 1200 %>" data-height="<%= 800 %>"
+                data-index="<%= index %>" data-pid="<%= index %>">
+      		      <%= attachment_image_tag( photo, :file, :limit, nil, 320) %>
+      		      <div class="caption">
+      		      </div>
+      		    </a>
+      		  </div>
+      		<% end %>
+
+        </div>
+      </div>
+
       <%= render 'photo' %>
