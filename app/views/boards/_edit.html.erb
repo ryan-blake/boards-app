@@ -27,7 +27,7 @@
   <btn class="center-text" style="position:absolute;left:calc(50% - 90px);">
   <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %></btn>
 
-  <div class="container-fluid row" style="position:relative;min-height:200px;max-height:400px;">
+  <div class="container-fluid row" style="position:relative;min-height:200px;max-height:400px; padding-top:25x;">
     <%= f.fields_for :images do |image_fields| %>
         <div class="col-xs-12 col-sm-6 col-md-3">
             <span style="max-width:20px;min-height:100px;max-height:100px;">
