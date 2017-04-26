@@ -1,14 +1,14 @@
 <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
   <% @board.images.each_with_index do |image_id, index| %>
     <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-      <a href="<%= attachment_url(image_id, :file, :fit, 500, 500, format: "jpg") %>" itemprop="contentUrl"
+      <a href="<%= attachment_url(image_id, :image, :fit, 500, 500, format: "jpg") %>" itemprop="contentUrl"
          data-size=" 500">
          <% if index < 1 %>
          <img src="<%=  attachment_url(image_id, :file, :fill, 300, 300) %>"
              itemprop="thumbnail" />
         <% else %>
         <div style="mac-width:300px;left:34%;display:flex;float:left;position:relative;" class="thumbnail" >
-          <img src="<%=  attachment_url(image_id, :file, :fit, 91, 91, format: "jpg")  %>"
+          <img src="<%=  attachment_url(image_id, :image, :fit, 91, 91, format: "jpg")  %>"
              itemprop="thumbnail" />
         </div>
         <% end %>
