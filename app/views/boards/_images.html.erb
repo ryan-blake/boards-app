@@ -1,7 +1,7 @@
 <div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery">
   <% @board.images.each_with_index do |image_id, index| %>
     <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-      <a href="<%= %>" itemprop="contentUrl"
+      <a href="<%= attachment_url(image_id, :file, :fill, 300, 300) %>" itemprop="contentUrl"
          data-size=" 500">
          <% if index < 1 %>
          <img src="<%=  attachment_url(image_id, :file, :fill, 300, 300) %>"
