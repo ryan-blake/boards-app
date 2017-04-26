@@ -1,6 +1,10 @@
 
 <div>
-  <% @board.images.each do |photo| %>
-    <%= link_to(image_tag(attachment_url(photo, :file, :fit, 100, 100, format: 'jpg')), attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'), data: { lightbox: "example-set", title: "hi" }) %>
+  <% @board.images.each_with_index do |photo, index| %>
+   <% if index < 1 %>
+    <%= link_to(image_tag(attachment_url(photo, :file, :fit, nil, 100, format: 'jpg')),
+      attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
+      data: { lightbox: "example-set", title: "" }) %>
+      <% end %>
   <% end %>
 </div>
