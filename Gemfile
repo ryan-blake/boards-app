@@ -54,8 +54,7 @@ gem 'validates_overlap'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'slim'
-gem 'photoswipe-rails'
-gem 'pswp-rails', '~> 4.0'
+
 
 # gem 'data-confirm-modal'
 group :development do

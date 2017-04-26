@@ -8,7 +8,7 @@
 * file per style scope.
 *
 
-*= require photoswipe
+
 *= require_tree .
 *= require_self
 
@@ -19,7 +19,7 @@
 @import 'bootstrap-datetimepicker';
 @import "font-awesome-sprockets";
 @import "font-awesome";
-@import 'photoswipe';
+@import 'lightbox';
 
 
 
