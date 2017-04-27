@@ -1,8 +1,33 @@
 
-<div class="center-text" style="max-height:320px;">
+<div class="center-text" style="max-height:350px;">
+  <div class="scroller">
   <% @board.images.each_with_index do |photo, index| %>
-    <%= link_to(image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')),
-      attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
-      data: { lightbox: "example-set", title: "" }) %>
+
+    <div class="center-text">
+    <%= link_to(image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')),
+          attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
+          data: { lightbox: "example-set", title: "" }) %>
+    </div>
+
   <% end %>
 </div>
+
+</div>
+<style>
+.scroller {
+
+}
+  .slick-prev::before, .slick-next::before {
+    color: #000;
+  }
+
+  .slick-next {
+    right: 5px;
+    z-index: 400;
+  }
+
+  .slick-prev {
+    left: 5px;
+    z-index: 400;
+  }
+</style>
