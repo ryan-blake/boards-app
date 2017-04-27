@@ -3,7 +3,7 @@
   <div class="scroller">
   <% @board.images.each_with_index do |photo, index| %>
 
-    <div style="">
+    <div class="slide-img">
     <%= link_to(image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')),
           attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
           data: { lightbox: "example-set", title: "" }) %>
@@ -14,7 +14,7 @@
 
 </div>
 <style>
-.slick-slide img {
+.slide-img {
     left: calc(50% - 175px);
     position: relative;
 }
