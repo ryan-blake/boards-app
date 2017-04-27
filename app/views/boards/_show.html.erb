@@ -159,7 +159,13 @@ checkbox.onclick = function() {
 };
 
 function initSlider(){
-$('.scroller').slick();
+    $('.scroller').slick({
+      dots: true,
+      infinite: true,
+      speed: 200,
+      prevArrow: '<div class="slick-prev"><i class="fa fa-chevron-left"></i></div>',
+      nextArrow: '<div class="slick-next"><i class="fa fa-chevron-right"></i></div>'
+    });
 }
 
 $(document).ready(function() {
