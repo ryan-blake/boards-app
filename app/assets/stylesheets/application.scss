@@ -21,7 +21,7 @@
 @import "font-awesome";
 @import 'lightbox';
 @import 'slick';
-@import 'slick-theme';
+
 
 
 html, body {
@@ -146,8 +146,6 @@ height:100%;
     font-size:15px;
     right: -5px;
     z-index: 400;
-    border-radius:50%;
-    border: solid black 1px;
   }
 
   .slick-prev {
