@@ -53,7 +53,8 @@ gem 'validates_timeliness', '~> 4.0'
 gem 'validates_overlap'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails'
-gem 'slim'
+gem "jquery-slick-rails"
+
 
 
 # gem 'data-confirm-modal'

@@ -17,6 +17,7 @@ jQuery ->
         $("#progress-bar").slideUp('fast')
 
 
+
  # jQuery ->
  #  $("#category-select").hide();
  #
