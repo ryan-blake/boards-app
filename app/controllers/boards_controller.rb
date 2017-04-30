@@ -15,11 +15,9 @@ class BoardsController < ApplicationController
       end
       session[:conversations] ||= []
       @users = User.all.where.not(id: current_user)
-      @conversations = Conversation.includes(:recipient, :messages)
-        .find(session[:conversations])
 
-      @user = current_user
       @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+
   # end
       @types = Type.order(:name)
       @categories = Category.order(:name)
@@ -31,6 +29,11 @@ class BoardsController < ApplicationController
         if @charge == nil
           @boards = Board.where(title: @charge.item )
           @boardies = Board.where(title: @charge.item )
+      end
+
+      @conversations = Conversation.includes(:recipient, :messages)
+       if @conversations
+        .find(session[:conversations])
       end
     end
   end
@@ -97,7 +100,7 @@ class BoardsController < ApplicationController
   end
   def active_boards
     @user = current_user
-    @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true, pending: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+    @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
   end
   def inactive_boards
     @user = current_user
@@ -296,7 +299,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :used, :footgear, :width, :length, :name, :type_id, :category_id, :volume, :address,
+      params.require(:board).permit(:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :used, :footgear, :width, :length, :name, :type_id, :category_id, :accessory_id, :volume, :address,
       :city, :state, :remote_image_url,:zipcode, images_files: [], images_attributes: [ :id, :file, :_destroy])
     end
 

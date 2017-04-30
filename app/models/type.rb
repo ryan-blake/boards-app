@@ -11,4 +11,5 @@
 class Type < ApplicationRecord
   has_many :boards
   has_many :categories
+  has_many :varieties
 end

@@ -69,6 +69,58 @@ Category.find_or_create_by(
 categories = Category.all
 
 
+Variety.find_or_create_by(
+  name: "Fins",
+  type_id: Type.find_by(name: "Surf").id
+)
+Variety.find_or_create_by(
+  name: "Kick Pad",
+  type_id: Type.find_by(name: "Surf").id
+)
+Variety.find_or_create_by(
+  name: "Leash",
+  type_id: Type.find_by(name: "Surf").id
+)
+Variety.find_or_create_by(
+  name: "Paddle",
+  type_id: Type.find_by(name: "Surf").id
+)
+Variety.find_or_create_by(
+  name: "Bindings",
+  type_id: Type.find_by(name: "Snow").id
+)
+Variety.find_or_create_by(
+  name: "Stomp Pad",
+  type_id: Type.find_by(name: "Snow").id
+)
+Variety.find_or_create_by(
+  name: "Bindings",
+  type_id: Type.find_by(name: "Wake").id
+)
+Variety.find_or_create_by(
+  name: "Rope",
+  type_id: Type.find_by(name: "Wake").id
+)
+Variety.find_or_create_by(
+  name: "Bearings",
+  type_id: Type.find_by(name: "Skate").id
+)
+Variety.find_or_create_by(
+  name: "Griptape",
+  type_id: Type.find_by(name: "Skate").id
+)
+Variety.find_or_create_by(
+  name: "Trucks",
+  type_id: Type.find_by(name: "Skate").id
+)
+Variety.find_or_create_by(
+  name: "Wheels",
+  type_id: Type.find_by(name: "Skate").id
+)
+
+varieties = Variety.all
+
+
 User.create(
  name: "ryan",
  email: "ryan_blake@mac.com",
@@ -98,6 +150,21 @@ User.create(
 
 users = User.all
 
+ 40.times do
+   Accessory.create!(
+   name: Faker::Hipster.word,
+   brand: Faker::Hipster.word,
+   color: Faker::Hipster.word,
+   price: Faker::Number.number(1),
+   inventory: Faker::Number.number(1),
+   variety_id: rand(1..15),
+   board_id: rand(1..40),
+   type_id: rand(1..4)
+
+   )
+ end
+
+ accessories =  Accessory.all
 
 20.times do
   Board.create!(
@@ -117,7 +184,8 @@ users = User.all
   pending: false,
   arrived: false,
   zipcode: [76210, 90277, 76262, 76135].sample,
-  for_sale: true
+  for_sale: true,
+  accessory_id: rand(10..40)
   )
 end
 

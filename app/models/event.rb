@@ -22,7 +22,7 @@ class Event < ApplicationRecord
 # validate :future_reservations_only, :on => :create
 # validates_datetime :end_time, :after => :start_time
 validates_date :start_time, :before => :end_time,
-                               :before_message => "must be at least 18 years old"
+                               :before_message => "valid times only"
 # validates_time :start_time, :on_or_after => :open_time,
 #    :on_or_after_message => 'must be after opening time',
 #    :before => :end_time,

@@ -56,6 +56,8 @@
         <th class="col-sm-3"><%= f.label :width %> (inches)<br/></th>
         <th class="col-sm-3"><%= f.label :volume %><strong>: if applies </strong><br/></strong></th>
         <th ><%= f.label :length %><strong> / height of board (inches)</strong><br/></strong></th>
+        <%= f.grouped_collection_select :accessory_id, Type.order(:name),:varieties, :name, :id, :name, include_blank: true %>
+
       </thead>
       <tbody>
         <td class="col-sm-3"><%= f.number_field :width, class: 'form-control' %></td>

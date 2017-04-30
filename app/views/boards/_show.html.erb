@@ -75,7 +75,7 @@
          <%= @board.volume %>
         <% end %>
       </tbody>
-</table>
+    </table>
 </div>
 
 <!-- section -->
@@ -99,6 +99,10 @@
   <% else %>
 
 <!-- section -->
+
+  <div class="center-text" id="" style="position:relative;min-height:200px;max-height:200px;width:100%;color:black;margin-top:190px;margin-bottom:20px;z-index:9990;">
+    <%= render partial: 'accessories', locals: {board: @board}  %>
+  </div>
 
     <div class="payment center-text">
       <% if current_user && current_user.id == @board.user_id %>
@@ -166,6 +170,16 @@ function initSlider(){
       prevArrow: '<div class="slick-prev"><i class="fa fa-chevron-left"></i></div>',
       nextArrow: '<div class="slick-next"><i class="fa fa-chevron-right"></i></div>'
     });
+
+
+    $('.multiple-items').slick({
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      dots: true
+    });
+
+
 }
 
 $(document).ready(function() {

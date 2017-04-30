@@ -1,0 +1,8 @@
+<% if @board %>
+  <div class="multiple-items">
+  <% @board.accessories.each do |i| %>
+
+   <strong> <%= i.color %> &    <%= i.name %></strong>
+  <% end %>
+</div>
+<% end %>
