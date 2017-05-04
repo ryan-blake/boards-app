@@ -38,9 +38,11 @@ class Board < ApplicationRecord
   belongs_to :user
   belongs_to :type, optional: true
   belongs_to :category
+
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true
+
   has_many :events
   validates_associated :events
 
@@ -52,8 +54,6 @@ class Board < ApplicationRecord
   validates :category, :presence => true
   validates :zipcode, :length => { :is => 5 }
   after_save :check_for_tracking_number
-
-
 
   # mapping
   geocoded_by :full_address
