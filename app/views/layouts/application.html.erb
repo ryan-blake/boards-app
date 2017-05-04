@@ -11,25 +11,20 @@
     <%= javascript_include_tag 'application' %>
 
 
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>" style="position:absolute;top:50px;right:0;">
-    <%= value %>
-  </div>
-<% end %>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>" style="position:absolute;top:50px;right:0;">
+        <%= value %>
+      </div>
+    <% end %>
 
-
-<!-- <div class="container">
-  <h1><%= yield :header %></h1>
-</div> -->
     <%= yield(:header) %>
   </head>
 
   <body>
+
     <%= render 'layouts/header' %>
 
     <%= yield %>
-
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
@@ -38,8 +33,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAIDdA5C2oS2Opd5tIqc8B9Fe-Z1NsrBes"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-
-
 
   </body>
 

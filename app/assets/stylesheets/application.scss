@@ -135,7 +135,7 @@ height:100%;
 }
 
 .slide-img img{
-  left: calc(50% - 175px);
+  left: calc(50% - 175px) !important;
   position: relative;
 }
   .slick-prev::before, .slick-next::before {
