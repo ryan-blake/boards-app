@@ -382,7 +382,7 @@
 
     this.$lightbox.find('.lb-nav').show();
 
-    if (this.album.length > 1) {
+    if (this.album.length >= 2) {
       if (this.options.wrapAround) {
         if (alwaysShowNav) {
           this.$lightbox.find('.lb-prev, .lb-next').css('opacity', '1');
@@ -429,7 +429,7 @@
         });
     }
 
-    if (this.album.length > 1 && this.options.showImageNumberLabel) {
+    if (this.album.length >= 2 && this.options.showImageNumberLabel) {
       var labelText = this.imageCountLabel(this.currentImageIndex + 1, this.album.length);
       this.$lightbox.find('.lb-number').text(labelText).fadeIn('fast');
     } else {

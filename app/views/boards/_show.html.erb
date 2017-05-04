@@ -50,16 +50,10 @@
   <div class="image-box center-text" id="images" style="">
       <div class="scroller">
       <% @board.images.each_with_index do |photo, index| %>
-
-
-        <%= link_to(image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg'), no_turbolink: true),
+        <%= link_to(image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')),
               attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
               data: { lightbox: "example-set", title: "" }) %>
-
-
       <% end %>
-
-
     </div>
   </div>
 
