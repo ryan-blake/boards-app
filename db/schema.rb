@@ -10,11 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421010105) do
+ActiveRecord::Schema.define(version: 20170501193618) do
+
+  create_table "accessories", force: :cascade do |t|
+    t.string   "name"
+    t.string   "brand"
+    t.string   "color"
+    t.integer  "price"
+    t.string   "inventory"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "board_id"
+    t.integer  "type_id"
+    t.integer  "variety_id"
+    t.index ["board_id"], name: "index_accessories_on_board_id"
+    t.index ["type_id"], name: "index_accessories_on_type_id"
+    t.index ["variety_id"], name: "index_accessories_on_variety_id"
+  end
+
+  create_table "additions", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "price"
+    t.integer  "inventory"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "board_id"
+    t.index ["board_id"], name: "index_additions_on_board_id"
+    t.index ["user_id"], name: "index_additions_on_user_id"
+  end
 
   create_table "boards", force: :cascade do |t|
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "make"
     t.boolean  "used"
     t.integer  "price"
@@ -26,8 +54,8 @@ ActiveRecord::Schema.define(version: 20170421010105) do
     t.integer  "width"
     t.integer  "type_id"
     t.integer  "volume"
-    t.boolean  "arrived",     default: false
-    t.boolean  "pending",     default: false
+    t.boolean  "arrived",      default: false
+    t.boolean  "pending",      default: false
     t.string   "address"
     t.string   "city"
     t.string   "state"
@@ -36,12 +64,14 @@ ActiveRecord::Schema.define(version: 20170421010105) do
     t.float    "longitude"
     t.integer  "distance_id"
     t.integer  "category_id"
-    t.boolean  "for_sale",    default: true
+    t.boolean  "for_sale",     default: true
     t.string   "customer_id"
     t.boolean  "shipping"
     t.boolean  "shipped"
     t.string   "tracking"
-    t.boolean  "rental",      default: false
+    t.boolean  "rental",       default: false
+    t.integer  "accessory_id"
+    t.index ["accessory_id"], name: "index_boards_on_accessory_id"
     t.index ["category_id"], name: "index_boards_on_category_id"
     t.index ["type_id"], name: "index_boards_on_type_id"
     t.index ["user_id"], name: "index_boards_on_user_id"
@@ -113,8 +143,10 @@ ActiveRecord::Schema.define(version: 20170421010105) do
   create_table "images", force: :cascade do |t|
     t.string   "file_id"
     t.integer  "board_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "accessory_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["accessory_id"], name: "index_images_on_accessory_id"
     t.index ["board_id"], name: "index_images_on_board_id"
   end
 
@@ -217,6 +249,14 @@ ActiveRecord::Schema.define(version: 20170421010105) do
     t.string   "stripe_account"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "varieties", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "type_id"
+    t.index ["type_id"], name: "index_varieties_on_type_id"
   end
 
 end

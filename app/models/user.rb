@@ -60,6 +60,7 @@ class User < ApplicationRecord
   has_many :user_provider, :dependent => :destroy
   has_many :messages
   has_many :conversations, foreign_key: :sender_id
+  has_many :additions, :as => :boardable
   # mapping
 
   # mapping

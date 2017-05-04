@@ -2,36 +2,37 @@
 #
 # Table name: boards
 #
-#  id          :integer          not null, primary key
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  make        :string
-#  used        :boolean
-#  price       :integer
-#  footgear    :boolean
-#  user_id     :integer
-#  description :string
-#  length      :integer
-#  title       :string
-#  width       :integer
-#  type_id     :integer
-#  volume      :integer
-#  arrived     :boolean          default("f")
-#  pending     :boolean          default("f")
-#  address     :string
-#  city        :string
-#  state       :string
-#  zipcode     :integer
-#  latitude    :float
-#  longitude   :float
-#  distance_id :integer
-#  category_id :integer
-#  for_sale    :boolean          default("t")
-#  customer_id :string
-#  shipping    :boolean
-#  shipped     :boolean
-#  tracking    :string
-#  rental      :boolean          default("f")
+#  id           :integer          not null, primary key
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  make         :string
+#  used         :boolean
+#  price        :integer
+#  footgear     :boolean
+#  user_id      :integer
+#  description  :string
+#  length       :integer
+#  title        :string
+#  width        :integer
+#  type_id      :integer
+#  volume       :integer
+#  arrived      :boolean          default("f")
+#  pending      :boolean          default("f")
+#  address      :string
+#  city         :string
+#  state        :string
+#  zipcode      :integer
+#  latitude     :float
+#  longitude    :float
+#  distance_id  :integer
+#  category_id  :integer
+#  for_sale     :boolean          default("t")
+#  customer_id  :string
+#  shipping     :boolean
+#  shipped      :boolean
+#  tracking     :string
+#  rental       :boolean          default("f")
+#  accessory_id :integer
 #
 
 class Board < ApplicationRecord
@@ -42,6 +43,7 @@ class Board < ApplicationRecord
   accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true
   has_many :events
+  belongs_to :boardable, polymorphic: true
   validates_associated :events
 
   validates :title, :presence => true
