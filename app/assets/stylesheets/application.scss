@@ -102,9 +102,7 @@ height:100%;
         float: right;
     }
     img {
-        display: block;
-        left: calc(50% - 175px);
-        position: relative;
+
     }
     &.slick-loading img {
         display: none;
@@ -134,10 +132,7 @@ height:100%;
     display: none;
 }
 
-.slide-img img{
-  left: calc(50% - 175px) !important;
-  position: relative;
-}
+
   .slick-prev::before, .slick-next::before {
     color: #000;
   }
