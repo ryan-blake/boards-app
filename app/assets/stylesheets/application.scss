@@ -37,6 +37,20 @@ height:100%;
     display: inline !important;
 }
 
+.slick-next {
+  font-size:15px;
+  right: 5px;
+  z-index: 400;
+  color:black;
+}
+
+.slick-prev {
+  font-size:15px;
+  left: 5px;
+  z-index: 400;
+  color:black;
+  color:black;
+}
 
 /* pswp = photoswipe */
 .pswp {
