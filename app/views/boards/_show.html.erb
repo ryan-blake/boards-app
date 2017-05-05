@@ -161,3 +161,21 @@ checkbox.onclick = function() {
    <% end %>
 </div>
 </div>
+
+<script>
+function initSlider(){
+    $('.scroller').slick({
+      dots: true,
+      speed: 200,
+      prevArrow: '<div class="slick-prev"><i class="fa fa-chevron-left"></i></div>',
+      nextArrow: '<div class="slick-next"><i class="fa fa-chevron-right"></i></div>'
+    });
+}
+
+$(document).ready(function() {
+
+  initSlider();
+
+});
+
+</script>
