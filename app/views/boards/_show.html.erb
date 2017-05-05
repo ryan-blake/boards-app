@@ -40,20 +40,7 @@
   <div class="image-box center-text" id="images" style="">
     <%= render partial: 'images', locals: {board: @board}  %>
 
-    <script>
-    $(document).ready(function() {
-
-      $('.scroller').slick({
-        dots: true,
-        speed: 200,
-        infinite: false,
-        centerMode: true,
-        prevArrow: '<div class="slick-prev"><i class="fa fa-chevron-left"></i></div>',
-        nextArrow: '<div class="slick-next"><i class="fa fa-chevron-right"></i></div>'
-      });
-
-    });
-    </script>
+    
   </div>
 
 <hr class="style13" style="top:440px;">
