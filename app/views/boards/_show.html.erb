@@ -130,17 +130,6 @@ $('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, 
     </div>
   <% end %>
 </div>
-<% end %>
-
-<div id="forsale">
-  <% if !current_user %>
-    <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
-        <%= render partial: 'forsale', locals: {board: @board} %>
-    <% elsif @board.for_sale == false  && @board.user_id == current_user.id%>
-    <%= render partial: 'forsale', locals: {board: @board} %>
-   <% end %>
-</div>
-</div>
 <script>
 $(document).ready(function() {
 var checkbox = document.getElementById('checkbox');
@@ -160,5 +149,15 @@ checkbox.onclick = function() {
 };
 });
 
-
 </script>
+<% end %>
+
+<div id="forsale">
+  <% if !current_user %>
+    <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
+        <%= render partial: 'forsale', locals: {board: @board} %>
+    <% elsif @board.for_sale == false  && @board.user_id == current_user.id%>
+    <%= render partial: 'forsale', locals: {board: @board} %>
+   <% end %>
+</div>
+</div>
