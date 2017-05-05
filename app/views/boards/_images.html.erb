@@ -1,7 +1,7 @@
 
 <div class="center-text" style="max-height:320px;">
-  <div class="scroller">
   <% @board.images.each_with_index do |photo, index| %>
+  <div class="scroller">
     <%= link_to(image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')),
       attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
       data: { lightbox: "example-set", title: "" }) %>
