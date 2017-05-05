@@ -95,6 +95,11 @@
       <%= render 'events/calendar', locals: {events: @events, board: @board} %>
     </div>
 </div>
+<script>
+$('.date#datetimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+
+$('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+</script>
 
   <% else %>
 
@@ -155,9 +160,5 @@ checkbox.onclick = function() {
 };
 });
 
-
-$('.date#datetimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
-
-$('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
 
 </script>

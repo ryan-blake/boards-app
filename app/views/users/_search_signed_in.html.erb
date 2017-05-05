@@ -18,7 +18,7 @@
   <% if @boards.length == 0 %>
     <%= render partial: 'boards/none' %>
   <% end %>
-<% @boards.each do |board| %>
+<% @boards.each_with_index do |board| %>
   <tbody class="tbody-search col-sm-6 col-md-4 center-text">
       <!-- if no image load other boards image in results -->
       <td class="center-text tbody-td-well">
@@ -66,8 +66,6 @@
            </div>
            <div class="modal-content">
            </div>
-         </div>
-         <div class="center-text" id="paginator">
          </div>
        </div>
 
