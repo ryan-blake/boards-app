@@ -17,7 +17,6 @@
 //= require bootstrap-datetimepicker
 //= require refile
 //= require lightbox
-//= require glide
 //= require jquery.slick
 //= require_tree .
 
