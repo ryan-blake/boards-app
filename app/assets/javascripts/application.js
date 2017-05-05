@@ -20,6 +20,18 @@
 //= require jquery.slick
 //= require_tree .
 
+$(document).ready(function() {
+
+  $('.scroller').slick({
+    dots: true,
+    infinite: false,
+    centerMode: true,
+    prevArrow: '<div class="slick-prev"><i class="fa fa-chevron-left"></i></div>',
+    nextArrow: '<div class="slick-next"><i class="fa fa-chevron-right"></i></div>'
+  });
+
+});
+
 
 
 // alter to match if board.type (selected) display only makes where boards == type selected
