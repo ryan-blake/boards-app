@@ -1,10 +1,19 @@
 
 <div class="center-text" style="max-height:320px;">
-  <div class="scroller">
+  <div class="scroller glide">
   <% @board.images.each_with_index do |photo, index| %>
-    <%= link_to(image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')),
-      attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
-      data: { lightbox: "example-set", title: "" }) %>
+  <div class="glide__wrapper">
+      <ul class="glide__track">
+        <%= link_to(image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')),
+          attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
+          data: { lightbox: "example-set", title: "" }) %>
+      </ul>
+  </div>
   <% end %>
+  <div class="glide__arrows">
+      <button class="glide__arrow prev" data-glide-dir="<">prev</button>
+      <button class="glide__arrow next" data-glide-dir=">">next</button>
+  </div>
+  <div class="glide__bullets"></div>
   </div>
 </div>
