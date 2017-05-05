@@ -36,26 +36,28 @@
      </div>
 </div>
 <br>
-<div class="center-text" id="pay_now_rent">
+<div class="center-text" id="pay_now_rent" style="display:block;">
   <%f.submit %>
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
       data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
       <% if current_user.present? %>
         data-email="<%=current_user.email %>"
       <% end %>
-          data-description="A <%= @board.title %> reservation"
-            data-amount="<%= @board.price.to_i.ceil * 100 %>"
-      ></script>
-
+        data-description="A <%= @board.title %> reservation"
+        data-amount="<%= @board.price.to_i.ceil * 100 %>">
+    </script>
 </div>
 <% end %>
 <% end %>
 
 <script>
-$(document).ready(function() {
-var pay = document.getElementById('pay_now_rent');
-pay.style['display'] = 'block';
+function initRentPay(){
+  var pay = document.getElementById('pay_now_rent');
+  pay.style['display'] = 'block';
 
+};
+$(document).ready(function() {
+ initRentPay();
 });
 </script>
 </div>
