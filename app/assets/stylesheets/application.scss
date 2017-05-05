@@ -52,7 +52,6 @@ height:100%;
 }
 /* Preload images */
 body:after {
-  content: url(<%= image_path('close.png')%>) url(<%= image_path('loading.gif')%>) url(<%= image_path('prev.png')%>) url(<%= image_path('next.png')%>);
   display: none;
 }
 
@@ -146,7 +145,6 @@ body.lb-disable-scrolling {
 
 .lb-nav a {
   outline: none;
-  background-image: url('data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
 }
 
 .lb-prev, .lb-next {
