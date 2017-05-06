@@ -131,7 +131,7 @@ class BoardsController < ApplicationController
   def sales_boards
    @sales_user = current_user.name
 
-
+  
 
   end
   # GET /boards/1

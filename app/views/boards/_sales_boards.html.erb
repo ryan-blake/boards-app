@@ -3,3 +3,8 @@
   sales for <%= @sales_user %> wtf
    </h1>
 </strong>
+
+<%  @charges = Charge.where(:vendor_id  => current_user.id) %>
+<% @charges.each do |i| %>
+  <%= i.price %>
+<% end %>
