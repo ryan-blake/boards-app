@@ -131,7 +131,15 @@ class BoardsController < ApplicationController
   def sales_boards
    @sales_user = current_user.name
 
-  
+       @payments = Stripe::Charge.list(
+         {
+           limit: 100,
+           expand: ['data.source_transfer', 'data.application_fee']
+         },
+         { stripe_account: current_user.stripe_account }
+       )
+
+
 
   end
   # GET /boards/1
