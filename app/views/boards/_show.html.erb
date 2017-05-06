@@ -152,7 +152,9 @@ $('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, 
   </div>
 
 <script>
-
+$(document).ready(function() {
+  initSlider();
+});
   function initSlider(){
       $('.scroller').slick({
         dots: true,
@@ -160,9 +162,7 @@ $('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, 
         prevArrow: '<div class="slick-prev"><i class="fa fa-chevron-left"></i></div>',
         nextArrow: '<div class="slick-next"><i class="fa fa-chevron-right"></i></div>'
       });
-  }
-  $(document).ready(function() {
-    initSlider();
-  });
+  };
+
 
 </script>
