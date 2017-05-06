@@ -6,15 +6,32 @@
     <br><small><span class="raised"><%= format_amount(@balance.pending[0].amount) %></span> pending</small>
   </h2>
   </h1>
+  <div class="row">
+  <div class="col-md-12">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Transfer ID</th>
+          <th>Destination</th>
+          <th>Amount</th>
+          <th>Deposit date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transfers.each do |transfer| %>
+          <tr>
+            <td><%= transfer.id %></td>
+            <td><%= transfer.bank_account.bank_name %> ending in <%= transfer.bank_account.last4%></td>
+            <td><%= format_amount(transfer.amount) %></td>
+            <td><%= format_date(transfer.date) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 </strong>
-<% @transfers.each do |transfer| %>
-  <tr>
-    <td><%= transfer.id %></td>
-    <td><%= transfer.bank_account.bank_name %> ending in <%= transfer.bank_account.last4%></td>
-    <td><%= format_amount(transfer.amount) %></td>
-    <td><%= format_date(transfer.date) %></td>
-  </tr>
-<% end %>
+
 
 <%  @charges = Charge.where(:vendor_id  => current_user.id) %>
 <% @charges.each do |i| %>
