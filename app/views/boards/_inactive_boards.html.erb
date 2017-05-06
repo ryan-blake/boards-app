@@ -85,11 +85,13 @@
        </li>
        <li class="center-text" style="padding-top:5px;">
          <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
-         <% if (board.for_sale == true && board.pending == false ) && (current_user.stripe_account != nil) %>
+         <% unless current_user.stripe_account == nil %>
+         <% if (board.for_sale == true && board.pending == false )  %>
 
            <strong style="color:red;">active</strong>
            <% else %>
            <strong style="color:red;">inactive</strong>
+           <% end %>
            <% end %>
            <button class="btn btn-sort pull-right view_btn"><%= link_to 'view', board, target: :_blank  %></button>
            <br>
