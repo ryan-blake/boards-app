@@ -9,3 +9,15 @@ $("#picking_up_results").html("<%=j render partial: 'pick_boards' %>");
 
 $("#inventory").html("<%=j render partial: 'inactive_boards' %>");
 $('#paginator').html('<%= escape_javascript(paginate(@inactive_boards, :remote => true)) %>');
+
+function initSlider(){
+    $('.scroller').slick({
+      dots: true,
+      infinite: false,
+      prevArrow: '<div class="slick-prev"><i class="fa fa-chevron-left"></i></div>',
+      nextArrow: '<div class="slick-next"><i class="fa fa-chevron-right"></i></div>'
+    });
+};
+$(document).ready(function() {
+  initSlider();
+});
