@@ -146,6 +146,13 @@ class BoardsController < ApplicationController
 )
 
        @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
+       # Retrieve transactions with an available_on date in the future
+transactions = Stripe::BalanceTransaction.all(
+  {
+    limit: 100,
+    available_on: {gte: Time.now.to_i}
+  },{ stripe_account: current_user.stripe_account })
+
        balances = Hash.new
 
              # Iterate through transactions and sum values for each available_on date
@@ -156,7 +163,7 @@ class BoardsController < ApplicationController
                  balances[txn.available_on] = txn.net
                end
              end
-             
+
        @transactions = balances.sort_by {|date,net| date}
 
 
