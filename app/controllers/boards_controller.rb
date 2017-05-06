@@ -123,12 +123,14 @@ class BoardsController < ApplicationController
       if @pending_boards
       @pending_boards = @pending_boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
     end
-    end
+  end
   def pick_boards
     @user = current_user
      @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
   end
-
+  def sales_boards
+   @sales_user = current_user.name
+  end
   # GET /boards/1
   # GET /boards/1.json
   def show

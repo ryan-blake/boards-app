@@ -51,12 +51,11 @@
         <%=  board.description.truncate(33)  %>
        </li>
        <li class="center-text">
-         <strong class="make-li"><%=  board.make %></strong>
+         <strong class="make-li"><%= board.make %></strong>
        </li>
        <li class="center-text" style="padding-top:5px;">
          <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
          <% if board.for_sale == true && board.pending == false %>
-
            <strong style="color:red;">active</strong>
            <% else %>
            <strong style="color:red;">inactive</strong>

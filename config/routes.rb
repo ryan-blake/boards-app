@@ -18,7 +18,8 @@ end
   resources :boards do
     resources :events, only: [:create, :destroy, :show, :board_dash]
     collection do
-      get 'search', 'search_signed_in', 'sort_order', 'board_dash', 'active_boards', 'inactive_boards', 'shipped_boards', 'pending_boards', 'pick_boards', 'company_search'
+      get 'search', 'search_signed_in', 'sort_order', 'board_dash', 'active_boards', 'inactive_boards',
+         'shipped_boards', 'pending_boards', 'pick_boards', 'sales_boards', 'company_search'
     end
   end
 
