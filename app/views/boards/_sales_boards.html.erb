@@ -4,6 +4,7 @@
    </h1>
    <% @charges.each do |i| %>
    <%= i.price %>
+   <%=  one %>
    <%= i.customer.name %>
    <% end %>
 
@@ -26,4 +27,5 @@
           </td>
         </tr>
       <% end %>
+      <% raise %>
 </table>
