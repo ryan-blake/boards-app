@@ -1,8 +1,9 @@
 <strong>
   <h1>
   sales for <%= @sales_user %>
-  <h1>
+   </h1>
 </strong>
+<table>
 <% @payments.each do |payment| %>
         <tr>
           <td><%= link_to payment.source_transfer.source_transaction, charge_path(payment.source_transfer.source_transaction) %></td>
@@ -20,6 +21,4 @@
           </td>
         </tr>
       <% end %>
-<script>
-console.log("sales");
-</script>
+</table>
