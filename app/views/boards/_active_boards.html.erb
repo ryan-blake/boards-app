@@ -28,7 +28,7 @@
       <td class="center-text" >
         <div  style="min-height:240px;">
         <% if board.images.first != nil %>
-            <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+            <%= link_to attachment_image_tag(board.images.first, :file, :fill, 140, 140), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
           <% else %>
             <%= link_to attachment_image_tag(Board.find(3).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
         <% end %>
