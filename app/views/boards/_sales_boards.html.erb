@@ -2,11 +2,19 @@
   <h1>
   sales for <%= @sales_user %> wtf
   <h2 class="page-header">
-  <i class="fa fa-table purple"></i>  Transaction balance
-  <br><small><span class="raised"><%= format_amount(@balance.pending[0].amount) %></span> pending</small>
-</h2>
-   </h1>
+    <i class="fa fa-table purple"></i>  Transaction balance
+    <br><small><span class="raised"><%= format_amount(@balance.pending[0].amount) %></span> pending</small>
+  </h2>
+  </h1>
 </strong>
+<% @transfers.each do |transfer| %>
+  <tr>
+    <td><%= transfer.id %></td>
+    <td><%= transfer.bank_account.bank_name %> ending in <%= transfer.bank_account.last4%></td>
+    <td><%= format_amount(transfer.amount) %></td>
+    <td><%= format_date(transfer.date) %></td>
+  </tr>
+<% end %>
 
 <%  @charges = Charge.where(:vendor_id  => current_user.id) %>
 <% @charges.each do |i| %>

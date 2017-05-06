@@ -138,6 +138,13 @@ class BoardsController < ApplicationController
          },
          { stripe_account: current_user.stripe_account }
        )
+       @transfers = Stripe::Transfer.list(
+  {
+    limit: 100
+  },
+  { stripe_account: current_user.stripe_account }
+)
+
        @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
 
 
