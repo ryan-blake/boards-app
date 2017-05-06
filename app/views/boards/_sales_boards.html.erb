@@ -3,6 +3,23 @@
   sales for <%= @sales_user %>
   <h1>
 </strong>
+<% @payments.each do |payment| %>
+        <tr>
+          <td><%= link_to payment.source_transfer.source_transaction, charge_path(payment.source_transfer.source_transaction) %></td>
+          <td><%= number_to_currency(payment.amount/100) %></td>
+          <td><%= format_amount(payment.amount - payment.application_fee.amount) %></td>
+          <td><%= format_date(payment.created) %></td>
+          <td class="text-center">
+            <% if payment.refunded %>
+              <span class="text-danger">
+                <span class="fa fa-undo"></span> Refunded
+              </span>
+            <% else %>
+              <%= link_to "Refund", charge_path(payment.source_transfer.source_transaction), method: :delete, data: { confirm: "Are you sure you want to refund this charge?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Refunding charge..." }, class: "btn btn-sm btn-block btn-custom btn-danger" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
 <script>
 console.log("sales");
 </script>
