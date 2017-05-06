@@ -73,7 +73,7 @@
           <span class="fa fa-undo"></span> Refunded
         </span>
       <% else %>
-        <%= link_to "Refund", charges_path(payment.source_transfer.source_transaction), method: :delete, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> refunding"} class: "btn btn-sm btn-block btn-custom btn-danger" %>
+        <%= link_to "Refund", charges_path(payment.source_transfer.source_transaction), method: :delete, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> refunding"}, class: "btn btn-sm btn-block btn-custom btn-danger" %>
       <% end %>
     </td>
   </tr>
