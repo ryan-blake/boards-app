@@ -21,7 +21,11 @@
 
 <% end %>
 </div> -->
+<% if current_user.stripe_account == nil %>
+<h4 class="dash-data-title"> purchased </h4>
+<% else %>
 <h4 class="dash-data-title"> Inactive Inventory </h4>
+<% end %>
 <table class="container-fluid" id="results" style="width:100%;">
   <% if @inactive_boards.length == 0 %>
     <%= render partial: 'boards/none' %>
@@ -81,7 +85,7 @@
        </li>
        <li class="center-text" style="padding-top:5px;">
          <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
-         <% if board.for_sale == true && board.pending == false %>
+         <% if (board.for_sale == true && board.pending == false ) && (current_user.stripe_account != nil) %>
 
            <strong style="color:red;">active</strong>
            <% else %>
