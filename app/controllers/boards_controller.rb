@@ -131,6 +131,8 @@ class BoardsController < ApplicationController
   def sales_boards
    @sales_user = current_user.name
 
+   @charges = Charge.where(vendor_id: current_user.id)
+
        @payments = Stripe::Charge.list(
          {
            limit: 100,

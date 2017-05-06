@@ -2,6 +2,11 @@
   <h1>
   sales for <%= @sales_user %>
    </h1>
+   <% @charges.each do |i| %>
+   <%= i.price %>
+   <%= i.customer.name %>
+   <% end %>
+
 </strong>
 <table>
 <% @payments.each do |payment| %>
