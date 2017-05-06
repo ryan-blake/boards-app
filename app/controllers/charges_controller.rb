@@ -102,7 +102,7 @@ end
       :description => 'Rails Stripe customer',
       :customer => params[:customer_id],
       :currency => 'usd',
-      :destination => @charge.vendor.uid,
+      :destination => @charge.vendor.stripe_account,
       :application_fee => 200+(@charge.price*3)+ 31
       },
     )
