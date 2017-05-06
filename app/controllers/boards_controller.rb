@@ -138,6 +138,7 @@ class BoardsController < ApplicationController
          },
          { stripe_account: current_user.stripe_account }
        )
+       @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
 
 
 
