@@ -25,7 +25,7 @@ end
 
   get'dash' => 'boards#board_dash'
 
-  resources :charges, only: [:new, :create, :complete, :show, :destroy]
+  resources :charges
   resources :tokens, only: [:new, :create]
 
   get 'complete_charge' => 'charges#complete'
