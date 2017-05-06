@@ -146,7 +146,18 @@ class BoardsController < ApplicationController
 )
 
        @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
+       balances = Hash.new
 
+             # Iterate through transactions and sum values for each available_on date
+             transactions.auto_paging_each do |txn|
+               if balances.key?(txn.available_on)
+                 balances[txn.available_on] += txn.net
+               else
+                 balances[txn.available_on] = txn.net
+               end
+             end
+             
+       @transactions = balances.sort_by {|date,net| date}
 
 
   end
