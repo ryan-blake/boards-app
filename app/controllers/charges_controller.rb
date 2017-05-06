@@ -125,6 +125,45 @@ end
 
 
     end
+
+    def show
+    begin
+      # Retrieve the charge from Stripe
+      @charge = Stripe::Charge.retrieve(id: params[:id], expand: ['application_fee'])
+
+      # Validate that the user should be able to view this charge
+      check_destination(@charge)
+
+      @board = Board.find(@charge.board_id)
+    rescue Stripe::RateLimitError => e
+      # Too many requests made to the API too quickly
+      flash[:error] = e.message
+      render :show
+    rescue Stripe::InvalidRequestError => e
+      # Invalid parameters were supplied to Stripe's API
+      flash[:error] = e.message
+      render :show
+    rescue Stripe::AuthenticationError => e
+      # Authentication with Stripe's API failed
+      # (maybe you changed API keys recently)
+      flash[:error] = e.message
+      render :show
+    rescue Stripe::APIConnectionError => e
+      # Network communication with Stripe failed
+      flash[:error] = e.message
+      render :show
+    rescue Stripe::StripeError => e
+      # Display a very generic error to the user, and maybe send
+      # yourself an email
+      flash[:error] = e.message
+      render :show
+    rescue => e
+      # Something else happened, completely unrelated to Stripe
+      flash[:error] = e.message
+      render :show
+    end
+  end
+
     def destroy
     begin
       # Retrieve the charge from Stripe
