@@ -199,7 +199,7 @@
  <% end %>
 </div>
 
-<div class="center-text" style="width:30%;top:20px;">
+<div class="center-text" style="">
   <% if user_signed_in?  && current_user.provider == nil %>
   <% if current_user.stripe_account == nil %>
     <%= link_to 'new managed', new_stripe_account_path, class: 'btn-sort btn', style: 'color:black' %>
@@ -208,17 +208,13 @@
   <%  @stripe_account.verification.fields_needed.each do |i| array << i end %>
   <% array.include? 'legal_entity.ssn_last_4'%>
     <% if @stripe_account.verification.fields_needed  %>
-    <div class="row">
-      <div class="col-md-10">
+    <div class="row" style="top:40px;position:absolute;width:50%;left:50%;">
         <div class="alert alert-warning text-center shadow-sm">
-          <h4>
-            We need some information to continue processing your acct
-          </h4>
           <p style="font-size:10px;">
+            We need some information to continue processing your acct
             <%= link_to "Update your information", edit_stripe_account_path(@stripe_account.id), class: "btn btn-sm btn-warning btn-custom" %>
           </p>
         </div>
-      </div>
     </div>
     <% else %>
     <p style="font-size:10px;">
