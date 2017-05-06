@@ -54,6 +54,12 @@ height:100%;
   z-index: 400;;
   color:black;
 }
+slick-dots {
+    position: relative !important;
+    bottom: -30px !important;
+    right: 30px;
+}
+
 /* Preload images */
 body:after {
   display: none;
