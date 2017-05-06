@@ -125,4 +125,55 @@ end
 
 
     end
+    def destroy
+    begin
+      # Retrieve the charge from Stripe
+      charge = Stripe::Charge.retrieve(params[:id])
+
+      # Validate that the user should be able to view this charge
+      check_destination(charge)
+
+      # Refund the charge
+      charge.refund(reverse_transfer: true, refund_application_fee: true)
+
+      # Update the local charge
+      local_charge = Charge.find_by charge_id: charge.id
+      local_charge.amount_refunded = charge.amount
+      local_charge.save
+
+      # Update the amount raised for this campaign
+
+
+      # Let the user know the refund was successful
+      flash[:success] = "The charge has been refunded."
+      redirect_to dash_path
+    rescue Stripe::RateLimitError => e
+      # Too many requests made to the API too quickly
+      flash[:error] = e.message
+      redirect_to dash_path
+    rescue Stripe::InvalidRequestError => e
+      # Invalid parameters were supplied to Stripe's API
+      flash[:error] = e.message
+      redirect_to dash_path
+    rescue Stripe::AuthenticationError => e
+      # Authentication with Stripe's API failed
+      # (maybe you changed API keys recently)
+      flash[:error] = e.message
+      redirect_to dash_path
+    rescue Stripe::APIConnectionError => e
+      # Network communication with Stripe failed
+      flash[:error] = e.message
+      redirect_to dash_path
+    rescue Stripe::StripeError => e
+      # Display a very generic error to the user, and maybe send
+      # yourself an email
+      flash[:error] = e.message
+      redirect_to dash_path
+    rescue => e
+      # Something else happened, completely unrelated to Stripe
+      flash[:error] = e.message
+      redirect_to dash_path
+    end
+  end
+
 end
