@@ -21,11 +21,3 @@
    <% end %>
    <% end %>
   <% end %>
-
-
-  <div style="margin-bottom:20px;">
-    <% if current_user %>
-    <% @charges = Charge.where(:vendor_id => current_user.id) %>
-    <%= line_chart @charges.group(:created_at).sum(:price) %>
-    <% end %>
-  </div>
