@@ -82,7 +82,7 @@
   <% if current_user %>
   <strong> Sales </strong>
   <% @charges = Charge.where(:vendor_id => current_user.id) %>
-    <%= line_chart @charges.group(:created_at).sum(:price) %>
+    <%= line_chart @charges.group(:created_at).sum(:price), colors: ["#000", "#00bfff"] %>
 
   <% @board_all = Board.where(:user_id => current_user.id) %>
     <%= pie_chart current_user.boards.group(:title).sum(:price) %>
