@@ -18,6 +18,8 @@
 //= require refile
 //= require lightbox
 //= require jquery.slick
+//= require Chart.bundle
+//= require chartkick
 //= require_tree .
 
 

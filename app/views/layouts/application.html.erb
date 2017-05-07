@@ -11,6 +11,8 @@
     <%= javascript_include_tag 'application' %>
 
 
+
+
 <% flash.each do |key, value| %>
   <div class="alert alert-<%= key %>" style="position:absolute;top:50px;right:0;">
     <%= value %>
@@ -28,6 +30,8 @@
     <%= render 'layouts/header' %>
 
     <%= yield %>
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

@@ -1,3 +1,5 @@
+<% content_for(:header) do %>
+<% end %>
 
   <h4 class="dash-data-title"> Board waiting arrival</h4>
 <% if @charge || @board %>
@@ -19,3 +21,9 @@
    <% end %>
    <% end %>
   <% end %>
+
+
+  <div style="margin-bottom:20px;">
+    <% @charges = Charge.where(:vendor_id => 2) %>
+    <%= line_chart @charges.group(:created_at).sum(:price) %>
+  </div>
