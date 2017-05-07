@@ -85,7 +85,7 @@
     <%= line_chart @charges.group(:created_at).sum(:price) %>
 
   <% @board_all = Board.where(:user_id => current_user.id) %>
-    <%= pie_chart @board_all.type.group(:name) %>
+    <%= pie_chart @board_all.types.group(:name) %>
   <% end %>
   <!--  add board_type and category to charges as metadata or otherwise-->
   <!-- manipulate chart data group by_data_range, type, category, price, margins on the fly, -->
