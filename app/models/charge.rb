@@ -18,7 +18,7 @@
 #  shipping    :boolean
 #  start_time  :datetime
 #  end_time    :datetime
-#
+
 
 class Charge < ApplicationRecord
   belongs_to :user

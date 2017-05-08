@@ -23,7 +23,9 @@ class ChargesController < ApplicationController
     customer_id: customer.id,
     completed: false,
     board_id: params[:charge]["board_id"],
-    shipping: params[:charge]["shipping"]
+    shipping: params[:charge]["shipping"],
+    metadata: { "name" => params[:name], "campaign" => campaign.id }
+    }
   )
 
 
@@ -103,8 +105,9 @@ end
       :customer => params[:customer_id],
       :currency => 'usd',
       :destination => @charge.vendor.stripe_account,
-      :application_fee => 200+(@charge.price*3)+ 31
-      },
+      :application_fee => 200+(@charge.price*3)+ 31,
+       metadata: { "shipping" => params[:shipping], "board" => @board.title }
+      }
     )
     @charge.update_attribute(:completed, true)
     @board.update_attribute(:arrived, true)
