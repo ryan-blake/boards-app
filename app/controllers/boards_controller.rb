@@ -166,6 +166,7 @@ transactions = Stripe::BalanceTransaction.all(
 
        @transactions = balances.sort_by {|date,net| date}
 
+       @charge = Stripe::Charge.retrieve(id: params[:id], expand: ['application_fee'])
 
   end
   # GET /boards/1

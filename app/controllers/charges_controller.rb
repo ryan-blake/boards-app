@@ -135,7 +135,7 @@ end
       # Validate that the user should be able to view this charge
       check_destination(@charge)
 
-      @board = Board.find(@charge.board_id)
+      @board = Board.find(@charge.metadata.charge_id)
     rescue Stripe::RateLimitError => e
       # Too many requests made to the API too quickly
       flash[:error] = e.message
