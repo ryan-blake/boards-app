@@ -104,7 +104,7 @@ end
       :currency => 'usd',
       :destination => @charge.vendor.stripe_account,
       :application_fee => 200+(@charge.price*3)+ 31,
-       metadata: { "shipping" => params[:charge]["shipping"], "charge_id" => @charge.id, "board" => @board.title, "vendor" => User.find(@charge.vendor).name, "vendor_id" => User.find(@charge.vendor).id,  "customer" => User.find(current_user).name, "customer_id" => User.find(current_user).id }
+       metadata: { "shipping" => @charge.shipping, "charge_id" => @charge.id, "board" => @board.title, "vendor" => User.find(@charge.vendor).name, "vendor_id" => User.find(@charge.vendor).id,  "customer" => User.find(current_user).name, "customer_id" => User.find(current_user).id }
      },
     )
     @charge.update_attribute(:completed, true)
