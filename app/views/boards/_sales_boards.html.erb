@@ -62,7 +62,7 @@
 <% end %>
 
 <% @payments.each do |payment| %>
-<tr id="row_<%= payment_id %>">
+<tr id="charge_<%= payment.id %>" >
     <td><%= link_to payment.source_transfer.source_transaction, charges_path(payment.source_transfer.source_transaction) %></td>
     <td><%= number_to_currency(payment.amount/100) %></td>
     <td><%= format_amount(payment.amount - payment.application_fee.amount) %></td>
