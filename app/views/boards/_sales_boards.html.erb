@@ -1,4 +1,4 @@
-<% unless current_user.stripe_account %>
+<% if current_user.stripe_account %>
 <strong>
   <h1>
     <h2 class="page-header">
@@ -107,4 +107,11 @@
   <!--  add board_type and category to charges as metadata or otherwise-->
   <!-- manipulate chart data group by_data_range, type, category, price, margins on the fly, -->
 </div>
+<% else %>
+<% @my_purchases = Charge.where(:user_id => current_user.id) %>
+ <% @my_purchases.each do |i| %>
+   <%= i.item, i.price, i.vendor.name %>
+   <strong style="font-size:15px;text-decoration:none">Chat with
+     <%= link_to i.vendor.name.capitalize , conversations_path(user_id: i.vendor.id), remote: true, method: :post %>
+
 <% end %>
