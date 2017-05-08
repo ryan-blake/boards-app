@@ -1,6 +1,5 @@
 <strong>
   <h1>
-  sales for <%= @sales_user %> wtf
     <h2 class="page-header">
       <i class="fa fa-table purple"></i>  Transaction balance
       <br><small><span class="raised"><%= format_amount(@balance.pending[0].amount) %></span> pending</small>
@@ -28,7 +27,7 @@
     </table>
   </div>
 </div>
-  <div class="row">
+  <div class="row" id="transfer-table">
   <div class="col-md-12">
     <table class="table table-bordered table-striped table-hover">
       <thead>
@@ -60,7 +59,7 @@
 <strong> price </strong>
   <%= i.price %>
 <% end %>
-<div class="row">
+<div class="row" id="payment-table">
   <div class="col-md-12">
     <table class="table table-bordered table-striped table-hover">
       <thead>
@@ -85,7 +84,9 @@
                   <span class="fa fa-undo"></span> Refunded
                 </span>
               <% else %>
-                <%= link_to "Refund", charge_path(payment.source_transfer.source_transaction), method: :delete, data: { confirm: "Are you sure you want to refund this charge?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Refunding charge..." }, class: "btn btn-sm btn-block btn-custom btn-danger" %>
+              <strong style="font-size:15px;text-decoration:none">Chat with
+                <%= link_to payment.user.name.capitalize , conversations_path(user_id: payment.user.id), remote: true, method: :post %>
+                <!-- <%= link_to "Refund", charge_path(payment.source_transfer.source_transaction), method: :delete, data: { confirm: "Are you sure you want to refund this charge?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Refunding charge..." }, class: "btn btn-sm btn-block btn-custom btn-danger" %> -->
               <% end %>
             </td>
           </tr>
