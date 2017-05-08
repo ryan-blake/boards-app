@@ -87,7 +87,6 @@
               <% else %>
               <strong style="font-size:15px;text-decoration:none">Chat with
                 <%= link_to payment.metadata.customer.capitalize , conversations_path(user_id: payment.metadata.customer_id), remote: true, method: :post %>
-                <!-- <%= link_to "Refund", charge_path(payment.source_transfer.source_transaction), method: :delete, data: { confirm: "Are you sure you want to refund this charge?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Refunding charge..." }, class: "btn btn-sm btn-block btn-custom btn-danger" %> -->
               <% end %>
             </td>
           </tr>
