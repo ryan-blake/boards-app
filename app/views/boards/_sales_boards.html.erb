@@ -1,3 +1,4 @@
+<% unless current_user.stripe_account %>
 <strong>
   <h1>
     <h2 class="page-header">
@@ -106,3 +107,4 @@
   <!--  add board_type and category to charges as metadata or otherwise-->
   <!-- manipulate chart data group by_data_range, type, category, price, margins on the fly, -->
 </div>
+<% end %>
