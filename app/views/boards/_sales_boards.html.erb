@@ -85,8 +85,10 @@
                   <span class="fa fa-undo"></span> Refunded
                 </span>
               <% else %>
-<%   @charge = Stripe::Charge.retrieve(id: "ch_1AHIp6FfA3tpH6jxJ3mnonq6") %>
-                <%= @charge.metadata.customer %>
+<%   @charge = Stripe::Charge.retrieve(id: payment.source_transfer.source_transaction) %>
+<strong style="font-size:15px;text-decoration:none">Chat with
+  <%= link_to @charge.metadata.name.capitalize , conversations_path(user_id: @charge.metadata.customer_id), remote: true, method: :post %>
+</strong>
 
             </td>
           </tr>
