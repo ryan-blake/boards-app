@@ -24,8 +24,6 @@ class ChargesController < ApplicationController
     completed: false,
     board_id: params[:charge]["board_id"],
     shipping: params[:charge]["shipping"],
-    metadata: { "name" => params[:name], "campaign" => campaign.id }
-    }
   )
 
 
