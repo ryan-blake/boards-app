@@ -86,7 +86,7 @@
                 </span>
               <% else %>
               <strong style="font-size:15px;text-decoration:none">Chat with
-                <%= link_to payment.metadata['customer'].capitalize , conversations_path(user_id: payment.metadata.customer_id), remote: true, method: :post %>
+                <%= link_to payment.data.metadata.customer.capitalize , conversations_path(user_id: payment.metadata.customer_id), remote: true, method: :post %>
               <% end %>
             </td>
           </tr>
