@@ -85,7 +85,9 @@
                   <span class="fa fa-undo"></span> Refunded
                 </span>
               <% else %>
-              <%= payment.metadata.customer %>
+<%   @charge = Stripe::Charge.retrieve(id: params[:id]) %>
+                <%= @charge.metadata.customer %>
+
             </td>
           </tr>
           <% end %>
