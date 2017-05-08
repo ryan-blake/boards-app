@@ -62,7 +62,7 @@
 <% end %>
 
 <% @payments.each do |payment| %>
-  <tr>
+<tr id="row_<%= payment_id %>">
     <td><%= link_to payment.source_transfer.source_transaction, charges_path(payment.source_transfer.source_transaction) %></td>
     <td><%= number_to_currency(payment.amount/100) %></td>
     <td><%= format_amount(payment.amount - payment.application_fee.amount) %></td>
@@ -73,7 +73,9 @@
           <span class="fa fa-undo"></span> Refunded
         </span>
       <% else %>
-        <%= link_to "Refund", charges_path(payment.source_transfer.source_transaction), method: :delete, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> refunding"}, class: "btn btn-sm btn-block btn-custom btn-danger" %>
+
+        <%= link_to "refund", charges_path(payment.source_transfer.source_transaction), remote: true,
+                                method: :delete, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> refunding"}, class: "btn btn-sm btn-block btn-custom btn-danger" %>
       <% end %>
     </td>
   </tr>

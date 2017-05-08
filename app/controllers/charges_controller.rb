@@ -176,10 +176,6 @@ end
       # Refund the charge
       charge.refund(reverse_transfer: true, refund_application_fee: true)
 
-      # Update the local charge
-      local_charge = Charge.find_by charge_id: charge.id
-      local_charge.amount_refunded = charge.amount
-      local_charge.save
 
       # Update the amount raised for this campaign
 
