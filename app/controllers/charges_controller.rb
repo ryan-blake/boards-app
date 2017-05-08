@@ -23,7 +23,7 @@ class ChargesController < ApplicationController
     customer_id: customer.id,
     completed: false,
     board_id: params[:charge]["board_id"],
-    shipping: params[:charge]["shipping"],
+    shipping: params[:charge]["shipping"]
   )
 
 
