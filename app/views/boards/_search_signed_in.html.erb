@@ -57,6 +57,7 @@
              <button class="btn btn-sort pull-right view_btn"><%= link_to 'view', board, target: :_blank  %></button>
              <br>
              <hr class="style13">
+              <%= time_ago_in_words(board.list_time) %>
            </td>
            </ul>
         </tbody>
