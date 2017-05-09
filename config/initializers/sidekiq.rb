@@ -1,5 +1,3 @@
-require 'sidekiq'
-
 Sidekiq.configure_server do |config|
 
     congif.redis = {url: ENV['REDIS_PROVIDER']}
