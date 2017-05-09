@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+# crons
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
+mount Sidekiq::Web => '/sidekiq'
 
   # mngd
   get 'terms', to: 'pages#terms'
