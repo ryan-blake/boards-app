@@ -120,9 +120,11 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.20161129)
       unf (>= 0.0.5, < 1.0.0)
+    em-dir-watcher (0.9.4)
     erubis (2.7.0)
     et-orbi (1.0.3)
       tzinfo
+    eventmachine (1.2.3)
     execjs (2.7.0)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
@@ -298,6 +300,10 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    sidekick (0.7.0)
+      em-dir-watcher
+      eventmachine
+      tilt (>= 1)
     sidekiq (4.2.10)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -415,6 +421,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
+  sidekick
   sidekiq-cron (~> 0.4.0)
   simple_calendar
   sinatra!
