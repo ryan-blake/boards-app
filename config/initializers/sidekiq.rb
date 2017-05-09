@@ -1,6 +1,6 @@
 Sidekiq.configure_server do |config|
 
-    congif.redis = {url: ENV['REDIS_PROVIDER']}
+    config.redis = {url: ENV['REDIS_PROVIDER']}
 
   schedule_file = "config/schedule.yml"
   if File.exists?(schedule_file)
