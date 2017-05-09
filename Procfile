@@ -1,1 +1,1 @@
-delistWorker: bundle exec sidekiq -c 1
+delistWorker: bundle exec sidekiq -C config/initializers/sidekiq.yml
