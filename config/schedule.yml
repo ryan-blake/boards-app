@@ -1,5 +1,5 @@
 delist_month_old_boards:
   # cron: "* 21 * * 0-6" should perfrom at 9pm every night
-  cron: "1 * * * *"
+  cron: "* */1 * * *"
   class: "DelistMonthOldBoardsJob"
   queue: default
