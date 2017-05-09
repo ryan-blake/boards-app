@@ -1,7 +1,7 @@
 Sidekiq.configure_server do |config|
   if Rails.env.development?
     config.redis = { url: 'redis://localhost:6379/0'  }
-  else Rails.env.production?
+  elsif Rails.env.production?
     congif.redis = {url: ENV['REDIS_PROVIDER']}
   end
   schedule_file = "config/schedule.yml"
