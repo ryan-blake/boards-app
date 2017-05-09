@@ -1,9 +1,9 @@
+require 'sidekiq'
+
 Sidekiq.configure_server do |config|
-  if Rails.env.development?
-    config.redis = { url: 'redis://localhost:6379/0'  }
-  elsif Rails.env.production?
+
     congif.redis = {url: ENV['REDIS_PROVIDER']}
-  end
+
   schedule_file = "config/schedule.yml"
   if File.exists?(schedule_file)
     Sidekiq::Cron::Job.load_from_hash YAML.load_file(schedule_file)
