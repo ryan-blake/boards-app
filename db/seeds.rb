@@ -142,7 +142,7 @@ end
   arrived: false,
   zipcode: [76210, 90277, 76262, 76135].sample,
   for_sale: true,
-  list_time: [Time.now, Time.now - 2.weeks, Time.now 4.weeks].sample
+  list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
   )
 end
 20.times do
