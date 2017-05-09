@@ -81,7 +81,8 @@ User.create(
  address: "123 test st",
  city: "roanoke",
  state: ["tx", "tx"].sample,
- zipcode: 76262
+ zipcode: 76262,
+ company: "comp1"
 
  )
  User.create(
@@ -92,7 +93,8 @@ User.create(
  address: "123 test st",
  city: "denton",
  state: ["tx", "tx"].sample,
- zipcode: 76210
+ zipcode: 76210,
+ company: "comp2"
 
 )
 
@@ -139,7 +141,8 @@ end
   pending: false,
   arrived: false,
   zipcode: [76210, 90277, 76262, 76135].sample,
-  for_sale: true
+  for_sale: true,
+  list_time: [Time.now, Time.now - 2.weeks.ago, Time.now 4.weeks.ago].sample
   )
 end
 20.times do
@@ -160,7 +163,9 @@ end
   pending: true,
   arrived: [true, false].sample,
   zipcode: [76210, 90277, 76262, 76135].sample,
-  for_sale: false
+  for_sale: false,
+  list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
+
   )
 
   boards = Board.all

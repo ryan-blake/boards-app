@@ -32,6 +32,7 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
+#  list_time   :datetime         default("f")
 #
 
 class Board < ApplicationRecord
@@ -52,6 +53,8 @@ class Board < ApplicationRecord
   validates :category, :presence => true
   validates :zipcode, :length => { :is => 5 }
   after_save :check_for_tracking_number
+  after_update :update_tokens
+
 
 
 
@@ -70,5 +73,16 @@ class Board < ApplicationRecord
      end
   end
 
+  private
+
+  def update_tokens
+    if for_sale_changed? == true
+      if self.changes["for_sale"][1]
+      a =  Board.find(self.id).user
+      a.tokens += -2
+      a.save
+      end
+    end
+  end
 
 end

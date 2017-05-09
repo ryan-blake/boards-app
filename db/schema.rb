@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421010105) do
+ActiveRecord::Schema.define(version: 20170509170935) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at",                  null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20170421010105) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",      default: false
+    t.datetime "list_time"
     t.index ["category_id"], name: "index_boards_on_category_id"
     t.index ["type_id"], name: "index_boards_on_type_id"
     t.index ["user_id"], name: "index_boards_on_user_id"

@@ -78,6 +78,7 @@
 <%= f.label :price %><br/>
 <%= f.number_field :price, class: 'btn-width form-control' %>
 <%= f.hidden_field :user_id, :value => current_user.id %>
+<%= f.hidden_field :list_time, :value => Time.now %>
 
 <!--  -->
 

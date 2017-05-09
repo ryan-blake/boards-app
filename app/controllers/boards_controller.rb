@@ -24,15 +24,6 @@ class BoardsController < ApplicationController
       @types = Type.order(:name)
       @categories = Category.order(:name)
 
-      if current_user.present?
-
-        @on = current_user
-        @charge = Charge.where(user_id: @on.id)
-        if @charge == nil
-          @boards = Board.where(title: @charge.item )
-          @boardies = Board.where(title: @charge.item )
-      end
-    end
   end
 
 
@@ -48,24 +39,24 @@ class BoardsController < ApplicationController
 
       # stripe account data
       if current_user.stripe_account
-    @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
+        @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
 
-    @payments = Stripe::Charge.list(
-      {
-        limit: 100,
-        expand: ['data.source_transfer', 'data.application_fee']
-      },
-      { stripe_account: current_user.stripe_account }
-    )
+        @payments = Stripe::Charge.list(
+        {
+          limit: 100,
+          expand: ['data.source_transfer', 'data.application_fee']
+        },
+        { stripe_account: current_user.stripe_account }
+        )
 
-    @transfers = Stripe::Transfer.list(
-      {
-        limit: 100
-      },
-      { stripe_account: current_user.stripe_account }
-    )
+        @transfers = Stripe::Transfer.list(
+          {
+            limit: 100
+          },
+          { stripe_account: current_user.stripe_account }
+        )
 
-    @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
+        @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
 
     # Retrieve transactions with an available_on date in the future
     transactions = Stripe::BalanceTransaction.all(
@@ -168,6 +159,7 @@ transactions = Stripe::BalanceTransaction.all(
 
 
   end
+
   # GET /boards/1
   # GET /boards/1.json
   def show
@@ -223,6 +215,7 @@ transactions = Stripe::BalanceTransaction.all(
   # PATCH/PUT /boards/1
   # PATCH/PUT /boards/1.json
   def update
+
     respond_to do |format|
       if @board.update(board_params)
 
@@ -316,6 +309,8 @@ def update_boards
   end
 end
 
+
+
   private
   def sort_column
     Board.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
@@ -335,7 +330,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :used, :footgear, :width, :length, :name, :type_id, :category_id, :volume, :address,
+      params.require(:board).permit(:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :used, :footgear, :width, :length, :name, :type_id, :category_id, :list_time, :volume, :address,
       :city, :state, :remote_image_url,:zipcode, images_files: [], images_attributes: [ :id, :file, :_destroy])
     end
 

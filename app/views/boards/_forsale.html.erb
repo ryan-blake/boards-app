@@ -2,13 +2,19 @@
 <% remote = modal ? true : false %>
 <%= form_for(@board, html: {role: :form, 'data-model' => 'board'}, :remote => true) do |f| %>
   <div class="actions  text-center">
-
-<% if @board.for_sale === false && @board.pending == false %>
-  <div class="actions">
+<% if  @board.for_sale === false && @board.pending == false %>
+ <% if @user.tokens >= 2 %>
+  <div class="actions" >
     <%= f.hidden_field :pending , value: false %>
     <%= f.hidden_field :shipping, :value => nil %>
+    <%= f.hidden_field :list_time, value: Time.now %>
     <%= f.hidden_field :for_sale , value: true %>
     <%= button_tag "list!", id: 'list-btn', class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Listing..."}, remote: true %>
+    <% else %>
+    <div id="tokenPartial" style="display:inline-block;">
+      <%= render partial: 'tokens/new' %>
+    </div>
+    <% end %>
   </div>
 
   <% elsif @board.for_sale == false && @board.pending == true && @board.user_id == current_user.id %>
@@ -18,12 +24,15 @@
     <%= f.hidden_field :customer_id, value: "nil"  %>
     <%= f.hidden_field :address, value: "" %>
     <%= f.hidden_field :pending, value: false %>
+    <%= f.hidden_field :list_time, value: "" %>
     <div class="actions">
      <%= f.hidden_field :for_sale , value: false %>
      <%= button_tag "Cancel", id: 'cancel-btn', class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> canceling..."}, remote: true %>
     </div>
   <% elsif @board.for_sale == true && @board.pending == false %>
       <%= f.hidden_field :pending, value: false %>
+      <%= f.hidden_field :list_time, value: "" %>
+
     <div class="actions">
         <%= f.hidden_field :for_sale , value: false %>
         <%= button_tag "Delist", id: 'delist-btn', class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> delisting..."}, remote: true %>

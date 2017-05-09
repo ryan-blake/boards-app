@@ -1,10 +1,8 @@
 require 'sidekiq/web'
 
-
-
 if Rails.env.production?
 
-   Sidekiq.configure_server do |config|
+  Sidekiq.configure_server do |config|
    config.redis = { url: ENV["REDISTOGO_URL"]}
    schedule_file = "config/schedule.yml"
    if File.exists?(schedule_file)
