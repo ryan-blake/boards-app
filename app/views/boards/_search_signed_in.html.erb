@@ -48,16 +48,17 @@
          </li>
          <li class="center-text">
           <%=  board.description.truncate(33)  %>
+
          </li>
          <li class="center-text">
            <strong class="make-li"><%=  board.make %></strong>
+           <%= time_ago_in_words(board.list_time) %>
          </li>
          <li class="center-text" style="padding-top:5px;">
            <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
              <button class="btn btn-sort pull-right view_btn"><%= link_to 'view', board, target: :_blank  %></button>
              <br>
              <hr class="style13">
-              <%= time_ago_in_words(board.list_time) %>
            </td>
            </ul>
         </tbody>
