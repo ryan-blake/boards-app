@@ -57,8 +57,8 @@ gem 'slim'
 gem "jquery-slick-rails"
 gem 'groupdate'
 gem "chartkick"
-
-gem "sinatra", github: 'sinatra/sinatra'
+gem "sidekick"
+gem "sinatra", github:'sinatra/sinatra'
 gem "sidekiq-cron", "~> 0.4.0"
 
 # gem 'data-confirm-modal'
