@@ -3,7 +3,7 @@ class DelistMonthOldBoardsJob < ApplicationJob
 
   def perform(*args)
     a = []
-    boards = Board.where("list_time < ?", 20.days.ago).where(:for_sale => true)
+    boards = Board.where(:for_sale => true)
     boards.each do |i|
       i.for_sale = false
       i.list_time = ""
