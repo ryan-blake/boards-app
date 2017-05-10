@@ -69,8 +69,8 @@ class Board < ApplicationRecord
  scope :min_price, ->(min) { where('price >= ?', min) }
  scope :max_price, ->(max) { where('price <= ?', max) }
  # fix length
- scope :min_length_search, ->(minimum) { where('length > ?', minimum) }
- scope :max_length_search, ->(maximum) { where('length < ?', maximum) }
+ scope :min_length_search, ->(minimum) { where('length >= ?', minimum) }
+ scope :max_length_search, ->(maximum) { where('length <= ?', maximum) }
 
 
   def check_for_tracking_number

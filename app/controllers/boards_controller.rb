@@ -247,16 +247,23 @@ transactions = Stripe::BalanceTransaction.all(
    else
      distance_in_miles = params[:value]
    end
+
    if params[:search].empty?
      @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
              # price
-             if params[:min].present? || params[:max].present?
-
+             if params[:min][0].to_i > 2
                @boards  = @boards.min_price(params[:min]).max_price(params[:max])
-
+             else
+               @boards  = @boards.min_price("1").max_price(params[:max])
+             end
             #  length / height
+            if params[:minimum][0].to_i > 2
+              @boards  = @boards.min_length_search(params[:minimum]).max_length_search(params[:maximum])
+            else
+              @boards  = @boards.min_length_search("1").max_length_search(params[:maximum])
+            end
 
              if params[:rental] == "on"
                @boards =  @boards.where(:rental => true)
@@ -275,21 +282,28 @@ transactions = Stripe::BalanceTransaction.all(
                      format.js
               end
              end
-end
+
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
+
 else
    @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
            "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
-            # price, SET MINUMUM AND MAX DEFAULTS, (looks like a default minimum is all that is needed) UNLESS USER params[:min].present
-            if params[:min].empty? && params[:max].empty?
+            # price
+            if params[:min][0].to_i > 2
+              @boards  = @boards.min_price(params[:min]).max_price(params[:max])
             else
-                @boards  = @boards.min_price(params[:min]).max_price(params[:max])
+              @boards  = @boards.min_price("1").max_price(params[:max])
             end
 
             # length / height
+            if params[:minimum][0].to_i > 2
+              @boards  = @boards.min_length_search(params[:minimum]).max_length_search(params[:maximum])
+            else
+              @boards  = @boards.min_length_search("1").max_length_search(params[:maximum])
+            end
 
 
             if params[:rental] == "on"
