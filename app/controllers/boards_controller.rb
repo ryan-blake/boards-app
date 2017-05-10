@@ -259,16 +259,16 @@ transactions = Stripe::BalanceTransaction.all(
                @boards  = @boards.min_price(1).max_price(params[:max][0].to_i)
              end
 
-            #  length / height
-            if params[:minimum][0].to_i < 2
-              @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
-            else
-              if params[:maximum][0].to_i == 0
-                @boards  = @boards.min_length_search(1).max_length_search(9999)
-              else
-              @boards  = @boards.min_length_search(1).max_length_search(params[:maximum][0].to_i)
-            end
-            end
+             #  length / height
+             if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
+               @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
+             else
+               if params[:maximum][0].to_i == 0
+                 @boards  = @boards.min_length_search(1).max_length_search(9999)
+               else
+               @boards  = @boards.min_length_search(1).max_length_search(params[:maximum][0].to_i)
+             end
+             end
 
              if params[:rental] == "on"
                @boards =  @boards.where(:rental => true)
@@ -304,7 +304,7 @@ else
             end
 
            #  length / height
-           if params[:minimum][0].to_i < 2
+           if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
              @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
            else
              if params[:maximum][0].to_i == 0
