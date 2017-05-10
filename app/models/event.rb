@@ -39,8 +39,11 @@ validates_date :start_time, :before => :end_time,
 
 # validate :unbooked_events, :on => :create
 
-belongs_to :board
+# belongs_to :board
 
+def all_day_event?
+  self.start_time == self.start_time.end_of_day && self.end_time == self.end_time.end_of_day ? true : false
+end
 
 # validates :name, presence: true
 # validate all events are paid for first

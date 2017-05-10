@@ -1,6 +1,7 @@
 <% content_for(:header) do %>
 <% end %>
 
+<%= render partial: 'events/fullcalendar' %>
   <h4 class="dash-data-title"> Board waiting arrival</h4>
 <% if @charge || @board %>
   <% @charge.each do |charge| %>

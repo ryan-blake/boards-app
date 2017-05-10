@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509170935) do
+ActiveRecord::Schema.define(version: 20170510212934) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at",                                  null: false
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(version: 20170509170935) do
     t.integer  "board_id"
     t.integer  "charge_id"
     t.string   "name"
+    t.string   "color"
+    t.string   "date_range"
     t.index ["board_id"], name: "index_events_on_board_id"
     t.index ["charge_id"], name: "index_events_on_charge_id"
     t.index ["user_id"], name: "index_events_on_user_id"
