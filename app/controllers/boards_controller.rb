@@ -268,6 +268,7 @@ transactions = Stripe::BalanceTransaction.all(
               else
               @boards  = @boards.min_length_search(1).max_length_search(params[:maximum][0].to_i)
             end
+            end
 
              if params[:rental] == "on"
                @boards =  @boards.where(:rental => true)
