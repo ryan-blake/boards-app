@@ -251,6 +251,13 @@ transactions = Stripe::BalanceTransaction.all(
      @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+             # price
+             if params[:min].present? || params[:max].present?
+
+               @boards  = @boards.min_price(params[:min]).max_price(params[:max])
+
+            #  length / height
+
              if params[:rental] == "on"
                @boards =  @boards.where(:rental => true)
              else
@@ -268,7 +275,7 @@ transactions = Stripe::BalanceTransaction.all(
                      format.js
               end
              end
-
+end
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 else
@@ -276,6 +283,15 @@ else
 
            "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
+            # price, SET MINUMUM AND MAX DEFAULTS, (looks like a default minimum is all that is needed) UNLESS USER params[:min].present
+            if params[:min].empty? && params[:max].empty?
+            else
+                @boards  = @boards.min_price(params[:min]).max_price(params[:max])
+            end
+
+            # length / height
+
+
             if params[:rental] == "on"
               @boards =  @boards.where(:rental => true)
             else
