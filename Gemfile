@@ -60,7 +60,7 @@ gem "chartkick"
 gem "sidekick"
 gem "sinatra", github:'sinatra/sinatra'
 gem "sidekiq-cron", "~> 0.4.0"
-
+gem 'simple_form'
 # gem 'data-confirm-modal'
 group :development do
   gem 'better_errors'
@@ -85,7 +85,7 @@ group :development, :test do
     # Call 'byebug' anywhere in the code to stop execution and get a debugger console
     gem 'byebug', platform: :mri
     gem 'sqlite3'
-    gem 'simple_form'
+
 end
 
 group :test do
