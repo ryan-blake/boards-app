@@ -259,7 +259,7 @@ transactions = Stripe::BalanceTransaction.all(
                 @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
               else
                 if params[:max][0].to_i == 0
-                  @boards  = @boards.min_price(1).max_length_search(9999)
+                  @boards  = @boards.min_price(1).max_price(9999)
                 else
                 @boards  = @boards.min_price(1).max_price(params[:max][0].to_i)
               end
