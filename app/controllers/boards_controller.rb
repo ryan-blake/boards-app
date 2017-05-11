@@ -269,12 +269,12 @@ transactions = Stripe::BalanceTransaction.all(
              if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
                @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
              else
-               if params[:maximum][0].to_i == 0 && params[:maximum][0].to_i >= 1
+               if params[:maximum][0].to_i <= 0 && params[:maximum][0].to_i >= 1
                  @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(9999)
-               elsif params[:minimum][0].to_i == 0 && params[:maximum][0].to_i >= 1
+               elsif params[:minimum][0].to_i <= 0 && params[:maximum][0].to_i >= 1
                  @boards  = @boards.min_length_search(1).max_length_search(params[:maximum][0].to_i)
                else
-                 @boards  = @boards.min_length_search(1).max_length_search(9999)
+                 @boards  = @boards.min_length_search(2).max_length_search(9999)
                end
              end
 
