@@ -253,18 +253,19 @@ transactions = Stripe::BalanceTransaction.all(
 
              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
              # price
+             if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
+               @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
+             else
+               if params[:max][0].to_i <= 0 && params[:min][0].to_i >= 1
+                 @boards  = @boards.min_price(params[:min][0].to_i).max_price(9999)
+               elsif params[:min][0].to_i <= 0 && params[:max][0].to_i >= 1
+                 @boards  = @boards.min_price(1).max_price(params[:max][0].to_i)
+               else
+                 @boards  = @boards.min_price(1).max_price(9999)
+               end
+             end
 
-#
-            if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
-                @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
-              else
-                if params[:max][0].to_i == 0
-                  @boards  = @boards.min_price(1).max_price(9999)
-                else
-                @boards  = @boards.min_price(1).max_price(params[:max][0].to_i)
-              end
-            end
-#
+
              #  length / height
              if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
                @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
@@ -274,7 +275,7 @@ transactions = Stripe::BalanceTransaction.all(
                elsif params[:minimum][0].to_i <= 0 && params[:maximum][0].to_i >= 1
                  @boards  = @boards.min_length_search(1).max_length_search(params[:maximum][0].to_i)
                else
-                 @boards  = @boards.min_length_search(2).max_length_search(9999)
+                 @boards  = @boards.min_length_search(1).max_length_search(9999)
                end
              end
 
@@ -305,28 +306,30 @@ else
            "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
             # price
-            #
-              if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
-                @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
-              else
-                if params[:max][0].to_i == 0
-                  @boards  = @boards.min_price(1).max_length_search(9999)
-                else
+            if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
+              @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
+            else
+              if params[:max][0].to_i <= 0 && params[:min][0].to_i >= 1
+                @boards  = @boards.min_price(params[:min][0].to_i).max_price(9999)
+              elsif params[:min][0].to_i <= 0 && params[:max][0].to_i >= 1
                 @boards  = @boards.min_price(1).max_price(params[:max][0].to_i)
+              else
+                @boards  = @boards.min_price(1).max_price(9999)
               end
-              end
-            #
+            end
 
-           #  length / height
-           if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
-             @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
-           else
-             if params[:maximum][0].to_i == 0
-               @boards  = @boards.min_length_search(1).max_length_search(9999)
-             else
-             @boards  = @boards.min_length_search(1).max_length_search(params[:maximum][0].to_i)
-           end
-           end
+            #  length / height
+            if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
+              @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
+            else
+              if params[:maximum][0].to_i <= 0 && params[:minimum][0].to_i >= 1
+                @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(9999)
+              elsif params[:minimum][0].to_i <= 0 && params[:maximum][0].to_i >= 1
+                @boards  = @boards.min_length_search(1).max_length_search(params[:maximum][0].to_i)
+              else
+                @boards  = @boards.min_length_search(1).max_length_search(9999)
+              end
+            end
 
 
             if params[:rental] == "on"
