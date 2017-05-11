@@ -38,7 +38,7 @@ def create
 
     if User.where(:email => user_email).exists?
       redirect_to new_user_session_path, :notice => "Howdy, Email is already in use, please login or use a different email to complete your purchase." and return
-       
+
 
     else
     current_user = User.create!(
@@ -83,7 +83,8 @@ def create
             completed: false,
             board_id: @board.id,
             start_time: @event.start_time,
-            end_time: @event.end_time
+            end_time: @event.end_time,
+            rental:  true
           )
 
       rescue Stripe::CardError => e
@@ -104,16 +105,18 @@ def create
             :customer => @charge.customer_id,
             :currency => 'usd',
             :destination => @charge.vendor.uid,
-            :application_fee => @charge.price / 2
+            :application_fee => 200+(@charge.price*3)+ 31
 
             },
           )
 
           @charge.update_attribute(:completed, true)
+          @board.inventory += -1
+          @board.save
           @event.charge_id = @charge.id
           @event.save
 
-          redirect_to my_boards_path, flash: {notice: "Charge Successful"}
+          redirect_to dash_path, flash: {notice: "Charge Successful"}
         end
 
       end

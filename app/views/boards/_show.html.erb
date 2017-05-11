@@ -76,17 +76,20 @@
 <!-- section -->
   <% if @board.rental %>
   <div class="rental-div" style="min-height:100%;">
-    <div class="rent-dates">
-      <%= render 'events/form', locals: {events: @events, board: @board} %>
-    <!-- section -->
-    </div>
-    <hr>
+
 
     <div id="events_calendar" style="max-width:100%;padding-bottom:30px;">
       <%= render 'events/calendar', locals: {events: @events, board: @board} %>
     </div>
+    <div class="rent-dates">
+      <%= render 'events/form', locals: {events: @events, board: @board} %>
+    <!-- section -->
+    </div>
 </div>
+
+<hr>
 <script>
+
 $('.date#datetimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
 
 $('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');

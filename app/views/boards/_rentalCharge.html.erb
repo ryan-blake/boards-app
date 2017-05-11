@@ -1,0 +1,21 @@
+<%= form_for Charge.new do |f| %>
+  <%= f.hidden_field :amount, value:  @board.price.round  %>
+  <%= f.hidden_field :item, value:  @board.title %>
+  <%= f.hidden_field :owner_id, value:  @board.user_id %>
+  <%= f.hidden_field :board_id, value:  @board.id %>
+  <%= f.hidden_field :shipping, value:  false %>
+
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
+        <% if current_user.present? %>
+          data-email="<%=current_user.email %>"
+        <% end %>
+
+        data-amount="<%= @board.price.to_i.ceil * 100 %>"
+
+
+        data-name="<%=  @board.title %> " data-description="<%= number_to_currency( @board.price) %>">
+    </script>
+
+  <% end %>

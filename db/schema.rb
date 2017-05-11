@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509170935) do
+ActiveRecord::Schema.define(version: 20170511230110) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at",                                  null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170509170935) do
     t.string   "tracking"
     t.boolean  "rental",      default: false
     t.datetime "list_time",   default: '2017-05-10 01:00:12'
+    t.integer  "inventory"
     t.index ["category_id"], name: "index_boards_on_category_id"
     t.index ["type_id"], name: "index_boards_on_type_id"
     t.index ["user_id"], name: "index_boards_on_user_id"
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(version: 20170509170935) do
     t.boolean  "shipping"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.boolean  "rental"
     t.index ["user_id"], name: "index_charges_on_user_id"
   end
 
@@ -106,6 +108,8 @@ ActiveRecord::Schema.define(version: 20170509170935) do
     t.integer  "board_id"
     t.integer  "charge_id"
     t.string   "name"
+    t.string   "color"
+    t.string   "date_range"
     t.index ["board_id"], name: "index_events_on_board_id"
     t.index ["charge_id"], name: "index_events_on_charge_id"
     t.index ["user_id"], name: "index_events_on_user_id"

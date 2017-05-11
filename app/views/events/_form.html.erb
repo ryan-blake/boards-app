@@ -34,30 +34,42 @@
          <span class="glyphicon glyphicon-calendar"></span>
        </span>
      </div>
+       <%= hidden_field_tag(:stripeToken) %>
 </div>
+
 <br>
-<div class="center-text" id="pay_now_rent" style="display:block;">
-  <%f.submit %>
+<div id="rent_now" style="display:none;left: calc(50% - 55px);position: relative;">
+
+
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
       data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
       <% if current_user.present? %>
         data-email="<%=current_user.email %>"
       <% end %>
         data-description="A <%= @board.title %> reservation"
-        data-amount="<%= @board.price.to_i.ceil * 100 %>">
+        data-amount="<%= @board.price.to_i.ceil * 100 %> ">
     </script>
-</div>
-<% end %>
-<% end %>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <%f.submit %>
 
+
+</div>
+
+<% end %>
+<% end %>
+</div>
 <script>
-function initRentPay(){
-  var pay = document.getElementById('pay_now_rent');
-  pay.style['display'] = 'block';
-
-};
 $(document).ready(function() {
- initRentPay();
+var endtime = document.getElementById('datetimepicker1');
+var pay_rent = document.getElementById('rent_now')
+
+endtime.onclick = function() {
+  if (pay_rent.style.display == 'none') {
+     pay_rent.style['display'] = 'block';
+  } else {
+    pay_rent.style['display'] = 'block';
+  }
+};
 });
+
 </script>
-</div>

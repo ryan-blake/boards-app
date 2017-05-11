@@ -61,12 +61,13 @@
       </tbody>
       <th class="col-sm-3"><%= f.label :accessory %></th>
       <th class="col-sm-3"><%= f.label :used %></th>
+      <th class="col-sm-3"><%= f.label :inventory %></th>
       <thead>
       </thead>
       <tbody>
         <td class="col-sm-3"><%= f.check_box :footgear, class: 'form-control' %> <br /></td>
         <td class="col-sm-3"><%= f.check_box :used, class: 'form-control' %> <br /></td>
-
+        <td class="col-sm-3"><%= f.number_field :inventory, class: 'btn-width form-control' %></td>
       </tbody>
     </table>
     </div>

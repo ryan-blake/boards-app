@@ -2,11 +2,8 @@
   <div class="calendar-heading text-center" style="position:relative; display:block;">
     <button class="btn btn-sort" style="float:right;margin-right:10px;"><%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view, remote: true %></button>
     <button class="btn btn-sort" style="float:right;color:black;margin-right:5px;"><%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view, remote: true%></button>
-    <% if calendar.number_of_weeks == 1 %>
-      <span class="calendar-title">Week <%= calendar.week_number %></span>
-    <%else%>
-        <span class="calendar-title">Week <%= calendar.week_number %> - <%= calendar.end_week %></span>
-    <%end%>
+    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
+
   </div>
 
   <table class="table table-striped">
