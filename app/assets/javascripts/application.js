@@ -15,6 +15,7 @@
 //= require jquery.geocomplete
 //= require moment
 //= require bootstrap-datetimepicker
+//= require daterangepicker
 //= require refile
 //= require lightbox
 //= require jquery.slick
