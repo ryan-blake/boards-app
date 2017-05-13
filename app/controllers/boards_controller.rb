@@ -284,6 +284,17 @@ transactions = Stripe::BalanceTransaction.all(
 
              if params[:rental] == "on"
                @boards =  @boards.where(:rental => true)
+              #  get boards that also havent been rented once
+              # @fresh_rentals ==  @boards.events == nil
+              # for boards with previous rentals run scope
+           # @boards.each do |i|
+            #  unless i.events.present?
+              #  noevents << i
+            # end
+           # end
+           # boards must run a few extra attached scopes to validate start/end_dates
+               @boards  = @boards.start_search(params[:start_date]).end_search(params[:end_date])
+              # @boards = @boards << @fresh_boards
              else
                @boards = @boards.where(:rental => false)
              end
@@ -292,10 +303,6 @@ transactions = Stripe::BalanceTransaction.all(
               elsif (params[:used] == "on") && (params[:used] != params[:new])
                   @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
               else
-
-                @boards = @boards.all.joins(:events).where(:events => { :name => "ryan_blake@me.com" } ).all
-                @boards = @boards.all.joins(:events).where.not(:events => { :start_time => params[:start_time]..params[:end_time] } ).all
-                @boards = @boards.all.joins(:events).where.not(:events => { :end_time => params[:start_time]..params[:end_time] } ).all
 
                 @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 

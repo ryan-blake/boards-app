@@ -72,10 +72,13 @@ class Board < ApplicationRecord
  scope :min_length_search, ->(minimum) { where('length >= ?', minimum) }
  scope :max_length_search, ->(maximum) { where('length <= ?', maximum) }
 
- scope :start_search, ->(start) { where('start_time >= ?', start) }
- scope :end_search, ->(end_time) { where('end_time <= ?', end_time) }
+ scope :start_search, -> (start_date) {
+   joins(:events).where("start_time <= ?", start_date)
+ }
+ scope :end_search, -> (end_date) {
 
-
+ joins(:events).where("start_time <= ?", end_date)
+}
   def check_for_tracking_number
     if tracking_changed?
        BoardMailer.tracking_number(self).deliver_now
