@@ -40,7 +40,6 @@
 <br>
 <div id="rent_now" style="display:none;left: calc(50% - 55px);position: relative;">
 
-
     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
       data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
       <% if current_user.present? %>
@@ -51,8 +50,6 @@
     </script>
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <%f.submit %>
-
-
 </div>
 
 <% end %>

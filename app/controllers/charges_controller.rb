@@ -174,7 +174,7 @@ end
       check_destination(charge)
 
       # Refund the charge
-      charge.refund(reverse_transfer: true, refund_application_fee: true)
+      charge.refund(reverse_transfer: true, refund_application_fee: false)
 
 
       # Update the amount raised for this campaign
@@ -211,5 +211,6 @@ end
       redirect_to dash_path
     end
   end
+
 
 end

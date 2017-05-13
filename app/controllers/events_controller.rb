@@ -88,10 +88,13 @@ def create
           )
 
       rescue Stripe::CardError => e
+        @event.destroy
         charge_error = e.message
+
       end
 
       if charge_error
+        @event.destroy
         flash[:error] = charge_error
         render :new
       else
@@ -127,9 +130,6 @@ def create
 if @user_new != nil
   @user_new.send_reset_password_instructions
 end
-
-
-  # @unbooked = Event.where(user_id: @user.id, board_id: @board.id, booked: false)
 
 
 end

@@ -42,7 +42,7 @@ class Board < ApplicationRecord
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true
-  has_many :events
+  has_many :events, dependent: :destroy
   validates_associated :events
 
   validates :title, :presence => true
@@ -68,9 +68,12 @@ class Board < ApplicationRecord
 
  scope :min_price, ->(min) { where('price >= ?', min) }
  scope :max_price, ->(max) { where('price <= ?', max) }
- # fix length
+
  scope :min_length_search, ->(minimum) { where('length >= ?', minimum) }
  scope :max_length_search, ->(maximum) { where('length <= ?', maximum) }
+
+ scope :start_search, ->(start) { where('start_time >= ?', start) }
+ scope :end_search, ->(end_time) { where('end_time <= ?', end_time) }
 
 
   def check_for_tracking_number

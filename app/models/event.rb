@@ -38,6 +38,8 @@ validates_date :start_time, :before => :end_time,
 #                                            message_content: 'overlaps with Users other meetings.' }
 
 # validate :unbooked_events, :on => :create
+scope :start_search, ->(start) { where('start_time >= ?', start) }
+scope :end_search, ->(end_time) { where('end_time <= ?', end_time) }
 
 belongs_to :board
 

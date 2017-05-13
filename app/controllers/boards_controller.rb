@@ -252,6 +252,9 @@ transactions = Stripe::BalanceTransaction.all(
      @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+
+
+
              # price
              if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
                @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
@@ -290,12 +293,18 @@ transactions = Stripe::BalanceTransaction.all(
                   @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
               else
 
-                   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+                @boards = @boards.all.joins(:events).where(:events => { :name => "ryan_blake@me.com" } ).all
+                @boards = @boards.all.joins(:events).where.not(:events => { :start_time => params[:start_time]..params[:end_time] } ).all
+                @boards = @boards.all.joins(:events).where.not(:events => { :end_time => params[:start_time]..params[:end_time] } ).all
+
+                @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
               respond_to do |format|
                      format.js
               end
              end
+
+
 
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",

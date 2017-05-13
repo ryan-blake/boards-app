@@ -19,7 +19,6 @@ openExtended.onclick = function() {
 };
 });
 
-
 </script>
 
 <% end %>
@@ -85,7 +84,27 @@ openExtended.onclick = function() {
             <%= number_field :maximum, params[:maximum], class: 'form-control', placeholder: "Choose max" %>
             </span>
           </div>
+          <div class='input-group date' id='starttimepicker'>
+            <%= text_field :start_time, params[:start_time], class: 'form-control', placeholder: "Pick Up Date" %>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+            </div>
+            <div class='input-group date' id='endtimepicker'>
+              <%= text_field :end_time, params[:end_time], class: 'form-control', placeholder: "Drop Off Date" %>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+              </div>
+
+          <!-- <%= text_field :start_time, "data-provide" => 'datepicker' %>
+          <%= text_field :end_time, "data-provide" => 'datepicker1' %> -->
         </div>
+<script>
+        $('.date#starttimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+
+        $('.date#endtimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+</script>
       </div>
 
         <!-- /exteneded -search-->
