@@ -9,6 +9,15 @@ def index
   @users = User.all
 end
 
+def maps
+  @users = User.last
+  @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+  		  marker.lat user.latitude
+  		  marker.lng user.longitude
+  		  marker.infowindow "<a target='blank' href='users/"+"#{user.id}"+"'>Shop #{user.company}</a>"
+  		  marker.json({ title: user.company })
+  		end
+end
 def show
   @user = User.find(params[:id])
   @boards = Board.where(:for_sale => true).order('created_at DESC')
@@ -64,6 +73,7 @@ end
 
 
  def search_signed_in
+
    @user = User.find(params[:id])
    @boards = @user.boards.where(:for_sale => true)
 
