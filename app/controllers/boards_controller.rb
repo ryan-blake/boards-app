@@ -287,8 +287,8 @@ transactions = Stripe::BalanceTransaction.all(
               unless params[:start_date][0].to_s == "" && params[:end_date][0].to_s == ""
                  startDate = Date.parse(params[:start_date].join(', '))
                  endDate = Date.parse(params[:end_date].join(', '))
-                 @boards = @boards.start_search1(startDate, endDate)
-                 @boards = @boards.end_search1(startDate, endDate).pluck(:id)
+                 @boards = @boards.start_search(startDate, endDate)
+                 @boards = @boards.end_search(startDate, endDate).pluck(:id)
              #  strange behaviour inside scoped starts and stops
               one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
               @boards = Board.where(:id => (@boards + one))
