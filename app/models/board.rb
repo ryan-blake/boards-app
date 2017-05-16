@@ -32,7 +32,8 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
-#  list_time   :datetime         default("f")
+#  list_time   :datetime         default("2017-05-10 01:00:12.430923")
+#  inventory   :integer
 #
 
 class Board < ApplicationRecord
@@ -77,6 +78,7 @@ class Board < ApplicationRecord
  scope :start_search, -> (startDate, endDate) {
    joins(:events).where.not(:events => {start_time: (startDate.beginning_of_day)..(endDate.end_of_day + 1.days)})
 }
+
 scope :end_search, -> (startDate, endDate) {
   joins(:events).where.not(:events => {end_time: (startDate.beginning_of_day)..(endDate.end_of_day)})
 }

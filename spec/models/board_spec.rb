@@ -32,7 +32,8 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
-#  list_time   :datetime         default("f")
+#  list_time   :datetime         default("2017-05-10 01:00:12.430923")
+#  inventory   :integer
 #
 
 require 'rails_helper'

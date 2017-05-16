@@ -78,7 +78,21 @@ end
 
              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
              if params[:rental] == "on"
-               @boards =  @boards.where(:rental => true)
+               @boards =  @boards.where(:rental => true).where("inventory >= ?", 1)
+              #  get boards that also havent been rented once unless inventory > 1
+              one = @boards
+              unless params[:start_date][0].to_s == "" && params[:end_date][0].to_s == ""
+                 startDate = Date.parse(params[:start_date].join(', '))
+                 endDate = Date.parse(params[:end_date].join(', '))
+                 @boards = @boards.start_search(startDate, endDate)
+                 @boards = @boards.end_search(startDate, endDate).pluck(:id)
+             #  strange behaviour inside scoped starts and stops
+              one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
+              @boards = Board.where(:id => (@boards + one))
+            else
+              one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
+              @boards = Board.where(:id => (one + @boards))
+            end
              else
                @boards = @boards.where(:rental => false)
              end

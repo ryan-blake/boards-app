@@ -5,6 +5,23 @@ $(function() {
 $("#geo-input").geocomplete();
 country: "US"
 });
+
+$(document).ready(function() {
+var openExtended = document.getElementById('open-extended');
+var extended = document.getElementById('extended-search');
+
+openExtended.onclick = function() {
+   if(this.style.display == 'block') {
+     this.style['display'] = 'none';
+     extended.style['display'] = 'block';
+   }
+};
+});
+
+  $('.date#starttimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+
+  $('.date#endtimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+
 </script>
 <% end %>
 
@@ -58,13 +75,58 @@ country: "US"
         <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'distance from (mi.)'} , { :class => 'form-control' })  %>
       </span>
     </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <div class="col-lg-6">
     <div class="input-group">
       <span class="input-group-btn">
         <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
       </span>
-    </div><!-- /input-group -->
+    </div>
+  </div><!-- /.col-lg-6 -->
+
+  <span id="open-extended" class="center-text" style="cursor:pointer;text-decoration:underline;display:block;"> Extend Search </span>
+  <div id="extended-search" style="display:none;">
+    <div class="col-lg-6">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <%= collection_select(nil, :company, User.all.order(:company).distinct.sort, :company, :company, {prompt: "Choose co"},{ class: "form-control" }) %>
+         </span>
+      </div>
+    </div>
+  <div class="col-sm-4" style="top: 0;width: 50%;float: right;">
+    <div class="input-group">
+      <span class="col-md-8 col-lg-12">
+      <%= number_field :min, params[:min], class: 'form-control', placeholder: "Choose price" %>
+      </span>
+      <span class="col-md-8 col-lg-12">
+      <%= number_field :max, params[:max], class: 'form-control', placeholder: "Choose max" %>
+      </span>
+    </div>
+    <div class="input-group" style="float:left;">
+      <span class="col-md-8 col-lg-12">
+      <%= number_field :minimum, params[:minimum], class: 'form-control', placeholder: "length min" %>
+      </span>
+      <span class="col-md-8 col-lg-12">
+      <%= number_field :maximum, params[:maximum], class: 'form-control', placeholder: "Choose max" %>
+      </span>
+    </div>
+    <div class='input-group date' id='starttimepicker'>
+      <%= text_field :start_date, params[:start_date], class: 'form-control', placeholder: "Pick Up Date" %>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+      </div>
+      <div class='input-group date' id='endtimepicker'>
+        <%= text_field :end_date, params[:end_date], class: 'form-control', placeholder: "Drop Off Date" %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+        </div>
+
+    <!-- <%= text_field :start_time, "data-provide" => 'datepicker' %>
+    <%= text_field :end_time, "data-provide" => 'datepicker1' %> -->
+  </div>
+</div>
+  <div class="col-lg-6">
+<!-- /input-group -->
     New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
     Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
     Rental:<span class="check-box-search"><%= check_box_tag :rental, params[:rental] %> </span>

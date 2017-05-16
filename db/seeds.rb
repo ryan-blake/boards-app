@@ -38,6 +38,14 @@ Category.find_or_create_by(
   type_id: Type.find_by(name: "Surf").id
 )
 Category.find_or_create_by(
+  name: "Skimboard",
+  type_id: Type.find_by(name: "Surf").id
+)
+Category.find_or_create_by(
+  name: "Body-board",
+  type_id: Type.find_by(name: "Surf").id
+)
+Category.find_or_create_by(
   name: "Snowboard",
   type_id: Type.find_by(name: "Snow").id
 )
@@ -119,7 +127,9 @@ users = User.all
   pending: false,
   arrived: false,
   zipcode: [76210, 90277, 76262, 76135].sample,
-  for_sale: true
+  for_sale: true,
+  list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
+
   )
 end
 
@@ -165,12 +175,34 @@ end
   zipcode: [76210, 90277, 76262, 76135].sample,
   for_sale: false,
   list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
-
   )
-
+end
+  20.times do
+    Board.create!(
+    title:       Faker::Hipster.word,
+    make:       Faker::Hipster.word,
+    used:       [true, false].sample,
+    description: Faker::Hipster.paragraph,
+    length: Faker::Number.number(1),
+    width: Faker::Number.number(1),
+    volume: Faker::Number.number(1),
+    type: types.sample,
+    category: categories.sample,
+    footgear: [true, false].sample,
+    price: rand(10..40),
+    user_id: User.all.sample.id,
+    pending: false,
+    arrived: false,
+    zipcode: [76210, 90277, 76262, 76135].sample,
+    for_sale: true,
+    rental: true,
+    inventory: rand(9..14),
+    list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
+    )
+  end
   boards = Board.all
 
-end
+
 
 50.times do
   Image.create!(
@@ -180,6 +212,26 @@ end
 end
 
 images = Image.all
+
+10.times do
+  Event.create!(
+  start_time: Time.now,
+  end_time: Time.now + 2.days,
+  board_id: rand(60..80),
+  user_id: rand(1..2)
+  )
+end
+
+10.times do
+  Event.create!(
+  start_time: Time.now - 2.weeks,
+  user_id: rand(1..2),
+  end_time: Time.now - 1.weeks,
+  board_id: rand(60..80)
+  )
+end
+
+events = Event.all
 
 distance_array = %w(10 20 30 50 100 150 200 350 400)
 
@@ -196,4 +248,5 @@ puts "#{Image.count} images"
 puts "#{Board.count} boards"
 puts"#{User.count} users"
 puts"#{Type.count} types"
-puts"#{Category.count} types"
+puts"#{Category.count} cats"
+puts"#{Event.count} events"

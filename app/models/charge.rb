@@ -18,7 +18,8 @@
 #  shipping    :boolean
 #  start_time  :datetime
 #  end_time    :datetime
-
+#  rental      :boolean
+#
 
 class Charge < ApplicationRecord
   belongs_to :user

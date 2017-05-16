@@ -15,6 +15,8 @@
 #  board_id   :integer
 #  charge_id  :integer
 #  name       :string
+#  color      :string
+#  date_range :string
 #
 
 FactoryGirl.define do

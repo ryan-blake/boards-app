@@ -18,6 +18,7 @@
 #  shipping    :boolean
 #  start_time  :datetime
 #  end_time    :datetime
+#  rental      :boolean
 #
 
 require 'rails_helper'

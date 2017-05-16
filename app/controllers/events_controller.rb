@@ -109,12 +109,11 @@ def create
             :currency => 'usd',
             :destination => @charge.vendor.uid,
             :application_fee => 200+(@charge.price*3)+ 31
-
             },
           )
 
           @charge.update_attribute(:completed, true)
-          # @board.inventory += -1
+          @board.inventory += -1
           @board.save
           @event.charge_id = @charge.id
           @event.save

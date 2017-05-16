@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20170511230110) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",      default: false
-    t.datetime "list_time",   default: '2017-05-10 01:00:12'
-    t.integer  "inventory"
+    t.datetime "list_time",   default: '2017-05-16 04:18:52'
+    t.integer  "inventory",   default: 0
     t.index ["category_id"], name: "index_boards_on_category_id"
     t.index ["type_id"], name: "index_boards_on_type_id"
     t.index ["user_id"], name: "index_boards_on_user_id"
@@ -108,8 +108,6 @@ ActiveRecord::Schema.define(version: 20170511230110) do
     t.integer  "board_id"
     t.integer  "charge_id"
     t.string   "name"
-    t.string   "color"
-    t.string   "date_range"
     t.index ["board_id"], name: "index_events_on_board_id"
     t.index ["charge_id"], name: "index_events_on_charge_id"
     t.index ["user_id"], name: "index_events_on_user_id"

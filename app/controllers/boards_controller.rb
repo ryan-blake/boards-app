@@ -3,8 +3,6 @@ class BoardsController < ApplicationController
   helper_method :sort_column, :sort_direction
   respond_to :html, :js
 
-  # GET /boards
-  # GET /boards.json
   def index
       @user = current_user
       # @boards = Board.find_by(user_id: @user)
@@ -283,14 +281,14 @@ transactions = Stripe::BalanceTransaction.all(
              end
 
              if params[:rental] == "on"
-               @boards =  @boards.where(:rental => true)
+               @boards =  @boards.where(:rental => true).where("inventory >= ?", 1)
               #  get boards that also havent been rented once unless inventory > 1
               one = @boards
               unless params[:start_date][0].to_s == "" && params[:end_date][0].to_s == ""
                  startDate = Date.parse(params[:start_date].join(', '))
                  endDate = Date.parse(params[:end_date].join(', '))
-                 @boards = @boards.start_search(startDate, endDate)
-                 @boards = @boards.end_search(startDate, endDate).pluck(:id)
+                 @boards = @boards.start_search1(startDate, endDate)
+                 @boards = @boards.end_search1(startDate, endDate).pluck(:id)
              #  strange behaviour inside scoped starts and stops
               one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
               @boards = Board.where(:id => (@boards + one))
@@ -352,7 +350,7 @@ else
               end
             end
 
-
+# reverse params between :start_time..:end_time
             if params[:rental] == "on"
               @boards =  @boards.where(:rental => true)
             else
