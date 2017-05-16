@@ -120,7 +120,11 @@ openExtended.onclick = function() {
           <span class="glyphicon glyphicon-calendar"></span>
         </span>
         </div>
+        <script>
+                $('.date#starttimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
 
+                $('.date#endtimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+        </script>
     <!-- <%= text_field :start_time, "data-provide" => 'datepicker' %>
     <%= text_field :end_time, "data-provide" => 'datepicker1' %> -->
   </div>
