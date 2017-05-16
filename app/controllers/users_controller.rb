@@ -10,7 +10,7 @@ def index
 end
 
 def maps
-  @users = User.last
+  @users = User.all.where(:company != nil)
   @hash = Gmaps4rails.build_markers(@users) do |user, marker|
   		  marker.lat user.latitude
   		  marker.lng user.longitude
