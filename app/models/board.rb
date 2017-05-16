@@ -72,13 +72,16 @@ class Board < ApplicationRecord
  scope :min_length_search, ->(minimum) { where('length >= ?', minimum) }
  scope :max_length_search, ->(maximum) { where('length <= ?', maximum) }
 
- scope :start_search, -> (start_date) {
-   joins(:events).where("start_time <= ?", start_date)
- }
- scope :end_search, -> (end_date) {
 
- joins(:events).where("start_time <= ?", end_date)
+# needs more TESTING
+ scope :start_search, -> (startDate, endDate) {
+   joins(:events).where.not(:events => {start_time: (startDate.beginning_of_day)..(endDate.end_of_day + 1.days)})
 }
+scope :end_search, -> (startDate, endDate) {
+  joins(:events).where.not(:events => {end_time: (startDate.beginning_of_day)..(endDate.end_of_day)})
+}
+
+#
   def check_for_tracking_number
     if tracking_changed?
        BoardMailer.tracking_number(self).deliver_now
@@ -86,6 +89,7 @@ class Board < ApplicationRecord
   end
 
   private
+
 
   def update_tokens
     if for_sale_changed? == true
@@ -96,5 +100,6 @@ class Board < ApplicationRecord
       end
     end
   end
+
 
 end

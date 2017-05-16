@@ -114,7 +114,7 @@ def create
           )
 
           @charge.update_attribute(:completed, true)
-          @board.inventory += -1
+          # @board.inventory += -1
           @board.save
           @event.charge_id = @charge.id
           @event.save

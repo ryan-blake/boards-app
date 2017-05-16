@@ -253,8 +253,6 @@ transactions = Stripe::BalanceTransaction.all(
 
              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
 
-
-
              # price
              if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
                @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
@@ -284,17 +282,14 @@ transactions = Stripe::BalanceTransaction.all(
 
              if params[:rental] == "on"
                @boards =  @boards.where(:rental => true)
-              #  get boards that also havent been rented once
-              # @fresh_rentals ==  @boards.events == nil
-              # for boards with previous rentals run scope
-           # @boards.each do |i|
-            #  unless i.events.present?
-              #  noevents << i
-            # end
-           # end
-           # boards must run a few extra attached scopes to validate start/end_dates
-               @boards  = @boards.start_search(params[:start_date]).end_search(params[:end_date])
-              # @boards = @boards << @fresh_boards
+               one = @boards
+                  startDate = Date.parse(params[:start_date].join(', '))
+                  endDate = Date.parse(params[:end_date].join(', '))
+                  @boards = @boards.start_search(startDate, endDate)
+                  @boards = @boards.end_search(startDate, endDate).pluck(:id)
+              #  strange behaviour inside scoped starts and stops
+               one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
+               @boards = Board.where(:id => (@boards + one))
              else
                @boards = @boards.where(:rental => false)
              end
@@ -310,12 +305,8 @@ transactions = Stripe::BalanceTransaction.all(
                      format.js
               end
              end
-
-
-
    # casting seems to have changed geocoder locally but works on heroku.
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
-
 else
    @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
