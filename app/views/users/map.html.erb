@@ -1,0 +1,18 @@
+<% content_for(:header) do %>
+<script>
+$(document).ready(function(){
+  map = document.getElementById('map');
+  map.onclick = function() {
+    if (map.style.color == "black") {
+    map.style['color'] = "red";
+  } else if (map.style.color == 'orange') {
+    map.style['color'] = "black"
+  } else {
+    map.style['color'] = "orange"
+  }
+}
+});
+</script>
+<% end %>
+
+<h1 id="map" style="cursor:pointer;color:black;">MAP</h1>

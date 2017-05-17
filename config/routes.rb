@@ -19,6 +19,8 @@ mount Sidekiq::Web => '/sidekiq'
   end
 end
 
+get 'map' => 'users#map'
+
   resources :boards do
     resources :events, only: [:create, :destroy, :show, :board_dash]
     collection do
