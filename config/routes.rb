@@ -18,6 +18,8 @@ mount Sidekiq::Web => '/sidekiq'
       get 'search', 'users/search_signed_in/:id', 'sort_order', to: "users#search_signed_in"
   end
 end
+get'maps' => 'users#maps'
+
 
   resources :boards do
     resources :events, only: [:create, :destroy, :show, :board_dash]

@@ -20,6 +20,7 @@
 //= require jquery.slick
 //= require Chart.bundle
 //= require chartkick
+
 //= require_tree .
 
 
