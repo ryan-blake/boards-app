@@ -60,6 +60,7 @@ gem "chartkick"
 gem "sidekick"
 gem "sinatra", github:'sinatra/sinatra'
 gem "sidekiq-cron", "~> 0.4.0"
+gem "gmaps4rails"
 
 # gem 'data-confirm-modal'
 group :development do
