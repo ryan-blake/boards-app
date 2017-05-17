@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.geocomplete
 //= require moment
+//= require underscore
 //= require bootstrap-datetimepicker
 //= require refile
 //= require lightbox
@@ -23,6 +24,7 @@
 //= require underscore
 //= require gmaps/google
 //= require_tree .
+
 
 
 
