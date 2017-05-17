@@ -1,18 +1,32 @@
 <% content_for(:header) do %>
-<script>
-$(document).ready(function(){
-  map = document.getElementById('map');
-  map.onclick = function() {
-    if (map.style.color == "black") {
-    map.style['color'] = "red";
-  } else if (map.style.color == 'orange') {
-    map.style['color'] = "black"
-  } else {
-    map.style['color'] = "orange"
-  }
-}
-});
-</script>
+
 <% end %>
 
 <h1 id="map" style="cursor:pointer;color:black;">MAP</h1>
+
+<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+<script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
+<script>
+$(document).ready(function(){
+
+
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers([
+    {
+      "lat": 0,
+      "lng": 0,
+      "picture": {
+        "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
+        "width":  32,
+        "height": 32
+      },
+      "infowindow": "hello!"
+    }
+  ]);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+});
+});
+</script>
