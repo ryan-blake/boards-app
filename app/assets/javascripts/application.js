@@ -10,19 +10,18 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery
 //= require jquery_ujs
+//= require gmaps/google
 //= require jquery.geocomplete
 //= require moment
-//= require underscore
 //= require bootstrap-datetimepicker
 //= require refile
 //= require lightbox
 //= require jquery.slick
 //= require Chart.bundle
 //= require chartkick
-//= require underscore
-//= require gmaps/google
 //= require_tree .
 
 
