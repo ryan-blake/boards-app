@@ -21,6 +21,8 @@ end
 get'maps' => 'users#maps'
 
 
+
+
   resources :boards do
     resources :events, only: [:create, :destroy, :show, :board_dash]
     collection do

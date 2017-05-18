@@ -5,6 +5,13 @@ respond_to :html, :js
 
 # GET /users
 # GET /users.json
+ def maps
+  @user_places = User.where.not(:latitude => nil)
+  @url_array = []
+     @user_places.each do |user|
+       @url_array << (user.id)
+   end
+ end
 
 def index
   @users = User.all

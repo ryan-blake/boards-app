@@ -1,4 +1,6 @@
+
 <% content_for(:header) do %>
+
 <script>
 $(document).ready(function() {
 var checkbox = document.getElementById('checkbox');
@@ -19,6 +21,7 @@ checkbox.onclick = function() {
 });
 
 </script>
+
 <% end %>
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
 <div class="container-fluid">
