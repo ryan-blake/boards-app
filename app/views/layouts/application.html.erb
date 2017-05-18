@@ -28,7 +28,7 @@
 
   <body>
     <%= render 'layouts/header' %>
-    <%= render 'layouts/messaging' %>
+
 
     <%= yield %>
 
@@ -41,7 +41,9 @@
 
     <link href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/v4.0.0/build/css/bootstrap-datetimepicker.css" rel="stylesheet" />
 
-
+    <% if current_user %>
+    <%= render 'layouts/messaging' %>
+    <% end %>
 
 
 </html>
