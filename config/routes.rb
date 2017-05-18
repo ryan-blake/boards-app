@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'layouts/msg'
+
 # crons
 require 'sidekiq/web'
 require 'sidekiq/cron/web'
@@ -19,7 +21,7 @@ mount Sidekiq::Web => '/sidekiq'
   end
 end
 get'maps' => 'users#maps'
-
+get 'msg' => 'layouts#messageDash'
 
 
 
