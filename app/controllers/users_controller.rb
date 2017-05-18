@@ -5,6 +5,20 @@ respond_to :html, :js
 
 # GET /users
 # GET /users.json
+def map
+  @users = User.where.not(:latitude => nil)
+  @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+     marker.lat(user.latitude)
+     marker.lng(user.longitude)
+
+
+   end
+
+@json_parking_areas = Gmaps4rails.build_markers(@users) do |user, marker|
+  marker.lat user.latitude
+  marker.lng user.longitude
+  end
+end
 def index
   @users = User.all
 end

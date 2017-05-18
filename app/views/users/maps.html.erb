@@ -1,0 +1,23 @@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAIDdA5C2oS2Opd5tIqc8B9Fe-Z1NsrBes"></script>
+
+<div id="map" style="width:400px;height:300px;"></div>
+
+	    <script type="text/javascript">
+        $(document).load = function(){
+          handler = Gmaps.build('Google');
+  				handler.buildMap({
+  					provider: { mapTypeId: google.maps.MapTypeId.HYBRID },
+  					internal: {id: 'map'}}, function(){
+  				  markers = handler.addMarkers(<%=raw @hash.to_json %>);
+  				  handler.bounds.extendWith(markers);
+  				  handler.fitMapToBounds();
+  				  handler.getMap().setZoom(16);
+  				});
+
+      }
+      alert("here");
+
+
+	    </script>
+      <script src="https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js"></script>
+      <script src='https://cdn.rawgit.com/googlemaps/v3-utility-library/master/infobox/src/infobox_packed.js'></script>
