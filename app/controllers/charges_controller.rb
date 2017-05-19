@@ -6,6 +6,46 @@ class ChargesController < ApplicationController
     #  stripe_account: connected_account_id).data
   end
 
+    def complete
+       @board = Board.find_by(id: @charge.board_id,  arrived: false)
+
+
+      Stripe.api_key = ENV["STRIPE_API_KEY"]
+      token = @charge.token
+      charge = Stripe::Charge.create({
+        :amount => @charge.price*100,
+        :description => 'Rails Stripe customer',
+        :customer => @charge.customer_id,
+        :currency => 'usd',
+        :destination => @charge.vendor.stripe_account,
+        :application_fee => 200+(@charge.price*3)+ 31,
+         metadata: { "shipping" => @charge.shipping, "charge_id" => @charge.id, "board" => @board.title, "vendor" => User.find(@charge.vendor).name, "vendor_id" => User.find(@charge.vendor).id,  "customer" => User.find(current_user).name, "customer_id" => User.find(current_user).id }
+       },
+      )
+      @charge.update_attribute(:completed, true)
+      @board.update_attribute(:arrived, true)
+      @board.user_id = @charge.user_id
+      @board.update_attribute(:shipping, nil)
+      @board.update_attribute(:shipped, nil)
+      @board.update_attribute(:customer_id, nil)
+      @board.update_attribute(:address, nil)
+      @board.update_attribute(:pending, false)
+      @board.update_attribute(:customer_id, nil)
+      @board.save
+      if @new_user
+        redirect_to new_user_session_path, :notice => "HOWDY, Your board is ordered! Check your email to create your password and confirm your email."
+      else
+        redirect_to dash_path, flash: {notice: "Charge Successful"}
+      end
+
+      rescue Stripe::CardError => e
+        flash[:error] = e.message
+        redirect_to charges_path
+
+
+      end
+
+
   def create
 
   if current_user
@@ -36,7 +76,8 @@ class ChargesController < ApplicationController
   @board.update_attribute(:pending, true)
   @board.for_sale = false
   @board.save
-  redirect_to  root_path
+  @new_user = false
+  complete
 
 
   # ChargeMailer.new_charge_user(@charge).deliver_now
@@ -83,49 +124,16 @@ class ChargesController < ApplicationController
     @board.for_sale = false
     @board.save
 
+    @new_user = true
+    complete
     # ChargeMailer.new_charge_user(@charge).deliver_now
     # ChargeMailer.new_charge_vendor(@charge).deliver_now
 
-      redirect_to new_user_session_path, :notice => "HOWDY, Your board is ordered! Check your email to create your password and confirm your email."
+
    end
+
  end
 end
-
-  def complete
-    @charge = Charge.find(params[:charge_id])
-     @board = Board.find_by(id: @charge.board_id,  arrived: false)
-
-    Stripe.api_key = ENV["STRIPE_API_KEY"]
-    token = params[:token]
-    charge = Stripe::Charge.create({
-      :amount => @charge.price*100,
-      :description => 'Rails Stripe customer',
-      :customer => params[:customer_id],
-      :currency => 'usd',
-      :destination => @charge.vendor.stripe_account,
-      :application_fee => 200+(@charge.price*3)+ 31,
-       metadata: { "shipping" => @charge.shipping, "charge_id" => @charge.id, "board" => @board.title, "vendor" => User.find(@charge.vendor).name, "vendor_id" => User.find(@charge.vendor).id,  "customer" => User.find(current_user).name, "customer_id" => User.find(current_user).id }
-     },
-    )
-    @charge.update_attribute(:completed, true)
-    @board.update_attribute(:arrived, true)
-    @board.user_id = @charge.user_id
-    @board.update_attribute(:shipping, nil)
-    @board.update_attribute(:shipped, nil)
-    @board.update_attribute(:customer_id, nil)
-    @board.update_attribute(:address, nil)
-    @board.update_attribute(:pending, false)
-    @board.update_attribute(:customer_id, nil)
-    @board.save
-    redirect_to dash_path, flash: {notice: "Charge Successful"}
-
-
-    rescue Stripe::CardError => e
-      flash[:error] = e.message
-      redirect_to charges_path
-
-
-    end
 
     def show
     begin
