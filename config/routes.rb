@@ -39,7 +39,7 @@ get'maps' => 'users#maps'
   get 'complete_charge' => 'charges#complete'
   get 'complete_charge' => 'charges#retrieve'
 
-  get'chat' => 'conversations#chat'
+  get'msg' => 'conversations#msg'
   get 'messages/create'
   get 'conversations/create'
   resources :conversations, only: [:create] do
