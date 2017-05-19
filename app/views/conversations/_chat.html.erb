@@ -1,5 +1,5 @@
 <div id="fixed-msg">
-  <div id="messaging">
+  <div id="message-modal">
     <span id="V" style="">
       <%= link_to '-_-', msg_path , remote: true, data: { toggle: "modal", target: "#MsgModal" }%>
 
@@ -13,7 +13,7 @@
   #fixed-msg {
     background-color:lightblue;height:50px;width:50px;border-radius:100%;position:fixed;bottom:5px;left:10px;z-index:1997;
   }
-  #messaging {
+  #message-modal {
     cursor:pointer;position: fixed;background-color: white;width: 30px;height: 20px;border-radius: 0%;bottom: 20px;left: 20px;z-index:1998;
   }
   #V {
