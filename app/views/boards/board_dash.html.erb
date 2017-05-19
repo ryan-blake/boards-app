@@ -135,42 +135,7 @@
     }
   };
   });
-  // chatJS
-  $(document).ready(function() {
-  var chatlist = document.getElementById('chat-list');
-  var panel = document.getElementById('panel-title')
-  var expand = document.getElementById('expand-chat')
-  var hide = document.getElementById('hide-chat')
 
-  panel.onclick = function() {
-    if (chatlist.style.display == 'none') {
-       chatlist.style['display'] = 'block';
-       expand.style['display'] = 'none';
-       hide.style['display'] = 'block';
-    } else {
-      chatlist.style['display'] = 'none';
-      hide.style['display'] = 'none';
-      expand.style['display'] = 'block';
-    }
-  };
-  });
-
-
-  (function() {
-    $(document).on('click', '.toggle-window', function(e) {
-      e.preventDefault();
-      var panel = $(this).parent().parent();
-      var messages_list = panel.find('.messages-list');
-
-      panel.find('.panel-body').toggle();
-      panel.attr('class', 'panel panel-default');
-
-      if (panel.find('.panel-body').is(':visible')) {
-        var height = messages_list[0].scrollHeight;
-        messages_list.scrollTop(height);
-      }
-    });
-  })();
     </script>
   <% end %>
 
@@ -215,47 +180,6 @@
     <!-- <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn-sort btn', style: 'color:black' %> -->
  <% end %>
 
-</div>
-<!-- chat -->
-<div class="msg-center col-md-3 col-sm-4 pull-right">
-  <div class="panel panel-primary">
-    <div class="panel-heading" id="panel-title">
-      <h3 class="panel-title">User list </h3>
-      <span><i class="fa fa-angle-double-up fa-2x" id="expand-chat" style="position:absolute;top:5px;right:25px;" aria-hidden="true"></i></span>
-      <span><i class="fa fa-angle-double-down fa-2x" id="hide-chat" style="display:none;position:absolute;top:7px;right:25px;" aria-hidden="true"></i></span>
-     </div>
-    <div class="panel-body" id="chat-list" style="display:none;">
-      <ul>
-       <% if current_user%>
-            <% @charge = Charge.where(:user_id => @user.id) %>
-            <% @my_sales = Charge.where(:vendor_id => @user.id) %>
-        <!-- links to VENODRS that user has purchased from. Need  -->
-       <% user_names = [] %>
-        <% @charge.each do |i| %>
-          <% user_names << i.vendor %>
-        <% end %>
-        <!-- lnks to Users who have purchased from  -->
-        <% @my_sales.each do |i| %>
-         <% user_names << i.user %>
-        <% end %>
-        <% user_names.uniq.each do |i| %>
-        <% if i.company != nil %>
-          <li><%= link_to i.company, conversations_path(user_id: i), remote: true, method: :post %></li>
-        <% else %>
-          <li><%= link_to i.name, conversations_path(user_id: i), remote: true, method: :post %></li>
-          <%end%>
-        <%end%>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <div>
-    <ul id="conversations-list">
-      <% @conversations.each do |conversation| %>
-        <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
-      <% end %>
-    </ul>
-  </div>
 </div>
 <!-- nav desktop -->
 <div class="dash-nav-desktop btn-group-vertical pull-left" role="group" aria-label="...">
