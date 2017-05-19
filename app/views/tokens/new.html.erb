@@ -17,7 +17,9 @@
       <article>
         <tbody>
           <td>
+
         <%= hidden_field_tag(:stripeToken) %>
+
         <% @token = true %>
           </td>
       </article>
@@ -40,13 +42,15 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 <script>
+
 var handler = StripeCheckout.configure({
-  key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+  key: '<%= STRIPE_PUBLISHABLE_TEST %>',
   locale: 'auto',
   name: 'Boards',
   description: 'Token purchase',
   token: function(token) {
     $('input#stripeToken').val(token.id);
+
     $('form').submit();
   }
 });

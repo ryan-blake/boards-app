@@ -1,1 +1,2 @@
 GOOGLE_MAPS_API = ENV["GOOGLE_MAPS_KEY"]
+STRIPE_PUBLISHABLE_TEST = ENV["stripe_publishable_key"]
