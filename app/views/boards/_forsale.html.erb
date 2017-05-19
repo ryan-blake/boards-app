@@ -3,7 +3,7 @@
 <%= form_for(@board, html: {role: :form, 'data-model' => 'board'}, :remote => true) do |f| %>
   <div class="actions  text-center">
 <% if  @board.for_sale === false && @board.pending == false %>
- <% if @user.tokens >= 2 %>
+ <% if current_user.tokens >= 2 %>
   <div class="actions" >
     <%= f.hidden_field :pending , value: false %>
     <%= f.hidden_field :shipping, :value => nil %>
