@@ -39,6 +39,7 @@ get'maps' => 'users#maps'
   get 'complete_charge' => 'charges#complete'
   get 'complete_charge' => 'charges#retrieve'
 
+  get'chat' => 'conversations#chat'
   get 'messages/create'
   get 'conversations/create'
   resources :conversations, only: [:create] do
@@ -47,7 +48,6 @@ get'maps' => 'users#maps'
     end
     resources :messages, only: [:create]
   end
-
 
   get 'relist_board' => 'boards#relist'
   get 'my_boards' => 'pages#boards'
