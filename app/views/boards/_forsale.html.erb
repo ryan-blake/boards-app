@@ -11,9 +11,10 @@
     <%= f.hidden_field :for_sale , value: true %>
     <%= button_tag "list!", id: 'list-btn', class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Listing..."}, remote: true %>
     <% else %>
-    <div id="tokenPartial" style="display:inline-block;">
+    <!-- <div id="tokenPartial" style="display:inline-block;">
       <%= render partial: 'tokens/new' %>
-    </div>
+    </div> -->
+    <strong> You're out of tokens. </strong>
     <% end %>
   </div>
 
