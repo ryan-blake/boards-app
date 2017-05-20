@@ -32,4 +32,11 @@ class Conversation < ApplicationRecord
  def opposed_user(user)
    user == recipient ? sender : recipient
  end
+
+ def msg_preview(convo)
+  self.messages.where(:conversation_id => convo).last.body
+ end
+ def msg_sender(convo)
+  self.where(:conversation_id => convo).user.name 
+ end
 end

@@ -85,7 +85,7 @@
                   <span class="fa fa-undo"></span> Refunded
                 </span>
               <% else %>
-              <%= message_customer(payment.source_transfer.source_transaction) %>
+              <%= message_charge_customer(payment.source_transfer.source_transaction) %>
 
             </td>
           </tr>

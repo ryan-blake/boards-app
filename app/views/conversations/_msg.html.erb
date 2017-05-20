@@ -20,6 +20,16 @@
   <div style="position:absolute;top:0;width:100%;height:20px;border:solid 1px black;background-color:lightblue;" class="center-text">
     <strong> Msgs </strong>
   </div>
+  <div style="position:relative;top:20px;">
+    <!-- order by converation.last_updated at first -->
+  <% @conversations.each do |convo| %>
+  <ul>
+    <%= link_to convo.sender.name, conversations_path(user_id: convo.sender.id), remote: true, method: :post %>:
+      <%= convo.msg_preview(convo.id) %>...
+      <hr style="width:100%;">
+  </ul>
+    <% end %></div>
+
 </div>
 
 <!-- chat -->

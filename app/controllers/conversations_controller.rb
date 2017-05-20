@@ -11,9 +11,7 @@ class ConversationsController < ApplicationController
 def msg
   @user = current_user
   @users = User.all.where.not(id: current_user)
-  @conversations = Conversation.includes(:recipient, :messages)
-  .find(session[:conversations])
-
+  @conversations = Conversation.includes(:recipient, :messages).find(session[:conversations])
 end
   def close
    @conversation = Conversation.find(params[:id])
