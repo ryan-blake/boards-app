@@ -11,7 +11,6 @@
       <% @conversations.each do |conversation| %>
         <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
         <% end %>
-      <% end %>
     </ul>
   </div>
 </div>
@@ -28,7 +27,9 @@
       <%= convo.msg_preview(convo.id) %>...
       <hr style="width:100%;">
   </ul>
-    <% end %></div>
+    <% end %>
+  </div>
+  <% end %>
 
 </div>
 
