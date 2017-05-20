@@ -44,7 +44,7 @@
 <script>
 
 var handler = StripeCheckout.configure({
-  key: "<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>",
+   key: '<%= Rails.configuration.stripe[:publishable_key] %>',
   locale: 'auto',
   name: 'Boards',
   description: 'Token purchase',

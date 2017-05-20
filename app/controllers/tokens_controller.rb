@@ -27,7 +27,7 @@ class TokensController < ApplicationController
      :amount => @amount,
      :currency => 'usd',
      :source => params[:stripeToken],
-     :description => 'Custom donation'
+     :description => 'Custom Tokens'
    )
 
    @user = current_user
