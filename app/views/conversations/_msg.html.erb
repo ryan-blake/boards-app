@@ -23,6 +23,7 @@
   </div>
   <div style="position:relative;top:20px;">
     <!-- order by converation.last_updated at first -->
+    <% if @conversations %>
   <% @conversations.each do |convo| %>
   <ul>
     <% op_user = convo.opposed_user(@user) %>
@@ -36,6 +37,7 @@
     <% end %>
 
   </ul>
+  <%end %>
     <% end %>
   </div>
 
