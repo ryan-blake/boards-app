@@ -803,13 +803,15 @@ margin-left:0px;
 margin-right:0px;
 }
 
-.msg-center {
-  width: calc(40% - 70px);
-  bottom: 0px;
-  right: -10px;
-  position: fixed;
-  z-index:888;
-}
+ .msg-center {
+   position:fixed;
+   bottom:0px;
+   width:75%;
+   left:0px;
+   max-height: 230px;
+   font-size:8px;
+ }
+
 .message-sent {
  position: relative;
  background-color: #D9EDF7;
@@ -1330,14 +1332,6 @@ margin-right:0px;
    left: -31px!important;
  }
 
- .msg-center {
-   position:fixed;
-   bottom:0px;
-   width:75%;
-   left:0px;
-   max-height: 230px;
-   font-size:8px;
- }
  .panel {
    margin-bottom:0px;
  }
@@ -1346,7 +1340,7 @@ margin-right:0px;
    padding-bottom:60px;
  }
  .convo-panel {
-   width:130%;
+   width:100%;
  }
 
  .messages-list {
