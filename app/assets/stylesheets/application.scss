@@ -793,7 +793,7 @@ font-size:13px;
 }
 //
 .messages-list {
- max-height: 150px;
+height:100px !important;
  overflow-y: visible;
  overflow-x: hidden;
 }
@@ -1344,7 +1344,9 @@ margin-right:0px;
  }
 
  .messages-list {
-   max-height:72px !important;
+
+   min-height:120px !important;
+
  }
  textarea.form-control {
       height: 35px !important;
