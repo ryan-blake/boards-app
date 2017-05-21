@@ -34,7 +34,7 @@
     <% op_user = convo.opposed_user(@user) %>
     <% if op_user.name != current_user.name %>
     <%= link_to op_user.name, conversations_path(user_id: op_user.id), remote: true, method: :post %>:
-    <%= convo.messages.last.body %>
+    <%= convo.messages.last.body.truncate(12) %>
       <hr class="style14" style="margin-left:-10px;max-width:100%">
   </ul>
 
