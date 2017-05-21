@@ -1,6 +1,6 @@
 <div id="fixed-msg">
   <div id="message-modal">
-    <span id="V" style="">
+    <span id="V" style="display:block;">
       <%= link_to '-_-', msg_path , remote: true, data: { toggle: "modal", target: "#MsgModal" }%>
 
     </span>
@@ -33,7 +33,7 @@
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="MsgModal">
    <div class="modal-dialog modal-lg" role="document">
      <div class="modal-header">
-       <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <button type="button" id="msg-x" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
      </div>
      <div class="modal-content">
 
