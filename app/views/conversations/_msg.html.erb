@@ -23,7 +23,18 @@
   </div>
   <div style="position:relative;top:20px;">
     <!-- order by converation.last_updated at first -->
+  <% @conversations.each do |convo| %>
+  <ul>
+    <% op_user = convo.opposed_user(@user) %>
+    <% if op_user.name != current_user.name %>
+    <%= op_user.name %>
+    <%= link_to op_user.name, conversations_path(user_id: op_user.id), remote: true, method: :post %>:
+    <%= convo.msg_preview(convo.id) %>...
 
+      <hr style="width:100%;">
+  </ul>
+  <% end %>
+    <% end %>
   </div>
 
 </div>
