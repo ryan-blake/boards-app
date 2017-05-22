@@ -6,8 +6,7 @@
 <% @convos = @user.conversations.all.pluck(:id) + Conversation.all.where(:recipient_id => @user.id).pluck(:id) %>
 <% @convos = @convos.uniq %>
 <% @convos = Conversation.where(:id => @convos) %>
-<% @convos =  @convos.joins(:messages).order("messages.updated_at DESC").group(:id) %>
-
+<% @convos = @convos.joins(:messages).group(:id).merge(Message.order(updated_at: :desc)) %>
 <% @convos.each do |convo| %>
 <ul class="pull-left convo-button"data-conversation-id="<%=convo.id %>" style="margin-top:13px;margin-left:1px;min-width:100%;max-height:28px;">
 <%   op_user = convo.opposed_user(@user)%>
