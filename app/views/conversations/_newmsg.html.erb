@@ -3,7 +3,9 @@
 </div>
 <div style="position:relative;top:20px;">
   <!-- order by converation.msgs.last_updated at first -->
+  <% if @user.conversations.present? %>
 <% @convos = @user.conversations.all.pluck(:id) + Conversation.all.where(:recipient_id => @user.id).pluck(:id) %>
+<% end %>
 <% @convos = @convos.uniq %>
 <% @convos = Conversation.where(:id => @convos) %>
 <% @convos = @convos.joins(:messages).group(:id).merge(Message.order(updated_at: :desc)) %>
