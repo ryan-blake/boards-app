@@ -11,7 +11,7 @@
 <% @convos = @convos.uniq %>
 <% @convos = Conversation.where(:id => @convos) %>
 
-<% @convos = @convos.joins(:messages).merge(Message.order(updated_at: :desc)) %>
+<% @convos = @convos.joins(:messages).order(updated_at: :desc) %>
 <% @convos = @convos.uniq%>
 
 <% @convos.each do |convo| %>
