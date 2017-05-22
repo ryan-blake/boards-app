@@ -10,8 +10,9 @@
 <% end %>
 <% @convos = @convos.uniq %>
 <% @convos = Conversation.where(:id => @convos) %>
-<% @convos = @convos.joins(:messages).merge(Message.order(updated_at: :desc)).group(:id) %>
-<% @convos = @convos.uniq %>
+
+<% @convos = @convos.joins(:messages).merge(Message.order(updated_at: :desc)) %>
+<% @convos = @convos.uniq%>
 
 <% @convos.each do |convo| %>
 <ul class="pull-left convo-button"data-conversation-id="<%=convo.id %>" style="margin-top:13px;margin-left:1px;min-width:100%;max-height:28px;">
