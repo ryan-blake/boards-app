@@ -3,12 +3,16 @@
 </div>
 <div style="position:relative;top:20px;">
   <!-- order by converation.msgs.last_updated at first -->
-  <% if @user.conversations.present? %>
-<% @convos = @user.conversations.all.pluck(:id) + Conversation.all.where(:recipient_id => @user.id).pluck(:id) %>
+  <% if current_user.conversations.present? %>
+    <% @convos = @user.conversations.all.pluck(:id) + Conversation.all.where(:recipient_id => @user.id).pluck(:id) %>
+<% else %>
+    <% @convos = Conversation.all.where(:recipient_id => @user.id).pluck(:id) %>
 <% end %>
 <% @convos = @convos.uniq %>
 <% @convos = Conversation.where(:id => @convos) %>
-<% @convos = @convos.joins(:messages).group(:id).merge(Message.order(updated_at: :desc)) %>
+<% @convos = @convos.joins(:messages).merge(Message.order(updated_at: :desc)).group(:id) %>
+<% @convos = @convos.uniq %>
+
 <% @convos.each do |convo| %>
 <ul class="pull-left convo-button"data-conversation-id="<%=convo.id %>" style="margin-top:13px;margin-left:1px;min-width:100%;max-height:28px;">
 <%   op_user = convo.opposed_user(@user)%>
