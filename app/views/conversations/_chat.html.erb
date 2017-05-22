@@ -1,8 +1,7 @@
-<div id="fixed-msg">
+<div id="fixed-msg" stle="display:block;">
   <div id="message-modal">
     <span id="V" style="display:block;">
       <%= link_to '-_-', msg_path , remote: true, data: { toggle: "modal", target: "#MsgModal" }%>
-
     </span>
     <div id="new-alert">
     </div>
@@ -42,3 +41,16 @@
    <div>
    </div>
  </div>
+ <script>
+ $(function() {
+ var chatopen = document.getElementById('fixed-msg');
+ var chatbox = document.getElementById('MsgModal');
+// if modal == block hide chat button else show chat button
+$('#MsgModal').on('show.bs.modal', function (e) {
+  chatopen.style.display = 'none';
+});
+$('#MsgModal').on('hidden.bs.modal', function (e) {
+  chatopen.style.display = 'block';
+});
+});
+ </script>

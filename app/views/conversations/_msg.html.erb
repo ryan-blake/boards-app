@@ -27,7 +27,7 @@
 <% @received = Conversation.all.where(:recipient_id => @user.id).pluck(:id) %>
 <% @convos =  @convos << @received %>
 <% @convos = @convos.uniq %>
-<% @convos = Conversation.where(:id => @convos) %>
+<% @convos = Conversation.where(:id => @convos).order(:updated_at) %>
 
   <% @convos.each do |convo| %>
   <ul class="pull-left" style="margin-top:13px;margin-left:1px;min-width:100%;max-height:28px;">
@@ -46,12 +46,12 @@
 </div>
 
 <!-- chat -->
-<div class="msg-center col-md-3 col-sm-4 pull-right" style="max-height:30%;max-height:230px;max-width:70%;">
+<div class="msg-center col-md-3 col-sm-4 pull-right" style="max-height:30%;max-height:230px;min-width:70%;margin-left:-14px;">
   <div class="panel panel-primary">
     <div class="panel-heading" id="panel-title">
       <h3 class="panel-title">User list </h3>
-      <span><i class="fa fa-angle-double-up fa-2x" id="expand-chat" style="position:absolute;top:5px;right:25px;" aria-hidden="true"></i></span>
-      <span><i class="fa fa-angle-double-down fa-2x" id="hide-chat" style="display:none;position:absolute;top:7px;right:25px;" aria-hidden="true"></i></span>
+      <!-- <span><i class="fa fa-angle-double-up fa-2x" id="expand-chat" style="position:absolute;top:5px;right:25px;" aria-hidden="true"></i></span>
+      <span><i class="fa fa-angle-double-down fa-2x" id="hide-chat" style="display:none;position:absolute;top:7px;right:25px;" aria-hidden="true"></i></span> -->
      </div>
     <div class="panel-body" style="width:100%" id="chat-list">
       <ul>
@@ -92,23 +92,8 @@ login
 
  <script>
  // chatJS
- $(document).ready(function() {
- var chatlist = document.getElementById('chat-list');
- var panel = document.getElementById('panel-title')
- var expand = document.getElementById('expand-chat')
- var hide = document.getElementById('hide-chat')
- panel.onclick = function() {
-   if (chatlist.style.display == 'none') {
-      chatlist.style['display'] = 'block';
-      expand.style['display'] = 'none';
-      hide.style['display'] = 'block';
-   } else {
-     chatlist.style['display'] = 'none';
-     hide.style['display'] = 'none';
-     expand.style['display'] = 'block';
-   }
- };
- });
+
+
  (function() {
    $(document).on('click', '.toggle-window', function(e) {
      e.preventDefault();
