@@ -6,7 +6,7 @@
   <%= f.hidden_field :shipping, value:  true  %>
 
 
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    <script async src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
         <% if current_user.present? %>
           data-email="<%=current_user.email %>"

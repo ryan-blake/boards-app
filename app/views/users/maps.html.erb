@@ -139,10 +139,11 @@
           });
       });
 
+      var urlArray = <%= @url_array.to_json.to_s.html_safe %>
 
-var urlArray = <%= @url_array.to_json.to_s.html_safe %>
 
 function linkMarkers() {
+
   for (var i = 0; i < markers.length; i++) {
     (function (i) {
         markers[i].addListener('click', function() {

@@ -9,6 +9,7 @@
     <ul id="conversations-list">
       <% if @conversation %>
       <% @conversations.each do |conversation| %>
+      hi
         <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
         <% end %>
         <% end %>
@@ -18,31 +19,7 @@
 </div>
 
 <div id="convo-list" style="top:0;position:absolute;width:30%;height:100%;border:solid 1px black;right:0;">
-  <div style="position:absolute;top:0;width:100%;height:20px;border:solid 1px black;background-color:lightblue;" class="center-text">
-    <strong> Msgs </strong>
-  </div>
-  <div style="position:relative;top:20px;">
-    <!-- order by converation.last_updated at first -->
-<% @convos = @user.conversations.all.pluck(:id) %>
-<% @received = Conversation.all.where(:recipient_id => @user.id).pluck(:id) %>
-<% @convos =  @convos << @received %>
-<% @convos = @convos.uniq %>
-<% @convos = Conversation.where(:id => @convos).order(:updated_at) %>
-
-  <% @convos.each do |convo| %>
-  <ul class="pull-left" style="margin-top:13px;margin-left:1px;min-width:100%;max-height:28px;">
-    <% op_user = convo.opposed_user(@user) %>
-    <% if op_user.name != current_user.name %>
-    <%= link_to op_user.name, conversations_path(user_id: op_user.id), remote: true, method: :post %>:
-    <%= convo.messages.last.body.truncate(15) %>
-      <hr class="style14" style="margin-left:-1px;max-width:100%">
-  </ul>
-
-    <% end %>
-    <% end %>
-
-  </div>
-
+  <%= render 'newmsg' %>
 </div>
 
 <!-- chat -->
@@ -69,7 +46,7 @@
         <% end %>
         <% user_names.uniq.each do |i| %>
         <% if i.company != nil %>
-          <li><%= link_to i.company, conversations_path(user_id: i), remote: true, method: :post %></li>
+          <li class="convo-button"><%= link_to i.company, conversations_path(user_id: i), remote: true, method: :post %></li>
         <% else %>
           <li><%= link_to i.name, conversations_path(user_id: i), remote: true, method: :post %></li>
           <%end%>
@@ -107,4 +84,11 @@ login
      }
    });
  })();
+ $(".convo-button").click(function() {
+   // Hides all images.
+   $(".show-convo.panel").hide();
+   // Shows appropriate one.
+   var imageId = $(this).data("conversation-id"); // Fetches the value of the data-imageId attribute.
+   $(".show-convo.panel[data-conversation-id="+imageId+"]").show();
+});
  </script>

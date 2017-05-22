@@ -22,6 +22,8 @@ class Conversation < ApplicationRecord
     )
   end
 
+
+
   def self.get(sender_id, recipient_id)
     conversation = between(sender_id, recipient_id).first
     return conversation if conversation.present?

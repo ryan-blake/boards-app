@@ -8,11 +8,19 @@ class ConversationsController < ApplicationController
      format.js
    end
   end
+
 def msg
   @user = current_user
   @users = User.all.where.not(id: current_user)
   @conversations = Conversation.includes(:recipient, :messages).find(session[:conversations])
+
+  @user_places = User.where.not(:latitude => nil)
+  @url_array = []
+     @user_places.each do |user|
+       @url_array << (user.id)
+   end
 end
+
 
   def close
    @conversation = Conversation.find(params[:id])
