@@ -17,7 +17,8 @@
 <% @convos = @convos.distinct%>
 
 <% @convos.each do |convo| %>
-<ul class="pull-left convo-button"data-conversation-id="<%=convo.id %>" style="margin-top:13px;margin-left:1px;min-width:100%;max-height:28px;">
+<ul class="pull-left convo-button" data-conversation-id="<%=convo.id %>" style="margin-top:13px;margin-left:1px;min-width:100%;max-height:28px;">
+
 <%   op_user = convo.opposed_user(@user)%>
   <% if op_user.name != current_user.name %>
   <%= link_to op_user.name, conversations_path(user_id: op_user.id), remote: true, method: :post %>:

@@ -1,0 +1,19 @@
+<li class="convo-panel">
+  <div class="panel panel-default show-convo" data-conversation-id="<%= conversation.id %>">
+    <div class="panel-heading">
+      <ul class="pull-left convo-button" data-conversation-id="<%=conversation.id %>" style="margin-top:13px;margin-left:1px;min-width:100%;max-height:28px;">
+      <strong> <%= conversation.opposed_user(user).name %> </strong>
+    </ul>
+      <span id="updated-msg">
+        <div class="messages-list">
+          <ul>
+            <strong> conversation.messages.last.body </strong>
+          </ul>
+        </div>
+    </span>
+      <!-- <%= link_to "x", close_conversation_path(conversation), class: "btn btn-default btn-xs pull-right", remote: true, method: :post %> -->
+      <span class="panel-notice" style="display:none;"></span>
+
+    </div>
+
+    <div class="panel-body" style="">

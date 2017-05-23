@@ -13,9 +13,9 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
         var messages_visible = (conversation).find('.panel-body').is(':visible');
 
         if (!messages_visible) {
+          conversation.find('.messages-list').find('ul').append(data['message']);
 
         }
-        conversation.find('.messages-list').find('ul').append(data['message']);
       }
       else {
         $('#conversations-list').append(data['window']);
