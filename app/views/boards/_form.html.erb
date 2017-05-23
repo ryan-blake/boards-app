@@ -10,7 +10,7 @@
       </ul>
     </div>
     <% end %>
-<% if current_user.provider != nil %>
+<% if current_user.stripe_account != nil %>
 <div class="title center-text">
 <%= f.label :title %>
   <td><%= f.text_field :title, class: 'btn-width form-control' %></td>

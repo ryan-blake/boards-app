@@ -3,32 +3,36 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   disconnected: function() {},
   received: function(data) {
     var conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
-
-    // var alertMsg = document.getElementById("new-alert");
+    var msgPanel = $('#convo-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
+    var alertChat = document.getElementById('new-alert');
 
     if (data['window'] !== undefined) {
       var conversation_visible = conversation.is(':visible');
 
       if (conversation_visible) {
-
         var messages_visible = (conversation).find('.panel-body').is(':visible');
 
         if (!messages_visible) {
           conversation.removeClass('panel-default').addClass('panel-success');
+          msgPanel.find('#msgUpdate').append(data['message']);
         }
         conversation.find('.messages-list').find('ul').append(data['message']);
+        conversation.removeClass('panel-default').addClass('panel-success');
+        msgPanel.find('#msgUpdate').find('.message-received').remove();
+        msgPanel.find('#msgUpdate').append(data['message']);
       }
       else {
-        $('#conversations-list').append(data['window']);
-        conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
         conversation.removeClass('panel-default').addClass('panel-success');
+        msgPanel.find('#msgUpdate').find('.message-received').remove();
+        msgPanel.find('#msgUpdate').append(data['message']);
+
+        // $('#conversations-list').append(data['window']);
+        conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
 
       }
     }
     else {
       conversation.find('ul').append(data['message']);
-      // alertMsg.style.display.is(':visible');
-
     }
 
     var messages_list = conversation.find('.messages-list');
