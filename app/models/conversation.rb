@@ -22,6 +22,7 @@ class Conversation < ApplicationRecord
     )
   end
 
+  scope :ordered, -> { joins(:messages).order('messages.updated_at') }
 
 
   def self.get(sender_id, recipient_id)

@@ -11,9 +11,10 @@
 <% @convos = @convos.uniq %>
 <% @convos = Conversation.where(:id => @convos) %>
 
-<% @convos = @convos.includes(:messages).order('messages.updated_at desc').group(:conversation_id) %>
+ <% @convos = @convos.includes(:messages).order('messages.updated_at desc').group('messages.conversation_id') %>
 
-<% @convos = @convos.uniq%>
+
+<% @convos = @convos.distinct%>
 
 <% @convos.each do |convo| %>
 <ul class="pull-left convo-button"data-conversation-id="<%=convo.id %>" style="margin-top:13px;margin-left:1px;min-width:100%;max-height:28px;">
