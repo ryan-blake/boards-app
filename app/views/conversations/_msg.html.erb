@@ -7,11 +7,11 @@
   </div>
   <div class="msg-up" style="padding-top:20px;">
     <ul id="conversations-list">
-      <% if @conversation %>
+
       <% @conversations.each do |conversation| %>
-      hi
+
         <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
-        <% end %>
+
         <% end %>
 
     </ul>
