@@ -3,7 +3,8 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   disconnected: function() {},
   received: function(data) {
     var conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
-    var alertMsg = document.getElementById("new-alert");
+
+    // var alertMsg = document.getElementById("new-alert");
 
     if (data['window'] !== undefined) {
       var conversation_visible = conversation.is(':visible');
@@ -26,8 +27,8 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
     }
     else {
       conversation.find('ul').append(data['message']);
-      alertMsg.style.display.is(':visible');
-      
+      // alertMsg.style.display.is(':visible');
+
     }
 
     var messages_list = conversation.find('.messages-list');
