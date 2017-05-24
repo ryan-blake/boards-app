@@ -40,16 +40,33 @@ height:100%;
   width:100%;
   font-size:13px;
 }
-
-#msgUpdate.message-received {
-  max-width: 100%;
-overflow-y: hidden;
-max-height: 30px;
-position: relative;
-top: 0px;
-margin-top: -20px;
-
-margin-left: 51px;
+#msg-x {
+color:white;
+}
+.chat-x {
+  top: 22px;
+  position: absolute;
+  right: 10px;
+}
+#msg-load {
+  top: -18px;
+  position: relative;
+  left: 30%;
+  background-color: white;
+  max-width: 67%;
+}
+#msgUpdate li div.message-received {
+ max-width: 71%;
+ overflow-y: hidden;
+ margin-bottom: -19px;
+ padding-left:34px;
+ position: relative;
+ top: -27px;
+ margin-top: 0px;
+ margin-left: 20%;
+ background-color: transparent;
+ color: black;
+ color: mediumslateblue;
 }
 .slick-slide img {
     display: inline !important;
@@ -818,14 +835,17 @@ margin-left:0px;
 margin-right:0px;
 }
 
- .msg-center {
-   position:fixed;
-   bottom:0px;
-   width:75%;
-   left:0px;
-   max-height: 230px;
-   font-size:8px;
- }
+.msg-center {
+  position:fixed;
+  top: 73%;
+  width: 75%;
+  left: 0px;
+  max-height: 230px;
+  font-size: 8px;
+  left: -26px;
+  min-height: 119px;
+  overflow-x: scroll;
+}
 
 .message-sent {
  position: relative;

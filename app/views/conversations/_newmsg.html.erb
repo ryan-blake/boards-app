@@ -11,21 +11,18 @@
 <% @convos = @convos.uniq %>
 <% @convos = Conversation.where(:id => @convos) %>
 <!-- grouping doesn't work on heroku  .group('messages.conversation_id')-->
- <% @convos = @convos.includes(:messages).order('messages.updated_at desc').group('messages.conversation_id') %>
-
-
+ <% @convos = @convos.includes(:messages).order('messages.updated_at desc').group('conversation_id') %>
 <% @convos = @convos.distinct%>
 
 <% @convos.each do |convo| %>
-<ul class="pull-left convo-button"data-conversation-id="<%=convo.id %>" style="margin-top:13px;margin-left:1px;min-width:100%;max-height:28px;">
-<%   op_user = convo.opposed_user(@user)%>
-  <% if op_user.name != current_user.name %>
-  <%= link_to op_user.name, conversations_path(user_id: op_user.id), remote: true, method: :post %>:
-  <span id="msgUpdate"><li id='msg-load' style='display:block;'><%= convo.messages.last.body.truncate(15) %></li></span>
-    <hr class="style14" style="margin-left:-1px;max-width:100%">
-</ul>
+<div id="new-msgs-list">
+<!-- get this to refresh after a message is received -->
+    <%= render 'updatedMsg', convo: convo %>
+</div>
+<style>
 
-  <% end %>
+</style>
+
   <% end %>
 
 </div>

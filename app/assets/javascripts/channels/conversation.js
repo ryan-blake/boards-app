@@ -24,6 +24,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
         msgPanel.find('#msg-load').addClass('hidden')
         msgPanel.find('#msgUpdate').find('.message-received').remove();
         msgPanel.find('#msgUpdate').append(data['message']);
+        msgPanel.find('#msgUpdate').addClass('message-preview');
 
         // $('#conversations-list').append(data['window']);
         conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");

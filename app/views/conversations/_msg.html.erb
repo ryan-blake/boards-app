@@ -24,8 +24,12 @@ $(function(){
     <ul id="conversations-list" style="display:none;">
 
       <% @conversations.each do |conversation| %>
-        <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
+      <div id="conversations-msg">
+        <% if @show_msg == true %>
+          <%= render 'conversations/conversation', conversation: conversation, user: current_user %>
         <% end %>
+      </div>
+      <% end %>
 
     </ul>
   </div>
@@ -36,16 +40,12 @@ $(function(){
 </div>
 
 <!-- chat -->
-<div class="msg-center col-md-3 col-sm-4 pull-right" style="max-height:30%;max-height:230px;min-width:70%;margin-left:-14px;">
-  <div class="panel panel-primary">
-    <div class="panel-heading" id="panel-title">
-      <h3 class="panel-title">User list </h3>
+<div class="msg-center col-md-3 col-sm-4" style="">
       <!-- <span><i class="fa fa-angle-double-up fa-2x" id="expand-chat" style="position:absolute;top:5px;right:25px;" aria-hidden="true"></i></span>
       <span><i class="fa fa-angle-double-down fa-2x" id="hide-chat" style="display:none;position:absolute;top:7px;right:25px;" aria-hidden="true"></i></span> -->
-     </div>
+
     <div class="panel-body" style="width:100%" id="chat-list">
       <ul>
-       <% if current_user%>
             <% @charge = Charge.where(:user_id => @user.id) %>
             <% @my_sales = Charge.where(:vendor_id => @user.id) %>
         <!-- links to VENODRS that user has purchased from. Need  -->
@@ -63,11 +63,11 @@ $(function(){
         <% else %>
           <li><%= link_to i.name, conversations_path(user_id: i), remote: true, method: :post %></li>
           <%end%>
-        <%end%>
         <% end %>
       </ul>
     </div>
   </div>
+</div>
 </div>
 <!-- chat -->
 

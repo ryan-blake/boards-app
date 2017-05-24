@@ -1,3 +1,5 @@
+// pauses msg loading until user clicks open msg
+<% @show_msg = true %>
 
 var conversations = $('#conversations-list');
 var conversation = conversations.find("[data-conversation-id='" + "<%= @conversation.id %>" + "']");
