@@ -21,6 +21,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
       }
       else {
         conversation.removeClass('panel-default').addClass('panel-success');
+        msgPanel.find('#msg-load').addClass('hidden')
         msgPanel.find('#msgUpdate').find('.message-received').remove();
         msgPanel.find('#msgUpdate').append(data['message']);
 
