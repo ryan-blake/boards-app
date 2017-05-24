@@ -4,7 +4,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   received: function(data) {
     var conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
     var msgPanel = $('#convo-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
-    var alertChat = document.getElementById('new-alert');
+    var alertChat = $('#new-alert');
 
     if (data['window'] !== undefined) {
       var conversation_visible = conversation.is(':visible');
@@ -28,11 +28,14 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
 
         // $('#conversations-list').append(data['window']);
         conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
-
+        alertChat.addClass('.shows');
+        alert('hey, you just got a new msg');
       }
     }
     else {
       conversation.find('ul').append(data['message']);
+      alertChat.addClass('.shows');
+
     }
 
     var messages_list = conversation.find('.messages-list');
