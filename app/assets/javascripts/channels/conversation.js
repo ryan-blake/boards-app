@@ -14,12 +14,10 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
 
         if (!messages_visible) {
           conversation.removeClass('panel-default').addClass('panel-success');
-          msgPanel.find('#msgUpdate').append(data['message']);
         }
         conversation.find('.messages-list').find('ul').append(data['message']);
         conversation.removeClass('panel-default').addClass('panel-success');
-        msgPanel.find('#msgUpdate').find('.message-received').remove();
-        msgPanel.find('#msgUpdate').append(data['message']);
+
       }
       else {
         conversation.removeClass('panel-default').addClass('panel-success');
