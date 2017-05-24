@@ -41,6 +41,7 @@ $(function(){
 
 <!-- chat -->
 <div class="msg-center col-md-3 col-sm-4" style="">
+  users:
       <!-- <span><i class="fa fa-angle-double-up fa-2x" id="expand-chat" style="position:absolute;top:5px;right:25px;" aria-hidden="true"></i></span>
       <span><i class="fa fa-angle-double-down fa-2x" id="hide-chat" style="display:none;position:absolute;top:7px;right:25px;" aria-hidden="true"></i></span> -->
 
@@ -57,21 +58,24 @@ $(function(){
         <% @my_sales.each do |i| %>
          <% user_names << i.user %>
         <% end %>
+<!-- if conversations user exists data_conversations_id -->
+<!-- else conversations_id is blank nothing -->
         <% user_names.uniq.each do |i| %>
-        <% if i.company != nil %>
-          <li class="convo-button"><%= link_to i.company, conversations_path(user_id: i), remote: true, method: :post %></li>
-        <% else %>
-          <li><%= link_to i.name, conversations_path(user_id: i), remote: true, method: :post %></li>
+        <% @charge_convo = Conversation.where(:recipient => i).or(Conversation.where(:sender => i)) %>
+
+            <div class="convo-button"data-conversation-id="<%= @charge_convo.first.id %>">
+
+
+              <li><%= link_to i.name, conversations_path(user_id: i.id), remote: true, method: :post %></li>
+            </div>
+
           <%end%>
-        <% end %>
+
       </ul>
     </div>
   </div>
 </div>
-</div>
 <!-- chat -->
-
-
  <% else %>
 login
  <% end %>

@@ -13,8 +13,12 @@ class BoardsController < ApplicationController
       end
       session[:conversations] ||= []
       @users = User.all.where.not(id: current_user)
-      @conversations = Conversation.includes(:recipient, :messages)
-        .find(session[:conversations])
+      if @user
+@conversations = Conversation.where(:recipient_id => @user.id).pluck(:id)
+@conversations_started = Conversation.where(:sender_id => @user.id).pluck(:id)
+@conversations = @conversations << @conversations_started
+      @conversations = Conversation.where(:id => @conversations)
+    end
 
       @user = current_user
       @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
@@ -32,9 +36,8 @@ class BoardsController < ApplicationController
       @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
       session[:conversations] ||= []
       @users = User.all.where.not(id: current_user)
-      @conversations = Conversation.includes(:recipient, :messages)
-      .find(session[:conversations])
 
+# @conversations 
       # stripe account data
       if current_user.stripe_account
         @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)

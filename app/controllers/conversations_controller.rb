@@ -11,8 +11,12 @@ class ConversationsController < ApplicationController
 def msg
   @user = current_user
   @users = User.all.where.not(id: current_user)
-  @conversations = Conversation.includes(:recipient, :messages).find(session[:conversations])
-
+  if @user
+@conversations = Conversation.where(:recipient_id => @user.id).pluck(:id)
+@conversations_started = Conversation.where(:sender_id => @user.id).pluck(:id)
+@conversations = @conversations << @conversations_started
+  @conversations = Conversation.where(:id => @conversations)
+end
   @user_places = User.where.not(:latitude => nil)
   @url_array = []
      @user_places.each do |user|

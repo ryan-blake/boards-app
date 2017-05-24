@@ -59,7 +59,7 @@ class User < ApplicationRecord
   has_many :received_charges, class_name: 'Charge', foreign_key: 'vendor_id', dependent: :destroy
   has_many :user_provider, :dependent => :destroy
   has_many :messages
-  has_many :conversations, foreign_key: :sender_id
+  has_many :conversations, foreign_key: :sender_id, dependent: :destroy
   # mapping
 
   # mapping
