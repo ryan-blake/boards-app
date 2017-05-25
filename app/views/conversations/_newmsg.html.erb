@@ -11,12 +11,8 @@
 <% @convos = @convos.uniq %>
 <% @convos = Conversation.where(:id => @convos) %>
 <!-- grouping doesn't work on heroku  .group('messages.conversation_id')-->
- <!-- <% @convos = @convos.includes(:messages).order('messages.updated_at desc').group(:conversation_id).distinct%> -->
-
- <% @convos = @convos.find_by_sql("SELECT * FROM conversations
-   INNER JOIN messages ON conversations.id = conversations.messages
-   ORDER BY messages.updated_at desc") %>
-
+ <% @convos = @convos.includes(:messages).order('messages.updated_at desc')
+ .group('conversation.id, messages.id').distinct%>
 
 
 <% @convos.each do |convo| %>
