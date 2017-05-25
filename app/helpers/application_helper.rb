@@ -1,7 +1,7 @@
 module ApplicationHelper
   @types_search = Type.all
   @distances_search = Distance.all
-
+# find metadata proper
 def message_customer(customer)
  @charge = Stripe::Charge.retrieve(id: customer)
 
