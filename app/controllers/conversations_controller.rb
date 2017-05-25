@@ -3,9 +3,6 @@ class ConversationsController < ApplicationController
    @conversation = Conversation.get(current_user.id, params[:user_id])
    add_to_conversations unless conversated?
 
-   # ConversationMailer.new_message(@conversation).deliver_now
-
-
    respond_to do |format|
      format.js
    end

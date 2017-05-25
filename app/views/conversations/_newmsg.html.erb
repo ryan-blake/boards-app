@@ -14,8 +14,8 @@
 
 <% @convos = @convos.joins(:messages).group("conversations.id, messages.id, messages.created_at ").order('messages.id, messages.created_at desc') %>
 
+<div id="new-msgs-list">
 <% @convos.each do |convo| %>
-  <div id="new-msgs-list">
   <!-- get this to refresh after a message is received -->
       <%= render 'updatedMsg', convo: convo %>
   </div>

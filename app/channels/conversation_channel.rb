@@ -11,6 +11,9 @@ class ConversationChannel < ApplicationCable::Channel
      message_params = data['message'].each_with_object({}) do |el, hash|
        hash[el.values.first] = el.values.last
      end
-     Message.create(message_params)
+     @newMessage = Message.create(message_params)
+    #  send email to users about new messages
+    #  ConversationMailer.new_message(@newMessage).deliver_now
+
    end
 end
