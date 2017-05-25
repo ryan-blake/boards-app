@@ -14,7 +14,7 @@
  <!-- <% @convos = @convos.includes(:messages).order('messages.updated_at desc').group(:conversation_id).distinct%> -->
 <% @convos = @convos
 .joins(:messages)
-.group("conversations.id messages.id")
+.group("conversations.id, messages.id")
 .order("max(messages.created_at) DESC") %>
 
 
