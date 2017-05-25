@@ -10,8 +10,8 @@
 <% end %>
 <% @convos = @convos.uniq %>
 <% @convos = Conversation.where(:id => @convos) %>
-<!-- grouping doesn't work on heroku  .group('messages.conversation_id')-->
- <% @convos = @convos.includes(:messages).order('messages.updated_at desc').group([:conversation_id]) %>
+<!-- grouping doesn't work on heroku  .group('messages.conversation_id') .group([:conversation_id])-->
+ <% @convos = @convos.includes(:messages).order('messages.updated_at desc') %>
 <% @convos = @convos.distinct%>
 
 <% @convos.each do |convo| %>
