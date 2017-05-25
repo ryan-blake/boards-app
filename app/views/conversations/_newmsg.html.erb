@@ -14,7 +14,7 @@
  <!-- <% @convos = @convos.includes(:messages).order('messages.updated_at desc').group(:conversation_id).distinct%> -->
 
  <% @convos = @convos.find_by_sql("SELECT * FROM conversations
-   INNER JOIN messages ON conversations.id = conversations.messages_id
+   INNER JOIN messages ON conversations.id = conversations.messages
    ORDER BY messages.updated_at desc") %>
 
 
