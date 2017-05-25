@@ -53,12 +53,16 @@
  $(function() {
  var chatopen = document.getElementById('fixed-msg');
  var chatbox = document.getElementById('MsgModal');
+ var alertChat = $('#new-alert');
 // if modal == block hide chat button else show chat button
 $('#MsgModal').on('show.bs.modal', function (e) {
   chatopen.style.display = 'none';
+  alertChat.removeClass('shows').addClass('hidden');
+
 });
 $('#MsgModal').on('hidden.bs.modal', function (e) {
-  chatopen.style.display = 'block';
+    chatopen.style.display = 'block';
+
 });
 });
  </script>

@@ -992,10 +992,11 @@ margin-right:0px;
 }
 
 #chat-list {
-  max-height:170px;
-  overflow-y: scroll;
-  width:120%;
-  display:block;
+  max-height: 150px;
+      overflow-y: scroll;
+      min-width: 102%;
+      display: block;
+      overflow-x: hidden;
 }
 
 #top {

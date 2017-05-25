@@ -25,18 +25,18 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
         msgPanel.find('#msgUpdate').find('.message-received').remove();
         msgPanel.find('#msgUpdate').append(data['message']);
         msgPanel.find('#msgUpdate').addClass('message-preview');
-
-        conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
-
-        // if user is logged in use localstorage to persist class change. else send email about new message.
         alertChat.removeClass('hidden').addClass('shows');
 
+        // $('#conversations-list').append(data['window']);
+        conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
       }
+
     }
     else {
       conversation.find('ul').append(data['message']);
 
     }
+
 
     var messages_list = conversation.find('.messages-list');
     var height = messages_list[0].scrollHeight;
