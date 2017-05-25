@@ -12,10 +12,10 @@
 <% @convos = Conversation.where(:id => @convos) %>
 <!-- grouping doesn't work on heroku  .group('messages.conversation_id')-->
  <!-- <% @convos = @convos.includes(:messages).order('messages.updated_at desc').group(:conversation_id).distinct%> -->
-<% @convos = @convos
-.joins(:messages)
-.group("conversations.id, messages.updated_at")
-.order("max(messages.conversation_id, messages.created_at) DESC") %>
+<!-- <% @convos = @convos.includes(:messages).order('messages.updated_at desc').group(:conversation_id).distinct%> -->
+
+<%@convos = @convos.joins(:messages).group("conversations.id, messages.updated_at").order('messages.id, messages.created_at desc') %>
+
 
 
 <% @convos.each do |convo| %>
