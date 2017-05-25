@@ -10,8 +10,11 @@
 <% end %>
 <% @convos = @convos.uniq %>
 <% @convos = Conversation.where(:id => @convos) %>
+<!-- <% @convos = @convos.includes(:messages).order('messages.updated_at desc').group(:conversation_id).distinct%> -->
 
-<% @convos = @convos.joins(:messages).group("conversations.id, messages.id, messages.updated_at").order('messages.id, messages.created_at desc') %>
+<% @convos = @convos.joins(:messages).group("conversations.id, messages.id, messages.created_at ").order('messages.id, messages.created_at desc') %>
+
+
 
 <% @convos.each do |convo| %>
 <div id="new-msgs-list">
