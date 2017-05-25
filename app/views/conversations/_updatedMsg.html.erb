@@ -3,7 +3,7 @@
 <% op_user = convo.opposed_user(@user) %>
   <% if op_user.name != current_user.name %>
   <%= link_to op_user.name, conversations_path(user_id: op_user.id), remote: true, method: :post %>:
-  <span id="msgUpdate"><li id='msg-load' style='display:block;'><%= convo.messages.last.body.truncate(15) %></li></span>
+  <span id="msgUpdate"><li id='msg-load' style='display:block;'><%= convo.messages.first.body.truncate(15) %></li></span>
     <hr class="style14" style="max-width: 100%;margin: 0px;min-width: 100%;">
     <% end %>
 </ul>
