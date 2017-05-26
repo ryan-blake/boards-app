@@ -32,8 +32,8 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
-#  list_time   :datetime         default("2017-05-10 01:00:12.430923")
-#  inventory   :integer
+#  list_time   :datetime         default("2017-05-24 21:08:15")
+#  inventory   :integer          default("0")
 #
 
 FactoryGirl.define do

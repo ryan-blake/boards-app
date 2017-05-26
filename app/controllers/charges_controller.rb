@@ -22,6 +22,7 @@ class ChargesController < ApplicationController
          metadata: { "shipping" => @charge.shipping, "charge_id" => @charge.id, "board" => @board.title, "vendor" => User.find(@charge.vendor).name, "vendor_id" => User.find(@charge.vendor).id,  "customer" => User.find(current_user).name, "customer_id" => User.find(current_user).id }
        },
       )
+      @charge.charge_stripe = charge['id']
       @charge.update_attribute(:completed, true)
       @board.update_attribute(:arrived, true)
       @board.user_id = @charge.user_id
@@ -51,7 +52,7 @@ class ChargesController < ApplicationController
   if current_user
   customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
-    :card => params[:stripeToken]
+      :card => params[:stripeToken]
   )
 
   @charge = Charge.new(
@@ -65,6 +66,7 @@ class ChargesController < ApplicationController
     board_id: params[:charge]["board_id"],
     shipping: params[:charge]["shipping"]
   )
+
 
 
   @charge.update_attribute(:boolean, true)
@@ -136,14 +138,20 @@ class ChargesController < ApplicationController
 end
 
     def show
+
     begin
-      # Retrieve the charge from Stripe
-      @charge = Stripe::Charge.retrieve(id: params[:id], expand: ['application_fee'])
+      @charge = Charge.find(params[:id])
+      @board = Board.where(:id => @charge.board_id)[0]
+      @payments = Stripe::Charge.retrieve(id: @charge.charge_stripe)
+      {
+        expand: ['data.source_transfer', 'data.application_fee']
+      }
+      # # Retrieve the charge from Stripe
+      # @charge = Stripe::Charge.retrieve(id: params[:id], expand: ['application_fee'])
+      #
+      # # Validate that the user should be able to view this charge
+      # check_destination(@charge)
 
-      # Validate that the user should be able to view this charge
-      check_destination(@charge)
-
-      @board = Board.find(@charge.metadata.charge_id)
     rescue Stripe::RateLimitError => e
       # Too many requests made to the API too quickly
       flash[:error] = e.message

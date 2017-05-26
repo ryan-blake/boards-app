@@ -14,9 +14,9 @@ class BoardsController < ApplicationController
       session[:conversations] ||= []
       @users = User.all.where.not(id: current_user)
       if @user
-@conversations = Conversation.where(:recipient_id => @user.id).pluck(:id)
-@conversations_started = Conversation.where(:sender_id => @user.id).pluck(:id)
-@conversations = @conversations << @conversations_started
+      @conversations = Conversation.where(:recipient_id => @user.id).pluck(:id)
+      @conversations_started = Conversation.where(:sender_id => @user.id).pluck(:id)
+      @conversations = @conversations << @conversations_started
       @conversations = Conversation.where(:id => @conversations)
     end
 
@@ -37,9 +37,9 @@ class BoardsController < ApplicationController
       session[:conversations] ||= []
       @users = User.all.where.not(id: current_user)
 
-# @conversations 
+# @conversations
       # stripe account data
-      if current_user.stripe_account
+      if @user.stripe_account
         @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
 
         @payments = Stripe::Charge.list(
@@ -115,12 +115,14 @@ class BoardsController < ApplicationController
       if @pending_boards
       @pending_boards = @pending_boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
     end
-  end
+end
+
   def pick_boards
     @user = current_user
      @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
   end
   def sales_boards
+    if current_user.stripe_account != nil
    @sales_user = current_user.name
 
        @payments = Stripe::Charge.list(
@@ -159,6 +161,7 @@ transactions = Stripe::BalanceTransaction.all(
        @transactions = balances.sort_by {|date,net| date}
 
 
+     end
   end
 
   # GET /boards/1

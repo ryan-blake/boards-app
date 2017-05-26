@@ -32,8 +32,8 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
-#  list_time   :datetime         default("2017-05-10 01:00:12.430923")
-#  inventory   :integer
+#  list_time   :datetime         default("2017-05-24 21:08:15")
+#  inventory   :integer          default("0")
 #
 
 class Board < ApplicationRecord
@@ -55,6 +55,7 @@ class Board < ApplicationRecord
   validates :zipcode, :length => { :is => 5 }
   after_save :check_for_tracking_number
   after_update :update_tokens
+
 
 
 

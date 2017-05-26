@@ -72,10 +72,12 @@
           <th>Actions</th>
         </tr>
       </thead>
+
       <tbody>
         <% @payments.each do |payment| %>
+        <% customer_path = meta_stripe_customer(payment.source_transfer.source_transaction) %>
           <tr>
-            <td><%= link_to payment.source_transfer.source_transaction, charge_path(payment.source_transfer.source_transaction) %></td>
+            <td><%= link_to payment.source_transfer.source_transaction, charge_path(customer_path.metadata.charge_id ) %></td>
             <td><%= number_to_currency(payment.amount/100) %></td>
             <td><%= format_amount(payment.amount - payment.application_fee.amount) %></td>
             <td><%= format_date(payment.created) %></td>
@@ -107,5 +109,33 @@
   <!-- manipulate chart data group by_data_range, type, category, price, margins on the fly, -->
 </div>
 <% else %>
+Purchased:
+<div class="row" id="payment-table">
+  <div class="col-md-12">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Receipt ID</th>
+          <th>Store</th>
+          <th>Amount</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <%  @charges = Charge.where(:user_id  => current_user.id) %>
+      <% @charges.each do |i| %>
+        <tr>
+            <td><%= link_to i.id, charge_path(i.id ) %></td>
+            <td>$<%= i.price %>.00</td>
+            <td><%= format_date(i.created_at) %></td>
+            <td><%= i.vendor.company %>
+            <td class="text-center">
+
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <% end %>

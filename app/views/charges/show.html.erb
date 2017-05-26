@@ -3,36 +3,33 @@
   <div class="row">
     <div class="col-md-12">
       <h2 class="page-header">
-        <%= @charge.id %> <small class="pull-right raised"><%= format_amount(@charge.amount) %></small>
+        <strong>Receipt No: </strong><%= @charge.id %> <span class="pull-right ">$<%= @charge.price %>.00</span>
+      |<strong>  <%= @charge.vendor.company %> </strong>|
+
       </h2>
       <div class="panel panel-default">
         <div class="panel-body">
           <dl>
-            <dt>From:</dt>
-            <dd><%= @charge.metadata.name %></dd>
+            <dt>Purchase From:</dt>
+            <dd><%= @charge.user.name %></dd>
             <hr>
             <dt>Payment method:</dt>
-            <dd><%= @charge.source.brand %> ending in <%= @charge.source.last4 %></dd>
+            <dd><%= @payments['source']['brand']%></dd>
+
             <hr>
             <dt>For:</dt>
             <dd><%= link_to @board.title, board_path(@board) %></dd>
             <hr>
-            <dt>Fundraising Marketplace fee:</dt>
-            <dd><%= format_amount(@charge.application_fee.amount) %></dd>
-            <hr>
-            <dt>Net earnings:</dt>
-            <dd><%= format_amount(@charge.amount - @charge.application_fee.amount) %></dd>
+            <% if @charge.shipping == false || @charge.rental == true %>
+              <dd>In store pick Up</dd>
+            <% else %>
+             <dt>Shipped</dt>
+             <% end %>
             <hr>
             <dt>Created:</dt>
-            <dd><%= format_date(@charge.created) %></dd>
-            <hr>
-            <dt>Refunded:</dt>
-            <dd><%= @charge.refunded %></dd>
+            <dd><%= format_date(@charge.created_at) %></dd>
             <hr>
           </dl>
-          <% unless @charge.refunded %>
-            <%= link_to "Refund this donation", charge_path(@charge.id), method: :delete, data: { confirm: "Are you sure you want to refund this charge?", disable_with: "<i class='fa fa-spinner fa-spin'></i> Refunding charge..." }, class: "btn btn-lg btn-block btn-custom btn-danger" %>
-          <% end %>
         </div>
       </div>
     </div>
