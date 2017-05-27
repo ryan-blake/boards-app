@@ -1,60 +1,118 @@
+
+<!-- element -->
+
+
 <div id="purchaseTokens" style="max-width:200px;width:100%;height:20px;">
-<%= form_tag tokens_path do %>
+  <form action="/tokens" method="POST" id="payment-form">
         <% if flash[:error].present? %>
         <div id="error_explanation">
           <p><%= flash[:error] %></p>
         <% end %>
-      </div>
-        <%= label_tag(:amount, '$2 per listing') %>
-        <br>
-      <span>  <%= text_field_tag(:amount,nil, {:class => 'form-control', :style => 'font-size:10px;width:100px;', :placeholder => '$20.00 minimum'})%>
-        <%= hidden_field_tag(:stripeToken) %>
-        <button style="" class="btn btn-success" id='tokenButton'>Purchase</button></span>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <div id="card-errors" class="alert alert-danger"></div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Donation amount</label>
+              <input class="form-control input-lg" id="amount" name="amount" type="text" placeholder="$10.00">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="card-element">Card details</label>
+              <div id="card-element" class="form-control input-lg field">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <input type="hidden" name="email" value="<%= @user.email %>">
+            <button class="btn btn-lg btn-block btn-primary btn-custom" id="submit_payment" type="submit">
+              Make a donation
+            </button>
+          </div>
+        </div>
+        </div>
         <% @token = true %>
-     </article>
-    <% end %>
 
+    <script src="https://js.stripe.com/v3/"></script>
+      <script>
+        $(function(){
+          // Set your Stripe publishable API key here
+          var stripe = Stripe("<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>");
 
+          var elements = stripe.elements();
 
+          // Style the payment element
+          var style = {
+            base: {
+              fontSize: "14px"
+            }
+          };
 
+          // Create an instance of the card Element
+          var card = elements.create('card', {style: style});
 
-<script src="https://checkout.stripe.com/checkout.js"></script>
+          // Add an instance of the card Element into the `card-element` <div>
+          card.mount('#card-element');
 
-<script>
-var handler = StripeCheckout.configure({
-  key: '<%= Rails.configuration.stripe[:STRIPE_PUBLISHABLE_KEY] %>',
-  locale: 'auto',
-  name: 'Boards',
-  description: 'Token purchase',
-  token: function(token) {
-    $('input#stripeToken').val(token.id);
-    $('form').submit();
-  }
-});
-$('#tokenButton').on('click', function(e) {
-  e.preventDefault();
+          // Listen for errors
+          card.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+              displayError.textContent = event.error.message;
+              displayError.style.display = 'block';
+            } else {
+              displayError.textContent = '';
+              displayError.style.display = 'none';
+            }
+          });
 
-  $('#error_explanation').html('');
+          // Create a token
+          var form = document.getElementById('payment-form');
+          form.addEventListener('submit', function(event) {
+            event.preventDefault();
 
-  var amount = $('input#amount').val();
-  amount = amount.replace(/\$/g, '').replace(/\,/g, '')
+            // Validate the form isn't empty before requesting a token
+            if (document.getElementById('amount').value == ''){
+              return false;
+            }
 
-  amount = parseFloat(amount);
+            var submit_btn = document.getElementById('submit_payment');
+            var errorElement = document.getElementById('card-errors');
+            submit_btn.innerHTML = "<i class='fa fa-spinner fa-spin'></i> Making donation...";
+            submit_btn.className += " disabled";
+            stripe.createToken(card).then(function(result) {
+              if (result.error) {
+                errorElement.textContent = result.error.message;
+                errorElement.style.display = 'block';
+                submit_btn.innerHTML = "Make a donation";
+                submit_btn.classList.remove("disabled");
+              } else {
+                // Reset errors
+                errorElement.textContent = '';
+                errorElement.style.display = 'none';
+                // Send the token to your server
+                stripeTokenHandler(result.token);
+              }
+            });
+          });
 
-  if (isNaN(amount)) {
-    $('#error_explanation').html('<p>Please enter a valid amount in USD ($).</p>');
-  }
-  else if (amount < 20.00) {
-    $('#error_explanation').html('<p>Donation amount must be at least $20.</p>');
-  }
-  else {
-    amount = amount * 100; // Needs to be an integer!
-    handler.open({
-      amount: Math.round(amount)
-    })
-  }
-});
-$(window).on('popstate', function() {
-  handler.close();
-});
-</script>
+          // Submit the token
+          function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            // Submit the form
+            form.submit();
+          }
+        });
+      </script>

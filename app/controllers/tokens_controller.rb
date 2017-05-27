@@ -24,6 +24,7 @@ class TokensController < ApplicationController
    end
 
    Stripe::Charge.create(
+     source: params[:stripeToken],
      :amount => @amount,
      :currency => 'usd',
      :source => params[:stripeToken],
@@ -33,7 +34,7 @@ class TokensController < ApplicationController
    @user = current_user
    @user.tokens += (@amount / 100 ) / 2
    @user.save
-  redirect_to root_path
+  redirect_to dash_path
    rescue Stripe::CardError => e
      flash[:error] = e.message
      redirect_to new_charge_path
