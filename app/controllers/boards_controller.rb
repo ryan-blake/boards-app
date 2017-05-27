@@ -247,8 +247,8 @@ transactions = Stripe::BalanceTransaction.all(
  def search_signed_in
    if params[:value].empty?
      distance_in_miles = 3
-
    else
+
      distance_in_miles = params[:value]
    end
 
@@ -256,8 +256,6 @@ transactions = Stripe::BalanceTransaction.all(
      @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-
-
 
              # price
              if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
@@ -302,11 +300,12 @@ transactions = Stripe::BalanceTransaction.all(
             else
               one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
               @boards = Board.where(:id => (one + @boards))
-
             end
              else
+
                @boards = @boards.where(:rental => false)
              end
+
              if (params[:new] == "on") && (params[:used] != params[:new])
                 @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
               elsif (params[:used] == "on") && (params[:used] != params[:new])
@@ -326,7 +325,31 @@ transactions = Stripe::BalanceTransaction.all(
   #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 
 else
-   @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+  # rentals must be filtered before .near because of left outer join of events doesnt include distance.
+  if params[:rental] == "on"
+    @boards =  Board.where(:rental => true, :for_sale => [true]).where("inventory >= ?", 1)
+   #  get boards that also havent been rented once unless inventory > 1
+   one = @boards
+   unless params[:start_date][0].to_s == "" && params[:end_date][0].to_s == ""
+
+      startDate = Date.parse(params[:start_date].join(', '))
+      endDate = Date.parse(params[:end_date].join(', '))
+      @boards = @boards.start_search(startDate, endDate)
+      @boards = @boards.end_search(startDate, endDate).pluck(:id)
+  #  strange behaviour inside scoped starts and stops
+   one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
+   @boards = Board.where(:id => (@boards + one))
+
+   else
+
+     one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
+     @boards = Board.where(:id => (one + @boards))
+   end
+  else
+    @boards = @boards.where(:rental => false, :for_sale => true)
+  end
+
+   @boards = @boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
            "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
             .near(params[:search], distance_in_miles)
@@ -357,11 +380,8 @@ else
             end
 
 # reverse params between :start_time..:end_time
-            if params[:rental] == "on"
-              @boards =  @boards.where(:rental => true)
-            else
-              @boards = @boards.where(:rental => false)
-            end
+
+
             if (params[:new] == "on") && (params[:used] != params[:new])
                          @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
                        elsif (params[:used] == "on") && (params[:used] != params[:new])
