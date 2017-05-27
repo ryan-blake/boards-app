@@ -261,7 +261,13 @@ transactions = Stripe::BalanceTransaction.all(
              if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
                @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
              else
-              price_param(@boards)
+               if params[:max][0].to_i <= 0 && params[:min][0].to_i >= 1
+                 @boards  = @boards.min_price(params[:min][0].to_i).max_price(9999)
+               elsif params[:min][0].to_i <= 0 && params[:max][0].to_i >= 1
+                 @boards  = @boards.min_price(1).max_price(params[:max][0].to_i)
+               else
+                 @boards  = @boards.min_price(1).max_price(9999)
+               end
              end
 
 
@@ -269,7 +275,13 @@ transactions = Stripe::BalanceTransaction.all(
              if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
                @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
              else
-               length_param(@boards)
+               if params[:maximum][0].to_i <= 0 && params[:minimum][0].to_i >= 1
+                 @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(9999)
+               elsif params[:minimum][0].to_i <= 0 && params[:maximum][0].to_i >= 1
+                 @boards  = @boards.min_length_search(1).max_length_search(params[:maximum][0].to_i)
+               else
+                 @boards  = @boards.min_length_search(1).max_length_search(9999)
+               end
              end
 
              if params[:rental] == "on"
@@ -284,11 +296,13 @@ transactions = Stripe::BalanceTransaction.all(
              #  strange behaviour inside scoped starts and stops
               one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
               @boards = Board.where(:id => (@boards + one))
+
             else
               one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
               @boards = Board.where(:id => (one + @boards))
             end
              else
+
                @boards = @boards.where(:rental => false)
              end
 
@@ -343,14 +357,26 @@ else
             if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
               @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
             else
-              price_param(@boards)
+              if params[:max][0].to_i <= 0 && params[:min][0].to_i >= 1
+                @boards  = @boards.min_price(params[:min][0].to_i).max_price(9999)
+              elsif params[:min][0].to_i <= 0 && params[:max][0].to_i >= 1
+                @boards  = @boards.min_price(1).max_price(params[:max][0].to_i)
+              else
+                @boards  = @boards.min_price(1).max_price(9999)
+              end
             end
 
             #  length / height
             if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
               @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
             else
-              length_param(@boards)
+              if params[:maximum][0].to_i <= 0 && params[:minimum][0].to_i >= 1
+                @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(9999)
+              elsif params[:minimum][0].to_i <= 0 && params[:maximum][0].to_i >= 1
+                @boards  = @boards.min_length_search(1).max_length_search(params[:maximum][0].to_i)
+              else
+                @boards  = @boards.min_length_search(1).max_length_search(9999)
+              end
             end
 
 # reverse params between :start_time..:end_time
