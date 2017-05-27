@@ -227,7 +227,7 @@
 
     </script>
   <% end %>
-
+  <% if @user.stripe_account %>
 <div class="jumbotron gel" id="msg-area">
   <h2><%= current_user.tokens.to_s + " tokens " %> </h2>
     <div class="btn btn-sort" style="max-width:100px;link-style:none;" id="showTokens">Get Tokens</div>
@@ -240,6 +240,7 @@
     </div>
     <!-- <%= link_to "purchase tokens", new_token_path %> -->
 </div>
+<% end %>
 
 <div class="pull-right" style="top:65px;right:-70px;width:183px;position:absolute;">
   <% if  current_user && current_user.stripe_account != nil %>

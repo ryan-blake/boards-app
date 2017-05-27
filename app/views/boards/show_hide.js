@@ -1,3 +1,4 @@
+// erase ?
 $(document).ready(function() {
   var priceDwnBtn = document.getElementById('sort-down-price');
   var priceUpBtn = document.getElementById('sort-up-price');

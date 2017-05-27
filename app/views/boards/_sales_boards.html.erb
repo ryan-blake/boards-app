@@ -1,4 +1,4 @@
-<% if custom_user(current_user) %>
+<% if current_user.stripe_account %>
 <strong>
   <h1>
     <h2 class="page-header">
@@ -110,15 +110,15 @@
 </div>
 <% else %>
 Purchased:
-<div class="row" id="payment-table">
+<div class="row" id="payment-table" style="position:relative;">
   <div class="col-md-12">
     <table class="table table-bordered table-striped table-hover">
       <thead>
         <tr>
-          <th>Receipt ID</th>
-          <th>Store</th>
-          <th>Amount</th>
-          <th>Created</th>
+          <th>Receipts</th>
+          <th>Price</th>
+          <th>Purchased On</th>
+          <th>Company</th>
         </tr>
       </thead>
 

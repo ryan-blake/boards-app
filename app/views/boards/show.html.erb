@@ -25,16 +25,6 @@ checkbox.onclick = function() {
 <% end %>
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
 <div class="container-fluid">
-  <!-- shipping detail? try to clean up and gather data from stripe token -->
-  <% if current_user && current_user.id == @board.customer_id.to_i %>
-    <% if @board.shipping == nil %>
-    <div class="">
-      <div class="text-center">
-          <h4 style="color:darkred;"> You're almost there!</h4>
-             <h4 style="color:black;text-shadow:-1px 1px slategrey;"> Select if you want this item shipped check the box.<br> Local pickups press submit.</h4>
-          <% end %>
-          <%= render partial: 'shipping', locals: {board: @board} %>
-    <% end %>
       </div>
     </div>
     <!-- edit button plus contact for shipping, is contact for shipping necessary -->
