@@ -6,9 +6,11 @@ def message_customer(customer)
  @charge = Stripe::Charge.retrieve(id: customer)
      link_to @charge.metadata.customer.capitalize , conversations_path(user_id: @charge.metadata.customer_id), remote: true, method: :post
 end
+
 def meta_stripe_customer(charge)
   Stripe::Charge.retrieve(id: charge)
 end
+
   def format_amount(amount)
     sprintf('$%0.2f', amount.to_f / 100.0).gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1,")
   end
@@ -16,6 +18,11 @@ end
   def format_date(created)
     Time.at(created).getutc.strftime("%m/%d/%Y")
   end
+
+ def custom_user(user)
+   if user.stripe_account.present?
+   end
+ end
 
 private
 

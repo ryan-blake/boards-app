@@ -174,13 +174,13 @@
 
                   var submit_btn = document.getElementById('submit_payment');
                   var errorElement = document.getElementById('card-errors');
-                  submit_btn.innerHTML = "<i class='fa fa-spinner fa-spin'></i> Making donation...";
+                  submit_btn.innerHTML = "<i class='fa fa-spinner fa-spin'></i> Adding tokens...";
                   submit_btn.className += " disabled";
                   stripe.createToken(card).then(function(result) {
                     if (result.error) {
                       errorElement.textContent = result.error.message;
                       errorElement.style.display = 'block';
-                      submit_btn.innerHTML = "Make a donation";
+                      submit_btn.innerHTML = "Purchase Tokens";
                       submit_btn.classList.remove("disabled");
                     } else {
                       // Reset errors
@@ -370,8 +370,8 @@ $('#tokenButton').on('click', function(e) {
   if (isNaN(amount)) {
     $('#error_explanation').html('<p>Please enter a valid amount in USD ($).</p>');
   }
-  else if (amount < 20.00) {
-    $('#error_explanation').html('<p>Donation amount must be at least $20.</p>');
+  else if (amount < 1000) {
+    $('#error_explanation').html('<p> amount must be at least $10.</p>');
   }
   else {
     amount = amount * 100; // Needs to be an integer!

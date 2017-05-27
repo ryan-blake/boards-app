@@ -17,8 +17,8 @@ class TokensController < ApplicationController
 
    @amount = (@amount * 100).to_i # Must be an integer!
 
-   if @amount < 2000
-     flash[:error] = 'Charge not completed. Donation amount must be at least $20.'
+   if @amount < 1000
+     flash[:error] = 'Charge not completed. Amount must be at least $10.'
      redirect_to root_path
      return
    end
