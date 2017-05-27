@@ -53,23 +53,28 @@
   </div>
 </div>
 </strong>
+<style>
+@media  (max-width: 504px) {
+  #payment-table {
+    font-size:10px;
+  }
 
+  #payment-table tbody {
+    font-size:10px;
+  }
+}
 
-<%  @charges = Charge.where(:vendor_id  => current_user.id) %>
-<% @charges.each do |i| %>
-<strong> price </strong>
-  <%= i.price %>
-<% end %>
+</style>
 <div class="row" id="payment-table">
   <div class="col-md-12">
     <table class="table table-bordered table-striped table-hover">
       <thead>
         <tr>
-          <th>Payment ID</th>
+          <th>Receipt ID</th>
           <th>Amount</th>
           <th>Net</th>
           <th>Created</th>
-          <th>Actions</th>
+          <th>Customer Name</th>
         </tr>
       </thead>
 
@@ -77,17 +82,17 @@
         <% @payments.each do |payment| %>
         <% customer_path = meta_stripe_customer(payment.source_transfer.source_transaction) %>
           <tr>
-            <td><%= link_to payment.source_transfer.source_transaction, charge_path(customer_path.metadata.charge_id ) %></td>
+            <td><%= link_to customer_path.metadata.charge_id, charge_path(customer_path.metadata.charge_id ) %></td>
             <td><%= number_to_currency(payment.amount/100) %></td>
             <td><%= format_amount(payment.amount - payment.application_fee.amount) %></td>
             <td><%= format_date(payment.created) %></td>
+            <td><%= customer_name(payment.source_transfer.source_transaction) %></td>
             <td class="text-center">
               <% if payment.refunded %>
                 <span class="text-danger">
                   <span class="fa fa-undo"></span> Refunded
                 </span>
               <% else %>
-              <!-- <%= message_customer(payment.source_transfer.source_transaction) %> -->
 
             </td>
           </tr>

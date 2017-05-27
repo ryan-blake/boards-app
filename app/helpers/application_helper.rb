@@ -2,13 +2,13 @@ module ApplicationHelper
   @types_search = Type.all
   @distances_search = Distance.all
 # find metadata proper
-def message_customer(customer)
- @charge = Stripe::Charge.retrieve(id: customer)
-     link_to @charge.metadata.customer.capitalize , conversations_path(user_id: @charge.metadata.customer_id), remote: true, method: :post
-end
+  def customer_name(customer)
+   @charge = Stripe::Charge.retrieve(id: customer)
+        @charge.metadata.customer.capitalize
+  end
 
 def meta_stripe_customer(charge)
-  Stripe::Charge.retrieve(id: charge)
+   Stripe::Charge.retrieve(id: charge)
 end
 
   def format_amount(amount)
