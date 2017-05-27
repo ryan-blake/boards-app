@@ -125,10 +125,14 @@
   $(document).ready(function() {
   var open = document.getElementById('showTokens');
   var tokenpartial = document.getElementById('tokenPartial');
+  var closePartial = document.getElementById('closePartial');
+
 
   open.onclick = function() {
     if (tokenpartial.style.display == 'none') {
        tokenpartial.style['display'] = 'block';
+       closePartial.style['display'] = 'block';
+       open.style['display'] = 'none';
       //  elemelons
 
               $(function(){
@@ -210,9 +214,14 @@
 
       // !elemelons
 
-    } else {
+    }  closePartial.onclick = function() {
+    if (closePartial.style.display == 'block') {
+      closePartial.style['display'] = 'none';
       tokenpartial.style['display'] = 'none';
+      open.style['display'] = 'block';
+
     }
+  };
   };
   });
 
@@ -221,9 +230,13 @@
 
 <div class="jumbotron gel" id="msg-area">
   <h2><%= current_user.tokens.to_s + " tokens " %> </h2>
-    <div class="btn btn-sort" style="link-style:none;" id="showTokens">Get Tokens</div>
-    <div id="tokenPartial" style="display:none;top:35px;position:absolute;left:33%;">
+    <div class="btn btn-sort" style="max-width:100px;link-style:none;" id="showTokens">Get Tokens</div>
+    <div class="btn btn-danger" style="max-width:100px;display:none;" id="closePartial">CLOSE</div>
+
+    <div id="tokenPartial" class="" style="left:calc(50% - 150px);display:none;z-index:990;top:150px;position:absolute;">
+      <div style="width:300px;min-height:200px;max-height240px;background-color:#f5f5f5;z-index:989;">
       <%= render partial: 'tokens/new' %>
+      </div>
     </div>
     <!-- <%= link_to "purchase tokens", new_token_path %> -->
 </div>
