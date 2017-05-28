@@ -1356,9 +1356,10 @@ z-index: 1;
  }
  .dash-nav-mobile {
    display: block;
-   position:absolute;
+   position:fixed;
    top:150px;
    width:100%;
+   z-index:2;
  }
 
  .dash-data-title {

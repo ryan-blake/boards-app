@@ -3,7 +3,7 @@
 <%= form_for(@board, html: {role: :form, 'data-model' => 'board'}, :remote => true) do |f| %>
   <div class="actions  text-center">
 <% if  @board.for_sale === false && @board.pending == false %>
- <% if current_user.tokens >= 2 %>
+ <% if current_user.tokens >= 1 %>
   <div class="actions" >
     <%= f.hidden_field :pending , value: false %>
     <%= f.hidden_field :shipping, :value => nil %>
@@ -11,8 +11,8 @@
     <%= f.hidden_field :for_sale , value: true %>
     <%= button_tag "list!", id: 'list-btn', class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Listing..."}, remote: true %>
     <% else %>
-    <strong> You're out of tokens. </strong>
-    <% end %>
+    <small> not enough of tokens </small>
+    <% end %>            
   </div>
 
   <% elsif @board.for_sale == false && @board.pending == true && @board.user_id == current_user.id %>
