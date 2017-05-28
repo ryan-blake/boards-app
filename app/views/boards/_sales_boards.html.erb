@@ -82,7 +82,7 @@
         <% @payments.each do |payment| %>
         <% customer_path = meta_stripe_customer(payment.source_transfer.source_transaction) %>
           <tr>
-            <td><%= link_to customer_path.metadata.charge_id, charge_path(customer_path.metadata.charge_id ) %></td>
+            <td><%= link_to customer_path.metadata.charge_id, charge_path(customer_path.metadata.charge_id ), target: :_blank %></td>
             <td><%= number_to_currency(payment.amount/100) %></td>
             <td><%= format_amount(payment.amount - payment.application_fee.amount) %></td>
             <td><%= format_date(payment.created) %></td>

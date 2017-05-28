@@ -240,15 +240,11 @@
     </div>
 </div>
 <% end %>
-
 <div class="pull-right" style="top:65px;right:-70px;width:183px;position:fixed;z-index:1;">
   <% if  current_user && current_user.stripe_account != nil %>
     <h3 class="btn btn-sort"><%= link_to 'Add listing', new_board_path %></h3>
  <% end %>
 </div>
-
-
-
 <div class="center-text" style="right:0px;position:absolute;top:50px;position:fixed;z-index:1;">
   <% if current_user.stripe_account == nil %>
     <%= link_to 'new managed', new_stripe_account_path, class: 'btn-sort btn', style: 'color:black' %>
@@ -277,8 +273,8 @@
 <!-- nav desktop -->
 <div class="dash-nav-desktop btn-group-vertical pull-left" role="group" aria-label="...">
   <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-  <button type="button" class="btn btn-default" id="btn-pending">pending</button>
   <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
+  <button type="button" class="btn btn-default" id="btn-pending">pending</button>
   <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_boards_path, remote:true %></button>
   <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  pick_boards_boards_path, remote:true %></button>
   <button type="button" class="btn btn-default" id="btn-sales"><%= link_to 'Sales', sales_boards_boards_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
@@ -295,8 +291,8 @@
      </button>
      <ul class="dropdown-menu"style="width:100%;">
        <li><button type="button" class="btn btn-default" id="btn-active-m"><%= link_to 'Active',  active_boards_boards_path, remote:true %></button></li>
-       <li><button type="button" class="btn btn-default" id="btn-pending-m">pending</button></li>
        <li><button type="button" class="btn btn-default" id="btn-inventory-m"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true %></button></li>
+       <li><button type="button" class="btn btn-default" id="btn-pending-m">pending</button></li>
        <li><button type="button" class="btn btn-default" id="btn-shipped-m"><%= link_to 'shipping',  shipped_boards_boards_path, remote:true %></button></li>
        <li><button type="button" class="btn btn-default" id="btn-pickup-m"><%= link_to 'Pick Up',  pick_boards_boards_path, remote:true %></button></li>
        <li><button type="button" class="btn btn-default" id="btn-sales-m"><%= link_to 'Sales', sales_boards_boards_path , remote: true %></button></li>
@@ -328,7 +324,10 @@
 
 </div>
 </div>
+<!-- search -->
 
+<!-- !search -->
+<!-- modal -->
  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-header">
