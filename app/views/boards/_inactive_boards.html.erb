@@ -1,26 +1,3 @@
-<!-- <div>
-
-<h4 style="text-decoration:underline;" class="center-text"> Inactive inventory </h4>
- <% if current_user.provider == nil %> (must <%= link_to 'connect', user_stripe_connect_omniauth_authorize_path %> to sell) </h4> <% end %>
-
-   <% @inactive_boards.each do |i| %>
-   <thead>
-     <hr class="style13">
-
-   <td>
-   <%= link_to attachment_image_tag(i.images.first, :file, :fill, 100, 100), i, remote: true, data: {toggle: "modal", targe: "#newModal"} %>
-   <br>
-    $<%= i.price %><%= link_to i.title, i%>
-    <% if i.for_sale == true && i.pending == false %>
-      <strong style="color:red;">active</strong>
-      <% else %>
-      <strong style="color:red;">inactive</strong>
-      <% end %>
-  </td>
-  </thead>
-
-<% end %>
-</div> -->
 <% if current_user.stripe_account == nil %>
 <h4 class="dash-data-title"> purchased </h4>
 <% else %>
@@ -30,7 +7,6 @@
   <% if @inactive_boards.length == 0 %>
     <%= render partial: 'boards/none' %>
   <% end %>
-
   <thead>
     <td>
       <div class="center-text" id="paginator">
@@ -52,57 +28,46 @@
     </td>
   </thead>
 
+      <!--  -->
+      <div class="row" id="pending-table">
+        <div class="col-md-12">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>image</th>
+                <th>title</th>
+                <th>price</th>
+                <th>cost</th>
+                <th>margin</th>
+                <th>inactive</th>
+              </tr>
+            </thead>
 
-<% @inactive_boards.each do |board| %>
-  <tbody class="tbody-search col-sm-6 col-md-4 center-text">
-      <!-- if no image load other boards image in results -->
-      <td class="center-text">
-        <div  style="min-height:240px;">
-        <% if board.images.first != nil %>
-            <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
-          <% else %>
-            <%= link_to attachment_image_tag(Board.find(3).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
-        <% end %>
+            <tbody>
+            <% @inactive_boards.each do |board| %>
+                <tr>
+                  <td><%= link_to attachment_image_tag(board.images.first, :file, :fill, 80, 80), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
+                  <td><%= link_to board.title.truncate(13), board, target: :_blank %></td>
+                  <td><%= format_amount(board.price * 100) %></td>
+                  <td>cost<%=  %></td>
+                  <td>margin<%= %></td>
+                  <td class="text-center">
+                    <% if board.for_sale == false %>
+                      <span class="text-danger">
+                        inactive
+                      </span>
+                    <% else %>
+                    active
+                  </td>
+                </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
-    <ul class="main-well-ul">
-       <li class="center-text title-link">
-         <!-- new link to modal -->
-         <div class="title-bar center-text">
-           <%= link_to board.title.truncate(23), board, target: :_blank  %>
-        </div>
-        <%if current_user && board.user_id == current_user.id %>
-         <li><%= link_to 'Edit', edit_board_path(board) %></li>
-        <% end %>
-        <div class="length-ribbon">
-          <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
-        </div>
-       </li>
-       <li class="center-text">
-        <%=  board.description.truncate(33)  %>
-       </li>
-       <li class="center-text">
-         <strong class="make-li"><%=  board.make %></strong>
-       </li>
-       <li class="center-text" style="padding-top:5px;">
-         <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
-         <% unless current_user.stripe_account == nil %>
-         <% if (board.for_sale == true && board.pending == false )  %>
-
-           <strong style="color:red;">active</strong>
-           <% else %>
-           <strong style="color:red;">inactive</strong>
-           <% end %>
-           <% end %>
-           <button class="btn btn-sort pull-right view_btn"><%= link_to 'view', board, target: :_blank  %></button>
-           <br>
-           <hr class="style13">
-         </td>
-         </ul>
-      </tbody>
-      <% end %>
-
-
-    <tbody >
+      <!--  -->
+    <tbody>
       <td>
         <div class="center-text bottom" id="paginator">
           <%= paginate @inactive_boards,  window: 1,remote: true %>
