@@ -34,14 +34,10 @@ class BoardsController < ApplicationController
       @user = current_user
       @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
       @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
-      session[:conversations] ||= []
       @users = User.all.where.not(id: current_user)
-
-# @conversations
       # stripe account data
       if @user.stripe_account
         @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
-
         @payments = Stripe::Charge.list(
         {
           limit: 100,
@@ -49,23 +45,19 @@ class BoardsController < ApplicationController
         },
         { stripe_account: current_user.stripe_account }
         )
-
         @transfers = Stripe::Transfer.list(
           {
             limit: 100
           },
           { stripe_account: current_user.stripe_account }
         )
-
         @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
-
     # Retrieve transactions with an available_on date in the future
     transactions = Stripe::BalanceTransaction.all(
       {
         limit: 100,
         available_on: {gte: Time.now.to_i}
       },{ stripe_account: current_user.stripe_account })
-
     balances = Hash.new
 
     # Iterate through transactions and sum values for each available_on date
@@ -76,13 +68,12 @@ class BoardsController < ApplicationController
         balances[txn.available_on] = txn.net
       end
     end
-
-
     # Sort the results
     @transactions = balances.sort_by {|date,net| date}
-
     # end new data from connect
     end
+
+
     else
       redirect_to root_path
     end
@@ -100,6 +91,7 @@ class BoardsController < ApplicationController
     @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
   end
   def pending_boards
+    # to become offers on boards
     @user = current_user
       @on = current_user
       @charge = Charge.where(user_id: @user.id, completed: false)
@@ -107,24 +99,22 @@ class BoardsController < ApplicationController
         @boards = Board.where(title: @charge.item )
         @boardies = Board.where(title: @charge.item )
       end
-
       @charge.each do |i|
         @pending_boards = Board.where(title: i.item, for_sale: false, id: i.board_id, :pending => true)
-
       end
       if @pending_boards
       @pending_boards = @pending_boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
     end
-end
+  end
 
   def pick_boards
     @user = current_user
      @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
   end
+
   def sales_boards
     if current_user.stripe_account != nil
    @sales_user = current_user.name
-
        @payments = Stripe::Charge.list(
          {
            limit: 100,
@@ -138,7 +128,6 @@ end
   },
   { stripe_account: current_user.stripe_account }
 )
-
        @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
        # Retrieve transactions with an available_on date in the future
 transactions = Stripe::BalanceTransaction.all(
@@ -159,8 +148,6 @@ transactions = Stripe::BalanceTransaction.all(
              end
 
        @transactions = balances.sort_by {|date,net| date}
-
-
      end
   end
 
