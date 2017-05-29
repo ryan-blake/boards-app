@@ -40,6 +40,11 @@ height:100%;
   width:100%;
   font-size:13px;
 }
+
+.dropdown-menu-right {
+  left: -70px !important;
+}
+
 #msg-x {
 color:white;
 }
@@ -838,15 +843,14 @@ margin-right:0px;
 }
 
 .msg-center {
-  position:fixed;
-  top: 73%;
-  width: 75%;
+  position: fixed;
+  top: 73.5%;
+  width: 70.8%;
+  max-height: 150px;
+  font-size: 10px;
   left: 0px;
-  max-height: 230px;
-  font-size: 8px;
-  left: -26px;
   min-height: 119px;
-  overflow-x: scroll;
+  overflow-x: hidden;
 }
 
 .message-sent {

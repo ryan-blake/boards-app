@@ -17,11 +17,8 @@
           <ti> <strong> Sort by: </strong> </ti>
          </ti>
           <div  <i style="display:inline;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
-          <div  <i style="display:none;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
           <div <i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></div>
-          <div  <i style="display:none;" class="btn btn-sort"> <%= sortable "price" %></i></div>
           <div  <i style="display:inline;" class="btn btn-sort"> <%= sortable "length", 'height' %></i></div>
-          <div  <i style="display:none;" class="btn btn-sort"> <%= sortable "length", 'height' %></i></div>
          </ti>
         </td>
       </tr>
@@ -35,10 +32,10 @@
             <thead>
               <tr>
                 <th>image</th>
-                <th>title</th>
-                <th>price</th>
+                <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "title" %></th>
+                <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></th>
                 <th>cost</th>
-                <th>margin</th>
+                <th>margin( (profit / revenue) * 100 )</th>
                 <th>inactive</th>
               </tr>
             </thead>
