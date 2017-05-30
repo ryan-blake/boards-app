@@ -1,4 +1,3 @@
-require 'csv'
 
 namespace :import do
   desc "Import boards from user csv"
