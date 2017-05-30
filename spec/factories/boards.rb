@@ -36,6 +36,7 @@
 #  inventory   :integer          default("0")
 #  cost        :integer
 #  margin      :integer
+#  upc         :string
 #
 
 FactoryGirl.define do
