@@ -80,7 +80,7 @@ class BoardsController < ApplicationController
   end
   def active_boards
     @user = current_user
-    @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true, pending: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+    @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
   end
   def inactive_boards
     @user = current_user

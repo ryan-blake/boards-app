@@ -34,6 +34,8 @@
 #  rental      :boolean          default("f")
 #  list_time   :datetime         default("2017-05-24 21:08:15")
 #  inventory   :integer          default("0")
+#  cost        :integer
+#  margin      :integer
 #
 
 require 'rails_helper'

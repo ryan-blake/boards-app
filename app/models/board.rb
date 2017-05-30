@@ -34,6 +34,8 @@
 #  rental      :boolean          default("f")
 #  list_time   :datetime         default("2017-05-24 21:08:15")
 #  inventory   :integer          default("0")
+#  cost        :integer
+#  margin      :integer
 #
 
 class Board < ApplicationRecord
@@ -55,6 +57,7 @@ class Board < ApplicationRecord
   validates :zipcode, :length => { :is => 5 }
   after_save :check_for_tracking_number
   after_update :update_tokens
+  after_update :update_margin
 
 
 
@@ -102,6 +105,19 @@ scope :end_search, -> (startDate, endDate) {
       a.save
       end
     end
+  end
+
+  def update_margin
+   if cost_changed? == true
+     if self.changes["cost"][1]
+       a = Board.find(self.id).user
+       profit = a.price - a.cost
+       revenue = a.price
+       margin = (profit / revenue) * 100
+       a.margin = margin
+       a.save!
+     end
+   end
   end
 
 

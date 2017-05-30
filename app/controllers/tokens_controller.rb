@@ -24,7 +24,7 @@ class TokensController < ApplicationController
    end
 
    Stripe::Charge.create(
-     source: params[:stripeToken],
+    #  source: params[:stripeToken],
      :amount => @amount,
      :currency => 'usd',
      :source => params[:stripeToken],
