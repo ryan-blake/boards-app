@@ -224,8 +224,6 @@
   };
   };
   });
-
-
     </script>
   <% end %>
   <% if @user.stripe_account %>
@@ -242,12 +240,12 @@
 </div>
 <% end %>
 
+
 <div class="pull-right" style="top:65px;right:-70px;width:183px;position:fixed;z-index:1;">
   <% if  current_user && current_user.stripe_account != nil %>
     <h3 class="btn btn-sort"><%= link_to 'Add listing', new_board_path %></h3>
  <% end %>
 </div>
-
 
 
 <div class="center-text" style="right:0px;position:absolute;top:50px;position:fixed;z-index:1;">
@@ -275,6 +273,7 @@
  <% end %>
 
 </div>
+
 <!-- nav desktop -->
 <div class="dash-nav-desktop btn-group-vertical pull-left" role="group" aria-label="...">
   <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
@@ -288,6 +287,7 @@
 <!--!nav desktop  -->
 
 <!-- nav mobile  starts at < 835px-->
+
 <div class="dash-nav-mobile btn-group-vertical pull-left" role="group" aria-label="...">
    <div class="btn-group" role="group">
      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -317,6 +317,7 @@
 </div>
 <!-- !nav mobile -->
 
+
 <div class="dash-data">
 <!-- Need to finish payment -->
 <div style="display:none;min-height:100%" class="col-md-12 center-text"  id="active">
@@ -339,7 +340,27 @@
 
 </div>
 </div>
+<%= form_tag({controller: :boards, action: :search_dash}, {method: :get, remote: true}) do  %>
 
+<div class="col-md-4" style="position:absolute;left:calc(45%);">
+  <div class="input-group">
+    <span class="input-group-btn">
+    <%= grouped_collection_select nil, :category_id, Type.all, :categories,
+          :name, :id, :name, {prompt: "Choose a type" },
+          { id: 'category-select' , class: "form-control"} %>
+    </span>
+  </div><!-- /input-group -->
+</div><!-- /.col-lg-6 -->
+<div class="col-md-4 search-bar">
+   <div class="input-group">
+     <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+     <span class="input-group-btn">
+       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+     </span>
+   </div><!-- /input-group -->
+ </div><!-- /.col-lg-6 -->
+
+ <% end %>
  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-header">

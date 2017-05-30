@@ -80,15 +80,25 @@ class BoardsController < ApplicationController
   end
   def active_boards
     @user = current_user
-    @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+    @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
+  def search_dash
+    @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+
+      @active_boards = @active_boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+
+              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+
+
+  end
+
   def inactive_boards
     @user = current_user
-    @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+    @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
   def shipped_boards
     @user = current_user
-    @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+    @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
   def pending_boards
     # to become offers on boards
@@ -103,13 +113,13 @@ class BoardsController < ApplicationController
         @pending_boards = Board.where(title: i.item, for_sale: false, id: i.board_id, :pending => true)
       end
       if @pending_boards
-      @pending_boards = @pending_boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+      @pending_boards = @pending_boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
     end
   end
 
   def pick_boards
     @user = current_user
-     @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+     @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
 
   def sales_boards
