@@ -107,18 +107,15 @@ scope :end_search, -> (startDate, endDate) {
     end
   end
 
+
   def update_margin
-   if cost_changed? == true
-     if self.changes["cost"][1]
-       a = Board.find(self.id).user
-       profit = a.price - a.cost
-       revenue = a.price
-       margin = (profit / revenue) * 100
-       a.margin = margin
-       a.save!
-     end
+   if cost_changed? == true || price_changed? == true
+     a =  Board.find(self.id)
+     p = a.price.to_f - a.cost.to_f
+     r = a.price.to_f
+      a.margin = ((p) / (r)) * 100
+      a.save
    end
   end
-
 
 end
