@@ -336,7 +336,7 @@
 </div>
 <%= form_tag({controller: :boards, action: :search_dash}, {method: :get, remote: true}) do  %>
 
-<div class="col-md-4" style="position:absolute;left:calc(45%);">
+<div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
   <div class="input-group">
     <span class="input-group-btn">
     <%= grouped_collection_select nil, :category_id, Type.all, :categories,
