@@ -48,7 +48,6 @@ class Board < ApplicationRecord
   accepts_nested_attributes_for :images, allow_destroy: true
   has_many :events, dependent: :destroy
   validates_associated :events
-
   validates :title, :presence => true
   validates :description, :presence => true
   validates :make, :presence => true
@@ -56,12 +55,10 @@ class Board < ApplicationRecord
   validates :price, :presence => true
   validates :category, :presence => true
   validates :zipcode, :length => { :is => 5 }
+  before_validation :load_costs
   after_save :check_for_tracking_number
   after_update :update_tokens
   after_update :update_margin
-
-
-
 
 
   # mapping
@@ -97,9 +94,8 @@ scope :end_search, -> (startDate, endDate) {
 
   def self.import(file)
     counter = 0
-
     CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
-      board = Board.new(title: row[:title], price: row[:price], cost: row[:cost], user_id: row[:user], category_id: row[:category].to_i, make: row[:make], description: row[:description], length: row[:length], zipcode: row[:zipcode])
+      board = Board.new(title: row[:title], margin: row[:margin], cost: row[:cost], user_id: row[:user], category_id: row[:category].to_i, make: row[:make], description: row[:description], length: row[:length], zipcode: row[:zipcode])
         if board.save
           counter += 1
         else
@@ -110,7 +106,6 @@ scope :end_search, -> (startDate, endDate) {
   end
 
   private
-
 
   def update_tokens
     if for_sale_changed? == true
@@ -131,6 +126,22 @@ scope :end_search, -> (startDate, endDate) {
       a.margin = ((p) / (r)) * 100
       a.save
    end
+  end
+
+  def load_costs
+    if self.cost != nil && self.margin == nil
+      r = self.price.to_f
+      p = r - self.cost.to_f
+
+      self.margin = ((p) / (r)) * 100
+    elsif self.margin != nil && self.price == nil
+      c = self.cost.to_f
+      m = self.margin.to_f
+      r = c / (1 - (m / 100))
+      self.price = r.ceil
+      self.save
+    end
+
   end
 
 end
