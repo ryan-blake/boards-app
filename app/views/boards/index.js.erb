@@ -1,2 +1,8 @@
 $('#results').html('<%= escape_javascript render 'search_signed_in' %>');
-$('.paginator').html('<%= escape_javascript(paginate(@boards, :remote => true)) %>');
+$('#partial-s').append('<%= j render @boards %>');
+<% if @posts.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @boards %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

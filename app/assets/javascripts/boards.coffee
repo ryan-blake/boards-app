@@ -16,6 +16,10 @@ jQuery ->
         $(this).find("input[type=submit]").removeAttr "disabled"  unless $(this).find("input.uploading").length
         $("#progress-bar").slideUp('fast')
 
+jQuery ->
+  if $('#paginator-s').size() > 0
+    $(window).on 'scroll', ->
+      $('.pagination .next_page a').attr('href') more_posts_url
 
  # jQuery ->
  #  $("#category-select").hide();

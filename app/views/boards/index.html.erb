@@ -129,8 +129,12 @@ openExtended.onclick = function() {
 <% end %>
 </div>
 <br>
-<div>
-<%= render partial: 'search_signed_in'%>
+<div id="partial-s">
+<%= render @boards%>
+</div>
+
+<div class="center-text" id="paginator-s">
+<%= paginate @boards, remote: true, window: 1 %>
 </div>
 
 <div style="position:fixed;bottom:20px;right:30px;">
