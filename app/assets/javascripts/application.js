@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.geocomplete
+//= require jquery.infinitescroll
 //= require moment
 //= require bootstrap-datetimepicker
 //= require refile
@@ -46,3 +47,4 @@
 // });
 // shipping hidden charge form
 // shipping hidden charge form
+//= require jquery.infinitescroll

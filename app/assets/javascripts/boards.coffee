@@ -16,6 +16,12 @@ jQuery ->
         $(this).find("input[type=submit]").removeAttr "disabled"  unless $(this).find("input.uploading").length
         $("#progress-bar").slideUp('fast')
 
+$(document).ready ->
+  $("#results .page").infinitescroll
+  alert('hi')
+    navSelector: "nav.pagination" # selector for the paged navigation (it will be hidden)
+    nextSelector: "nav.pagination a[rel=next]" # selector for the NEXT link (to page 2)
+    itemSelector: "#posts tr.post" # selector for all items you'll retrieve
 
  # jQuery ->
  #  $("#category-select").hide();
