@@ -46,28 +46,38 @@
     <tbody>
       <tbody>
         <td ><%= f.text_field :make, class: 'btn-width form-control' %></td>
-        <td ><%= f.grouped_collection_select :category_id, Type.order(:name),:categories, :name, :id, :name, include_blank: true %></td>
-        <td class="col-sm-3"><%= f.number_field :zipcode, class: 'form-control' %></td>
+        <td><%= f.grouped_collection_select :category_id, Type.order(:name),:categories, :name, :id, :name, include_blank: true %></td>
+        <td><%= f.number_field :zipcode, class: 'form-control' %></td>
       <thead>
-        <th class="col-sm-3"><%= f.label :width %> (inches)<br/></th>
-        <th class="col-sm-3"><%= f.label :volume %><strong>: if applies </strong><br/></strong></th>
+        <th ><%= f.label :width %> (inches)<br/></th>
+        <th ><%= f.label :volume %><strong>: if applies </strong><br/></strong></th>
         <th ><%= f.label :length %><strong> / height of board (inches)</strong><br/></strong></th>
       </thead>
       <tbody>
-        <td class="col-sm-3"><%= f.number_field :width, class: 'form-control' %></td>
-        <td class="col-sm-3"><%= f.number_field :volume, class: 'form-control' %></td>
+        <td ><%= f.number_field :width, class: 'form-control' %></td>
+        <td ><%= f.number_field :volume, class: 'form-control' %></td>
         <td ><%= f.number_field :length, class: 'form-control' %></td>
-
       </tbody>
-      <th class="col-sm-3"><%= f.label :accessory %></th>
-      <th class="col-sm-3"><%= f.label :used %></th>
-      <th class="col-sm-3"><%= f.label :inventory %></th>
       <thead>
+      <th ><%= f.label :accessory %></th>
+      <th ><%= f.label :used %></th>
+      <th ><%= f.label :inventory %></th>
       </thead>
       <tbody>
-        <td class="col-sm-3"><%= f.check_box :footgear, class: 'form-control' %> <br /></td>
-        <td class="col-sm-3"><%= f.check_box :used, class: 'form-control' %> <br /></td>
-        <td class="col-sm-3"><%= f.number_field :inventory, class: 'btn-width form-control' %></td>
+        <td ><%= f.check_box :footgear, class: 'form-control' %> <br /></td>
+        <td ><%= f.check_box :used, class: 'form-control' %> <br /></td>
+        <td ><%= f.number_field :inventory, class: 'btn-width form-control' %></td>
+      </tbody>
+      <thead>
+      <th ><strong>UPC</strong></th>
+      <th ><%= f.label :cost %></th>
+      <th ><%= f.label :margin %></th>
+      </thead>
+      <tbody>
+        <td ><%= f.text_field :footgear, class: 'form-control' %> <br /></td>
+        <td ><%= f.number_field :cost, class: 'form-control' %> <br /></td>
+        <td ><%= f.number_field :margin, class: 'btn-width form-control' %></td>
+
       </tbody>
     </table>
     </div>
@@ -76,7 +86,7 @@
     <%= f.text_area :description, class: 'form-control', style: 'min-height:80px;min-width:100%;'%>
 
 
-<%= f.label :price %><br/>
+<%= f.label :sale_price %><br/>
 <%= f.number_field :price, class: 'btn-width form-control' %>
 <%= f.hidden_field :user_id, :value => current_user.id %>
 <%= f.hidden_field :list_time, :value => Time.now %>
@@ -84,8 +94,8 @@
 <!--  -->
 
 
-  <div style="margin-top:20px;" class="actions">
-    <%= f.submit "update", class: "btn btn-info" %>
+  <div style="margin-top:20px;" class="center-text actions">
+    <%= f.submit "Create", class: "btn btn-info" %>
   </div>
 
 
