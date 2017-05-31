@@ -77,6 +77,13 @@ color:white;
 #board_category_id {
   margin:20px;
 }
+
+#csv-upload {
+  position: fixed;
+  top: 100px;
+  right: calc(50% - 250px);
+  z-index: 2;
+}
 .slick-slide img {
     display: inline !important;
 }

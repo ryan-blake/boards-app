@@ -256,7 +256,7 @@
     <div class="btn btn-sort" style="max-width:100px;link-style:none;" id="showTokens">Get Tokens</div>
     <div class="btn btn-danger" style="max-width:100px;display:none;" id="closePartial">CLOSE</div>
 
-<div id="csv-upload" style="position:fixed;top:100px; right:150px;z-index:8999;"><%= form_tag import_boards_path, multipart: true do %>
+<div id="csv-upload"><%= form_tag import_boards_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "Upload" %>
 <% end %>

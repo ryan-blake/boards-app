@@ -1,73 +1,71 @@
-<% if current_user.stripe_account == nil %>
-<h4 class="dash-data-title"> purchased </h4>
-<% else %>
-<h4 class="dash-data-title"> Inactive Inventory </h4>
-<% end %>
-<table class="container-fluid" id="results" style="width:100%;">
-  <% if @inactive_boards.length == 0 %>
-    <%= render partial: 'boards/none' %>
-  <% end %>
-  <thead>
-    <td>
-      <div class="center-text" id="paginator">
-        <%= paginate @inactive_boards,  window: 1,remote: true %>
-      </div>
-      <tr>
-        <td class="filtering center-text">
-          <ti> <strong> Sort by: </strong> </ti>
-         </ti>
-          <div  <i style="display:inline;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
-          <div <i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></div>
-          <div  <i style="display:inline;" class="btn btn-sort"> <%= sortable "length", 'height' %></i></div>
-         </ti>
-        </td>
-      </tr>
-    </td>
-  </thead>
-      <!--  -->
-      <div class="row" id="pending-table">
-        <div class="col-md-12">
-          <table class="table table-bordered table-striped table-hover">
-            <thead>
-              <tr>
-                <th>image</th>
-                <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "title" %></th>
-                <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></th>
-                <th>cost</th>
-                <th>margin( (profit / revenue) * 100 )</th>
-                <th>inactive</th>
-              </tr>
-            </thead>
+<div id="results">
+<h4 class="dash-data-title"> Active Inventory </h4>
 
-            <tbody>
-            <% @inactive_boards.each do |board| %>
-                <tr>
-                  <td><%= link_to attachment_image_tag(board.images.first, :file, :fill, 80, 80), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
-                  <td><%= link_to board.title.truncate(13), board, target: :_blank %></td>
-                  <td><%= format_amount(board.price * 100) %></td>
-                  <td>cost<%=  %></td>
-                  <td>margin<%= %></td>
-                  <td class="text-center">
-                    <% if board.for_sale == false %>
-                      <span class="text-danger">
-                        inactive
-                      </span>
-                    <% else %>
-                    active
-                  </td>
-                </tr>
-                <% end %>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <!--  -->
-    <tbody>
+  <div class="row" id="pending-table">
+    <% if @inactive_boards.length == 0 %>
+      <%= render partial: 'boards/none' %>
+    <% end %>
+    <thead>
       <td>
-        <div class="center-text bottom" id="paginator">
-          <%= paginate @inactive_boards,  window: 1,remote: true %>
+        <div class="center-text" id="active_boards">
+        <%= paginate @inactive_boards, remote: true, window: 1 %>
+        </div>
+        <tr>
+          <td class="filtering center-text">
+            <ti> <strong> Sort by: </strong> </ti>
+           </ti>
+            <div  <i style="display:inline;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
+           </ti>
+          </td>
+        </tr>
+      </td>
+    </thead>
+
+    <div class="col-md-12">
+      <table class="table table-bordered table-striped table-hover" id="results">
+        <thead>
+          <tr>
+            <th>image</th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "title" %></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "cost" %></i></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "margin" %></i></th>
+            <th>listing</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @inactive_boards.each do |board| %>
+            <tr>
+              <td><%= link_to attachment_image_tag(board.images.first, :file, :fill, 80, 80), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
+              <td><%= link_to board.title.truncate(13), board, target: :_blank %></td>
+              <td><%= format_amount(board.price * 100) %></td>
+              <td><%= format_amount(board.cost * 100)  %></td>
+              <td><%= board.margin  %>%</td>
+              <td class="text-center">
+                <small><%=board.category.name %> </small>
+                <% if board.for_sale == false %>
+                  <span class="text-danger">
+                    inactive
+                  </span>
+                <% else %>
+                active
+              </td>
+            </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--  -->
+
+    <tbody >
+      <td>
+        <div class="center-text pagination" id="active_boards">
+        <%= paginate @inactive_boards, remote: true, window: 1 %>
         </div>
       </td>
     </tbody>
   </table>
+</div>
