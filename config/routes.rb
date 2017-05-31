@@ -29,6 +29,9 @@ get'maps' => 'users#maps'
       get 'search_dash', 'search_signed_in', 'sort_order', 'board_dash', 'active_boards', 'inactive_boards',
          'shipped_boards', 'pending_boards', 'pick_boards', 'sales_boards', 'company_search'
     end
+    collection do
+      post  'import'
+    end
   end
 
   get'dash' => 'boards#board_dash'

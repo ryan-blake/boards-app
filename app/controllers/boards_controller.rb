@@ -2,6 +2,11 @@ class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   respond_to :html, :js
+  def import
+    count = Board.import params[:file]
+    redirect_to dash_path notice: "imported #{count} boards"
+
+  end
 
   def index
       @user = current_user
