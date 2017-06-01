@@ -101,6 +101,11 @@ class BoardsController < ApplicationController
     @user = current_user
     @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
+  def rental_boards
+    @user = current_user
+    @rental_boards = Board.where(user_id: current_user.id, pending: nil || false, rental: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+  end
+  
   def shipped_boards
     @user = current_user
     @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
