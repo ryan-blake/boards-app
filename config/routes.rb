@@ -22,7 +22,6 @@ get'maps' => 'users#maps'
 
 
 
-
   resources :boards do
     resources :events, only: [:create, :destroy, :show, :board_dash]
     collection do
@@ -35,6 +34,7 @@ get'maps' => 'users#maps'
   end
 
   get'dash' => 'boards#board_dash'
+  get '/:company' => 'users#show'
 
   resources :charges
   resources :tokens, only: [:new, :create]

@@ -18,7 +18,8 @@ def index
 end
 
 def show
-  @user = User.find(params[:id])
+  @user = User.find_by(company: params[:company])
+
   @boards = Board.where(:for_sale => true).order('created_at DESC')
   @boards = Board.where(:for_sale => [true]).where(:user_id => [@user.id], :rental => false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   @boards_M = Board.where(:for_sale => [true]).where(:user_id => [@user.id])
