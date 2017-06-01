@@ -194,6 +194,7 @@ end
     footgear: [true, false].sample,
     price: rand(10..40),
     user_id: User.all.sample.id,
+    cost: rand(5..10),
     pending: false,
     arrived: false,
     zipcode: [76210, 90277, 76262, 76135].sample,

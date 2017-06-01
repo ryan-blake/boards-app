@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170601172655) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",      default: false
-    t.datetime "list_time",   default: '2017-05-24 21:08:15'
+    t.datetime "list_time",   default: '2017-06-01 17:58:14'
     t.integer  "inventory",   default: 0
     t.integer  "cost"
     t.integer  "margin"
@@ -68,18 +68,16 @@ ActiveRecord::Schema.define(version: 20170601172655) do
     t.integer  "vendor_id"
     t.string   "token"
     t.string   "customer_id"
-    t.boolean  "completed",       default: false
-    t.boolean  "boolean",         default: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.boolean  "completed",     default: false
+    t.boolean  "boolean",       default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "board_id"
     t.string   "address"
     t.boolean  "shipping"
     t.datetime "start_time"
     t.datetime "end_time"
     t.boolean  "rental"
-    t.integer  "stripe_charge"
-    t.string   "charge_customer"
     t.string   "charge_stripe"
     t.index ["user_id"], name: "index_charges_on_user_id"
   end

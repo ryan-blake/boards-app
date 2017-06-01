@@ -1,7 +1,3 @@
 <div id="rental_calendar" style="max-width:100%;padding-bottom:30px;">
-  <%= render 'events/calendar', locals: {events: @events, board: @board} %>
-</div>
-<div class="rent-dates">
-  <%= render 'events/form', locals: {events: @events, board: @board} %>
-<!-- section -->
+  <%= render 'boards/calendar', locals: { board: @rental_boards} %>
 </div>
