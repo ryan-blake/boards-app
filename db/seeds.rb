@@ -83,7 +83,7 @@ User.create(
  role: 1,
  publishable_key: ENV['PUBLISHABLE_KEY'],
  provider: ENV['PROVIDER'],
- uid: ENV['UID'],
+ stripe_account: ENV['STRIPE_ACCOUNT'],
  access_code: ENV['ACCESS_CODE'],
  password: "testtest",
  address: "123 test st",
@@ -221,16 +221,18 @@ images = Image.all
   start_time: Time.now,
   end_time: Time.now + 2.days,
   board_id: rand(60..80),
-  user_id: rand(1..2)
+  user_id: 2,
+  vendor_id: 1
   )
 end
 
 10.times do
   Event.create!(
   start_time: Time.now - 2.weeks,
-  user_id: rand(1..2),
+  user_id: 2,
   end_time: Time.now - 1.weeks,
-  board_id: rand(60..80)
+  board_id: rand(60..80),
+  vendor_id: 1
   )
 end
 

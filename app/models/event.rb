@@ -23,6 +23,8 @@ class Event < ApplicationRecord
 # validates_datetime :end_time, :after => :start_time
 validates_date :start_time, :before => :end_time,
                                :before_message => "dates must be in logical order"
+belongs_to :vendor, class_name: 'User', foreign_key: 'vendor_id'
+
 # validates_time :start_time, :on_or_after => :open_time,
 #    :on_or_after_message => 'must be after opening time',
 #    :before => :end_time,

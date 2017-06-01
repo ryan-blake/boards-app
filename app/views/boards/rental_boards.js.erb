@@ -1,0 +1,2 @@
+$("#rental").html("<%=j render partial: 'rental_boards' %>");
+$('#paginator').html('<%= escape_javascript(paginate(@rental_boards, window: 1, :remote => true)) %>');

@@ -32,7 +32,6 @@ def create
   @board = Board.find(params[:board_id])
   if current_user
     @user = current_user
-
   else
     user_email = params[:stripeEmail]
 
@@ -63,6 +62,7 @@ def create
     start_time:  params["@event"]["start_time"],
     end_time:  params["@event"]["end_time"],
     user_id: @user.id,
+    vendor_id: @board.user.id.to_i,
     name: @user.email
   )
     charge_error = nil
@@ -114,6 +114,7 @@ def create
 
           @charge.update_attribute(:completed, true)
           @board.inventory += -1
+          @board.rented = true
           @board.save
           @event.charge_id = @charge.id
           @event.save

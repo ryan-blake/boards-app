@@ -1,0 +1,29 @@
+
+<% @rental_boards.first = @board %>
+<%= week_calendar number_of_weeks: 2, events: @board.events do |date, events| %>
+
+<%= date.strftime('%x') %>
+
+<hr>
+  <% events.each do |event| %>
+  <!-- create array of booking length -->
+<% a = [] %>
+  <% if current_user && event.user_id == current_user.id %>
+  <strong style="color:orange;"> your booking</strong>
+  <% if current_user && event.user_id != current_user.id %>
+  <strong style="color:red;">booked</strong>
+  <% end %>
+  <% else %>
+  <strong style="color:red;">booked</strong>
+  <% end %>
+ <% if current_user %>
+     <% if current_user.role == "admin" %>
+       <%= link_to 'Cancel', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+       <%  end %>
+     <%  end %>
+  <%  end %>
+
+
+<% end %>
+<br>
+<% end %>

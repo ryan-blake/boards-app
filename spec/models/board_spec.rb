@@ -37,6 +37,7 @@
 #  cost        :integer
 #  margin      :integer
 #  upc         :string
+#  rented      :boolean
 #
 
 require 'rails_helper'

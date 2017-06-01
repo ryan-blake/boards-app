@@ -103,9 +103,9 @@ class BoardsController < ApplicationController
   end
   def rental_boards
     @user = current_user
-    @rental_boards = Board.where(user_id: current_user.id, pending: nil || false, rental: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+    @rental_boards = Board.joins(:events).where(:events => {vendor_id:  current_user.id}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
-  
+
   def shipped_boards
     @user = current_user
     @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
@@ -123,8 +123,8 @@ class BoardsController < ApplicationController
         @pending_boards = Board.where(title: i.item, for_sale: false, id: i.board_id, :pending => true)
       end
       if @pending_boards
-      @pending_boards = @pending_boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-    end
+        @pending_boards = @pending_boards.order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+      end
   end
 
   def pick_boards
