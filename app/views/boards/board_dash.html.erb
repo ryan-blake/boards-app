@@ -252,9 +252,9 @@
    <% end %>
    </div>
 <div class="jumbotron gel" id="msg-area">
-  <h2><%= current_user.tokens.to_s + " tokens " %> </h2>
-    <div class="btn btn-sort" style="max-width:100px;link-style:none;" id="showTokens">Get Tokens</div>
-    <div class="btn btn-danger" style="max-width:100px;display:none;" id="closePartial">CLOSE</div>
+  <h2> </h2>
+    <div class="btn btn-sort" style="display:block;max-width:100px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></div>
+    <div class="btn btn-danger" style="max-width:100px;display:none;position: relative;bottom: 2px;left: 11px;" id="closePartial">CLOSE</div>
 
 <div id="csv-upload"><%= form_tag import_boards_path, multipart: true do %>
   <%= file_field_tag :file %>
@@ -270,7 +270,7 @@
 <% end %>
 
 
-<div class="pull-right" style="top:65px;right:-70px;width:183px;position:fixed;z-index:1;">
+<div class="pull-left" style="top:85px;left:10px;width:190px;position:fixed;z-index:1;">
   <% if  current_user && current_user.stripe_account != nil %>
     <h3 class="btn btn-sort"><%= link_to 'Add listing', new_board_path %></h3>
  <% end %>
