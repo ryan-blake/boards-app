@@ -224,6 +224,19 @@
   };
   };
   });
+  $(document).ready(
+     function(){
+         $('input:submit').attr('disabled',true);
+         $('input:file').change(
+             function(){
+                 if ($(this).val()){
+                     $('input:submit').removeAttr('disabled');
+                 }
+                 else {
+                     $('input:submit').attr('disabled',true);
+                 }
+             });
+     });
     </script>
   <% end %>
 
@@ -252,9 +265,10 @@
    <% end %>
    </div>
 <div class="jumbotron gel" id="msg-area">
-  <h2> </h2>
-    <div class="btn btn-sort" style="display:block;max-width:100px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></div>
-    <div class="btn btn-danger" style="max-width:100px;display:none;position: relative;bottom: 2px;left: 11px;" id="closePartial">CLOSE</div>
+  <div class="pull-left" style="top:50px;left:1px;width:190px;position:fixed;z-index:1;">
+      <h3 class="btn btn-sort" style="max-width:100px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
+      <h3 class="btn btn-danger" style="max-width:100px;display:none;position: relative;bottom: 2px;left: 11px;" id="closePartial">CLOSE</h3>
+  </div>
 
 <div id="csv-upload"><%= form_tag import_boards_path, multipart: true do %>
   <%= file_field_tag :file %>
@@ -271,8 +285,8 @@
 
 
 <div class="pull-left" style="top:85px;left:10px;width:190px;position:fixed;z-index:1;">
-  <% if  current_user && current_user.stripe_account != nil %>
-    <h3 class="btn btn-sort"><%= link_to 'Add listing', new_board_path %></h3>
+  <% if  current_user.tokens > 2 && current_user.stripe_account %>
+    <h3 class="btn btn-sort" style="margin: 0px;top: 106px;position: fixed;"><%= link_to 'Add listing', new_board_path %></h3>
  <% end %>
 </div>
 

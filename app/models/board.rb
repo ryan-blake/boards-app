@@ -95,7 +95,7 @@ scope :end_search, -> (startDate, endDate) {
   def self.import(file)
     counter = 0
     CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
-      board = Board.new(title: row[:title], margin: row[:margin], cost: row[:cost], user_id: row[:user], category_id: row[:category].to_i, make: row[:make], description: row[:description], length: row[:length], zipcode: row[:zipcode])
+      board = Board.new(title: row[:title],price: row[:price], margin: row[:margin], cost: row[:cost], user_id: row[:user], category_id: row[:category].to_i, make: row[:make], description: row[:description], length: row[:length], zipcode: row[:zipcode])
         if board.save
           counter += 1
         else
