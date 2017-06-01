@@ -1,9 +1,10 @@
 
 <%= week_calendar number_of_weeks: 2, events: @rental_boards do |date, events| %>
-
 <%= date.strftime('%x') %>
 
 <hr>
+<div style="max-height:200px;overflow-y:scroll;">
+
 <% i = 0 %>
   <% events.each do |event| %>
   <!-- create array of booking length -->
@@ -54,6 +55,7 @@
    <%= link_to 'X', event, method: :delete, data: { confirm: 'Are you sure?' } %>
  <% end %>
   </tbody>
+</div>
   </table>
   <hr>
 

@@ -3,6 +3,7 @@
   <%= content_for :page_title,   current_user.name.capitalize   + "'s Dashboard" %>
   <% content_for(:header) do %>
   <script>
+
   $(document).ready(function() {
     var activeBtn = document.getElementById('btn-active');
     var pendingBtn = document.getElementById('btn-pending');
@@ -445,7 +446,7 @@
      </div>
    </div>
  <% else %>
- <h2 class="center-text"> login to continue</h2>
+ <h2 class="center-text"> login to continue </h2>
 <% end %>
 
 <script src="https://checkout.stripe.com/checkout.js"></script>
@@ -489,4 +490,6 @@ $('#tokenButton').on('click', function(e) {
 $(window).on('popstate', function() {
   handler.close();
 });
+
+
 </script>
