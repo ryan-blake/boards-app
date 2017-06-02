@@ -12,18 +12,10 @@ type_array.each do |t|
   name: t
   )
 end
- # Type.find_by(name: "Surf").id
+
 
 types = Type.all
 
-# category_array = %w{Longboard(surf) SUP Short Skis Cruiser(skate) Skis(water)}
-#
-# category_array.each do |t|
-#   Category.find_or_create_by(
-#   name: t,
-#   type_id: [1..4].sample
-#   )
-# end
 
 Category.find_or_create_by(
   name: "Shortboard",
@@ -35,14 +27,6 @@ Category.find_or_create_by(
 )
 Category.find_or_create_by(
   name: "Stand Up Paddle",
-  type_id: Type.find_by(name: "Surf").id
-)
-Category.find_or_create_by(
-  name: "Skimboard",
-  type_id: Type.find_by(name: "Surf").id
-)
-Category.find_or_create_by(
-  name: "Body-board",
   type_id: Type.find_by(name: "Surf").id
 )
 Category.find_or_create_by(
@@ -199,7 +183,8 @@ end
     zipcode: [76210, 90277, 76262, 76135].sample,
     for_sale: true,
     rental: true,
-    inventory: rand(9..14),
+    cost: rand(5..10)
+    inventory: rand(1..3),
     list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
     )
   end
@@ -220,15 +205,17 @@ images = Image.all
   Event.create!(
   start_time: Time.now,
   end_time: Time.now + 2.days,
+  vendor_id: 1,
   board_id: rand(60..80),
-  user_id: rand(1..2)
+  user_id: 2
   )
 end
 
 10.times do
   Event.create!(
   start_time: Time.now - 2.weeks,
-  user_id: rand(1..2),
+  user_id: 1,
+  vendor_id: 2,
   end_time: Time.now - 1.weeks,
   board_id: rand(60..80)
   )
