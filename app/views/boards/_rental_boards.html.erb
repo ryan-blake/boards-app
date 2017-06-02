@@ -44,7 +44,7 @@
             <td><%= i.name %></td>
             <td><%= format_date(i.start_time) %> </td>
             <td><%=  format_date(i.end_time) %></td>
-              <td>$<%= i.board.price %>.00</td>
+            <td><%=  rental_cost(i) %></td>
             <td class="text-center">
 
         <% end %>

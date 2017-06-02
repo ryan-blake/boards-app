@@ -64,7 +64,7 @@ class User < ApplicationRecord
 
   # mapping
   geocoded_by :full_address
-  after_validation :geocode, :if => :zipcode_changed?
+  after_validation :geocode 
 
 
   def full_address
