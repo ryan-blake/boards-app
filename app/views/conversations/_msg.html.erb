@@ -60,10 +60,9 @@ $(function(){
 <!-- if conversations user exists data_conversations_id -->
 <!-- else conversations_id is blank nothing -->
         <% user_names.uniq.each do |i| %>
-        <% @charge_convo = Conversation.where(:recipient => i).or(Conversation.where(:sender => i)) %>
+        <% @charge_convo = Conversation.where(:recipient_id => i.id).or(Conversation.where(:sender_id => i.id)) %>
 
             <div class="convo-button"data-conversation-id="<%= @charge_convo.first.id %>">
-
               <li><%= link_to i.name, conversations_path(user_id: i.id), remote: true, method: :post %></li>
             </div>
 

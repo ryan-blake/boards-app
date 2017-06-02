@@ -28,6 +28,9 @@ class Charge < ApplicationRecord
   belongs_to :user
   belongs_to :vendor, class_name: 'User', foreign_key: 'vendor_id'
 
+  def opposite_vendor(user)
+    user == vendor ? vendor : user
+  end
 
   def rent_time(board)
     board.end_time - board.start_time

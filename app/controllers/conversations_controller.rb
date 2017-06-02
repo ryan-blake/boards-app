@@ -9,14 +9,14 @@ class ConversationsController < ApplicationController
   end
 
 def msg
-  @user = current_user
+  @user = User.where(id: 1).first
   @users = User.all.where.not(id: current_user)
-  if @user
-  @conversations = Conversation.where(:recipient_id => @user.id).pluck(:id)
-  @conversations_started = Conversation.where(:sender_id => @user.id).pluck(:id)
-  @conversations = @conversations << @conversations_started
-  @conversations = Conversation.where(:id => @conversations)
-end
+  if @user.conversations || Conversation.where(recipient_id: @user.id)
+    @conversations = Conversation.where(:recipient_id => @user.id).pluck(:id)
+    @conversations_started = Conversation.where(:sender_id => @user.id).pluck(:id)
+    @conversations = @conversations << @conversations_started
+    @conversations = Conversation.where(:id => @conversations)
+  end
   @user_places = User.where.not(:latitude => nil)
   @url_array = []
      @user_places.each do |user|

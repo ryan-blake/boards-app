@@ -32,9 +32,7 @@ get'maps' => 'users#maps'
       post  'import'
     end
   end
-
   get'dash' => 'boards#board_dash'
-  get '/:company' => 'users#show'
 
   resources :charges
   resources :tokens, only: [:new, :create]
@@ -42,15 +40,16 @@ get'maps' => 'users#maps'
   get 'complete_charge' => 'charges#complete'
   get 'complete_charge' => 'charges#retrieve'
 
-  get'msg' => 'conversations#msg'
-  get 'messages/create'
-  get 'conversations/create'
   resources :conversations, only: [:create] do
     member do
       post :close
     end
     resources :messages, only: [:create]
   end
+
+    get'msg' => 'conversations#msg'
+    get 'conversations/create'
+    get 'messages/create'
 
   get 'relist_board' => 'boards#relist'
   get 'my_boards' => 'pages#boards'
