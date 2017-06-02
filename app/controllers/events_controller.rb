@@ -63,6 +63,7 @@ def create
     start_time:  params["@event"]["start_time"],
     end_time:  params["@event"]["end_time"],
     user_id: @user.id,
+    vendor_id: @board.user.id,
     name: @user.email
   )
     charge_error = nil

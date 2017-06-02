@@ -38,6 +38,8 @@
            <!-- new link to modal -->
            <div class="title-bar center-text">
              <%= link_to board.title.truncate(23), board, target: :_blank  %>
+             <strong><%= board.category.name %></strong>
+
           </div>
           <%if current_user && board.user_id == current_user.id %>
            <li><%= link_to 'Edit', edit_board_path(board) %></li>

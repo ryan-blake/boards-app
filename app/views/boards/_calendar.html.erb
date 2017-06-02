@@ -1,0 +1,66 @@
+
+<%= week_calendar number_of_weeks: 2, events: @rental_boards do |date, events| %>
+<%= date.strftime('%x') %>
+
+<hr>
+<div style="max-height:200px;overflow-y:scroll;">
+
+<% i = 0 %>
+  <% events.each do |event| %>
+  <!-- create array of booking length -->
+  <table>
+    <thead>
+      <% i += 1 %>
+      <strong><%= i %> </strong>
+      <small style="color:black;">title:</small>
+      </thead>
+      <tbody>
+      <%=event.board.title  %>
+      </tbody>
+      <thead>
+      <small style="color:black;">id:</small>
+    </thead>
+    <tbody>
+    <%=event.board.id  %>
+  </tbody>
+  </table>
+  <table>
+    <thead>
+      <small style="color:black;">Renter:</small>
+      </thead>
+      <tbody>
+      <%=event.board.user.name  %>
+      </tbody>
+      <thead>
+      <small style="color:black;">Price:</small>
+    </thead>
+    <tbody>
+    <%=event.board.price  %>
+  </tbody>
+  </table>
+  <table>
+    <thead>
+      <strong> </strong>
+      <small style="color:black;">out:</small>
+      </thead>
+      <tbody>
+   [ X ]
+      </tbody>
+      <thead>
+      <small style="color:black;">in:</small>
+    </thead>
+    <tbody>
+ [ X ]
+ <% if current_user.role == "admin" %>
+   <%= link_to 'X', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+ <% end %>
+  </tbody>
+</div>
+  </table>
+  <hr>
+
+
+  <%  end %>
+
+
+<% end %>
