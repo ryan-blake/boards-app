@@ -85,6 +85,7 @@ class BoardsController < ApplicationController
   end
   def active_boards
     @user = current_user
+
     @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
   def search_dash
@@ -93,8 +94,6 @@ class BoardsController < ApplicationController
       @active_boards = @active_boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
               "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-
-
   end
 
   def inactive_boards
@@ -103,8 +102,16 @@ class BoardsController < ApplicationController
   end
   def rental_boards
     @user = current_user
+    @rental_boards = Event.where(vendor_id: @user.id).order(created_at: 'desc')
+    @rental_table = Event.where(vendor_id: @user.id).order(created_at: 'desc').page(params[:page]).per(8)
 
-    @rental_boards = Event.where(vendor_id: @user.id).order(sort_column + ' ' + sort_direction)
+  end
+  def search_rental
+    @rental_table = Event.where(vendor_id: @user.id).order(created_at: 'desc').page(params[:page]).per(8)
+    @rental_table = @rental_table.joins(:boards).where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+
+            "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+
   end
 
   def shipped_boards

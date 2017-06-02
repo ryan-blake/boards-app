@@ -15,7 +15,7 @@
       <small style="color:black;">title:</small>
       </thead>
       <tbody>
-      <%=event.board.title  %>
+       <%= link_to event.board.title , event.board, remote: true, data: { toggle: "modal", target: "#newModal" } %>
       </tbody>
       <thead>
       <small style="color:black;">id:</small>

@@ -284,28 +284,7 @@
   <% end %>
 
   <% if @user.stripe_account %>
-  <div>
-  <%= form_tag({controller: :boards, action: :search_dash}, {method: :get, remote: true}) do  %>
 
-  <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
-    <div class="input-group">
-      <span class="input-group-btn">
-      <%= grouped_collection_select  nil, :category_id, Type.all, :categories,
-            :name, :id, :name, {prompt: "Select type" },
-            { id: 'category-select' , class: "form-control"} %>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <div class="col-md-4 search-bar">
-     <div class="input-group">
-       <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
-       <span class="input-group-btn">
-         <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
-       </span>
-     </div><!-- /input-group -->
-   </div><!-- /.col-lg-6 -->
-   <% end %>
-   </div>
 <div class="jumbotron gel" id="msg-area">
   <div class="pull-left" style="top:50px;left:1px;width:190px;position:fixed;z-index:1;">
       <h3 class="btn btn-sort" style="max-width:100px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
@@ -415,7 +394,7 @@
 
 </div>
 <div  style="display:none;" class="col-md-12 center-text" id="rental">
- hi
+
 </div>
 
 </div>

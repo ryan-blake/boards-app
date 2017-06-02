@@ -53,9 +53,7 @@ def create
     @user = current_user
     @user_new = current_user
     end
-
   end
-
 
   # @charge = Charge.new
   @event = Event.create!(

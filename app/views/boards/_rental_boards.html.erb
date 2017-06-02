@@ -1,11 +1,55 @@
 <div id="rental_calendar" style="display:block;max-width:100%;padding-bottom:30px;">
   <%= render 'boards/calendar', locals: { board: @rental_boards} %>
 </div>
-hi
+<div>
+<%= form_tag({controller: :boards, action: :search_rental}, {method: :get, remote: true}) do  %>
 
-hi
-hi
-hi
-hi
-hi
-hihihi
+<div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
+  <div class="input-group">
+    <span class="input-group-btn">
+    <%= grouped_collection_select  nil, :category_id, Type.all, :categories,
+          :name, :id, :name, {prompt: "Select type" },
+          { id: 'category-select' , class: "form-control"} %>
+    </span>
+  </div><!-- /input-group -->
+</div><!-- /.col-lg-6 -->
+<div class="col-md-4 search-bar">
+   <div class="input-group">
+     <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+     <span class="input-group-btn">
+       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+     </span>
+   </div><!-- /input-group -->
+ </div><!-- /.col-lg-6 -->
+<% end %>
+
+<div class="row" id="rental-table" style="position:relative;">
+  <div class="col-md-12">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Ticket" %></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "User" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Pick Up" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Drop Off" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Price" %></i></th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+      <% @rental_table.each do |i| %>
+        <tr>
+            <td><%= link_to i.id, event_path(i.id ) %></td>
+            <td><%= i.name %></td>
+            <td><%= format_date(i.start_time) %> </td>
+            <td><%=  format_date(i.end_time) %></td>
+              <td>$<%= i.board.price %>.00</td>
+            <td class="text-center">
+
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>
