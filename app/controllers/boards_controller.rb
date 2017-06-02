@@ -335,7 +335,7 @@ transactions = Stripe::BalanceTransaction.all(
 else
   # rentals must be filtered before .near because of left outer join of events doesnt include distance.
   if params[:rental] == "on"
-    @boards =  Board.where(:rental => true, :for_sale => [true]).where("inventory >= ?", 1)
+    @boards =  Board.where(:rental => true, :for_sale => [true])
    #  get boards that also havent been rented once unless inventory > 1
    one = @boards
    unless params[:start_date][0].to_s == "" && params[:end_date][0].to_s == ""
@@ -354,7 +354,7 @@ else
      @boards = Board.where(:id => (one + @boards))
    end
   else
-    @boards = @boards.where(:rental => false, :for_sale => true)
+    @boards = Board.where(:rental => false, :for_sale => true)
   end
 
    @boards = @boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
