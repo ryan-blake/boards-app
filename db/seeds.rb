@@ -183,7 +183,7 @@ end
     zipcode: [76210, 90277, 76262, 76135].sample,
     for_sale: true,
     rental: true,
-    cost: rand(5..10)
+    cost: rand(5..10),
     inventory: rand(1..3),
     list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
     )
