@@ -34,7 +34,7 @@ get'maps' => 'users#maps'
   end
 
   get'dash' => 'boards#board_dash'
-  get '/:company' => 'users#show'
+
 
   resources :charges
   resources :tokens, only: [:new, :create]
