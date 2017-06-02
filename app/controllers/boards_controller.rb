@@ -103,8 +103,8 @@ class BoardsController < ApplicationController
   end
   def rental_boards
     @user = current_user
-    @events = Event.where(vendor_id: @user.id).pluck(:id)
-    @rental_boards = Event.where(id: @events).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+
+    @rental_boards = Event.where(vendor_id: @user.id).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
 
   def shipped_boards
