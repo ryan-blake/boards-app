@@ -58,8 +58,8 @@ def create
   # @charge = Charge.new
   @event = Event.create!(
     board_id: @board.id,
-    start_time:  params["@event"]["start_time"],
-    end_time:  params["@event"]["end_time"],
+    start_time:  params['daterange'].split(' - ').first,
+    end_time:  params['daterange'].split(' - ').last,
     user_id: @user.id,
     vendor_id: @board.user.id,
     name: @user.email

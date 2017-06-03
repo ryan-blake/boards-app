@@ -12,29 +12,14 @@
     </div>
   <% end %>
 <br>
-<div class="field col-sm-12" style="width:100%;">
-  <div>
-     <%= f.label :pick_up_date %>
-     <%# f.datetime_select :start_time, :ampm => true, :minute_step => 5 %>
-     <div class='input-group date' id='datetimepicker'>
-       <input type='text' class="form-control" name="@event[start_time]" id="@event_start_time" <% if @event.start_time %>value="<%= @event.start_time.strftime("%m/%d/%Y %I:%M %p") %><% end %>">
-       <span class="input-group-addon">
-         <span class="glyphicon glyphicon-calendar"></span>
-       </span>
-     </div>
-   </div>
-</div>
 
-<div class="field col-sm-12" style="width:100%;">
-     <%= f.label :drop_off_date %>
-     <%# f.datetime_select :start_time, :ampm => true, :minute_step => 5 %>
-     <div class='input-group date' id='datetimepicker1'>
-       <input type='text' class="form-control" name="@event[end_time]" id="@event_end_time" <% if @event.end_time %>value="<%= @event.end_time.strftime("%m/%d/%Y %I:%M %p") %><% end %>">
-       <span class="input-group-addon">
-         <span class="glyphicon glyphicon-calendar"></span>
-       </span>
-     </div>
+
+<div class="field" style="width:100%;">
+
        <%= hidden_field_tag(:stripeToken) %>
+
+       <input id="dateranges" type="text" name="daterange" class="center-text" style="min-width:200px;value=" />
+
 </div>
 
 <br>
@@ -46,7 +31,7 @@
         data-email="<%=current_user.email %>"
       <% end %>
         data-description="A <%= @board.title %> reservation"
-        data-amount="<%= @board.price.to_i.ceil * 100 %> ">
+        data-amount=" 200 ">
     </script>
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <%f.submit %>
@@ -57,7 +42,7 @@
 </div>
 <script>
 $(document).ready(function() {
-var endtime = document.getElementById('datetimepicker1');
+var endtime = document.getElementById('dateranges');
 var pay_rent = document.getElementById('rent_now')
 
 endtime.onclick = function() {

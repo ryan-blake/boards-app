@@ -48,6 +48,7 @@ $(function(){
       <ul>
             <% @charge = Charge.where(:user_id => @user.id) %>
             <% @my_sales = Charge.where(:vendor_id => @user.id) %>
+            <%= @charge.first.user_id %>
         <!-- links to VENODRS that user has purchased from. Need  -->
        <% user_names = [] %>
         <% @charge.each do |i| %>
@@ -59,16 +60,23 @@ $(function(){
         <% end %>
 <!-- if conversations user exists data_conversations_id -->
 <!-- else conversations_id is blank nothing -->
+<%= user_names.count %>
+    <% if user_names %>
         <% user_names.uniq.each do |i| %>
+
         <% @charge_convo = Conversation.where(:recipient => i).or(Conversation.where(:sender => i)) %>
-
+    <% if @charge_convo.count > 0 %>
             <div class="convo-button"data-conversation-id="<%= @charge_convo.first.id %>">
-
               <li><%= link_to i.name, conversations_path(user_id: i.id), remote: true, method: :post %></li>
-            </div>
-
-          <%end%>
-
+          </div>
+          <% else %>
+          <!-- starts conversation- but doesn't load until reload? -->
+          <div class="convo-button"data-conversation-id="<%= Conversation.new.id %>">
+            <li><%= link_to i.name, conversations_path(user_id: i.id), remote: true, method: :post %></li>
+        </div>
+        <%end%>
+    <%end%>
+    <%end%>
       </ul>
     </div>
   </div>

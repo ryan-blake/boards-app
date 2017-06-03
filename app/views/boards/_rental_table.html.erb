@@ -10,13 +10,13 @@
           <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "total" %></i></th>
         </tr>
       </thead>
-      <!-- <td><%=  rental_cost(i) %></td> -->
+
 
       <tbody>
       <% @rental_table.each do |i| %>
         <tr>
             <td><%= link_to i.id, event_path(i.id ) %></td>
-            <td><%= User.where(id: i.user_id).pluck(:name)[0] + i.vendor.name %></td>
+            <td><%= i.user.name%></td>
             <td><%= format_date(i.start_time) %> </td>
             <td><%=  format_date(i.end_time) %></td>
             <td> <%= i.total %> </td>

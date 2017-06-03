@@ -16,7 +16,7 @@
 #  charge_id  :integer
 #  name       :string
 #  vendor_id  :integer
-#  price      :integer
+#  total      :integer
 #
 
 require 'rails_helper'

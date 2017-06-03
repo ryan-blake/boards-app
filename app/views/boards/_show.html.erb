@@ -83,11 +83,24 @@
 <hr>
 <script>
 
-$('.date#datetimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+$('input[name="daterange"]').daterangepicker(
+{
+   locale: {
+     format: 'YYYY-MM-DD'
+   },
+   startDate: "<%= Time.now %>",
+   endDate: '<%= Time.now + 1.days%>',
+   showDropdowns: true,
+   orientation: 'auto top',
+},
+function(start, end, label) {
+   if ( start.format('YYYY-MM-DD') < end.format('YYYY-MM-DD') ) {
+     alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 
-$('.date#datetimepicker1').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+   };
+
+});
 </script>
-
   <% else %>
 
 <!-- section -->
