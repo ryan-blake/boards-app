@@ -1,0 +1,30 @@
+<div class="row" id="rental-table" style="position:relative;">
+  <div class="col-md-12">
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Ticket" %></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "User" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Pick Up" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Drop Off" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Price" %></i></th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+      <% @rental_table.each do |i| %>
+        <tr>
+            <td><%= link_to i.id, event_path(i.id ) %></td>
+            <td><%= User.where(id: i.user_id).pluck(:name)[0] + i.vendor.name %></td>
+            <td><%= format_date(i.start_time) %> </td>
+            <td><%=  format_date(i.end_time) %></td>
+            <td><%=  rental_cost(i) %></td>
+            <td class="text-center"><%= i.board.category.name %></td>
+
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>

@@ -103,15 +103,12 @@ class BoardsController < ApplicationController
   def rental_boards
     @user = current_user
     @rental_boards = Event.where(vendor_id: @user.id).order(created_at: 'desc')
-    @rental_table = Event.where(vendor_id: @user.id).order(created_at: 'desc').page(params[:page]).per(8)
+    @rental_table = Event.where(vendor: current_user).order(created_at: 'desc').page(params[:page]).per(8)
 
   end
   def search_rental
-    @rental_table = Event.where(vendor_id: @user.id).order(created_at: 'desc').page(params[:page]).per(8)
-    @rental_table = @rental_table.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
-
-            "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-
+      @rental_table = Event.where(vendor: current_user)
+      @rental_table = @rental_table.joins(:board).where(boards: {category_id: params[:category_id], user_id: current_user.id})
   end
 
   def shipped_boards

@@ -1,6 +1,4 @@
-<div id="rental_calendar" style="display:block;max-width:100%;padding-bottom:30px;">
-  <%= render 'boards/calendar', locals: { board: @rental_boards} %>
-</div>
+
 <div>
 <%= form_tag({controller: :boards, action: :search_rental}, {method: :get, remote: true}) do  %>
 
@@ -22,34 +20,9 @@
    </div><!-- /input-group -->
  </div><!-- /.col-lg-6 -->
 <% end %>
-
-<div class="row" id="rental-table" style="position:relative;">
-  <div class="col-md-12">
-    <table class="table table-bordered table-striped table-hover">
-      <thead>
-        <tr>
-          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Ticket" %></th>
-          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "User" %></i></th>
-          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Pick Up" %></i></th>
-          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Drop Off" %></i></th>
-          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "Price" %></i></th>
-
-        </tr>
-      </thead>
-
-      <tbody>
-      <% @rental_table.each do |i| %>
-        <tr>
-            <td><%= link_to i.id, event_path(i.id ) %></td>
-            <td><%= i.name %></td>
-            <td><%= format_date(i.start_time) %> </td>
-            <td><%=  format_date(i.end_time) %></td>
-            <td><%=  rental_cost(i) %></td>
-            <td class="text-center">
-
-        <% end %>
-      </tbody>
-
-    </table>
-  </div>
+<div id="rental_calendar" style="display:block;max-width:100%;padding-bottom:30px;">
+  <%= render 'boards/calendar', locals: { board: @rental_boards} %>
+</div>
+<div id="rental_results" style="display:block;max-width:100%;padding-bottom:30px;">
+  <%= render 'boards/rental_table', locals: { board: @rental_table} %>
 </div>
