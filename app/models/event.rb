@@ -15,6 +15,8 @@
 #  board_id   :integer
 #  charge_id  :integer
 #  name       :string
+#  vendor_id  :integer
+#  price      :integer
 #
 
 class Event < ApplicationRecord
@@ -24,6 +26,7 @@ class Event < ApplicationRecord
 validates_date :start_time, :before => :end_time,
                                :before_message => "dates must be in logical order"
 belongs_to :vendor, class_name: 'User', foreign_key: 'vendor_id'
+belongs_to :user, class_name: 'User', foreign_key: 'user_id'
 
 # validates_time :start_time, :on_or_after => :open_time,
 #    :on_or_after_message => 'must be after opening time',
@@ -64,4 +67,10 @@ def parse_time(time_as_string)
   self.start_time = Time.zone.parse(time_as_string)
 end
 
+  def load_cost
+    a = (((event.end_time - event.start_time) / 86400) * event.board.price).floor
+    a =  a * 100
+    event.price = a
+    event.save!
+  end
 end

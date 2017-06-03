@@ -15,6 +15,8 @@
 #  board_id   :integer
 #  charge_id  :integer
 #  name       :string
+#  vendor_id  :integer
+#  price      :integer
 #
 
 FactoryGirl.define do

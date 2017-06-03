@@ -32,7 +32,7 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
-#  list_time   :datetime         default("2017-05-24 21:08:15")
+#  list_time   :datetime         default("2017-06-02 18:29:30")
 #  inventory   :integer          default("0")
 #  cost        :integer
 #  margin      :integer

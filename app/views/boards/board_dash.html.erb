@@ -319,8 +319,8 @@
     </div>
   <% else %>
   <% array = [] %>
-  <%  @stripe_account.verification.fields_needed.each do |i| array << i end %>
-  <% array.include? 'legal_entity.ssn_last_4'%>
+    <%  @stripe_account.verification.fields_needed.each do |i| array << i end %>
+    <% array.include? 'legal_entity.ssn_last_4'%>
     <% if @stripe_account.verification.fields_needed  %>
     <div class="row" style="top: -2px;position: absolute;width: 156%;right: 166%;">
         <div class="alert alert-warning text-center shadow-sm">

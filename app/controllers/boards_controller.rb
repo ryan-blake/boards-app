@@ -102,13 +102,13 @@ class BoardsController < ApplicationController
   end
   def rental_boards
     @user = current_user
-    @rental_boards = Event.where(vendor_id: @user.id).order(created_at: 'desc')
-    @rental_table = Event.where(vendor: current_user).order(created_at: 'desc').page(params[:page]).per(8)
+    @rental_boards = Event.where(vendor_id: @user.id)
+    @rental_table = Event.where(vendor: current_user).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
   end
   def search_rental
-      @rental_table = Event.where(vendor: current_user)
-      @rental_table = @rental_table.joins(:board).where(boards: {category_id: params[:category_id], user_id: current_user.id})
+      @rental_table = Event.where(vendor: current_user).order(sort_column + ' ' + sort_direction)
+      @rental_table = @rental_table.joins(:board).where(boards: {category_id: params[:category_id], user_id: current_user.id}).order(sort_column + ' ' + sort_direction)
   end
 
   def shipped_boards

@@ -20,9 +20,11 @@
    </div><!-- /input-group -->
  </div><!-- /.col-lg-6 -->
 <% end %>
-<div id="rental_calendar" style="display:block;max-width:100%;padding-bottom:30px;">
-  <%= render 'boards/calendar', locals: { board: @rental_boards} %>
-</div>
+
 <div id="rental_results" style="display:block;max-width:100%;padding-bottom:30px;">
   <%= render 'boards/rental_table', locals: { board: @rental_table} %>
+</div>
+<hr class="style13">
+<div id="rental_calendar" style="display:block;max-width:100%;padding-bottom:30px;">
+  <%= render 'boards/calendar', locals: { board: @rental_boards} %>
 </div>
