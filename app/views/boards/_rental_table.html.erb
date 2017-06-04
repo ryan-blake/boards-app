@@ -1,5 +1,6 @@
 <div class="row" id="rental-table" style="position:relative;">
   <div class="col-md-12">
+    <h3> Rentals </h3>
     <table class="table table-bordered table-striped table-hover">
       <thead>
         <tr>
@@ -26,4 +27,34 @@
 
     </table>
   </div>
+</div>
+<div class="col-md-12">
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "id" %></th>
+        <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "User" %></i></th>
+        <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "start_time" %></i></th>
+        <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "end_time" %></i></th>
+        <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "total" %></i></th>
+      </tr>
+    </thead>
+
+<div>
+  <h3> My Rental Reservation </h3>
+    <tbody>
+    <% @my_rentals.each do |i| %>
+      <tr>
+          <td><%= link_to i.id, event_path(i.id ) %></td>
+          <td><%= i.vendor.name%></td>
+          <td><%= format_date(i.start_time) %> </td>
+          <td><%=  format_date(i.end_time) %></td>
+          <% if i.total %>
+          <td> $<%= i.total / 100 %>.00 </td>
+          <% end %>
+          <td class="text-center"><%= i.board.category.name %></td>
+      <% end %>
+    </tbody>
+
+  </table>
 </div>

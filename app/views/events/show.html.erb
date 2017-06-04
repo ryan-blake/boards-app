@@ -1,14 +1,50 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+<%= content_for :page_title, 'Review charge' %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="page-header">
+        <strong>Receipt No: </strong><%= @event.id %> <span class="pull-right ">$<%= @event.total %>.00</span>
+      |<strong>  <%= @event.vendor.company %> </strong>|
 
-<p>
-  <strong>Start at:</strong>
-  <%= @event.start_time %>
-</p>
+      </h2>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <dl>
+            <dt>Purchase From:</dt>
+            <dd><%= @event.user.name %></dd>
+            <hr>
+            <p>
+              <strong>Total:</strong>
+              <%= @event.total %>
+            </p>
+            <dt>Payment receipt:</dt>
+            <dd><%= link_to 'charge', charge_path(@event.charge_id) %></dd>
+
+            <hr>
+            <dt>For:</dt>
+            <dd><%= link_to @event.board.title, board_path(@event.board) %></dd>
+            <hr>
+            Pick Up
+            <%= @event.start_time %>
+            Drop Off
+            <%= @event.end_time %>
+            <hr>
+            <dt>Created:</dt>
+            <dd><%= format_date(@event.created_at) %></dd>
+            <hr>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

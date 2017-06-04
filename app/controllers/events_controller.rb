@@ -66,14 +66,16 @@ def create
   )
     charge_error = nil
 
+ days = ((@event.end_time - @event.start_time) / 86400) + 1
     if @event.valid?
+
       begin
         customer = Stripe::Customer.create(
           :email => params[:stripeEmail],
           :card  => params[:stripeToken])
 
           @charge = Charge.new(
-            price: @board.price.to_i.ceil * 100,
+          price: ((days * @board.price) * 100),
             user_id: @user.id,
             vendor_id: @board.user_id,
             item: @board.title,
@@ -114,6 +116,7 @@ def create
           @charge.update_attribute(:completed, true)
           @board.inventory += -1
           @board.save
+          @event.total = @charge.price
           @event.charge_id = @charge.id
           @event.save
 

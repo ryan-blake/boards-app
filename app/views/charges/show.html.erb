@@ -13,9 +13,10 @@
             <dt>Purchase From:</dt>
             <dd><%= @charge.user.name %></dd>
             <hr>
+            <% if current_user.stripe_account %>
             <dt>Payment method:</dt>
             <dd><%= @payments['source']['brand']%></dd>
-
+            <% end %>
             <hr>
             <dt>For:</dt>
             <dd><%= link_to @board.title, board_path(@board) %></dd>
