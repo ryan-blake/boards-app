@@ -100,9 +100,16 @@ $('input[name="daterange"]').daterangepicker(
 },
 function(start, end, label) {
    if ( start.format('YYYY-MM-DD') < end.format('YYYY-MM-DD') ) {
-     alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+     var depDate = moment(start);
+     var arrDate = moment(end);
+     var nbDays = depDate.diff(arrDate, 'days');
+     var one = 1;
+     alert("A " + (-nbDays + one ) * (2) +" date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+   }
+});
+$('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
 
-   };
+  alert("A old date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
 
 });
 </script>
