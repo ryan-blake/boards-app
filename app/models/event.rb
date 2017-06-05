@@ -23,8 +23,7 @@ class Event < ApplicationRecord
   extend SimpleCalendar
 # validate :future_reservations_only, :on => :create
 # validates_datetime :end_time, :after => :start_time
-validates_date :start_time, :before => :end_time,
-                               :before_message => "dates must be in logical order"
+
 belongs_to :vendor, class_name: 'User', foreign_key: 'vendor_id'
 belongs_to :user, class_name: 'User', foreign_key: 'user_id'
 
