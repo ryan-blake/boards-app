@@ -96,8 +96,10 @@ $('input[name="daterange"]').daterangepicker(
    startDate: "<%= Time.now %>",
    endDate: '<%= Time.now + 1.days%>',
    showDropdowns: true,
-   orientation: 'auto top',
+   orientation: 'top',
+   parentEl: "#modal-content"
 },
+
 function(start, end, label) {
    if ( start.format('YYYY-MM-DD') < end.format('YYYY-MM-DD') ) {
      var depDate = moment(start);
