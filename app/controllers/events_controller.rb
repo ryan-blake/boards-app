@@ -171,8 +171,7 @@ private
   end
 
   def set_current_events
-  @some_events = Event.where board_id: @board.id
-  @current_events =  @some_events.where start_time >= Time.now
-
+    @some_events = Event.where board_id: @board.id
+    @current_events =  @some_events.where start_time >= Time.now
   end
 end
