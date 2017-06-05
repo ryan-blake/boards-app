@@ -5,7 +5,7 @@
       <thead>
         <tr>
           <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "id" %></th>
-          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "User" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "name" %></i></th>
           <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "start_time" %></i></th>
           <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "end_time" %></i></th>
           <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "total" %></i></th>
@@ -17,7 +17,7 @@
       <% @rental_table.each do |i| %>
         <tr>
             <td><%= link_to i.id, event_path(i.id ) %></td>
-            <td><%= i.user.name%></td>
+            <td><%= i.name%></td>
             <td><%= format_date(i.start_time) %> </td>
             <td><%=  format_date(i.end_time) %></td>
             <td> <%= i.total %> </td>
@@ -33,7 +33,7 @@
     <thead>
       <tr>
         <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "id" %></th>
-        <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "User" %></i></th>
+        <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "name" %></i></th>
         <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "start_time" %></i></th>
         <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "end_time" %></i></th>
         <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "total" %></i></th>
@@ -46,7 +46,7 @@
     <% @my_rentals.each do |i| %>
       <tr>
           <td><%= link_to i.id, event_path(i.id ) %></td>
-          <td><%= i.vendor.name%></td>
+          <td><%= i.name%></td>
           <td><%= format_date(i.start_time) %> </td>
           <td><%=  format_date(i.end_time) %></td>
           <% if i.total %>
