@@ -96,8 +96,9 @@ $('input[name="daterange"]').daterangepicker(
    startDate: "<%= Time.now %>",
    endDate: '<%= Time.now + 1.days%>',
    showDropdowns: true,
-   orientation: 'top',
-   parentEl: "#modal-content"
+   autoApply: true,
+   orientation: 'auto top',
+   parentEl: '.modal-content'
 },
 
 function(start, end, label) {
