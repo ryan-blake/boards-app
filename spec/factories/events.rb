@@ -17,6 +17,7 @@
 #  name       :string
 #  vendor_id  :integer
 #  total      :integer
+#  out        :boolean
 #
 
 FactoryGirl.define do

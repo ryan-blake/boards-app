@@ -176,8 +176,9 @@ private
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
+  # to update events via patch in dash/rental no require(:event)?
   def event_params
-    params.require(:event).permit(:charge_id ,:name, :start_time, :end_time, :booked, :payed, :total)
+    params.permit(:out, :charge_id ,:name, :start_time, :end_time, :booked, :payed, :total)
   end
 
   def set_current_events
