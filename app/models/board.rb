@@ -60,7 +60,9 @@ class Board < ApplicationRecord
   after_update :update_tokens
   after_update :update_margin
 
-
+  scope :ordered, -> {
+    joins(:board => :categories).order("categories.name" 'desc')
+  }
   # mapping
   geocoded_by :full_address
   after_validation :geocode, if: ->(obj){ obj.full_address.present? }

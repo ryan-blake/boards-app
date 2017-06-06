@@ -1,2 +1,3 @@
 $("#rental").html("<%=j render partial: 'rental_boards' %>");
 $('#rental-table').append('<%= escape_javascript(paginate(@rental_table, window: 1, :remote => true)) %>');
+$("#rental_results").append("<%=j render partial: 'rental_table' %>");

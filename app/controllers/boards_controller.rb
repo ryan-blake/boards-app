@@ -103,7 +103,7 @@ class BoardsController < ApplicationController
   def rental_boards
     @user = current_user
     @rental_boards = Event.where(vendor_id: @user.id)
-    @rental_table = Event.where(vendor_id: @user.id).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+    @rental_table = Event.where(vendor_id: @user.id)
     @rental_table = @rental_table.joins(:board).where(boards: { user_id: current_user.id}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
     # @my_rentals = Event.where(user: current_user).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
@@ -112,7 +112,8 @@ class BoardsController < ApplicationController
   def search_rental
       @rental_table = Event.where(vendor: current_user).order(sort_column + ' ' + sort_direction)
       if params[:category_id].present?
-      @rental_table = @rental_table.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id], user_id: current_user.id}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+      @rental_table = @rental_table.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards:
+          {category_id: params[:category_id], user_id: current_user.id}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
       else
       @rental_table = @rental_table.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: { user_id: current_user.id}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
       end

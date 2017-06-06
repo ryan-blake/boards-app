@@ -3,9 +3,10 @@
     <h3> Rentals </h3>
     <table class="table table-bordered table-striped table-hover">
       <thead>
-        <tr>
+
+
           <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "id" %></th>
-          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "name" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%=  link_to_sorted "Name", 'events.name' %></i></th>
           <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "start_time" %></i></th>
           <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "end_time" %></i></th>
           <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "total" %></i></th>
