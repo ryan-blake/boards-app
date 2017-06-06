@@ -110,13 +110,20 @@ class BoardsController < ApplicationController
 
   end
   def search_rental
+    if params[:rental_out] == "on"
+      @rental_table = Event.where(vendor: current_user,:out => true).order(sort_column + ' ' + sort_direction)
+    end
+    if params[:rental_past] == "on"
+      @rental_table = Event.where(vendor: current_user,:out => true).where("end_time <= ?", 0.days.ago).order(sort_column + ' ' + sort_direction)
+    elsif params[:rental_out] != "on"
       @rental_table = Event.where(vendor: current_user).order(sort_column + ' ' + sort_direction)
+    end
       if params[:category_id].present?
       @rental_table = @rental_table.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id], user_id: current_user.id}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
       else
       @rental_table = @rental_table.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: { user_id: current_user.id}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
       end
-      # @my_rentals = Event.where(user: current_user).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+
 
   end
 

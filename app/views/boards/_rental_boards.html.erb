@@ -18,6 +18,9 @@
        <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
      </span>
    </div><!-- /input-group -->
+   currently out:<span class="check-box-search"><%= check_box_tag :rental_out, params[:rental_out] %> </span>
+
+   Past due:<span class="check-box-search"><%= check_box_tag :rental_past, params[:rental_past] %> </span>
  </div><!-- /.col-lg-6 -->
 <% end %>
 
