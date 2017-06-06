@@ -109,11 +109,21 @@ def create
             :customer => @charge.customer_id,
             :currency => 'usd',
             :destination => @charge.vendor.stripe_account,
-            :application_fee => 200+(@charge.price*3)+ 31
+            :application_fee => 200+(@charge.price*3)+ 31,
+            metadata: { "shipping" => @charge.shipping,
+              "charge_id" => @charge.id,
+               "board" => @board.title,
+               "vendor" => User.find(@charge.vendor_id).name,
+               "vendor_id" => User.find(@charge.vendor_id).id,
+                "customer" => User.find(@charge.user_id).name,
+                "customer_id" => User.find(@charge.user_id).id,
+                "rental" => true }
+
             },
           )
-
+          @charge.charge_stripe = charge['id']
           @charge.update_attribute(:completed, true)
+          @charge.save
           @board.inventory += -1
           @board.save
           @event.total = @charge.price
@@ -167,7 +177,7 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:name, :start_time, :end_time, :booked, :payed, :total)
+    params.require(:event).permit(:charge_id ,:name, :start_time, :end_time, :booked, :payed, :total)
   end
 
   def set_current_events

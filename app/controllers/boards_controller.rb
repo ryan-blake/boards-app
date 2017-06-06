@@ -41,7 +41,7 @@ class BoardsController < ApplicationController
       @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
       @users = User.all.where.not(id: current_user)
       # stripe account data
-      if @user.stripe_account
+      if current_user.stripe_account
         @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
         @payments = Stripe::Charge.list(
         {
