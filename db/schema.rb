@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170603200147) do
+ActiveRecord::Schema.define(version: 20170606191746) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at",                                  null: false
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20170603200147) do
     t.string   "name"
     t.integer  "vendor_id"
     t.integer  "total"
+    t.boolean  "out"
     t.index ["board_id"], name: "index_events_on_board_id"
     t.index ["charge_id"], name: "index_events_on_charge_id"
     t.index ["user_id"], name: "index_events_on_user_id"
