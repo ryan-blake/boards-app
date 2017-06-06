@@ -167,7 +167,7 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:name, :start_time, :end_time, :booked, :payed)
+    params.require(:event).permit(:name, :start_time, :end_time, :booked, :payed, :total)
   end
 
   def set_current_events
