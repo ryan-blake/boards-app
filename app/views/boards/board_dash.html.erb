@@ -358,7 +358,11 @@
   <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_boards_path, remote:true %></button>
   <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  pick_boards_boards_path, remote:true %></button>
   <button type="button" class="btn btn-default" id="btn-sales"><%= link_to 'Sales', sales_boards_boards_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+  <% if @user.stripe_account != nil %>
   <button type="button" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
+  <% else %>
+  <button style="display:none;" type="hidden" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
+  <% end %>
 </div>
 <!--!nav desktop  -->
 
