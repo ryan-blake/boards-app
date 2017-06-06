@@ -124,19 +124,26 @@ Purchased:
           <th>Price</th>
           <th>Purchased On</th>
           <th>Company</th>
+          <th>transaction</th>
+
         </tr>
       </thead>
 
       <tbody>
       <%  @charges = Charge.where(:user_id  => current_user.id) %>
       <% @charges.each do |i| %>
-        <tr>
+      <% if i.rental == true %>
+        <tr style="background-color:beige;">
+          <% else %>
+          <tr>
+            <% end %>
             <td><%= link_to i.id, charge_path(i.id ) %></td>
-            <td>$<%= i.price %>.00</td>
+            <td>$<%= i.price / 100 %>.00</td>
             <td><%= format_date(i.created_at) %></td>
-            <td><%= i.vendor.company %>
-            <td class="text-center">
-
+            <td><%= i.vendor.company %></td>
+              <% if i.rental == true %>
+            <td class="text-center">rental</td>
+                <% end %>
         <% end %>
       </tbody>
     </table>
