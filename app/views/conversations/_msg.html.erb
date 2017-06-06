@@ -49,7 +49,6 @@ $(function(){
             <% @charge = Charge.where(:user_id => @user.id) %>
             <% @my_sales = Charge.where(:vendor_id => @user.id) %>
             <% if @charge %>
-            <%= @charge.first.user_id %>
         <!-- links to VENODRS that user has purchased from. Need  -->
        <% user_names = [] %>
         <% @charge.each do |i| %>
@@ -62,7 +61,7 @@ $(function(){
          <% user_names << i.user %>
         <% end %>
         <% end %>
-        
+
 <!-- if conversations user exists data_conversations_id -->
 <!-- else conversations_id is blank nothing -->
 <%= user_names.count %>
