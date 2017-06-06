@@ -20,7 +20,7 @@
             :out:
             <%=
               check_box_tag 'out', true, i.out,
-                onchange: "$(this).data('params', 'event=' + data: i.id , 'out=' + this.checked)",
+                onchange: "$(this).data('params', 'out=' + this.checked)",
                 data: { remote: true, url: event_path(i.id), method: :patch }
                 %>
         </td>
