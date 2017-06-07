@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606191746) do
+ActiveRecord::Schema.define(version: 20170607164504) do
 
   create_table "boards", force: :cascade do |t|
     t.datetime "created_at",                                  null: false
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170606191746) do
     t.integer  "cost"
     t.integer  "margin"
     t.string   "upc"
+    t.string   "company"
     t.index ["category_id"], name: "index_boards_on_category_id"
     t.index ["type_id"], name: "index_boards_on_type_id"
     t.index ["user_id"], name: "index_boards_on_user_id"

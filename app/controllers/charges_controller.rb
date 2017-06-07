@@ -9,7 +9,6 @@ class ChargesController < ApplicationController
     def complete
        @board = Board.find_by(id: @charge.board_id,  arrived: false)
 
-
       Stripe.api_key = ENV["STRIPE_API_KEY"]
       token = @charge.token
       charge = Stripe::Charge.create({
@@ -32,6 +31,8 @@ class ChargesController < ApplicationController
       @board.update_attribute(:address, nil)
       @board.update_attribute(:pending, false)
       @board.update_attribute(:customer_id, nil)
+      @board.update_attribute(:company, nil)
+
       @board.save
       if @new_user
         redirect_to new_user_session_path, :notice => "HOWDY, Your board is ordered! Check your email to create your password and confirm your email."

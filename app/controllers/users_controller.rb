@@ -6,12 +6,48 @@ respond_to :html, :js
 # GET /users
 # GET /users.json
  def maps
-  @user_places = User.where.not(:latitude => nil, :company => nil)
-  @url_array = []
+  unless params[:keyword] || params[:category_id]
+    @user_places = User.where.not(:latitude => nil, :company => nil)
+    @url_array = []
      @user_places.each do |user|
        @url_array << (user.id)
    end
+ else
+
+   @user_places = User.where.not(:latitude => nil, :company => nil)
+
+   if params[:category_id].present?
+     if params[:rental] == "on"
+   @user_places = @user_places.joins(:boards).where("(boards.company like ? or boards.title like ? or boards.description like ? or boards.make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {for_sale: true, category_id: params[:category_id], rental: true}).pluck(:id)
+    else
+   @user_places = @user_places.joins(:boards).where("(boards.company like ? or boards.title like ? or boards.description like ? or boards.make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {for_sale: true, category_id: params[:category_id]}).pluck(:id)
+    end
+   else
+     if params[:rental] == "on"
+       @user_places = @user_places.joins(:boards).where("(boards.company like ? or boards.title like ? or boards.description like ? or boards.make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {for_sale: true, rental: true}).pluck(:id)
+     else
+       @user_places = @user_places.joins(:boards).where("(boards.company like ? or boards.title like ? or boards.description like ? or boards.make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {for_sale: true}).pluck(:id)
+    end
+   end
+
+   @user_places = @user_places.uniq
+   @user_places = User.where(id: @user_places)
+   @url_array = []
+      @user_places.each do |user|
+        @url_array << (user.id)
+      end
+    end
  end
+ # def search_map
+ #   @user_places = User.where.not(:latitude => nil, :company => nil)
+ #   @user_places = @user_places.joins(:boards).where("(boards.company like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id]})
+ #   @url_array = []
+ #      @user_places.each do |user|
+ #        @url_array << (user.id)
+ #    end
+ # end
+
+
 
 def index
   @users = User.all

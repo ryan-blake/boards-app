@@ -37,7 +37,7 @@
 #  cost        :integer
 #  margin      :integer
 #  upc         :string
-#
+
 
 class Board < ApplicationRecord
   belongs_to :user

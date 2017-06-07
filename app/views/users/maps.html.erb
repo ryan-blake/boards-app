@@ -1,205 +1,31 @@
+<%= form_tag({controller: :users, action: :maps}, {method: :get, remote: true}) do  %>
 
-<div class="front_page_container">
-    <h2>Find Shops</h2>
-</div>
+<div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
+  <div class="input-group">
+    <span class="input-group-btn">
+    <%= grouped_collection_select  nil, :category_id, Type.all, :categories,
+          :name, :id, :name, {prompt: "Select type" },
+          { id: 'category-select' , class: "form-control"} %>
+    </span>
+  </div><!-- /input-group -->
+  rentals:<span class="check-box-search"><%= check_box_tag :rental, params[:rental] %> </span>
 
-<input id="pac-input" style="width:200px;height:25px;" class="controls" type="text" placeholder="Search The Earth">
-<div id="map-container">
-	<div id="amap"></div>
-</div>
+</div><!-- /.col-lg-6 -->
+<div class="col-md-4 search-bar">
+   <div class="input-group">
+     <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+     <span class="input-group-btn">
+       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+     </span>
+   </div><!-- /input-group -->
+   <!-- currently out:<span class="check-box-search"><%= check_box_tag :rental_out, params[:rental_out] %> </span>
+   Past due:<span class="check-box-search"><%= check_box_tag :rental_past, params[:rental_past] %> </span> -->
+ </div><!-- /.col-lg-6 -->
+<% end %>
 
-  <script>
-      function initAutocomplete() {
-        var map = new google.maps.Map(document.getElementById('amap'), {
-          zoom: 2,
-          center: {lat: 41.3851, lng: 250.1734},
-          mapTypeId: 'terrain',
-          styles: [
-            {
-              featureType: 'administrative.country',
-              elementType: 'geometry.fill',
-              stylers: [{color: '#FFFFFF'}]
-            },
-            {
-              featureType: 'administrative.country',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#FFFFFF'}]
-            },
-            {
-              featureType: 'landscape.natural.landcover',
-              elementType: 'geometry.fill',
-              stylers: [{color: '#34A56F'}]
-            },
-            {
-              featureType: 'landscape.natural.terrain',
-              elementType: 'geometry.fill',
-              stylers: [{color: '#FFFAFA'}]
-            },
-            {
-              featureType: 'road.local',
-              elementType: 'geometry.fill',
-              stylers: [{color: '#D3D3D3'}]
-            },
-            {
-              featureType: 'road.local',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#D3D3D3'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry.fill',
-              stylers: [{color: '#D3D3D3'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#D3D3D3'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'geometry.fill',
-              stylers: [{color: '#7CFC00'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#FFFFFF'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'labels.text.stroke',
-              stylers: [{color: '#000000'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'geometry',
-              stylers: [{color: '#00E5EE'}]
-            },
-          ]
-          });
-
-
-          // Create the search box and link it to the UI element.
-        var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
-        });
-
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-
-          if (places.length == 0) {
-            return;
-          }
-
-
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
-            if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-          });
-          map.fitBounds(bounds);
-        });
-
-          // Create an array of alphabetical characters used to label the markers.
-       // var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-        var markers = locations.map(function(location, i) {
-            return new google.maps.Marker({
-            position: location,
-          });
-      });
-
-      var urlArray = <%= @url_array.to_json.to_s.html_safe %>
-
-
-function linkMarkers() {
-
-  for (var i = 0; i < markers.length; i++) {
-    (function (i) {
-        markers[i].addListener('click', function() {
-          window.location.href = '/users/' + urlArray[i]
-          }, false);
-    })(i);
-  }
-}
-
-linkMarkers()
-
-
-        // Add a marker clusterer to manage the markers.
-        var markerCluster = new MarkerClusterer(map, markers, {
-         imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-  });
-}
-
-    var placeObject = <%= @user_places.to_json.html_safe %>
-    var locations = returnLocationArray()
-
-function returnLocationArray () {
-  var array = []
-  for(var index in placeObject) {
-
-    if(placeObject[index].latitude != null && placeObject[index].longitude != null) {
-
-        array.push({lat: placeObject[index].latitude, lng: placeObject[index].longitude})
-
-      }
-  }
-  return array
-}
-
-       </script>
-
-       <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=<%= GOOGLE_MAPS_API %>&libraries=places&callback=initAutocomplete">
-    </script>
-		<style type="text/css">
-			#map-container {
-			  padding: 6px;
-			  border-width: 1px;
-			  border-style: solid;
-			  border-color: #ccc #ccc #999 #ccc;
-			  -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
-			  -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
-			  box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
-			//  width: 500px;
-			}
-			#amap {
-			//  width: 500px;
-			    height: 300px;
-			}
-		</style>
-    <div>
+  <div class="" id="map_boards">
+    <%= render 'users/maps', locals: { board: @user_places} %>
+  </div>
       <h1 class="center-text"> Featured Shops </h1>
     </div>
 <% @featured_stores = User.where.not(company: nil) %>
