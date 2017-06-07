@@ -154,6 +154,7 @@ class BoardsController < ApplicationController
   end
 
   def sales_boards
+      @purchases = Charge.where(:user_id  => current_user.id).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
     if current_user.stripe_account != nil
    @sales_user = current_user.name
        @payments = Stripe::Charge.list(
@@ -162,7 +163,7 @@ class BoardsController < ApplicationController
            expand: ['data.source_transfer', 'data.application_fee']
          },
          { stripe_account: current_user.stripe_account }
-       )
+       ).page(params[:page]).per(8)
        @transfers = Stripe::Transfer.list(
   {
     limit: 100

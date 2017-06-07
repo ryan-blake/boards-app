@@ -93,7 +93,6 @@
                   <span class="fa fa-undo"></span> Refunded
                 </span>
               <% else %>
-
             </td>
           </tr>
           <% end %>
@@ -113,6 +112,13 @@
   <!--  add board_type and category to charges as metadata or otherwise-->
   <!-- manipulate chart data group by_data_range, type, category, price, margins on the fly, -->
 </div>
+<tbody>
+  <td>
+  <div class="center-text pagination" id="sales_boards">
+    <%= paginate @sales_boards, remote: true, window: 1 %>
+  </div>
+  </td>
+</tbody>
 <% else %>
 Purchased:
 <div class="row" id="payment-table" style="position:relative;">
@@ -120,18 +126,17 @@ Purchased:
     <table class="table table-bordered table-striped table-hover">
       <thead>
         <tr>
-          <th>Receipts</th>
-          <th>Price</th>
-          <th>Purchased On</th>
-          <th>Company</th>
-          <th>transaction</th>
-
+          <th><i style="display:inline;" class="btn btn-sort"> Receipt<%= sortable "id" %></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "created_at" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "vendor_company" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> purchase/<%= sortable "rental" %></th>
         </tr>
       </thead>
 
       <tbody>
-      <%  @charges = Charge.where(:user_id  => current_user.id) %>
-      <% @charges.each do |i| %>
+
+      <% @purchases.each do |i| %>
       <% if i.rental == true %>
         <tr style="background-color:beige;">
           <% else %>
@@ -149,5 +154,11 @@ Purchased:
     </table>
   </div>
 </div>
-
+<tbody>
+  <td>
+  <div class="center-text pagination" id="sales_boards">
+    <%= paginate @purchases, remote: true, window: 1 %>
+  </div>
+  </td>
+</tbody>
 <% end %>

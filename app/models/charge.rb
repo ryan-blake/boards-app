@@ -20,7 +20,6 @@
 #  end_time      :datetime
 #  rental        :boolean
 #  charge_stripe :string
-#
 
 class Charge < ApplicationRecord
   belongs_to :user
