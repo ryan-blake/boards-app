@@ -28,35 +28,8 @@
   </div>
       <h1 class="center-text"> Featured Shops </h1>
     </div>
-<% @featured_stores = User.where.not(company: nil) %>
-<% @featured_stores.each do |i| %>
-<tbody style="width:100%;" class="tbody-search col-sm-6 col-md-4 col-lg-3 center-text">
-    <!-- if no image load other boards image in results -->
-    <td class="center-text" >
-      <div  style="min-height:240px;">
-          <%= link_to attachment_image_tag(Board.find(55).images.first, :file, :fill, 340, 200), user_path(i), target: :_blank %>
-      </div>
+    <% @featured_stores = User.where.not(company: nil).limit(15) %>
 
-  <ul class="main-well-ul">
-     <li class="center-text title-link">
-       <!-- new link to modal -->
-       <div class="title-bar center-text">
-         <%= i.company %>
-
-      </div>
-     </li>
-     <li class="center-text">
-      <%=  i.zipcode  %>
-
-     </li>
-     <li class="center-text">
-       <strong class="make-li"><%= i.zipcode  %></strong>
-     </li>
-     <li class="center-text" style="padding-top:5px;">
-       <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= i.company %></strong>
-         <br>
-         <hr class="style13">
-       </td>
-       </ul>
-    </tbody>
-    <% end %>
+<div class="" id="map_companies">
+  <%= render  'layouts/featured_companies', locals: { companies: @featured_stores} %>
+</div>

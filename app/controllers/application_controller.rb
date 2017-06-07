@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
 
+
+
   def price_param(items)
     if params[:max][0].to_i <= 0 && params[:min][0].to_i >= 1
       items  = items.min_price(params[:min][0].to_i).max_price(9999)
