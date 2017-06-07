@@ -10,7 +10,7 @@ respond_to :html, :js
     @user_places = User.where.not(:latitude => nil, :company => nil)
     @url_array = []
      @user_places.each do |user|
-       @url_array << (user.id)
+       @url_array << (user.name)
    end
  else
 
@@ -34,7 +34,7 @@ respond_to :html, :js
    @user_places = User.where(id: @user_places)
    @url_array = []
       @user_places.each do |user|
-        @url_array << (user.id)
+        @url_array << (user.company + user.name)
       end
     end
  end

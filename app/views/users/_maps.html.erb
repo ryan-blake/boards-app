@@ -9,6 +9,9 @@
 
   <script>
       function initAutocomplete() {
+        var rubyArray = <%= @url_array.to_json.to_s.html_safe %>
+        var urlArray = ['Co one','Co two', 'Co three']
+
         var map = new google.maps.Map(document.getElementById('amap'), {
           zoom: 2,
           center: {lat: 41.3851, lng: 250.1734},
@@ -76,9 +79,8 @@
             },
           ]
           });
-
         // infowindow
-      
+
           // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
@@ -137,17 +139,36 @@
           });
       });
 
-      var urlArray = <%= @url_array.to_json.to_s.html_safe %>
+
+      function linkMarkers() {
 
 
-function linkMarkers() {
 
-  for (var i = 0; i < markers.length; i++) {
-    (function (i) {
-        markers[i].addListener('click', function() {
-          window.location.href = '/users/' + urlArray[i]
-          }, false);
-    })(i);
+        for (var i = 0; i < markers.length; i++) {
+          (function (i) {
+
+            var contentString =  rubyArray;
+
+            var infowindow = new google.maps.InfoWindow({
+
+                   content: contentString[i]
+                 });
+
+            markers[i].addListener('click', function() {
+
+              alert(rubyArray);
+              infowindow.open(map, markers[i]);
+              }, false);
+        })(i);
+        // above markers window
+// function linkMarkers() {
+//
+//   for (var i = 0; i < markers.length; i++) {
+//     (function (i) {
+//         markers[i].addListener('click', function() {
+//           window.location.href = '/users/' + urlArray[i]
+//           }, false);
+//     })(i);
   }
 }
 
