@@ -11,4 +11,5 @@
 
 class Category < ApplicationRecord
   has_many :boards
+  has_many :accessories
 end

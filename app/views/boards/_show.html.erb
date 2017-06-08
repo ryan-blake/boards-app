@@ -66,6 +66,17 @@
   <div class="description-modal pull-right" style=";position:relative;clear:all;">
     <%= @board.description %>
   </div>
+<!--  -->
+<div class="center-text">
+  <% @board.user.accessories.where(category_id: @board.category_id).each do |i| %>
+  <tbody>
+  <tr><%= i.title %></tr>
+  <td><%= i.price  %></td>
+  <% end %>
+</tbody>
+</div>
+
+<!--  -->
 <!-- section -->
   <% if @board.rental %>
   <div class="rental-div" style="min-height:100%;">

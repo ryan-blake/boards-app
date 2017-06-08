@@ -37,6 +37,7 @@
 #  cost        :integer
 #  margin      :integer
 #  upc         :string
+#  company     :string
 #
 
 FactoryGirl.define do

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
 # crons
 require 'sidekiq/web'
 require 'sidekiq/cron/web'
@@ -13,7 +14,7 @@ mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :users do
-     resources :reviews
+     resources :reviews, :accessories
   collection do
       get  'search', 'users/search_signed_in/:id', 'sort_order',  to: "users#search_signed_in"
   end

@@ -37,7 +37,8 @@
 #  cost        :integer
 #  margin      :integer
 #  upc         :string
-
+#  company     :string
+#
 
 class Board < ApplicationRecord
   belongs_to :user
@@ -46,6 +47,9 @@ class Board < ApplicationRecord
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true
+
+  has_many :accessories, dependent: :destroy
+
   has_many :events, dependent: :destroy
   validates_associated :events
   validates :title, :presence => true

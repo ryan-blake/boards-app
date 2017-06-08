@@ -12,5 +12,6 @@
 class Image < ApplicationRecord
 
   belongs_to :board, optional: true
+  belongs_to :accessory, optional: true
   attachment :file, type: :image
 end

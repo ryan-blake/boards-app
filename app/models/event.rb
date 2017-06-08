@@ -25,8 +25,13 @@ class Event < ApplicationRecord
 # validate :future_reservations_only, :on => :create
 # validates_datetime :end_time, :after => :start_time
 
+belongs_to :board
+
 belongs_to :vendor, class_name: 'User', foreign_key: 'vendor_id'
 belongs_to :user, class_name: 'User', foreign_key: 'user_id'
+
+scope :start_search, ->(start) { where('start_time >= ?', start) }
+scope :end_search, ->(end_time) { where('end_time <= ?', end_time) }
 
 # validates_time :start_time, :on_or_after => :open_time,
 #    :on_or_after_message => 'must be after opening time',
@@ -43,10 +48,6 @@ belongs_to :user, class_name: 'User', foreign_key: 'user_id'
 #                                            message_content: 'overlaps with Users other meetings.' }
 
 # validate :unbooked_events, :on => :create
-scope :start_search, ->(start) { where('start_time >= ?', start) }
-scope :end_search, ->(end_time) { where('end_time <= ?', end_time) }
-
-belongs_to :board
 
 
 # validates :name, presence: true

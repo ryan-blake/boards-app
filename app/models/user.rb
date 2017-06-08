@@ -45,13 +45,15 @@ class User < ApplicationRecord
 
   before_save { self.role ||= :member }
 
-  has_many :events, dependent: :destroy
   validates :name, :presence => true
   validates :name, :presence => true
   validates :email, :presence => true
 
 
   enum role: [:member, :admin]
+  
+  has_many :accessories, dependent: :destroy
+
   has_many :events, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :boards, dependent: :destroy
@@ -64,7 +66,7 @@ class User < ApplicationRecord
 
   # mapping
   geocoded_by :full_address
-  after_validation :geocode 
+  after_validation :geocode
 
 
   def full_address
