@@ -1,8 +1,9 @@
 <div class="center-text">
 <strong>New Board</strong>
 </div>
-
-<%= render 'form', board: @board %>
+<% if current_user && current_user.stripe_account %>
+  <%= render 'form', board: @board %>
+<% end %>
 
 <div class="center-text">
 <% if user_signed_in?  && current_user.stripe_account == nil %>
@@ -10,6 +11,4 @@
 <% end %>
 <br>
 <hr>
-<%= link_to 'Back', boards_path %>
-
 </div>

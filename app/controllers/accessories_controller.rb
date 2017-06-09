@@ -12,15 +12,19 @@ end
 def show
   # @board = Spot.find(params[:spot_id])
   # @accessory = accessory.find(params[:id])
-  @charge = Charge.new
+
   @accessory = Accessory.find(params[:accessory_id])
 
 end
 
 # GET /accessories/new
 def new
-  @board = Board.find(params[:board_id])
+  # @board = Board.find(params[:board_id])
   @accessory = Accessory.new
+end
+def inventory
+  @accessory = Accessory.new
+
 end
 
 # GET /accessories/1/edit
@@ -32,11 +36,19 @@ end
 # POST /accessories
 # POST /accessories.json
 def create
-  @board = Board.find(params[:board_id])
+  # @board = Board.find(params[:board_id])
   @accessory = Accessory.new(accessory_params)
   if current_user
     @user = current_user
-
+    respond_to do |format|
+     if @accessory.save
+       format.html { redirect_to dash_path, notice: 'Board was successfully created.' }
+       format.json { render :show, status: :created, location: @accessory }
+     else
+       format.html { render :inventory }
+       format.json { render json: @accessory.errors, status: :unprocessable_entity }
+     end
+   end
  #  else
  #    user_email = params[:stripeEmail]
  #
@@ -145,7 +157,6 @@ def create
 #   @user_new.send_reset_password_instructions
   end
 
-
 end
 
 # PATCH/PUT /accessories/1
@@ -180,7 +191,7 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def accessory_params
-    params.permit(:brand ,:price, :inventory, :color, :title. :type_id, :category_id, :user_id, :board_id)
+    params.require(:accessory).permit(:brand ,:price, :inventory, :color, :title, :type_id, :category_id, :user_id, :board_id,images_files: [], images_attributes: [ :id, :file, :_destroy])
   end
 
   def set_current_accessories

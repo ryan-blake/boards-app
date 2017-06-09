@@ -20,6 +20,7 @@ mount Sidekiq::Web => '/sidekiq'
   end
 end
 get'maps' => 'users#maps'
+get 'accessoryInventory', to: 'accessories#inventory'
 
 
   resources :boards do

@@ -1,12 +1,23 @@
-<div style="position:relative;">
 
+<div style="position:relative;">
+<%= form_for (@accessory) do |f| %>
+  <% if @accessory.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@accessory.errors.count, "error") %> prohibited this @accessory from being saved:</h2>
+      <ul>
+      <% @accessory.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 <br>
 <div class="title center-text">
-<%= f.label :Accessory_title %>
+<%= f.label :title %>
   <td><%= f.text_field :title, class: 'btn-width form-control' %></td>
 </div>
 
-<div class="image-box center-text" style="min-height:150px !important;" id="images">
+<div class="image-box center-text" id="images">
   <div class="progress" id='progress-bar' style='display:none;'>
     <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%;background-color:#b2b2f1;">
       <span class="sr-only" id='progress-bar-text'></span>
@@ -26,7 +37,6 @@
   <table class="" style="">
     <thead style="max-width:100%;">
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.hidden_field :board_id, :value => @board.id %>
 
       <th ><%= f.label :brand %></th>
       <th ><%= f.label :category_id, "category" %> <br></th>
@@ -46,5 +56,8 @@
         <td ><%= f.number_field :price, class: 'form-control' %></td>
       </tbody>
 <!--  -->
-
+<div class="center-text" style="position:relative;bottom:20px;">
+  <%= f.submit 'Save', class: 'form-control', style: 'background-color:lightgrey;' %>
+</div>
 <!-- section -->
+  <% end %>
