@@ -11,10 +11,10 @@ mount Sidekiq::Web => '/sidekiq'
   resources :bank_accounts
 
   # !mngd
-
+  resources :accessories
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :users do
-     resources :reviews, :accessories
+     resources :reviews
   collection do
       get  'search', 'users/search_signed_in/:id', 'sort_order',  to: "users#search_signed_in"
   end
@@ -23,6 +23,7 @@ get'maps' => 'users#maps'
 
 
   resources :boards do
+    resources :accessories
     resources :events, only: [:create, :destroy, :show, :board_dash]
     collection do
       get 'search_dash','search_rental', 'search_signed_in', 'sort_order', 'board_dash', 'rental_boards', 'active_boards', 'inactive_boards',
@@ -31,6 +32,7 @@ get'maps' => 'users#maps'
     collection do
       post  'import'
     end
+
   end
 
   get'dash' => 'boards#board_dash'

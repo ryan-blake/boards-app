@@ -49,6 +49,7 @@ class Board < ApplicationRecord
   accepts_nested_attributes_for :images, allow_destroy: true
 
   has_many :accessories, dependent: :destroy
+  accepts_nested_attributes_for :accessories, allow_destroy: true, reject_if: :all_blank
 
   has_many :events, dependent: :destroy
   validates_associated :events

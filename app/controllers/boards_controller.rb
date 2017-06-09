@@ -202,6 +202,8 @@ transactions = Stripe::BalanceTransaction.all(
     @one = @images.length
     @images = @board.images.page(params[:page]).per(1)
     @event = Event.new
+    @accessory = Accessory.new
+
     @charge = Charge.new
     if current_user.present?
       @on = current_user
@@ -216,11 +218,14 @@ transactions = Stripe::BalanceTransaction.all(
   # GET /boards/new
   def new
     @board = Board.new
+    accessory = @board.accessories.build
+
   end
 
   # GET /boards/1/edit
   def edit
     @board = Board.find(params[:id])
+    @accessory = Accessory.find(params[@board.id])
     respond_to do |format|
         format.js
       end
@@ -230,6 +235,8 @@ transactions = Stripe::BalanceTransaction.all(
   # POST /boards.json
   def create
     @board = Board.new(board_params)
+    @accessory = Accessory.new
+
      @user = current_user
      respond_to do |format|
       if @board.save
@@ -461,7 +468,7 @@ end
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
       params.require(:board).permit(:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :used, :footgear, :width, :length, :name, :type_id, :category_id, :list_time, :volume, :address,
-      :city, :state, :remote_image_url, :zipcode, :inventory, images_files: [], images_attributes: [ :id, :file, :_destroy])
+      :city, :cost, :margin, :company, :state, :remote_image_url, :zipcode, :inventory, images_files: [], images_attributes: [ :id, :file, :_destroy], accessories_attributes: [:id, :price, :color, :inventory, :title, :user_id, :board_id, :category_id, :brand])
     end
 
 end

@@ -21,6 +21,7 @@
     <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%;background-color:#b2b2f1;">
       <span class="sr-only" id='progress-bar-text'></span>
     </div>
+
   </div>
   <%= f.label :add_images %><br>
   <btn class="center-text" style="position:absolute;left:calc(50% - 90px);">
@@ -92,12 +93,17 @@
 <%= f.hidden_field :company, :value => current_user.company ? current_user.company : nil %>
 <%= f.hidden_field :list_time, :value => Time.now %>
 
-<!--  -->
+
+<div style="position:relative;min-height:400px;min-width:100%;">
+ <%= f.fields_for :accessories do |builder| %>
+    <%= render "accessories/form", :f => builder %>
+  <% end %>
+</div>
+
+<%= f.submit 'Save' %>
 
 
-  <div style="margin-top:20px;" class="center-text actions">
-    <%= f.submit "Create", class: "btn btn-info" %>
-  </div>
+
 
 
 <!-- section -->
