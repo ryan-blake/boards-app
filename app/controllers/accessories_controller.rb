@@ -6,6 +6,9 @@ class AccessoriesController < ApplicationController
 def index
   @accessories = accessory.all
 end
+def table
+  @accessories = Accessory.all.page(params[:page]).per(4)
+end
 
 # GET /accessories/1
 # GET /accessories/1.json

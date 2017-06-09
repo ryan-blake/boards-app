@@ -11,7 +11,12 @@ mount Sidekiq::Web => '/sidekiq'
   resources :bank_accounts
 
   # !mngd
-  resources :accessories
+  resources :accessories do
+    collection do
+      get 'table'
+    end
+  end
+
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
   resources :users do
      resources :reviews

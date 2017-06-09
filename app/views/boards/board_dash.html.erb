@@ -11,6 +11,7 @@
     var pickUpBtn = document.getElementById('btn-pickup');
     var salesBtn = document.getElementById('btn-sales');
     var rentalBtn = document.getElementById('btn-rental');
+    var accessoryBtn = document.getElementById('btn-accessory');
     var activeBtnM = document.getElementById('btn-active-m');
     var pendingBtnM = document.getElementById('btn-pending-m');
     var inventoryBtnM = document.getElementById('btn-inventory-m');
@@ -18,6 +19,8 @@
     var pickUpBtnM = document.getElementById('btn-pickup-m');
     var salesBtnM = document.getElementById('btn-sales-m');
     var rentalBtnM = document.getElementById('btn-rental-m');
+    var accessoryBtnM = document.getElementById('btn-accessory-m');
+
     var pendingPG = document.getElementById('pending');
     var activePG = document.getElementById('active');
     var inventoryPG = document.getElementById('inventory');
@@ -25,6 +28,7 @@
     var pickUpPG = document.getElementById('pickUp');
     var salesPG = document.getElementById('sales');
     var rentalPG = document.getElementById('rental');
+    var accessoryPG = document.getElementById('accessories');
 
       activeBtn.onclick = function() {
           activePG.style['display'] = 'block';
@@ -34,6 +38,8 @@
           pickUpPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
+          accessoryPG.style['display'] = 'none';
+
 
        };
        pendingBtn.onclick = function() {
@@ -44,6 +50,8 @@
           pickUpPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
+          accessoryPG.style['display'] = 'none';
+
 
        };
        inventoryBtn.onclick = function() {
@@ -54,6 +62,8 @@
           pickUpPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
+          accessoryPG.style['display'] = 'none';
+
 
        };
        shippedBtn.onclick = function() {
@@ -64,6 +74,8 @@
           pickUpPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
+          accessoryPG.style['display'] = 'none';
+
 
        };
        pickUpBtn.onclick = function() {
@@ -74,6 +86,8 @@
           shippedPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
+          accessoryPG.style['display'] = 'none';
+
 
        };
        salesBtn.onclick = function() {
@@ -84,6 +98,8 @@
           shippedPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
           salesPG.style['display'] = 'block';
+          accessoryPG.style['display'] = 'none';
+
        };
        rentalBtn.onclick = function() {
           pickUpPG.style['display'] = 'none';
@@ -93,6 +109,19 @@
           shippedPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'block';
+          accessoryPG.style['display'] = 'none';
+
+       };
+       accessoryBtn.onclick = function() {
+         accessoryPG.style['display'] = 'block';
+          pickUpPG.style['display'] = 'none';
+          activePG.style['display'] = 'none';
+          inventoryPG.style['display'] = 'none';
+          pendingPG.style['display'] = 'none';
+          shippedPG.style['display'] = 'none';
+          salesPG.style['display'] = 'none';
+          rentalPG.style['display'] = 'none';
+
        };
       //mobile
       activeBtnM.onclick = function() {
@@ -103,6 +132,8 @@
          pickUpPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
+         accessoryPG.style['display'] = 'none';
+
 
       };
       pendingBtnM.onclick = function() {
@@ -113,6 +144,8 @@
          pickUpPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
+         accessoryPG.style['display'] = 'none';
+
 
       };
       inventoryBtnM.onclick = function() {
@@ -123,6 +156,8 @@
          pickUpPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
+         accessoryPG.style['display'] = 'none';
+
 
       };
       shippedBtnM.onclick = function() {
@@ -133,6 +168,8 @@
          pickUpPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
+         accessoryPG.style['display'] = 'none';
+
 
       };
       pickUpBtnM.onclick = function() {
@@ -143,6 +180,8 @@
          shippedPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
+         accessoryPG.style['display'] = 'none';
+
 
       };
       salesBtnM.onclick = function() {
@@ -153,9 +192,23 @@
          pendingPG.style['display'] = 'none';
          shippedPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
+         accessoryPG.style['display'] = 'none';
+
       };
       rentalBtnM.onclick = function() {
         rentalPG.style['display'] = 'block';
+         pickUpPG.style['display'] = 'none';
+         activePG.style['display'] = 'none';
+         inventoryPG.style['display'] = 'none';
+         pendingPG.style['display'] = 'none';
+         shippedPG.style['display'] = 'none';
+         salesPG.style['display'] = 'none';
+         accessoryPG.style['display'] = 'none';
+
+      };
+      accessoryBtnM.onclick = function() {
+        accessoryPG.style['display'] = 'block';
+        rentalPG.style['display'] = 'none';
          pickUpPG.style['display'] = 'none';
          activePG.style['display'] = 'none';
          inventoryPG.style['display'] = 'none';
@@ -365,6 +418,8 @@
   <% else %>
   <button style="display:none;" type="hidden" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <% end %>
+  <button type="button" class="btn btn-default" id="btn-accessory"><%= link_to 'accessories', table_accessories_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+
 </div>
 <!--!nav desktop  -->
 
@@ -383,6 +438,7 @@
        <li><button type="button" class="btn btn-default" id="btn-pickup-m"><%= link_to 'Pick Up',  pick_boards_boards_path, remote:true %></button></li>
        <li><button type="button" class="btn btn-default" id="btn-sales-m"><%= link_to 'Sales', sales_boards_boards_path , remote: true %></button></li>
        <li><button type="button" class="btn btn-default" id="btn-rental-m"><%= link_to 'Rental', rental_boards_boards_path , remote: true %></button></li>
+       <li><button type="button" class="btn btn-default" id="btn-accessory-m"><%= link_to 'accessories', table_accessories_path , remote: true %></button></li>
      </ul>
    </div>
 </div>
@@ -412,6 +468,9 @@
 </div>
 <div  style="display:none;" class="col-md-12 center-text" id="rental">
 
+</div>
+<div  style="display:none;" class="col-md-12 center-text" id="accessories">
+  hi
 </div>
 
 </div>

@@ -163,7 +163,7 @@ class BoardsController < ApplicationController
            expand: ['data.source_transfer', 'data.application_fee']
          },
          { stripe_account: current_user.stripe_account }
-       ).page(params[:page]).per(8)
+       )
        @transfers = Stripe::Transfer.list(
   {
     limit: 100

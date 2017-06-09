@@ -1,0 +1,78 @@
+
+<div id="results">
+<h4 class="dash-data-title"> accessories </h4>
+
+    <thead>
+      <td>
+        <div class="center-text" id="accessory_boards">
+        <%= paginate @accessories, remote: true, window: 1 %>
+        </div>
+        <tr>
+          <td class="filtering center-text">
+            <ti> <strong> Sort by: </strong> </ti>
+           </ti>
+           </ti>
+          </td>
+        </tr>
+      </td>
+    </thead>
+
+    <div class="col-md-12">
+      <table class="table table-bordered table-striped table-hover" id="results">
+        <thead>
+          <tr>
+            <th>image</th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%=  "title" %></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%=  "price" %></i></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%=  "brand" %></i></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%=  "baord_id" %></i></th>
+            <th>listing</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @accessories.each do |a| %>
+            <tr>
+              <td><%=  a.title.truncate(13) %></td>
+              <td><%= format_amount(a.price * 100) %></td>
+              <td><%= a.board_id %></td>
+              <td><%= a.brand  %>%</td>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--  -->
+
+    <tbody >
+      <td>
+        <div class="center-text pagination" id="active_boards">
+        <%= paginate @accessories, remote: true, window: 1 %>
+        </div>
+      </td>
+    </tbody>
+  </table>
+</div>
+
+<div>
+
+ <%= form_tag({controller: :accessories, action: :table}, {method: :get, remote: true}) do  %>
+
+ <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
+   <div class="input-group">
+     <span class="input-group-btn">
+     <%= grouped_collection_select  nil, :category_id, Type.all, :categories,
+           :name, :id, :name, {prompt: "Select type" },
+           { id: 'category-select' , class: "form-control"} %>
+     </span>
+   </div><!-- /input-group -->
+ </div><!-- /.col-lg-6 -->
+ <div class="col-md-4 search-bar">
+    <div class="input-group">
+      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+      <span class="input-group-btn">
+        <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  <% end %>
