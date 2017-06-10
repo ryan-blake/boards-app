@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
+  respond_to :html, :js
 
 # GET /events
 # GET /events.json
@@ -171,6 +173,17 @@ end
 
 private
   # Use callbacks to share common setup or constraints between actions.
+  def sort_column
+    Event.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+
+  def sort_updated
+    Event.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+  end
   def set_event
     @event = Event.find(params[:id])
   end

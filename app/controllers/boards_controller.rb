@@ -448,6 +448,7 @@ end
 
 
 
+
   private
   def sort_column
     Board.column_names.include?(params[:sort]) ? params[:sort] : "created_at"

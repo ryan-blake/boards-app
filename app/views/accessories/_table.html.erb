@@ -1,4 +1,3 @@
-
 <div id="results">
 <h4 class="dash-data-title"> accessories </h4>
 
@@ -21,12 +20,12 @@
       <table class="table table-bordered table-striped table-hover" id="results">
         <thead>
           <tr>
-            <th>image</th>
-            <th><i style="display:inline;" class="btn btn-sort"> <%=  "title" %></th>
-            <th><i style="display:inline;" class="btn btn-sort"> <%=  "price" %></i></th>
-            <th><i style="display:inline;" class="btn btn-sort"> <%=  "brand" %></i></th>
-            <th><i style="display:inline;" class="btn btn-sort"> <%=  "baord_id" %></i></th>
-            <th>listing</th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "title" %></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "brand" %></i></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%=  sortable "inventory" %></i></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%=  sortable "board_id" %></i></th>
+
           </tr>
         </thead>
 
@@ -35,8 +34,9 @@
             <tr>
               <td><%=  a.title.truncate(13) %></td>
               <td><%= format_amount(a.price * 100) %></td>
-              <td><%= a.board_id %></td>
               <td><%= a.brand  %>%</td>
+              <td><%= a.inventory %>%</td>
+              <td><%= a.board_id %></td>
           <% end %>
         </tbody>
       </table>
