@@ -1,3 +1,2 @@
-$('#results').html('<%= j render partial: 'table' %>');
 $("#accessories").html("<%=j render partial: 'table' %>");
 $('#paginate_accessories').html('<%= escape_javascript(paginate(@accessories, window: 1, :remote => true)) %>');

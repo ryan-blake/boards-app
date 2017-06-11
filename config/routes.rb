@@ -13,7 +13,7 @@ mount Sidekiq::Web => '/sidekiq'
   # !mngd
   resources :accessories do
     collection do
-      get 'table'
+      get 'table', 'search_table'
     end
   end
 

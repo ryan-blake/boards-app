@@ -10,13 +10,13 @@ def index
   @accessories = accessory.all
 end
 def table
-if !params
   @accessories = Accessory.all.order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
-else
+end
+
+def search_table
   @accessories = Accessory.where("cast( brand as text) like ? and cast( category_id as text) like ? and (title like ? or color like ? or brand like ?)",
 
           "%#{params[:brand]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
-        end
 end
 
 

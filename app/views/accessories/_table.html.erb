@@ -1,23 +1,15 @@
 <div id="results">
 <h4 class="dash-data-title"> accessories </h4>
-
-    <thead>
-      <td>
-        <div class="center-text" id="accessory_boards">
-        <%= paginate @accessories, remote: true, window: 1 %>
-        </div>
-        <tr>
-          <td class="filtering center-text">
-            <ti> <strong> Sort by: </strong> </ti>
-           </ti>
-           </ti>
-          </td>
-        </tr>
-      </td>
-    </thead>
-
+<thead >
+  <td>
+    <div class="center-text pagination" id="active_boards">
+    <%= paginate @accessories, remote: true, window: 1 %>
+    </div>
+  </td>
+</thead>
     <div class="col-md-12">
       <table class="table table-bordered table-striped table-hover" id="results">
+
         <thead>
           <tr>
             <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "title" %></th>
@@ -41,22 +33,12 @@
         </tbody>
       </table>
     </div>
-  </div>
   <!--  -->
-
-    <tbody >
-      <td>
-        <div class="center-text pagination" id="active_boards">
-        <%= paginate @accessories, remote: true, window: 1 %>
-        </div>
-      </td>
-    </tbody>
   </table>
 </div>
 
 <div>
-
- <%= form_tag({controller: :accessories, action: :table}, {method: :get, remote: true}) do  %>
+ <%= form_tag({controller: :accessories, action: :search_table}, {method: :get, remote: true}) do  %>
 
  <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
    <div class="input-group">
