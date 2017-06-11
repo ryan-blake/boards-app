@@ -419,8 +419,12 @@
   <button style="display:none;" type="hidden" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <% end %>
   <button type="button" class="btn btn-default" id="btn-accessory"><%= link_to 'accessories', table_accessories_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-
 </div>
+<style>
+#btn-accessory a {
+  margin-left:-9px;
+}
+</style>
 <!--!nav desktop  -->
 
 <!-- nav mobile  starts at < 835px-->
