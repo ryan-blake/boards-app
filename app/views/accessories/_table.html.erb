@@ -17,6 +17,7 @@
             <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "brand" %></i></th>
             <th><i style="display:inline;" class="btn btn-sort"> <%=  sortable "inventory" %></i></th>
             <th><i style="display:inline;" class="btn btn-sort"> <%=  sortable "board_id" %></i></th>
+            <th>images</th>
 
           </tr>
         </thead>
@@ -29,8 +30,7 @@
               <td><%= a.brand  %>%</td>
               <td><%= a.inventory %>%</td>
               <td><%= a.board_id %></td>
-              <td><%= attachment_image_tag(accessories.images.first %></td>
-
+              <td><%= attachment_image_tag(a.images.first, :file, :fill, 80, 80) %></td>
           <% end %>
         </tbody>
       </table>
