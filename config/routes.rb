@@ -27,12 +27,16 @@ end
 get'maps' => 'users#maps'
 get 'accessoryInventory', to: 'accessories#inventory'
 
-
+resources :events do
+  collection do
+      get 'rental_boards','search_rental'
+    end
+end
   resources :boards do
     resources :accessories
     resources :events, only: [:create, :destroy, :show, :board_dash]
     collection do
-      get 'search_dash','search_rental', 'search_signed_in', 'sort_order', 'board_dash', 'rental_boards', 'active_boards', 'inactive_boards',
+      get 'search_dash','search_signed_in', 'sort_order', 'board_dash',  'active_boards', 'inactive_boards',
          'shipped_boards', 'pending_boards', 'pick_boards', 'sales_boards', 'company_search'
     end
     collection do

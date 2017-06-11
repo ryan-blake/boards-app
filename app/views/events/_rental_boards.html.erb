@@ -1,0 +1,34 @@
+
+<div>
+<%= form_tag({controller: :events, action: :search_rental}, {method: :get, remote: true}) do  %>
+
+<div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
+  <div class="input-group">
+    <span class="input-group-btn">
+    <%= grouped_collection_select  nil, :category_id, Type.all, :categories,
+          :name, :id, :name, {prompt: "Select type" },
+          { id: 'category-select' , class: "form-control"} %>
+    </span>
+  </div><!-- /input-group -->
+</div><!-- /.col-lg-6 -->
+<div class="col-md-4 search-bar">
+   <div class="input-group">
+     <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+     <span class="input-group-btn">
+       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+     </span>
+   </div><!-- /input-group -->
+   currently out:<span class="check-box-search"><%= check_box_tag :rental_out, params[:rental_out] %> </span>
+
+   Past due:<span class="check-box-search"><%= check_box_tag :rental_past, params[:rental_past] %> </span>
+ </div><!-- /.col-lg-6 -->
+<% end %>
+
+<div id="rental_results" style="display:block;max-width:100%;padding-bottom:30px;">
+  <%= render 'events/table', locals: { board: @rental_table} %>
+</div>
+<hr style="padding: 0 20px;" class="style13">
+
+<div id="rental_calendar" style="display:block;max-width:100%;padding-bottom:30px;">
+  <%= render 'boards/calendar', locals: { board: @rental_boards} %>
+</div>

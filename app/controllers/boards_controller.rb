@@ -100,32 +100,7 @@ class BoardsController < ApplicationController
     @user = current_user
     @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
-  def rental_boards
-    @user = current_user
-    @rental_boards = Event.where(vendor_id: @user.id)
-    @rental_table = Event.where(vendor_id: @user.id).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-    @rental_table = @rental_table.joins(:board).where(boards: { user_id: current_user.id}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
-    # @my_rentals = Event.where(user: current_user).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
-
-  end
-  def search_rental
-    if params[:rental_out] == "on"
-      @rental_table = Event.where(vendor: current_user,:out => true).order(sort_column + ' ' + sort_direction)
-    end
-    if params[:rental_past] == "on"
-      @rental_table = Event.where(vendor: current_user,:out => true).where("end_time <= ?", 0.days.ago).order(sort_column + ' ' + sort_direction)
-    elsif params[:rental_out] != "on"
-      @rental_table = Event.where(vendor: current_user).order(sort_column + ' ' + sort_direction)
-    end
-      if params[:category_id].present?
-      @rental_table = @rental_table.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id], user_id: current_user.id}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-      else
-      @rental_table = @rental_table.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: { user_id: current_user.id}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-      end
-
-
-  end
 
   def shipped_boards
     @user = current_user
@@ -469,7 +444,8 @@ end
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
       params.require(:board).permit(:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :used, :footgear, :width, :length, :name, :type_id, :category_id, :list_time, :volume, :address,
-      :city, :cost, :margin, :company, :state, :remote_image_url, :zipcode, :inventory, images_files: [], images_attributes: [ :id, :file, :_destroy], accessories_attributes: [:id, :price, :color, :inventory, :title, :user_id, :board_id, :category_id, :brand])
+      :city, :cost, :margin, :company, :state, :remote_image_url, :zipcode, :inventory, images_files: [], images_attributes: [ :id, :file, :_destroy], accessories_attributes: [:id, :price, :color, :inventory, :title, :user_id, :board_id, :category_id, :brand,
+         images_files: [], images_attributes: [ :id, :file, :_destroy]])
     end
 
 end

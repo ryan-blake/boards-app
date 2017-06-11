@@ -66,6 +66,13 @@
            { id: 'category-select' , class: "form-control"} %>
      </span>
    </div><!-- /input-group -->
+   <div class="col-lg-6">
+     <div class="input-group">
+       <span class="input-group-btn">
+         <%= collection_select(nil, :brand, Accessory.where(:user_id => current_user.id).order(:brand).distinct.sort, :brand, :brand, {prompt: "Choose make"},{ class: "form-control" }) %>
+        </span>
+     </div>
+   </div>
  </div><!-- /.col-lg-6 -->
  <div class="col-md-4 search-bar">
     <div class="input-group">

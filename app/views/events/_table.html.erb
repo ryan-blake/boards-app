@@ -1,0 +1,37 @@
+<div class="row" id="rental-table" style="position:relative;">
+  <div class="col-md-12">
+    <h3> Rentals </h3>
+    <table class="table table-bordered table-striped table-hover">
+      <thead>
+        <tr>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "id" %></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "name" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "start_time" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "end_time" %></i></th>
+          <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "total" %></i></th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+      <% @rental_table.each do |i| %>
+        <tr>
+            <td><%= link_to i.id, event_path(i.id ) %>
+            :out:
+            <%=
+              check_box_tag 'out', true, i.out,
+                onchange: "$(this).data('params', 'out=' + this.checked)",
+                data: { remote: true, url: event_path(i.id), method: :patch }
+                %>
+        </td>
+            <td><%= i.name%></td>
+            <td><%= format_date(i.start_time) %> </td>
+            <td><%=  format_date(i.end_time) %></td>
+            <td> <%= i.total %> </td>
+            <td class="text-center"><%= i.board.category.name %></td>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>
