@@ -66,28 +66,6 @@
     <%= @board.description %>
   </div>
 <!--  -->
-
-
-<div class="center-text">
-  <tbody>
-    <!-- <% if @board.accessories.count >= 1 %>
-     <%  @board.accessories.each do |i| %>
-    <tr><%= i.title %></tr>
-    <td><%= i.price  %></td>
-    <% end %>
-    <%  elsif @board.user.accessories  %>
-    <% bc = @board.category.id%>
-    <% ac = Accessory.where(board_id: nil, user_id: @board.user.id, category_id: bc)%>
-    <% ac.each do |i|%>
-    <%=   i.title %>
-    <%=   i.price %>
-    <% if i.kind %>
-    <%=   i.kind.name %>
-    <% end%>
-    <% end%>
-    <% end%> -->
-</tbody>
-</div>
 </div>
 <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
   <div class="col-sm-6" style="min-width:25%;">
