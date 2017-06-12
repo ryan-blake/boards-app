@@ -12,4 +12,6 @@
 class Category < ApplicationRecord
   has_many :boards
   has_many :accessories
+  has_many :kinds
+
 end

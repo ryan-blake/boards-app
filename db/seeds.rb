@@ -60,6 +60,68 @@ Category.find_or_create_by(
 
 categories = Category.all
 
+# Kind.find_or_create_by(
+#   name: "Paddle",
+#   category_id: Category.find_by(name: "Stand Up Paddle").id
+# )
+# Kind.find_or_create_by(
+#   name: "Fins",
+#   category_id: Category.find_by(name: "Stand Up Paddle").id
+# )
+# Kind.find_or_create_by(
+#   name: "Boots",
+#   category_id: Category.find_by(name: "Snowboard").id
+# )
+# Kind.find_or_create_by(
+#   name: "Bindings",
+#   category_id: Category.find_by(name: "Snowboard").id
+# )
+# Kind.find_or_create_by(
+#   name: "Bindings",
+#   category_id: Category.find_by(name: "Skis").id
+# )
+# Kind.find_or_create_by(
+#   name: "Wax",
+#   category_id: Category.find_by(name: "Longboard").id
+# )
+# Kind.find_or_create_by(
+#   name: "Bindings",
+#   category_id: Category.find_by(name: "Wakeboard").id
+# )
+# Kind.find_or_create_by(
+#   name: "Wheels",
+#   category_id: Category.find_by(name: "Cruiser").id
+# )
+# Kind.find_or_create_by(
+#   name: "Leash",
+#   category_id: Category.find_by(name: "Longboard").id
+# )
+# Kind.find_or_create_by(
+#   name: "Stomp Pad",
+#   category_id: Category.find_by(name: "Shortboard").id
+# )
+# Kind.find_or_create_by(
+#   name: "Bearings",
+#   category_id: Category.find_by(name: "Cruiser").id
+# )
+# Kind.find_or_create_by(
+#   name: "Leash",
+#   category_id: Category.find_by(name: "Shortboard").id
+# )
+# Kind.find_or_create_by(
+#   name: "Wheels",
+#   category_id: Category.find_by(name: "Skateboard").id
+# )
+# Kind.find_or_create_by(
+#   name: "Fins",
+#   category_id: Category.find_by(name: "Shortboard").id
+# )
+# Kind.find_or_create_by(
+#   name: "Trucks",
+#   category_id: Category.find_by(name: "Skateboard").id
+# )
+
+# kinds = Kind.all
 
 User.create(
  name: "ryan",
@@ -190,6 +252,30 @@ end
   end
   boards = Board.all
 
+  # skate/trucks, wheels, bearings, griptape : snow/boots, bindings : surf/kickpad, fins, leashes, paddles : wake/bindings
+  # 30.times do
+  #   Accessory.create!(
+  #     brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
+  #     price: rand(10..25),
+  #     inventory: rand(1..5),
+  #     color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample
+  #     title: Faker::Hipster.word,
+  #     user_id: rand(1..2),
+  #     kind: Kind.all.sample
+  #   )
+  # end
+  # 30.times do
+  #   Accessory.create!(
+  #     brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
+  #     price: rand(10..25),
+  #     inventory: rand(1..5),
+  #     color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample
+  #     title: Faker::Hipster.word,
+  #     board = Board.all.sample
+  #     board_id: board.id
+  #     user_id: board.user.id
+  #   )
+  # end
 
 
 50.times do
@@ -200,6 +286,7 @@ end
 end
 
 images = Image.all
+
 
 10.times do
   Event.create!(
@@ -240,3 +327,4 @@ puts"#{User.count} users"
 puts"#{Type.count} types"
 puts"#{Category.count} cats"
 puts"#{Event.count} events"
+puts"#{Accessory.count} accessories"

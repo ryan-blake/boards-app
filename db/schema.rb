@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170608205733) do
+ActiveRecord::Schema.define(version: 20170612004704) do
 
   create_table "accessories", force: :cascade do |t|
     t.string   "brand"
@@ -24,8 +24,10 @@ ActiveRecord::Schema.define(version: 20170608205733) do
     t.integer  "category_id"
     t.integer  "user_id"
     t.integer  "board_id"
+    t.integer  "kind_id"
     t.index ["board_id"], name: "index_accessories_on_board_id"
     t.index ["category_id"], name: "index_accessories_on_category_id"
+    t.index ["kind_id"], name: "index_accessories_on_kind_id"
     t.index ["type_id"], name: "index_accessories_on_type_id"
     t.index ["user_id"], name: "index_accessories_on_user_id"
   end
@@ -147,6 +149,14 @@ ActiveRecord::Schema.define(version: 20170608205733) do
     t.integer  "accessory_id"
     t.index ["accessory_id"], name: "index_images_on_accessory_id"
     t.index ["board_id"], name: "index_images_on_board_id"
+  end
+
+  create_table "kinds", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_kinds_on_category_id"
   end
 
   create_table "messages", force: :cascade do |t|
