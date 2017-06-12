@@ -79,24 +79,60 @@
   <div class="col-sm-6" style="min-width:25%;">
     <% a = Accessory.first %>
     <%= a.title %>
+    <div class="accessoryImage">
     <%= attachment_image_tag(a.images.first, :file, :fill, 120, 120) %>
+    </div>
+    <div class="accessoryImage1">
+    <%= attachment_image_tag(a.images.first, :file, :fill, 80, 80) %>
+    </div>
     <%= a.category.name %>
   </div>
   <div class="col-sm-6" style="min-width:25%;">
     <%= a.title %>
     <%= a.category.name %>
+    <div class="accessoryImage">
     <%= attachment_image_tag(a.images.first, :file, :fill, 120, 120) %>
+    </div>
+    <div class="accessoryImage1">
+    <%= attachment_image_tag(a.images.first, :file, :fill, 80, 80) %>
+    </div>
   </div>
   <div class="col-sm-6" style="min-width:25%;">
     <%= a.title %>
     <%= a.category.name %>
+    <div class="accessoryImage">
     <%= attachment_image_tag(a.images.first, :file, :fill, 120, 120) %>
+    </div>
+    <div class="accessoryImage1">
+    <%= attachment_image_tag(a.images.first, :file, :fill, 80, 80) %>
+    </div>
   </div>
   <div class="col-sm-6" style="min-width:25%;">
     <%= a.title %>
     <%= a.category.name %>
+    <div class="accessoryImage">
     <%= attachment_image_tag(a.images.first, :file, :fill, 120, 120) %>
+    </div>
+    <div class="accessoryImage1">
+    <%= attachment_image_tag(a.images.first, :file, :fill, 80, 80) %>
+    </div>
   </div>
+  <style>
+  .accessoryImage {
+    display:block;
+  }
+  .accessoryImage1 {
+    display:none;
+  }
+  @media (max-width: 444px) {
+    .accessoryImage {
+      display:none;
+    }
+    .accessoryImage1 {
+      display:block;
+    }
+
+  </style>
   <div class="col-sm-6" style="min-width:25%;">
     <% a = Accessory.first %>
     <%= a.title %>
