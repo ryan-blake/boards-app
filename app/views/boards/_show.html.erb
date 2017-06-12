@@ -90,7 +90,7 @@
     <%=   i.kind.name %>
   </div>
   <% end %>
-  <%  elsif @board.user.accessories  %>
+  <%  else  %>
   <% bc = @board.category.id%>
   <% ac = Accessory.where(board_id: nil, user_id: @board.user.id, category_id: bc)%>
   <% ac.each do |i|%>
@@ -105,8 +105,8 @@
     <%=   i.kind.name %>
   </div>
   <% end%>
-  <% end%>
  </div>
+ <% end%>
 <!--  -->
 
 <style>
