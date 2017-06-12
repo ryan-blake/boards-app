@@ -76,13 +76,13 @@ kinds = Kind.all
     )
   end
   30.times do
+    board = Board.all.sample
     Accessory.create!(
       brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
       price: rand(10..25),
       inventory: rand(1..5),
       color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample,
       title: Faker::Hipster.word,
-      board = Board.all.sample,
       board_id: board.id,
       user_id: board.user.id,
       kind_id: Kind.where(category_id: board.category.id).id
