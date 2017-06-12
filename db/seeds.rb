@@ -69,9 +69,9 @@ kinds = Kind.all
       brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
       price: rand(10..25),
       inventory: rand(1..5),
-      color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample
+      color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample,
       title: Faker::Hipster.word,
-      user_id: rand(1..2),
+      user_id: User.all.sample.id,
       kind_id: Kind.all.sample.id
     )
   end
