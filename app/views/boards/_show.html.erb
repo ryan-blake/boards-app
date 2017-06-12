@@ -66,42 +66,46 @@
     <%= @board.description %>
   </div>
 <!--  -->
+
+
+<div class="center-text">
+  <tbody>
+</tbody>
 </div>
-<div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+
+
+
+
+  <!--  -->
+  <% if @board.accessories.count >= 1 %>
+   <%  @board.accessories.each do |i| %>
   <div class="col-sm-6" style="min-width:25%;">
-    <% if @board.accessories.count >= 1 %>
-     <%  @board.accessories.each do |i| %>
-     <%=   i.title %>
-     <%=   i.price %>
-     <div class="accessoryImage">
-     <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
-     </div>
-     <div class="accessoryImage1">
-     <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
-     </div>
-     <% if i.kind %>
-     <%=   i.kind.name %>
-     <% end%>
-    <% end %>
-    <%  elsif @board.user.accessories  %>
-    <% bc = @board.category.id%>
-    <% ac = Accessory.where(board_id: nil, user_id: @board.user.id, category_id: bc)%>
-    <% ac.each do |i|%>
-    <%=   i.title %>
-    <%=   i.price %>
+    <%= i.title %><strong>$<%= i.price %>.00</strong>
     <div class="accessoryImage">
     <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
     </div>
     <div class="accessoryImage1">
     <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
     </div>
-    <% if i.kind %>
     <%=   i.kind.name %>
-    <% end%>
-    <% end%>
-    <% end%>
   </div>
-
+  <% end %>
+  <%  elsif @board.user.accessories  %>
+  <% bc = @board.category.id%>
+  <% ac = Accessory.where(board_id: nil, user_id: @board.user.id, category_id: bc)%>
+  <% ac.each do |i|%>
+  <div class="col-sm-6" style="min-width:25%;">
+    <%= i.title %><strong>$<%= i.price %>.00</strong>
+    <div class="accessoryImage">
+    <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
+    </div>
+    <div class="accessoryImage1">
+    <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
+    </div>
+    <%=   i.kind.name %>
+  </div>
+  <% end%>
+  <% end%>
  </div>
 <!--  -->
 
