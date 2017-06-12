@@ -70,7 +70,7 @@ kinds = Kind.all
       price: rand(10..25),
       inventory: rand(1..5),
       color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample,
-      title: Faker::Hipster.word,
+      title: ['title1','43title1','title15','title16','title112','title232','title53','title231','title8','titl21'].sample,
       user_id: User.all.sample.id,
       kind_id: Kind.all.sample.id
     )
