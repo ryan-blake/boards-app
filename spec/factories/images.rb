@@ -2,11 +2,12 @@
 #
 # Table name: images
 #
-#  id         :integer          not null, primary key
-#  file_id    :string
-#  board_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :integer          not null, primary key
+#  file_id      :string
+#  board_id     :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  accessory_id :integer
 #
 
 FactoryGirl.define do

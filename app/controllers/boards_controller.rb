@@ -444,7 +444,7 @@ end
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
       params.require(:board).permit(:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :used, :footgear, :width, :length, :name, :type_id, :category_id, :list_time, :volume, :address,
-      :city, :cost, :margin, :company, :state, :remote_image_url, :zipcode, :inventory, images_files: [], images_attributes: [ :id, :file, :_destroy], accessories_attributes: [:id, :price, :color, :inventory, :title, :user_id, :board_id, :category_id, :brand,
+      :city, :cost, :margin, :company, :state, :remote_image_url, :zipcode, :inventory, images_files: [], images_attributes: [ :id, :file, :_destroy], accessories_attributes: [:id, :price, :color, :inventory, :kind_id, :title, :user_id, :board_id, :category_id, :brand,
          images_files: [], images_attributes: [ :id, :file, :_destroy]])
     end
 

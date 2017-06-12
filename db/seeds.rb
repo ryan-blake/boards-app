@@ -60,68 +60,68 @@ Category.find_or_create_by(
 
 categories = Category.all
 
-# Kind.find_or_create_by(
-#   name: "Paddle",
-#   category_id: Category.find_by(name: "Stand Up Paddle").id
-# )
-# Kind.find_or_create_by(
-#   name: "Fins",
-#   category_id: Category.find_by(name: "Stand Up Paddle").id
-# )
-# Kind.find_or_create_by(
-#   name: "Boots",
-#   category_id: Category.find_by(name: "Snowboard").id
-# )
-# Kind.find_or_create_by(
-#   name: "Bindings",
-#   category_id: Category.find_by(name: "Snowboard").id
-# )
-# Kind.find_or_create_by(
-#   name: "Bindings",
-#   category_id: Category.find_by(name: "Skis").id
-# )
-# Kind.find_or_create_by(
-#   name: "Wax",
-#   category_id: Category.find_by(name: "Longboard").id
-# )
-# Kind.find_or_create_by(
-#   name: "Bindings",
-#   category_id: Category.find_by(name: "Wakeboard").id
-# )
-# Kind.find_or_create_by(
-#   name: "Wheels",
-#   category_id: Category.find_by(name: "Cruiser").id
-# )
-# Kind.find_or_create_by(
-#   name: "Leash",
-#   category_id: Category.find_by(name: "Longboard").id
-# )
-# Kind.find_or_create_by(
-#   name: "Stomp Pad",
-#   category_id: Category.find_by(name: "Shortboard").id
-# )
-# Kind.find_or_create_by(
-#   name: "Bearings",
-#   category_id: Category.find_by(name: "Cruiser").id
-# )
-# Kind.find_or_create_by(
-#   name: "Leash",
-#   category_id: Category.find_by(name: "Shortboard").id
-# )
-# Kind.find_or_create_by(
-#   name: "Wheels",
-#   category_id: Category.find_by(name: "Skateboard").id
-# )
-# Kind.find_or_create_by(
-#   name: "Fins",
-#   category_id: Category.find_by(name: "Shortboard").id
-# )
-# Kind.find_or_create_by(
-#   name: "Trucks",
-#   category_id: Category.find_by(name: "Skateboard").id
-# )
+Kind.find_or_create_by(
+  name: "Paddle",
+  category_id: Category.find_by(name: "Stand Up Paddle").id
+)
+Kind.find_or_create_by(
+  name: "Fins",
+  category_id: Category.find_by(name: "Stand Up Paddle").id
+)
+Kind.find_or_create_by(
+  name: "Boots",
+  category_id: Category.find_by(name: "Snowboard").id
+)
+Kind.find_or_create_by(
+  name: "Bindings",
+  category_id: Category.find_by(name: "Snowboard").id
+)
+Kind.find_or_create_by(
+  name: "Bindings",
+  category_id: Category.find_by(name: "Skis").id
+)
+Kind.find_or_create_by(
+  name: "Wax",
+  category_id: Category.find_by(name: "Longboard").id
+)
+Kind.find_or_create_by(
+  name: "Bindings",
+  category_id: Category.find_by(name: "Wakeboard").id
+)
+Kind.find_or_create_by(
+  name: "Wheels",
+  category_id: Category.find_by(name: "Cruiser").id
+)
+Kind.find_or_create_by(
+  name: "Leash",
+  category_id: Category.find_by(name: "Longboard").id
+)
+Kind.find_or_create_by(
+  name: "Stomp Pad",
+  category_id: Category.find_by(name: "Shortboard").id
+)
+Kind.find_or_create_by(
+  name: "Bearings",
+  category_id: Category.find_by(name: "Cruiser").id
+)
+Kind.find_or_create_by(
+  name: "Leash",
+  category_id: Category.find_by(name: "Shortboard").id
+)
+Kind.find_or_create_by(
+  name: "Wheels",
+  category_id: Category.find_by(name: "Skateboard").id
+)
+Kind.find_or_create_by(
+  name: "Fins",
+  category_id: Category.find_by(name: "Shortboard").id
+)
+Kind.find_or_create_by(
+  name: "Trucks",
+  category_id: Category.find_by(name: "Skateboard").id
+)
 
-# kinds = Kind.all
+kinds = Kind.all
 
 User.create(
  name: "ryan",

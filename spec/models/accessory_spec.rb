@@ -14,6 +14,7 @@
 #  category_id :integer
 #  user_id     :integer
 #  board_id    :integer
+#  kind_id     :integer
 #
 
 require 'rails_helper'

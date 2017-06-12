@@ -39,12 +39,15 @@
       <%= f.hidden_field :user_id, :value => current_user.id %>
 
       <th ><%= f.label :brand %></th>
-      <th ><%= f.label :category_id, "category" %> <br></th>
+      <th ><%= f.label :category_id, "Category" %> <br></th>
+      <th ><%= f.label :kind_id, "Kind" %> <br></th>
+
     </thead>
     <tbody>
       <tbody>
         <td ><%= f.text_field :brand, class: 'btn-width form-control' %></td>
         <td><%= f.grouped_collection_select :category_id, Type.order(:name),:categories, :name, :id, :name, include_blank: true %></td>
+        <td><%= f.grouped_collection_select :kind_id, Category.order(:name),:kinds, :name, :id, :name, include_blank: true %></td>
       <thead>
         <th ><%= f.label :color %> (inches)<br/></th>
         <th ><%= f.label :inventory %><strong>: if applies </strong><br/></strong></th>

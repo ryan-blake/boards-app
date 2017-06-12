@@ -26,7 +26,9 @@
         <% @accessories.each do |a| %>
             <tr>
               <td><%=  a.title.truncate(13) %></td>
+              <% if a.price %>
               <td><%= format_amount(a.price * 100) %></td>
+              <% end %>
               <td><%= a.brand  %>%</td>
               <td><%= a.inventory %>%</td>
               <td><%= a.board_id %></td>
@@ -50,6 +52,13 @@
            { id: 'category-select' , class: "form-control"} %>
      </span>
    </div><!-- /input-group -->
+   <div>
+   <span class="input-group-btn">
+   <%= grouped_collection_select  nil, :kind_id, Category.all, :kinds,
+         :name, :id, :name, {prompt: "Select Kind" },
+         { id: 'Kind-select' , class: "form-control"} %>
+   </span>
+ </div><!-- /input-group -->
    <div class="col-lg-6">
      <div class="input-group">
        <span class="input-group-btn">
