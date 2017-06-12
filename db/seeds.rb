@@ -266,7 +266,8 @@ end
     end
     30.times do
       board = Board.all.sample
-      kind =  Kind.where(category_id: board.category.id).id
+      kind =  Kind.where(category_id: board.category.id).first
+      kind = kind.id
       Accessory.create!(
         brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
         price: rand(10..25),
