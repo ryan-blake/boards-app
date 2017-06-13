@@ -45,7 +45,7 @@ end
 
 # GET /accessories/1/edit
 def edit
-  @accessory = Accessory.find_by(params[:id])
+  @accessory = Accessory.find(params[:id])
 end
 
 # POST /accessories
