@@ -120,6 +120,10 @@ Kind.find_or_create_by(
   name: "Trucks",
   category_id: Category.find_by(name: "Skateboard").id
 )
+Kind.find_or_create_by(
+  name: "Trucks",
+  category_id: Category.find_by(name: "Electric").id
+)
 
 kinds = Kind.all
 
