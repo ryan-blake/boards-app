@@ -75,36 +75,8 @@
 </div>
 <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
   <!--  -->
-  <% if @board.accessories.count >= 1 %>
-   <%  @board.accessories.each do |i| %>
-  <div class="col-sm-6" style="min-width:25%;">
-    <%= i.title %><strong>$<%= i.price %>.00</strong>
-    <div class="accessoryImage">
-    <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
-    </div>
-    <div class="accessoryImage1">
-    <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
-    </div>
-    <%=   i.kind.name %>
-  </div>
-  <% end %>
-  <%  else  %>
-  <% bc = @board.category.id%>
-  <% ac = Accessory.where(board_id: nil, user_id: @board.user.id, category_id: bc)%>
-  <% ac.each do |i|%>
-  <div class="col-sm-6" style="min-width:25%;">
-    <%= i.title %><strong>$<%= i.price %>.00</strong>
-    <div class="accessoryImage">
-    <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
-    </div>
-    <div class="accessoryImage1">
-    <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
-    </div>
-    <%=   i.kind.name %>
-  </div>
-  <% end%>
+  <%= render 'accessories/collection' %>
  </div>
- <% end%>
 <!--  -->
 
 <style>
@@ -114,7 +86,7 @@
   .accessoryImage1 {
     display:none;
   }
-@media (max-width: 444px) {
+@media (max-width: 454px) {
   .accessoryImage {
     display:none;
   }
