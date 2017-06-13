@@ -155,7 +155,7 @@ User.create(
 users = User.all
 
 
-20.times do
+50.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -180,7 +180,7 @@ users = User.all
   )
 end
 
-20.times do
+50.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -203,7 +203,7 @@ end
   list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
   )
 end
-20.times do
+50.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -226,7 +226,7 @@ end
   list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
   )
 end
-  20.times do
+  50.times do
     Board.create!(
     title:       Faker::Hipster.word,
     make:       Faker::Hipster.word,
@@ -253,7 +253,7 @@ end
   boards = Board.all
 
 
-    30.times do
+    75.times do
       Accessory.create!(
         brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
         price: rand(10..25),
@@ -264,7 +264,7 @@ end
         kind_id: Kind.all.sample.id
       )
     end
-    30.times do
+    75.times do
       board = Board.where.not(category_id: 10).sample
       kind =  Kind.where(category_id: board.category_id)
       kind = kind.first.id
@@ -280,19 +280,30 @@ end
         kind_id: kind
       )
     end
-
-50.times do
+    i = 1
+150.times do
   Image.create!(
-  file_id: ['1687654e4eb2d536fe0d59de264c6244b92ff03da25e32f38eb94e26e539','da61df8dcdc92275d4bd48ce01cb6c8f35d4faee','15a33afca32c3f5b59b8035b17c324f198a76919bb09105dc3035a458a4d','f8ed69e4e3bcce539e368bf9509f1389c4afc0d3d5af6e37ada037a50c95'].sample,
-  board_id: Board.all.sample.id
+  file_id: ['1687654e4eb2d536fe0d59de264c6244b92ff03da25e32f38eb94e26e539','04c86fb9b07208fcea64889aea5059d7c4939b5a3f5ba5edf7f00f313b9f','15a33afca32c3f5b59b8035b17c324f198a76919bb09105dc3035a458a4d','f8ed69e4e3bcce539e368bf9509f1389c4afc0d3d5af6e37ada037a50c95'].sample,
+  board_id: i,
   )
+  if i < 80
+    i += 1
+  else
+    i -= 1
+  end
 end
 
-50.times do
+  i = 1
+150.times do
   Image.create!(
-  file_id: ['1687654e4eb2d536fe0d59de264c6244b92ff03da25e32f38eb94e26e539','da61df8dcdc92275d4bd48ce01cb6c8f35d4faee','15a33afca32c3f5b59b8035b17c324f198a76919bb09105dc3035a458a4d','f8ed69e4e3bcce539e368bf9509f1389c4afc0d3d5af6e37ada037a50c95'].sample,
-  accessory_id: Accessory.all.sample.id
+  file_id: ['1687654e4eb2d536fe0d59de264c6244b92ff03da25e32f38eb94e26e539','04c86fb9b07208fcea64889aea5059d7c4939b5a3f5ba5edf7f00f313b9f','15a33afca32c3f5b59b8035b17c324f198a76919bb09105dc3035a458a4d','f8ed69e4e3bcce539e368bf9509f1389c4afc0d3d5af6e37ada037a50c95'].sample,
+  accessory_id: i
   )
+  if i < 80
+    i += 1
+  else
+    i -= 1
+  end
 end
 
 
