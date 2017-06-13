@@ -14,26 +14,29 @@
           <tr>
             <th>images</th>
             <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "id" %></th>
+            <th><i style="display:inline;" class="btn btn-sort"> <%=  sortable "inventory" %></i></th>
             <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "title" %></th>
             <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></th>
             <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "brand" %></i></th>
-            <th><i style="display:inline;" class="btn btn-sort"> <%=  sortable "inventory" %></i></th>
             <th><i style="display:inline;" class="btn btn-sort"> <%=  sortable "board_id" %></i></th>
+            <th> Category </th>
+            <th> Kind </th>
           </tr>
         </thead>
-
         <tbody>
         <% @accessories.each do |a| %>
             <tr>
               <td><%= attachment_image_tag(a.images.first, :file, :fill, 80, 80) %></td>
               <td><%=link_to a.id, accessory_path(a) %></td>
+              <td><%= a.inventory %>%</td>
               <td><%=  a.title.truncate(13) %></td>
               <% if a.price %>
               <td><%= format_amount(a.price * 100) %></td>
               <% end %>
-              <td><%= a.brand  %>%</td>
-              <td><%= a.inventory %>%</td>
+              <td><%= a.brand  %></td>
               <td><%= a.board_id %></td>
+              <td><%= a.category.name  %>%</td>
+              <td><%= a.kind.name  %>%</td>
           <% end %>
         </tbody>
       </table>

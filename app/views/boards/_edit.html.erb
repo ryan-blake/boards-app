@@ -79,26 +79,49 @@
     <%= f.text_area :description, class: 'form-control', style: 'min-height:80px;min-width:100%;'%>
 
 
-<%= f.label :price %><br/>
-<%= f.number_field :price, class: 'btn-width form-control' %>
-<%= f.hidden_field :user_id, :value => current_user.id %>
+  <%= f.label :price %><br/>
+  <%= f.number_field :price, class: 'btn-width form-control' %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
 
 <!--  -->
-<div style="position:relative;min-height:400px;min-width:100%;">
-  <%= render 'accessories/form', locals: {accessories: @accessories, board: @board} %>
+<div id="accessoryForm" style="margin-bottom:50px;display:block;position:relative;min-height:400px;min-width:100%;">
+  <div>
+    <%= f.fields_for :accessories do |builder| %>
+      <%= render "accessories/form", :f => builder %>
+    <% end %>
+  <hr>
+  </div>
+
+  <div class="center-text" style="position: absolute;bottom: -40px;width: 100%;">
+    <%= f.submit 'Save', class: 'form-control', style: 'background-color:lightgrey;' %>
+  </div>
 </div>
 
-<!--  -->
 
 
-  <div style="margin-top:20px;position:relative;" class="actions">
 
-    <%= f.button "update", id: 'update-btn', class: "btn btn-success", data: { toggle: "modal", target: "#newodal"} %>
-
-  </div>
 
 
 <!-- section -->
 
   <% end %>
   <% end %>
+</div>
+  <script>
+  $(function(){
+    var checkAccessory = document.getElementById('addAccessory');
+    var formAccessory = document.getElementById('accessoryForm')
+    var saveAccessory = document.getElementById('newAccBtn')
+
+    checkAccessory.onclick = function() {
+     if(this.checked) {
+       formAccessory.style['display'] = 'block';
+       saveAccessory.style['display'] = 'none';
+     } else {
+       formAccessory.style['display'] = 'none';
+       saveAccessory.style['display'] = 'block';
+
+     }
+    };
+  });
+  </script>

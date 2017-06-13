@@ -182,7 +182,7 @@ transactions = Stripe::BalanceTransaction.all(
     else
       @accessories = Accessory.where(user_id: @board.user.id)
     end
-    
+
     @charge = Charge.new
     if current_user.present?
       @on = current_user
@@ -204,7 +204,7 @@ transactions = Stripe::BalanceTransaction.all(
   # GET /boards/1/edit
   def edit
     @board = Board.find(params[:id])
-    @accessory = Accessory.find(params[@board.id])
+    @accessory = Accessory.where(board_id: @board.id)
     respond_to do |format|
         format.js
       end
