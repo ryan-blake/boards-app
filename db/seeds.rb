@@ -269,13 +269,9 @@ end
       )
     end
     75.times do
-      board = Board.all.sample
-      kind =  Kind.where(category_id: board.category_id)
-      if kind.category_id
-      kind = kind.first.id
-    else
-      kind = rand(1..8)
-    end
+      board = Board.where(user_id: 1).sample
+    kind =  Kind.where(category_id: board.category_id)
+
       Accessory.create!(
         brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
         price: rand(10..25),
