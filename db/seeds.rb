@@ -81,6 +81,10 @@ Kind.find_or_create_by(
   category_id: Category.find_by(name: "Skis").id
 )
 Kind.find_or_create_by(
+  name: "Bindings",
+  category_id: 7
+)
+Kind.find_or_create_by(
   name: "Wax",
   category_id: Category.find_by(name: "Longboard").id
 )
