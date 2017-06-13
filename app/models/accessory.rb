@@ -34,7 +34,6 @@ class Accessory < ApplicationRecord
 private
 
   def save_category
-    
     a = self
     a.category = a.kind.category
   end

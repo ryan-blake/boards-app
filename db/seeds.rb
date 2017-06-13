@@ -274,7 +274,7 @@ end
     end
     75.times do
       board = Board.where(user_id: 1).sample
-    kind =  Kind.where(category_id: board.category_id)
+      kind =  Kind.where(category_id: board.category_id).sample
 
       Accessory.create!(
         brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
@@ -284,7 +284,7 @@ end
         title: Faker::Hipster.word,
         board_id: board.id,
         user_id: board.user.id,
-        kind_id: kind
+        kind_id: kind.id
       )
     end
     i = 1
