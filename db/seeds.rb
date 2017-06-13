@@ -269,7 +269,7 @@ end
       )
     end
     75.times do
-      board = Board.where.not(category_id: 10).sample
+      board = Board.all.sample
       kind =  Kind.where(category_id: board.category_id)
       kind = kind.first.id
 
