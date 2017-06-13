@@ -1,5 +1,5 @@
 class AccessoriesController < ApplicationController
-  before_action :set_accessory, only: [:show, :edit, :update, :destroy]
+  # before_action :set_accessory, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   respond_to :html, :js
 
@@ -26,8 +26,11 @@ def show
   # @board = Spot.find(params[:spot_id])
   # @accessory = accessory.find(params[:id])
 
-  @accessory = Accessory.find(params[:accessory_id])
-
+  @accessory = Accessory.find(params[:id])
+  if @accessory.board
+    @board = @accessory.board
+  end
+  
 end
 
 # GET /accessories/new
@@ -211,7 +214,7 @@ def sort_direction
 end
   # Use callbacks to share common setup or constraints between actions.
   def set_accessory
-    @accessory = accessory.find(params[:id])
+    @accessory = accessory.find(params[:accessory_id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

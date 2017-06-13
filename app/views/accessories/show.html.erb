@@ -1,2 +1,68 @@
-<h1>Accessories#show</h1>
-<p>Find me in app/views/accessories/show.html.erb</p>
+<% content_for(:header) do %>
+
+<script>
+
+</script>
+
+<% end %>
+
+<div class="container-fluid">
+      </div>
+    </div>
+    <!-- edit button plus contact for shipping, is contact for shipping necessary -->
+  <div class="well-sm pull-left" style="position:absolute;top:0;">
+    <% if (current_user && current_user.id == @accessory.user_id)%>
+      <%= link_to "Edit", edit_accessory_path, class: 'btn btn-primary pull-right' %>
+    <% end %>
+  </div>
+    <!-- begin view -->
+<div class="title center-text">
+  <strong><%= @accessory.title %></strong>
+
+</div>
+  <div class="image-box center-text" id="images">
+    <div class="center-text" style="max-height:320px;">
+      <div class="">
+        <% @accessory.images.each_with_index do |photo, index| %>
+          <%= link_to(image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')),
+            attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
+            data: { lightbox: "example-set", title: "" }) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <hr class="style13">
+</div>
+
+
+<div class="dimensions" style="min-height:250px;">
+  <table class="col-sm-3 col-md-5" style="position:absolute;top:0px;">
+    <thead>
+      <th class="col-sm-3"> brand: </th>
+      <th class="col-sm-3"> color: </th>
+      <th class="col-sm-3"> category: </th>
+      <th class="col-sm-3"> kind: </th>
+      <% if @accessory.board_id %>
+      <th class="col-sm-3"> board: </th>
+      <% end %>
+      <th class="col-sm-3"> inventory: </th>
+      <th class="col-sm-3"> price: </th>
+
+    </thead>
+    <tbody>
+      <td class="col-sm-3"> <%= @accessory.brand %> </td>
+      <td class="col-sm-3"> <%= @accessory.color %> </td>
+      <td class="col-sm-3"> <%= @accessory.category.name %> </td>
+      <td class="col-sm-3"> <%= @accessory.kind.name %> </td>
+      <% if @accessory.board_id %>
+        <td class="col-sm-3"> <%= link_to @accessory.board.title, board_path(@board) %> </td>
+      <% end %>
+      <td class="col-sm-3"> <%= @accessory.inventory %> </td>
+      <td class="col-sm-3"> <%= @accessory.price %> </td>
+    </tbody>
+</div>
+</table>
+<br>
+<br>
+<hr class="style13">
