@@ -21,20 +21,29 @@
 <% end %>
 <script>
 
-$(document).ready(function() {
+var prices = $('#showPrice').data('board');
+var pricing = document.getElementById('showPrice');
+pricing.innerHTML = prices
 
+
+$(document).ready(function() {
 
 
    $( ".accessory_div" ).click(function() {
   id = $(this).closest("tr").data("id");
   price = $(this).closest("tr").data("price");
 
+
     if (this.style['background-color'] == 'white') {
     this.style['background-color'] = 'lightgrey';
+    prices += price
   } else {
     this.style['background-color'] = 'white';
+    prices -= price
   }
-      alert(id + " " + price);
+
+      var pricing = document.getElementById('showPrice');
+      pricing.innerHTML = prices
 });
 
 });

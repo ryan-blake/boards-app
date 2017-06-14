@@ -1,5 +1,8 @@
+<script>
+
+</script>
 <%= form_for Charge.new do |f| %>
-  <%= f.hidden_field :amount, value:  @board.price.round  %>
+  <%= f.hidden_field :amount, value:  @board.price.round    %>
   <%= f.hidden_field :item, value:  @board.title %>
   <%= f.hidden_field :owner_id, value:  @board.user_id %>
   <%= f.hidden_field :board_id, value:  @board.id %>
@@ -9,10 +12,15 @@
     <script async src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
         <% if current_user.present? %>
+
           data-email="<%=current_user.email %>"
         <% end %>
-        data-amount="<%= @total_price.to_i.ceil * 100 %> + (accVar)"
-        data-name="<%=  @board.title %> " data-description="<%= number_to_currency( @board.price) %>">
+        data-amount="<%= @total_price.to_i.ceil * 100 %>"
+        data-name="<%=  @board.title %> "
+        data-description= "<%=  @board.price %> ">
+
+
+
     </script>
 
   <% end %>
