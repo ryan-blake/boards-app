@@ -26,36 +26,7 @@
   </div>
 
       <!-- begin view -->
-      <div>
-       <%= form_tag({controller: :accessories, action: :search_board}, {method: :get, remote: true}) do  %>
 
-       <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
-         <div class="input-group">
-           <span class="input-group-btn">
-           <%= grouped_collection_select  nil, :kind_id, Category.where(id: @board.category_id), :kinds,
-                 :name, :id, :name, {prompt: "Select Kind" },
-                 { id: 'Kind-select' , class: "form-control"} %>
-           </span>
-         </div><!-- /input-group -->
-         <div class="col-lg-6">
-           <div class="input-group">
-             <span class="input-group-btn">
-               <%= collection_select(nil, :brand, Accessory.where(category_id: @board.category_id,:user_id => @board.user_id).order(:brand).distinct.sort, :brand, :brand, {prompt: "Choose make"},{ class: "form-control" }) %>
-              </span>
-           </div>
-         </div>
-       </div><!-- /.col-lg-6 -->
-       <div class="col-md-4 search-bar">
-          <div class="input-group">
-            <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
-            <span class="input-group-btn">
-              <%= hidden_field_tag :board_id, @board.id%>
-              <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
-            </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-        <% end %>
-      </div>
 <div class="title center-text">
   <strong><%= @board.title %></strong>
 </div>
@@ -103,6 +74,58 @@
 </tbody>
 </div>
 </div>
+<script>
+$(document).ready(function() {
+var openAccess = document.getElementById('accessoryBtnOpen');
+var hideAccess = document.getElementById('accessoryBtnHide');
+var access = document.getElementById('searchAccessories');
+
+openAccess.onclick = function() {
+ if(this.style.display == 'flex') {
+   this.style['display'] = 'none';
+   hideAccess.style['display'] = 'flex';
+   access.style['display'] = 'flex';
+ }
+};
+hideAccess.onclick = function() {
+ if(this.style.display == 'flex') {
+   this.style['display'] = 'none';
+   openAccess.style['display'] = 'flex';
+   access.style['display'] = 'none';
+ }
+};
+});
+</script>
+<div style="posisition:relative;" class="col-sm-6 col-md-6 col-lg-8">
+  <div id="accessoryBtnOpen" style="display:flex;" class="btn btn-primary">search</div>
+  <div id="accessoryBtnHide" style="display:none;" class="btn btn-danger">hide</div>
+</div>
+<div id="searchAccessories"  style="display:none;" class="col-md-9">
+ <%= form_tag({controller: :accessories, action: :search_board}, {method: :get, remote: true}) do  %>
+   <div class="input-group pull-left"style="max-width:50%;">
+     <span class="input-group-btn">
+     <%= grouped_collection_select  nil, :kind_id, Category.where(id: @board.category_id), :kinds,
+           :name, :id, :name, {prompt: "Select Kind" },
+           { id: 'Kind-select' , class: "form-control"} %>
+     </span>
+   </div>
+     <div class="input-group pull-right" style="max-width:50%;">
+       <span class="input-group-btn">
+         <%= collection_select(nil, :brand, Accessory.where(category_id: @board.category_id,:user_id => @board.user_id).order(:brand).distinct.sort, :brand, :brand, {prompt: "Choose make"},{ class: "form-control" }) %>
+        </span>
+     </div>
+ <div class="col-md-4">
+    <div class="input-group">
+      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Accessories.."  %>
+      <span class="input-group-btn">
+        <%= hidden_field_tag :board_id, @board.id%>
+        <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  <% end %>
+</div>
+
 <div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
   <!--  -->
   <%= render 'accessories/collection' %>
@@ -179,9 +202,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
 });
 </script>
   <% else %>
-
 <!-- section -->
-
     <div class="payment center-text">
       <% if current_user && current_user.id == @board.user_id %>
         <strong style="font-size:30px;">$<%= @board.price %></strong>
@@ -212,7 +233,9 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
   var checkbox = document.getElementById('checkbox');
   var delivery_div = document.getElementById('delivery');
   var pickup_div = document.getElementById('pickup');
+
   delivery_div.style['display'] = 'block';
+
 
   checkbox.onclick = function() {
    if(this.checked) {
@@ -224,7 +247,8 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
      pickup_div.style['display'] = 'none';
    }
   };
-  });
+});
+
 </script>
 <% end %>
 
@@ -236,8 +260,3 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
     <%= render partial: 'forsale', locals: {board: @board} %>
    <% end %>
   </div>
-
-<script>
-
-
-</script>
