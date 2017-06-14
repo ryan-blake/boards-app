@@ -79,7 +79,8 @@ $(document).ready(function() {
 var openAccess = document.getElementById('accessoryBtnOpen');
 var hideAccess = document.getElementById('accessoryBtnHide');
 var access = document.getElementById('searchAccessories');
-
+openAccess.style.display = 'flex';
+hideAccess.style.display = 'none';
 openAccess.onclick = function() {
  if(this.style.display == 'flex') {
    this.style['display'] = 'none';
