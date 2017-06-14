@@ -1,11 +1,15 @@
+
 <% if @accessories.count >= 1%>
  <%  @accessories.each do |i| %>
 <div class="col-sm-6 center-text" style="min-width:25%;">
   <%= i.title %><strong>$<%= i.price %>.00</strong>
-  <div class="accessoryImage">
+  <div class="accessoryImage" id="aImage" style="cursor:pointer">
+    <div id="invisiPrice" style="display:flex;" data-accessoryvar="<%= i.id  %>"></div>
+    aosn saorjrasrasrs
   <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
   </div>
-  <div class="accessoryImage1">
+  <div class="accessoryImage1" id="aImage1">
+    oasjrojrs
   <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
   </div>
   <%=   i.kind.name %>
@@ -14,3 +18,14 @@
 <% else %>
 <%= render partial: 'boards/none' %>
 <% end %>
+<script>
+
+$(document).ready(function() {
+  var accVar = $('#invisiPrice').data('accessoryvar');
+  var accImage = document.getElementById('aImage');
+  var accImage1 = document.getElementById('aImage1');
+accImage.onclick = function() {
+alert("a" + (accVar) + "cost is added");
+ };
+});
+</script>

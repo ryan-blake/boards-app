@@ -18,7 +18,7 @@
 
        <%= hidden_field_tag(:stripeToken) %>
 
-       <input id="dateranges" type="text" name="daterange" class="center-text" style="z-index:9999;min-width:200px;value=" />
+<input id="dateranges" type="text" name="daterange" class="center-text" style="z-index:9999;min-width:200px;value=" />
 
 </div>
 
@@ -30,10 +30,11 @@
       <% if current_user.present? %>
         data-email="<%=current_user.email %>"
       <% end %>
-        data-description="A <%= @board.title %> reservation"
+      var daterange = document.getElementById('#dateranges').val
 
-var daterange = document.getElementById('#dateranges').val
-        data-amount=" daterange ">
+        data-description="A <%= @board.title %> reservation"
+        data-amount="daterange">
+
     </script>
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <%f.submit %>
