@@ -18,10 +18,10 @@
 <% ac.each do |i|%>
 <div class="col-sm-6 center-text" style="min-width:25%;">
   <%= i.title %><strong>$<%= i.price %>.00</strong>
-  <div class="accessoryImage">
+  <div class="accessoryImage" style="cursor:pointer;">
   <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
   </div>
-  <div class="accessoryImage1">
+  <div class="accessoryImage1" style="cursor:pointer;">
   <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
   </div>
   <%=   i.kind.name %>
