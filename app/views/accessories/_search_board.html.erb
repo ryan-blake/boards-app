@@ -1,0 +1,16 @@
+<% if @accessories.count >= 1%>
+ <%  @accessories.each do |i| %>
+<div class="col-sm-6 center-text" style="min-width:25%;">
+  <h2><%= i.title %><strong>$<%= i.price %>.00</strong></h2>
+  <div class="accessoryImage">
+  <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
+  </div>
+  <div class="accessoryImage1">
+  <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
+  </div>
+  <%=   i.kind.name %>
+</div>
+<% end %>
+<% else %>
+<%= render partial: 'boards/none' %>
+<% end %>

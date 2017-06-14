@@ -26,6 +26,36 @@
   </div>
 
       <!-- begin view -->
+      <div>
+       <%= form_tag({controller: :accessories, action: :search_board}, {method: :get, remote: true}) do  %>
+
+       <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
+         <div class="input-group">
+           <span class="input-group-btn">
+           <%= grouped_collection_select  nil, :kind_id, Category.where(id: @board.category_id), :kinds,
+                 :name, :id, :name, {prompt: "Select Kind" },
+                 { id: 'Kind-select' , class: "form-control"} %>
+           </span>
+         </div><!-- /input-group -->
+         <div class="col-lg-6">
+           <div class="input-group">
+             <span class="input-group-btn">
+               <%= collection_select(nil, :brand, Accessory.where(category_id: @board.category_id,:user_id => @board.user_id).order(:brand).distinct.sort, :brand, :brand, {prompt: "Choose make"},{ class: "form-control" }) %>
+              </span>
+           </div>
+         </div>
+       </div><!-- /.col-lg-6 -->
+       <div class="col-md-4 search-bar">
+          <div class="input-group">
+            <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+            <span class="input-group-btn">
+              <%= hidden_field_tag :board_id, @board.id%>
+              <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+        <% end %>
+      </div>
 <div class="title center-text">
   <strong><%= @board.title %></strong>
 </div>
@@ -73,7 +103,7 @@
 </tbody>
 </div>
 </div>
-<div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+<div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
   <!--  -->
   <%= render 'accessories/collection' %>
  </div>
