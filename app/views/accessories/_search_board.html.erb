@@ -55,22 +55,33 @@ function loadSelectedAccessories() {
     ? JSON.parse(clickedAccessoriesString)
     : [];
 }
+function loadSelectedAccessoriesPrice() {
+accessoriesPriceString = sessionStorage.accessoriesPrice
+  return accessoriesPriceString
+    ? JSON.parse(accessoriesPriceString)
+    : [];
+  }
 
-function saveClickedAccessories(clickedAccessories) {
+function saveClickedAccessories(clickedAccessories, accessoriesPrice) {
   sessionStorage.clickedAccessories = JSON.stringify(clickedAccessories);
+  sessionStorage.accessoriesPrice = JSON.stringify(accessoriesPrice);
 }
 
-function clickAccessory(accessory_div) {
+function clickAccessory(accessory_div, price) {
   $(accessory_div).addClass('panel-success');
   $(accessory_div).addClass('snow-background');
 
   var clickedAccessories = loadSelectedAccessories();
+  var accessoriesPrice = loadSelectedAccessoriesPrice();
+  alert(accessoriesPrice);
+  accessoriesPrice.push(price);
   clickedAccessories.push(accessory_div.id);
-  saveClickedAccessories(clickedAccessories);
+  saveClickedAccessories(clickedAccessories, accessoriesPrice);
+
 }
 
 
-function unclickAccessory(accessory_div) {
+function unclickAccessory(accessory_div, price) {
   $(accessory_div).removeClass('panel-success');
   $(accessory_div).removeClass('snow-background');
 
@@ -79,24 +90,33 @@ function unclickAccessory(accessory_div) {
   if (removeThis > -1)  (
     clickedAccessories.splice(removeThis, 1)
   );
+  var accessoriesPrice = loadSelectedAccessoriesPrice();
+  var removeThisP = accessoriesPrice.indexOf(price);
+  alert(removeThisP);
+  if (removeThisP > -1)  (
+    accessoriesPrice.splice(removeThis, 1)
 
-  saveClickedAccessories(clickedAccessories);
+  );
+
+  saveClickedAccessories(clickedAccessories, accessoriesPrice);
 }
 
 $(function(){
   // restore taken seats
-  $.each(loadSelectedAccessories(), function(i, accessory_div){
+  $.each(loadSelectedAccessories(), function(i, accessory_div, price){
     $('#'+accessory_div).addClass('panel-success');
     $('#'+accessory_div).addClass('snow-background');
   });
 
   $('.accessory_div').on('click', function() {
     var accessory_div = this;
+    price = $(this).closest("tr").data("price");
+
     if (loadSelectedAccessories().indexOf(accessory_div.id) < 0) {
       // not taken
-      clickAccessory(accessory_div);
+      clickAccessory(accessory_div, price);
     } else {
-      unclickAccessory(accessory_div);
+      unclickAccessory(accessory_div, price);
     }
   });
 })();
