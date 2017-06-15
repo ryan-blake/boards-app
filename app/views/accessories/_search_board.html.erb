@@ -1,8 +1,7 @@
 
 <% if @accessories.count >= 1%>
  <%  @accessories.each do |i| %>
- <tr data-id="<%= i.id %>" data-price="<%= i.price %>"  class="accessory_div col-sm-6 center-text" style="background-color:white;min-width:25%;">
-
+ <tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="accessory_div col-sm-6" style="background-color:white;min-width:25%;">
 <td class="vendor-link" style="cursor:pointer;"> <div>
 <%= i.title %><strong>$<%= i.price %>.00</strong>
 <div class="accessoryImage" id="aImage" style="cursor:pointer">
@@ -25,26 +24,23 @@ var prices = $('#showPrice').data('board');
 var pricing = document.getElementById('showPrice');
 pricing.innerHTML = prices
 
-
 $(document).ready(function() {
 
-
    $( ".accessory_div" ).click(function() {
-  id = $(this).closest("tr").data("id");
-  price = $(this).closest("tr").data("price");
+    id = $(this).closest("tr").data("id");
+    price = $(this).closest("tr").data("price");
 
+      if (this.style['background-color'] == 'white') {
+      this.style['background-color'] = 'lightgrey';
+      prices += price
+    } else {
+      this.style['background-color'] = 'white';
+      prices -= price
+    }
 
-    if (this.style['background-color'] == 'white') {
-    this.style['background-color'] = 'lightgrey';
-    prices += price
-  } else {
-    this.style['background-color'] = 'white';
-    prices -= price
-  }
-
-      var pricing = document.getElementById('showPrice');
-      pricing.innerHTML = prices
-});
+    var pricing = document.getElementById('showPrice');
+    pricing.innerHTML = prices
+  });
 
 });
 

@@ -9,6 +9,7 @@
   <%= f.hidden_field :shipping, value:  false %>
 
 
+
     <script async src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
         <% if current_user.present? %>
@@ -17,9 +18,7 @@
         <% end %>
         data-amount="<%= @total_price.to_i.ceil * 100 %>"
         data-name="<%=  @board.title %> "
-        data-description= "<%=  @board.price %> ">
-
-
+        data-description= <%=  (@board.price) + (@board.price) %>  >
 
     </script>
 

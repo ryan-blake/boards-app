@@ -149,6 +149,11 @@ hideAccess.onclick = function() {
     display:block;
   }
 }
+@media (min-width:991px) and (max-width: 1199px) {
+  #accessoryBtnOpen, #accessoryBtnHide {
+    margin-top: 214px;
+  }
+ }
 </style>
 <!-- section -->
   <% if @board.rental %>
@@ -207,7 +212,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
       <% if current_user && current_user.id == @board.user_id %>
         <strong data-board="<%= @board.price %>"style="font-size:30px;">$</strong>
       <% elsif @board.for_sale == true %>
-         <strong data-board="<%= @board.price %>" id="showPrice" style="font-size:30px;">$</strong>
+         <strong style="font-size:30px;">$</strong><strong data-board="<%= @board.price %>" id="showPrice" style="font-size:30px;">.00</strong>
          <div class="form-group">
            pick up
            <input id="checkbox" type="checkbox", "true">
