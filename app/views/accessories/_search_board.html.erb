@@ -1,6 +1,6 @@
 <% if @accessories.count >= 1%>
  <%  @accessories.each do |i| %>
- <tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="panel accessory_div col-sm-6" style="background-color:white;min-width:25%;">
+ <tr data-id="<%= i.id %>" data-price="<%= i.price %>" id="<%=i.id %>" class="panel accessory_div col-sm-6" style="background-color:white;min-width:25%;">
 <td class="vendor-link" style="cursor:pointer;"> <div>
 <%= i.title %><strong>$<%= i.price %>.00</strong>
 <div class="accessoryImage" id="aImage" style="cursor:pointer">
@@ -22,29 +22,82 @@
 var prices = $('#showPrice').data('board');
 var pricing = document.getElementById('showPrice');
 pricing.innerHTML = prices
+$('#newModal').on('show.bs.modal', function (e) {
+  sessionStorage.clear()
+});
 
 $(document).ready(function() {
-
-
    $( ".accessory_div" ).click(function() {
     id = $(this).closest("tr").data("id");
     price = $(this).closest("tr").data("price");
 
-
-
-      if (this.style['background-color'] == 'white') {
-        $(".accessory_div.panel[data-id="+id+"]").addClass('panel-success');
-      this.style['background-color'] = 'snow';
-      prices += price
-    } else {
-    $(".accessory_div.panel[data-id="+id+"]").removeClass('panel-success')
-      this.style['background-color'] = 'white';
+    if ($(this).hasClass("panel-success")) {
+      // $(".accessory_div.panel[data-id="+id+"]").addClass('panel-success');
       prices -= price
+      alert(this.id)
+    } else {
+      // $(".accessory_div.panel[data-id="+id+"]").removeClass('panel-success')
+      prices += price
+      alert(this.id)
     }
-
     var pricing = document.getElementById('showPrice');
     pricing.innerHTML = prices
+    sessionStorage.pricing = pricing.innerHTML
+    document.getElementById('showPrice').innerHTML = 'stored' + sessionStorage.pricing;
+  });
+});
 
+//
+
+function loadSelectedAccessories() {
+  clickedAccessoriesString = sessionStorage.clickedAccessories
+  return clickedAccessoriesString
+    ? JSON.parse(clickedAccessoriesString)
+    : [];
+}
+
+function saveClickedAccessories(clickedAccessories) {
+  sessionStorage.clickedAccessories = JSON.stringify(clickedAccessories);
+}
+
+function clickAccessory(accessory_div) {
+  $(accessory_div).addClass('panel-success');
+  $(accessory_div).addClass('snow-background');
+
+  var clickedAccessories = loadSelectedAccessories();
+  clickedAccessories.push(accessory_div.id);
+  saveClickedAccessories(clickedAccessories);
+}
+
+
+function unclickAccessory(accessory_div) {
+  $(accessory_div).removeClass('panel-success');
+  $(accessory_div).removeClass('snow-background');
+
+  var clickedAccessories = loadSelectedAccessories();
+  var removeThis = clickedAccessories.indexOf(accessory_div.id);
+  if (removeThis > -1)  (
+    clickedAccessories.splice(removeThis, 1)
+  );
+
+  saveClickedAccessories(clickedAccessories);
+}
+
+$(function(){
+  // restore taken seats
+  $.each(loadSelectedAccessories(), function(i, accessory_div){
+    $('#'+accessory_div).addClass('panel-success');
+    $('#'+accessory_div).addClass('snow-background');
+  });
+
+  $('.accessory_div').on('click', function() {
+    var accessory_div = this;
+    if (loadSelectedAccessories().indexOf(accessory_div.id) < 0) {
+      // not taken
+      clickAccessory(accessory_div);
+    } else {
+      unclickAccessory(accessory_div);
+    }
   });
 });
 </script>
