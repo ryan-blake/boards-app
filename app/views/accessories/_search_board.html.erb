@@ -34,11 +34,11 @@ $(document).ready(function() {
     if ($(this).hasClass("panel-success")) {
       // $(".accessory_div.panel[data-id="+id+"]").addClass('panel-success');
       prices -= price
-      alert(this.id)
+      alert(this.id + "hasClass")
     } else {
       // $(".accessory_div.panel[data-id="+id+"]").removeClass('panel-success')
       prices += price
-      alert(this.id)
+      alert(this.id + "!! hasClass")
     }
     var pricing = document.getElementById('showPrice');
     pricing.innerHTML = prices
@@ -70,7 +70,7 @@ function saveClickedAccessories(clickedAccessories, accessoriesPrice) {
 function clickAccessory(accessory_div, price) {
   $(accessory_div).addClass('panel-success');
   $(accessory_div).addClass('snow-background');
-
+  alert(price);
   var clickedAccessories = loadSelectedAccessories();
   var accessoriesPrice = loadSelectedAccessoriesPrice();
 
@@ -111,7 +111,9 @@ $(function(){
 
     if (loadSelectedAccessories().indexOf(accessory_div.id) < 0) {
       // not taken
+
       clickAccessory(accessory_div, price);
+      alert('on click');
     } else {
       unclickAccessory(accessory_div, price);
     }
