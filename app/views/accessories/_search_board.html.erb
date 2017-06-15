@@ -107,8 +107,9 @@ $(function(){
 
   $('.accessory_div').on('click', function() {
     var accessory_div = this;
+    alert(accessory_div.id + "clcj listner")
     price = $(this).closest("tr").data("price");
-
+alert(price + "click listener")
     if (loadSelectedAccessories().indexOf(accessory_div.id) < 0) {
       // not taken
 
