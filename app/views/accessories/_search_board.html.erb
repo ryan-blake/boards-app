@@ -1,7 +1,6 @@
-
 <% if @accessories.count >= 1%>
  <%  @accessories.each do |i| %>
- <tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="accessory_div col-sm-6" style="background-color:white;min-width:25%;">
+ <tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="panel accessory_div col-sm-6" style="background-color:white;min-width:25%;">
 <td class="vendor-link" style="cursor:pointer;"> <div>
 <%= i.title %><strong>$<%= i.price %>.00</strong>
 <div class="accessoryImage" id="aImage" style="cursor:pointer">
@@ -26,14 +25,19 @@ pricing.innerHTML = prices
 
 $(document).ready(function() {
 
+
    $( ".accessory_div" ).click(function() {
     id = $(this).closest("tr").data("id");
     price = $(this).closest("tr").data("price");
 
+
+
       if (this.style['background-color'] == 'white') {
-      this.style['background-color'] = 'lightgrey';
+        $(".accessory_div.panel[data-id="+id+"]").addClass('panel-success');
+      this.style['background-color'] = 'snow';
       prices += price
     } else {
+    $(".accessory_div.panel[data-id="+id+"]").removeClass('panel-success')
       this.style['background-color'] = 'white';
       prices -= price
     }
@@ -42,9 +46,5 @@ $(document).ready(function() {
     pricing.innerHTML = prices
 
   });
-
-
 });
-
-
 </script>
