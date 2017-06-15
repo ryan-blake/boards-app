@@ -92,12 +92,9 @@ function unclickAccessory(accessory_div, price) {
   );
   var accessoriesPrice = loadSelectedAccessoriesPrice();
   var removeThisP = accessoriesPrice.indexOf(price);
-  alert(removeThisP);
   if (removeThisP > -1)  (
     accessoriesPrice.splice(removeThis, 1)
-
   );
-
   saveClickedAccessories(clickedAccessories, accessoriesPrice);
 }
 
