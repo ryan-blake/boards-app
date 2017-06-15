@@ -73,7 +73,7 @@ function clickAccessory(accessory_div, price) {
 
   var clickedAccessories = loadSelectedAccessories();
   var accessoriesPrice = loadSelectedAccessoriesPrice();
-  alert(accessoriesPrice);
+
   accessoriesPrice.push(price);
   clickedAccessories.push(accessory_div.id);
   saveClickedAccessories(clickedAccessories, accessoriesPrice);
