@@ -11,8 +11,9 @@
     <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
   </div>
   <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %>.00</strong></span>
+  <div style="z-index:999;position:relative;bottom:0;"  id="<%=i.id %>" class="accessory_div btn btn-success">Add</div>
+
   </td>
-  <div style="padding-top:5px;z-index:999;position:relative;bottom:0;"  id="<%=i.id %>" class="pull-right accessory_div btn btn-success">Add</div>
 
 </div>
 </tr>
