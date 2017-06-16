@@ -2,7 +2,7 @@
  <%  @accessories.each do |i| %>
 <tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="panel col-sm-6" style="max-height:195px;min-height:160px;position:relative;padding:0;background-color:white;min-width:25%;">
    <td class="vendor-link" style="cursor:pointer;">
-<div>
+<div class="center-text">
   <%= i.title %>
   <div class="accessoryImage" id="aImage" style="cursor:pointer">
     <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
