@@ -25,9 +25,12 @@ $('#newModal').on('show.bs.modal', function (e) {
 var pricing = document.getElementById('showPrice');
 if (sessionStorage.accessoriesPriceTotal){
 pricing.innerHTML = sessionStorage.accessoriesPriceTotal
+alert('hi123');
+
 } else {
   var prices = $('#showPrice').data('board');
   pricing.innerHTML = prices
+
 }
 
 $(document).ready(function() {
@@ -88,14 +91,15 @@ function clickAccessory(accessory_div, price) {
       var pricing = document.getElementById('showPrice');
       pricing.innerHTML = accessoriesPriceTotal
       sessionStorage.pricing = pricing.innerHTML
-      document.getElementById('showPrice').innerHTML = sessionStorage.pricing;
+      document.getElementById('showPrice').innerHTML = 'stored mult' + sessionStorage.pricing;
       }
   } else {
     accessoriesPriceTotal += accessoriesPrice[0];
     var pricing = document.getElementById('showPrice');
     pricing.innerHTML = accessoriesPriceTotal
     sessionStorage.pricing = pricing.innerHTML
-    document.getElementById('showPrice').innerHTML = sessionStorage.pricing ;
+    document.getElementById('showPrice').innerHTML = 'stored in' + sessionStorage.pricing ;
+    alert('hi3');
 
 };
   saveClickedAccessories(clickedAccessories, accessoriesPrice, accessoriesPriceTotal);
@@ -123,10 +127,12 @@ function unclickAccessory(accessory_div, price) {
 if (accessoriesPrice.length > 0) {
   accessoriesPriceTotal -= price;
   var pricing = document.getElementById('showPrice');
+
   pricing.innerHTML = accessoriesPriceTotal
-  sessionStorage.pricing = pricing.innerHTML
-  document.getElementById('showPrice').innerHTML = sessionStorage.pricing ;
+  sessionStorage.accessoriesPriceTotal = accessoriesPriceTotal
+
 } else {
+  accessoriesPriceTotal -= price;
   document.getElementById('showPrice').innerHTML = $('#showPrice').data('board')
 }
   saveClickedAccessories(clickedAccessories, accessoriesPrice, accessoriesPriceTotal);
