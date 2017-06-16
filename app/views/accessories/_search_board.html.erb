@@ -2,7 +2,6 @@
  <%  @accessories.each do |i| %>
 <tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="panel col-sm-6" style="max-height:195px;min-height:160px;position:relative;padding:0;background-color:white;min-width:25%;">
    <td class="vendor-link" style="cursor:pointer;">
-     <div style="padding-top:5px;z-index:999;position:absolute;bottom:0;"  id="<%=i.id %>" class="center-text accessory_div btn btn-success">Add</div>
 <div>
   <%= i.title %>
   <div class="accessoryImage" id="aImage" style="cursor:pointer">
@@ -14,6 +13,7 @@
   <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %>.00</strong></span>
   </td>
 </div>
+<div style="padding-top:5px;z-index:999;position:relative;bottom:0;"  id="<%=i.id %>" class="pull-right accessory_div btn btn-success">Add</div>
 </tr>
 <% end %>
 <% else %>
