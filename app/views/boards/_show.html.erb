@@ -9,8 +9,6 @@
   <div class="well-sm pull-left" style="position:absolute;top:0;z-index:929;">
     <% if (current_user && current_user.id == @board.user_id)&& (@board.shipping != true || false) %>
       <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#editModal" } %>
-
-
        <div style="z-index:1000;min-width:50px;min-height:50px;background-color:white;">
         <% if @board.shipping == true %>
           <% if @board.tracking != true || false %>
@@ -131,30 +129,7 @@ hideAccess.onclick = function() {
 
 <div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
   <!--  -->
-  <%= render 'accessories/collection' %>
  </div>
-<!--  -->
-<style>
-  .accessoryImage {
-    display:block;
-  }
-  .accessoryImage1 {
-    display:none;
-  }
-@media (max-width: 484px) {
-  .accessoryImage {
-    display:none;
-  }
-  .accessoryImage1 {
-    display:block;
-  }
-}
-@media (min-width:991px) and (max-width: 1199px) {
-  #accessoryBtnOpen, #accessoryBtnHide {
-    margin-top: 214px;
-  }
- }
-</style>
 <!-- section -->
   <% if @board.rental %>
   <div class="rental-div" style="min-height:100%;">

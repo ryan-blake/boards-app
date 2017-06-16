@@ -180,7 +180,7 @@ transactions = Stripe::BalanceTransaction.all(
     if @board.accessories.count >= 1
       @accessories = Accessory.where(board_id: @board.id)
     else
-      @accessories = Accessory.where(user_id: @board.user.id)
+      @accessories = Accessory.where(user_id: @board.user.id).limit(40)
     end
 
     @charge = Charge.new

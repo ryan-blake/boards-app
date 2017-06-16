@@ -14,22 +14,24 @@ def table
 end
 
 def search_table
+
   @accessories = Accessory.where(user_id: current_user.id).where("cast( kind_id as text) like ? and cast( brand as text) like ? and cast( category_id as text) like ? and (title like ? or color like ? or brand like ?)",
 
           "%#{params[:kind_id]}%", "%#{params[:brand]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
-
           @acc_array = []
              @accessories.each do |a|
                @acc_array << (a.price)
            end
+
 end
 
 def search_board
   @board = Board.find(params[:board_id])
-  @accessories = Accessory.where(board_id: nil, user_id: @board.user.id, category_id: @board.category_id).where("cast( kind_id as text) like ? and cast( brand as text) like ? and (title like ? or color like ? or brand like ?)",
+    @accessories = Accessory.where(board_id: nil, user_id: @board.user.id, category_id: @board.category_id).where("cast( kind_id as text) like ? and cast( brand as text) like ? and (title like ? or color like ? or brand like ?)",
 
-          "%#{params[:kind_id]}%", "%#{params[:brand]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+          "%#{params[:kind_id]}%", "%#{params[:brand]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").limit(40)
 end
+
 
 
 # GET /accessories/1

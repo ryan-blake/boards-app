@@ -1,16 +1,17 @@
 <% if @accessories.count >= 1%>
  <%  @accessories.each do |i| %>
- <tr data-id="<%= i.id %>" data-price="<%= i.price %>" id="<%=i.id %>" class="panel accessory_div col-sm-6" style="background-color:white;min-width:25%;">
-<td class="vendor-link" style="cursor:pointer;"> <div>
-<%= i.title %><strong>$<%= i.price %>.00</strong>
-<div class="accessoryImage" id="aImage" style="cursor:pointer">
-<%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
-</div>
-<div class="accessoryImage1" id="aImage1">
-  accessoryImage
-<%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
-</div>
-<%=   i.kind.name %></td>
+<tr data-id="<%= i.id %>" data-price="<%= i.price %>" id="<%=i.id %>" class="panel accessory_div col-sm-6" style="background-color:white;min-width:25%;">
+   <td class="vendor-link" style="cursor:pointer;">
+<div>
+   <%= i.title %><strong>$<%= i.price %>.00</strong>
+  <div class="accessoryImage" id="aImage" style="cursor:pointer">
+    <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
+  </div>
+  <div class="accessoryImage1" id="aImage1">
+    <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
+  </div>
+    <%= i.kind.name %>
+  </td>
 </div>
 </tr>
 <% end %>
@@ -18,6 +19,7 @@
 <%= render partial: 'boards/none' %>
 <% end %>
 <script>
+
 $('#newModal').on('show.bs.modal', function (e) {
   sessionStorage.clear()
 });
