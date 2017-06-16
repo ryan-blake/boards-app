@@ -1,16 +1,19 @@
 <% if @accessories.count >= 1%>
  <%  @accessories.each do |i| %>
-<tr data-id="<%= i.id %>" data-price="<%= i.price %>" id="<%=i.id %>" class="panel accessory_div col-sm-6" style="background-color:white;min-width:25%;">
+<tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="panel col-sm-6" style="position:relative;padding:0;background-color:white;min-width:25%;">
+
    <td class="vendor-link" style="cursor:pointer;">
+     <div style="z-index:999;position:absolute;bottom:0;"  id="<%=i.id %>" class="accessory_div btn btn-success">Add</div>
+
 <div>
-   <%= i.title %><strong>$<%= i.price %>.00</strong>
+  <%= i.title %>
   <div class="accessoryImage" id="aImage" style="cursor:pointer">
     <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
   </div>
   <div class="accessoryImage1" id="aImage1">
     <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
   </div>
-    <%= i.kind.name %>
+    <%= i.kind.name %><strong>$<%= i.price %>.00</strong>
   </td>
 </div>
 </tr>
@@ -38,6 +41,7 @@ pricing.innerHTML = sessionStorage.accessoriesPriceTotal
 }
 
 $(document).ready(function() {
+
    $( ".accessory_div" ).click(function() {
     id = $(this).closest("tr").data("id");
     price = $(this).closest("tr").data("price");
@@ -153,8 +157,12 @@ $(function(){
 
     if (loadSelectedAccessories().indexOf(accessory_div.id) < 0) {
       // not taken
+      this.innerHTML = "Remove"
+
       clickAccessory(accessory_div, price);
     } else {
+      this.innerHTML = "Add"
+
       unclickAccessory(accessory_div, price);
     }
   });
