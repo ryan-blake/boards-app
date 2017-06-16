@@ -12,8 +12,9 @@
   </div>
   <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %>.00</strong></span>
   </td>
+  <div style="padding-top:5px;z-index:999;position:relative;bottom:0;"  id="<%=i.id %>" class="pull-right accessory_div btn btn-success">Add</div>
+
 </div>
-<div style="padding-top:5px;z-index:999;position:relative;bottom:0;"  id="<%=i.id %>" class="pull-right accessory_div btn btn-success">Add</div>
 </tr>
 <% end %>
 <% else %>
