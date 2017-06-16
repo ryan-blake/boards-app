@@ -1,7 +1,6 @@
 <% if @accessories.count >= 1%>
  <%  @accessories.each do |i| %>
-<tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="panel col-sm-6" style="min-height:195px;position:relative;padding:0;background-color:white;min-width:25%;">
-
+<tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="panel col-sm-6" style="max-height:195px;min-height:160px;position:relative;padding:0;background-color:white;min-width:25%;">
    <td class="vendor-link" style="cursor:pointer;">
      <div style="z-index:999;position:absolute;bottom:0;"  id="<%=i.id %>" class="center-text accessory_div btn btn-success">Add</div>
 <div>
