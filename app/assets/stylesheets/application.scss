@@ -1026,12 +1026,6 @@ margin-right:0px;
   display:block;position:relative;top:-50px;
 }
 
-.accessoryImage {
-  display:block;
-}
-.accessoryImage1 {
-  display:none;
-}
 
 .shop-search-form {
   margin-top:-17px;
@@ -1371,20 +1365,7 @@ z-index: 1;
     margin-left: -7px !important;
   }
 }
-// mobile images for accessories
-@media (max-width: 484px) {
-.accessoryImage {
-  display:none;
-}
-.accessoryImage1 {
-  display:block;
-}
-}
-@media (min-width:991px) and (max-width: 1199px) {
-#accessoryBtnOpen, #accessoryBtnHide {
-  margin-top: 214px;
-}
-}
+
 // less than
 @media (max-width:995px) {
 

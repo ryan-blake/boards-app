@@ -130,6 +130,28 @@ hideAccess.onclick = function() {
 <div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
   <!--  -->
  </div>
+<!--  -->
+<style>
+  .accessoryImage {
+    display:block;
+  }
+  .accessoryImage1 {
+    display:none;
+  }
+@media (max-width: 484px) {
+  .accessoryImage {
+    display:none;
+  }
+  .accessoryImage1 {
+    display:block;
+  }
+}
+@media (min-width:991px) and (max-width: 1199px) {
+  #accessoryBtnOpen, #accessoryBtnHide {
+    margin-top: 214px;
+  }
+ }
+</style>
 <!-- section -->
   <% if @board.rental %>
   <div class="rental-div" style="min-height:100%;">
