@@ -19,8 +19,8 @@
   <strong><%= @accessory.title %></strong>
 
 </div>
-  <div class="image-box center-text" id="images">
-    <div class="center-text" style="max-height:320px;">
+  <div class="image-box-accessory center-text" id="images">
+    <div class="center-text" style="max-height:220px;">
       <div class="">
         <% @accessory.images.each_with_index do |photo, index| %>
           <%= link_to(image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')),
@@ -33,9 +33,7 @@
 
   <hr class="style13">
 </div>
-
-
-<div class="dimensions" style="min-height:250px;">
+<div class="dimensions" style="max-height:250px;">
   <table class="col-sm-3 col-md-5" style="position:absolute;top:0px;">
     <thead>
       <th class="col-sm-3"> brand: </th>
