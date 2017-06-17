@@ -20,6 +20,7 @@
 #  end_time      :datetime
 #  rental        :boolean
 #  charge_stripe :string
+#  accessories   :string
 #
 
 FactoryGirl.define do

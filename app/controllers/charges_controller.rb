@@ -18,7 +18,8 @@ class ChargesController < ApplicationController
         :currency => 'usd',
         :destination => @charge.vendor.stripe_account,
         :application_fee => 200+(@charge.price*3)+ 31,
-         metadata: { "shipping" => @charge.shipping, "charge_id" => @charge.id, "board" => @board.title, "vendor" => User.find(@charge.vendor).name, "vendor_id" => User.find(@charge.vendor).id,  "customer" => User.find(current_user).name, "customer_id" => User.find(current_user).id }
+         metadata: { "shipping" => @charge.shipping, "charge_id" => @charge.id,
+            "board" => @board.title, "vendor" => User.find(@charge.vendor).name, "vendor_id" => User.find(@charge.vendor).id,  "customer" => User.find(@charge.user).name, "customer_id" => @charge.user_id }
        },
       )
       @charge.charge_stripe = charge['id']
@@ -43,8 +44,6 @@ class ChargesController < ApplicationController
       rescue Stripe::CardError => e
         flash[:error] = e.message
         redirect_to charges_path
-
-
       end
 
 
@@ -65,11 +64,18 @@ class ChargesController < ApplicationController
     customer_id: customer.id,
     completed: false,
     board_id: params[:charge]["board_id"],
-    shipping: params[:charge]["shipping"]
+    shipping: params[:charge]["shipping"],
+    accessories: params[:charge]["accessories"]
   )
 
-
-
+  array = @charge.accessories.split(",")
+  if array.count >= 1
+    @accessories = Accessory.where(id: array)
+    @accessories.each do |i|
+      i.inventory += -1
+      i.save
+    end
+  end
   @charge.update_attribute(:boolean, true)
   @charge.save
   @board = Board.where(id: @charge.board_id).first
@@ -114,7 +120,8 @@ class ChargesController < ApplicationController
       customer_id: customer.id,
       completed: false,
       board_id: params[:charge]["board_id"],
-      shipping: params[:charge]["shipping"]
+      shipping: params[:charge]["shipping"],
+      accessories: params[:charge]["accessories"].to_s
     )
 
     @charge.update_attribute(:boolean, true)
@@ -131,7 +138,6 @@ class ChargesController < ApplicationController
     complete
     # ChargeMailer.new_charge_user(@charge).deliver_now
     # ChargeMailer.new_charge_vendor(@charge).deliver_now
-
 
    end
 
