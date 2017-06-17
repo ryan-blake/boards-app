@@ -123,7 +123,14 @@ class ChargesController < ApplicationController
       shipping: params[:charge]["shipping"],
       accessories: params[:charge]["accessories"].to_s
     )
-
+    array = @charge.accessories.split(",")
+    if array.count >= 1
+      @accessories = Accessory.where(id: array)
+      @accessories.each do |i|
+        i.inventory += -1
+        i.save
+      end
+    end
     @charge.update_attribute(:boolean, true)
     @charge.save
     @board = Board.where(id: @charge.board_id).first
