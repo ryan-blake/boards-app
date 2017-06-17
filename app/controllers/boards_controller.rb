@@ -183,6 +183,7 @@ transactions = Stripe::BalanceTransaction.all(
       @accessories = Accessory.where(user_id: @board.user.id).limit(40)
     end
 
+
     @charge = Charge.new
     if current_user.present?
       @on = current_user
