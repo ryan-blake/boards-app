@@ -178,10 +178,12 @@ transactions = Stripe::BalanceTransaction.all(
     @images = @board.images.page(params[:page]).per(1)
     @event = Event.new
     if @board.accessories.count >= 1
-      @accessories = Accessory.where(board_id: @board.id)
+      @accessories_boards = Accessory.where(board_id: @board.id)
     else
-      @accessories = Accessory.where(user_id: @board.user.id).limit(40)
+       @accessories_boards = nil
     end
+      @accessories = Accessory.where(user_id: @board.user.id, category_id: @board.category_id).limit(40)
+
 
 
     @charge = Charge.new
