@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619160756) do
+ActiveRecord::Schema.define(version: 20170619201952) do
 
   create_table "accessories", force: :cascade do |t|
     t.string   "brand"
@@ -185,10 +185,13 @@ ActiveRecord::Schema.define(version: 20170619160756) do
 
   create_table "sizes", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.         "references"
     t.integer  "unit_id"
+    t.integer  "category_id"
+    t.integer  "board_id"
+    t.index ["category_id"], name: "index_sizes_on_category_id"
     t.index ["unit_id"], name: "index_sizes_on_unit_id"
   end
 
@@ -229,8 +232,10 @@ ActiveRecord::Schema.define(version: 20170619160756) do
 
   create_table "units", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_units_on_category_id"
   end
 
   create_table "user_providers", force: :cascade do |t|

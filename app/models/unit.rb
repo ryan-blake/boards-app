@@ -2,12 +2,14 @@
 #
 # Table name: units
 #
-#  id         :integer          not null, primary key
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  name        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  category_id :integer
 #
 
 class Unit < ApplicationRecord
   has_many :sizes
+  belongs_to :category, optional: true
 end

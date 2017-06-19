@@ -16,6 +16,14 @@ end
 
 types = Type.all
 
+unit_array = %w{In Ft Cm Mm}
+
+unit_array.each do |t|
+ Unit.find_or_create_by(
+  name: t
+  )
+end
+
 
 Category.find_or_create_by(
   name: "Shortboard",

@@ -1,0 +1,13 @@
+<table>
+<thead>
+      <th ><%= f.label :size %></th>
+      <th ><%= f.label :unit_id, "unit" %> <br></th>
+    </thead>
+    <tbody>
+      <tbody>
+        <td ><%= f.text_field :name, class: 'btn-width form-control' %></td>
+
+        <td><%= f.collection_select( :unit_id, Unit.all, :id, :name, { :include_blank => 'Unit'} , { :class => 'form-control' })  %>
+
+        </tbody>
+      </table>

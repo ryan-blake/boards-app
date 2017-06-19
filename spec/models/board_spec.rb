@@ -39,6 +39,7 @@
 #  upc         :string
 #  company     :string
 #  references  :size
+#  size_id     :integer
 #
 
 require 'rails_helper'

@@ -39,20 +39,20 @@
 #  upc         :string
 #  company     :string
 #  references  :size
+#  size_id     :integer
 #
 
 class Board < ApplicationRecord
   belongs_to :user
   belongs_to :type, optional: true
   belongs_to :category
-  belongs_to :size
+  has_one :size
+  accepts_nested_attributes_for :size, allow_destroy: true, reject_if: :all_blank
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true
-
   has_many :accessories, dependent: :destroy
-  accepts_nested_attributes_for :accessories, allow_destroy: true, reject_if: :all_blank
-
+  accepts_nested_attributes_for :accessories, allow_destroy: true, reject_if: :non_acc
   has_many :events, dependent: :destroy
   validates_associated :events
   validates :title, :presence => true
@@ -74,6 +74,9 @@ class Board < ApplicationRecord
 
   def full_address
     [address, city, state, zipcode].join(', ')
+  end
+  def non_acc(att)
+    att['title'].blank? && new_record?
   end
 
  scope :min_price, ->(min) { where('price >= ?', min) }

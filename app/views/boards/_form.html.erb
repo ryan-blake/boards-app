@@ -55,6 +55,12 @@
         <th ><%= f.label :length %><strong> / height of board (inches)</strong><br/></strong></th>
       </thead>
       <tbody>
+        <div>
+          <%= f.fields_for :size do |builder| %>
+            <%= render "sizes/form", :f => builder %>
+          <% end %>
+        <hr>
+        </div>
         <td ><%= f.number_field :width, class: 'form-control' %></td>
         <td ><%= f.number_field :volume, class: 'form-control' %></td>
         <td ><%= f.number_field :length, class: 'form-control' %></td>
