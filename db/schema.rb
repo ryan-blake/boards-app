@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616230743) do
+ActiveRecord::Schema.define(version: 20170619160756) do
 
   create_table "accessories", force: :cascade do |t|
     t.string   "brand"
@@ -68,7 +68,10 @@ ActiveRecord::Schema.define(version: 20170616230743) do
     t.integer  "margin"
     t.string   "upc"
     t.string   "company"
+    t.         "references"
+    t.integer  "size_id"
     t.index ["category_id"], name: "index_boards_on_category_id"
+    t.index ["size_id"], name: "index_boards_on_size_id"
     t.index ["type_id"], name: "index_boards_on_type_id"
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
@@ -180,6 +183,15 @@ ActiveRecord::Schema.define(version: 20170616230743) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "sizes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.         "references"
+    t.integer  "unit_id"
+    t.index ["unit_id"], name: "index_sizes_on_unit_id"
+  end
+
   create_table "stripe_accounts", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -210,6 +222,12 @@ ActiveRecord::Schema.define(version: 20170616230743) do
   end
 
   create_table "types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "units", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

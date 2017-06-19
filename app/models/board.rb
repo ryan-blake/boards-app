@@ -38,12 +38,14 @@
 #  margin      :integer
 #  upc         :string
 #  company     :string
+#  references  :size
 #
 
 class Board < ApplicationRecord
   belongs_to :user
   belongs_to :type, optional: true
   belongs_to :category
+  belongs_to :size
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true

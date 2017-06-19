@@ -38,6 +38,7 @@
 #  margin      :integer
 #  upc         :string
 #  company     :string
+#  references  :size
 #
 
 FactoryGirl.define do
