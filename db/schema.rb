@@ -65,16 +65,13 @@ ActiveRecord::Schema.define(version: 20170620182854) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",      default: false
-    t.datetime "list_time",   default: '2017-06-02 18:29:30'
+    t.datetime "list_time",   default: '2017-06-20 23:36:00'
     t.integer  "inventory",   default: 0
     t.integer  "cost"
     t.integer  "margin"
     t.string   "upc"
     t.string   "company"
-    t.         "references"
-    t.integer  "size_id"
     t.index ["category_id"], name: "index_boards_on_category_id"
-    t.index ["size_id"], name: "index_boards_on_size_id"
     t.index ["type_id"], name: "index_boards_on_type_id"
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
@@ -188,22 +185,17 @@ ActiveRecord::Schema.define(version: 20170620182854) do
 
   create_table "sizes", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.         "references"
-    t.integer  "unit_id"
-    t.integer  "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "board_id"
+    t.integer  "unit_id"
     t.integer  "feet"
     t.integer  "inches"
     t.integer  "length"
     t.integer  "width"
     t.integer  "thickness"
     t.integer  "volume"
-    t.integer  "accessory_id"
-    t.integer  "access"
-    t.index ["accessory_id"], name: "index_sizes_on_accessory_id"
-    t.index ["category_id"], name: "index_sizes_on_category_id"
+    t.index ["board_id"], name: "index_sizes_on_board_id"
     t.index ["unit_id"], name: "index_sizes_on_unit_id"
   end
 
