@@ -299,7 +299,9 @@ end
         color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample,
         title: ['title1','43title1','title15','title16','title112','title232','title53','title231','title8','titl21'].sample,
         user_id: User.all.sample.id,
-        kind_id: Kind.all.sample.id
+        kind_id: Kind.all.sample.id,
+        unit_id: Unit.all.sample.id,
+        measure: rand (1..25)
       )
     end
     75.times do
@@ -314,7 +316,9 @@ end
         title: Faker::Hipster.word,
         board_id: board.id,
         user_id: board.user.id,
-        kind_id: kind.id
+        kind_id: kind.id,
+        unit_id: Unit.all.sample.id,
+        measure: rand (3..25)
       )
     end
     i = 1
