@@ -266,8 +266,28 @@ end
     list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
     )
   end
-  boards = Board.all
+  75.times do
+    board = Board.where(user_id: 1, type_id: 1).sample
 
+    Size.create!(
+      feet: rand(3..12),
+      inches: rand(0..12),
+      thickness: rand(2..12),
+      board_id: board.id,
+    )
+  end
+  boards = Board.all
+  all_boards = boards.count
+  boards.times do
+    board = 1
+    Size.create!(
+      length: rand(1..14),
+      width: rand(1..20)
+      board_id: board,
+      unit_id: rand(1..4)
+    )
+    board += 1
+  end
 
     75.times do
       Accessory.create!(
@@ -277,7 +297,9 @@ end
         color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample,
         title: ['title1','43title1','title15','title16','title112','title232','title53','title231','title8','titl21'].sample,
         user_id: User.all.sample.id,
-        kind_id: Kind.all.sample.id
+        kind_id: Kind.all.sample.id,
+        measure: rand(1..4),
+        unit: rand(1..4)
       )
     end
     75.times do
@@ -292,7 +314,9 @@ end
         title: Faker::Hipster.word,
         board_id: board.id,
         user_id: board.user.id,
-        kind_id: kind.id
+        kind_id: kind.id,
+        measure: rand(2..24),
+        unit_id: rand(1..4)
       )
     end
     i = 1
