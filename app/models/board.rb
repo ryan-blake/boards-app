@@ -58,7 +58,6 @@ class Board < ApplicationRecord
   validates :title, :presence => true
   validates :description, :presence => true
   validates :make, :presence => true
-  validates :length, :presence => true
   validates :price, :presence => true
   validates :category, :presence => true
   validates :zipcode, :length => { :is => 5 }

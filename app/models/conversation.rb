@@ -39,6 +39,7 @@ class Conversation < ApplicationRecord
    def msg_preview(convo)
       self.messages.where(:conversation_id => convo).last.body
     end
+
     def msg_sender(convo)
      self.where(:conversation_id => convo).user.name
     end

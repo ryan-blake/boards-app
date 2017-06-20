@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619201952) do
+ActiveRecord::Schema.define(version: 20170620153739) do
 
   create_table "accessories", force: :cascade do |t|
     t.string   "brand"
@@ -191,6 +191,12 @@ ActiveRecord::Schema.define(version: 20170619201952) do
     t.integer  "unit_id"
     t.integer  "category_id"
     t.integer  "board_id"
+    t.integer  "feet"
+    t.integer  "inches"
+    t.integer  "length"
+    t.integer  "width"
+    t.integer  "thickness"
+    t.integer  "volume"
     t.index ["category_id"], name: "index_sizes_on_category_id"
     t.index ["unit_id"], name: "index_sizes_on_unit_id"
   end

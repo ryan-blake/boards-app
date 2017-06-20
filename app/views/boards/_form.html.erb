@@ -55,15 +55,13 @@
         <th ><%= f.label :length %><strong> / height of board (inches)</strong><br/></strong></th>
       </thead>
       <tbody>
-        <div>
+        <div class="btn btn-sort" id="surfBtn">Surf size</div>
+        <div id="sizeForm" style="display:block;">
           <%= f.fields_for :size do |builder| %>
             <%= render "sizes/form", :f => builder %>
           <% end %>
         <hr>
         </div>
-        <td ><%= f.number_field :width, class: 'form-control' %></td>
-        <td ><%= f.number_field :volume, class: 'form-control' %></td>
-        <td ><%= f.number_field :length, class: 'form-control' %></td>
       </tbody>
       <thead>
       <th ><%= f.label :used %></th>
@@ -140,6 +138,36 @@
        formAccessory.style['display'] = 'none';
        saveAccessory.style['display'] = 'block';
 
+     }
+    };
+  });
+  $(function(){
+    var surfBtn = document.getElementById('surfBtn');
+
+    var sizeLength = document.getElementById('sizeLength')
+    var sizeFeet = document.getElementById('sizeFeet')
+    var sizeInches = document.getElementById('sizeInches')
+    var sizeWidth = document.getElementById('sizeWidth')
+    var sizeThickness = document.getElementById('sizeThickness')
+    var sizeVolume = document.getElementById('sizeVolume')
+    var sizeUnits = document.getElementById('sizeUnits')
+    surfBtn.onclick = function() {
+     if(sizeFeet.style.display == 'none' ) {
+       sizeLength.style['display'] = 'none';
+       sizeFeet.style['display'] = 'block';
+       sizeInches.style['display'] = 'block';
+       sizeWidth.style['display'] = 'block';
+       sizeThickness.style['display'] = 'block';
+       sizeVolume.style['display'] = 'block';
+       sizeUnits.style['display'] = 'none';
+     } else {
+       sizeLength.style['display'] = 'block';
+       sizeFeet.style['display'] = 'none';
+       sizeInches.style['display'] = 'none';
+       sizeWidth.style['display'] = 'block';
+       sizeThickness.style['display'] = 'none';
+       sizeVolume.style['display'] = 'none';
+       sizeUnits.style['display'] = 'block';
      }
     };
   });

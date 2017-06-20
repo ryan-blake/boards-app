@@ -45,7 +45,7 @@
         <% end %>
       </thead>
       <tbody>
-        <td class="col-sm-3"> <%= @board.length %> </td>
+        <td class="col-sm-3"> <%= @board.size.name + " " + @board.size.unit.name%> </td>
         <td class="col-sm-3"> <%= @board.width %> </td>
         <td class="col-sm-3"> <%= @board.make %> </td>
         <% if @board.type_id == 1 && @board.volume %>
