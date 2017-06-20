@@ -37,6 +37,7 @@
   <table class="col-sm-3 col-md-5" style="position:absolute;top:0px;">
     <thead>
       <th class="col-sm-3"> brand: </th>
+      <th class="col-sm-3"> dimension: </th>
       <th class="col-sm-3"> color: </th>
       <th class="col-sm-3"> category: </th>
       <th class="col-sm-3"> kind: </th>
@@ -50,6 +51,9 @@
     </thead>
     <tbody>
       <td class="col-sm-3"> <%= @accessory.brand %> </td>
+      <% if @accessory.measure %>
+      <td class="col-sm-3"> <%= @accessory.measure %><%= @accessory.unit.name %> </td>
+      <% end %>
       <td class="col-sm-3"> <%= @accessory.color %> </td>
       <td class="col-sm-3"> <%= @accessory.category.name %> </td>
       <td class="col-sm-3"> <%= @accessory.kind.name %> </td>

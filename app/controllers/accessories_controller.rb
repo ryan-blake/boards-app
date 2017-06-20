@@ -25,7 +25,7 @@ def search_table
 
 end
 
-def search_board
+def search_accessories
   @board = Board.find(params[:board_id])
     @accessories = Accessory.where(board_id: nil, user_id: @board.user.id, category_id: @board.category_id).where("cast( kind_id as text) like ? and cast( brand as text) like ? and (title like ? or color like ? or brand like ?)",
 

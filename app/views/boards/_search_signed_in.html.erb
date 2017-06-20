@@ -45,7 +45,6 @@
            <li><%= link_to 'Edit', edit_board_path(board) %></li>
           <% end %>
           <div class="length-ribbon">
-            <% num = board.length / 12.to_d %><%b = num.divmod 1%> <%=b[0].floor%>' <%= b[1].round(2) %>''<br>
           </div>
          </li>
          <li class="center-text">

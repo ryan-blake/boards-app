@@ -20,7 +20,6 @@
 
 class Size < ApplicationRecord
   has_many :boards
-
   belongs_to :unit, optional: true
   belongs_to :categories, optional: true
 

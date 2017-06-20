@@ -25,7 +25,6 @@
     <thead style="max-width:100%;">
       <%= f.hidden_field :user_id, :value => current_user.id %>
       <%= f.hidden_field :board_id, :value => @board.id %>
-
       <th ><%= f.label :brand %></th>
       <th ><%= f.label :category_id, "category" %> <br></th>
         <th ><%= f.label :kind_id, "kind" %> <br></th>
@@ -36,15 +35,19 @@
         <td><%= f.grouped_collection_select :category_id, Type.order(:name),:categories, :name, :id, :name, include_blank: true %></td>
         <td><%= f.grouped_collection_select :kind_id, Category.order(:name),:kinds, :name, :id, :name, include_blank: true %></td>
       <thead>
+        <th ><%= f.label :size %><strong>size</strong><br/></strong></th>
         <th ><%= f.label :color %> (inches)<br/></th>
         <th ><%= f.label :inventory %><strong>: if applies </strong><br/></strong></th>
         <th ><%= f.label :price %><strong> / height of board (inches)</strong><br/></strong></th>
       </thead>
       <tbody>
+        <td ><%= f.number_field :measure, class: 'form-control' %>
+        <spam id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name,
+        { :include_blank => 'Unit'} , { :class => 'form-control' })%> </spam></td>
         <td ><%= f.text_field :color , class: 'form-control' %></td>
         <td ><%= f.number_field :inventory, class: 'form-control' %></td>
         <td ><%= f.number_field :price, class: 'form-control' %></td>
+
       </tbody>
 <!--  -->
-
 <!-- section -->

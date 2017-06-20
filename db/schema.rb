@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620153739) do
+ActiveRecord::Schema.define(version: 20170620182854) do
 
   create_table "accessories", force: :cascade do |t|
     t.string   "brand"
@@ -25,10 +25,13 @@ ActiveRecord::Schema.define(version: 20170620153739) do
     t.integer  "user_id"
     t.integer  "board_id"
     t.integer  "kind_id"
+    t.integer  "unit_id"
+    t.integer  "measure"
     t.index ["board_id"], name: "index_accessories_on_board_id"
     t.index ["category_id"], name: "index_accessories_on_category_id"
     t.index ["kind_id"], name: "index_accessories_on_kind_id"
     t.index ["type_id"], name: "index_accessories_on_type_id"
+    t.index ["unit_id"], name: "index_accessories_on_unit_id"
     t.index ["user_id"], name: "index_accessories_on_user_id"
   end
 
@@ -185,8 +188,8 @@ ActiveRecord::Schema.define(version: 20170620153739) do
 
   create_table "sizes", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.         "references"
     t.integer  "unit_id"
     t.integer  "category_id"
@@ -197,6 +200,9 @@ ActiveRecord::Schema.define(version: 20170620153739) do
     t.integer  "width"
     t.integer  "thickness"
     t.integer  "volume"
+    t.integer  "accessory_id"
+    t.integer  "access"
+    t.index ["accessory_id"], name: "index_sizes_on_accessory_id"
     t.index ["category_id"], name: "index_sizes_on_category_id"
     t.index ["unit_id"], name: "index_sizes_on_unit_id"
   end

@@ -11,5 +11,6 @@
 
 class Unit < ApplicationRecord
   has_many :sizes
+  has_many :accessories
   belongs_to :category, optional: true
 end

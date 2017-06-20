@@ -22,6 +22,7 @@ class Accessory < ApplicationRecord
   belongs_to :board, optional: true
   belongs_to :user
   belongs_to :category, optional: true
+  belongs_to :unit, optional: true
   belongs_to :kind
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true

@@ -122,7 +122,7 @@ class SizesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def size_params
-      params.require(:size).permit(:kind_id, :unit_id,:length, :width, :feet, :inches , :category_id, :board_id, images_files: [], images_attributes: [ :id, :file, :_destroy])
+      params.require(:size).permit( :access, :unit_id,:length, :width, :feet, :inches , :category_id, :board_id, images_files: [], images_attributes: [ :id, :file, :_destroy])
     end
 
     def set_current_accessories
