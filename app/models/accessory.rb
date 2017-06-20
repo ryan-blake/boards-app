@@ -15,7 +15,9 @@
 #  user_id     :integer
 #  board_id    :integer
 #  kind_id     :integer
-
+#  unit_id     :integer
+#  measure     :integer
+#
 
 class Accessory < ApplicationRecord
 
