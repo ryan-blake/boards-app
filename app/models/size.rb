@@ -27,6 +27,7 @@ class Size < ApplicationRecord
 
   after_validation :create_length
 
+
   # add pretty_size to @board
   # pretty_size  = @board.size.join @size.unit
   def create_length

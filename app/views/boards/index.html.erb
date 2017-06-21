@@ -93,6 +93,8 @@ $(window).scroll(function(){
             <span class="col-md-8 col-lg-12">
             <%= number_field :maximum, params[:maximum], class: 'form-control', placeholder: "Choose max" %>
             </span>
+          <%= collection_select( nil, :unit_id, Unit.all, :id, :name,
+            { :include_blank => 'Unit'} , { :class => 'form-control' })%>
           </div>
           <div class='input-group date' id='starttimepicker'>
             <%= text_field :start_date, params[:start_date], class: 'form-control', placeholder: "Pick Up Date" %>

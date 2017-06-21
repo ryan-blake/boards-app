@@ -29,7 +29,7 @@ end
    if user.stripe_account.present?
    end
  end
-
+ 
 private
 
 def sortable(column, title = nil)

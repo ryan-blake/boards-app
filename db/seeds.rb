@@ -16,7 +16,7 @@ end
 
 types = Type.all
 
-unit_array = %w{In Ft Cm Mm}
+unit_array = %w{in ft cm mm}
 
 unit_array.each do |t|
  Unit.find_or_create_by(
@@ -177,7 +177,6 @@ users = User.all
   make:       Faker::Hipster.word,
   used:       [true, false].sample,
   description: Faker::Hipster.paragraph,
-  length: Faker::Number.number(1),
   width: Faker::Number.number(1),
   volume: Faker::Number.number(1),
   type: types.sample,
@@ -202,7 +201,6 @@ end
   make:       Faker::Hipster.word,
   used:       [true, false].sample,
   description: Faker::Hipster.paragraph,
-  length: Faker::Number.number(1),
   width: Faker::Number.number(1),
   volume: Faker::Number.number(1),
   type: types.sample,
@@ -225,7 +223,6 @@ end
   make:       Faker::Hipster.word,
   used:       [true, false].sample,
   description: Faker::Hipster.paragraph,
-  length: Faker::Number.number(1),
   width: Faker::Number.number(1),
   volume: Faker::Number.number(1),
   type: types.sample,

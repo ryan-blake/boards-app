@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :c_ft ,:c_cm, :c_mm
   respond_to :html, :js
   def import
     count = Board.import params[:file]
@@ -298,12 +298,49 @@ transactions = Stripe::BalanceTransaction.all(
 
              #  length / height
              if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
-               @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
+               c = params[:unit_id][0].to_i
+               a = params[:minimum][0].to_i
+               b = params[:maximum][0].to_i
+                unless c == 1
+                  if c == 2
+                    a = c_ft(a)
+                    b = c_ft(b)
+                  elsif c == 3
+                    a = c_cm(a)
+                    b = c_cm(b)
+                  else
+                    a = c_mm(a)
+                    b = c_mm(b)
+                  end
+                end
+               @boards  = @boards.min_length_search(a).max_length_search(b)
              else
                if params[:maximum][0].to_i <= 0 && params[:minimum][0].to_i >= 1
-                 @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(9999)
+                 c = params[:unit_id][0].to_i
+                 a = params[:minimum][0].to_i
+                  unless c == 1
+                    if c == 2
+                      a = c_ft(a)
+                    elsif c == 3
+                      a = c_cm(a)
+                    else
+                      a = c_mm(a)
+                    end
+                  end
+                 @boards  = @boards.min_length_search(a).max_length_search(9999)
                elsif params[:minimum][0].to_i <= 0 && params[:maximum][0].to_i >= 1
-                 @boards  = @boards.min_length_search(1).max_length_search(params[:maximum][0].to_i)
+                 c = params[:unit_id][0].to_i
+                 b = params[:maximum][0].to_i
+                  unless c == 1
+                    if c == 2
+                      b = c_ft(b)
+                    elsif c == 3
+                      b = c_cm(b)
+                    else
+                      b = c_mm(b)
+                    end
+                  end
+                 @boards  = @boards.min_length_search(1).max_length_search(b)
                else
                  @boards  = @boards.min_length_search(1).max_length_search(9999)
                end
@@ -402,22 +439,23 @@ else
               else
                 @boards  = @boards.min_length_search(1).max_length_search(9999)
               end
-            end
+          end
+
 
 # reverse params between :start_time..:end_time
 
 
-            if (params[:new] == "on") && (params[:used] != params[:new])
-                         @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-                       elsif (params[:used] == "on") && (params[:used] != params[:new])
-                           @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-                       else
-                            @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        if (params[:new] == "on") && (params[:used] != params[:new])
+                     @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+                   elsif (params[:used] == "on") && (params[:used] != params[:new])
+                       @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+                   else
+                        @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
-                       respond_to do |format|
-                              format.js
-                          end
-                        end
+                   respond_to do |format|
+                          format.js
+                      end
+                    end
 
 end
 
@@ -450,6 +488,20 @@ end
   def sort_direction
     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
   end
+
+  def c_ft(a)
+    a = (a * 12)
+  end
+
+  def c_cm(param)
+
+    param = (param / 2.54)
+
+  end
+  def c_mm(param)
+    param = (param / 25.4)
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_board
       @board = Board.find(params[:id])

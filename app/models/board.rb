@@ -153,4 +153,5 @@ scope :end_search, -> (startDate, endDate) {
 
   end
 
+
 end
