@@ -22,10 +22,13 @@
 
 class Size < ApplicationRecord
   has_many :boards
-  belongs_to :unit, optional: true
+  belongs_to :unit
+
   belongs_to :categories, optional: true
 
   after_validation :create_length
+  after_save :board_length
+  after_update :board_length, if: ->(obj){ obj.length_changed?}
 
 
   # add pretty_size to @board
@@ -41,5 +44,24 @@ class Size < ApplicationRecord
        end
      end
   end
+
+  def board_length
+    if self.board_id.present?
+    a = Board.find(self.board_id)
+   unless self.unit_id == 1
+     if self.unit_id == 2
+       a.length = self.length * 12
+     elsif self.unit_id == 3
+       a.length = (self.length / 2.54)
+     else
+       a.length = (self.length / 25.4)
+     end
+    else
+    a.length = self.length
+    end
+    a.save
+  end
+end
+
 
 end

@@ -36,21 +36,21 @@ ActiveRecord::Schema.define(version: 20170620182854) do
   end
 
   create_table "boards", force: :cascade do |t|
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                                          null: false
+    t.datetime "updated_at",                                                          null: false
     t.string   "make"
     t.boolean  "used"
     t.integer  "price"
     t.boolean  "footgear"
     t.integer  "user_id"
     t.string   "description"
-    t.integer  "length"
+    t.decimal  "length",      precision: 5, scale: 2
     t.string   "title"
     t.integer  "width"
     t.integer  "type_id"
     t.integer  "volume"
-    t.boolean  "arrived",     default: false
-    t.boolean  "pending",     default: false
+    t.boolean  "arrived",                             default: false
+    t.boolean  "pending",                             default: false
     t.string   "address"
     t.string   "city"
     t.string   "state"
@@ -59,14 +59,14 @@ ActiveRecord::Schema.define(version: 20170620182854) do
     t.float    "longitude"
     t.integer  "distance_id"
     t.integer  "category_id"
-    t.boolean  "for_sale",    default: true
+    t.boolean  "for_sale",                            default: true
     t.string   "customer_id"
     t.boolean  "shipping"
     t.boolean  "shipped"
     t.string   "tracking"
-    t.boolean  "rental",      default: false
-    t.datetime "list_time",   default: '2017-06-21 15:46:24'
-    t.integer  "inventory",   default: 0
+    t.boolean  "rental",                              default: false
+    t.datetime "list_time",                           default: '2017-06-21 22:14:47'
+    t.integer  "inventory",                           default: 0
     t.integer  "cost"
     t.integer  "margin"
     t.string   "upc"
