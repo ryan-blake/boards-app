@@ -15,8 +15,6 @@
 <%= f.label :title %>
   <td><%= f.text_field :title, class: 'btn-width form-control' %></td>
 </div>
-
-
 <div class="image-box center-text" id="images">
   <div class="progress" id='progress-bar' style='display:none;'>
     <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%;background-color:#b2b2f1;">
@@ -39,7 +37,15 @@
     <% end %>
   </div>
 </div>
-
+<tbody>
+  <div class="btn btn-sort" id="surfBtnE">Surf size</div>
+  <div id="sizeEdit" style="display:block;">
+    <%= f.fields_for :size do |builder| %>
+      <%= render "sizes/edit", :f => builder %>
+    <% end %>
+  <hr>
+  </div>
+</tbody>
 <div class="dimensions" style="">
   <table class="" style="">
     <thead style="min-width:100%;">
@@ -96,11 +102,6 @@
     <%= f.submit 'Save', class: 'form-control', style: 'background-color:lightgrey;' %>
   </div>
 </div>
-
-
-
-
-
 
 <!-- section -->
 

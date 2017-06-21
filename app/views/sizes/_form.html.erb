@@ -15,3 +15,38 @@
         <td id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name, { :include_blank => 'Unit'} , { :class => 'form-control' })  %>
         </tbody>
       </table>
+
+      <script>
+      alert('hi')
+      $(function(){
+      var surfBtn = document.getElementById('surfBtn');
+      alert('hi1')
+
+      var sizeLength = document.getElementById('sizeLength')
+      var sizeFeet = document.getElementById('sizeFeet')
+      var sizeInches = document.getElementById('sizeInches')
+      var sizeWidth = document.getElementById('sizeWidth')
+      var sizeThickness = document.getElementById('sizeThickness')
+      var sizeVolume = document.getElementById('sizeVolume')
+      var sizeUnits = document.getElementById('sizeUnits')
+      surfBtn.onclick = function() {
+      if(sizeFeet.style.display == 'none' ) {
+       sizeLength.style['display'] = 'none';
+       sizeFeet.style['display'] = 'block';
+       sizeInches.style['display'] = 'block';
+       sizeWidth.style['display'] = 'block';
+       sizeThickness.style['display'] = 'block';
+       sizeVolume.style['display'] = 'block';
+       sizeUnits.style['display'] = 'none';
+      } else {
+       sizeLength.style['display'] = 'block';
+       sizeFeet.style['display'] = 'none';
+       sizeInches.style['display'] = 'none';
+       sizeWidth.style['display'] = 'block';
+       sizeThickness.style['display'] = 'none';
+       sizeVolume.style['display'] = 'none';
+       sizeUnits.style['display'] = 'block';
+      }
+      };
+      });
+      </script>

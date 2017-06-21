@@ -209,6 +209,7 @@ transactions = Stripe::BalanceTransaction.all(
   def edit
     @board = Board.find(params[:id])
     @accessory = Accessory.where(board_id: @board.id)
+
     @size = @board.size
 
     respond_to do |format|

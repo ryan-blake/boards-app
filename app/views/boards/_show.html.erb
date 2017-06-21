@@ -7,7 +7,7 @@
     <!-- edit button plus contact for shipping, is contact for shipping necessary -->
   <div class="well-sm pull-left" style="position:absolute;top:0;z-index:929;">
     <% if (current_user && current_user.id == @board.user_id)&& (@board.shipping != true || false) %>
-      <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#editModal" } %>
+      <div id="editModalBtn"><%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#editModal" } %></div>
        <div style="z-index:1000;min-width:50px;min-height:50px;background-color:white;">
         <% if @board.shipping == true %>
           <% if @board.tracking != true || false %>
