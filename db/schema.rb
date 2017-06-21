@@ -18,15 +18,15 @@ ActiveRecord::Schema.define(version: 20170620182854) do
     t.integer  "inventory"
     t.string   "color"
     t.string   "title"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "type_id"
     t.integer  "category_id"
     t.integer  "user_id"
     t.integer  "board_id"
     t.integer  "kind_id"
     t.integer  "unit_id"
-    t.integer  "measure"
+    t.decimal  "measure",     precision: 5, scale: 2
     t.index ["board_id"], name: "index_accessories_on_board_id"
     t.index ["category_id"], name: "index_accessories_on_category_id"
     t.index ["kind_id"], name: "index_accessories_on_kind_id"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170620182854) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",      default: false
-    t.datetime "list_time",   default: '2017-06-20 23:36:00'
+    t.datetime "list_time",   default: '2017-06-21 15:46:24'
     t.integer  "inventory",   default: 0
     t.integer  "cost"
     t.integer  "margin"
@@ -185,16 +185,16 @@ ActiveRecord::Schema.define(version: 20170620182854) do
 
   create_table "sizes", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "board_id"
     t.integer  "unit_id"
     t.integer  "feet"
     t.integer  "inches"
-    t.integer  "length"
-    t.integer  "width"
-    t.integer  "thickness"
-    t.integer  "volume"
+    t.decimal  "length",     precision: 5, scale: 2
+    t.decimal  "width",      precision: 5, scale: 2
+    t.decimal  "thickness",  precision: 5, scale: 2
+    t.decimal  "volume",     precision: 5, scale: 2
     t.index ["board_id"], name: "index_sizes_on_board_id"
     t.index ["unit_id"], name: "index_sizes_on_unit_id"
   end

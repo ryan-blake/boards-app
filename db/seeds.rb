@@ -273,8 +273,8 @@ end
     Size.create!(
       feet: rand(3..12),
       inches: rand(0..12),
-      width: rand(12..22),
-      thickness: rand(2..12),
+      width: rand(12.25..22.88),
+      thickness: rand(2.1..12.98),
       board_id: board.id,
     )
   end
@@ -283,8 +283,8 @@ end
   board = 1
   all_boards.times do
     Size.create!(
-      length: rand(1..14),
-      width: rand(1..20),
+      length: rand(1.15..14.9),
+      width: rand(1.19..20.88),
       board_id: board,
       unit_id: Unit.all.sample.id
     )
@@ -301,7 +301,7 @@ end
         user_id: User.all.sample.id,
         kind_id: Kind.all.sample.id,
         unit_id: Unit.all.sample.id,
-        measure: rand(1..25)
+        measure: rand(1.15..25.88)
       )
     end
     75.times do
@@ -318,7 +318,7 @@ end
         user_id: board.user.id,
         kind_id: kind.id,
         unit_id: Unit.all.sample.id,
-        measure: rand(3..25)
+        measure: rand(3.9..25.1)
       )
     end
     i = 1

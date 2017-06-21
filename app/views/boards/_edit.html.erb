@@ -1,4 +1,4 @@
-<% if ( current_user && current_user.stripe_account != nil ) && (@board.shipping != true || false ) %>
+<% if ( current_user && current_user.stripe_account == nil ) && (@board.shipping != true || false ) %>
 <%= form_for(@board, remote: true)  do |f| %>
   <% if @board.errors.any? %>
     <div id="error_explanation">
@@ -106,6 +106,10 @@
 <!-- section -->
 
   <% end %>
+  <% else %>
+  <script>
+  alert('upgrade your account')
+  </script>
   <% end %>
 </div>
   <script>
