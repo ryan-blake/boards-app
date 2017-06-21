@@ -239,6 +239,7 @@ end
   list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
   )
 end
+puts "#{Board.count} at board/1"
   50.times do
     Board.create!(
     title:       Faker::Hipster.word,
@@ -275,6 +276,8 @@ end
       board_id: board.id,
     )
   end
+  puts "#{Board.count} at sizes/1"
+
   boards = Board.all
   all_boards = boards.count
   board = 1
@@ -301,6 +304,7 @@ end
         measure: rand(1.15..25.88)
       )
     end
+    puts "#{Board.count} at access/1"
     75.times do
       board = Board.where(user_id: 1).sample
       kind =  Kind.where(category_id: board.category_id).sample

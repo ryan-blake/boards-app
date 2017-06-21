@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170620182854) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",                              default: false
-    t.datetime "list_time",                           default: '2017-06-21 22:14:47'
+    t.datetime "list_time",                           default: '2017-06-21 23:06:12'
     t.integer  "inventory",                           default: 0
     t.integer  "cost"
     t.integer  "margin"
