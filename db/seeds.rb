@@ -265,21 +265,29 @@ puts "#{Board.count} at board/1"
     )
   end
   boards = Board.all
+  a = 0
    100.times do
     board = Board.where(user_id: 1, type_id: 1).sample
-    a = 0
-    Size.create!(
-      if a % 2 == 0
-      feet: rand(1..6),
-      else
-      feet: rand(7..10),
-      end
-      inches: rand(0..12),
-      width: rand(12.25..22.88),
-      thickness: rand(2.1..12.98),
-      board_id: board.id,
-    )
-    a += 1
+    if a % 2 == 0
+      Size.create!(
+        feet: rand(1..6),
+        inches: rand(0..12),
+        width: rand(12.25..22.88),
+        thickness: rand(2.1..12.98),
+        board_id: board.id,
+      )
+      a += 1
+    else
+      Size.create!(
+        feet: rand(7..10),
+        inches: rand(0..12),
+        width: rand(12.25..22.88),
+        thickness: rand(2.1..12.98),
+        board_id: board.id,
+      )
+      a += 1
+    end
+
   end
   puts "#{Board.count} at sizes/1"
 
@@ -287,17 +295,25 @@ puts "#{Board.count} at board/1"
   all_boards = boards.count
   board = 1
   all_boards.times do
-    Size.create!(
     if board % 2 == 0
-      length: rand(1..6),
+      Size.create!(
+        length: rand(1..6),
+        width: rand(1.19..20.88),
+        board_id: board,
+        unit_id: Unit.all.sample.id
+      )
+      board += 1
     else
-      length: rand(6.1..15),
+      Size.create!(
+        length: rand(6.1..15),
+        width: rand(1.19..20.88),
+        board_id: board,
+        unit_id: Unit.all.sample.id
+      )
+      board += 1
     end
-      width: rand(1.19..20.88),
-      board_id: board,
-      unit_id: Unit.all.sample.id
-    )
-    board += 1
+
+
   end
 
     75.times do
