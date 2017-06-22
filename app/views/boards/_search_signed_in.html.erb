@@ -94,3 +94,24 @@
         </td>
       </tbody>
     </table>
+
+<script>
+    $( document ).ready(function() {
+
+  // hide spinner
+  $(".sk-circle").hide();
+
+
+  // show spinner on AJAX start
+  $(document).ajaxStart(function(){
+    $(".sk-circle").show();
+  });
+  $(document).ajaxStop(function(){
+    $(".sk-circle").delay(9900).hide(0);
+  });
+  // hide spinner on AJAX stop
+
+
+});
+
+</script>

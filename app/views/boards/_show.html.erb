@@ -1,6 +1,21 @@
 <div id="show-view">
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
-
+<div class="sk-circle" style="position:absolute;top:17%;left:calc(50% - 24px);%;">
+  <div style="position:absolute;background-color:rgba(17, 214, 188, 0.3);min-width:50px;min-height:50px;border-radius:90%;">"
+  <div class="sk-circle1 sk-child"></div>
+  <div class="sk-circle2 sk-child"></div>
+  <div class="sk-circle3 sk-child"></div>
+  <div class="sk-circle4 sk-child"></div>
+  <div class="sk-circle5 sk-child"></div>
+  <div class="sk-circle6 sk-child"></div>
+  <div class="sk-circle7 sk-child"></div>
+  <div class="sk-circle8 sk-child"></div>
+  <div class="sk-circle9 sk-child"></div>
+  <div class="sk-circle10 sk-child"></div>
+  <div class="sk-circle11 sk-child"></div>
+  <div class="sk-circle12 sk-child"></div>
+  </div>
+</div>
 <div class="container-fluid">
   <!-- shipping detail? try to clean up and gather data from stripe token -->
       </div>
@@ -215,7 +230,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
     <div class="payment center-text">
       <% if current_user && current_user.id == @board.user_id %>
         <strong data-board="<%= @board.price %>"style="font-size:30px;">$</strong>
-      <% elsif @board.for_sale == true %>
+      <% elsif @board.for_sale == true && @board.inventory >= 1%>
          <strong style="font-size:30px;">$</strong><strong data-board="<%= @board.price %>" id="showPrice" style="font-size:30px;">.00</strong>
          <div class="form-group">
            pick up
@@ -232,6 +247,10 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
              pick up
              <%= render partial: 'charge', locals: {board: @board} %>
            </div>
+         </div>
+         <% else %>
+         <div class="form-group">
+           Not Available
          </div>
        <% end %>
     </div>
