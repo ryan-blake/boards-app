@@ -13,7 +13,6 @@ type_array.each do |t|
   )
 end
 
-
 types = Type.all
 
 unit_array = %w{in ft cm mm}
@@ -23,6 +22,23 @@ unit_array.each do |t|
   name: t
   )
 end
+
+tail_array = %w{Asym Bat Chop Diamond Pin Rocket Rounded\ Diamond Rounded\ Square Round Square Squash Star Swallow   }
+
+tail_array.each do |t|
+ Tail.create!(
+  name: t
+ )
+end
+
+fin_array = %w{Quad Tri Twin Single}
+
+fin_array.each do |t|
+ Fin.find_or_create_by(
+  name: t
+ )
+end
+
 
 
 Category.find_or_create_by(

@@ -1,0 +1,2 @@
+class Rocker < ApplicationRecord
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620182854) do
+ActiveRecord::Schema.define(version: 20170622191036) do
 
   create_table "accessories", force: :cascade do |t|
     t.string   "brand"
@@ -65,13 +65,19 @@ ActiveRecord::Schema.define(version: 20170620182854) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",                              default: false
-    t.datetime "list_time",                           default: '2017-06-21 23:06:12'
+    t.datetime "list_time",                           default: '2017-06-22 18:09:13'
     t.integer  "inventory",                           default: 0
     t.integer  "cost"
     t.integer  "margin"
     t.string   "upc"
     t.string   "company"
+    t.integer  "tail_id"
+    t.integer  "fin_id"
+    t.integer  "rocker_id"
     t.index ["category_id"], name: "index_boards_on_category_id"
+    t.index ["fin_id"], name: "index_boards_on_fin_id"
+    t.index ["rocker_id"], name: "index_boards_on_rocker_id"
+    t.index ["tail_id"], name: "index_boards_on_tail_id"
     t.index ["type_id"], name: "index_boards_on_type_id"
     t.index ["user_id"], name: "index_boards_on_user_id"
   end
@@ -145,6 +151,12 @@ ActiveRecord::Schema.define(version: 20170620182854) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
+  create_table "fins", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "images", force: :cascade do |t|
     t.string   "file_id"
     t.integer  "board_id"
@@ -183,6 +195,12 @@ ActiveRecord::Schema.define(version: 20170620182854) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "rockers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sizes", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",                         null: false
@@ -216,6 +234,12 @@ ActiveRecord::Schema.define(version: 20170620182854) do
     t.boolean  "boolean"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "tails", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tokens", force: :cascade do |t|

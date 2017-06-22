@@ -11,7 +11,7 @@
 #  footgear    :boolean
 #  user_id     :integer
 #  description :string
-#  length      :integer
+#  length      :decimal(5, 2)
 #  title       :string
 #  width       :integer
 #  type_id     :integer
@@ -32,14 +32,12 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
-#  list_time   :datetime         default("2017-06-02 18:29:30")
+#  list_time   :datetime         default("2017-06-21 23:06:12")
 #  inventory   :integer          default("0")
 #  cost        :integer
 #  margin      :integer
 #  upc         :string
 #  company     :string
-#  references  :size
-#  size_id     :integer
 #
 
 FactoryGirl.define do

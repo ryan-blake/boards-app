@@ -7,7 +7,23 @@ $(function() {
 $("#geo-input").geocomplete();
 country: "US"
 });
+$( document ).ready(function() {
 
+// hide spinner
+$(".sk-circle").hide();
+
+
+// show spinner on AJAX start
+$(document).ajaxStart(function(){
+$(".sk-circle").show();
+});
+$(document).ajaxStop(function(){
+$(".sk-circle").delay(400).hide(0);
+});
+// hide spinner on AJAX stop
+
+
+});
 $(document).ready(function() {
 var openExtended = document.getElementById('open-extended');
 var extended = document.getElementById('extended-search');

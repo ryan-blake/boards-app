@@ -3,6 +3,23 @@
   <%= content_for :page_title,   current_user.name.capitalize   + "'s Dashboard" %>
   <% content_for(:header) do %>
   <script>
+  $( document ).ready(function() {
+
+// hide spinner
+$(".sk-circle").hide();
+
+
+// show spinner on AJAX start
+$(document).ajaxStart(function(){
+  $(".sk-circle").show();
+});
+$(document).ajaxStop(function(){
+  $(".sk-circle").delay(400).hide(0);
+});
+// hide spinner on AJAX stop
+
+
+});
   $(document).ready(function() {
     var activeBtn = document.getElementById('btn-active');
     var pendingBtn = document.getElementById('btn-pending');
@@ -324,7 +341,7 @@
   };
   };
   });
-  
+
     </script>
   </div>
   <% end %>

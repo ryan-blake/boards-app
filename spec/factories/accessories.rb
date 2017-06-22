@@ -16,7 +16,7 @@
 #  board_id    :integer
 #  kind_id     :integer
 #  unit_id     :integer
-#  measure     :integer
+#  measure     :decimal(5, 2)
 #
 
 FactoryGirl.define do
