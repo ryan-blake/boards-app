@@ -80,18 +80,18 @@ $(window).scroll(function(){
         <div class="col-sm-4" style="top: 0;width: 50%;float: right;">
           <div class="input-group">
             <span class="col-md-8 col-lg-12">
-            <%= number_field :min, params[:min], class: 'form-control', placeholder: "Choose price" %>
+            <%= number_field :min, params[:min], class: 'form-control', min: 1, placeholder: "Choose price" %>
             </span>
             <span class="col-md-8 col-lg-12">
-            <%= number_field :max, params[:max], class: 'form-control', placeholder: "Choose max" %>
+            <%= number_field :max, params[:max], class: 'form-control',min: 1, placeholder: "Choose max" %>
             </span>
           </div>
           <div class="input-group" style="float:left;">
             <span class="col-md-8 col-lg-12">
-            <%= number_field :minimum, params[:minimum], class: 'form-control', placeholder: "length min" %>
+            <%= number_field :minimum, params[:minimum], class: 'form-control',min: 1, placeholder: "length min" %>
             </span>
             <span class="col-md-8 col-lg-12">
-            <%= number_field :maximum, params[:maximum], class: 'form-control', placeholder: "Choose max" %>
+            <%= number_field :maximum, params[:maximum], class: 'form-control',min: 1, placeholder: "Choose max" %>
             </span>
           <%= collection_select( nil, :unit_id, Unit.all, :id, :name,
             { :include_blank => 'Unit'} , { :class => 'form-control' })%>

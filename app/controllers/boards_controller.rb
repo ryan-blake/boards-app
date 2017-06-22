@@ -273,7 +273,6 @@ transactions = Stripe::BalanceTransaction.all(
    if params[:value].empty?
      distance_in_miles = 3
    else
-
      distance_in_miles = params[:value]
    end
 
@@ -294,7 +293,6 @@ transactions = Stripe::BalanceTransaction.all(
                  @boards  = @boards.min_price(1).max_price(9999)
                end
              end
-
 
              #  length / height
              if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
