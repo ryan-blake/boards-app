@@ -222,6 +222,8 @@ transactions = Stripe::BalanceTransaction.all(
   def create
     @board = Board.new(board_params)
     @size = Size.new
+     fin = Fin.find(params[:fin_id])
+     tail = Tail.find(params[:tail_id])
 
 
       @accessory = Accessory.new

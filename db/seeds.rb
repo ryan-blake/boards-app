@@ -40,7 +40,6 @@ fin_array.each do |t|
 end
 
 
-
 Category.find_or_create_by(
   name: "Shortboard",
   type_id: Type.find_by(name: "Surf").id
