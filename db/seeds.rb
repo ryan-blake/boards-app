@@ -292,6 +292,7 @@ puts "#{Board.count} at board/1"
       length: rand(1..6),
     else
       length: rand(6.1..15),
+    end
       width: rand(1.19..20.88),
       board_id: board,
       unit_id: Unit.all.sample.id
