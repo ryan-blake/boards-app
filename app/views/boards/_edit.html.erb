@@ -57,6 +57,10 @@
       <tbody>
         <td ><%= f.text_field :make, class: 'btn-width form-control' %></td>
         <td ><%= f.grouped_collection_select :category_id, Type.order(:name),:categories, :name, :id, :name, include_blank: true %></td>
+        <%= f.collection_select :tail_id, Tail.all, :id, :name,
+          { :include_blank => 'Tail'} , { :class => 'form-control' } %>
+          <%= f.collection_select :fin_id, Fin.all, :id, :name,
+            { :include_blank => 'Fin'} , { :class => 'form-control' } %>
         <td class="col-sm-3"><%= f.number_field :zipcode, class: 'form-control' %></td>
       <thead>
         <th class="col-sm-3"><%= f.label :width %> (inches)<br/></th>

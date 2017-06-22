@@ -30,6 +30,8 @@ tail_array.each do |t|
   name: t
  )
 end
+tails = Tail.all
+
 
 fin_array = %w{Quad Tri Twin Single}
 
@@ -38,6 +40,8 @@ fin_array.each do |t|
   name: t
  )
 end
+
+fins = Fin.all
 
 
 Category.find_or_create_by(
@@ -242,6 +246,8 @@ end
   volume: Faker::Number.number(1),
   type: types.sample,
   category: categories.sample,
+  tail: tails.sample,
+  fin: fins.sample,
   footgear: [true, false].sample,
   rental: [true, false].sample,
   price: rand(10..40),
@@ -266,6 +272,8 @@ puts "#{Board.count} at board/1"
     volume: Faker::Number.number(1),
     type: types.sample,
     category: categories.sample,
+    tail: tails.sample,
+    fin: fins.sample,
     footgear: [true, false].sample,
     price: rand(10..40),
     user_id: User.all.sample.id,

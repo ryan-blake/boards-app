@@ -56,6 +56,9 @@
       <thead>
         <th class="col-sm-3"> Make: </th>
         <th class="col-sm-3"> dimensions: </th>
+        <% if @board.type_id == 1 %>
+           <th class="col-sm-6"><span> volume: fin: tail: </th>
+        <% end %>
         <% if @board.used == false %>
           <th class="col-sm-3"> Used </th>
         <% end %>
@@ -71,6 +74,8 @@
         <% if @board.type_id == 1 %>
          <td class="col-sm-3">
          <%= @board.size.volume%>
+         <%= @board.tail.name%>
+         <%= @board.fin.name%>
         <% end %>
       </tbody>
     </table>
