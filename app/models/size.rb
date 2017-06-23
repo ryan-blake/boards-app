@@ -29,6 +29,16 @@ class Size < ApplicationRecord
 
   # add pretty_size to @board
   # pretty_size  = @board.size.join @size.unit
+
+  def pretty_surf
+      "#{feet}'#{inches}'' x #{width} x #{thickness}"
+  end
+
+  def pretty_dimensions
+    "#{length} x #{width} #{unit.name}"
+  end
+
+
   def create_length
     a = self
     unless a.length && a.length < 0

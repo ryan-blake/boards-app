@@ -1,28 +1,9 @@
 <div id="show-view">
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
-<div class="sk-circle" style="position:absolute;top:17%;left:calc(50% - 24px);%;">
-  <div style="position:absolute;background-color:rgba(17, 214, 188, 0.3);min-width:50px;min-height:50px;border-radius:90%;">"
-  <div class="sk-circle1 sk-child"></div>
-  <div class="sk-circle2 sk-child"></div>
-  <div class="sk-circle3 sk-child"></div>
-  <div class="sk-circle4 sk-child"></div>
-  <div class="sk-circle5 sk-child"></div>
-  <div class="sk-circle6 sk-child"></div>
-  <div class="sk-circle7 sk-child"></div>
-  <div class="sk-circle8 sk-child"></div>
-  <div class="sk-circle9 sk-child"></div>
-  <div class="sk-circle10 sk-child"></div>
-  <div class="sk-circle11 sk-child"></div>
-  <div class="sk-circle12 sk-child"></div>
-  </div>
-</div>
-<div class="container-fluid">
-  <!-- shipping detail? try to clean up and gather data from stripe token -->
-      </div>
-    <!-- edit button plus contact for shipping, is contact for shipping necessary -->
+<%= render 'layouts/spinner' %>
   <div class="well-sm pull-left" style="position:absolute;top:0;z-index:929;">
-    <% if (current_user && current_user.id == @board.user_id)&& (@board.shipping != true || false) %>
-      <div id="editModalBtn"><%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#editModal" } %></div>
+    <% if (current_user && current_user.owner?(@board)) && (@board.boardSold?) %>
+    <div id="editModalBtn"><%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#editModal" } %></div>
        <div style="z-index:1000;min-width:50px;min-height:50px;background-color:white;">
         <% if @board.shipping == true %>
           <% if @board.tracking != true || false %>
@@ -30,52 +11,50 @@
           <% end %>
         <% end %>
         </div>
-      <% elsif @board.shipping == false %>
-        <% @a = @board.customer_id %>
-        contact <% b = User.find(@a).email %>
-        <%= b %>
-        for pickup info
       <% end %>
   </div>
-
       <!-- begin view -->
-
 <div class="title center-text">
   <strong><%= @board.title %></strong>
-  <strong><%= @board.length %></strong>
-
 </div>
-<!--  images -->
   <div class="image-box center-text" id="images" style="">
     <%= render partial: 'images', locals: {board: @board}  %>
   </div>
-
 <hr class="style13" style="top:440px;">
   <div class="dimensions-modal" style="">
-    <table class="col-sm-3 col-md-5" style="">
+    <table class="center-text" style="">
       <thead>
-        <th class="col-sm-3"> Make: </th>
-        <th class="col-sm-3"> dimensions: </th>
-        <% if @board.type_id == 1 %>
-           <th class="col-sm-6"><span> volume: fin: tail: </th>
-        <% end %>
-        <% if @board.used == false %>
-          <th class="col-sm-3"> Used </th>
-        <% end %>
+      <th style="max-width:30%;"> Make:</th>  <th style="width:50%;">Dimensions:</th>
+      <th style="nax-width:30%;"> Dimensions:</th>  <th style="width:50%;">Dimensions:</th>
+      <% if @board.used == false %>
+        <th style="nax=width:50%;">Used:</th>
+      <% end %>
       </thead>
       <tbody>
-        <td class="col-sm-6 col-md-8 col-lg-8"> <%= @board.make %> </td>
+        <td> <%= @board.make %> </td>
         <% if @board.size.feet.to_i > 0 %>
-             <td class="col-sm-5"><span><%=  @board.size.feet  %>' <%= @board.size.inches %>" x <%=  @board.size.width %>" x <%=  @board.size.thickness %>"</span>
-             </td>
+        <td style="max-width:35%;">
+          <%= @board.size.pretty_surf %>
+        </td>
         <% else %>
-          <td class="col-sm-3"><%= @board.size.length %> <%= @board.size.width %> <%=@board.size.unit.name %></td>
+        <td style="max-width:35%;">
+         <%= @board.size.pretty_dimensions %>
+         </td>
         <% end %>
-        <% if @board.type_id == 1 %>
+      </tbody>
+      <% if @board.type_id == 1 %>
+        <thead>
+          <th style="width:30%;">Volume:</th>
+          <th style="width:30%;">Tail:</th>
+           <th class="width:40%:"><span> Finbox: </th>
+        </thead>
+        <tbody>
          <td class="col-sm-3">
          <%= @board.size.volume%>
          <%= @board.tail.name%>
+         <% if @board.fin %>
          <%= @board.fin.name%>
+        <% end %>
         <% end %>
       </tbody>
     </table>
@@ -92,8 +71,6 @@
   <%= @accessories_boards.first.measure %><%= @accessories_boards.first.unit.name %>
  </td>
  <% end %>
-
-
 <div class="center-text">
   <tbody>
 </tbody>
@@ -233,9 +210,9 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
   <% else %>
 <!-- section -->
     <div class="payment center-text">
-      <% if current_user && current_user.id == @board.user_id %>
+      <% if current_user && current_user.owner?(@board)%>
         <strong data-board="<%= @board.price %>"style="font-size:30px;">$</strong>
-      <% elsif @board.for_sale == true && @board.inventory >= 1%>
+        <% elsif @board.sellable? %>
          <strong style="font-size:30px;">$</strong><strong data-board="<%= @board.price %>" id="showPrice" style="font-size:30px;">.00</strong>
          <div class="form-group">
            pick up

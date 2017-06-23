@@ -44,9 +44,9 @@ class Board < ApplicationRecord
   belongs_to :user
   belongs_to :type, optional: true
   belongs_to :category
-  has_one :size
   belongs_to :tail, optional: true
   belongs_to :fin, optional: true
+  has_one :size
   accepts_nested_attributes_for :size, allow_destroy: true, reject_if: :all_blank
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
@@ -61,7 +61,9 @@ class Board < ApplicationRecord
   validates :price, :presence => true
   validates :category, :presence => true
   validates :zipcode, :length => { :is => 5 }
+
   before_validation :load_costs
+  after_validation :save_type
   after_save :check_for_tracking_number
   after_update :update_tokens
   after_update :update_margin
@@ -71,9 +73,6 @@ class Board < ApplicationRecord
   geocoded_by :full_address
   after_validation :geocode, if: ->(obj){ obj.full_address.present? }
 
-  def full_address
-    [address, city, state, zipcode].join(', ')
-  end
   def non_acc(att)
     att['title'].blank? && new_record?
   end
@@ -84,23 +83,78 @@ class Board < ApplicationRecord
  scope :min_length_search, ->(minimum) { where('length >= ?', minimum) }
  scope :max_length_search, ->(maximum) { where('length <= ?', maximum) }
 
-
 # needs more TESTING
  scope :start_search, -> (startDate, endDate) {
    joins(:events).where.not(:events => {start_time: (startDate.beginning_of_day)..(endDate.end_of_day + 1.days)})
 }
-
 scope :end_search, -> (startDate, endDate) {
   joins(:events).where.not(:events => {end_time: (startDate.beginning_of_day)..(endDate.end_of_day)})
 }
-
 #
+def full_address
+  [address, city, state, zipcode].join(', ')
+end
   def check_for_tracking_number
     if tracking_changed?
        BoardMailer.tracking_number(self).deliver_now
      end
   end
 
+  def pretty_print
+     "$#{price}.00 by #{title}. "
+  end
+
+  def sellable?
+    self.for_sale && self.inventory >= 1
+  end
+  def boardSold?
+    self.shipping != true || false
+  end
+
+  private
+
+
+
+
+
+# validate_attributes
+
+
+  def update_tokens
+    if for_sale_changed? == true
+      if self.changes["for_sale"][1]
+      a =  Board.find(self.id).user
+      a.tokens += -2
+      a.save
+      end
+    end
+  end
+  def update_margin
+   if cost_changed? == true || price_changed? == true
+     a =  Board.find(self.id)
+     p = a.price.to_f - a.cost.to_f
+     r = a.price.to_f
+      a.margin = ((p) / (r)) * 100
+      a.save
+   end
+  end
+  def load_costs
+    if self.cost != nil && self.margin == nil
+      r = self.price.to_f
+      p = r - self.cost.to_f
+      self.margin = ((p) / (r)) * 100
+    elsif self.margin != nil && self.price == nil
+      c = self.cost.to_f
+      m = self.margin.to_f
+      r = c / (1 - (m / 100))
+      self.price = r.ceil
+      self.save
+    end
+  end
+  def save_type
+    a = self
+    a.type_id = a.category.type_id
+  end
   def self.import(file)
     counter = 0
     CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
@@ -113,45 +167,5 @@ scope :end_search, -> (startDate, endDate) {
     end
     counter
   end
-
-  private
-
-  def update_tokens
-    if for_sale_changed? == true
-      if self.changes["for_sale"][1]
-      a =  Board.find(self.id).user
-      a.tokens += -2
-      a.save
-      end
-    end
-  end
-
-
-  def update_margin
-   if cost_changed? == true || price_changed? == true
-     a =  Board.find(self.id)
-     p = a.price.to_f - a.cost.to_f
-     r = a.price.to_f
-      a.margin = ((p) / (r)) * 100
-      a.save
-   end
-  end
-
-  def load_costs
-    if self.cost != nil && self.margin == nil
-      r = self.price.to_f
-      p = r - self.cost.to_f
-
-      self.margin = ((p) / (r)) * 100
-    elsif self.margin != nil && self.price == nil
-      c = self.cost.to_f
-      m = self.margin.to_f
-      r = c / (1 - (m / 100))
-      self.price = r.ceil
-      self.save
-    end
-
-  end
-
 
 end

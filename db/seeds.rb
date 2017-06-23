@@ -233,6 +233,7 @@ end
   arrived: false,
   zipcode: [76210, 90277, 76262, 76135].sample,
   for_sale: true,
+  inventory: rand(1..3),
   list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
   )
 end
@@ -257,7 +258,9 @@ end
   arrived: [true, false].sample,
   zipcode: [76210, 90277, 76262, 76135].sample,
   for_sale: false,
+  inventory: rand(1..3),
   list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
+
   )
 end
 puts "#{Board.count} at board/1"

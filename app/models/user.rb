@@ -51,7 +51,7 @@ class User < ApplicationRecord
 
 
   enum role: [:member, :admin]
-  
+
   has_many :accessories, dependent: :destroy
 
   has_many :events, dependent: :destroy
@@ -72,7 +72,8 @@ class User < ApplicationRecord
   def full_address
     [address, city, state, zipcode].join(', ')
   end
-
-
+  def owner?(board)
+    self.id == board.user_id
+  end
 
 end
