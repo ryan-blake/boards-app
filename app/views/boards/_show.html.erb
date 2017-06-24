@@ -21,56 +21,16 @@
     <%= render partial: 'images', locals: {board: @board}  %>
   </div>
 <hr class="style13" style="top:440px;">
-  <div class="dimensions-modal" style="">
-    <table class="center-text" style="">
-      <thead>
-      <th style="max-width:30%;"> Make:</th>  <th style="width:50%;">Dimensions:</th>
-      <th style="nax-width:30%;"> Dimensions:</th>  <th style="width:50%;">Dimensions:</th>
-      <% if @board.used == false %>
-        <th style="nax=width:50%;">Used:</th>
-      <% end %>
-      </thead>
-      <tbody>
-        <td> <%= @board.make %> </td>
-        <% if @board.size.feet.to_i > 0 %>
-        <td style="max-width:35%;">
-          <%= @board.size.pretty_surf %>
-        </td>
-        <% else %>
-        <td style="max-width:35%;">
-         <%= @board.size.pretty_dimensions %>
-         </td>
-        <% end %>
-      </tbody>
-      <% if @board.type_id == 1 %>
-        <thead>
-          <th style="width:30%;">Volume:</th>
-          <th style="width:30%;">Tail:</th>
-           <th class="width:40%:"><span> Finbox: </th>
-        </thead>
-        <tbody>
-         <td class="col-sm-3">
-         <%= @board.size.volume%>
-         <%= @board.tail.name%>
-         <% if @board.fin %>
-         <%= @board.fin.name%>
-        <% end %>
-        <% end %>
-      </tbody>
-    </table>
-</div>
+<%= render partial: 'datatable', locals: {board: @board}  %>
 
 <!-- section -->
-  <div class="description-modal pull-right" style=";position:relative;clear:all;">
+  <div class="description-modal pull-right" style="padding:40px 15px;position:relative;clear:all;">
     <%= @board.description %>
   </div>
 <!--  -->
-<% if @accessories_boards && @accessories_boards.first.unit %>
 <td class="col-sm-3">
-  <%= @accessories_boards.first.title %>
-  <%= @accessories_boards.first.measure %><%= @accessories_boards.first.unit.name %>
- </td>
- <% end %>
+  <% @board.assignedAccessory? %>
+</td>
 <div class="center-text">
   <tbody>
 </tbody>

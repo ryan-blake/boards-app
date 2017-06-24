@@ -110,6 +110,17 @@ end
   def boardSold?
     self.shipping != true || false
   end
+  def assignedAccessory?
+    if self.accessories.count >= 1
+      self.accessories.each do |i|
+        "#{i.title} #{i.measure}.#{i.unit.name}. "
+      end
+    end
+  end
+
+  def surfable?
+    self.type_id == 1
+  end
 
   private
 

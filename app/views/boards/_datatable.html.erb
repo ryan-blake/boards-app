@@ -1,0 +1,53 @@
+
+    <table class="center-text" style="">
+      <thead>
+        <th class="center-text single_table top" style="margin-left:20%;min-width:30%;max-width:30%;">Brand</th>
+        <th class="center-text single_table top" style="nax-width:30%;"> Dimensions</th>
+        <% if @board.tail_id%>
+          <th class="center-text single_table top" style="width:30%;">Tail</th>
+        <% end %>
+      </thead>
+      <tbody>
+        <td class="center-text" style="max-width:55%;border:black 1px solid;">
+        <%= @board.make %> </td>
+        <% if @board.surfable? %>
+          <td class="center-text single_table" style="min-width:150px;max-width:35%;border:black 1px solid;">
+            <%= @board.size.pretty_surf %>
+          </td>
+          <% if @board.tail_id%>
+          <td class="center-text single_table" style="width:30%;">
+           <%= @board.tail.name%>
+           </td>
+          <% end %>
+        <% else %>
+          <td class="center-text" style="max-width:35%border:black 1px solid;">
+           <%= @board.size.pretty_dimensions %>
+          </td>
+        <% end %>
+      </tbody>
+      <% if @board.surfable? %>
+        <thead>
+          <% if !@board.used %>
+            <th class="single_table center-text top" style="padding:top:10px;nax-width:15%;">Used</th>
+            <% else %>
+            <th class="single_table center-text top" style="padding:top:10px;nax-width:15%;"></th>
+          <% end %>
+          <th class="single_table center-text top" style="width:30%;">Volume:</th>
+          <th class="single_table center-text top" style="width:30%;"> Finbox: </th>
+        </thead>
+        <tbody >
+          <td class="single_table center-text" style="width:30%;">
+          </td>
+         <td class="single_table center-text" style="width:30%;">
+           <% if @board.fin_id %>
+            <%= @board.size.volume%>
+           <% end%>
+         </td>
+         <% if @board.fin_id %>
+         <td class="single_table center-text" style="width:30%;">
+          <%= @board.fin.name%>
+         </td>
+         <% end %>
+        <% end %>
+      </tbody>
+    </table>
