@@ -177,24 +177,14 @@ transactions = Stripe::BalanceTransaction.all(
     @one = @images.length
     @images = @board.images.page(params[:page]).per(1)
     @event = Event.new
+    @accessories = Accessory.where(user_id: @board.user.id, category_id: @board.category_id).limit(40)
     if @board.accessories.count >= 1
       @accessories_boards = Accessory.where(board_id: @board.id)
     else
        @accessories_boards = nil
     end
-      @accessories = Accessory.where(user_id: @board.user.id, category_id: @board.category_id).limit(40)
 
 
-
-    @charge = Charge.new
-    if current_user.present?
-      @on = current_user
-      @charge = Charge.where(user_id: @on.id)
-      if @charge == nil
-        @boards = Board.where(title: @charge.item )
-        @boardies = Board.where(title: @charge.item )
-      end
-    end
   end
 
   # GET /boards/new
@@ -202,7 +192,6 @@ transactions = Stripe::BalanceTransaction.all(
     @board = Board.new
     accessory = @board.accessories.build
     size = @board.build_size
-
   end
 
   # GET /boards/1/edit

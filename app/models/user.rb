@@ -72,8 +72,10 @@ class User < ApplicationRecord
   def full_address
     [address, city, state, zipcode].join(', ')
   end
-  def owner?(board)
-    self.id == board.user_id
+  def owner?(item)
+    self.id == item.user_id
   end
-
+  def email_confirmation
+    "#{@email}"
+  end
 end

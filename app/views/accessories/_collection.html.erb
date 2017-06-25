@@ -1,30 +1,18 @@
-<!--
-<% if @board.accessories.count >= 1 %>
- <%  @board.accessories.each do |i| %>
-<div class="col-sm-6 center-text" style="min-width:25%;">
-  <%= i.title %><strong>$<%= i.price %>.00</strong>
-  <div class="accessoryImage" style="cursor:pointer;">
-  <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
+<% if @accessories_boards%>
+   <%  @accessories_boards.each do |i| %>
+  <tr class="panel col-sm-6" style="max-height:195px;min-height:160px;position:relative;padding:0;background-color:white;min-width:25%;">
+     <td class="vendor-link" style="cursor:pointer;">
+  <div class="center-text">
+    <%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %>
+    <div class="accessoryImage" id="aImage" style="cursor:pointer">
+      <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
+    </div>
+    <div class="accessoryImage1" id="aImage1">
+      <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
+    </div>
+      <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %>.00</strong></span>
+    </td>
   </div>
-  <div class="accessoryImage1" style="cursor:pointer;">
-  <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
-  </div>
-  <%=   i.kind.name %>
-</div>
+  </tr>
+  <% end %>
 <% end %>
-<%  else  %>
-<% bc = @board.category.id%>
-<% ac = Accessory.where(board_id: nil, user_id: @board.user.id, category_id: bc)%>
-<% ac.each do |i|%>
-<div class="col-sm-6 center-text" style="min-width:25%;">
-  <%= i.title %><strong>$<%= i.price %>.00</strong>
-  <div class="accessoryImage" style="cursor:pointer;">
-  <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
-  </div>
-  <div class="accessoryImage1" style="cursor:pointer;">
-  <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
-  </div>
-  <%=   i.kind.name %>
-</div>
-<% end%>
-<% end%> -->

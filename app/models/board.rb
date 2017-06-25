@@ -118,6 +118,8 @@ end
     end
   end
 
+
+
   def surfable?
     self.type_id == 1
   end

@@ -54,7 +54,6 @@ class ChargesController < ApplicationController
       :email => params[:stripeEmail],
       :card => params[:stripeToken]
   )
-
   @charge = Charge.new(
     price: params[:charge]["amount"].to_i,
     user_id: current_user.id,
@@ -104,8 +103,7 @@ class ChargesController < ApplicationController
       role: 0,
       password: Faker::Code.asin,
     )
-    current_user.send_reset_password_instructions
-
+    current_user.skip_confirmation!
     customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
       :card => params[:stripeToken]
@@ -142,12 +140,10 @@ class ChargesController < ApplicationController
     @board.save
 
     @new_user = true
+    current_user.send_reset_password_instructions
     complete
-    # ChargeMailer.new_charge_user(@charge).deliver_now
-    # ChargeMailer.new_charge_vendor(@charge).deliver_now
 
    end
-
  end
 end
 
