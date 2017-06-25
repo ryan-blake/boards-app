@@ -14,42 +14,38 @@
           <td class="filtering center-text">
             <ti> <strong> Sort by: </strong> </ti>
            </ti>
-            <div  <i style="display:inline;" class="btn btn-sort"> <%= sortable "created_at", "Date" %></i></div>
+            <div <i style="display:inline;" class="btn btn-sort"> <%= sortable "created_at", "Date" %></i></div>
             <div <i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></div>
-            <div  <i style="display:inline;" class="btn btn-sort"> <%= sortable "length", 'height' %></i></div>
+            <div <i style="display:inline;" class="btn btn-sort"> <%= sortable "length", 'height' %></i></div>
            </ti>
           </td>
         </tr>
       </td>
     </thead>
-
+<style>
+.no_padding {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+</style>
   <% @boards.each do |board| %>
-    <tbody class="tbody-search col-sm-6 col-md-4 center-text">
+    <tbody class="no_padding tbody-search col-sm-1 col-md-1 col-lg-2 center-text" style="max-width:150px !important;border:1px solid black;">
         <!-- if no image load other boards image in results -->
         <td class="center-text" >
-          <div  style="min-height:240px;">
-
-              <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
-
+          <div  style="max-height:120px;">
+              <!-- <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
+            <%= link_to  image_tag("surf_girl.jpg", height: 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
           </div>
-
-      <ul class="main-well-ul">
+      <ul class="main-well-ul" style="top:20px;">
          <li class="center-text title-link">
            <!-- new link to modal -->
            <div class="title-bar center-text">
              <%= link_to board.title.truncate(23), board, target: :_blank  %>
              <strong><%= board.category.name %></strong>
-
-          </div>
-          <%if current_user && board.user_id == current_user.id %>
-           <li><%= link_to 'Edit', edit_board_path(board) %></li>
-          <% end %>
-          <div class="length-ribbon">
           </div>
          </li>
          <li class="center-text">
           <%=  board.description.truncate(33)  %>
-
          </li>
          <li class="center-text">
            <strong class="make-li"><%=  board.make %></strong>
@@ -59,7 +55,7 @@
            <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
              <button class="btn btn-sort pull-right view_btn"><%= link_to 'view', board, target: :_blank  %></button>
              <br>
-             <hr class="style13">
+             <hr style="display:flex;" class="style13">
            </td>
            </ul>
         </tbody>
@@ -110,7 +106,6 @@
     $(".sk-circle").delay(400).hide(0);
   });
   // hide spinner on AJAX stop
-
 
 });
 

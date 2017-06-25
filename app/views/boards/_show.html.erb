@@ -19,6 +19,7 @@
 </div>
   <div class="image-box center-text" id="images" style="">
     <%= render partial: 'images', locals: {board: @board}  %>
+    <%=  image_tag("surf_girl.jpg", height: 280, width: 330) %>
   </div>
 <hr class="style13" style="top:440px;">
 <%= render partial: 'datatable', locals: {board: @board}  %>
@@ -27,11 +28,11 @@
   <div class="description-modal pull-right" style="padding:40px 15px;position:relative;clear:all;">
     <%= @board.description %>
   </div>
-<!--  -->
-
+<!-- board accesories -->
 <div class="center-text">
   <tbody>
-</tbody>
+    <%= render partial: 'accessories/collection' %>
+  </tbody>
 </div>
 </div>
 <script>
@@ -56,64 +57,18 @@ hideAccess.onclick = function() {
  }
 };
 });
-
 </script>
 <div style="posisition:relative;" class="col-sm-12 col-md-12 col-lg-12">
-  <div id="accessoryBtnOpen" style="display:flex;" class="btn btn-primary">search</div>
-  <div id="accessoryBtnHide" style="display:none;" class="btn btn-danger">hide</div>
+  <div id="accessoryBtnOpen" style="center-text display:flex;" class="btn btn-success">Search Accessories </div>
+  <div id="accessoryBtnHide" style="center-test display:none;background-color:darkgreen;" class="btn btn-primary">Hide</div>
 </div>
 <div id="searchAccessories"  style="display:none;" class="col-md-9">
- <%= form_tag({controller: :accessories, action: :search_accessories}, {method: :get, remote: true}) do  %>
-   <div class="input-group pull-left"style="max-width:50%;">
-     <span class="input-group-btn">
-     <%= grouped_collection_select  nil, :kind_id, Category.where(id: @board.category_id), :kinds,
-           :name, :id, :name, {prompt: "Select Kind" },
-           { id: 'Kind-select' , class: "form-control"} %>
-     </span>
-   </div>
-     <div class="input-group pull-right" style="max-width:50%;">
-       <span class="input-group-btn">
-         <%= collection_select(nil, :brand, Accessory.where(category_id: @board.category_id,:user_id => @board.user_id).order(:brand).distinct.sort, :brand, :brand, {prompt: "Choose make"},{ class: "form-control" }) %>
-        </span>
-     </div>
- <div class="col-md-4">
-    <div class="input-group">
-      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Accessories.."  %>
-      <span class="input-group-btn">
-        <%= hidden_field_tag :board_id, @board.id%>
-        <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <% end %>
+  <%= render 'accessories/search_accessories_form' %>
 </div>
-
+<!-- shop accessories by type -->
 <div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
-
  </div>
 <!--  -->
-<style>
-  .accessoryImage {
-    display:block;
-  }
-  .accessoryImage1 {
-    display:none;
-  }
-@media (max-width: 484px) {
-  .accessoryImage {
-    display:none;
-  }
-  .accessoryImage1 {
-    display:block;
-  }
-
-}
-@media (min-width:991px) and (max-width: 1199px) {
-  #accessoryBtnOpen, #accessoryBtnHide {
-    margin-top: 214px;
-  }
- }
-</style>
 <!-- section -->
   <% if @board.rental %>
   <div class="rental-div" style="min-height:100%;">
@@ -121,7 +76,6 @@ hideAccess.onclick = function() {
           <span class="center-text">
             <div id="invisible" data-rubyvar="<%= @board.price  %>"></div>
           <div id="number" style="font-size:30px;"><%= @board.price %> </div>
-
           <%= render 'events/form', locals: {events: @events, board: @board} %>
         <!-- section -->
         </span>
@@ -134,7 +88,6 @@ hideAccess.onclick = function() {
 
 <hr>
 <script>
-
 $('input[name="daterange"]').daterangepicker(
 {
    locale: {
@@ -147,7 +100,6 @@ $('input[name="daterange"]').daterangepicker(
    orientation: 'auto top',
    parentEl: '.modal-content'
 },
-
 function(start, end, label) {
    if ( start.format('YYYY-MM-DD') < end.format('YYYY-MM-DD') ) {
      var depDate = moment(start);
@@ -207,7 +159,6 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
   var pricing = document.getElementById('showPrice');
   pricing.innerHTML = prices
 
-
   checkbox.onclick = function() {
    if(this.checked) {
      pickup_div.style['display'] = 'block';
@@ -219,15 +170,11 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
    }
   };
 });
-
 </script>
 <% end %>
-
   <div id="forsale">
   <% if !current_user %>
-    <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
-        <%= render partial: 'forsale', locals: {board: @board} %>
-    <% elsif @board.for_sale == false  && @board.user_id == current_user.id%>
+    <% elsif current_user.owner?(@board) %>
     <%= render partial: 'forsale', locals: {board: @board} %>
    <% end %>
   </div>

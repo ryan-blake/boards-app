@@ -1,0 +1,31 @@
+<!-- search signed in table _old  -->
+<tbody class="no_padding tbody-search col-sm-1 col-md-1 col-lg-2 center-text" style="max-width:150px !important;border:1px solid black;">
+    <!-- if no image load other boards image in results -->
+    <td class="center-text" >
+      <div  style="max-height:120px;">
+          <!-- <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
+        <%= link_to  image_tag("surf_girl.jpg", height: 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+      </div>
+  <ul class="main-well-ul" style="top:20px;">
+     <li class="center-text title-link">
+       <!-- new link to modal -->
+       <div class="title-bar center-text">
+         <%= link_to board.title.truncate(23), board, target: :_blank  %>
+         <strong><%= board.category.name %></strong>
+      </div>
+     </li>
+     <li class="center-text">
+      <%=  board.description.truncate(33)  %>
+     </li>
+     <li class="center-text">
+       <strong class="make-li"><%=  board.make %></strong>
+       <%= time_ago_in_words(board.list_time) %>
+     </li>
+     <li class="center-text" style="padding-top:5px;">
+       <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
+         <button class="btn btn-sort pull-right view_btn"><%= link_to 'view', board, target: :_blank  %></button>
+         <br>
+         <hr style="display:flex;" class="style13">
+       </td>
+       </ul>
+    </tbody>
