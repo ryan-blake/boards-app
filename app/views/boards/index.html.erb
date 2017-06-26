@@ -22,7 +22,16 @@ openExtended.onclick = function() {
 
 type_select.onchange = function() {
   mainSearch.style['display'] = 'block'
+  $(".sk-circle").hide();
+  // show spinner on AJAX start
+  $(document).ajaxStart(function(){
+    $(".sk-circle").show();
+  });
+  $(document).ajaxStop(function(){
+    $(".sk-circle").delay(400).hide(0);
+  });
   }
+
 });
 
 
@@ -40,12 +49,14 @@ $(window).scroll(function(){
 <% end %>
 <span id="top" name="top" style="display:block;position:relative;top:-50px;"></span>
 <div id="type_select">
-<%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
+<%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
 <span class="input-group-btn">
-  <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, {prompt: "Choose type"},{id:'type-select' ,class: "form-control" }) %>
+  <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, {prompt: "Choose type"},{id:'type-select' ,class: "form-control"}) %>
 </span>
+
 <% submit_tag "Submit" %>
 <% end %>
+
   </div>
 <div id="mainsearch" style="display:none;">
 <%= render partial: 'search_form' %>
@@ -57,4 +68,21 @@ $(window).scroll(function(){
 
 <div style="position:fixed;bottom:20px;right:30px;">
   <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>
+</div>
+
+<div class="sk-circle" style="z-index:9999;position:absolute;top:17%;left:calc(50% - 24px);%;">
+  <div style="position:absolute;background-color:rgba(17, 214, 188, 0.3);min-width:50px;min-height:50px;border-radius:90%;">"
+  <div class="sk-circle1 sk-child"></div>
+  <div class="sk-circle2 sk-child"></div>
+  <div class="sk-circle3 sk-child"></div>
+  <div class="sk-circle4 sk-child"></div>
+  <div class="sk-circle5 sk-child"></div>
+  <div class="sk-circle6 sk-child"></div>
+  <div class="sk-circle7 sk-child"></div>
+  <div class="sk-circle8 sk-child"></div>
+  <div class="sk-circle9 sk-child"></div>
+  <div class="sk-circle10 sk-child"></div>
+  <div class="sk-circle11 sk-child"></div>
+  <div class="sk-circle12 sk-child"></div>
+  </div>
 </div>

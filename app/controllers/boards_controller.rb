@@ -256,8 +256,12 @@ transactions = Stripe::BalanceTransaction.all(
       format.json { head :no_content }
     end
   end
+def search_type
+  @boards = Board.where(:for_sale => [true], type_id: "#{params[:type_id]}")
 
+  @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
+end
 
  def search_signed_in
    if params[:value].empty?
@@ -267,9 +271,9 @@ transactions = Stripe::BalanceTransaction.all(
    end
 
    if params[:search].empty?
-     @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+     @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
-             "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+             "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
 
              # price
              if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
@@ -283,7 +287,6 @@ transactions = Stripe::BalanceTransaction.all(
                  @boards  = @boards.min_price(1).max_price(9999)
                end
              end
-
              #  length / height
              if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
                c = params[:unit_id][0].to_i

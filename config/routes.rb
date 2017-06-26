@@ -37,7 +37,7 @@ end
     resources :sizes
     resources :events, only: [:create, :destroy, :show, :board_dash]
     collection do
-      get 'search_dash','search_signed_in', 'sort_order', 'board_dash',  'active_boards', 'inactive_boards',
+      get 'search_dash', 'search_type', 'search_signed_in', 'sort_order', 'board_dash',  'active_boards', 'inactive_boards',
          'shipped_boards', 'pending_boards', 'pick_boards', 'sales_boards', 'company_search'
     end
     collection do

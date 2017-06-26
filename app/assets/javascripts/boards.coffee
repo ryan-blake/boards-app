@@ -40,7 +40,13 @@ $ ->
       dataType: 'script'
       data: {
         type_id: $("#type-select option:selected").val()
-      }
+      },
+        $.ajax '/boards/search_type',
+          type: 'GET'
+          dataType: 'script'
+          data: {
+            type_id: $("#type-select option:selected").val()
+          }
       error: (jqXHR, textStatus, errorThrown) ->
         console.log("AJAX Error: #{textStatus}")
       success: (data, textStatus, jqXHR) ->
