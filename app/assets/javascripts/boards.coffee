@@ -17,31 +17,31 @@ jQuery ->
         $("#progress-bar").slideUp('fast')
 
 
- # jQuery ->
- #  $("#category-select").hide();
- #
- #  $("#type-select").change ->
- #    $("#category-select").show();
+ jQuery ->
+  $("#category-select").hide();
 
-# jQuery ->
-#   subcat = $('#category-select').html()
-#   $('#category-select').click ->
-#     type = jQuery('#type-select').children('option').filter(':selected').text()
-#     options = $(subcat).filter("optgroup[label='#{type}']").html()
-#     if options
-#       $('#category-select').html(options)
-#       console.log('hi');
-#     else
-#       $('#category-select').empty()
-# $ ->
-#   $(document).on 'change', '#type-select', (evt) ->
-#     $.ajax 'index',
-#       type: 'GET'
-#       dataType: 'script'
-#       data: {
-#         type_id: $("#type-select option:selected").val()
-#       }
-#       error: (jqXHR, textStatus, errorThrown) ->
-#         console.log("AJAX Error: #{textStatus}")
-#       success: (data, textStatus, jqXHR) ->
-#         console.log("Dynamic country select OK!")
+  $("#type-select").change ->
+    $("#category-select").show();
+
+jQuery ->
+  subcat = $('#category-select').html()
+  $('#category-select').click ->
+    type = jQuery('#type-select').children('option').filter(':selected').text()
+    options = $(subcat).filter("optgroup[label='#{type}']").html()
+    if options
+      $('#category-select').html(options)
+      console.log('hi');
+    else
+      $('#category-select').empty()
+$ ->
+  $(document).on 'change', '#type-select', (evt) ->
+    $.ajax 'index',
+      type: 'GET'
+      dataType: 'script'
+      data: {
+        type_id: $("#type-select option:selected").val()
+      }
+      error: (jqXHR, textStatus, errorThrown) ->
+        console.log("AJAX Error: #{textStatus}")
+      success: (data, textStatus, jqXHR) ->
+        console.log("Dynamic country select OK!")

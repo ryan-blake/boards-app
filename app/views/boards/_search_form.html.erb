@@ -1,0 +1,103 @@
+<%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
+     <div class="row board-search-form">
+     <div class="col-lg-6">
+       <div class="input-group">
+         <span class="input-group-btn">
+           <%= grouped_collection_select nil, :category_id, Type.all, :categories,
+                   :name, :id, :name, { include_blank: true },
+                   { id: 'category-select' , class: "cat-width form-control"} %>       </div><!-- /input-group -->
+     </div><!-- /.col-lg-6 -->
+     <div class="col-lg-6">
+       <div class="input-group">
+         <span class="input-group-btn">
+           <%= collection_select(nil, :make, Board.where(:for_sale => true).order(:make).distinct.sort, :make, :make, {prompt: "Choose make"},{ class: "form-control" }) %>
+          </span>
+       </div>
+     </div>
+   </div><!-- /.row -->
+
+   <div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-btn">
+        <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
+      </span>
+    </div><!-- /input-group -->
+    <div class="col-lg-6">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'distance from (mi.)'} , { :class => 'form-control' })  %>
+        </span>
+
+      </div><!-- /input-group -->
+      <span id="open-extended" style="cursor:pointer;text-decoration:underline;display:block;"> Extend Search </span>
+      <div id="extended-search" style="display:none;">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <%= collection_select(nil, :company, User.all.order(:company).distinct.sort, :company, :company, {prompt: "Choose co"},{ class: "form-control" }) %>
+             </span>
+          </div>
+        </div>
+        <div class="col-sm-4" style="top: 0;width: 50%;float: right;">
+          <div class="input-group">
+            <span class="col-md-8 col-lg-12">
+            <%= number_field :min, params[:min], class: 'form-control', min: 1, placeholder: "Choose price" %>
+            </span>
+            <span class="col-md-8 col-lg-12">
+            <%= number_field :max, params[:max], class: 'form-control',min: 1, placeholder: "Choose max" %>
+            </span>
+          </div>
+          <div class="input-group" style="float:left;">
+            <span class="col-md-8 col-lg-12">
+            <%= number_field :minimum, params[:minimum], class: 'form-control',min: 1, placeholder: "length min" %>
+            </span>
+            <span class="col-md-8 col-lg-12">
+            <%= number_field :maximum, params[:maximum], class: 'form-control',min: 1, placeholder: "Choose max" %>
+            </span>
+          <%= collection_select( nil, :unit_id, Unit.all, :id, :name,
+            { :include_blank => 'Unit'} , { :class => 'form-control' })%>
+          </div>
+          <div class='input-group date' id='starttimepicker'>
+            <%= text_field :start_date, params[:start_date], class: 'form-control', placeholder: "Pick Up Date" %>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+            </div>
+            <div class='input-group date' id='endtimepicker'>
+              <%= text_field :end_date, params[:end_date], class: 'form-control', placeholder: "Drop Off Date" %>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+              </div>
+
+          <!-- <%= text_field :start_time, "data-provide" => 'datepicker' %>
+          <%= text_field :end_time, "data-provide" => 'datepicker1' %> -->
+        </div>
+<script>
+        $('.date#starttimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+
+        $('.date#endtimepicker').datetimepicker().data("DateTimePicker").format('ddd, MMM D YYYY, h:mm A');
+</script>
+      </div>
+
+        <!-- /exteneded -search-->
+
+
+    </div><!-- /.col-lg-6 -->
+    New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
+    Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
+    Rental:<span class="check-box-search"><%= check_box_tag :rental, params[:rental] %> </span>
+
+  </div><!-- /.col-lg-6 -->
+<!-- /.row -->
+<div class="col-lg-12 search-bar">
+   <div class="input-group">
+     <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+     <span class="input-group-btn">
+       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+     </span>
+   </div><!-- /input-group -->
+ </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+<% end %>
