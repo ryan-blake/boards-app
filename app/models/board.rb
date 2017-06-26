@@ -120,6 +120,10 @@ end
 
 
 
+  def items?
+    "#{title} #{type.name} $#{price}"
+  end
+
   def surfable?
     self.type_id == 1
   end

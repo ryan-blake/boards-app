@@ -1,10 +1,10 @@
-  <table class="container-fluid index-results " id="results" style="width:100%;">
+  <table class="container-fluid index-results " id="results" style="">
     <% if @boards.length == 0 %>
         <%= render partial: 'boards/none' %>
       <% end %>
       <% if current_user %>
-      <% @boards = @boards.where.not(:user_id => current_user) %>
-    <% end %>
+        <% @boards = current_user.not_my_boards(@boards) %>
+      <% end %>
     <thead>
       <td>
         <div class="center-text" id="paginator">
@@ -22,44 +22,28 @@
         </tr>
       </td>
     </thead>
-<style>
-.no_padding {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-}
-</style>
   <% @boards.each do |board| %>
-    <tbody class="no_padding tbody-search col-sm-1 col-md-1 col-lg-2 center-text" style="max-width:150px !important;border:1px solid black;">
-        <!-- if no image load other boards image in results -->
-        <td class="center-text" >
-          <div  style="max-height:120px;">
-              <!-- <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
-            <%= link_to  image_tag("surf_girl.jpg", height: 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
-          </div>
-      <ul class="main-well-ul" style="top:20px;">
-         <li class="center-text title-link">
-           <!-- new link to modal -->
-           <div class="title-bar center-text">
-             <%= link_to board.title.truncate(23), board, target: :_blank  %>
-             <strong><%= board.category.name %></strong>
-          </div>
-         </li>
-         <li class="center-text">
-          <%=  board.description.truncate(33)  %>
-         </li>
-         <li class="center-text">
-           <strong class="make-li"><%=  board.make %></strong>
-           <%= time_ago_in_words(board.list_time) %>
-         </li>
-         <li class="center-text" style="padding-top:5px;">
-           <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
-             <button class="btn btn-sort pull-right view_btn"><%= link_to 'view', board, target: :_blank  %></button>
-             <br>
-             <hr style="display:flex;" class="style13">
-           </td>
-           </ul>
-        </tbody>
-        <% end %>
+    <tbody class="items" style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;">
+      <td class="" style="max-height:150px;min-width:150px;max-width:150px;">
+          <!-- <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
+          <div class="desktop-items-img"><%= link_to  image_tag("surf_girl.jpg", width: 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%></div>
+          <div class="mobile-items-img"><%= link_to  image_tag("surf_girl.jpg", width: 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%></div>
+          <span class="center-text" style="position:relative;overflow-x:hide;margin-top:15px;">
+            <%= board.items? %>
+          <br>
+          </span>
+          <span class="center-text" style="position:relative;overflow-x:hide;margin-top:15px;">
+            <% if board.surfable? %>
+          <strong>  <%= board.size.pretty_surf %></strong>
+            <% else %>
+            <strong><%= board.size.pretty_dimensions %></strong>
+            <% end %>
+            <hr class="style13">
+          </span>
+      </td>
+    </tbody>
+<% end %>
+
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
            <div class="modal-dialog modal-lg" role="document">
              <div class="modal-header">
@@ -82,7 +66,7 @@
             <div class="center-text" id="paginator">
             </div>
           </div>
-      <tbody >
+      <tbody>
         <td>
           <div class="center-text" id="paginator">
             <%= paginate @boards, remote: true, window: 1 %>
@@ -90,14 +74,10 @@
         </td>
       </tbody>
     </table>
-
 <script>
     $( document ).ready(function() {
-
   // hide spinner
   $(".sk-circle").hide();
-
-
   // show spinner on AJAX start
   $(document).ajaxStart(function(){
     $(".sk-circle").show();
@@ -106,7 +86,5 @@
     $(".sk-circle").delay(400).hide(0);
   });
   // hide spinner on AJAX stop
-
 });
-
 </script>
