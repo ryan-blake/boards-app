@@ -257,10 +257,8 @@ transactions = Stripe::BalanceTransaction.all(
     end
   end
 def search_type
-  @boards = Board.where(:for_sale => [true], type_id: "#{params[:type_id]}")
-
+  @boards = Board.where(rental: false, :for_sale => [true], type_id: "#{params[:type_id]}")
   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-
 end
 
  def search_signed_in

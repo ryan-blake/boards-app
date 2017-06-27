@@ -130,13 +130,6 @@ end
 
   private
 
-
-
-
-
-# validate_attributes
-
-
   def update_tokens
     if for_sale_changed? == true
       if self.changes["for_sale"][1]

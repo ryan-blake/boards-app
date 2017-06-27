@@ -13,12 +13,15 @@ var openExtended = document.getElementById('open-extended');
 var extended = document.getElementById('extended-search');
 var type_select = document.getElementById('type_select');
 var mainSearch = document.getElementById('mainsearch');
-openExtended.onclick = function() {
-   if(this.style.display == 'block') {
-     this.style['display'] = 'none';
-     extended.style['display'] = 'block';
-   }
-};
+  openExtended.onclick = function() {
+     if(extended.style.display == 'none') {
+       this.innerHTNL = 'Close Extended';
+       extended.style['display'] = 'block';
+     } else if (extended.style.display == 'block') {
+       extended.style['display'] = 'none';
+       this.innerHTNL = 'Open Extended';
+     }
+  };
 
 type_select.onchange = function() {
   mainSearch.style['display'] = 'block'
@@ -51,11 +54,16 @@ $(window).scroll(function(){
 <div id="type_select">
 <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
 <span class="input-group-btn">
-  <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, {prompt: "Choose type"},{id:'type-select' ,class: "form-control"}) %>
+  <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, {prompt: "Choose type"},{id:'type-select' ,class: "typesone form-control"}) %>
 </span>
 
 <% submit_tag "Submit" %>
 <% end %>
+<style>
+.typesone:active {
+ background-color:black;
+}
+</style>
 
   </div>
 <div id="mainsearch" style="display:none;">
