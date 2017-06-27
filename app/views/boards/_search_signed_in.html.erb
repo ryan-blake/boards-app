@@ -33,10 +33,10 @@
           <br>
           </span>
           <span class="center-text" style="position:relative;overflow-x:hide;margin-top:15px;">
-            <% if board.surfable? %>
-          <strong>  <%= board.size.pretty_surf %></strong>
-            <% else %>
+            <% unless board.surfable? %>
             <strong><%= board.size.pretty_dimensions %></strong>
+            <% else %>
+            <strong>  <%= board.size.pretty_surf %></strong>
             <% end %>
             <hr class="style13">
           </span>

@@ -247,7 +247,6 @@ $(document).ajaxStop(function(){
        open.style['display'] = 'none';
 
       //  elemelons
-
               $(function(){
                 // Set your Stripe publishable API key here
                 var stripe = Stripe("<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>");
@@ -323,23 +322,21 @@ $(document).ajaxStop(function(){
                   form.submit();
                 }
               });
-
       // !elemelons
 
-    }  closePartial.onclick = function() {
+    }
+    closePartial.onclick = function() {
     if (closePartial.style.display == 'block') {
       closePartial.style['display'] = 'none';
       tokenpartial.style['display'] = 'none';
       open.style['display'] = 'block';
     }
-  };
+    };
   };
   });
-
     </script>
   </div>
   <% end %>
-  <!-- !!elemelons -->
   <script>
   $(document).ready(
      function(){
@@ -357,7 +354,6 @@ $(document).ajaxStop(function(){
     </script>
   <% end %>
   <% if @user.stripe_account %>
-
 <div class="jumbotron gel" id="msg-area" style="top: 50px;background: black;top: 50px;">
   <div class="pull-left" style="top:50px;left:1px;width:190px;position:fixed;z-index:1;">
       <h3 class="btn btn-sort" style="max-width:100px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
@@ -387,7 +383,7 @@ $(document).ajaxStop(function(){
 </div>
 
 
-  <% if current_user.stripe_account == nil %>
+  <% if current_user && !current_user.stripe_account %>
   <div class="jumbotron" style="position:fixed;width:100%; height:100px;z-index:2;top:50px;">
     <div class="center-text" style="right:0px;position:absolute;top:50px;position:fixed;z-index:1;">
     <%= link_to 'new managed', new_stripe_account_path, class: 'btn-sort btn', style: 'color:black' %>
@@ -410,11 +406,8 @@ $(document).ajaxStop(function(){
       <%= link_to "Update your information", edit_stripe_account_path(@stripe_account.id), class: "btn btn-sm btn-warning btn-custom" %>
     </p>
      <% end %>
-    <!-- <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn-sort btn', style: 'color:black' %> -->
  <% end %>
-
 </div>
-
 
 <!-- nav desktop -->
 <div class="dash-nav-desktop btn-group-vertical pull-left" role="group" aria-label="...">
@@ -424,7 +417,7 @@ $(document).ajaxStop(function(){
   <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_boards_path, remote:true %></button>
   <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  pick_boards_boards_path, remote:true %></button>
   <button type="button" class="btn btn-default" id="btn-sales"><%= link_to 'Sales', sales_boards_boards_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-  <% if @user.stripe_account != nil %>
+  <% if !@user.stripe_account  %>
   <button type="button" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <% else %>
   <button style="display:none;" type="hidden" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
@@ -457,37 +450,31 @@ $(document).ajaxStop(function(){
      </ul>
    </div>
 </div>
+<style>
+.dash-nav-mobile button a:active .dropdown-menu {
+  display:none;
+}
+</style>
 <!-- !nav mobile -->
-
-
 <div class="dash-data">
 <!-- Need to finish payment -->
 <div style="display:none;min-height:100%" class="col-md-12 center-text"  id="active">
-
 </div>
 <div style="display:block;" class="col-md-12 center-text" id="pending">
 <%= render partial: 'pages/pending_boards' %>
 </div>
-
 <div  style="display:none;" class="col-md-12 center-text" id="inventory">
 </div>
-
 <div  style="display:none;" class="col-md-12 center-text" id="shipped">
-
 </div>
 <div  style="display:none;" class="col-md-12 center-text" id="pickUp">
-
 </div>
 <div  style="display:none;" class="col-md-12 center-text" id="sales">
-
 </div>
 <div  style="display:none;" class="col-md-12 center-text" id="rental">
-
 </div>
 <div  style="display:none;" class="col-md-12 center-text" id="accessories">
-
 </div>
-
 </div>
 
  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">

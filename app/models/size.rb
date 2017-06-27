@@ -18,8 +18,7 @@
 
 class Size < ApplicationRecord
   has_many :boards
-  belongs_to :unit, optional: true
-
+  belongs_to :unit
   belongs_to :categories, optional: true
 
   after_validation :create_length
@@ -35,7 +34,8 @@ class Size < ApplicationRecord
   end
 
   def pretty_dimensions
-    "#{length} x #{width} #{unit.name}"
+
+     "#{length} x #{width} #{unit.name}"
   end
 
 

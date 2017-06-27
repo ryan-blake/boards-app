@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
-  helper_method :sort_column, :sort_direction, :c_ft ,:c_cm, :c_mm
+  helper_method :sort_column, :sort_direction, :c_ft ,:c_cm, :c_mm, :cat2type
   respond_to :html, :js
   def import
     count = Board.import params[:file]
@@ -264,11 +264,18 @@ end
  def search_signed_in
    if params[:value].empty?
      distance_in_miles = 3
+     if params[:category_id]
+       params[:type_id] = cat2type(params[:category_id].to_i)
+     end
    else
      distance_in_miles = params[:value]
+     if params[:category_id]
+       params[:type_id] = cat2type(params[:category_id].to_i)
+     end
    end
 
    if params[:search].empty?
+
      @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
              "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
@@ -382,7 +389,6 @@ else
    #  get boards that also havent been rented once unless inventory > 1
    one = @boards
    unless params[:start_date][0].to_s == "" && params[:end_date][0].to_s == ""
-
       startDate = Date.parse(params[:start_date].join(', '))
       endDate = Date.parse(params[:end_date].join(', '))
       @boards = @boards.start_search(startDate, endDate)
@@ -491,6 +497,9 @@ end
     param = (param / 25.4)
   end
 
+  def cat2type(cat)
+    Category.where(id: cat).pluck(:type_id)[0]
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_board
       @board = Board.find(params[:id])

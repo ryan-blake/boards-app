@@ -161,6 +161,7 @@ end
       self.save
     end
   end
+
   def save_type
     a = self
     a.type_id = a.category.type_id
