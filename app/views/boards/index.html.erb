@@ -5,7 +5,7 @@
 <script>
 $(function() {
 $("#geo-input").geocomplete();
-country: "US"
+  country: "US"
 });
 
 $(document).ready(function() {
@@ -26,7 +26,6 @@ var type_value = document.getElementById('type-value')
 
 type_select.onchange = function() {
   mainSearch.style['display'] = 'block'
-
   $(".sk-circle").hide();
   // show spinner on AJAX start
   $(document).ajaxStart(function(){
@@ -36,14 +35,15 @@ type_select.onchange = function() {
     $(".sk-circle").delay(400).hide(0);
   });
   }
-
 });
 function updateTextArea(source){
  var value = source;
- alert(value);
  var type_val = document.getElementById('show_type');
   type_val.innerHTML = value
   document.getElementById('hidden_type').value = value;
+  if (value == 1) {
+    alert(value)
+  }
 };
 
 
@@ -51,7 +51,6 @@ $(window).scroll(function(){
     //Click event to scroll to top
     $(".next").click(function(){
         $('html, body').animate({scrollTop : 200},0);
-
     });
   });
 

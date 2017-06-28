@@ -29,6 +29,8 @@ jQuery ->
     type = jQuery('#type-select').children('option').filter(':selected').text()
     options = $(subcat).filter("optgroup[label='#{type}']").html()
     if options
+      $('#category-select').html("<option value=''></option>" + options)
+      $('#category-select option:first').attr("selected", "selected");
       $('#category-select').html(options)
     else
       $('#category-select').empty()

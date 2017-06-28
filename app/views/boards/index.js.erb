@@ -1,4 +1,2 @@
 $('#results').html('<%= escape_javascript render 'search_signed_in' %>');
 $('.paginator').html('<%= escape_javascript(paginate(@boards, :remote => true)) %>');
-$('#type_select').onchage('<%= escape_javascript render 'search_signed_in' %>');
-$('#type_select').onchange("<%=j render partial: 'search_form' %>"));
