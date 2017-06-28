@@ -21,7 +21,7 @@
 #  rental        :boolean
 #  charge_stripe :string
 #  accessories   :string
-#
+
 
 class Charge < ApplicationRecord
   belongs_to :user

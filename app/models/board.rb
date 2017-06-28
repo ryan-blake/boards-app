@@ -100,8 +100,8 @@ end
      end
   end
 
-  def pretty_print
-     "$#{price}.00 by #{title}. "
+  def pretty_price
+     "$#{price}.00 "
   end
 
   def sellable?
@@ -118,10 +118,8 @@ end
     end
   end
 
-
-
   def items?
-    "#{title} #{type.name} $#{price}"
+    "#{title} #{type.name} #{category.name} #{length}"
   end
 
   def surfable?

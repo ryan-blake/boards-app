@@ -13,6 +13,7 @@ var openExtended = document.getElementById('open-extended');
 var extended = document.getElementById('extended-search');
 var type_select = document.getElementById('type_select');
 var mainSearch = document.getElementById('mainsearch');
+var type_value = document.getElementById('type-value')
   openExtended.onclick = function() {
      if(extended.style.display == 'none') {
        this.innerHTNL = 'Close Extended';
@@ -25,6 +26,7 @@ var mainSearch = document.getElementById('mainsearch');
 
 type_select.onchange = function() {
   mainSearch.style['display'] = 'block'
+
   $(".sk-circle").hide();
   // show spinner on AJAX start
   $(document).ajaxStart(function(){
@@ -36,6 +38,13 @@ type_select.onchange = function() {
   }
 
 });
+function updateTextArea(source){
+ var value = source;
+ alert(value);
+ var type_val = document.getElementById('show_type');
+  type_val.innerHTML = value
+  document.getElementById('hidden_type').value = value;
+};
 
 
 $(window).scroll(function(){
@@ -46,15 +55,14 @@ $(window).scroll(function(){
     });
   });
 
-
 </script>
 
 <% end %>
 <span id="top" name="top" style="display:block;position:relative;top:-50px;"></span>
 <div id="type_select">
 <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
-<span class="input-group-btn">
-  <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, {prompt: "Choose type"},{id:'type-select' ,class: "typesone form-control"}) %>
+<span id="type-value" class="input-group-btn">
+  <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %> #-> f is a form tag this you use this form
 </span>
 
 <% submit_tag "Submit" %>
@@ -62,6 +70,11 @@ $(window).scroll(function(){
 <style>
 .typesone:active {
  background-color:black;
+}
+#type-select {
+  width:100%;
+  height:35px;
+  font-size:15px;
 }
 </style>
 

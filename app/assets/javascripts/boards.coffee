@@ -21,7 +21,7 @@ jQuery ->
   $("#category-select").hide();
 
   $("#type-select").change ->
-    $("#category-select").show();
+    $("#category-select").show(0);
 
 jQuery ->
   subcat = $('#category-select').html()
@@ -30,7 +30,6 @@ jQuery ->
     options = $(subcat).filter("optgroup[label='#{type}']").html()
     if options
       $('#category-select').html(options)
-      console.log('hi');
     else
       $('#category-select').empty()
 $ ->

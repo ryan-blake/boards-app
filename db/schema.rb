@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20170622191036) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",                              default: false
-    t.datetime "list_time",                           default: '2017-06-23 18:42:22'
+    t.datetime "list_time",                           default: '2017-06-27 20:46:29'
     t.integer  "inventory",                           default: 0
     t.integer  "cost"
     t.integer  "margin"
@@ -203,10 +203,10 @@ ActiveRecord::Schema.define(version: 20170622191036) do
 
   create_table "sizes", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.integer  "board_id"
-    t.integer  "unit_id"
+    t.integer  "unit_id",                            default: 1
     t.integer  "feet"
     t.integer  "inches"
     t.decimal  "length",     precision: 5, scale: 2

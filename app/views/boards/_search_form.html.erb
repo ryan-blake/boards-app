@@ -7,11 +7,13 @@
 }
 
 </style>
+
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
     <div class="row board-search-form">
       <div class="main-form width:80% padding-left:5% padding-right:5%">
+        <span><%= hidden_field_tag :type_id, nil,:id => "hidden_type", :value => ''%></span>
       <%= grouped_collection_select nil, :category_id, Type.all, :categories,
-                   :name, :id, :name, { prompt: 'Select Category' },
+                   :name, :id, :name, { include_blank:true },
                    { id: 'category-select' , class: "form-control"} %>
       <%= collection_select(nil, :make, Board.where(:for_sale => true).order(:make).distinct.sort, :make, :make, {prompt: "Select Brand"},{ class: "form-control" }) %>
       <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
@@ -21,13 +23,16 @@
         Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
       </div>
 </div>
+
+
+
 <div style="position:relative;float:right;">
        <span id="open-extended" class="pull-right" style=" margin-right:20px;cursor:pointer;text-decoration:underline;display:block;"> Extend Search </span>
+        <div id="show_type"> hi </div>
        <div id="extended-search" style="display:none;">
          <div class="col-lg-6">
            <div class="input-group">
              <span class="input-group-btn">
-               <!-- <% hidden_field_tag :type_id %>  -->
                <%= collection_select(nil, :company, User.all.order(:company).distinct.sort, :company, :company, {prompt: "Choose co"},{ class: "form-control" }) %>
               </span>
               <div class="col-sm-4" style="top: 0;width: 50%;float: right;">

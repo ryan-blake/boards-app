@@ -192,6 +192,9 @@ transactions = Stripe::BalanceTransaction.all(
     @board = Board.new
     accessory = @board.accessories.build
     size = @board.build_size
+    respond_to do |format|
+        format.js
+      end
   end
 
   # GET /boards/1/edit
@@ -257,29 +260,22 @@ transactions = Stripe::BalanceTransaction.all(
     end
   end
 def search_type
-  @boards = Board.where(rental: false, :for_sale => [true], type_id: "#{params[:type_id]}")
+  @boards = Board.where(rental: false, :for_sale => [true], type_id: "#{params[:type_id]}").where("inventory >= ?", 1)
   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 end
 
  def search_signed_in
    if params[:value].empty?
      distance_in_miles = 3
-     if params[:category_id]
-       params[:type_id] = cat2type(params[:category_id].to_i)
-     end
    else
      distance_in_miles = params[:value]
-     if params[:category_id]
-       params[:type_id] = cat2type(params[:category_id].to_i)
-     end
    end
 
    if params[:search].empty?
 
      @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
-             "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-
+             "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1)
              # price
              if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
                @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
@@ -338,7 +334,8 @@ end
                   end
                  @boards  = @boards.min_length_search(1).max_length_search(b)
                else
-                 @boards  = @boards.min_length_search(1).max_length_search(9999)
+                 @boards  = @boards.min_length_search(0).max_length_search(9999)
+
                end
              end
 
@@ -408,7 +405,7 @@ else
 
    @boards = @boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
-           "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%") \
+           "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1) \
             .near(params[:search], distance_in_miles)
             # price
             if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1

@@ -16,6 +16,7 @@
       <!-- begin view -->
 <div class="title center-text">
   <strong><%= @board.title %></strong>
+    <strong><%= @board.length %></strong>
 </div>
   <div class="image-box center-text" id="images" style="">
     <%= render partial: 'images', locals: {board: @board}  %>

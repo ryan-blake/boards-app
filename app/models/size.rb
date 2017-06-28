@@ -20,7 +20,6 @@ class Size < ApplicationRecord
   has_many :boards
   belongs_to :unit
   belongs_to :categories, optional: true
-
   after_validation :create_length
   after_save :board_length
   after_update :board_length, if: ->(obj){ obj.length_changed?}

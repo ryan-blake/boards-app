@@ -33,8 +33,6 @@ class Accessory < ApplicationRecord
   after_validation :save_category
 
 
-
-
 private
 
   def save_category
