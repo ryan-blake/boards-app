@@ -9,20 +9,23 @@ country: "US"
 });
 
 $(document).ready(function() {
-var openExtended = document.getElementById('open-extended');
-var extended = document.getElementById('extended-search');
-var type_select = document.getElementById('type_select');
-var mainSearch = document.getElementById('mainsearch');
-var type_value = document.getElementById('type-value')
-  openExtended.onclick = function() {
-     if(extended.style.display == 'none') {
-       this.innerHTNL = 'Close Extended';
-       extended.style['display'] = 'block';
-     } else if (extended.style.display == 'block') {
-       extended.style['display'] = 'none';
-       this.innerHTNL = 'Open Extended';
-     }
-  };
+
+  var type_select = document.getElementById('type_select');
+  var mainSearch = document.getElementById('mainsearch');
+  var openExtended = document.getElementById('open-extended');
+  var extended = document.getElementById('extended-search');
+  var type_select = document.getElementById('type_select');
+  var mainSearch = document.getElementById('mainsearch');
+  var type_value = document.getElementById('type-value')
+    openExtended.onclick = function() {
+       if(extended.style.display == 'none') {
+         this.innerHTNL = 'Close Extended';
+         extended.style['display'] = 'block';
+       } else if (extended.style.display == 'block') {
+         extended.style['display'] = 'none';
+         this.innerHTNL = 'Open Extended';
+       }
+    };
 
 type_select.onchange = function() {
   mainSearch.style['display'] = 'block'
@@ -36,11 +39,9 @@ type_select.onchange = function() {
     $(".sk-circle").delay(400).hide(0);
   });
   }
-
 });
 function updateTextArea(source){
  var value = source;
- alert(value);
  var type_val = document.getElementById('show_type');
   type_val.innerHTML = value
   document.getElementById('hidden_type').value = value;
@@ -51,7 +52,6 @@ $(window).scroll(function(){
     //Click event to scroll to top
     $(".next").click(function(){
         $('html, body').animate({scrollTop : 200},0);
-
     });
   });
 
@@ -67,7 +67,10 @@ $(window).scroll(function(){
 
 <% submit_tag "Submit" %>
 <% end %>
+</div>
+
 <style>
+
 .typesone:active {
  background-color:black;
 }
@@ -78,14 +81,16 @@ $(window).scroll(function(){
 }
 </style>
 
-  </div>
-<div id="mainsearch" style="display:none;">
-<%= render partial: 'search_form' %>
+
+<div id="mainsearch" style='display:none;'>
+  <%= render partial: 'search_form'%>
+
 </div>
 <br>
 <div>
   <%= render partial: 'search_signed_in'%>
 </div>
+
 
 <div style="position:fixed;bottom:20px;right:30px;">
   <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>
