@@ -91,25 +91,26 @@ $(window).scroll(function(){
     <div style="position:absolute;top:300px;width:100%;">
       <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
-        <%= render partial: 'featured', locals: {boards: @boards} %>
+        <%= render partial: 'featured', locals: {boards: @surf} %>
       </div>
       <hr class="style13">
 
       <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
-        <%= render partial: 'featured', locals: {boards: @boards} %>
+        <%= render partial: 'featured', locals: {boards: @snow} %>
       </div>
       <hr class="style13">
 
       <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
-        <%= render partial: 'featured', locals: {boards: @boards} %>
+        <%= render partial: 'featured', locals: {boards: @skate} %>
       </div>
       <hr class="style13">
 
       <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
-        <%= render partial: 'featured', locals: {boards: @boards} %>
+        <% @wake = @wake.where.not(user_id: current_user.id) %>
+        <%= render partial: 'featured', locals: {boards: @wake} %>
       </div>
       <hr class="style13">
 
