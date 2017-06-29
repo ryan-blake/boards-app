@@ -25,7 +25,7 @@
   <% @boards.each do |board| %>
     <tbody class="items" style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;">
       <td class="" style="max-height:150px;min-width:150px;max-width:150px;">
-          <div class="desktop-items-img" style="width:120px;height:120px;">
+          <div class="desktop-items-img" style="width:150px;height:150px;">
           <!-- <%= link_to  image_tag("surf_girl.jpg", width: 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
             <%= link_to attachment_image_tag(board.images.last, :file, :fill, 150, 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
           </div>
