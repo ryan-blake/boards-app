@@ -7,7 +7,7 @@
   <%= board.title %>
   <div class="boardImage" id="surfModalBtn" style="padding: 0 9px;cursor:pointer">
     <!-- <%= link_to  image_tag("surf_girl.jpg", width: 130), board, remote: true, data: { toggle: "modal", target: "#surfModal" }%> -->
-    <%= link_to attachment_image_tag(board.images.last, :file, :fill, 130, 130), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+    <%= link_to attachment_image_tag(board.images.first, :file, :fill, 130, 130), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
   </div>
     <span class="center-text"><%= board.make %> </span>
     <br>

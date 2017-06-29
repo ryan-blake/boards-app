@@ -180,7 +180,8 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
 <% end %>
   <div id="forsale">
   <% if current_user %>
-    <% elsif current_user.owner?(@board) %>
+    <% if current_user.owner?(@board) %>
     <%= render partial: 'forsale', locals: {board: @board} %>
+    <% end %>
    <% end %>
   </div>
