@@ -13,7 +13,10 @@ var openExtended = document.getElementById('open-extended');
 var extended = document.getElementById('extended-search');
 var type_select = document.getElementById('type_select');
 var mainSearch = document.getElementById('mainsearch');
-var type_value = document.getElementById('type-value')
+var type_value = document.getElementById('type-value');
+var featuredDiv = document.getElementById('featured-boards');
+
+
   openExtended.onclick = function() {
      if(extended.style.display == 'none') {
        this.innerHTNL = 'Close Extended';
@@ -26,6 +29,7 @@ var type_value = document.getElementById('type-value')
 
 type_select.onchange = function() {
   mainSearch.style['display'] = 'block'
+  featuredDiv.style['display'] = 'none'
   $(".sk-circle").hide();
   // show spinner on AJAX start
   $(document).ajaxStart(function(){
@@ -74,6 +78,28 @@ $(window).scroll(function(){
 }
 </style>
 
+  </div>
+  <div id="featured-boards" style="display:block;min-width:100%;height:300px;position:relative;background-color:black;">
+    <h1 class="center-text" style="left:calc(50% - 50px);position:absolute;top:30%;color:white;"> kuivir </h1>
+    <h3 style="color:white;bottom:0px;position:absolute;"> Buy and sell new or used Boards from Shops, individuals and shapers. </h3>
+    <div style="position:absolute;top:300px;">
+      <h3 style="position:relative;"> Surf </h3>
+      <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+        <%= render partial: 'featured' %>
+      </div>
+    <h3 style="position:relative;"> Snow </h3>
+    <div style="position:absolute;top:20px;display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+      <%= render partial: 'featured' %>
+    </div>
+    <h3 style="position:relative;"> Skate </h3>
+    <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+      <%= render partial: 'featured' %>
+    </div>
+  <h3 style="position:relative;"> Wake </h3>
+  <div style="position:absolute;top:20px;display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+    <%= render partial: 'featured' %>
+  </div>
+</div>
   </div>
 <div id="mainsearch" style="display:none;">
 <%= render partial: 'search_form' %>
