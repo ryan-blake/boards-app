@@ -1,21 +1,27 @@
-boards<% if @boards.count >= 1%>
- <%  @boards.each do |i| %>
-<tr class="panel col-sm-6" style="float:right;max-height:195px;min-height:200px;max-height:200px;position:relative;padding:0;background-color:white;min-width:25%;">
+<% if boards.count >= 1%>
+ <%  boards.each_with_index do |i, index| %>
+ <% if index < 10 %>
+ <tbody style="float:right;min-width:180px;max-height:195px;min-height:200px;max-height:200px;position:relative;padding:0;background-color:white;min-width:25%;">
+<tr class="" style="">
    <td class="vendor-link" style="cursor:pointer;">
 <div class="center-text">
   <%= link_to i.title, i, remote: true, data: { toggle: "modal", target: "#newModal" } %>
-  <div class="boardImage"  style="cursor:pointer">
-    <%= link_to attachment_image_tag(i.images.last, :file, :fill, 150, 150), i, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+  <div class="boardImage"  style="padding: 0 9px;cursor:pointer">
+    <%= link_to  image_tag("surf_girl.jpg", width: 130), i, remote: true, data: { toggle: "modal", target: "#newModal" }%>
 
+    <!-- <%= link_to attachment_image_tag(i.images.last, :file, :fill, 150, 150), i, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
   </div>
-    <span class="center-text"><%= i.type.name %></span><strong><br><span>$<%= i.price %>.00</strong></span>
+    <span class="center-text"><%= i.make %> </span>
+    <br>
+    <span class="center-text"><%= i.category.name %>  <strong>$<%= i.price %>.00</strong></span>
   </td>
 </div>
 </tr>
+</tbody>
 <% end %>
-<% else %>
-<%= render partial: 'boards/none' %>
 <% end %>
+<% end %>
+
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
    <div class="modal-dialog modal-lg" role="document">
      <div class="modal-header">
@@ -23,7 +29,5 @@ boards<% if @boards.count >= 1%>
      </div>
      <div class="modal-content">
      </div>
-   </div>
-   <div class="center-text" id="paginator">
    </div>
  </div>

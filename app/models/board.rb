@@ -119,7 +119,7 @@ end
   end
 
   def items?
-    "#{title} #{type.name} #{category.name} #{length}"
+    "#{title} #{type.name}"
   end
 
   def surfable?

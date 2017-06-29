@@ -43,6 +43,7 @@ var hideAccess = document.getElementById('accessoryBtnHide');
 var access = document.getElementById('searchAccessories');
 openAccess.style.display = 'flex';
 hideAccess.style.display = 'none';
+
 openAccess.onclick = function() {
  if(this.style.display == 'flex') {
    this.style['display'] = 'none';
@@ -58,13 +59,16 @@ hideAccess.onclick = function() {
  }
 };
 });
+
 </script>
 <div style="posisition:relative;" class="col-sm-12 col-md-12 col-lg-12">
   <div id="accessoryBtnOpen" style="center-text display:flex;" class="btn btn-success">Search Accessories </div>
+
   <div id="accessoryBtnHide" style="center-test display:none;background-color:darkgreen;" class="btn btn-primary">Hide</div>
 </div>
 <div id="searchAccessories"  style="display:none;" class="col-md-9">
   <%= render 'accessories/search_accessories_form' %>
+
 </div>
 <!-- shop accessories by type -->
 <div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
@@ -72,6 +76,7 @@ hideAccess.onclick = function() {
 <!--  -->
 <!-- section -->
   <% if @board.rental %>
+
   <div class="rental-div" style="min-height:100%;">
         <div class="rent-dates">
           <span class="center-text">
