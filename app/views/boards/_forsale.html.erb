@@ -12,7 +12,7 @@
     <%= button_tag "list!", id: 'list-btn', class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Listing..."}, remote: true %>
     <% else %>
     <small> not enough of tokens </small>
-    <% end %>            
+    <% end %>
   </div>
 
   <% elsif @board.for_sale == false && @board.pending == true && @board.user_id == current_user.id %>

@@ -1,0 +1,7 @@
+$("#forsale").html("<%= render "forsale", board: @board %>");
+$("#images").html("<%=j render partial: 'images' %>");
+$("#surfModal .modal-content").html('<%= j render partial: "featured_show" %>');
+$("#surfModal").modal()
+$("#pickup").html("<%=j render partial: 'charge' %>");
+$("#delivery").html("<%=j render partial: 'chargeshow' %>");
+$("#boardAccessories").html("<%=j render partial: 'accessories/search_accessories' %>");

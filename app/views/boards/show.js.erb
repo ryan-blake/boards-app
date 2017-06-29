@@ -1,7 +1,15 @@
 $("#forsale").html("<%=j render partial: 'forsale' %>");
 $("#images").html("<%=j render partial: 'images' %>");
-$("#newModal .modal-content").html('<%= j render partial: "show" %>');
-$("#newModal").modal()
+
+var seeing_search = $('#category_ids').is(':visible')
+if (seeing_search) {
+  $("#newModal .modal-content").html('<%= j render partial: "show" %>');
+  $("#newModal").modal()
+} else {
+  $("#surfModal .modal-content").html('<%= j render partial: "show" %>');
+  $("#surfModal").modal()
+};
+
 $("#pickup").html("<%=j render partial: 'charge' %>");
 $("#delivery").html("<%=j render partial: 'chargeshow' %>");
 $("#boardAccessories").html("<%=j render partial: 'accessories/search_accessories' %>");

@@ -1,5 +1,7 @@
 <% if @accessories.count >= 1%>
  <%  @accessories.each do |i| %>
+
+   </script>
 <tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="panel col-sm-6" style="max-height:195px;min-height:160px;position:relative;padding:0;background-color:white;min-width:25%;">
    <td class="vendor-link" style="cursor:pointer;">
 <div class="center-text">
@@ -13,6 +15,7 @@
     <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %>.00</strong></span>
     <div style="z-index:999;position:relative;bottom:0;"  id="<%=i.id %>" class="accessory_div btn btn-success">Add</div>
   </td>
+
 </div>
 </tr>
 <% end %>
@@ -21,10 +24,17 @@
 <% end %>
 
 <script>
+
 $('#newModal').on('show.bs.modal', function (e) {
   sessionStorage.clear()
 });
 $('#newModal').on('hide.bs.modal', function (e) {
+  sessionStorage.clear()
+});
+$('#surfModal').on('show.bs.modal', function (e) {
+  sessionStorage.clear()
+});
+$('#surfModal').on('hide.bs.modal', function (e) {
   sessionStorage.clear()
 });
 
@@ -32,6 +42,7 @@ $('#newModal').on('hide.bs.modal', function (e) {
 var pricing = document.getElementById('showPrice');
 if (sessionStorage.accessoriesPriceTotal){
   pricing.innerHTML = sessionStorage.accessoriesPriceTotal
+
 } else {
   var prices = $('#showPrice').data('board');
   pricing.innerHTML = prices
@@ -154,6 +165,7 @@ $(function(){
     price = $(this).closest("tr").data("price");
 
     if (loadSelectedAccessories().indexOf(accessory_div.id) < 0) {
+
       // not taken
       this.innerHTML = "Remove"
       clickAccessory(accessory_div, price);
