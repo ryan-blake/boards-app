@@ -1540,8 +1540,9 @@ z-index: 1;
    display:none;
  }
 
- tbody .items {
-   max-width:110px;
+    .items {
+   max-width:125px !important;
+   padding-right:3px;
  }
 }
 
