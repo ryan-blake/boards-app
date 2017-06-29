@@ -1,6 +1,5 @@
 <% if @accessories.count >= 1%>
  <%  @accessories.each do |i| %>
-
    </script>
 <tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="panel col-sm-6" style="max-height:195px;min-height:160px;position:relative;padding:0;background-color:white;min-width:25%;">
    <td class="vendor-link" style="cursor:pointer;">
@@ -54,7 +53,6 @@ $(document).ready(function() {
     price = $(this).closest("tr").data("price");
 
     if ($(this).hasClass("panel-success")) {
-
       // prices -= price
     } else {
       alert(id)
@@ -165,7 +163,6 @@ $(function(){
     price = $(this).closest("tr").data("price");
 
     if (loadSelectedAccessories().indexOf(accessory_div.id) < 0) {
-
       // not taken
       this.innerHTML = "Remove"
       clickAccessory(accessory_div, price);

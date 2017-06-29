@@ -2,14 +2,22 @@ $("#forsale").html("<%=j render partial: 'forsale' %>");
 $("#images").html("<%=j render partial: 'images' %>");
 
 var seeing_search = $('#category_ids').is(':visible')
+var featured = $('#featured-boards').is(':visible')
+
 if (seeing_search) {
   $("#newModal .modal-content").html('<%= j render partial: "show" %>');
   $("#newModal").modal()
 } else {
+
+};
+if (featured) {
   $("#surfModal .modal-content").html('<%= j render partial: "show" %>');
   $("#surfModal").modal()
-};
 
+} else {
+
+alert('wtf')
+};
 $("#pickup").html("<%=j render partial: 'charge' %>");
 $("#delivery").html("<%=j render partial: 'chargeshow' %>");
 $("#boardAccessories").html("<%=j render partial: 'accessories/search_accessories' %>");
