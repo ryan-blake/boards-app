@@ -1539,6 +1539,11 @@ z-index: 1;
  .desktop-items-img {
    display:none;
  }
+
+ tbody .items {
+   max-width:120px;
+   min-width:120px;
+ }
 }
 
 @media (max-width: 350px) {
