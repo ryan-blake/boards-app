@@ -29,7 +29,7 @@
           <!-- <%= link_to  image_tag("surf_girl.jpg", width: 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
             <%= link_to attachment_image_tag(board.images.last, :file, :fill, 150, 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
           </div>
-          <div class="mobile-items-img">
+          <div class="mobile-items-img center-text">
             <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
 <!-- # <%= link_to  image_tag("surf_girl.jpg", width: 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
           </div>
@@ -37,7 +37,7 @@
             <%= board.items? %>
           <br>
           </span>
-          <span class="center-text" style="max-width:100%;position:relative;overflow-x:hide;margin-top:15px;">
+          <span class="center-text" style="max-width:140px;position:relative;overflow-x:hide;margin-top:15px;">
             <% unless board.surfable? %>
             <strong><%= board.size.pretty_dimensions %></strong>
             <% else %>
