@@ -88,6 +88,12 @@ color:white;
   background-color: lightgrey !important;
 }
 
+.featured-div {
+    background-color: rgba(2,185,250, .5);
+    object-fit: fill;
+}
+
+
 .single_table {
   border: 1px solid black;
 }
@@ -584,7 +590,7 @@ div.hidden { display: none; }
  padding-bottom:30px;
  border:none;
  border-radius: 0;
- background-color: #AD90D4;
+background-color: #27ae60;
  a {
    color:white;
    text-decoration: none;
@@ -663,7 +669,7 @@ fieldset[disabled] .btn-sort.active {
 //newinverse
 .btn-inverse {
   color: #ffffff !important;
-  background-color: #AD90D4;
+  background-color: rgba(2,185,250, .5);;
   text-decoration: none;
   border-color: none;
   position: absolute;
@@ -705,12 +711,12 @@ fieldset[disabled] .btn-inverse:active,
 .btn-inverse.disabled.active,
 .btn-inverse[disabled].active,
 fieldset[disabled] .btn-inverse.active {
-  background-color: #AD90D4;
+  background-color: rgba(2,185,250, .5);;
   border-color: #F0F0F0;
 }
 
 .btn-inverse .badge {
-  color: #AD90D4;
+  color: rgba(2,185,250, .5);;
   background-color: #ffffff;
 }
 // oldinverse
@@ -739,7 +745,7 @@ fieldset[disabled] .btn-inverse.active {
 }
 .dash-nav-desktop button{
 height:50px;
-background-color:#AD90D4;
+background-color:rgba(2,185,250, .5);;
 color:white;
 border-color:white;
 a {

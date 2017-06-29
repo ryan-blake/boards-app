@@ -9,23 +9,23 @@ $("#geo-input").geocomplete();
 });
 
 $(document).ready(function() {
-var openExtended = document.getElementById('open-extended');
-var extended = document.getElementById('extended-search');
+  alert('hi')
+
 var type_select = document.getElementById('type_select');
 var mainSearch = document.getElementById('mainsearch');
 var type_value = document.getElementById('type-value')
-  openExtended.onclick = function() {
-     if(extended.style.display == 'none') {
-       this.innerHTNL = 'Close Extended';
-       extended.style['display'] = 'block';
-     } else if (extended.style.display == 'block') {
-       extended.style['display'] = 'none';
-       this.innerHTNL = 'Open Extended';
-     }
-  };
+var featured =  document.getElementById('featured');
+var signed_search =  document.getElementById('search-signed-in');
+
 
 type_select.onchange = function() {
+  alert('hi3')
+
   mainSearch.style['display'] = 'block'
+  signed_search.style['display'] = 'block'
+  featured.style['display'] = 'none'
+  $("featured-div").hide();
+
   $(".sk-circle").hide();
   // show spinner on AJAX start
   $(document).ajaxStart(function(){
@@ -37,25 +37,19 @@ type_select.onchange = function() {
   }
 });
 function updateTextArea(source){
+  alert('hi4')
  var value = source;
  var type_val = document.getElementById('show_type');
   type_val.innerHTML = value
   document.getElementById('hidden_type').value = value;
-  if (value == 1) {
-    alert(value)
-  }
 };
-
-
 $(window).scroll(function(){
     //Click event to scroll to top
     $(".next").click(function(){
         $('html, body').animate({scrollTop : 200},0);
     });
   });
-
 </script>
-
 <% end %>
 <span id="top" name="top" style="display:block;position:relative;top:-50px;"></span>
 <div id="type_select">
@@ -63,9 +57,20 @@ $(window).scroll(function(){
 <span id="type-value" class="input-group-btn">
   <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %> #-> f is a form tag this you use this form
 </span>
-
 <% submit_tag "Submit" %>
 <% end %>
+
+<div  id="featured" style='display:block;'>
+  <div class="featured-div" style="top:-20px;position:relative;min-height:300px;max-height:300px;min-width:!00%;">
+    <h1 class="center-text" style="color:black;"> Welcome </h1>
+    <h5 class="pull-right" style="right:1px;color:black;position:absolute;top:20%;">Find New/Used boards from shops, shapers and individuals</h5>
+    <h3 style="color:black;position:absolute;bottom:10px;">Featured Boards </h3>
+  </div>
+  <div style="position:relative;">
+    <%= render partial: 'featured'%>
+  </div>
+</div>
+
 <style>
 .typesone:active {
  background-color:black;
@@ -76,15 +81,16 @@ $(window).scroll(function(){
   font-size:15px;
 }
 </style>
-
-  </div>
-<div id="mainsearch" style="display:none;">
-<%= render partial: 'search_form' %>
 </div>
-<br>
-<div>
+
+<div id="mainsearch" style="display:none;">
+  <%= render partial: 'search_form'%>
+</div>
+<div id='search_signed-in' style='position:absolute;top:300px;display:none;width:100%;'>
   <%= render partial: 'search_signed_in'%>
 </div>
+<br>
+
 
 <div style="position:fixed;bottom:20px;right:30px;">
   <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>

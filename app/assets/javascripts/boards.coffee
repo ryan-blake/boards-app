@@ -23,25 +23,8 @@ jQuery ->
   $("#type-select").change ->
     $("#category-select").show(0);
 
-jQuery ->
-  subcat = $('#category-select').html()
-  $('#category-select').click ->
-    type = jQuery('#type-select').children('option').filter(':selected').text()
-    options = $(subcat).filter("optgroup[label='#{type}']").html()
-    if options
-      $('#category-select').html("<option value=''></option>" + options)
-      $('#category-select option:first').attr("selected", "selected");
-      $('#category-select').html(options)
-    else
-      $('#category-select').empty()
 $ ->
   $(document).on 'change', '#type-select', (evt) ->
-    $.ajax 'index',
-      type: 'GET'
-      dataType: 'script'
-      data: {
-        type_id: $("#type-select option:selected").val()
-      },
         $.ajax '/boards/search_type',
           type: 'GET'
           dataType: 'script'
