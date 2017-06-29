@@ -1,0 +1,87 @@
+<table class="container-fluid index-results " id="featured-results" style="">
+  <% if @boards.length == 0 %>
+      <%= render partial: 'boards/none' %>
+    <% end %>
+    <% if current_user %>
+      <% @boards = current_user.not_my_boards(@boards) %>
+    <% end %>
+  <thead>
+    <td>
+      <div class="center-text" id="paginator">
+      </div>
+      <tr>
+
+      </tr>
+    </td>
+  </thead>
+<% @boards.each do |board| %>
+  <tbody class="items" style="max-height: 150px;min-height:150px;min-width:120px !important;float:left;display:inline-flex;">
+    <td class="" style="max-height:150px;min-width:120px;max-width:150px;">
+        <div class="desktop-items-img">
+          hi
+          <%= link_to attachment_image_tag(board.images.last, :file, :fill, 150, 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+        <!-- <%= link_to  image_tag("surf_girl.jpg", width: 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%></div> -->
+        <div class="mobile-items-img">
+          <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+        <!-- <%= link_to  image_tag("surf_girl.jpg", width: 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%></div> -->
+        <span class="center-text" style="position:relative;overflow-x:hide;margin-top:15px;">
+          <%= board.items? %>
+        <br>
+        </span>
+        <span class="center-text" style="position:relative;overflow-x:hide;margin-top:15px;">
+          <% unless board.surfable? %>
+          <strong><%= board.size.pretty_dimensions %></strong>
+          <% else %>
+          <strong>  <%= board.size.pretty_surf %></strong>
+          <% end %>
+          <strong class="pull-right" style="margin-left:50%;">  <%= board.pretty_price%></strong>
+          <hr class="style13">
+        </span>
+    </td>
+  </tbody>
+<% end %>
+
+      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
+         <div class="modal-dialog modal-lg" role="document">
+           <div class="modal-header">
+             <button type="button" class="close" style="background-color:black;width:100%;height:30px;border-radius:2%;color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">CLOSE</span></button>
+           </div>
+           <div class="modal-content">
+           </div>
+         </div>
+         <div class="center-text" id="paginator">
+         </div>
+       </div>
+       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"  id="accModal">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-header">
+              <button type="button" class="close" style="background-color:black;width:100%;height:30px;border-radius:2%;color:white;" id="dismissAccModal" aria-label="Close"><span aria-hidden="true">CLOSE</span></button>
+            </div>
+            <div style="background-color:lightgrey;" class="modal-content">
+            </div>
+          </div>
+          <div class="center-text" id="paginator">
+          </div>
+        </div>
+    <tbody>
+      <td>
+        <div class="center-text" id="paginator">
+
+        </div>
+      </td>
+    </tbody>
+  </table>
+<script>
+  $( document ).ready(function() {
+// hide spinner
+$(".sk-circle").hide();
+// show spinner on AJAX start
+$(document).ajaxStart(function(){
+  $(".sk-circle").show();
+});
+$(document).ajaxStop(function(){
+  $(".sk-circle").delay(400).hide(0);
+});
+// hide spinner on AJAX stop
+});
+</script>

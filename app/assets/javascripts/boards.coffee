@@ -36,12 +36,6 @@ jQuery ->
       $('#category-select').empty()
 $ ->
   $(document).on 'change', '#type-select', (evt) ->
-    $.ajax 'index',
-      type: 'GET'
-      dataType: 'script'
-      data: {
-        type_id: $("#type-select option:selected").val()
-      },
         $.ajax '/boards/search_type',
           type: 'GET'
           dataType: 'script'
