@@ -1367,14 +1367,16 @@ z-index: 1;
 .accessoryImage1 {
   display:none;
 }
+
+.items {
+  padding-left:9% !important;
+}
+
 .mobile-items-img {
   display:none;
 }
 .desktop-items-img {
   display:block;
-}
-.items {
-  padding-left:9% !important;
 }
 // responsive
 
@@ -1531,6 +1533,12 @@ z-index: 1;
  .items {
    padding-left:7.5% !important;
  }
+ .mobile-items-img {
+   display:block;
+ }
+ .desktop-items-img {
+   display:none;
+ }
 }
 
 @media (max-width: 350px) {
@@ -1542,12 +1550,7 @@ z-index: 1;
     max-width:120px !important;
   }
 
-  .mobile-items-img {
-    display:block;
-  }
-  .desktop-items-img {
-    display:none;
-  }
+
   .items {
     padding-left:8% !important;
   }
