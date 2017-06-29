@@ -133,11 +133,21 @@ $(window).scroll(function(){
       <hr class="style13">
       <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+        <% if current_user %>
+          <% @snow = @snow.where.not(user_id: current_user.id) %>
+        <% end %>
+
+        <%= render partial: 'featured', locals: {boards: @snow} %>
       </div>
       <hr class="style13">
 
       <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+        <% if current_user %>
+          <% @skate = @skate.where.not(user_id: current_user.id) %>
+        <% end %>
+
+        <%= render partial: 'featured', locals: {boards: @skate} %>
       </div>
       <hr class="style13">
 
@@ -146,6 +156,8 @@ $(window).scroll(function(){
         <% if current_user %>
         <% @wake = @wake.where.not(user_id: current_user.id) %>
         <% end %>
+
+        <%= render partial: 'featured', locals: {boards: @wake} %>
       </div>
       <hr class="style13">
 
