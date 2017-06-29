@@ -37,13 +37,13 @@
             <%= board.items? %>
           <br>
           </span>
-          <span class="center-text" style="position:relative;overflow-x:hide;margin-top:15px;">
+          <span class="center-text" style="max-width:100%;position:relative;overflow-x:hide;margin-top:15px;">
             <% unless board.surfable? %>
             <strong><%= board.size.pretty_dimensions %></strong>
             <% else %>
             <strong>  <%= board.size.pretty_surf %></strong>
             <% end %>
-            <strong class="pull-right" style="margin-left:50%;">  <%= board.pretty_price%></strong>
+            <strong class="pull-right" style="margin-left:50%;max-wi">  <%= board.pretty_price%></strong>
             <hr class="style13">
           </span>
       </td>
