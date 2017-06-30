@@ -113,6 +113,8 @@ function clickAccessory(accessory_div, price) {
 }
 
 function unclickAccessory(accessory_div, price) {
+  alert(id + 'pane')
+  
   $(accessory_div).removeClass('panel-success');
   $(accessory_div).removeClass('snow-background');
   var accessoriesPriceTotal = sessionStorage.accessoriesPriceTotal;
