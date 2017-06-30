@@ -8,23 +8,24 @@
   </div>
 </div>
 
+<% @board.images.each_with_index do |photo, index| %>
     <!-- Swiper -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="swiper-zoom-container">
-                  <div class="center-text" style="max-height:320px;">
-                    <div class="">
-                      <% @board.images.each_with_index do |photo, index| %>
-                        <%= link_to(image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')),
+
+
+                        <%= link_to(image_tag(attachment_url(photo, :file, :fill, 450, 450, format: 'jpg')),
                           attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
                           data: { lightbox: "example-set", title: "" }) %>
-                      <% end %>
-                    </div>
-                  </div>
+
+
                 </div>
             </div>
         </div>
+        <% end %>
+
         <!-- Add Pagination -->
         <div class="swiper-pagination-img swiper-pagination-white"></div>
         <!-- Add Navigation -->
