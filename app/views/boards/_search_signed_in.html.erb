@@ -11,7 +11,7 @@
         <%= paginate @boards, remote: true, window: 1 %>
         </div>
         <tr>
-          <td class="filtering center-text">
+          <td class="filtering center-text col-md-12">
             <ti> <strong> Sort by: </strong> </ti>
            </ti>
             <div <i style="display:inline;" class="btn btn-sort"> <%= sortable "created_at", "Date" %></i></div>
@@ -23,15 +23,15 @@
       </td>
     </thead>
   <% @boards.each do |board| %>
-    <tbody class="items" style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;">
-      <td class="" style="max-height:150px;min-width:150px;max-width:150px;">
+    <tbody class="items" style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;background-color:white;">
+      <td class="" style="max-height: 150px;min-width:150px;max-width: 150px;padding-right: 5%;padding-left: 10%;background-color:white;">
           <div class="desktop-items-img" style="width:150px;height:150px;">
           <!-- <%= link_to  image_tag("surf_girl.jpg", width: 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
             <%= link_to attachment_image_tag(board.images.last, :file, :fill, 150, 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
           </div>
           <div class="mobile-items-img center-text" style="width:120px;height:120px;">
-            <!-- <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
- <%= link_to  image_tag("surf_girl.jpg", width: 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+            <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
+ <!-- <%= link_to  image_tag("surf_girl.jpg", width: 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
           </div>
           <span class="center-text" style="position:relative;overflow-x:hide;margin-top:15px;">
             <%= board.items? %>
@@ -43,7 +43,7 @@
             <% else %>
             <strong>  <%= board.size.pretty_surf %></strong>
             <% end %>
-            <strong class="pull-right" style="margin-left:50%;max-wi">  <%= board.pretty_price%></strong>
+            <strong class="center-text" style="margin-left:50%;max-wi">  <%= board.pretty_price%></strong>
             <hr class="style13">
           </span>
       </td>
