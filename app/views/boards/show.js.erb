@@ -2,9 +2,10 @@ $("#forsale").html("<%=j render partial: 'forsale' %>");
 $("#images").html("<%=j render partial: 'images' %>");
 
 var seeing_search = $('#category_ids').is(':visible')
+var dashboard = $('#dashboard').is(':visible')
 var featured = $('#featured-boards').is(':visible')
 
-if (seeing_search) {
+if (seeing_search || dashboard) {
   $("#newModal .modal-content").html('<%= j render partial: "show" %>');
   $("#newModal").modal()
 } else {
