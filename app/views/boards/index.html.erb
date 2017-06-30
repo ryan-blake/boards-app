@@ -41,6 +41,7 @@ $("#geo-input").geocomplete();
   country: "US"
 });
 
+
 $(document).ready(function() {
 var openExtended = document.getElementById('open-extended');
 var extended = document.getElementById('extended-search');
@@ -125,10 +126,11 @@ $(window).scroll(function(){
     <div style="position:absolute;top:300px;width:100%;">
       <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
-      <% if current_user %>
-      <% @boards = @boards.where.not(user_id: current_user.id).where(type_id: 1); %>
-      <% end %>
-      <%= render partial: 'featured', locals: {boards: @boards} %>
+        <% if current_user %>
+          <% @surf = @surf.where.not(user_id: current_user.id) %>
+        <% end %>
+        <%= render partial: 'featured', locals: {boards: @surf} %>
+
       </div>
       <hr class="style13">
       <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
@@ -191,3 +193,13 @@ $(window).scroll(function(){
   <div class="sk-circle12 sk-child"></div>
   </div>
 </div>
+<script>
+var swiper = new Swiper('.swiper-container', {
+      pagination: '.swiper-pagination',
+      slidesPerView: 4,
+      centeredSlides: true,
+      paginationClickable: true,
+      spaceBetween: 30
+  });
+
+</script>

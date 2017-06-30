@@ -1,5 +1,9 @@
 <% if boards.count >= 1%>
+<div class="swiper-container">
+<div class="swiper-wrapper">
  <%  boards.each do |board| %>
+     <div class="swiper-slide">
+
  <tbody style="float:right;min-width:180px;max-height:195px;min-height:200px;max-height:200px;position:relative;padding:0;background-color:white;min-width:25%;">
 <tr class="" style="">
    <td class="vendor-link" style="cursor:pointer;">
@@ -16,5 +20,11 @@
 </div>
 </tr>
 </tbody>
+</div>
 <% end %>
 <% end %>
+
+ </div>
+ <!-- Add Pagination -->
+ <div class="swiper-pagination"></div>
+</div>
