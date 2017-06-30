@@ -1,4 +1,4 @@
-  <table class="container-fluid index-results " id="results" style="">
+  <table class="container-fluid index-results " id="results" style="background-color:black;">
     <% if @boards.length == 0 %>
         <%= render partial: 'boards/none' %>
       <% end %>
@@ -24,7 +24,8 @@
     </thead>
   <% @boards.each do |board| %>
     <tbody class="items" style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;background-color:white;">
-      <td class="" style="max-height: 150px;min-width:150px;max-width: 150px;padding-right: 5%;padding-left: 10%;background-color:white;">
+      <td class="" style="max-height: 150px;min-width:150px;max-width: 150px;    margin-right: 5%;
+    margin-left: 10%;background-color:white;">
           <div class="desktop-items-img" style="width:150px;height:150px;">
           <!-- <%= link_to  image_tag("surf_girl.jpg", width: 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
             <%= link_to attachment_image_tag(board.images.last, :file, :fill, 150, 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
