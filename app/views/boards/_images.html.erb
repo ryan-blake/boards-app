@@ -5,7 +5,7 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="swiper-zoom-container">
-                        <%= link_to(image_tag(attachment_url(photo, :file, :fill, 450, 450, format: 'jpg')),
+                        <%= link_to(image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')),
                           attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
                           data: { lightbox: "example-set", title: "" }) %>
                 </div>
@@ -32,7 +32,7 @@
         </style>
 
     <!-- Initialize Swiper -->
-    <% if @board.images.count >= 1 %>
+
     <script>
     var swiper = new Swiper('.swiper-container', {
         zoom: true,
@@ -41,4 +41,3 @@
         prevButton: '.swiper-button-prev'
     });
     </script>
-    <% end %>
