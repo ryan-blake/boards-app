@@ -74,7 +74,7 @@ height:100%;
       width: 40%;
       min-width:150px;
   }
-  .swiper-slide:nth-child(10n) {
+  .swiper-slide:nth-last-child(1n){
       width: 40%;
       padding-right:50px;
       min-width:150px;
