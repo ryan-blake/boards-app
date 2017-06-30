@@ -1,17 +1,7 @@
-<div class="center-text" style="max-height:320px;">
-  <div class="">
-    <% @board.images.each_with_index do |photo, index| %>
-      <%= link_to(image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')),
-        attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
-        data: { lightbox: "example-set", title: "" }) %>
-    <% end %>
-  </div>
-</div>
 
     <!-- Swiper -->
     <div class="swiper-container">
     <% @board.images.each_with_index do |photo, index| %>
-
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="swiper-zoom-container">
@@ -42,6 +32,7 @@
         </style>
 
     <!-- Initialize Swiper -->
+    <% if @board.images.count >= 1 %>
     <script>
     var swiper = new Swiper('.swiper-container', {
         zoom: true,
@@ -50,3 +41,4 @@
         prevButton: '.swiper-button-prev'
     });
     </script>
+    <% end %>
