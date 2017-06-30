@@ -29,9 +29,9 @@ class BoardsController < ApplicationController
       @boards = Board.where(:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
       @surf = Board.where(type_id: 1,:for_sale => [true], :rental => false).where(:arrived => [false]).limit(10)
-      @snow = Board.where(type_id: 2,:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-      @skate = Board.where(type_id: 3,:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-      @wake = Board.where(type_id: 4,:for_sale => [true], :rental => false).where(:arrived => [false]).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+      @snow = Board.where(type_id: 2,:for_sale => [true], :rental => false).where(:arrived => [false]).limit(10)
+      @skate = Board.where(type_id: 3,:for_sale => [true], :rental => false).where(:arrived => [false]).limit(10)
+      @wake = Board.where(type_id: 4,:for_sale => [true], :rental => false).where(:arrived => [false]).limit(10)
 
   # end
       @types = Type.order(:name)
