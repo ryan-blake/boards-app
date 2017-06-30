@@ -100,9 +100,9 @@ $(window).scroll(function(){
 <span id="type-value" class="type_collection">
   <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
 </span>
-
 <% submit_tag "Submit" %>
 <% end %>
+
 <style>
 .typesone:active {
  background-color:black;
