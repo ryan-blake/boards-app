@@ -9,7 +9,7 @@
 </div>
 
     <!-- Swiper -->
-    <div class="swiper-container-img">
+    <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="swiper-zoom-container">
@@ -28,8 +28,8 @@
         <!-- Add Pagination -->
         <div class="swiper-pagination-img swiper-pagination-white"></div>
         <!-- Add Navigation -->
-        <div class="swiper-button-prev-img"></div>
-        <div class="swiper-button-next-img"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </div>
 
     <!-- Swiper CSS -->
@@ -45,10 +45,10 @@
 
     <!-- Initialize Swiper -->
     <script>
-    var swiper = new Swiper('.swiper-container-img', {
+    var swiper = new Swiper('.swiper-container', {
         zoom: true,
-        pagination: '.swiper-pagination-img',
-        nextButton: '.swiper-button-next-img',
-        prevButton: '.swiper-button-prev-img'
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
     });
     </script>
