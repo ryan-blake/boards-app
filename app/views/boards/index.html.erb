@@ -137,7 +137,7 @@ $(window).scroll(function(){
     <h3 style="right:0;padding-right:5px;color:white;bottom:0px;position:absolute;">Your online board market</h3>
     <div style="position:absolute;top:300px;width:100%;">
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
-      <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+      <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;margin-top: -27px;">
         <% if current_user %>
           <% @surf = @surf.where.not(user_id: current_user.id) %>
         <% end %>
@@ -146,7 +146,7 @@ $(window).scroll(function(){
       </div>
       <hr class="style13" style="margin:0;">
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
-      <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+      <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;margin-top: -27px;">
         <% if current_user %>
           <% @snow = @snow.where.not(user_id: current_user.id) %>
         <% end %>
@@ -155,7 +155,7 @@ $(window).scroll(function(){
       <hr class="style13">
 
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
-      <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+      <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;margin-top: -27px;">
         <% if current_user %>
           <% @skate = @skate.where.not(user_id: current_user.id) %>
         <% end %>
@@ -165,7 +165,7 @@ $(window).scroll(function(){
       <hr class="style13">
 
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
-      <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+      <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;margin-top: -27px;">
         <% if current_user %>
         <% @wake = @wake.where.not(user_id: current_user.id) %>
         <% end %>
