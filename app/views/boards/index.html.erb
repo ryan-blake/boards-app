@@ -49,13 +49,19 @@ var type_select = document.getElementById('type_select');
 var mainSearch = document.getElementById('mainsearch');
 var type_value = document.getElementById('type-value');
 var featuredDiv = document.getElementById('featured-boards');
+var searchSigned = document.getElementById('search-result-partial')
+var searchResults = document.getElementById('results');
+
   openExtended.onclick = function() {
      if(extended.style.display == 'none') {
        this.innerHTNL = 'Close Extended';
        extended.style['display'] = 'block';
-     } else if (extended.style.display == 'block') {
+       searchResults.style['top'] = '315px';
+         } else if (extended.style.display == 'block') {
        extended.style['display'] = 'none';
        this.innerHTNL = 'Open Extended';
+       searchResults.style['top'] = '190px';
+
      }
   };
 
@@ -63,7 +69,8 @@ type_select.onchange = function() {
   mainSearch.style['display'] = 'block';
   featuredDiv.style['display'] = 'none';
   type_value.style['top'] = '0';
-  type_value.addClass('form-control');
+  type_value.style['left'] = '5%';
+  searchSigned.style['display'] = 'block';
 
 
   $(".sk-circle").hide();
@@ -116,14 +123,20 @@ $(window).scroll(function(){
     top: 140px;
     left: calc(50% - 55px);
 }
+
+.swiper-button-white {
+  background-color: rgba( 05, 134, 12, .5);
+  border-radius:: 100%;
+  color:white;
+}
 </style>
 
   </div>
-  <div id="featured-boards" style="top:-40px;display:block;min-width:100%;height:300px;position:relative;background-color:black;">
+  <div id="featured-boards" style="top:-40px;display:block;min-width:100%;height:300px;position:relative;background-color:darkslategrey;">
     <h1 class="center-text" style="left:calc(50% - 50px);position:absolute;top:30%;color:white;"> kuivir </h1>
-    <h3 style="color:white;bottom:0px;position:absolute;"> Buy and sell new or used Boards from Shops, individuals and shapers. </h3>
+    <h3 style="right:0;padding-right:5px;color:white;bottom:0px;position:absolute;">Your online board market</h3>
     <div style="position:absolute;top:300px;width:100%;">
-      <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
+      <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
         <% if current_user %>
           <% @surf = @surf.where.not(user_id: current_user.id) %>
@@ -131,8 +144,8 @@ $(window).scroll(function(){
         <%= render partial: 'featured', locals: {boards: @surf} %>
 
       </div>
-      <hr class="style13">
-      <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
+      <hr class="style13" style="margin:0;">
+      <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
         <% if current_user %>
           <% @snow = @snow.where.not(user_id: current_user.id) %>
@@ -142,7 +155,7 @@ $(window).scroll(function(){
       </div>
       <hr class="style13">
 
-      <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
+      <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
         <% if current_user %>
           <% @skate = @skate.where.not(user_id: current_user.id) %>
@@ -152,7 +165,7 @@ $(window).scroll(function(){
       </div>
       <hr class="style13">
 
-      <span class="center-text"><h3 style="color:lightcoral;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
+      <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
         <% if current_user %>
         <% @wake = @wake.where.not(user_id: current_user.id) %>
@@ -168,7 +181,7 @@ $(window).scroll(function(){
 <%= render partial: 'search_form' %>
 </div>
 <br>
-<div>
+<div id="search-result-partial" style="display:none;">
   <%= render partial: 'search_signed_in'%>
 </div>
 

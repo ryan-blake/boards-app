@@ -38,13 +38,13 @@
             <%= board.items? %>
           <br>
           </span>
-          <span class="center-text" style="max-width:140px;position:relative;overflow-x:hide;margin-top:15px;">
+          <span class="center-text" style="max-width:140px;position:relative;overflow-x:hidden;margin-top:15px;">
             <% unless board.surfable? %>
-            <strong><%= board.size.pretty_dimensions %></strong>
+            <strong style="font-weight:200;"><%= board.size.pretty_dimensions %></strong>
             <% else %>
-            <strong>  <%= board.size.pretty_surf %></strong>
+            <strong style="font-weight:200;">  <%= board.size.pretty_surf %></strong>
             <% end %>
-            <strong class="center-text" style="margin-left:50%;max-wi">  <%= board.pretty_price%></strong>
+            <strong class="center-text" style="margin-right:50%;float:left;">  <%= board.pretty_price%></strong>
             <hr class="style13">
           </span>
       </td>

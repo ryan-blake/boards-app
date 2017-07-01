@@ -1,21 +1,22 @@
 <style>
 .main-form .form-control {
-  max-width: 50% !important;
-  margin-left:10% !important;
-  margin-right:10% !important;
-  float:right;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.filtering .btn {
+  font-size: 12px;
 }
 </style>
 
 <%= form_tag({controller: :boards, action: :search_signed_in}, {method: :get, remote: true}) do  %>
     <div class="row board-search-form">
-      <div class="main-form width:80% padding-left:5% padding-right:5%">
+      <div class="main-form" style="">
         <span><%= hidden_field_tag :type_id, nil,:id => "hidden_type", :value => ''%></span>
-<span id="category_ids"></span>
-      <%= collection_select(nil, :make, Board.where(:for_sale => true).order(:make).distinct.sort, :make, :make, {prompt: "Select Brand"},{ class: "form-control" }) %>
-      <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control'  %>
-      <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'distance from (mi.)'} , { :class => 'form-control' })  %>
-      <div style="position:relative;float:right;display:inline;">
+        <span id="category_ids" style="display: flex;width: 45%;margin-left: 2%;width: 51%;"></span>
+      <span style="width: 45%;float: left;top: -34px;position: relative;margin-left: 50%;"><%= collection_select(nil, :make, Board.where(:for_sale => true).order(:make).distinct.sort, :make, :make, {prompt: "Select Brand"},{ class: "form-control" }) %></span>
+      <div style="position: relative;display: inline;margin-left:5%;">
         New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
         Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
       </div>
@@ -23,46 +24,57 @@
 
 
 
-<div style="position:relative;float:right;">
-       <span id="open-extended" class="pull-right" style=" margin-right:20px;cursor:pointer;text-decoration:underline;display:block;"> Extend Search </span>
-        <div id="show_type"> hi </div>
+<div style="position:absolute;left:5%;">
+       <span id="open-extended" class="pull-right" style="cursor:pointer;text-decoration:underline;"> Extend Search </span>
+        <div id="show_type"></div>
        <div id="extended-search" style="display:none;">
          <div class="col-lg-6">
            <div class="input-group">
-             <span class="input-group-btn">
+             <!-- <span class="input-group-btn">
                <%= collection_select(nil, :company, User.all.order(:company).distinct.sort, :company, :company, {prompt: "Choose co"},{ class: "form-control" }) %>
-              </span>
-              <div class="col-sm-4" style="top: 0;width: 50%;float: right;">
+              </span> -->
+              <div class="col-sm-4" style="top: 0;width: 100%;float: left;">
                 <div class="input-group">
-                  <span class="col-md-8 col-lg-12">
+                  <span style="float: left;width: 50%;">
                   <%= number_field :min, params[:min], class: 'form-control', min: 1, placeholder: "Choose price" %>
                   </span>
-                  <span class="col-md-8 col-lg-12">
+                  <span style="float:right;">
                   <%= number_field :max, params[:max], class: 'form-control',min: 1, placeholder: "Choose max" %>
                   </span>
                 </div>
-                <div class="input-group" style="float:left;">
-                  <span class="col-md-8 col-lg-12">
-                  <%= number_field :minimum, params[:minimum], class: 'form-control',min: 1, placeholder: "length min" %>
-                  </span>
-                  <span class="col-md-8 col-lg-12">
-                  <%= number_field :maximum, params[:maximum], class: 'form-control',min: 1, placeholder: "Choose max" %>
-                  </span>
-                <%= collection_select( nil, :unit_id, Unit.all, :id, :name,
-                  { :include_blank => 'Unit'} , { :class => 'form-control' })%>
-                </div>
-                <div class='input-group date' id='starttimepicker'>
+                <!--  -->
+                <div class="input-group">
+                    <span style="float: left;width: 35%;">
+                      <%= number_field :minimum, params[:minimum], class: 'form-control',min: 1, placeholder: "length min" %>
+                    </span>
+                    <span style="float:right;">
+                      <%= number_field :maximum, params[:maximum], class: 'form-control',min: 1, placeholder: "Choose max", style:'width: 62%;right: 35px;' %>
+
+                          <%= collection_select( nil, :unit_id, Unit.all, :id, :name,
+                            { :include_blank => 'Unit'} , { :class => 'form-control', style: 'float: none;width: 65px;right: 35px;' })%>
+
+                    </span>
+                  </div>
+                <!--  -->
+
+                <div class='input-group date' id='starttimepicker' style="float: right;left: 90%;top: 0;position: absolute;width: 50%;">
                   <%= text_field :start_date, params[:start_date], class: 'form-control', placeholder: "Pick Up Date" %>
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                   </span>
                   </div>
-                  <div class='input-group date' id='endtimepicker'>
+                  <div class='input-group date' id='endtimepicker' style="float: right;left: 90%;top: 34px;position: absolute;width: 50%;">
                     <%= text_field :end_date, params[:end_date], class: 'form-control', placeholder: "Drop Off Date" %>
                     <span class="input-group-addon">
                       <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                     </div>
+                    <div class="row">
+                    <div class="input-group">
+                    <%= text_field_tag :search, params[:search],:id => 'geo-input', :class => 'form-control', style: 'left: 5%;width: 112%;'  %>
+                    <%= collection_select( nil, :value, Distance.all, :value, :value, { :include_blank => 'distance from (mi.)'} , { :class => 'form-control', style: 'float: right;top: 0;position: absolute;left: 117%;' })  %>
+                    </div>
+                  </div>
 
                 <!-- <%= text_field :start_time, "data-provide" => 'datepicker' %>
                 <%= text_field :end_time, "data-provide" => 'datepicker1' %> -->
@@ -74,16 +86,17 @@
 </script>
     </div>
     </div><!-- /.col-lg-6 -->
-  :<span class="check-box-search" style="display:inline;position: relative;left: 60%;">Rental: <%= check_box_tag :rental, params[:rental] %> </span>
+  :<span class="check-box-search" style="display: inline;position: absolute;left: 109%;width: 100%;bottom: 24px;">Rental: <%= check_box_tag :rental, params[:rental] %> </span>
   </div><!-- /.col-lg-6 -->
 <!-- /.row -->
 <div class="col-lg-12 search-bar">
    <div class="input-group">
      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
-     <span class="input-group-btn">
-       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+     <span class="input-group-btn" >
+       <%= button_tag "Go!", style:'background-color:darkslategrey;border:1px solid darkslategrey;' ,class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
      </span>
    </div><!-- /input-group -->
  </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
 <% end %>
+</div>
