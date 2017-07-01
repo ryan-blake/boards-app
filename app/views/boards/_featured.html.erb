@@ -12,6 +12,7 @@
   <div class="boardImage" id="surfModalBtn" style="padding: 0 9px;cursor:pointer">
     <!-- <%= link_to  image_tag("surf_girl.jpg", width: 130), board, remote: true, data: { toggle: "modal", target: "#surfModal" }%> -->
     <%= link_to attachment_image_tag(board.images.last, :file, :fill, 130, 130), board, remote: true, data: { toggle: "modal", target: "#surfModal" }%>
+    <span id='window'></span>
   </div>
     <span class="center-text"><%= board.make %> </span>
     <br>
@@ -32,13 +33,27 @@
  <div class="swiper-pagination"></div>
 </div>
 <script>
-var swiper = new Swiper('.swiper-container', {
+$(document).ready(function(){
+  var w = window.innerWidth
+   document.documentElement.clientWidth
+    document.body.clientWidth;
+    if (w <= 700 && w >= 551) {
+      var slides = 3
+    } else if (w <= 550){
+      var slides = 2
+    } else {
+      var slides = 4
+    };
+
+  var swiper = new Swiper('.swiper-container', {
     pagination: '.swiper-pagination',
-    slidesPerView: 4,
+    slidesPerView: slides,
     nextButton: '.swiper-button-next',
      prevButton: '.swiper-button-prev',
     paginationClickable: true,
     spaceBetween: 30,
     freeMode: true
 });
+})
+
 </script>
