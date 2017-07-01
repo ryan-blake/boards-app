@@ -150,7 +150,6 @@ $(window).scroll(function(){
         <% if current_user %>
           <% @snow = @snow.where.not(user_id: current_user.id) %>
         <% end %>
-
         <%= render partial: 'featured', locals: {boards: @snow} %>
       </div>
       <hr class="style13">
