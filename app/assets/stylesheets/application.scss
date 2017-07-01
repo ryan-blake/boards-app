@@ -441,7 +441,7 @@ div.hidden { display: none; }
  padding-bottom:30px;
  border:none;
  border-radius: 0;
- background-color: #AD90D4;
+ background-color: darkseagreen;
  a {
    color:white;
    text-decoration: none;
@@ -519,7 +519,7 @@ fieldset[disabled] .btn-sort.active {
 //newinverse
 .btn-inverse {
   color: #ffffff !important;
-  background-color: #AD90D4;
+  background-color: darkseagreen;
   text-decoration: none;
   border-color: none;
   position: absolute;
@@ -561,12 +561,12 @@ fieldset[disabled] .btn-inverse:active,
 .btn-inverse.disabled.active,
 .btn-inverse[disabled].active,
 fieldset[disabled] .btn-inverse.active {
-  background-color: #AD90D4;
+  background-color: darkseagreen;
   border-color: #F0F0F0;
 }
 
 .btn-inverse .badge {
-  color: #AD90D4;
+  color: darkseagreen;
   background-color: #ffffff;
 }
 // oldinverse
@@ -595,7 +595,7 @@ fieldset[disabled] .btn-inverse.active {
 }
 .dash-nav-desktop button{
 height:50px;
-background-color:#AD90D4;
+background-color:darkseagreen;
 color:white;
 border-color:white;
 a {
