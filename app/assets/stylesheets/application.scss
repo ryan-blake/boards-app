@@ -767,8 +767,11 @@ margin-right:0px;
  max-width:300px;
  min-width:300px;
 }
-.modal:active body {
-  position: fixed;
+
+.modal-open {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position:fixed;
 }
 
 .title-bar{
