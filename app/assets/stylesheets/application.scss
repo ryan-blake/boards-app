@@ -767,6 +767,9 @@ margin-right:0px;
  max-width:300px;
  min-width:300px;
 }
+.modal:active body {
+  position: fixed;
+}
 
 .title-bar{
  height:20px;
