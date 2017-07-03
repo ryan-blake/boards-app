@@ -1,33 +1,46 @@
-
 <% if @accessories.count >= 1%>
+<div class="swiper-container">
+<div class="swiper-wrapper">
  <%  @accessories.each do |i| %>
-<tr data-id="<%= i.id %>" data-price="<%= i.price %>" class="panel col-sm-6" style="max-height:195px;min-height:160px;position:relative;padding:0;background-color:white;min-width:25%;">
-   <td class="vendor-link" style="cursor:pointer;">
-<div class="center-text">
-  <%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %>
-  <div class="accessoryImage" id="aImage" style="cursor:pointer">
-    <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
-  </div>
-  <div class="accessoryImage1" id="aImage1">
-    <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
-  </div>
-    <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %>.00</strong></span>
-    <div style="z-index:999;position:relative;bottom:0;"  id="<%=i.id %>" class="accessory_div btn btn-success">Add</div>
-  </td>
+     <div class="swiper-slide">
+
+          <td class="vendor-link" style="cursor:pointer;">
+
+       <div class="center-text">
+         <%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %>
+         <div class="accessoryImage" id="aImage" style="cursor:pointer">
+           <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
+         </div>
+         <div class="accessoryImage1" id="aImage1">
+           <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
+         </div>
+           <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %>.00</strong></span>
+           <div style="z-index:999;position:relative;bottom:0;"  data-id="<%= i.id %>" data-price="<%= i.price %>" id="<%=i.id %>" class="accessory_div btn btn-success">Add</div>
+       </div>
+</td>
 </div>
-</tr>
 <% end %>
-<% else %>
-<%= render partial: 'boards/none' %>
 <% end %>
+</div>
+ <!-- Add Pagination -->
+ <div class="swiper-button-next swiper-button-white"></div>
+ <div class="swiper-button-prev swiper-button-white"></div>
+
+ <div class="swiper-pagination"></div>
+
+</div>
 
 <script>
-$('#newModal').on('show.bs.modal', function (e) {
-  sessionStorage.clear()
-});
-$('#newModal').on('hide.bs.modal', function (e) {
-  sessionStorage.clear()
-});
+
+$(document).ready(function() {
+  $('#newModal').on('show.bs.modal', function (e) {
+    sessionStorage.clear()
+    alert('hi');
+  });
+  $('#newModal').on('hide.bs.modal', function (e) {
+    sessionStorage.clear()
+    alert('bye');
+  });
 // loads board price and resets if accessoriesPriceTotal returns to nil
 var pricing = document.getElementById('showPrice');
 if (sessionStorage.accessoriesPriceTotal){
@@ -36,14 +49,15 @@ if (sessionStorage.accessoriesPriceTotal){
   var prices = $('#showPrice').data('board');
   pricing.innerHTML = prices
 }
-$(document).ready(function() {
+
+
    $( ".accessory_div" ).click(function() {
-    id = $(this).closest("tr").data("id");
-    price = $(this).closest("tr").data("price");
+    id = $(this).data("id");
+    price = $(this).data("price");
     if ($(this).hasClass("panel-success")) {
       // prices -= price
     } else {
-      alert(id)
+      alert(price)
       // $(".accessory_div.panel[data-id="+id+"]").removeClass('panel-success')
       // prices += price
     }
@@ -134,7 +148,7 @@ $(function(){
   });
   $('.accessory_div').on('click', function() {
     var accessory_div = this;
-    price = $(this).closest("tr").data("price");
+    price = $(this).data("price");
     if (loadSelectedAccessories().indexOf(accessory_div.id) < 0) {
       // not taken
       this.innerHTML = "Remove"
@@ -144,5 +158,31 @@ $(function(){
       unclickAccessory(accessory_div, price);
     }
   });
+
+  var w = window.innerWidth
+   document.documentElement.clientWidth
+    document.body.clientWidth;
+    if (w <= 700 && w >= 551) {
+      var slides = 3
+    } else if (w <= 450){
+      var slides = 2
+    } else {
+      var slides = 4
+    };
+
+  var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: slides,
+    nextButton: '.swiper-button-next',
+     prevButton: '.swiper-button-prev',
+    paginationClickable: true,
+    spaceBetween: 30,
+    freeMode: true
+});
+
 })();
+
 </script>
+
+
+<!--  -->
