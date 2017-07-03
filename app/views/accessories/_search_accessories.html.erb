@@ -26,10 +26,14 @@
  <div class="swiper-button-next swiper-button-white"></div>
  <div class="swiper-button-prev swiper-button-white"></div>
 
- <div class="swiper-pagination"></div>
+ <div style="" class="swiper-pagination"></div>
+  </div>
 
-</div>
-
+<style>
+.swiper-pagination-bullet {
+  margin:0px;
+}
+</style>
 <script>
 
 $(document).ready(function() {
@@ -159,14 +163,24 @@ $(function(){
     }
   });
 
+  var w = window.innerWidth
+   document.documentElement.clientWidth
+    document.body.clientWidth;
+    if (w <= 700 && w >= 551) {
+      var slides = 3
+    } else if (w <= 450){
+      var slides = 2
+    } else {
+      var slides = 4
+    };
 
   var swiper = new Swiper('.swiper-container', {
     pagination: '.swiper-pagination',
-    slidesPerView: 4,
+    slidesPerView: slides,
     nextButton: '.swiper-button-next',
      prevButton: '.swiper-button-prev',
     paginationClickable: true,
-    spaceBetween: 30,
+    spaceBetween: 10,
     freeMode: true
 });
 
