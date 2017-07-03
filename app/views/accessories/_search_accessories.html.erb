@@ -159,16 +159,7 @@ $(function(){
     }
   });
 
-  var w = window.innerWidth
-   document.documentElement.clientWidth
-    document.body.clientWidth;
-    if (w <= 700 && w >= 551) {
-      var slides = 3
-    } else if (w <= 450){
-      var slides = 2
-    } else {
-      var slides = 4
-    };
+  var slides = 3;
 
   var swiper = new Swiper('.swiper-container', {
     pagination: '.swiper-pagination',
