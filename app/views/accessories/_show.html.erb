@@ -1,8 +1,8 @@
 <% content_for(:header) do %>
-
 <script>
 
 </script>
+
 <% end %>
 
 <div class="container-fluid">
@@ -25,7 +25,7 @@
       </div>
     </div>
     <!-- edit button plus contact for shipping, is contact for shipping necessary -->
-  <div class="well-sm pull-left" style="position:absolute;top:0;">
+  <div class="well-sm pull-left" id="acc-show" style="position:absolute;top:0;">
   </div>
     <!-- begin view -->
 <div class="title center-text">
@@ -33,7 +33,7 @@
 </div>
   <div class="image-box-accessory center-text" id="images">
     <div class="center-text" style="max-height:220px;">
-      <div class="">
+      <div class="siema-acc">
         <% @accessory.images.each_with_index do |photo, index| %>
           <%= link_to(image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')),
             attachment_url(photo, :file, :fit, 500, 500, format: 'jpg'),
@@ -81,3 +81,35 @@
 <br>
 <br>
 <hr class="style13">
+<script>
+const siemas = document.querySelectorAll('.siema-acc');
+
+// Extend prototype with method that adds arrows to DOM
+// Style the arrows with CSS or JS — up to you mate
+Siema.prototype.addArrows = function() {
+
+  // make buttons & append them inside Siema's container
+  this.prevArrow = document.createElement('button');
+  this.nextArrow = document.createElement('button');
+  this.prevArrow.textContent = 'back';
+  this.nextArrow.textContent = 'next';
+  this.selector.appendChild(this.prevArrow)
+  this.selector.appendChild(this.nextArrow)
+
+  // event handlers on buttons
+  this.prevArrow.addEventListener('click', () => this.prev());
+  this.nextArrow.addEventListener('click', () => this.next());
+
+}
+
+// this is fairly new way of looping through DOM Elements
+// More about ithere: https://pawelgrzybek.com/loop-through-a-collection-of-dom-elements/
+// For better compatibility I suggest using for loop
+for(const siema of siemas) {
+  const instance = new Siema({
+    selector: siema,
+  });
+  instance.addArrows();
+}
+
+</script>

@@ -2,7 +2,6 @@
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
 <%= render 'layouts/spinner' %>
 <!--  -->
-<!--  -->
   <div class="well-sm pull-left" style="position:absolute;top:0;z-index:929;">
     <% if (current_user && current_user.owner?(@board)) && (@board.boardSold?) %>
     <div id="editModalBtn"><%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#editModal" } %></div>
@@ -15,7 +14,6 @@
         </div>
       <% end %>
   </div>
-
       <!-- begin view -->
 <div class="title center-text">
   <strong><%= @board.title %></strong>
