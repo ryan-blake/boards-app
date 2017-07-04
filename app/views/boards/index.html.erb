@@ -100,14 +100,7 @@ $(window).scroll(function(){
 </script>
 <% end %>
 
-<span id="top" name="top" style="display:block;position:relative;top:-50px;"></span>
-<div id="type_select" >
-<%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
-<span id="type-value" class="type_collection" style="top:203px">
-  <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
-</span>
-<% submit_tag "Submit" %>
-<% end %>
+
 
 <style>
 
@@ -131,7 +124,16 @@ $(window).scroll(function(){
 </style>
 
   </div>
-  <div id="featured-boards" style="display:block;margin-top:-23px;overflow-y:scroll;-webkit-overflow-scrolling: touch;height:100%;">
+  <div style="display:block;margin-top:-23px;overflow-y:scroll;-webkit-overflow-scrolling: touch;height:100%;">
+    <span id="top" name="top" style="display:block;position:relative;top:-50px;"></span>
+    <div id="type_select" >
+    <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
+    <span id="type-value" class="type_collection" style="top:150px">
+      <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
+    </span>
+    <% submit_tag "Submit" %>
+    <% end %>
+      <div id="featured-boards">
     <div style="top:-80px;display:block;min-width:100%;height:300px;position:relative;background-color:darkslategrey;">
       <h1 class="center-text" style="padding: 0px 15px;border-bottom: 1px solid white;left:calc(50% - 63px);position:absolute;top:30%;color:white;"> kuivir </h1>
       <h3 style="left: calc(50% - 113px);padding-right:5px;color:white;bottom:110px;position:absolute;">board market place</h3>
@@ -175,6 +177,8 @@ $(window).scroll(function(){
       <hr class="style13">
   </div>
 </div>
+</div>
+
 <div id="mainsearch" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
 <%= render partial: 'search_form' %>
 </div>
