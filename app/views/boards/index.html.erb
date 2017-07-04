@@ -51,6 +51,7 @@ var type_value = document.getElementById('type-value');
 var featuredDiv = document.getElementById('featured-boards');
 var searchSigned = document.getElementById('search-result-partial')
 var searchResults = document.getElementById('results');
+var indexMain = document.getElementById('index-main');
 
   openExtended.onclick = function() {
      if(extended.style.display == 'none') {
@@ -71,6 +72,7 @@ type_select.onchange = function() {
   type_value.style['top'] = '0';
   type_value.style['left'] = '5%';
   searchSigned.style['display'] = 'block';
+  indexMain.removeClass('index-style');
 
 
   $(".sk-circle").hide();
@@ -124,7 +126,7 @@ $(window).scroll(function(){
 </style>
 
   </div>
-  <div style="display:block;margin-top:-23px;overflow-y:scroll;-webkit-overflow-scrolling: touch;height:100%;">
+  <div id="index-main" class="index-style">
     <span id="top" name="top" style="display:block;position:relative;top:-50px;"></span>
     <div id="type_select" >
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
