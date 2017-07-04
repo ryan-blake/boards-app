@@ -137,7 +137,7 @@ $(window).scroll(function(){
     <h3 style="left: calc(50% - 113px);;padding-right:5px;color:white;bottom:110px;position:absolute;">board market place</h3>
     <div style="-webkit-overflow-scrolling: touch;position:absolute;top:300px;width:100%;">
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
-      <div style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;margin-top: -27px;">
+      <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
         <% if current_user %>
           <% @surf = @surf.where.not(user_id: current_user.id) %>
         <% end %>
