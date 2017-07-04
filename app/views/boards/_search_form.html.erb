@@ -14,10 +14,6 @@
     <div class="row board-search-form">
       <div class="main-form" style="">
         <span><%= hidden_field_tag :type_id, nil,:id => "hidden_type", :value => ''%></span>
-        <div style="position: absolute;display: inline;bottom:70px;left: calc(50% - 54px);">
-          New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
-          Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
-        </div>
         <span id="category_ids" style="display: flex;width: 45%;margin-left: 2%;width: 51%;"></span>
       <span style="width: 45%;float: left;top: -34px;position: relative;margin-left: 50%;"><%= collection_select(nil, :make, Board.where(:for_sale => true).order(:make).distinct.sort, :make, :make, {prompt: "Select Brand"},{ class: "form-control" }) %></span>
       <div class="input-group" style="margin-left: 2%;bottom: 34px;width: 51%;">
@@ -29,20 +25,25 @@
         </span>
         <%= collection_select( nil, :unit_id, Unit.all, :id, :name,
           { :include_blank => 'Unit'} , { :class => 'form-control', style: 'float: right;width: 17%;left: -5%;margin: 0px;' })%>
+          <span class="unit_label"> Unit: </span>
       </div>
       <div class="input-group" style="float: right;bottom: 67px;width: 48%;">
+        <div style="position: absolute;bottom: -30px;z-index: 3;">
+          New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
+          Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
+        </div>
         <span>
         <%= number_field :min, params[:min], style: 'width: 45%;margin: 0px;', class: 'form-control', min: 1, placeholder: "min price" %>
         </span>
         <span style="">
-        <%= number_field :max, params[:max], style: 'float: right;width: 44%;position: absolute;left: 43%;margin: 0px;', class: 'form-control',min: 1, placeholder: "max price" %>
+        <%= number_field :max, params[:max], style: 'float: right;width: 42%;position: absolute;left: 45%;margin: 0px;', class: 'form-control',min: 1, placeholder: "max price" %>
         </span>
       </div>
 </div>
 
 
 
-<div style="position:absolute;left:5%;">
+<div style="position:relative;left:5%;">
        <span id="open-extended" class="pull-right" style="cursor:pointer;text-decoration:underline;"> Extend Search </span>
         <div id="show_type"></div>
        <div id="extended-search" style="display:none;">

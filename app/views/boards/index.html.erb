@@ -70,9 +70,8 @@ type_select.onchange = function() {
   mainSearch.style['display'] = 'block';
   featuredDiv.style['display'] = 'none';
   type_value.style['top'] = '0';
-  type_value.style['left'] = '5%';
+  type_value.style['display'] = 'none'
   searchSigned.style['display'] = 'block';
-  indexMain.removeClass('index-style');
 
 
   $(".sk-circle").hide();
@@ -109,12 +108,8 @@ $(window).scroll(function(){
 
 #type-value {
     z-index: 1;
-    top: 90px;
-    width: 490px;
     position: relative;
-    height: 55px;
     font-size: 15px;
-    top: 140px;
     left: calc(50% - 55px);
 }g
 
@@ -127,7 +122,7 @@ $(window).scroll(function(){
 
   </div>
   <div id="index-main" class="index-style">
-    <span id="top" name="top" style="display:block;position:relative;top:-50px;"></span>
+    <span id="top" name="top" style="display:block;position:relative;"></span>
     <div id="type_select" >
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
     <span id="type-value" class="type_collection" style="top:150px">
@@ -181,7 +176,7 @@ $(window).scroll(function(){
 </div>
 </div>
 
-<div id="mainsearch" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
+<div id="mainsearch" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;max-height:100px;">
 <%= render partial: 'search_form' %>
 </div>
 <br>

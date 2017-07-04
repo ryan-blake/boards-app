@@ -375,8 +375,8 @@ display:none;
 .index-results {
   padding-top: 40px;
   width: 100%;
-  position: absolute;
-  margin-left: 3%;
+  position: relative;
+  margin-left: 0%;
 }
 // loading shadow-wave
 
@@ -392,12 +392,6 @@ display:none;
   right: 2%;
   top: 0.5%;
 }
-//
-// body {
-//   background: snow;
-//  width: 100%;
-//
-// }
 
 ul {
  padding-left: 0px;
@@ -1244,7 +1238,10 @@ z-index: 1;
   display:block;
 }
 .index-style {
-  display:block;margin-top:-23px;overflow-y:scroll;-webkit-overflow-scrolling: touch;height:100%;
+  display:block;
+  overflow-y:scroll;
+  -webkit-overflow-scrolling: touch;
+  height:100%;
 }
 
 // responsive
@@ -1412,6 +1409,12 @@ z-index: 1;
     .items {
    max-width:155px !important;
 
+ }
+ .unit_label {
+   position: relative;
+   z-index: 3;
+   top: 30px;
+   left: 40%;
  }
 }
 
