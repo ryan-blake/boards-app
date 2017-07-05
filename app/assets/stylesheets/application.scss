@@ -1404,10 +1404,12 @@ z-index: 1;
  .desktop-items-img {
    display:none;
  }
-
-    .items {
+  .items {
    max-width:155px !important;
+ }
 
+ #kuivir-header {
+   position:relative;
  }
 }
 
