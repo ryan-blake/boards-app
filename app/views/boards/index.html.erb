@@ -127,15 +127,7 @@ $(window).scroll(function(){
 
 
   <div id="index-body">
-    <span id="top" name="top" style=""></span>
-    <div id="type_select" >
-    <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
-    <span id="type-value" class="type_collection" style="top:150px">
-      <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
-    </span>
-    <% submit_tag "Submit" %>
-    <% end %>
-  </div>
+
   <div id="featured-boards" style="display:block;margin-top:-23px;overflow-y:scroll;-webkit-overflow-scrolling: touch;height:100%;">
     <div style="top:-80px;display:block;min-width:100%;height:300px;position:relative;background-color:darkslategrey;">
       <h1 class="center-text" style="padding: 0px 15px;border-bottom: 1px solid white;left:calc(50% - 63px);position:absolute;top:30%;color:white;"> kuivir </h1>
