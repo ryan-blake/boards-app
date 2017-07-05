@@ -132,7 +132,7 @@ $(window).scroll(function(){
     <span id="top" name="top" style=""></span>
     <div id="type_select" style="">
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
-    <span id="type-value" class="type_collection" style="top:-34px;position:relative;z-index:999;left: calc(50% - 51px);">
+    <span id="type-value" class="type_collection" style="top:-34px;position:relative;z-index:999;left: calc(50% - 55px);">
       <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
     </span>
     <% submit_tag "Submit" %>
