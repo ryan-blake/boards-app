@@ -70,6 +70,8 @@ type_select.onchange = function() {
   featuredDiv.style['display'] = 'none';
   type_value.style['top'] = '0';
   type_value.style['left'] = '5%';
+  type_value.style['z-index'] = '0';
+
   searchSigned.style['display'] = 'block';
 
 
@@ -128,9 +130,9 @@ $(window).scroll(function(){
 
   <div id="index-body">
     <span id="top" name="top" style=""></span>
-    <div id="type_select" >
+    <div id="type_select" style="">
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
-    <span id="type-value" class="type_collection" style="top:150px">
+    <span id="type-value" class="type_collection" style="top:-34px;position:relative;z-index:999;left: calc(50% - 51px);">
       <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
     </span>
     <% submit_tag "Submit" %>
