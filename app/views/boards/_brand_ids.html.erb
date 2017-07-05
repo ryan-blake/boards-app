@@ -1,1 +1,1 @@
- <%= collection_select(nil, :make, Board.where(rental: false, :for_sale => true, :type_id => params[:type_id]).where("inventory >= ?", 1).select(:make).uniq, :make, :make, {:include_blank => "Select Brand"},{ class: "form-control"}) %>
+ <%= collection_select(nil, :make, Board.where(rental: false, :for_sale => true, :type_id => params[:type_id]).where("inventory >= ?", 1).select(:make).uniq, :make, :make, {:include_blank => "Select Brand", },{  class: "form-control"}) %>

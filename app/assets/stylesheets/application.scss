@@ -1411,6 +1411,14 @@ z-index: 1;
  #kuivir-header {
    position:relative;
  }
+
+ .unit_id {
+   display:block;
+   top: 35px;
+    position: absolute;
+    left: 80%;
+ }
+
 }
 
 @media (max-width: 350px) {
