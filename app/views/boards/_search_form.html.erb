@@ -19,7 +19,7 @@
           Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
         </div>
         <span id="category_ids" style="display: flex;width: 45%;margin-left: 2%;width: 51%;"></span>
-      <span style="width: 45%;float: left;top: -34px;position: relative;margin-left: 50%;"><%= collection_select(nil, :make, Board.where(:for_sale => true).order(:make).distinct.sort, :make, :make, {prompt: "Select Brand"},{ class: "form-control" }) %></span>
+      <span id="brand_ids"  style="width: 45%;float: left;top: -34px;position: relative;margin-left: 50%;"></span>
       <div class="input-group" style="margin-left: 2%;bottom: 34px;width: 51%;">
         <span>
         <%= number_field :minimum, params[:minimum], style: 'width: 35%;margin: 0px;margin-left: 5%;', class: 'form-control', min: 1, placeholder: "min length" %>

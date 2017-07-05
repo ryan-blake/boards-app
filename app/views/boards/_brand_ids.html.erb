@@ -1,0 +1,1 @@
+<%= collection_select(nil, :make, Board.where(:for_sale => true, :type_id => params[:type_id]).order(:make).distinct.sort, :make, :make, {prompt: "Select Brand"},{ class: "form-control" }) %>
