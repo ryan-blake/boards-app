@@ -1,1 +1,1 @@
-<%= collection_select(nil, :category_id, Category.where(:type_id => params[:type_id]).order(:name), :id, :name, {prompt: "Select category"},{ class: "form-control", id: "first_type" }) %>
+<%= collection_select(nil, :category_id, Category.where(:type_id => params[:type_id]).order(:name), :id, :name, {prompt: "Categories"},{ class: "form-control", id: "first_type" }) %>

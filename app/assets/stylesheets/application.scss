@@ -374,9 +374,9 @@ display:none;
 
 .index-results {
   padding-top: 40px;
-  width: 100%;
-  position: absolute;
-  margin-left: 3%;
+  max-width: 100%;
+  position: relative;
+  margin-left: 2%;
 }
 // loading shadow-wave
 
