@@ -2,10 +2,9 @@
 <div class="swiper-container">
 <div class="swiper-wrapper">
  <%  @accessories.each do |i| %>
-     <div class="swiper-slide">
-
+     <div class="swiper-slide" style="    border: black 1px solid;
+    max-height: 250px;"> 
           <td class="vendor-link" style="cursor:pointer;">
-
        <div class="center-text">
          <%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %>
          <div class="accessoryImage" id="aImage" style="cursor:pointer">
