@@ -374,7 +374,7 @@ display:none;
 
 .index-results {
   padding-top: 40px;
-  max-width: 100%;
+  width: 100%;
   position: absolute;
   margin-left: 3%;
 }
@@ -1414,9 +1414,6 @@ z-index: 1;
 
  .unit_id {
    display:block;
-   top: 35px;
-    position: absolute;
-    left: 80%;
  }
 
 }
