@@ -50,36 +50,37 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <%= f.label :tail_id, "Tail Type" %>
-          <%=  f.collection_select( :tail_id, Tail.all, :id, :name,
-            { :include_blank => 'Tail'} , { :class => 'form-control input-lg' }) %>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label>Fin Type</label>
-          <%=  f.collection_select :fin_id, Fin.all, :id, :name,
-            { :include_blank => 'Fin'} , { class: "form-control input-lg" } %>
-        </div>
-      </div>
-    </div>
+
     <div class="row">
       <div id="surfBtn" style="width: 50%;position: relative;" class="btn btn-primary">Surf Dimensions</div>
       <div id="sizeForm" style="display:block;width:100%;">
         <%= f.fields_for :size do |builder| %>
           <%= render "sizes/form", :f => builder %>
         <% end %>
-      </div>
+        <div class="row" id="surf_box">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :tail_id, "Tail Type" %>
+              <%=  f.collection_select( :tail_id, Tail.all, :id, :name,
+                { :include_blank => 'Tail'} , { :class => 'form-control input-lg' }) %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Fin Type</label>
+              <%=  f.collection_select :fin_id, Fin.all, :id, :name,
+                { :include_blank => 'Fin'} , { class: "form-control input-lg" } %>
+            </div>
+          </div>
+        </div>
+    </div>
     </div>
 
     <div class="row">
     <div class="col-md-4">
       <div class="form-group">
-        <label>Inventory:</label>
-          <%= f.number_field :inventory, class: 'btn-width form-control input-lg' %>
+        <label>inventory:</label>
+          <%= f.number_field :inventory, min: 0,class: 'btn-width form-control input-lg' %>
       </div>
     </div>
     <div class="col-md-1">
@@ -93,21 +94,22 @@
     <div class="col-md-4">
       <div class="form-group">
         <label>Cost:</label>
-        <%= f.number_field :cost, class: 'form-control input-lg' %> <br />
+        <%= f.number_field :cost, min: 1, class: 'form-control input-lg' %> <br />
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label>Margin:</label>
-          <%= f.number_field :margin, class: 'btn-width form-control input-lg' %>
+          <%= f.number_field :margin, min: 0, class: 'btn-width form-control input-lg' %>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label>Sale Price:</label>
-        <%= f.number_field :price, class: 'input-lg btn-width form-control' %>
+        <%= f.number_field :price, min: 0, class: 'input-lg btn-width form-control' %>
       </div>
     </div>
+
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.hidden_field :company, :value => current_user.company ? current_user.company : nil %>
     <%= f.hidden_field :list_time, :value => Time.now %>
@@ -185,6 +187,9 @@
     var sizeThickness = document.getElementById('sizeThickness')
     var sizeVolume = document.getElementById('sizeVolume')
     var sizeUnits = document.getElementById('sizeUnits')
+    var surfBox = document.getElementById('surf_box')
+      surfBox.style['display'] = 'none'
+
     surfBtn.onclick = function() {
      if(sizeFeet.style.display == 'none' ) {
        sizeLength.style['display'] = 'none';
@@ -194,6 +199,7 @@
        sizeThickness.style['display'] = 'block';
        sizeVolume.style['display'] = 'block';
        sizeUnits.style['display'] = 'none';
+       surfBox.style['display'] = 'block';
      } else {
        sizeLength.style['display'] = 'block';
        sizeFeet.style['display'] = 'none';
@@ -202,6 +208,8 @@
        sizeThickness.style['display'] = 'none';
        sizeVolume.style['display'] = 'none';
        sizeUnits.style['display'] = 'block';
+       surfBox.style['display'] = 'none';
+
      }
     };
   });

@@ -2,29 +2,38 @@
       <div class="row">
       <div class="col-md-2">
         <div class="form-group">
-          <td id="sizeFeet" style="display:none"><%= f.number_field :feet, class: 'btn-width form-control', placeholder: 'feet' %></td>
+          <td id="sizeFeet" style="display:none">
+            <%= f.label :description %>
+          <%= f.number_field :feet, class: 'btn-width form-control', placeholder: 'feet' %></td>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <td id="sizeInches" style="display:none"><%= f.number_field :inches, class: 'btn-width form-control', placeholder: 'Inches' %></td>
+          <td id="sizeInches" style="display:none">
+            <%= f.label :inches %><%= f.number_field :inches, class: 'btn-width form-control', placeholder: 'Inches' %></td>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <td id="sizeWidth" style="display:block"><%= f.number_field :width, class: 'btn-width form-control', placeholder: 'width/ in.',:step => 0.01 %></td>
+          <td id="sizeWidth" style="display:block">
+            <%= f.label :width %>
+          <%= f.number_field :width, class: 'btn-width form-control', placeholder: 'width/ in.',:step => 0.01 %></td>
         </div>
       </div>
     </div>
         <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <td id="sizeThickness" style="display:none"><%= f.number_field :thickness, class: 'btn-width form-control', placeholder: 'thickness/ in.',:step => 0.01 %></td>
+          <td id="sizeThickness" style="display:none">
+            <%= f.label :thickness %>
+          <%= f.number_field :thickness, class: 'btn-width form-control', placeholder: 'thickness/ in.',:step => 0.01 %></td>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <td id="sizeVolume" style="display:none"><%= f.number_field :volume, class: 'btn-width form-control', placeholder: 'volume/ L',:step => 0.01 %></td>
+          <td id="sizeVolume" style="display:none">
+            <%= f.label :volume %>
+          <%= f.number_field :volume, class: 'btn-width form-control', placeholder: 'volume/ L',:step => 0.01 %></td>
         </div>
       </div>
     </div>
@@ -32,50 +41,19 @@
     <div class="row">
       <div class="col-md-4">
         <div class="form-group">
-          <td id="sizeLength" style="display:block"><%= f.number_field :length, class: 'btn-width form-control', placeholder: 'length',:step => 0.01 %></td>
+          <td id="sizeLength" style="display:block">
+            <%= f.label :length %>
+          <%= f.number_field :length, class: 'btn-width form-control', placeholder: 'length',:step => 0.01 %></td>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <td id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name, { :include_blank => 'Unit'} , { :class => 'form-control' })  %>
+          <td id="sizeUnits" style="display:block">
+            <%= f.label :unit %>
+          <%= f.collection_select( :unit_id, Unit.all, :id, :name, { :include_blank => 'Unit'} , { :class => 'form-control' })  %>
         </div>
       </div>
     </div>
       </table>
 
 <!-- surf new -->
-
-
-      <script>
-
-      $(function(){
-      var surfBtn = document.getElementById('surfBtn');
-
-      var sizeLength = document.getElementById('sizeLength')
-      var sizeFeet = document.getElementById('sizeFeet')
-      var sizeInches = document.getElementById('sizeInches')
-      var sizeWidth = document.getElementById('sizeWidth')
-      var sizeThickness = document.getElementById('sizeThickness')
-      var sizeVolume = document.getElementById('sizeVolume')
-      var sizeUnits = document.getElementById('sizeUnits')
-      surfBtn.onclick = function() {
-      if(sizeFeet.style.display == 'none' ) {
-       sizeLength.style['display'] = 'none';
-       sizeFeet.style['display'] = 'block';
-       sizeInches.style['display'] = 'block';
-       sizeWidth.style['display'] = 'block';
-       sizeThickness.style['display'] = 'block';
-       sizeVolume.style['display'] = 'block';
-       sizeUnits.style['display'] = 'none';
-      } else {
-       sizeLength.style['display'] = 'block';
-       sizeFeet.style['display'] = 'none';
-       sizeInches.style['display'] = 'none';
-       sizeWidth.style['display'] = 'block';
-       sizeThickness.style['display'] = 'none';
-       sizeVolume.style['display'] = 'none';
-       sizeUnits.style['display'] = 'block';
-      }
-      };
-      });
-      </script>
