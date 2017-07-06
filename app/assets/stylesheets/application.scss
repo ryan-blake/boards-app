@@ -1243,6 +1243,10 @@ z-index: 1;
 .desktop-items-img {
   display:block;
 }
+
+.unit_id {
+  display: none;
+}
 // responsive
 
 @media (max-width: 484px) {
@@ -1413,7 +1417,10 @@ z-index: 1;
  }
 
  .unit_id {
-   display:block;
+   top: 34px;
+   position: absolute;
+   display: block;
+   left: 80%;
  }
 
 }
