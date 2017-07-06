@@ -1,20 +1,50 @@
 <table>
-<thead>
-      <th ><%= f.label :size %></th>
-      <th ><%= f.label :unit_id, "unit" %> <br></th>
-    </thead>
-    <tbody>
-      <tbody style="border:1px solid black;">
-        <%= f.label :length %>
-        <td id="sizeLength" style="display:block"><%= f.number_field :length, class: 'btn-width form-control', placeholder: 'length',:step => 0.01 %></td>
-        <td id="sizeFeet" style="display:none"><%= f.number_field :feet, class: 'btn-width form-control', placeholder: 'feet' %></td>
-        <td id="sizeInches" style="display:none"><%= f.number_field :inches, class: 'btn-width form-control', placeholder: 'Inches' %></td>
-        <td id="sizeWidth" style="display:block"><%= f.number_field :width, class: 'btn-width form-control', placeholder: 'width/ in.',:step => 0.01 %></td>
-        <td id="sizeThickness" style="display:none"><%= f.number_field :thickness, class: 'btn-width form-control', placeholder: 'thickness/ in.',:step => 0.01 %></td>
-        <td id="sizeVolume" style="display:none"><%= f.number_field :volume, class: 'btn-width form-control', placeholder: 'volume/ L',:step => 0.01 %></td>
-        <td id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name, { :include_blank => 'Unit'} , { :class => 'form-control' })  %>
-        </tbody>
+      <div class="row">
+      <div class="col-md-2">
+        <div class="form-group">
+          <td id="sizeFeet" style="display:none"><%= f.number_field :feet, class: 'btn-width form-control', placeholder: 'feet' %></td>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <td id="sizeInches" style="display:none"><%= f.number_field :inches, class: 'btn-width form-control', placeholder: 'Inches' %></td>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <td id="sizeWidth" style="display:block"><%= f.number_field :width, class: 'btn-width form-control', placeholder: 'width/ in.',:step => 0.01 %></td>
+        </div>
+      </div>
+    </div>
+        <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <td id="sizeThickness" style="display:none"><%= f.number_field :thickness, class: 'btn-width form-control', placeholder: 'thickness/ in.',:step => 0.01 %></td>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <td id="sizeVolume" style="display:none"><%= f.number_field :volume, class: 'btn-width form-control', placeholder: 'volume/ L',:step => 0.01 %></td>
+        </div>
+      </div>
+    </div>
+    <!-- norm -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <td id="sizeLength" style="display:block"><%= f.number_field :length, class: 'btn-width form-control', placeholder: 'length',:step => 0.01 %></td>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <td id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name, { :include_blank => 'Unit'} , { :class => 'form-control' })  %>
+        </div>
+      </div>
+    </div>
       </table>
+
+<!-- surf new -->
+
 
       <script>
 
