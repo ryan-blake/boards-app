@@ -61,7 +61,6 @@ class Board < ApplicationRecord
   validates :price, :presence => true
   validates :category, :presence => true
 
-
   before_validation :load_costs
   after_validation :save_type
   after_save :check_for_tracking_number

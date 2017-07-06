@@ -1,32 +1,82 @@
 <% if @board.type.id == 1 %>
-<table>
-<tbody style="border:1px solid black;">
+<table style="min-width: 100%;">
 
-<td id="sizeFeetE" style="display:block"><%= f.number_field :feet, class: 'btn-width form-control', placeholder: 'feet'%></td>
-<td id="sizeInchesE" style="display:block"><%= f.number_field :inches, class: 'btn-width form-control', placeholder: 'Inches' %></td>
-<td id="sizeWitdthE" style="display:block"><%= f.number_field :width, class: 'btn-width form-control', placeholder: 'width In.',:step => 0.01 %></td>
-
-<td id="sizeThicknessE" style="display:block"><%= f.number_field :thickness, class: 'btn-width form-control', placeholder: 'thickness/ in.', :step => 0.01 %></td>
-
-<td id="sizeVolumeE" style="display:block"><%= f.number_field :volume, class: 'btn-width form-control', placeholder: 'volume/ L',:step => 0.01 %></td>
-
+  <tbody style="border:1px solid black;">
+<div class="row">
+ <div class="col-md-6">
+  <div class="form-group">
+    <span id="sizeFeetE" style="display:block" class="center-text"><%= f.label :Feet %>
+    <%= f.number_field :feet, class: 'btn-width form-control', placeholder: 'feet', min: 0%>
+    </span>
+  </div>
+ </div>
+<div class="col-md-6">
+  <div class="form-group">
+    <span id="sizeInchesE" style="display:block" class="center-text"><%= f.label :Inches %>
+    <%= f.number_field :inches, class: 'btn-width form-control', placeholder: 'Inches', min: 0, max:12 %>
+    </span>
+  </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <span id="sizeWitdthE" style="display:block" class="center-text"><%= f.label :Width %>
+      <%= f.number_field :width, class: 'btn-width form-control', placeholder: 'width In.',:step => 0.01, min: 0 %>
+      </span>
+    </div>
+  </div>
+ <div class="col-md-6">
+  <div class="form-group">
+    <span id="sizeThicknessE" style="display:block" class="center-text"><%= f.label :Thickmess %>
+     <%= f.number_field :thickness, class: 'btn-width form-control', placeholder: 'thickness/ in.', :step => 0.01, min: 0 %>
+    </span>
+  </div>
+ </div>
+ <div class="col-md-6">
+  <div class="form-group">
+      <span id="sizeVolumeE" style="display:block" class="center-text"><%= f.label :Volume %>
+      <%= f.number_field :volume, class: 'btn-width form-control', placeholder: 'volume/ L',:step => 0.01, min: 0 %>
+    </span>
+  </div>
+ </div>
+</div>
 </tbody>
 </table>
 <% else %>
 <table>
 <thead>
-      <th ><%= f.label :size %></th>
-      <th ><%= f.label :unit_id, "unit" %> <br></th>
     </thead>
     <tbody>
-      <tbody style="border:1px solid black;">
+<tbody style="border:1px solid black;">
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <span id="sizeLengthE" style="display:block">
         <%= f.label :length %>
-        <td id="sizeLengthE" style="display:block"><%= f.number_field :length, class: 'btn-width form-control', placeholder: 'length', :step => 0.01 %></td>
-        <td id="sizeWidthE" style="display:block"><%= f.number_field :width, class: 'btn-width form-control', placeholder: 'width/ in.', :step => 0.01 %></td>
-        <td id="sizeUnitsE" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name, { :include_blank => 'Unit'} , { :class => 'form-control' })  %>
-        </tbody>
-      </table>
-      <tbody>
+        <%= f.number_field :length, class: 'btn-width form-control', placeholder: 'length', :step => 0.01 %>
+      </span>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <span id="sizeWidthE" style="display:block">
+        <%= f.label :Width %>
+        <%= f.number_field :width, class: 'btn-width form-control', placeholder: 'width/ in.', :step => 0.01 %>
+      </span>
+    </div>
+  </div>
+    <div class="col-md-4">
+      <div class="form-group">
+          <span id="sizeUnitsE" style="display:block">
+            <%= f.label :unit_id, "unit" %>
+          <%= f.collection_select( :unit_id, Unit.all, :id, :name, { :include_blank => 'Unit'} , { :class => 'form-control' })  %>
+        </span>
+      </div>
+     </div>
+     </tbody>
+    </table>
+   <tbody>
 <% end %>
       <!-- <script>
       $(function(){

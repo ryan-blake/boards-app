@@ -131,11 +131,13 @@
       </div>
     </div>
     <div class="row">
+      <div class="">
         <div class="form-group">
-          <div id="newAccBtn" class="center-text" style="position:relative;bottom:20px;">
-            <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
-          </div>
           <div id="accessoryForm" style="margin-bottom:50px;display:none;position:relative;min-height:400px;min-width:100%;">
+            <hr class="style14">
+            <div id="newAccBtn" class="center-text" style="position:relative;bottom:20px;">
+              <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
+            </div>
             <div>
               <%= f.fields_for :accessories do |builder| %>
                 <%= render "accessories/form", :f => builder %>
@@ -147,8 +149,8 @@
     </div>
 
     <div class="row">
-      <div class="col-md-8" style="position: absolute;bottom: 0px;">
-          <div class="center-text" style="position: relative;bottom: -40px;width: 100%;">
+      <div class="col-md-12">
+          <div class="center-text" style="position: absolute;bottom: -40px;width: 100%;">
             <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
           </div>
       </div>

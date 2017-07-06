@@ -38,7 +38,7 @@
   </div>
 </div>
 <tbody>
-  <div class="btn btn-sort" id="surfBtnE">Surf size</div>
+
   <div id="sizeEdit" style="display:block;">
     <%= f.fields_for :size do |builder| %>
       <%= render "sizes/edit", :f => builder %>
@@ -55,12 +55,17 @@
     </thead>
     <tbody>
       <tbody>
-        <td ><%= f.text_field :make, class: 'btn-width form-control' %></td>
-        <td ><%= f.grouped_collection_select :category_id, Type.order(:name),:categories, :name, :id, :name, include_blank: true %></td>
+        <td><%= f.text_field :make, class: 'btn-width form-control' %></td>
+        <td><%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Category'} , { :class => 'form-control' } %></td>
+        <% if @board.surfable? %>
+        <spam><strong>Tail</strong>
         <%= f.collection_select :tail_id, Tail.all, :id, :name,
           { :include_blank => 'Tail'} , { :class => 'form-control' } %>
-          <%= f.collection_select :fin_id, Fin.all, :id, :name,
+          <br><strong>Fin</strong>
+        <%= f.collection_select :fin_id, Fin.all, :id, :name,
             { :include_blank => 'Fin'} , { :class => 'form-control' } %>
+        </spam>
+            <% end %>
         <td class="col-sm-3"><%= f.number_field :zipcode, class: 'form-control' %></td>
       <thead>
         <th class="col-sm-3"><%= f.label :width %> (inches)<br/></th>
@@ -94,7 +99,9 @@
   <%= f.hidden_field :user_id, :value => current_user.id %>
 
 <!--  -->
-<div id="accessoryForm" style="margin-bottom:50px;display:block;position:relative;min-height:400px;min-width:100%;">
+<hr class="style14">
+<h3> Acccessory Form </h3>
+<div id="accessoryForm" style="margin-bottom:50px;display:block;position:relative;min-height:400px;min-width:90%;">
   <div>
     <%= f.fields_for :accessories do |builder| %>
       <%= render "accessories/form", :f => builder %>

@@ -4,20 +4,20 @@
         <div class="form-group">
           <td id="sizeFeet" style="display:none">
             <%= f.label :description %>
-          <%= f.number_field :feet, class: 'btn-width form-control', placeholder: 'feet' %></td>
+          <%= f.number_field :feet, class: 'btn-width form-control', placeholder: 'feet' , min: 0%></td>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
           <td id="sizeInches" style="display:none">
-            <%= f.label :inches %><%= f.number_field :inches, class: 'btn-width form-control', placeholder: 'Inches' %></td>
+            <%= f.label :inches %><%= f.number_field :inches, class: 'btn-width form-control', placeholder: 'Inches' , min: 0%></td>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <td id="sizeWidth" style="display:block">
             <%= f.label :width %>
-          <%= f.number_field :width, class: 'btn-width form-control', placeholder: 'width/ in.',:step => 0.01 %></td>
+          <%= f.number_field :width, class: 'btn-width form-control', placeholder: 'width/ in.',:step => 0.01 , min: 0%></td>
         </div>
       </div>
     </div>
@@ -26,14 +26,14 @@
         <div class="form-group">
           <td id="sizeThickness" style="display:none">
             <%= f.label :thickness %>
-          <%= f.number_field :thickness, class: 'btn-width form-control', placeholder: 'thickness/ in.',:step => 0.01 %></td>
+          <%= f.number_field :thickness, class: 'btn-width form-control', placeholder: 'thickness/ in.',:step => 0.01 , min: 0%></td>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <td id="sizeVolume" style="display:none">
             <%= f.label :volume %>
-          <%= f.number_field :volume, class: 'btn-width form-control', placeholder: 'volume/ L',:step => 0.01 %></td>
+          <%= f.number_field :volume, class: 'btn-width form-control', placeholder: 'volume/ L',:step => 0.01 , min: 0%></td>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="form-group">
           <td id="sizeLength" style="display:block">
             <%= f.label :length %>
-          <%= f.number_field :length, class: 'btn-width form-control', placeholder: 'length',:step => 0.01 %></td>
+          <%= f.number_field :length, class: 'btn-width form-control', placeholder: 'length',:step => 0.01 , min: 0%></td>
         </div>
       </div>
       <div class="col-md-4">

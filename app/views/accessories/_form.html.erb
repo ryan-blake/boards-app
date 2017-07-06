@@ -1,53 +1,67 @@
-<div style="position:relative;">
-<br>
-<div class="title center-text">
-<%= f.label :Accessory_title %>
-  <td><%= f.text_field :title, class: 'btn-width form-control' %></td>
-</div>
-<div class="image-box center-text" style="min-height:150px !important;" id="images">
-  <div class="progress" id='progress-bar' style='display:none;'>
-    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%;background-color:#b2b2f1;">
-      <span class="sr-only" id='progress-bar-text'></span>
+
+
+<!--  -->
+<div class="row">
+  <div class="col-md-11">
+    <div class="form-group">
+      <%= f.label :Accessory_title %>
+        <td><%= f.text_field :title, class: 'btn-width form-control' %></td>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.hidden_field :board_id, :value => @board.id %>
     </div>
   </div>
-  <%= f.label :add_images %><br>
-  <btn class="center-text" style="position:absolute;left:calc(50% - 90px);">
-
-  <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %></btn>
-
-  <div id="image"></div>
 </div>
-
+<div class="row">
+  <div class="image-box center-text" style="min-height:150px !important;" id="images">
+    <div class="progress" id='progress-bar' style='display:none;'>
+      <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%;background-color:#b2b2f1;">
+        <span class="sr-only" id='progress-bar-text'></span>
+      </div>
+    </div>
+    <%= f.label :add_images %><br>
+    <btn class="center-text" style="position:absolute;left:calc(50% - 90px);">
+    <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %></btn>
+    <div id="image"></div>
+  </div>
 </div>
-
-<div class="dimensions" style="">
-  <table class="" style="">
-    <thead style="max-width:100%;">
-      <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.hidden_field :board_id, :value => @board.id %>
-      <th ><%= f.label :brand %></th>
-      <th ><%= f.label :category_id, "category" %> <br></th>
-        <th ><%= f.label :kind_id, "kind" %> <br></th>
-    </thead>
-    <tbody>
-      <tbody>
-        <td ><%= f.text_field :brand, class: 'btn-width form-control' %></td>
-        <td><%= f.grouped_collection_select :category_id, Type.order(:name),:categories, :name, :id, :name, include_blank: true %></td>
-        <td><%= f.grouped_collection_select :kind_id, Category.order(:name),:kinds, :name, :id, :name, include_blank: true %></td>
-      <thead>
-        <th ><%= f.label :size %><strong>size</strong><br/></strong></th>
-        <th ><%= f.label :color %> (inches)<br/></th>
-        <th ><%= f.label :inventory %><strong>: if applies </strong><br/></strong></th>
-        <th ><%= f.label :price %><strong> / height of board (inches)</strong><br/></strong></th>
-      </thead>
-      <tbody>
-        <td ><%= f.number_field :measure, class: 'form-control',:step => 0.01 %>
-        <spam id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name,
-        { :include_blank => 'Unit'} , { :class => 'form-control' })%> </spam></td>
-        <td ><%= f.text_field :color , class: 'form-control' %></td>
-        <td ><%= f.number_field :inventory, class: 'form-control' %></td>
-        <td ><%= f.number_field :price, class: 'form-control' %></td>
-
-      </tbody>
-<!--  -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :brand %>
+      <%= f.text_field :brand, class: 'btn-width form-control' %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :category %>
+      <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Category'} , { :class => 'form-control input-lg' } %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :size %>
+    <%= f.number_field :measure, class: 'form-control',:step => 0.01 , min: 0 %>
+      <spam id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name,
+      { :include_blank => 'Unit'} , { :class => 'form-control' })%> </spam></td>    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :color %>
+      <td ><%= f.text_field :color , class: 'form-control' %></td>
+  </div>
+</div>
+<div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :inventory %>
+      <%= f.number_field :inventory, min: 1, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <%= f.label :price %>
+      <td ><%= f.number_field :price, min: 1, class: 'form-control' %></td>    </div>
+</div>
+</div>
 <!-- section -->
