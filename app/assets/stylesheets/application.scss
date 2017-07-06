@@ -376,7 +376,7 @@ display:none;
   padding-top: 40px;
   width: 100%;
   position: absolute;
-  margin-left: 3%;
+  margin-left: 1%;
 }
 // loading shadow-wave
 
@@ -1247,6 +1247,13 @@ z-index: 1;
 .unit_id {
   display: none;
 }
+
+#paginator {
+  min-width: 190px;
+    max-width: 200px;
+    position: relative;
+    left: calc(50% - 103px);
+}
 // responsive
 
 @media (max-width: 484px) {
@@ -1421,6 +1428,14 @@ z-index: 1;
    position: absolute;
    display: block;
    left: 80%;
+ }
+
+ #paginator {
+  left: calc(50% - 113px);
+ }
+
+ .index-results {
+   margin-left: 3%;
  }
 
 }
