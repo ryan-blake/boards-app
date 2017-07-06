@@ -376,9 +376,8 @@ $(document).ajaxStop(function(){
 
 <div class="pull-left" style="top:85px;left:10px;width:190px;position:fixed;z-index:1;">
   <% if  current_user.tokens > 2 && current_user.stripe_account %>
-    <h3 class="btn btn-sort" style="margin: 0px;top: 106px;position: fixed;"><%= link_to 'Add listing', new_board_path %></h3>
-    <h3 class="btn btn-sort" style="margin: 0px;top: 136px;position: fixed;"><%= link_to 'Add accessory', accessoryInventory_path %></h3>
-
+    <h3 class="btn btn-sort"><%= link_to 'Listing', new_board_path %></h3>
+    <h3 class="btn btn-sort" style="left: 80px;position: absolute;"><%= link_to 'Accessory', accessoryInventory_path %></h3>
  <% end %>
 </div>
 
