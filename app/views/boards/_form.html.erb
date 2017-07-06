@@ -1,4 +1,5 @@
-
+<div class="panel panel-default topspace">
+  <div class="panel-body">
 <%= form_for(board) do |f| %>
   <% if board.errors.any? %>
     <div id="error_explanation">
@@ -53,7 +54,7 @@
 
     <div class="row">
       <div id="surfBtn" style="width: 50%;position: relative;" class="btn btn-primary">Surf Dimensions</div>
-      <div id="sizeForm" style="display:block;width:100%;">
+      <div id="sizeForm" style="display:block;width:100%;margin-top: -125px;">
         <%= f.fields_for :size do |builder| %>
           <%= render "sizes/form", :f => builder %>
         <% end %>
@@ -135,6 +136,38 @@
         <div class="form-group">
           <div id="accessoryForm" style="margin-bottom:50px;display:none;position:relative;min-height:400px;min-width:100%;">
             <hr class="style14">
+            <div id="AccBtn" class="center-text" style="position:relative;bottom:20px;">
+              <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
+            </div>
+            <div>
+              <%= f.fields_for :accessories do |builder| %>
+                <%= render "accessories/form", :f => builder %>
+              <% end %>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>new accessory</label>
+                  <span id="extraAccessory" class="btn btn-primary">eXtra Acceessory </span>
+                </div>
+              </div>
+            <hr>
+            </div>
+         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+          <div class="center-text" id="createBTN" style="position: absolute;bottom: -40px;width: 100%;">
+            <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
+          </div>
+      </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="">
+        <div class="form-group">
+          <div id="newaccessoryForm" style="margin-bottom:50px;display:none;position:relative;min-height:400px;min-width:100%;">
+            <hr class="style14">
             <div id="newAccBtn" class="center-text" style="position:relative;bottom:20px;">
               <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
             </div>
@@ -150,7 +183,7 @@
 
     <div class="row">
       <div class="col-md-12">
-          <div class="center-text" style="position: absolute;bottom: -40px;width: 100%;">
+          <div class="center-text" style="display:none;position: absolute;bottom: -40px;width: 100%;">
             <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
           </div>
       </div>
@@ -164,8 +197,11 @@
   <script>
   $(function(){
     var checkAccessory = document.getElementById('addAccessory');
+    var extraAccessory = document.getElementById('extraAccessory')
     var formAccessory = document.getElementById('accessoryForm')
-    var saveAccessory = document.getElementById('newAccBtn')
+    var newformAccessory = document.getElementById('newaccessoryForm')
+    var saveAccessory = document.getElementById('AccBtn')
+    var newsaveAccessory = document.getElementById('newAccBtn')
 
     checkAccessory.onclick = function() {
      if(this.checked) {
@@ -177,6 +213,23 @@
 
      }
     };
+
+
+    extraAccessory.onclick = function() {
+      if (newformAccessory.style.display == 'none') {
+       newformAccessory.style['display'] = 'block';
+       newsaveAccessory.style['display'] = 'none';
+       createBtn.style['position'] = 'absolute';
+       createBtn.style['bottom'] = '0px';
+       extraAccessory.innerHTML = 'Close Extra Accessory'
+          } else {
+       newformAccessory.style['display'] = 'none';
+       newsaveAccessory.style['display'] = 'block';
+       createBtn.style['position'] = 'nil';
+       createBtn.style['bottom'] = 'nil';
+     }
+    };
+
   });
   $(function(){
     var surfBtn = document.getElementById('surfBtn');
@@ -201,6 +254,7 @@
        sizeVolume.style['display'] = 'block';
        sizeUnits.style['display'] = 'none';
        surfBox.style['display'] = 'block';
+       surfBtn.innerHTML = 'Dimensions';
      } else {
        sizeLength.style['display'] = 'block';
        sizeFeet.style['display'] = 'none';
@@ -210,8 +264,11 @@
        sizeVolume.style['display'] = 'none';
        sizeUnits.style['display'] = 'block';
        surfBox.style['display'] = 'none';
+       surfBtn.innerHTML = 'Surf Dimensions';
 
      }
     };
   });
   </script>
+</div>
+</div>

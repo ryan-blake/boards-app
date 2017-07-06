@@ -35,6 +35,13 @@
       <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Category'} , { :class => 'form-control input-lg' } %>
     </div>
   </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :kind %>
+      <%= f.grouped_collection_select :kind_id, Category.order(:name), :kinds, :name, :id, :name,   { :include_blank => 'Accssory-type'} , { :class => 'form-control input-lg' } %>
+
+    </div>
+  </div>
 </div>
 <div class="row">
   <div class="col-md-4">
@@ -61,5 +68,6 @@
       <%= f.label :price %>
       <td ><%= f.number_field :price, min: 1, class: 'form-control' %></td>    </div>
 </div>
+
 </div>
 <!-- section -->

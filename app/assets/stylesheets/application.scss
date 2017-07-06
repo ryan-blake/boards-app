@@ -105,10 +105,6 @@ color:white;
  color: mediumslateblue;
 }
 
-#board_category_id {
-  margin:20px;
-}
-
 #csv-upload {
   position: fixed;
   top: 100px;
@@ -1438,6 +1434,7 @@ z-index: 1;
 
  .index-results {
    margin-left: 3%;
+   overflow-x: hidden;
  }
 
 }

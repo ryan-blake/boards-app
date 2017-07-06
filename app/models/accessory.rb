@@ -23,21 +23,25 @@ class Accessory < ApplicationRecord
 
   belongs_to :board, optional: true
   belongs_to :user
-  belongs_to :category, optional: true
+  belongs_to :category
   belongs_to :unit, optional: true
   belongs_to :kind
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
   accepts_nested_attributes_for :images, allow_destroy: true
   validates :kind_id, :presence => true
+  validates :category_id, :presence => true
+
   after_validation :save_category
+  def save_category
+    a = self
+    if a.category
+      a.category = a.kind.category
+    end
+  end
 
 
 private
 
-  def save_category
-    a = self
-    a.category = a.kind.category
-  end
 
 end
