@@ -134,7 +134,6 @@ $(window).scroll(function(){
     border: black solid 1px;
 }
 </style>
-
   <div id="type_select" style="top: -128px;position: absolute;left: calc(50% - 50px);z-index: 999;">
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
     <span id="type-value" class="type_collection" style="">
