@@ -126,12 +126,12 @@ $(window).scroll(function(){
 }
 
 #type-select {
-  background-color: darkslategray;
-    color: white;
+  background-color: white;
+    color: black;
     height: 34px;
     width: 137px;
     font-size: 19px;
-
+    border: black solid 1px;
 }
 </style>
 
@@ -154,6 +154,7 @@ $(window).scroll(function(){
       <h3 style="left: calc(50% - 113px);color: white;top:65%;position: absolute;">board market place</h3>
     </div>
     <div style="position:relative;top: -70px;width:100%;">
+      <h1 class="center-text" style="padding: 0px 15px;border-bottom: 1px solid black;left: calc(50% - 145px);color: black;width: 40%;position: relative;"> Featured </h1>
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
         <% if current_user %>
