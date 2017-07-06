@@ -3,10 +3,10 @@
 <div class="swiper-wrapper">
  <%  @accessories.each do |i| %>
      <div class="swiper-slide" style="    border: black 1px solid;
-    max-height: 250px;"> 
+    max-height: 250px;">
           <td class="vendor-link" style="cursor:pointer;">
        <div class="center-text">
-         <%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %>
+         <span id="acc-link"><%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></span>
          <div class="accessoryImage" id="aImage" style="cursor:pointer">
            <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
          </div>
@@ -53,6 +53,7 @@ $(document).ready(function() {
 
   });
 // loads board price and resets if accessoriesPriceTotal returns to nil
+var accLink = document.getElementById('acc-link');
 var pricing = document.getElementById('showPrice');
 if (sessionStorage.accessoriesPriceTotal){
   pricing.innerHTML = sessionStorage.accessoriesPriceTotal
@@ -190,6 +191,10 @@ $(function(){
     spaceBetween: 1,
     freeMode: true
 });
+
+  accLink.onclick = function() {
+    $('#newModal').style['position'] = 'fixed';
+  }
 
 })();
 
