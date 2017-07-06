@@ -32,10 +32,20 @@
 .swiper-pagination-bullet {
   margin:0px;
 }
+
+.fixed-position {
+  position:fixed;
+}
 </style>
 <script>
 
 $(document).ready(function() {
+  $('#accModal').on('show.bs.modal', function (e) {
+    $('#newModal').addClass('fixed-position');
+  });
+  $('#accModal').on('hide.bs.modal', function (e) {
+    $('#newModal').removeClass('fixed-position');
+  });
   $('#surfModal').on('show.bs.modal', function (e) {
     sessionStorage.clear()
 
@@ -53,7 +63,6 @@ $(document).ready(function() {
 
   });
 // loads board price and resets if accessoriesPriceTotal returns to nil
-var accLink = document.getElementById('acc-link');
 var pricing = document.getElementById('showPrice');
 if (sessionStorage.accessoriesPriceTotal){
   pricing.innerHTML = sessionStorage.accessoriesPriceTotal
@@ -191,10 +200,6 @@ $(function(){
     spaceBetween: 1,
     freeMode: true
 });
-
-  accLink.onclick = function() {
-    $('#newModal').style['position'] = 'fixed';
-  }
 
 })();
 
