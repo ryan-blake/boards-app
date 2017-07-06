@@ -43,9 +43,11 @@
 $(document).ready(function() {
   $('#accModal').on('show.bs.modal', function (e) {
     $('#newModal').addClass('fixed-position');
+    alert('accshow')
   });
   $('#accModal').on('hide.bs.modal', function (e) {
     $('#newModal').removeClass('fixed-position');
+    alert('acc')
   });
   $('#surfModal').on('show.bs.modal', function (e) {
     sessionStorage.clear()
