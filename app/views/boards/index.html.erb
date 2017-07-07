@@ -51,7 +51,6 @@ var type_value = document.getElementById('type-value');
 var featuredDiv = document.getElementById('featured-boards');
 var searchSigned = document.getElementById('search-result-partial')
 var searchResults = document.getElementById('results');
-$('body').css("-webkit-overflow-scrolling", "touch");
 
   openExtended.onclick = function() {
      if(extended.style.display == 'none') {
@@ -73,7 +72,6 @@ type_select.onchange = function() {
   type_value.style['left'] = '5%';
   type_value.style['z-index'] = '0';
   searchSigned.style['display'] = 'block';
-  $('body').css("-webkit-overflow-scrolling", "none");
 
 
   $(".sk-circle").hide();
@@ -161,6 +159,7 @@ $(window).scroll(function(){
 
 </style>
 
+<div style="-webkit-overflow-scrolling:touch;">
   <div id="type_select" style="top: -128px;position: fixed;left: calc(50% - 50px);z-index: 999;">
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
     <span id="type-value" class="type_collection" style="">
@@ -235,6 +234,7 @@ $(window).scroll(function(){
     </div>
   </div>
   </div>
+</div>
 </div>
 </div>
 </div>
