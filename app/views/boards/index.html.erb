@@ -137,7 +137,7 @@ $(window).scroll(function(){
   display:block;
   width:100%;
   position:relative;
-  background-color: darkseagreen;
+  background-color: slategrey;
   top:0px;
   height:260px;
 }
@@ -176,7 +176,7 @@ $(window).scroll(function(){
     <h3 style="left: calc(50% - 113px);top:45%;position: absolute;">board market place</h3>
   </div>
   <div id="about" class="single-div" style="position:relative;overflow-y:scroll;-webkit-overflow-scrolling: touch;">
-    <div class="bcg">
+    <div class="">
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Featured</h3></span>
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
@@ -190,7 +190,6 @@ $(window).scroll(function(){
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
         <% if current_user %>
         <% @snow = current_user.not_my_boards(@snow) %>
-
         <% end %>
         <%= render partial: 'featured', locals: {boards: @snow} %>
       </div>
@@ -201,7 +200,6 @@ $(window).scroll(function(){
         <% if current_user %>
         <% @skate = current_user.not_my_boards(@skate) %>
         <% end %>
-
         <%= render partial: 'featured', locals: {boards: @skate} %>
       </div>
       <hr class="style13">
