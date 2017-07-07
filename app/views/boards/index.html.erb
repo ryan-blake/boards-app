@@ -194,6 +194,8 @@ $(window).scroll(function(){
       <hr class="style13">
   </div>
 </div>
+<div id="footer" style="position:absolute;height:100px;width:!00%;background-color:green;">
+
 </div>
 <div id="mainsearch" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
 <%= render partial: 'search_form' %>
@@ -201,11 +203,12 @@ $(window).scroll(function(){
 <br>
 <div id="search-result-partial" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
   <%= render partial: 'search_signed_in'%>
+  <div style="position:fixed;bottom:20px;right:30px;">
+    <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>
+  </div>
 </div>
 
-<div style="position:fixed;bottom:20px;right:30px;">
-  <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>
-</div>
+
 
 <div class="sk-circle" style="z-index:9999;position:absolute;top:17%;left:calc(50% - 24px);%;">
   <div style="position:absolute;background-color:rgba(17, 214, 188, 0.3);min-width:50px;min-height:50px;border-radius:90%;">"
