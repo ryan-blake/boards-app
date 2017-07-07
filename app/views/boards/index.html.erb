@@ -141,16 +141,13 @@ $(window).scroll(function(){
   top:-20px;
   height:260px;
 }
-#about  {
+#footer .bcg {
   display:block;
   width:100%;
-  position:absolute;
-  top:265px;
+  position:relative;
   background-color: darkseagreen;
-  height:100%;
+  height:80px;
   margin-top:-20px;
-  style="overflow-y:scroll;
-  -webkit-overflow-scrolling: touch;"
 }
 .bcg {
   background: no-repeat center center;
@@ -176,9 +173,9 @@ $(window).scroll(function(){
 <div id="div-wrapper" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
   <div id="header" class="single-div">
     <h1 class="center-text" id="kuivir-header" style=""> kuivir </h1>
-    <h3 style="left: calc(50% - 113px);top:45%;position:absolute;">board market place</h3>
+    <h3 style="left: calc(50% - 113px);top:45%;position: absolute;">board market place</h3>
   </div>
-  <div id="about" class="single-div" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
+  <div id="about" class="single-div" style="">
     <div style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Featured</h3></span>
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
@@ -214,6 +211,22 @@ $(window).scroll(function(){
         <% end %>
         <%= render partial: 'featured', locals: {boards: @wake} %>
       </div>
+  </div>
+
+  <div id="footer" class="single-div">
+    <div class="bcg">
+      <div class="row">
+      <a href="https://www.google.com">
+
+      </a>
+      <a href="https://www.twitter.com/mintyxyz">
+
+      </a>
+      <a href="https://www.facebook.com">
+
+      </a>
+    </div>
+  </div>
   </div>
 </div>
 </div>
