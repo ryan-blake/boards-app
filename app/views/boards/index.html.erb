@@ -240,11 +240,11 @@ $(window).scroll(function(){
 
 
 <!--  -->
-<div id="mainsearch" style="display:none;overflow-x:hidden;max-width:100%;">
+<div id="mainsearch" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;-webkit-overflow-scrolling:none !important;">
 <%= render partial: 'search_form' %>
 </div>
 <br>
-<div id="search-result-partial" style="display:none;overflow-x:hidden;max-width:100%;">
+<div id="search-result-partial" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;-webkit-overflow-scrolling:none !important;">
   <%= render partial: 'search_signed_in'%>
 </div>
 
