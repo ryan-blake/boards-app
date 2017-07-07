@@ -51,6 +51,7 @@ var type_value = document.getElementById('type-value');
 var featuredDiv = document.getElementById('featured-boards');
 var searchSigned = document.getElementById('search-result-partial')
 var searchResults = document.getElementById('results');
+$('body').css("-webkit-overflow-scrolling", "touch");
 
   openExtended.onclick = function() {
      if(extended.style.display == 'none') {
@@ -71,8 +72,8 @@ type_select.onchange = function() {
   type_value.style['top'] = '0';
   type_value.style['left'] = '5%';
   type_value.style['z-index'] = '0';
-
   searchSigned.style['display'] = 'block';
+  $('body').css("-webkit-overflow-scrolling", "none");
 
 
   $(".sk-circle").hide();
