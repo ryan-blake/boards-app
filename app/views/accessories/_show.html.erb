@@ -1,29 +1,7 @@
 <% content_for(:header) do %>
 <script>
-
 </script>
-
 <% end %>
-
-<div class="container-fluid">
-  <div class="sk-circle" style="position:absolute;top:17%;left:calc(50% - 24px);%;">
-    <div style="position:absolute;background-color:rgba(17, 214, 188, 0.3);min-width:50px;min-height:50px;border-radius:90%;">"
-    <div class="sk-circle1 sk-child"></div>
-    <div class="sk-circle2 sk-child"></div>
-    <div class="sk-circle3 sk-child"></div>
-    <div class="sk-circle4 sk-child"></div>
-    <div class="sk-circle5 sk-child"></div>
-    <div class="sk-circle6 sk-child"></div>
-    <div class="sk-circle7 sk-child"></div>
-    <div class="sk-circle8 sk-child"></div>
-    <div class="sk-circle9 sk-child"></div>
-    <div class="sk-circle10 sk-child"></div>
-    <div class="sk-circle11 sk-child"></div>
-    <div class="sk-circle12 sk-child"></div>
-    </div>
-  </div>
-      </div>
-    </div>
     <!-- edit button plus contact for shipping, is contact for shipping necessary -->
   <div class="well-sm pull-left" id="acc-show" style="position:absolute;top:0;">
   </div>
@@ -45,39 +23,43 @@
   <hr class="style13">
 </div>
 <div class="dimensions" style="max-height:250px;">
-  <table class="col-sm-3 col-md-5" style="position:absolute;top:0px;">
-    <thead>
+  <table class="table table-bordered table-inverse">
+  <thead>
+    <tr>
       <th class="col-sm-3"> brand: </th>
       <th class="col-sm-3"> dimension: </th>
       <th class="col-sm-3"> color: </th>
       <th class="col-sm-3"> category: </th>
-      </thead>
-      <tbody>
-        <td class="col-sm-3"> <%= @accessory.brand %> </td>
-        <% if @accessory.measure %>
-        <td class="col-sm-3"> <%= @accessory.measure %><%= @accessory.unit.name %> </td>
-        <% end %>
-        <td class="col-sm-3"> <%= @accessory.color %> </td>
-        <td class="col-sm-3"> <%= @accessory.category.name %> </td>
-    </tbody>
-    <thead>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-sm-3"> <%= @accessory.brand %> </td>
+      <% if @accessory.measure %>
+      <td class="col-sm-3"> <%= @accessory.measure %><%= @accessory.unit.name %> </td>
+      <% end %>
+      <td class="col-sm-3"> <%= @accessory.color %> </td>
+      <td class="col-sm-3"> <%= @accessory.category.name %> </td>
+    </tr>
+    <tr>
       <th class="col-sm-3"> kind: </th>
       <% if @accessory.board_id %>
       <th class="col-sm-3"> board: </th>
       <% end %>
       <th class="col-sm-3"> inventory: </th>
       <th class="col-sm-3"> price: </th>
-    </thead>
-    <tbody>
+    </tr>
+    <tr>
       <td class="col-sm-3"> <%= @accessory.kind.name %> </td>
       <% if @accessory.board_id %>
         <td class="col-sm-3"> <%= link_to @accessory.board.title, board_path(@board) %> </td>
       <% end %>
       <td class="col-sm-3"> <%= @accessory.inventory %> </td>
       <td class="col-sm-3"> <%= @accessory.price %> </td>
-    </tbody>
-</div>
+    </tr>
+  </tbody>
 </table>
+
 <br>
 <br>
 <hr class="style13">
