@@ -1,20 +1,23 @@
-accessories:
+
 <% if @accessories_boards%>
 
    <%  @accessories_boards.each do |i| %>
-  <tr class="panel col-sm-6" style="max-height:195px;min-height:160px;position:relative;padding:0;background-color:white;min-width:25%;">
-     <td class="vendor-link" style="cursor:pointer;">
-  <div class="center-text">
-    <%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %>
-    <div class="accessoryImage" id="aImage" style="cursor:pointer">
-      <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
-    </div>
-    <div class="accessoryImage1" id="aImage1">
-      <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
-    </div>
-      <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %>.00</strong></span>
-    </td>
-  </div>
-  </tr>
+   <div class="" style="max-height: 100px;background-color:lightgrey;width:25%;">
+        <td class="vendor-link" style="cursor:pointer;">
+     <div class="center-text">
+       <span id="acc-link"><%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></span>
+       <div class="accessoryImage" id="aImage" style="cursor:pointer">
+         <%= attachment_image_tag(i.images.first, :file, :fill, 90, 90) %>
+       </div>
+       <div class="accessoryImage1" id="aImage1">
+         <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
+       </div>
+         <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %>.00</strong></span>
+     </div>
+</td>
+</div>
   <% end %>
+  <span style="width:25%;" class="pull-left">
+  <%= @board.title %> accessories:
+  </span>
 <% end %>

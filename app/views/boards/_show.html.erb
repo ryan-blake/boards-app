@@ -27,12 +27,12 @@
 <%= render partial: 'datatable', locals: {board: @board}  %>
 
 <!-- section -->
-  <div class="description-modal pull-right" style="padding:40px 15px;position:relative;clear:all;">
+  <div class="description-modal pull-right" style="padding:40px 15px;position:relative;clear:all;width: 75%;">
     <%= @board.description %>
   </div>
 <!-- board accesories -->
 <div class="center-text">
-  <tbody>
+  <tbody style=position:relative;max-width:25%;>
     <%= render partial: 'accessories/collection' %>
   </tbody>
 </div>
