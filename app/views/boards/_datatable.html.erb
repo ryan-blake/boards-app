@@ -1,26 +1,26 @@
 
     <table class="center-text" style="">
       <thead>
-        <th class="center-text single_table top" style="margin-left:20%;min-width:30%;max-width:30%;">Brand</th>
-        <th class="center-text single_table top" style="nax-width:30%;"> Dimensions</th>
+        <th class="center-text single_table top" style="margin-left:20%;min-width:30%;max-width:30%;padding: 0px 4px;">Brand</th>
+        <th class="center-text single_table top" style="nax-width:30%;padding: 0px 4px;"> Dimensions</th>
         <% if @board.tail_id%>
-          <th class="center-text single_table top" style="width:30%;">Tail</th>
+          <th class="center-text single_table top" style="width:30%;padding: 0px 4px;">Tail</th>
         <% end %>
       </thead>
       <tbody>
-        <td class="center-text" style="max-width:55%;border:black 1px solid;">
+        <td class="center-text" style="max-width:55%;border:black 1px solid;padding: 0px 4px;">
         <%= @board.make %> </td>
         <% if @board.surfable? %>
-          <td class="center-text single_table" style="min-width:150px;max-width:35%;border:black 1px solid;">
+          <td class="center-text single_table" style="min-width:150px;max-width:35%;border:black 1px solid;padding: 0px 4px;">
             <%= @board.size.pretty_surf %>
           </td>
           <% if @board.tail_id%>
-          <td class="center-text single_table" style="width:30%;">
+          <td class="center-text single_table" style="width:30%;padding: 0px 4px;">
            <%= @board.tail.name%>
            </td>
           <% end %>
         <% else %>
-          <td class="center-text" style="max-width:35%border:black 1px solid;">
+          <td class="center-text" style="max-width: 35%;border: black solid 1px;padding: 0px 4px;">
            <%= @board.size.pretty_dimensions %>
           </td>
         <% end %>
@@ -28,23 +28,23 @@
       <% if @board.surfable? %>
         <thead>
           <% if !@board.used %>
-            <th class="single_table center-text top" style="padding:top:10px;nax-width:15%;">Used</th>
+            <th class="single_table center-text top" style="padding:top:10px;nax-width:15%;padding: 0px 4px;">Used</th>
             <% else %>
-            <th class="single_table center-text top" style="padding:top:10px;nax-width:15%;"></th>
+            <th class="single_table center-text top" style="padding:top:10px;nax-width:15%;padding: 0px 4px;"></th>
           <% end %>
-          <th class="single_table center-text top" style="width:30%;">Volume:</th>
-          <th class="single_table center-text top" style="width:30%;"> Finbox: </th>
+          <th class="single_table center-text top" style="width:30%;padding: 0px 4px;">Volume:</th>
+          <th class="single_table center-text top" style="width:30%;padding: 0px 4px;"> Finbox: </th>
         </thead>
         <tbody >
-          <td class="single_table center-text" style="width:30%;">
+          <td class="single_table center-text" style="width:30%;padding: 0px 4px;">
           </td>
-         <td class="single_table center-text" style="width:30%;">
+         <td class="single_table center-text" style="width:30%;padding: 0px 4px;">
            <% if @board.fin_id %>
             <%= @board.size.volume%>
            <% end%>
          </td>
          <% if @board.fin_id %>
-         <td class="single_table center-text" style="width:30%;">
+         <td class="single_table center-text" style="width:30%;padding: 0px 4px;">
           <%= @board.fin.name%>
          </td>
          <% end %>

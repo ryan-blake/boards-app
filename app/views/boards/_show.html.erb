@@ -27,7 +27,7 @@
 <%= render partial: 'datatable', locals: {board: @board}  %>
 
 <!-- section -->
-  <div class="description-modal pull-right" style="padding:40px 15px;position:relative;clear:all;width: 75%;">
+  <div class="description-modal pull-right" style="padding:30px 7px;position:relative;clear:all;min-width: 75%;">
     <%= @board.description %>
   </div>
 <!-- board accesories -->
@@ -62,14 +62,13 @@ hideAccess.onclick = function() {
 });
 
 </script>
-<div style="posisition:relative;" class="col-sm-12 col-md-12 col-lg-12">
-  <div id="accessoryBtnOpen" style="center-text display:flex;" class="btn btn-success">Search Accessories </div>
+<div style="posisition:relative;" class="col-sm-12 col-md-12 col-lg-12" style="float:right;">
+  <div id="accessoryBtnOpen" style="width:100%; display:flex;" class="btn btn-success">Search Accessories </div>
 
-  <div id="accessoryBtnHide" style="center-test display:none;background-color:darkgreen;" class="btn btn-primary">Hide</div>
+  <div id="accessoryBtnHide" style="width:100%; display:none;background-color:darkgreen;" class="btn btn-primary">Hide</div>
 </div>
 <div id="searchAccessories"  style="display:none;" class="col-md-9">
   <%= render 'accessories/search_accessories_form' %>
-
 </div>
 <!-- shop accessories by type -->
 <div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
