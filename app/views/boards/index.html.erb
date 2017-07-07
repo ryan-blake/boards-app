@@ -132,6 +132,7 @@ $(window).scroll(function(){
 #div-wrapper {
    white-space: nowrap;
    max-width: 100%;
+   -webkit-overflow-scrolling: touch;
  }
  #header {
   display:block;
@@ -170,11 +171,6 @@ $(window).scroll(function(){
 
 <!--  -->
 <div id="featured-boards" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
-  <style>
-  body {
-     -webkit-overflow-scrolling: touch;
-  }
-  </style>
 <div id="div-wrapper" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
   <div id="about" class="single-div" style="">
     <div id="featured-boards" style="display:block;margin-top:-23px;overflow-y:scroll;-webkit-overflow-scrolling: touch;height:100%;">
@@ -182,7 +178,7 @@ $(window).scroll(function(){
         <h1 class="center-text" id="kuivir-header" style="padding: 0px 15px;border-bottom: 1px solid white;left: calc(50% - 63px);position: absolute;top: 45%;color: white;"> kuivir </h1>
         <h3 style="left: calc(50% - 113px);color: white;top:65%;position: absolute;">board market place</h3>
       </div>
-      <div id="feature-divs" style="position:relative;width:100%;top: -71px;height: 100%;">
+      <div id="feature-divs" style="-webkit-overflow-scrolling: touch;position:relative;width:100%;top: -71px;height: 100%;">
         <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Featured</h3></span>
         <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
         <div class="featured" style="">
