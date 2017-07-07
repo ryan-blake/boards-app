@@ -169,14 +169,13 @@ $(window).scroll(function(){
   </div>
 
 <!--  -->
-<div id="featured-boards" style="-webkit-overflow-scrolling: touch;postition:absolute;">
-<div id="div-wrapper" style="position:relative;-webkit-overflow-scrolling: touch;">
+<div id="featured-boards" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
+<div id="div-wrapper" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
   <div id="header" class="single-div">
     <h1 class="center-text" id="kuivir-header" style=""> kuivir </h1>
     <h3 style="left: calc(50% - 113px);top:45%;position: absolute;">board market place</h3>
   </div>
   <div id="about" class="single-div" style="position:relative;overflow-y:scroll;-webkit-overflow-scrolling: touch;">
-    <div class="">
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Featured</h3></span>
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
@@ -211,7 +210,6 @@ $(window).scroll(function(){
         <% end %>
         <%= render partial: 'featured', locals: {boards: @wake} %>
       </div>
-    </div>
   </div>
 
   <div id="footer" class="single-div">
