@@ -129,6 +129,14 @@ $(window).scroll(function(){
     border: black solid 1px;
 }
 
+.featured {
+  display:flex;
+  position:relative;
+  min-height:100px;
+  min-width:100%;
+  margin-top: -27px;
+}
+
 </style>
 
   <div id="type_select" style="top: -128px;position: absolute;left: calc(50% - 50px);z-index: 999;">
@@ -145,10 +153,10 @@ $(window).scroll(function(){
       <h1 class="center-text" id="kuivir-header" style="padding: 0px 15px;border-bottom: 1px solid white;left: calc(50% - 63px);position: absolute;top: 45%;color: white;"> kuivir </h1>
       <h3 style="left: calc(50% - 113px);color: white;top:65%;position: absolute;">board market place</h3>
     </div>
-    <div style="position:relative;top: -70px;width:100%;">
+    <div id="feature-divs" style="position:relative;width:100%;top: -71px;height: 100%;">
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Featured</h3></span>
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
-      <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
+      <div class="featured" style="">
         <% if current_user %>
         <% @surf = current_user.not_my_boards(@surf) %>
         <% end %>
@@ -156,7 +164,7 @@ $(window).scroll(function(){
       </div>
       <hr class="style13" style="margin:0;">
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
-      <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
+      <div class="featured" style="">
         <% if current_user %>
         <% @snow = current_user.not_my_boards(@snow) %>
 
@@ -166,7 +174,7 @@ $(window).scroll(function(){
       <hr class="style13">
 
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
-      <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
+      <div class="featured" style="">
         <% if current_user %>
         <% @skate = current_user.not_my_boards(@skate) %>
         <% end %>
@@ -176,7 +184,7 @@ $(window).scroll(function(){
       <hr class="style13">
 
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
-      <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
+      <div class="featured" style="">
         <% if current_user %>
         <% @wake = current_user.not_my_boards(@wake) %>
         <% end %>
