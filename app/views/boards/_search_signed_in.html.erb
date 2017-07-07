@@ -10,12 +10,13 @@
         <div class="" style="" id="paginator">
           <%= paginate @boards, remote: true, window: 1 %>
         </div>
+        <tr>
           <td class="filtering center-text">
             <div class="btn-group">
               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 Sort Options <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" role="menu" style="z-index:999;">
+              <ul class="dropdown-menu" role="menu">
                 <li><%= sortable "created_at", "Date" %> </li>
                 <li><%= sortable "price" %></li>
                 <li class="divider"></li>
@@ -23,6 +24,7 @@
               </ul>
             </div>
           </td>
+        </tr>
       </td>
     </thead>
   <% @boards.each do |board| %>

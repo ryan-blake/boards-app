@@ -52,6 +52,7 @@ var featuredDiv = document.getElementById('featured-boards');
 var searchSigned = document.getElementById('search-result-partial')
 var searchResults = document.getElementById('results');
 
+
   openExtended.onclick = function() {
      if(extended.style.display == 'none') {
        this.innerHTNL = 'Close Extended';
@@ -159,7 +160,6 @@ $(window).scroll(function(){
 
 </style>
 
-
   <div id="type_select" style="top: -128px;position: fixed;left: calc(50% - 50px);z-index: 999;">
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
     <span id="type-value" class="type_collection" style="">
@@ -238,13 +238,12 @@ $(window).scroll(function(){
 </div>
 </div>
 
-
 <!--  -->
-<div id="mainsearch" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;-webkit-overflow-scrolling:none !important;">
+<div id="mainsearch" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
 <%= render partial: 'search_form' %>
 </div>
 <br>
-<div id="search-result-partial" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;-webkit-overflow-scrolling:none !important;">
+<div id="search-result-partial" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
   <%= render partial: 'search_signed_in'%>
 </div>
 
