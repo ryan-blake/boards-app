@@ -1431,6 +1431,7 @@ z-index: 1;
 
  #paginator {
   left: calc(50% - 100px);
+  min-width: 100%;
  }
 
  .index-results {
