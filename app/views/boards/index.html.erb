@@ -51,7 +51,6 @@ var type_value = document.getElementById('type-value');
 var featuredDiv = document.getElementById('featured-boards');
 var searchSigned = document.getElementById('search-result-partial')
 var searchResults = document.getElementById('results');
-var indexMain = document.getElementById('index-main');
 
   openExtended.onclick = function() {
      if(extended.style.display == 'none') {
@@ -70,7 +69,9 @@ type_select.onchange = function() {
   mainSearch.style['display'] = 'block';
   featuredDiv.style['display'] = 'none';
   type_value.style['top'] = '0';
-  type_value.style['display'] = 'none'
+  type_value.style['left'] = '5%';
+  type_value.style['z-index'] = '0';
+
   searchSigned.style['display'] = 'block';
 
 
@@ -108,47 +109,60 @@ $(window).scroll(function(){
 
 #type-value {
     z-index: 1;
+    top: 90px;
+    width: 490px;
     position: relative;
-    font-size: 15px;
-    left: calc(50% - 55px);
+    height: 55px;
+    top: 136px;
+    left: calc(50% - 90px);
 }
+
+
 
 .swiper-button-white {
   background-color: rgba( 05, 134, 12, .5);
   border-radius:: 100%;
   color:white;
 }
-</style>
 
-  </div>
-  <div id="index-main" class="index-style">
-    <span id="top" name="top" style="display:block;position:relative;"></span>
-    <div id="type_select" >
+#type-select {
+  background-color: white;
+    color: black;
+    height: 34px;
+    width: 137px;
+    font-size: 19px;
+    border: black solid 1px;
+}
+</style>
+  <div id="type_select" style="top: -128px;position: absolute;left: calc(50% - 50px);z-index: 999;">
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
-    <span id="type-value" class="type_collection" style="top:150px">
+    <span id="type-value" class="type_collection" style="">
       <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
     </span>
     <% submit_tag "Submit" %>
     <% end %>
-      <div id="featured-boards">
-    <div style="top:-80px;display:block;min-width:100%;height:300px;position:relative;background-color:darkslategrey;">
-      <h1 class="center-text" style="padding: 0px 15px;border-bottom: 1px solid white;left:calc(50% - 63px);position:absolute;top:30%;color:white;"> kuivir </h1>
-      <h3 style="left: calc(50% - 113px);padding-right:5px;color:white;bottom:110px;position:absolute;">board market place</h3>
+  </div>
+
+  <div id="featured-boards" style="display:block;margin-top:-23px;overflow-y:scroll;-webkit-overflow-scrolling: touch;height:100%;">
+    <div style="top: -70px;height: 218px;position: relative;background-color: darkslategrey;">
+      <h1 class="center-text" id="kuivir-header" style="padding: 0px 15px;border-bottom: 1px solid white;left: calc(50% - 63px);position: absolute;top: 45%;color: white;"> kuivir </h1>
+      <h3 style="left: calc(50% - 113px);color: white;top:65%;position: absolute;">board market place</h3>
     </div>
     <div style="position:relative;top: -70px;width:100%;">
+      <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Featured</h3></span>
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
         <% if current_user %>
-          <% @surf = @surf.where.not(user_id: current_user.id) %>
+        <% @surf = current_user.not_my_boards(@surf) %>
         <% end %>
         <%= render partial: 'featured', locals: {boards: @surf} %>
-
       </div>
       <hr class="style13" style="margin:0;">
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
         <% if current_user %>
-          <% @snow = @snow.where.not(user_id: current_user.id) %>
+        <% @snow = current_user.not_my_boards(@snow) %>
+
         <% end %>
         <%= render partial: 'featured', locals: {boards: @snow} %>
       </div>
@@ -157,7 +171,7 @@ $(window).scroll(function(){
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
         <% if current_user %>
-          <% @skate = @skate.where.not(user_id: current_user.id) %>
+        <% @skate = current_user.not_my_boards(@skate) %>
         <% end %>
 
         <%= render partial: 'featured', locals: {boards: @skate} %>
@@ -167,7 +181,7 @@ $(window).scroll(function(){
       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
       <div style="display:flex;position:relative;min-height:100px;min-width:100%;margin-top: -27px;">
         <% if current_user %>
-        <% @wake = @wake.where.not(user_id: current_user.id) %>
+        <% @wake = current_user.not_my_boards(@wake) %>
         <% end %>
         <%= render partial: 'featured', locals: {boards: @wake} %>
       </div>
@@ -175,8 +189,7 @@ $(window).scroll(function(){
   </div>
 </div>
 </div>
-
-<div id="mainsearch" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;max-height:100px;">
+<div id="mainsearch" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
 <%= render partial: 'search_form' %>
 </div>
 <br>
