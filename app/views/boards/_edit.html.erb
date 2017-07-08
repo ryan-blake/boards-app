@@ -71,6 +71,7 @@
         <%= f.fields_for :size do |builder| %>
           <%= render "sizes/edit", :f => builder %>
         <% end %>
+        <%if @board.surfable? %>
         <div class="row" id="surf_box">
           <div class="col-md-4">
             <div class="form-group">
@@ -87,6 +88,7 @@
             </div>
           </div>
         </div>
+        <% end %>
     </div>
     </div>
 
