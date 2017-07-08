@@ -3,7 +3,9 @@
 <div class="row">
   <div class="col-md-11">
     <div class="form-group">
-      <%= f.label :Accessory_title %>
+      <strong style="text-decoration:underline;"> Edit Accessory </strong>
+      <br>
+      <%= f.label :title %>
         <td><%= f.text_field :title, class: 'btn-width form-control' %></td>
         <%= f.hidden_field :user_id, :value => current_user.id %>
 
