@@ -12,16 +12,15 @@
 </div>
 <div class="row">
   <div class="image-box center-text" style="min-height:150px !important;" id="images">
-    <div class="progress" id='progress-bar' style='display:block;'>
-      <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%;background-color:#b2b2f1;">
-        <span class="sr-only" id='progress-bar-text'></span>
-      </div>
-    </div>
+  
     <%= f.label :add_images %><br>
     <btn class="center-text" style="position:absolute;left:calc(50% - 90px);">
-    <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %></btn>
+    <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true, id: 'file-input-acc', type: 'file'  %></btn>
     <div id="image"></div>
   </div>
+  <hr>
+  <div id="preview-acc"></div>
+
 </div>
 <div class="row">
   <div class="col-md-6">
@@ -67,5 +66,40 @@
     <div class="form-group">
       <%= f.label :price %>
       <td ><%= f.number_field :price, min: 1, class: 'form-control' %></td>    </div>
-</div>
+    </div>
   </div>
+<script>
+
+  function previewImages() {
+
+var preview = document.querySelector('#preview-acc');
+
+if (this.files) {
+  [].forEach.call(this.files, readAndPreview);
+}
+
+function readAndPreview(file) {
+
+  // Make sure `file.name` matches our extensions criteria
+  if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+    return alert(file.name + " is not an image");
+  } // else...
+
+  var reader = new FileReader();
+
+  reader.addEventListener("load", function() {
+    var image = new Image();
+    image.height = 100;
+    image.title  = file.name;
+    image.src    = this.result;
+    preview.appendChild(image);
+  }, false);
+
+  reader.readAsDataURL(file);
+
+}
+
+}
+
+document.querySelector('#file-input-acc').addEventListener("change", previewImages, false);
+</script>

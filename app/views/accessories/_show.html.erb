@@ -14,7 +14,6 @@
       <div class="siema-acc">
         <% @accessory.images.each_with_index do |photo, index| %>
                 <div>
-
                     <%= image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')) %>
                  </div>
         <% end %>

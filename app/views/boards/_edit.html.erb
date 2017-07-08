@@ -13,7 +13,7 @@
     </div>
     <% end %>
 <% if current_user.stripe_account != nil %>
-<div id="newBoard" class="center-text" style="height:100%;max-width:85%;margin-left: 10%;margin-right: 5%;">
+<div id="editBoard" class="center-text" style="height:100%;max-width:85%;margin-left: 10%;margin-right: 5%;">
   <div class="row">
     <div class="col-md-12">
       <div class="form-group">
@@ -57,8 +57,7 @@
     </div>
 
     <div class="row">
-      <div id="surfBtn" style="width: 50%;position: relative;" class="btn btn-primary">Surf Dimensions</div>
-      <div id="sizeForm" style="display:block;width:100%;">
+      <div id="sizeForm" style="display:block;width:100%;margin:0px;">
         <%= f.fields_for :size do |builder| %>
           <%= render "sizes/edit", :f => builder %>
         <% end %>
@@ -127,46 +126,41 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group">
-          <label>Add accessory to listing</label>
-          <%= f.check_box :footgear, id: 'addAccessory' ,class: 'form-control' %>
-        </div>
-      </div>
-    </div>
+
+    <% if @board.accessories.count >= 1 %>
     <div class="row">
       <div class="">
         <div class="form-group">
           <div id="accessoryForm" style="margin-bottom:50px;display:block;position:relative;min-height:400px;min-width:100%;">
             <hr class="style14">
-            <div id="AccBtn" class="center-text" style="position:relative;bottom:20px;">
-              <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
-            </div>
+
             <div>
               <%= f.fields_for :accessories do |builder| %>
                 <%= render "accessories/edit", :f => builder %>
               <% end %>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label>new accessory</label>
-                  <span id="extraAccessory" class="btn btn-primary">eXtra Acceessory </span>
-                </div>
-              </div>
+
             <hr>
             </div>
          </div>
       </div>
     </div>
-
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+        <div class="center-text" id="" style="position:relative;">
+          <%= f.submit 'Update', class: 'form-control btn-success' %>
+        </div>
+    </div>
+  </div>
+    <% else %>
     <div class="row">
       <div class="col-md-12">
-          <div class="center-text" id="createBTN" style="position: absolute;bottom: -40px;width: 100%;">
-            <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
+          <div class="center-text" id="createBtn" style="position:relative;">
+            <%= f.submit 'Update', class: 'form-control btn-success'%>
           </div>
       </div>
     </div>
-    </div>
+    <% end %>
 
     </div>
 <!-- section -->
