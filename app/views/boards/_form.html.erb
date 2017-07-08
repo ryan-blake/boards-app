@@ -44,20 +44,20 @@
       <div class="col-md-5">
         <div class="form-group">
           <%= f.label :make, "Brand"%>
-          <%= f.text_field :make, class: "form-control input-lg", placeholder: "Brand" %>
+          <%= f.text_field :make, class: "form-control input-lg", placeholder: "Enter Brand" %>
         </div>
       </div>
       <div class="col-md-5">
         <div class="form-group">
-
-          <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Category'} , { :class => 'form-control input-lg' } %>
+<label> Category </label>
+          <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Choose Category'} , { :class => 'form-control input-lg' } %>
         </div>
       </div>
     </div>
 
     <div class="row">
       <div id="surfBtn" style="width: 50%;position: relative;" class="btn btn-primary">Surf Dimensions</div>
-      <div id="sizeForm" style="display:block;width:100%;margin-top: -125px;">
+      <div id="sizeForm" style="display:block;width:100%;">
         <%= f.fields_for :size do |builder| %>
           <%= render "sizes/form", :f => builder %>
         <% end %>
@@ -122,7 +122,7 @@
       <div class="col-md-11">
         <div class="form-group">
           <%= f.label :description %>
-          <%= f.text_area :description, class: 'form-control', style: 'min-height:80px;min-width:100%;'%>
+          <%= f.text_area :description, class: 'form-control', placeholder: "Enter Description", style: 'min-height:80px;min-width:100%;'%>
         </div>
       </div>
     </div>
@@ -198,6 +198,7 @@
   <% end %>
 
   <script>
+
   $(function(){
     var checkAccessory = document.getElementById('addAccessory');
     var extraAccessory = document.getElementById('extraAccessory')

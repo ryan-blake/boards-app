@@ -59,7 +59,13 @@ end
 
 # GET /accessories/1/edit
 def edit
+
   @accessory = Accessory.find(params[:id])
+  if @accessory
+  else
+    @accessory = Accessory.new
+  end
+
 end
 
 # POST /accessories
