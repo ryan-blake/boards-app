@@ -34,8 +34,18 @@
     <btn class="center-text" style="position:absolute;left:calc(50% - 90px);">
 
     <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true, id: 'file-input', type: 'file'  %></btn>
-
     <div id="image"></div>
+    <div class="container-fluid row" style="position:relative;min-height:200px;max-height:400px; margin-top:25px;">
+      <%= f.fields_for :images do |image_fields| %>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+              <span style="max-width:20px;min-height:100px;max-height:100px;">
+                <%= image_fields.label :remove %>
+                <%= image_fields.check_box :_destroy, class: 'form-control' %>
+                <%= attachment_image_tag(image_fields.object, :file, :fill, 75, 75) %>
+              </span>
+          </div>
+      <% end %>
+    </div>
 
 <hr>
 <div id="preview"></div>
@@ -126,7 +136,6 @@
         </div>
       </div>
     </div>
-
     <% if @board.accessories.count >= 1 %>
     <div class="row">
       <div class="">
@@ -190,6 +199,7 @@ function readAndPreview(file) {
   reader.addEventListener("load", function() {
     var image = new Image();
     image.height = 100;
+    image.width = 100;
     image.title  = file.name;
     image.src    = this.result;
     preview.appendChild(image);
