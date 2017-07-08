@@ -206,10 +206,7 @@ transactions = Stripe::BalanceTransaction.all(
   # GET /boards/1/edit
   def edit
     @board = Board.find(params[:id])
-    @accessory = Accessory.where(board_id: @board.id)
-    accessory = @board.accessories.build
-    size = @board.build_size
-    
+    @accessories = @board.accessories
     @size = @board.size
 
     respond_to do |format|
@@ -222,10 +219,7 @@ transactions = Stripe::BalanceTransaction.all(
   def create
     @board = Board.new(board_params)
     @size = Size.new
-
-
-
-      @accessory = Accessory.new
+    @accessory = Accessory.new
 
      @user = current_user
      respond_to do |format|
@@ -247,6 +241,8 @@ transactions = Stripe::BalanceTransaction.all(
   def update
 
     respond_to do |format|
+
+      @board = Board.find(params[:id])
       if @board.update(board_params)
 
         format.js
