@@ -1,5 +1,7 @@
 <% if ( current_user && current_user.stripe_account != nil ) && (@board.shipping != true || false ) %>
-<%= form_for(@board, remote: true)  do |f| %>
+<div class="panel panel-default topspace">
+  <div class="panel-body">
+  <%= form_for(@board, remote: true)  do |f| %>
   <% if @board.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
@@ -9,228 +11,185 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
-<!--  -->
-
-<div class="title center-text">
-<%= f.label :title %>
-  <td><%= f.text_field :title, class: 'btn-width form-control' %></td>
-</div>
-<div class="image-box center-text" id="images">
-  <div class="progress" id='progress-bar' style='display:none;'>
-    <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%;background-color:#b2b2f1;">
-      <span class="sr-only" id='progress-bar-text'></span>
+    <% end %>
+<% if current_user.stripe_account != nil %>
+<div id="newBoard" class="center-text" style="height:100%;max-width:85%;margin-left: 10%;margin-right: 5%;">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'btn-width form-control input-lg' %>
     </div>
   </div>
-  <%= f.label :add_images %><br>
-  <btn class="center-text" style="position:absolute;left:calc(50% - 90px);">
+</div>
+
+  <div class="row image-box center-text" id="images">
+    <div class="progress" id='progress-bar' style='display:none;'>
+      <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%;background-color:#b2b2f1;">
+        <span class="sr-only" id='progress-bar-text'></span>
+      </div>
+
+    </div>
+    <%= f.label :add_images %><br>
+    <btn class="center-text" style="position:absolute;left:calc(50% - 90px);">
+
     <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true, id: 'file-input', type: 'file'  %></btn>
-    <hr>
-    <div id="preview"></div>
-  <div class="container-fluid row" style="position:relative;min-height:200px;max-height:400px; margin-top:25px;">
-    <%= f.fields_for :images do |image_fields| %>
-        <div class="col-xs-12 col-sm-6 col-md-3">
-            <span style="max-width:20px;min-height:100px;max-height:100px;">
-              <%= image_fields.label :remove %>
-              <%= image_fields.check_box :_destroy, class: 'form-control' %>
-              <%= attachment_image_tag(image_fields.object, :file, :fill, 75, 75) %>
-            </span>
+
+    <div id="image"></div>
+
+<hr>
+<div id="preview"></div>
+  </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group">
+          <%= f.label :make, "Brand"%>
+          <%= f.text_field :make, class: "form-control input-lg", placeholder: "Enter Brand" %>
         </div>
-    <% end %>
-  </div>
-</div>
-<tbody>
-
-  <div id="sizeEdit" style="display:block;">
-    <%= f.fields_for :size do |builder| %>
-      <%= render "sizes/edit", :f => builder %>
-    <% end %>
-  <hr>
-  </div>
-</tbody>
-<div class="dimensions" style="">
-  <table class="" style="">
-    <thead style="min-width:100%;">
-      <th ><%= f.label :make %></th>
-      <th ><%= f.label :category_id, "category" %> <br></th>
-        <th class="col-sm-3"><%= f.label :zipcode %><br /></th>
-    </thead>
-    <tbody>
-      <tbody>
-        <td><%= f.text_field :make, class: 'btn-width form-control' %></td>
-        <td><%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Category'} , { :class => 'form-control' } %></td>
-        <% if @board.surfable? %>
-        <spam><strong>Tail</strong>
-        <%= f.collection_select :tail_id, Tail.all, :id, :name,
-          { :include_blank => 'Tail'} , { :class => 'form-control' } %>
-          <br><strong>Fin</strong>
-        <%= f.collection_select :fin_id, Fin.all, :id, :name,
-            { :include_blank => 'Fin'} , { :class => 'form-control' } %>
-        </spam>
-            <% end %>
-        <td class="col-sm-3"><%= f.number_field :zipcode, class: 'form-control' %></td>
-      <thead>
-        <th class="col-sm-3"><%= f.label :width %> (inches)<br/></th>
-        <th class="col-sm-3"><%= f.label :volume %><strong>: if applies </strong><br/></strong></th>
-        <th ><%= f.label :length %><strong> / height of board (inches)</strong><br/></strong></th>
-      </thead>
-      <tbody>
-        <td class="col-sm-3"><%= f.number_field :width, class: 'form-control' %></td>
-        <td class="col-sm-3"><%= f.number_field :volume, class: 'form-control' %></td>
-        <td ><%= f.number_field :length, class: 'form-control' %></td>
-
-      </tbody>
-      <label>add accessory</label>
-      <%= f.check_box :footgear, id: 'addAccessory' ,class: 'form-control' %>
-      <th class="col-sm-3"><%= f.label :used %></th>
-      <thead>
-      </thead>
-      <tbody>
-        <td class="col-sm-3"><%= f.check_box :footgear, class: 'form-control' %> <br /></td>
-        <td class="col-sm-3"><%= f.check_box :used, class: 'form-control' %> <br /></td>
-
-      </tbody>
-    </table>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+<label> Category </label>
+          <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Choose Category'} , { :class => 'form-control input-lg' } %>
+        </div>
+      </div>
     </div>
 
-    <%= f.label :description %>
-    <%= f.text_area :description, class: 'form-control', style: 'min-height:80px;min-width:100%;'%>
-
-
-  <%= f.label :price %><br/>
-  <%= f.number_field :price, class: 'btn-width form-control' %>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-
-<!--  -->
-<div class="row" style="max-width:100%;">
-  <div class="">
-    <div class="form-group">
-      <div id="accessoryForm" style="margin-bottom:50px;display:none;position:relative;min-height:400px;min-width:95%;max-width:95%;padding-left:25px;">
-        <hr class="style14">
-        <div id="AccBtn" class="center-text" style="position:relative;bottom:20px;">
-          <%= f.submit 'Update', class: 'btn-success form-control', style: 'background-color:lightgrey;' %>
-        </div>
-        <div>
-          <%= f.fields_for :accessories do |builder| %>
-            <%= render "accessories/form", :f => builder %>
-          <% end %>
-          <div class="col-md-3">
+    <div class="row">
+      <div id="surfBtn" style="width: 50%;position: relative;" class="btn btn-primary">Surf Dimensions</div>
+      <div id="sizeForm" style="display:block;width:100%;">
+        <%= f.fields_for :size do |builder| %>
+          <%= render "sizes/edit", :f => builder %>
+        <% end %>
+        <div class="row" id="surf_box">
+          <div class="col-md-4">
             <div class="form-group">
-              <label>new accessory</label>
-              <span id="extraAccessory" class="btn btn-primary">eXtra Acceessory </span>
+              <%= f.label :tail_id, "Tail Type" %>
+              <%=  f.collection_select( :tail_id, Tail.all, :id, :name,
+                { :include_blank => 'Tail'} , { :class => 'form-control input-lg' }) %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Fin Type</label>
+              <%=  f.collection_select :fin_id, Fin.all, :id, :name,
+                { :include_blank => 'Fin'} , { class: "form-control input-lg" } %>
             </div>
           </div>
         </div>
-     </div>
-  </div>
-</div>
+    </div>
+    </div>
 
-
-</div>
-<div class="row">
-  <div class="">
-    <div class="form-group">
-      <div id="newaccessoryForm" style="margin-bottom:50px;display:none;position:relative;min-height:400px;min-width:95%;max-width:95%;padding-left:25px;">
-        <hr class="style14">
-        <div id="newAccBtn" class="center-text" style="position:relative;bottom:20px;">
-          <%= f.submit 'Update', class: 'btn-success form-control'%>
-        </div>
-        <div>
-          <%= f.fields_for :accessories do |builder| %>
-            <%= render "accessories/form", :f => builder %>
-          <% end %>
-        <hr>
-        </div>
-     </div>
-     <div class="row">
-       <div class="col-md-12">
-           <div class="center-text" id="createBtn" style="">
-             <%= f.submit 'Update', class: 'btn-success form-control' %>
-           </div>
-       </div>
-     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-      <div class="center-text" style="display:none;position: absolute;bottom: -40px;width: 100%;">
-        <%= f.submit 'Update', class: 'form-control'%>
+    <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>inventory:</label>
+          <%= f.number_field :inventory, min: 0,class: 'btn-width form-control input-lg' %>
       </div>
+    </div>
+    <div class="col-md-1">
+      <div class="form-group">
+        <label>Used:</label>
+        <%= f.check_box :used, class: 'form-control input-lg' %>
+      </div>
+    </div>
   </div>
-</div>
-</div>
+    <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Cost:</label>
+        <%= f.number_field :cost, min: 1, class: 'form-control input-lg' %> <br />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Margin:</label>
+          <%= f.number_field :margin, min: 0, class: 'btn-width form-control input-lg' %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Sale Price:</label>
+        <%= f.number_field :price, min: 0, class: 'input-lg btn-width form-control' %>
+      </div>
+    </div>
 
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :company, :value => current_user.company ? current_user.company : nil %>
+    <%= f.hidden_field :list_time, :value => Time.now %>
+  </div>
+    <div class="row">
+      <div class="col-md-11">
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_area :description, class: 'form-control', placeholder: "Enter Description", style: 'min-height:80px;min-width:100%;'%>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Add accessory to listing</label>
+          <%= f.check_box :footgear, id: 'addAccessory' ,class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="">
+        <div class="form-group">
+          <div id="accessoryForm" style="margin-bottom:50px;display:block;position:relative;min-height:400px;min-width:100%;">
+            <hr class="style14">
+            <div id="AccBtn" class="center-text" style="position:relative;bottom:20px;">
+              <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
+            </div>
+            <div>
+              <%= f.fields_for :accessories do |builder| %>
+                <%= render "accessories/edit", :f => builder %>
+              <% end %>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>new accessory</label>
+                  <span id="extraAccessory" class="btn btn-primary">eXtra Acceessory </span>
+                </div>
+              </div>
+            <hr>
+            </div>
+         </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+          <div class="center-text" id="createBTN" style="position: absolute;bottom: -40px;width: 100%;">
+            <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
+          </div>
+      </div>
+    </div>
+    </div>
+
+    </div>
 <!-- section -->
 
   <% end %>
-  <% else %>
-<script>
-alert('upgrade your account')
-</script>
   <% end %>
-</div>
-<style>
-#createBtn {
-  position: absolute;
-  bottom: -30px;
-  width: 85%;
-  margin: 0px 43px
-}
-</style>
+
   <script>
 
 
-    var checkAccessory = document.getElementById('addAccessory');
-    var extraAccessory = document.getElementById('extraAccessory')
-    var formAccessory = document.getElementById('accessoryForm')
-    var newformAccessory = document.getElementById('newaccessoryForm')
-    var saveAccessory = document.getElementById('AccBtn')
-    var newsaveAccessory = document.getElementById('newAccBtn')
-    var createBtn = document.getElementById('createBtn')
 
-    checkAccessory.onclick = function() {
-
-     if(this.checked) {
-       formAccessory.style['display'] = 'block';
-       saveAccessory.style['display'] = 'none';
-     } else {
-       formAccessory.style['display'] = 'none';
-       saveAccessory.style['display'] = 'block';
-
-     }
-    };
-
-
-    extraAccessory.onclick = function() {
-      if (newformAccessory.style.display == 'none') {
-       newformAccessory.style['display'] = 'block';
-       newsaveAccessory.style['display'] = 'none';
-       createBtn.style['position'] = 'relative';
-       createBtn.style['bottom'] = '0px';
-       extraAccessory.innerHTML = 'Close Extra Accessory'
-       extraBtn.style['display'] = 'none';
-     } else if  (newformAccessory.style.display == 'block') {
-       newformAccessory.style['display'] = 'none';
-       newsaveAccessory.style['display'] = 'block';
-       createBtn.style['position'] = 'absolute';
-       createBtn.style['bottom'] = '-23px';
-       extraAccessory.innerHTML = 'Extra Accessory'
-
-     }
-    };
 
 
 
   function previewImages() {
 
-  var preview = document.querySelector('#preview');
+var preview = document.querySelector('#preview');
 
-  if (this.files) {
+if (this.files) {
   [].forEach.call(this.files, readAndPreview);
-  }
+}
 
-  function readAndPreview(file) {
+function readAndPreview(file) {
 
   // Make sure `file.name` matches our extensions criteria
   if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
@@ -249,10 +208,13 @@ alert('upgrade your account')
 
   reader.readAsDataURL(file);
 
-   }
+}
 
-  }
+}
 
-  document.querySelector('#file-input').addEventListener("change", previewImages, false);
+document.querySelector('#file-input').addEventListener("change", previewImages, false);
 
   </script>
+</div>
+</div>
+<% end %>
