@@ -11,6 +11,29 @@
         <%= collection_select(nil, :brand, Accessory.where(category_id: @board.category_id,:user_id => @board.user_id).order(:brand).distinct.sort, :brand, :brand, {prompt: "Choose make"},{ class: "form-control" }) %>
        </span>
     </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="input-group">
+          <span>
+            <%= number_field :minimum, params[:minimum], style: 'width: 120px;', class: 'form-control', min: 1, placeholder: "min length" %>
+          </span>
+        </div>
+      </div>
+      <div class="col-md-4" style="position: absolute;top: 34px;left: 123px;">
+        <div class="input-group" style="width: 112px;">
+            <span style="">
+              <%= number_field :maximum, params[:maximum], class: 'form-control',min: 1, placeholder: "max length" %>
+            </span>
+            <span style="width: 56px;position: absolute;float: right;top: 0px;">
+              <%= collection_select( nil, :unit_id, Unit.all, :id, :name,
+                { :include_blank => 'Unit'} , { :class => 'form-control' })%>
+            </span>
+          </div>
+
+
+      </div>
+
+    </div>
 <div class="col-md-4">
    <div class="input-group">
      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Accessories.."  %>

@@ -31,8 +31,13 @@ class Accessory < ApplicationRecord
   accepts_nested_attributes_for :images, allow_destroy: true
   validates :kind_id, :presence => true
   validates :category_id, :presence => true
-
   after_validation :save_category
+
+
+
+   scope :min_length_search, ->(minimum) { where('measured >= ?', minimum) }
+   scope :max_length_search, ->(maximum) { where('measured <= ?', maximum) }
+
   def save_category
     a = self
     if a.category
@@ -40,8 +45,24 @@ class Accessory < ApplicationRecord
     end
   end
 
-
 private
 
+def board_length
+  if self.board_id.present?
+  a = Board.find(self.board_id)
+ unless self.unit_id == 1
+   if self.unit_id == 2
+     a.length = self.length * 12
+   elsif self.unit_id == 3
+     a.length = (self.length / 2.54)
+   else
+     a.length = (self.length / 25.4)
+   end
+  else
+  a.length = self.length
+  end
+  a.save
+end
+end
 
 end

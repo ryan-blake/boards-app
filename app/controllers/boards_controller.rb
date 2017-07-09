@@ -339,7 +339,6 @@ end
                  @boards  = @boards.min_length_search(1).max_length_search(b)
                else
                  @boards  = @boards.min_length_search(0).max_length_search(9999)
-
                end
              end
 
