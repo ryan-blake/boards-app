@@ -1,6 +1,6 @@
 <div class="panel panel-default topspace">
   <div class="panel-body">
-<%= form_for(board) do |f| %>
+<%= form_for(board, remote: true)  do |f| %>
   <% if board.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
@@ -199,7 +199,7 @@
 
   <script>
 
-  $(function(){
+
     var checkAccessory = document.getElementById('addAccessory');
     var extraAccessory = document.getElementById('extraAccessory')
     var formAccessory = document.getElementById('accessoryForm')
@@ -234,45 +234,8 @@
      }
     };
 
-  });
-  $(function(){
-    var surfBtn = document.getElementById('surfBtn');
 
-    var sizeLength = document.getElementById('sizeLength')
-    var sizeFeet = document.getElementById('sizeFeet')
-    var sizeInches = document.getElementById('sizeInches')
-    var sizeWidth = document.getElementById('sizeWidth')
-    var sizeThickness = document.getElementById('sizeThickness')
-    var sizeVolume = document.getElementById('sizeVolume')
-    var sizeUnits = document.getElementById('sizeUnits')
-    var surfBox = document.getElementById('surf_box')
-      surfBox.style['display'] = 'none'
 
-    surfBtn.onclick = function() {
-     if(sizeFeet.style.display == 'none' ) {
-       sizeLength.style['display'] = 'none';
-       sizeFeet.style['display'] = 'block';
-       sizeInches.style['display'] = 'block';
-       sizeWidth.style['display'] = 'block';
-       sizeThickness.style['display'] = 'block';
-       sizeVolume.style['display'] = 'block';
-       sizeUnits.style['display'] = 'none';
-       surfBox.style['display'] = 'block';
-       surfBtn.innerHTML = 'Dimensions';
-     } else {
-       sizeLength.style['display'] = 'block';
-       sizeFeet.style['display'] = 'none';
-       sizeInches.style['display'] = 'none';
-       sizeWidth.style['display'] = 'block';
-       sizeThickness.style['display'] = 'none';
-       sizeVolume.style['display'] = 'none';
-       sizeUnits.style['display'] = 'block';
-       surfBox.style['display'] = 'none';
-       surfBtn.innerHTML = 'Surf Dimensions';
-
-     }
-    };
-  });
 
   function previewImages() {
 

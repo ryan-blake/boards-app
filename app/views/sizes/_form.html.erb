@@ -56,4 +56,44 @@
     </div>
       </table>
 
+      <script>
+      $(function(){
+        var surfBtn = $('#surfBtn');
+
+        var sizeLength = document.getElementById('sizeLength')
+        var sizeFeet = document.getElementById('sizeFeet')
+        var sizeInches = document.getElementById('sizeInches')
+        var sizeWidth = document.getElementById('sizeWidth')
+        var sizeThickness = document.getElementById('sizeThickness')
+        var sizeVolume = document.getElementById('sizeVolume')
+        var sizeUnits = document.getElementById('sizeUnits')
+        var surfBox = document.getElementById('surf_box')
+          surfBox.style['display'] = 'none'
+
+        surfBtn.onclick = function() {
+         if(sizeFeet.style.display == 'none' ) {
+           sizeLength.style['display'] = 'none';
+           sizeFeet.style['display'] = 'block';
+           sizeInches.style['display'] = 'block';
+           sizeWidth.style['display'] = 'block';
+           sizeThickness.style['display'] = 'block';
+           sizeVolume.style['display'] = 'block';
+           sizeUnits.style['display'] = 'none';
+           surfBox.style['display'] = 'block';
+           surfBtn.innerHTML = 'Dimensions';
+         } else {
+           sizeLength.style['display'] = 'block';
+           sizeFeet.style['display'] = 'none';
+           sizeInches.style['display'] = 'none';
+           sizeWidth.style['display'] = 'block';
+           sizeThickness.style['display'] = 'none';
+           sizeVolume.style['display'] = 'none';
+           sizeUnits.style['display'] = 'block';
+           surfBox.style['display'] = 'none';
+           surfBtn.innerHTML = 'Surf Dimensions';
+
+         }
+        };
+      });
+    </script>
 <!-- surf new -->

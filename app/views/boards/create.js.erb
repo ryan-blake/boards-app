@@ -1,0 +1,3 @@
+$("#newBoard").modal('hide')
+$("#newModal").modal('show')
+$("#newModal .modal-content").html("<%= escape_javascript(render('show', locals: { board: @board } )) %>")

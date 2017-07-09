@@ -1,14 +1,5 @@
-<div class="center-text">
-<strong>New Board</strong>
-</div>
-<% if current_user && current_user.stripe_account %>
-  <%= render 'form', board: @board %>
-<% end %>
-
-<div class="center-text">
 <% if user_signed_in?  && current_user.stripe_account == nil %>
   <%= link_to 'connect to post', user_stripe_connect_omniauth_authorize_path, class: 'btn btn-primary' %>
+<% elsif current_user && current_user.stripe_account %>
+  <%= render 'form', board: @board %>
 <% end %>
-<br>
-<hr>
-</div>

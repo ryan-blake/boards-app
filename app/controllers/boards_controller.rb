@@ -202,6 +202,9 @@ transactions = Stripe::BalanceTransaction.all(
     accessory = @board.accessories.build
     size = @board.build_size
 
+        respond_to do |format|
+            format.js
+          end
   end
 
   # GET /boards/1/edit
@@ -224,12 +227,13 @@ transactions = Stripe::BalanceTransaction.all(
 
      @user = current_user
      respond_to do |format|
+
       if @board.save
-        format.html { redirect_to @board, notice: 'Board was successfully created.' }
-        format.json { render :show, status: :created, location: @board }
+        format.js
+        format.json { render partial: 'form', status: :created, location: @board }
       else
-        format.html { render :new }
-        format.json { render json: @board.errors, status: :unprocessable_entity }
+        format.js { render :form }
+        format.json { render form: @board.errors, status: :unprocessable_entity }
       end
       # BoardMailer.new_board(@board).deliver_now
       @user.tokens += -2
