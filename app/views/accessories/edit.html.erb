@@ -1,7 +1,7 @@
 <%= form_for(@accessory)  do |f| %>
   <% if @accessory.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(board.errors.count, "error") %> prohibited this board from being saved:</h2>
+      <h2><%= pluralize(@accessory.errors.count, "error") %> prohibited this accessory from being saved:</h2>
       <ul>
       <% @accessory.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -44,6 +44,12 @@
     <div class="form-group">
       <%= f.label :category %>
       <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Category'} , { :class => 'form-control input-lg' } %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :kind %>
+      <%= f.grouped_collection_select :kind_id, Category.order(:name), :kinds, :name, :id, :name,   { :include_blank => 'Accssory-type'} , { :class => 'form-control input-lg' } %>
     </div>
   </div>
 </div>
