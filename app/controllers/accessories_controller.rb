@@ -1,6 +1,6 @@
 class AccessoriesController < ApplicationController
   # before_action :set_accessory, only: [:show, :edit, :update, :destroy]
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :c_ft ,:c_cm, :c_mm
   respond_to :html, :js
 
 
@@ -199,7 +199,7 @@ end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def accessory_params
-    params.require(:accessory).permit(:kind_id, :brand ,:price, :inventory, :color, :title, :type_id, :category_id, :user_id, :board_id,images_files: [], images_attributes: [ :id, :file, :_destroy])
+    params.require(:accessory).permit(:measured ,:measure, :unit_id, :kind_id, :brand ,:price, :inventory, :color, :title, :type_id, :category_id, :user_id, :board_id,images_files: [], images_attributes: [ :id, :file, :_destroy])
   end
 
   def set_current_accessories

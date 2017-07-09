@@ -25,7 +25,7 @@
               <%= number_field :maximum, params[:maximum], class: 'form-control',min: 1, placeholder: "max length" %>
             </span>
             <span style="width: 56px;position: absolute;float: right;top: 0px;">
-              <%= collection_select( nil, :unit_id, Unit.all, :id, :name,
+              <%= collection_select(nil, :unit_id, Unit.all, :id, :name,
                 { :include_blank => 'Unit'} , { :class => 'form-control' })%>
             </span>
           </div>

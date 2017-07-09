@@ -24,7 +24,7 @@ class Accessory < ApplicationRecord
   belongs_to :board, optional: true
   belongs_to :user
   belongs_to :category
-  belongs_to :unit, optional: true
+  belongs_to :unit
   belongs_to :kind
   has_many :images, dependent: :destroy
   accepts_attachments_for :images, attachment: :file, append: true
@@ -32,7 +32,8 @@ class Accessory < ApplicationRecord
   validates :kind_id, :presence => true
   validates :category_id, :presence => true
   after_validation :save_category
-
+  after_validation :accessory_length
+  after_update :accessory_length, if: ->(obj){ obj.measure_changed?}
 
 
    scope :min_length_search, ->(minimum) { where('measured >= ?', minimum) }
@@ -40,29 +41,29 @@ class Accessory < ApplicationRecord
 
   def save_category
     a = self
-    if a.category
+    if a.category.present?
       a.category = a.kind.category
     end
   end
 
 private
 
-def board_length
-  if self.board_id.present?
-  a = Board.find(self.board_id)
+
+def accessory_length
+  if self.measure.present?
  unless self.unit_id == 1
    if self.unit_id == 2
-     a.length = self.length * 12
+     self.measured = self.measure * 12
    elsif self.unit_id == 3
-     a.length = (self.length / 2.54)
+     self.measured = (self.measure / 2.54)
    else
-     a.length = (self.length / 25.4)
+     self.measured = (self.measure / 25.4)
    end
   else
-  a.length = self.length
+  self.measured = self.measure
   end
-  a.save
+ end
 end
-end
+
 
 end

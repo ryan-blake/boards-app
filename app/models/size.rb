@@ -50,7 +50,7 @@ class Size < ApplicationRecord
      end
   end
 
-  def board_length
+  def accessory_length
     if self.measure.present?
     a = self
    unless self.unit_id == 1
@@ -67,6 +67,22 @@ class Size < ApplicationRecord
     a.save
   end
 end
-
+def board_length
+  if self.board_id.present?
+  a = Board.find(self.board_id)
+ unless self.unit_id == 1
+   if self.unit_id == 2
+     a.length = self.length * 12
+   elsif self.unit_id == 3
+     a.length = (self.length / 2.54)
+   else
+     a.length = (self.length / 25.4)
+   end
+  else
+  a.length = self.length
+  end
+  a.save
+end
+end
 
 end
