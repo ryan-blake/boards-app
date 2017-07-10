@@ -1,3 +1,10 @@
+<% if  @contact.errors.present?%>
+
+        $(window).load(function () {
+            $('#newBoard').modal('show');
+            });
+
+<% end  %>
 $("#newBoard").modal('hide')
 $("#newModal").modal('show')
 $("#newModal .modal-content").html("<%= escape_javascript(render('show', locals: { board: @board } )) %>")

@@ -199,9 +199,7 @@ transactions = Stripe::BalanceTransaction.all(
   # GET /boards/new
   def new
     @board = Board.new
-    accessory = @board.accessories.build
-    size = @board.build_size
-
+  
         respond_to do |format|
             format.js
           end
