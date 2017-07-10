@@ -8,7 +8,7 @@
   </div>
     <div class="input-group pull-right" style="max-width:50%;">
       <span class="input-group-btn">
-        <%= collection_select(nil, :brand, Accessory.where(category_id: @board.category_id, :user_id => @board.user_id).where("inventory >= ?", 1).select(:brand).uniq, :brand, :brand, {:include_blank => "Select BRand", },{  class: "form-control"}) %>
+        <%= collection_select(nil, :brand, Accessory.where(category_id: @board.category_id, :user_id => @board.user_id).where("inventory >= ?", 1).select(:brand).uniq, :brand, :brand, {:include_blank => "Select Brand", },{  class: "form-control"}) %>
 <!-- new ^ -->
        </span>
     </div>
