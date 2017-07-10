@@ -121,6 +121,10 @@ def edit
     @accessory = Accessory.new
   end
 
+  respond_to do |format|
+      format.js
+    end
+
 end
 
 # POST /accessories
@@ -149,11 +153,12 @@ end
 def update
   @accessory = Accessory.find_by(params[:id])
   respond_to do |format|
-    if @accessory.update(accessory_params)
-      format.html { redirect_to @accessory, notice: 'accessory was successfully updated.' }
-      format.json { render :show, status: :ok, location: @accessory }
+    if @accessory.update(board_params)
+
+      format.js
+
     else
-      format.html { render :edit }
+      format.js
       format.json { render json: @accessory.errors, status: :unprocessable_entity }
     end
   end

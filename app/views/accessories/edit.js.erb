@@ -1,0 +1,6 @@
+$("#accEdit .modal-content").html('<%= j render partial: "edit" %>');
+$("#accEdit").modal()
+
+$("#dismissEditModal").on('click', function(){
+  $("#accEdit").modal('hide')
+});
