@@ -68,11 +68,14 @@ var searchResults = document.getElementById('results');
 
 type_select.onchange = function() {
   mainSearch.style['display'] = 'block';
+  mainSearch.style['margin-top'] = '15px';
   featuredDiv.style['display'] = 'none';
-  type_value.style['top'] = '0';
-  type_value.style['left'] = '5%';
-  type_value.style['z-index'] = '0';
+  type_value.style['top'] = '50px';
+  type_select.style['z-index'] = '1';
+  type_select.style['top'] = '0px';
+  type_select.style['position'] = 'absolute';
   searchSigned.style['display'] = 'block';
+
 
 
   $(".sk-circle").hide();
@@ -111,11 +114,7 @@ $(window).scroll(function(){
   color:white;
 }
 #type-value {
-    z-index: 1;
-    top: 90px;
-    width: 490px;
     position: relative;
-    height: 55px;
     top: 136px;
     left: calc(50% - 90px);
 }

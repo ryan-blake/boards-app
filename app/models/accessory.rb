@@ -48,6 +48,10 @@ class Accessory < ApplicationRecord
 
 private
 
+def format_date(created)
+  Time.at(created).getutc.strftime("%m/%d/%Y")
+end
+
 
 def accessory_length
   if self.measure.present?

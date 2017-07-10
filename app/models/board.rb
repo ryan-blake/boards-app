@@ -125,7 +125,9 @@ end
     self.type_id == 1
   end
 
+  
   private
+
 
   def update_tokens
     if for_sale_changed? == true

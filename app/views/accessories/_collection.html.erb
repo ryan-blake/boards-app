@@ -1,10 +1,15 @@
-
 <% if @accessories_boards%>
+<!-- add accessories price to board total -->
+  <% @theTotal = 0 %>
+  <% @accessories_boards.each do |i| %>
+    <% @theTotal += i.price %>
+  <% end %>
 <div class="" style="width:25%;">
   includes
   </div>
    <%  @accessories_boards.each do |i| %>
    <div class="" style="max-height: 150px;background-color:lightgrey;width:25%;">
+     <span id="addPrice" data-addPrice="<%= i.price %>"></span>
         <td class="vendor-link" style="cursor:pointer;">
      <div class="center-text">
        <span id="acc-link"><%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></span>
@@ -19,4 +24,6 @@
 </td>
 </div>
   <% end %>
+  <% else %>
+  <% @theTotal = 0 %>
 <% end %>
