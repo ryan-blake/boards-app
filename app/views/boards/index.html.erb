@@ -68,7 +68,6 @@ var searchResults = document.getElementById('results');
 
 type_select.onchange = function() {
   mainSearch.style['display'] = 'block';
-  mainSearch.style['margin-top'] = '15px';
   featuredDiv.style['display'] = 'none';
   type_value.style['top'] = '50px';
   type_select.style['z-index'] = '1';
@@ -234,8 +233,8 @@ $(window).scroll(function(){
 </div>
 </div>
 
-<!--  -->
-<div id="mainsearch" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
+
+<div id="mainsearch" style="padding-top:15px;display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
 <%= render partial: 'search_form' %>
 </div>
 

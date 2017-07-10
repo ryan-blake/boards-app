@@ -41,7 +41,13 @@ private
 
 def sortable(column, title = nil)
   title ||= column.titleize
-  direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"
+  direction = (column == sort_column && sort_direction == "asc") ? "asc" : "asc"
+  link_to title + ": #{direction}", params.merge(:sort => column, :direction => direction, :page => nil).permit!, remote: true
+end
+
+def sortableDesc(column, title = nil)
+  title ||= column.titleize
+  direction = (column == sort_column && sort_direction == "desc" ? "desc" : "desc")
   link_to title + ": #{direction}", params.merge(:sort => column, :direction => direction, :page => nil).permit!, remote: true
 end
 
