@@ -1,4 +1,4 @@
-<%= form_for(@accessory)  do |f| %>
+<%= form_for(@accessory, remote: true)  do |f| %>
   <% if @accessory.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@accessory.errors.count, "error") %> prohibited this accessory from being saved:</h2>
@@ -21,7 +21,7 @@
 </div>
 <div class="row">
   <div class="image-box center-text" style="min-height:150px !important;" id="images">
-    <div class="progress" id='progress-bar' style='display:none;'>
+    <div class="progress" id='progress-bar' style='display:none;width:90%;margin-left:5%;'>
       <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%;background-color:#b2b2f1;">
         <span class="sr-only" id='progress-bar-text'></span>
       </div>

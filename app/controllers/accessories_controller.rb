@@ -153,7 +153,7 @@ end
 def update
   @accessory = Accessory.find_by(params[:id])
   respond_to do |format|
-    if @accessory.update(board_params)
+    if @accessory.update(accessory_params)
 
       format.js
 
