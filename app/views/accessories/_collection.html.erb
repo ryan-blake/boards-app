@@ -7,8 +7,9 @@
 <div class="" style="width:25%;">
   includes
   </div>
+  <div class="max-height:150px;max-width:100%;">
    <%  @accessories_boards.each do |i| %>
-   <div class="" style="max-height: 150px;background-color:lightgrey;width:25%;">
+   <div class="" style="max-height:150px;background-color:lightgrey;width:25%;float:right;">
      <span id="addPrice" data-addPrice="<%= i.price %>"></span>
         <td class="vendor-link" style="cursor:pointer;">
      <div class="center-text">
@@ -22,6 +23,7 @@
          <span class="center-text"><%= i.kind.name %></span><strong><br></span>
      </div>
 </td>
+</div>
 </div>
   <% end %>
   <% else %>
