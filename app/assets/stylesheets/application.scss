@@ -31,7 +31,8 @@ margin: 0;
 background: snow;
 width: 100%;
 height:100%;
- overflow-y:scroll;
+overflow-y:scroll;
+
 }
 
 #pay_now_rent.stripe-button-el {
@@ -46,9 +47,13 @@ height:100%;
 
 // swiper
 .swiper-container {
-      width: 100%;
-      height: 300px;
-      margin: 20px auto;
+    margin-left: 0% !important;
+    margin-right: 0% !important;
+    width: 100%;
+    height: 300px;
+    margin: 20px auto;
+    width: 99%;
+    z-index: 0;
   }
   .swiper-slide {
       text-align: center;
