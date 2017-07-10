@@ -1385,6 +1385,10 @@ margin-top:-100px;
    display: none;
  }
 
+ #accKind, #accUnit, #accCategory {
+   border:1px solid beige;
+ }
+
 }
 // effective for width < 400px
 @media (max-width: 400px) {
