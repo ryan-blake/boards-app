@@ -103,10 +103,13 @@ end
 def new
   # @board = Board.find(params[:board_id])
   @accessory = Accessory.new
+
 end
 def inventory
   @accessory = Accessory.new
-
+  respond_to do |format|
+      format.js
+    end
 end
 
 # GET /accessories/1/edit
@@ -128,13 +131,13 @@ def create
   if current_user
     @user = current_user
     respond_to do |format|
-     if @accessory.save
-       format.html { redirect_to dash_path, notice: 'Board was successfully created.' }
-       format.json { render :show, status: :created, location: @accessory }
-     else
-       format.html { render :inventory }
-       format.json { render json: @accessory.errors, status: :unprocessable_entity }
-     end
+      if @accessory.save
+        format.js
+        format.json { render partial: 'show', status: :created, location: @board }
+      else
+        format.js { render :form }
+        format.json { render form: @accessory.errors, status: :unprocessable_entity }
+      end
    end
 
   end

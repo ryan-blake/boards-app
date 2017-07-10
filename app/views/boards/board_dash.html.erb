@@ -383,7 +383,7 @@ $(document).ajaxStop(function(){
 <div class="pull-left" style="top:85px;left:10px;width:190px;position:fixed;z-index:1;">
   <% if  current_user.tokens > 2 && current_user.stripe_account %>
     <h3 class="btn btn-sort"><%= link_to 'Listing', new_board_path %></h3>
-    <h3 class="btn btn-sort" style="left: 80px;position: absolute;"><%= link_to 'Accessory', accessoryInventory_path %></h3>
+    <h3 class="btn btn-sort"><%= link_to "accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></td></h3>
  <% end %>
 </div>
 
@@ -516,7 +516,7 @@ $(document).ajaxStop(function(){
      <div class="center-text" id="paginator">
      </div>
    </div>
-   <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newBoard">
+   <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newAcc">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-header">
           <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

@@ -1,0 +1,3 @@
+$("#newAcc").modal('hide')
+$("#accModal").modal('show')
+$("#accModal .modal-content").html("<%= escape_javascript(render('show', locals: { board: @board } )) %>")
