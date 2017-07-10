@@ -1,3 +1,7 @@
 $("#newAcc").modal('hide')
 $("#accModal .modal-content").html("<%= escape_javascript(render('show', locals: { board: @board } )) %>")
 $("#accModal").modal('show')
+// close modal when clicked
+$("#dismissAccModal").on('click', function(){
+  $("#accModal").modal('hide')
+})
