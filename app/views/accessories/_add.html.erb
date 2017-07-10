@@ -1,4 +1,4 @@
-<div style="position:relative;">
+<div id="accForm" style="position:relative;">
 <%= form_for(@accessory, remote: true)  do |f| %>
 
   <% if @accessory.errors.any? %>
@@ -16,29 +16,32 @@
   <div class="col-md-11">
     <div class="form-group">
       <%= f.label :Accessory_title %>
-        <td><%= f.text_field :title, class: 'btn-width form-control' %></td>
+        <td ><%= f.text_field :title , class: 'form-control', id: 'accTitle' %></td>
         <%= f.hidden_field :user_id, :value => current_user.id %>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="image-box center-text" style="min-height:150px !important;" id="images">
-    <div class="progress" id='progress-bar' style='display:none;'>
-      <div class="progress-bar progress-bar-striped active" role="progressbar" style="width:0%;background-color:#b2b2f1;">
+    <div class="progress center-text" id='progress-bar' style='margin-left:5%;display:none;max-width:80%;'>
+      <div class="progress-bar progress-bar-striped active" role="progressbar" style="background-color:#b2b2f1;">
         <span class="sr-only" id='progress-bar-text'></span>
       </div>
     </div>
     <%= f.label :add_images %><br>
     <btn class="center-text" style="position:absolute;left:calc(50% - 90px);">
-    <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true %></btn>
+    <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true ,id: 'file-input-acc' %></btn>
     <div id="image"></div>
+
+    <div id="preview-acc"></div>
+
   </div>
 </div>
 <div class="row">
   <div class="col-md-6">
     <div class="form-group">
       <%= f.label :brand %>
-      <%= f.text_field :brand, class: 'btn-width form-control' %>
+      <%= f.text_field :brand, class: 'btn-width form-control', id: 'accBrand' %>
     </div>
   </div>
 </div>
@@ -46,13 +49,13 @@
   <div class="col-md-6">
     <div class="form-group">
       <%= f.label :category %>
-      <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Category'} , { :class => 'form-control input-lg' } %>
+      <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Category'} , { :class => 'form-control input-lg' , id: 'accCategory'} %>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
       <%= f.label :kind %>
-      <%= f.grouped_collection_select :kind_id, Category.order(:name), :kinds, :name, :id, :name,   { :include_blank => 'Accssory-type'} , { :class => 'form-control input-lg' } %>
+      <%= f.grouped_collection_select :kind_id, Category.order(:name), :kinds, :name, :id, :name,   { :include_blank => 'Accssory-type'} , { :class => 'form-control input-lg' , id: 'accKind'} %>
 </div>
 </div>
 </div>
@@ -60,34 +63,72 @@
   <div class="col-md-4">
     <div class="form-group">
       <%= f.label :size %>
-    <%= f.number_field :measure, class: 'form-control',:step => 0.01 , min: 0 %>
+    <%= f.number_field :measure, id: 'accMeasure' , class: 'form-control',:step => 0.01 , min: 0 %>
       <spam id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name,
-      { :include_blank => 'Unit'} , { :class => 'form-control' })%> </spam></td>    </div>
+      { :include_blank => 'Unit'} , { :class => 'form-control', id: 'accUnit' })%> </spam></td>    </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <%= f.label :color %>
-      <td ><%= f.text_field :color , class: 'form-control' %></td>
+      <td ><%= f.text_field :color , class: 'form-control', id: 'accColor' %></td>
   </div>
 </div>
 <div class="col-md-4">
     <div class="form-group">
       <%= f.label :inventory %>
-      <%= f.number_field :inventory, min: 1, class: 'form-control' %>
+      <%= f.number_field :inventory, min: 1, class: 'form-control', id: 'accInventory' %>
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <%= f.label :price %>
-      <td ><%= f.number_field :price, min: 1, class: 'form-control' %></td>    </div>
+      <td ><%= f.number_field :price, min: 1, class: 'form-control', id: 'accPrice' %></td>    </div>
       <div class="form-group">
       </div>
   </div>
     <div class="col-md-4">
       <div class="form-group">
-          <%= f.button "Create", class: "btn btn-primary btn-lg btn-block btn-custom", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating accessory..."} %>
+          <%= f.button "Create", id:'accSubmit', class: "btn btn-primary btn-lg btn-block btn-custom", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating accessory..."} %>
       </div>
     </div>
   </div>
 <!-- section -->
   <% end %>
+
+    <script>
+
+    function previewImages() {
+
+  var preview = document.querySelector('#preview-acc');
+
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+
+    var reader = new FileReader();
+
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.width = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    }, false);
+
+    reader.readAsDataURL(file);
+
+  }
+
+  }
+
+  document.querySelector('#file-input-acc').addEventListener("change", previewImages, false);
+
+    </script>

@@ -135,8 +135,8 @@ def create
         format.js
         format.json { render partial: 'show', status: :created, location: @board }
       else
-        format.js { render :form }
-        format.json { render form: @accessory.errors, status: :unprocessable_entity }
+        format.js { render :new }
+        format.json { render new: @accessory.errors, status: :unprocessable_entity }
       end
    end
 

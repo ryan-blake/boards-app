@@ -1,2 +1,89 @@
 $("#newAcc .modal-content").html('<%= j render partial: "add" , locals:{ accessory: Accessory.new}%>');
 $("#newAcc").modal()
+
+$('#accSubmit').on('click', function(){
+  var accTitle = document.getElementById('accTitle');
+  var accBrand = document.getElementById('accBrand');
+  var accCategory = document.getElementById('accCategory');
+  var accKind = document.getElementById('accKind');
+  var accMeasure = document.getElementById('accMeasure');
+  var accUnit = document.getElementById('accUnit');
+  var accInventory = document.getElementById('accInventory');
+  var accColor = document.getElementById('accColor');
+  var accPrice = document.getElementById('accPrice');
+  var missingItems = 0;
+
+
+ if($('#accTitle').val() == ""  )
+  {
+   accTitle.style['background-color'] = 'beige';
+  } else {
+   accTitle.style['background-color'] = 'white';
+  }
+ if($('#accBrand').val() == ""  )
+  {
+    accBrand.style['background-color'] = 'beige';
+  } else {
+    accBrand.style['background-color'] = 'white';
+  }
+  if($('#accCategory').val() == ""  )
+   {
+     accCategory.style['background-color'] = 'beige';
+   } else {
+     accCategory.style['background-color'] = 'white';
+   }
+   if($('#accKind').val() == ""  )
+    {
+      accKind.style['background-color'] = 'beige';
+    } else {
+      accKind.style['background-color'] = 'white';
+    }
+    if($('#accMeasure').val() == ""  )
+     {
+       accMeasure.style['background-color'] = 'beige';
+     } else {
+       accMeasure.style['background-color'] = 'white';
+     }
+     if($('#accUnit').val() == ""  )
+      {
+        accUnit.style['background-color'] = 'beige';
+      } else {
+        accUnit.style['background-color'] = 'white';
+      }
+      if($('#accInventory').val() == ""  )
+       {
+         accInventory.style['background-color'] = 'beige';
+       } else {
+         accInventory.style['background-color'] = 'white';
+       }
+     if($('#accUnit').val() == ""  )
+      {
+        accUnit.style['background-color'] = 'beige';
+      } else {
+        accUnit.style['background-color'] = 'white';
+      }
+      if($('#accColor').val() == ""  )
+       {
+         accColor.style['background-color'] = 'beige';
+       } else {
+         accColor.style['background-color'] = 'white';
+       }
+     if($('#accPrice').val() == ""  )
+      {
+        accPrice.style['background-color'] = 'beige';
+      } else {
+        accPrice.style['background-color'] = 'white';
+      }
+
+// submit disable
+    $('#accForm').submit(function()
+    {
+      // $('#accPrice').val() == ""
+      if( accTitle.style['background-color'] == 'beige' || accBrand.style['background-color'] == 'beige' || accCategory.style['background-color'] == 'beige' || accKind.style['background-color'] == 'beige' || accMeasure.style['background-color'] == 'beige' ||
+          accUnit.style['background-color'] == 'beige' || accInventory.style['background-color'] == 'beige' || accColor.style['background-color'] == 'beige' || accPrice.style['background-color'] == 'beige' )
+       {
+          return false;
+       }
+    });
+
+});
