@@ -90,11 +90,7 @@ $(window).scroll(function(){
     });
   });
 
-var index = document.getElementById('about');
-var showIndex = index.is(':visible');
-  if (showIndex) {
-    body.setAttribute('-webkit-overflow-scrolling', 'touch');
-  }
+
 
 </script>
 <% end %>
@@ -239,3 +235,16 @@ var showIndex = index.is(':visible');
   <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>
 </div>
 <%= render 'layouts/spinner' %>
+<script>
+
+
+var index = $('#about');
+var showIndex = index.is(':visible');
+var body = document.getElementsByTagName("body")[0]
+
+  if (showIndex) {
+    body.style['-webkit-overflow-scrolling'] = 'touch';
+
+  }
+
+</script>
