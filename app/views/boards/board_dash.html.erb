@@ -229,6 +229,15 @@ $(document).ajaxStop(function(){
       };
      });
      // tokensJS
+
+     $(function() {
+         $('.dropdown').mouseenter(function () {
+           $(this).find('.dropdown-menu').show('fast');
+         })
+         $('.dropdown').mouseleave(function () {
+           $(this).find('.dropdown-menu').hide('fast');
+         })
+     });
      </script>
      <!-- hide tokems partial -->
      <% if @user.stripe_account %>
@@ -438,12 +447,17 @@ $(document).ajaxStop(function(){
 
 <!-- nav mobile  starts at < 835px-->
 <div class="dash-nav-mobile btn-group-vertical pull-left" role="group" aria-label="...">
-   <div class="btn-group" role="group">
-     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-       Dropdown
-       <span class="caret"></span>
-     </button>
-     <ul class="dropdown-menu"style="width:100%;">
+  <!--  -->
+  <div class="btn-group" role="group">
+  <div class="dropdown" style="width:25px;">
+  <!-- Drowdown button -->
+  <button class="btn btn-default drowdown-toggle" type="button" data-toggle="dropdown">
+    <!-- Button title and arrow -->
+    Dash Menu<span class="caret"></span>
+  </button>
+  <!-- Dropdown content -->
+  <ul class="dropdown-menu" style="width:25%;">
+  <!--  -->
        <li><button type="button" class="btn btn-default" id="btn-active-m"><%= link_to 'Active',  active_boards_boards_path, remote:true %></button></li>
        <li><button type="button" class="btn btn-default" id="btn-pending-m">pending</button></li>
        <li><button type="button" class="btn btn-default" id="btn-inventory-m"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true %></button></li>
