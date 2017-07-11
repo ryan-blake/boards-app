@@ -241,10 +241,15 @@ $(window).scroll(function(){
 var index = $('#about');
 var showIndex = index.is(':visible');
 var body = document.getElementsByTagName("body")[0]
+var results = $('#results');
+var showResults = results.is(':visible');
 
   if (showIndex) {
-    body.style['-webkit-overflow-scrolling'] = 'touch';
+    body.addClass('webkit');
+  }
 
+  if (showResults) {
+    body.removeClass('webkit')
   }
 
 </script>
