@@ -30,8 +30,20 @@ def search_accessories
     @accessories = Accessory.where(board_id: nil, user_id: @board.user.id, category_id: @board.category_id).where("cast( kind_id as text) like ? and cast( brand as text) like ? and (title like ? or color like ? or brand like ?)",
 
           "%#{params[:kind_id]}%", "%#{params[:brand]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+          # price
+          if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
+            @accessories  = @accessories.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
+          else
+            if params[:max][0].to_i <= 0 && params[:min][0].to_i >= 1
+              @accessories  = @accessories.min_price(params[:min][0].to_i).max_price(9999)
+            elsif params[:min][0].to_i <= 0 && params[:max][0].to_i >= 1
+              @accessories  = @accessories.min_price(1).max_price(params[:max][0].to_i)
+            else
+              @accessories  = @accessories.min_price(1).max_price(9999)
+            end
+          end
+
           #  length / height
-          # convert measure to be universally measured by inches for filtering
           if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
             c = params[:unit_id][0].to_i
             a = params[:minimum][0].to_i

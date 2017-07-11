@@ -38,7 +38,9 @@ class Accessory < ApplicationRecord
 
    scope :min_length_search, ->(minimum) { where('measured >= ?', minimum) }
    scope :max_length_search, ->(maximum) { where('measured <= ?', maximum) }
-
+   scope :min_price, ->(min) { where('price >= ?', min) }
+   scope :max_price, ->(max) { where('price <= ?', max) }
+   
   def save_category
     a = self
     if a.category.present?

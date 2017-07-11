@@ -30,12 +30,20 @@
                 { :include_blank => 'Unit'} , { :class => 'form-control' })%>
             </span>
           </div>
-
-
+        </div>
+        <div class="row" style="position: relative;top: 0px;left: 29px;">
+          <div class="input-group">
+            <span>
+              <%= number_field :min, params[:min], style: 'width: 50%;', class: 'form-control', min: 1, placeholder: "min price" %>
+            </span>
+            <span style="">
+              <%= number_field :max, params[:max], style: 'float:right;width: 50%;', class: 'form-control',min: 1, placeholder: "max price" %>
+            </span>
+          </div>
       </div>
 
     </div>
-<div class="col-md-4">
+<div class="col-md-4" style="width:100%;">
    <div class="input-group">
      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Accessories.."  %>
      <span class="input-group-btn">
