@@ -147,7 +147,7 @@ $(window).scroll(function(){
 
 </style>
 
-  <div id="type_select" style="top: -128px;position: fixed;left: calc(50% - 50px);z-index: 999;">
+  <div id="type_select" style="overflow-x:hidden;top: -128px;position: fixed;left: calc(50% - 50px);z-index: 999;">
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
     <span id="type-value" class="type_collection" style="">
       <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
@@ -157,7 +157,7 @@ $(window).scroll(function(){
   </div>
 
 <!--  -->
-<div id="featured-boards" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
+<div id="featured-boards" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;overflow-x:hidden;">
 <div id="div-wrapper" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
   <div id="about" class="single-div" style="">
     <div id="featured-boards" style="display:block;margin-top:-23px;overflow-y:scroll;-webkit-overflow-scrolling: touch;height:100%;">
@@ -190,7 +190,6 @@ $(window).scroll(function(){
           <% if current_user %>
           <% @skate = current_user.not_my_boards(@skate) %>
           <% end %>
-
           <%= render partial: 'featured', locals: {boards: @skate} %>
         </div>
         <hr class="style13">
