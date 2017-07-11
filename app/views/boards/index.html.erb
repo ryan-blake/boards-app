@@ -235,21 +235,3 @@ $(window).scroll(function(){
   <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>
 </div>
 <%= render 'layouts/spinner' %>
-<script>
-
-
-var index = $('#about');
-var showIndex = index.is(':visible');
-var body = document.getElementsByTagName("body")[0]
-var results = $('#results');
-var showResults = results.is(':visible');
-
-  if (showIndex) {
-    body.addClass('webkit');
-  } else if  (showResults) {
-    body.removeClass('webkit')
-  }
-
-
-
-</script>
