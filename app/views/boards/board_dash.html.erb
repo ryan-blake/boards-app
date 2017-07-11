@@ -446,7 +446,7 @@ $(document).ajaxStop(function(){
        Dropdown
        <span class="caret"></span>
      </button>
-     <ul class="dropdown-menu mobile-drop-dash" style="overflow-y: scroll;width:100%;">
+     <ul class="dropdown-menu mobile-drop-dash" style="min-width: 10px;max-width: 100px;">
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-active-m"><%= link_to 'Active',  active_boards_boards_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-pending-m">pending</button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-inventory-m"><%= link_to "Inactive", inactive_boards_boards_path, remote:true %></button></li>
