@@ -97,7 +97,8 @@ end
     @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
   def search_dash
-    @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+    type = Category.find(params[:category_id]).type_id
+    @active_boards = Board.where(type_id: type, user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
       @active_boards = @active_boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 

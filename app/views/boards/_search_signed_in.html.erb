@@ -17,12 +17,12 @@
                 Sort Options <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu">
-                <li><%= sortable "created_at", "Date" %> </li>
-                <li><%= sortable "price" %></li>
-                <li><%= sortable "length", "Height" %></li>
+                <li><%= sortableAsc "created_at", "Date" %> </li>
+                <li><%= sortableAsc "price", "Price" %></li>
+                <li><%= sortableAsc "length", "Height" %></li>
                 <li class="divider"></li>
                 <li><%= sortableDesc "created_at", "Date" %></li>
-                <li><%= sortableDesc "Price" %></li>
+                <li><%= sortableDesc "price", "Price" %></li>
                 <li><%= sortableDesc "length", "Height" %></li>
               </ul>
             </div>

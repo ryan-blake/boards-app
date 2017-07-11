@@ -229,10 +229,13 @@ $(document).ajaxStop(function(){
       };
      });
      // tokensJS
+
      </script>
      <!-- hide tokems partial -->
      <% if @user.stripe_account %>
      <script>
+
+
   $(document).ready(function() {
   var open = document.getElementById('showTokens');
   var tokenpartial = document.getElementById('tokenPartial');
@@ -437,25 +440,26 @@ $(document).ajaxStop(function(){
 <!--!nav desktop  -->
 
 <!-- nav mobile  starts at < 835px-->
-<div class="dash-nav-mobile btn-group-vertical pull-left" role="group" aria-label="...">
+<div class="dash-nav-mobile btn-group-vertical pull-left" style="width:100px;" role="group" aria-label="...">
    <div class="btn-group" role="group">
-     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+     <button type="button" class="btn btn-default dropdown-toggle">
        Dropdown
        <span class="caret"></span>
      </button>
-     <ul class="dropdown-menu"style="width:100%;">
-       <li><button type="button" class="btn btn-default" id="btn-active-m"><%= link_to 'Active',  active_boards_boards_path, remote:true %></button></li>
-       <li><button type="button" class="btn btn-default" id="btn-pending-m">pending</button></li>
-       <li><button type="button" class="btn btn-default" id="btn-inventory-m"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true %></button></li>
-       <li><button type="button" class="btn btn-default" id="btn-shipped-m"><%= link_to 'shipping',  shipped_boards_boards_path, remote:true %></button></li>
-       <li><button type="button" class="btn btn-default" id="btn-pickup-m"><%= link_to 'Pick Up',  pick_boards_boards_path, remote:true %></button></li>
-       <li><button type="button" class="btn btn-default" id="btn-sales-m"><%= link_to 'Sales', sales_boards_boards_path , remote: true %></button></li>
-       <li><button type="button" class="btn btn-default" id="btn-rental-m"><%= link_to 'Rental', rental_boards_events_path , remote: true %></button></li>
-       <li><button type="button" class="btn btn-default" id="btn-accessory-m"><%= link_to 'accessories', table_accessories_path , remote: true %></button></li>
+     <ul class="dropdown-menu mobile-drop-dash" style="overflow-y: scroll;width:100%;">
+       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-active-m"><%= link_to 'Active',  active_boards_boards_path, remote:true %></button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-pending-m">pending</button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-inventory-m"><%= link_to "Inactive", inactive_boards_boards_path, remote:true %></button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-shipped-m"><%= link_to 'shipping',  shipped_boards_boards_path, remote:true %></button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-pickup-m"><%= link_to 'Pick Up',  pick_boards_boards_path, remote:true %></button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-sales-m"><%= link_to 'Sales', sales_boards_boards_path , remote: true %></button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-rental-m"><%= link_to 'Rental', rental_boards_events_path , remote: true %></button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-accessory-m"><%= link_to 'accessories', table_accessories_path , remote: true %></button></li>
      </ul>
    </div>
 </div>
 <style>
+
 .dash-nav-mobile button a:active .dropdown-menu {
   display:none;
 }
@@ -583,4 +587,12 @@ $('#tokenButton').on('click', function(e) {
 $(window).on('popstate', function() {
   handler.close();
 });
+
+
+$('.mobNavLi').on('click', function(){
+  $('.mobile-drop-dash').toggle()
+})
+$('.dropdown-toggle').on('click', function(){
+  $('.mobile-drop-dash').toggle()
+})
 </script>
