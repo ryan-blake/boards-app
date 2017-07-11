@@ -90,6 +90,12 @@ $(window).scroll(function(){
     });
   });
 
+var index = document.getElementById('about');
+var showIndex = index.is(':visible');
+  if (showIndex) {
+    body.setAttribute('-webkit-overflow-scrolling', 'touch');
+  }
+
 </script>
 <% end %>
 
