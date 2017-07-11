@@ -155,8 +155,8 @@ $(window).scroll(function(){
   </div>
 
 <!--  -->
-<div id="div-wrapper" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
 <div id="featured-boards" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;overflow-x:hidden;">
+<div id="div-wrapper" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
   <div id="about" class="single-div" style="">
     <div id="featured-boards" style="display:block;margin-top:-23px;overflow-y:scroll;-webkit-overflow-scrolling: touch;height:100%;">
       <div style="top: -70px;height: 218px;position: relative;background-color: darkslategrey;">
@@ -217,23 +217,17 @@ $(window).scroll(function(){
   </div>
 </div>
 </div>
+</div>
 
-<div id="mainsearch" class="single-div" style="    margin-top: 15px;
-    position: relative;
-    display: block;
-    overflow: hidden;
-    max-width: 100%;
-    max-height: 157px;">
+<div id="mainsearch" style="position:relative;top:16px;display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
 <%= render partial: 'search_form' %>
 </div>
 
-<div id="search-result-partial" class="single-div" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
+<div id="search-result-partial" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
   <%= render partial: 'search_signed_in'%>
 </div>
 
 <div style="position:fixed;bottom:20px;right:30px;">
   <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>
 </div>
-</div>
-
 <%= render 'layouts/spinner' %>
