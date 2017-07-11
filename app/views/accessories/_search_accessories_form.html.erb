@@ -34,10 +34,10 @@
         <div class="row" style="position: relative;top: 0px;left: 29px;">
           <div class="input-group">
             <span>
-              <%= number_field :min, params[:min], style: 'width: 50%;', class: 'form-control', min: 1, placeholder: "min price" %>
+              <%= number_field :min, params[:min], id: 'accMin', class: 'form-control', min: 1, placeholder: "min price" %>
             </span>
             <span style="">
-              <%= number_field :max, params[:max], style: 'float:right;width: 50%;', class: 'form-control',min: 1, placeholder: "max price" %>
+              <%= number_field :max, params[:max], style: 'float:right;', id: 'accMax', class: 'form-control',min: 1, placeholder: "max price" %>
             </span>
           </div>
       </div>

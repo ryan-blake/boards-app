@@ -1261,6 +1261,10 @@ left: calc(50% - 202px);
 margin-top:-65px;
 }
 
+#accMin, #accMax {
+  width: 50%;
+}
+
 
 // responsive
 
@@ -1471,6 +1475,15 @@ margin-top:-100px;
     right: 30px;
     overflow-x: hidden;
     margin:0px !important;
+  }
+
+  #accMin {
+    width: 40%;
+  }
+
+  #accMax {
+    width: 40%;
+    right: 53px;
   }
 }
 
