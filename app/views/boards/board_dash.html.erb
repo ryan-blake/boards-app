@@ -360,7 +360,7 @@ $(document).ajaxStop(function(){
   <span id="dashboard"></span>
   <div class="div-wrapper">
   <% if @user.stripe_account %>
-<div class="jumbotron gel" id="msg-area" style="top: 50px;background: black;top: 50px;">
+<div class="jumbotron gel bcg" id="msg-area" style="">
   <div class="pull-left" style="top:50px;left:1px;width:190px;position:fixed;z-index:1;">
       <h3 class="btn btn-sort" style="max-width:100px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
       <h3 class="btn btn-danger" style="max-width:100px;display:none;position: relative;bottom: 2px;left: 11px;" id="closePartial">CLOSE</h3>
@@ -383,8 +383,8 @@ $(document).ajaxStop(function(){
         <h3 class="btn btn-sort"><%= link_to "accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></td></h3>
      <% end %>
     </div>
+    <% end %>
 </div>
-<% end %>
 
 
 
