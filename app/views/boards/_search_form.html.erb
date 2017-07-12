@@ -14,7 +14,6 @@
     <div class="row board-search-form">
       <div class="main-form" style="">
         <span><%= hidden_field_tag :type_id, nil,:id => "hidden_type", :value => ''%></span>
-        <span style="left: 25px;position: absolute;top:128px;"><h3><%= @boards.first.type.name %></h3></span>
         <div style="position: relative;display: inline;bottom: -121px;left: calc(50% - 54px);">
           New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
           Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
