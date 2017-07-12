@@ -1,15 +1,16 @@
 
-<div class="top-dash" id="results">
+<div id="results">
+    <div class="top-dash">
 <h4 class="dash-data-title"> accessories </h4>
-<thead class="row" >
+<thead class="" >
   <td>
     <div class="center-text pagination" id="active_boards">
     <%= paginate @accessories, remote: true, window: 1 %>
     </div>
   </td>
 </thead>
-<div class="col-md-12 table-scrollable ">
-  <table style="" class="table table-bordered table-striped table-hover" id="">
+<div class="col-md-12 table-scrollable">
+  <table style="right: 59px;" class="table table-bordered table-striped table-hover" id="">
 
         <thead>
           <tr>
@@ -50,10 +51,11 @@
         </tbody>
       </table>
   <!--  -->
-</div>
+  </div>
+ </div>
 </div>
 
-<div>
+
  <%= form_tag({controller: :accessories, action: :search_table}, {method: :get, remote: true}) do  %>
 
  <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
@@ -99,3 +101,4 @@
          </div>
        </div>
      </div>
+   </div>
