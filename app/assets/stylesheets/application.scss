@@ -632,16 +632,6 @@ fieldset[disabled] .btn-inverse.active {
 
 //
 
-.dash-data {
- position:absolute;
- top:180px;
- left:42px;
- display: block;
- width: 93%;
- margin-left: 28px;
- height:70%;
-}
-
 .dash-nav-desktop button{
 height:50px;
 background-color:darkseagreen;
@@ -1402,13 +1392,12 @@ right: 63px;
    right: 20px;
  }
 
- .dash-data {
-   position:absolute;
-   top:199px;
+ .dash-data .bcg {
+   position:relative;
+   top:100px;
    display: block;
-   width:95%;
    width: 100% !important;
-   left: -31px!important;
+   left:1px;
  }
 
  .panel {
