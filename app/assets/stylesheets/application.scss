@@ -32,9 +32,35 @@ background: snow;
 width: 100%;
 height:100%;
 overflow-y:scroll;
-
 }
 
+
+
+div#about.bcg {
+
+  top: 0px;
+height: 200px;
+position: relative;
+background-color: yellow;
+}
+div#feature-divs.bcg {
+  position: relative;
+  min-height: 600px;
+  background-color: white;
+}
+
+#mainsearch.bcg {
+  height:20% !important;
+  position:relative;
+  display:none;
+  background-color: white;
+}
+
+#search-result-partial.bcg {
+  min-height:600px !important;
+position:relative;
+
+}
 
 #pay_now_rent.stripe-button-el {
   display:block;

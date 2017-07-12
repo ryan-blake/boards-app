@@ -1,5 +1,61 @@
+
+<!--  -->
 <%= content_for :page_title,   "Wojoi"%>
 <% content_for(:header) do %>
+<style>
+
+#search-bar {
+  display:none;
+}
+#search-result-partial {
+  position: relative;
+  display:none;
+}
+.swiper-button-white {
+  background-color: rgba( 05, 134, 12, .5);
+  border-radius:: 100%;
+  color:white;
+}
+#type-value {
+    position: relative;
+    top: 0px;
+    left: calc(50% - 90px);
+}
+#type-select {
+  background-color: white;
+    color: black;
+    height: 34px;
+    width: 137px;
+    font-size: 19px;
+    border: black solid 1px;
+}
+/**/
+#div-wrapper {
+   white-space: nowrap;
+   max-width: 100%;
+   -webkit-overflow-scrolling: touch;
+ }
+ #header {
+  display:block;
+  width:100%;
+  position:relative;
+  background-color: darkslategrey;
+  top:-20px;
+  height:260px;
+}
+#footer.bcg {
+  display:block;
+  width:100%;
+  position:relative;
+  background-color: darkseagreen;
+  height:80px;
+  margin-top:-20px;
+}
+
+
+
+</style>
+
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
    <div class="modal-dialog modal-lg" role="document">
      <div class="modal-header">
@@ -41,7 +97,6 @@ $("#geo-input").geocomplete();
   country: "US"
 });
 
-
 $(document).ready(function() {
 var openExtended = document.getElementById('open-extended');
 var extended = document.getElementById('extended-search');
@@ -51,6 +106,7 @@ var type_value = document.getElementById('type-value');
 var featuredDiv = document.getElementById('featured-boards');
 var searchSigned = document.getElementById('search-result-partial')
 var searchResults = document.getElementById('results');
+var searchBar = document.getElementById('search-bar');
 
 openExtended.onclick = function() {
    if(extended.style.display == 'none') {
@@ -73,6 +129,8 @@ type_select.onchange = function() {
   type_select.style['top'] = '0px';
   type_select.style['position'] = 'absolute';
   searchSigned.style['display'] = 'block';
+  searchBar.style['display'] = 'block';
+  type_select.style['position'] = 'absolute';
 
   }
 });
@@ -89,67 +147,13 @@ $(window).scroll(function(){
         $('html, body').animate({scrollTop : 200},0);
     });
   });
-
-
-
 </script>
+
 <% end %>
 
-
-
-<style>
-.swiper-button-white {
-  background-color: rgba( 05, 134, 12, .5);
-  border-radius:: 100%;
-  color:white;
-}
-#type-value {
-    position: relative;
-    top: 136px;
-    left: calc(50% - 90px);
-}
-
-#type-select {
-  background-color: white;
-    color: black;
-    height: 34px;
-    width: 137px;
-    font-size: 19px;
-    border: black solid 1px;
-}
-/**/
-#div-wrapper {
-   white-space: nowrap;
-   max-width: 100%;
-   -webkit-overflow-scrolling: touch;
- }
- #header {
-  display:block;
-  width:100%;
-  position:relative;
-  background-color: darkslategrey;
-  top:-20px;
-  height:260px;
-}
-#footer .bcg {
-  display:block;
-  width:100%;
-  position:relative;
-  background-color: darkseagreen;
-  height:80px;
-  margin-top:-20px;
-}
-.bcg {
-  background: no-repeat center center;
-  background-size: cover;
-  position: relative;
-  width: 100%;
-  display: inline-block;
-}
-
-</style>
-
-  <div id="type_select" style="top: -128px;position: fixed;left: calc(50% - 50px);z-index: 999;">
+<!--  -->
+<div id="div-wrapper" style="">
+  <div id="type_select" style="position: fixed;left: calc(50% - 50px);z-index: 999;top:10px;">
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
     <span id="type-value" class="type_collection" style="">
       <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
@@ -158,57 +162,66 @@ $(window).scroll(function(){
     <% end %>
   </div>
 
-<!--  -->
-<div id="featured-boards" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;overflow-x:hidden;">
-<div id="div-wrapper" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;">
-  <div id="about" class="single-div" style="">
-    <div id="featured-boards" style="display:block;margin-top:-23px;overflow-y:scroll;-webkit-overflow-scrolling: touch;height:100%;">
-      <div style="top: -70px;height: 218px;position: relative;background-color: darkslategrey;">
-        <h1 class="center-text" id="kuivir-header" style="padding: 0px 15px;border-bottom: 1px solid white;left: calc(50% - 63px);position: absolute;top: 45%;color: white;"> kuivir </h1>
-        <h3 style="left: calc(50% - 113px);color: white;top:65%;position: absolute;">board market place</h3>
+  <div id="featured-boards"  class="single-div" style="">
+    <div id="about" class="bcg">
+      <div class="about-text">
+          <h1 class="center-text" id="kuivir-header" style="padding: 0px 15px;border-bottom: 1px solid white;left: calc(50% - 63px);position: absolute;top: 45%;color: white;"> kuivir </h1>
+           <h3 style="left: calc(50% - 113px);color: white;top:65%;position: absolute;">board market place</h3>
       </div>
-      <div id="feature-divs" style="-webkit-overflow-scrolling: touch;position:relative;width:100%;top: -71px;height: 100%;">
-        <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Featured</h3></span>
-        <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
-        <div class="featured" style="">
-          <% if current_user %>
-          <% @surf = current_user.not_my_boards(@surf) %>
-          <% end %>
-          <%= render partial: 'featured', locals: {boards: @surf} %>
-        </div>
-        <hr class="style13" style="margin:0;">
-        <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
-        <div class="featured" style="">
-          <% if current_user %>
-          <% @snow = current_user.not_my_boards(@snow) %>
+    </div>
 
-          <% end %>
-          <%= render partial: 'featured', locals: {boards: @snow} %>
-        </div>
-        <hr class="style13">
+  <div id="feature-divs" class="single-div bcg" style="">
+    <div class="featured" style="">
+      <% if current_user %>
+      <% @surf = current_user.not_my_boards(@surf) %>
+      <% end %>
+      <%= render partial: 'featured', locals: {boards: @surf} %>
+    </div>
+    <hr class="style13" style="margin:0;">
+    <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
+    <div class="featured" style="">
+      <% if current_user %>
+      <% @snow = current_user.not_my_boards(@snow) %>
 
-        <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
-        <div class="featured" style="">
-          <% if current_user %>
-          <% @skate = current_user.not_my_boards(@skate) %>
-          <% end %>
-          <%= render partial: 'featured', locals: {boards: @skate} %>
-        </div>
-        <hr class="style13">
+      <% end %>
+      <%= render partial: 'featured', locals: {boards: @snow} %>
+    </div>
+    <hr class="style13">
 
-        <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
-        <div class="featured" style="">
-          <% if current_user %>
-          <% @wake = current_user.not_my_boards(@wake) %>
-          <% end %>
-          <%= render partial: 'featured', locals: {boards: @wake} %>
-        </div>
-        <hr class="style13">
+    <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
+    <div class="featured" style="">
+      <% if current_user %>
+      <% @skate = current_user.not_my_boards(@skate) %>
+      <% end %>
+      <%= render partial: 'featured', locals: {boards: @skate} %>
+    </div>
+    <hr class="style13">
+
+    <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
+    <div class="featured" style="">
+      <% if current_user %>
+      <% @wake = current_user.not_my_boards(@wake) %>
+      <% end %>
+      <%= render partial: 'featured', locals: {boards: @wake} %>
     </div>
   </div>
+</div>
 
-  <div id="footer" class="single-div">
-    <div class="bcg">
+  <div id="mainsearch" class="bcg single-div" style="">
+  <%= render partial: 'search_form' %>
+  </div>
+
+  <div id="search-result-partial" class=" bcg single-div" style="">
+    <%= render partial: 'search_signed_in'%>
+  </diV>
+
+  </div>
+  <div style="position:fixed;bottom:20px;right:30px;">
+    <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>
+  </div>
+  <%= render 'layouts/spinner' %>
+  <div id="footer" class="bcg single-div">
+
 
       <a href="https://www.google.com">
         Info
@@ -217,21 +230,6 @@ $(window).scroll(function(){
       <a href="https://www.google.com">
         Info
       </a>
+
   </div>
-  </div>
 </div>
-</div>
-</div>
-
-<div id="mainsearch" style="position:relative;top:16px;display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
-<%= render partial: 'search_form' %>
-</div>
-
-<div id="search-result-partial" style="display:none;overflow-x:hidden;overflow-y:hidden;max-width:100%;">
-  <%= render partial: 'search_signed_in'%>
-</div>
-
-<div style="position:fixed;bottom:20px;right:30px;">
-  <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>
-</div>
-<%= render 'layouts/spinner' %>
