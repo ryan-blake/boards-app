@@ -20,16 +20,18 @@
         </tr>
       </td>
     </thead>
+<style>
 
-    <div class="col-md-12">
-      <table class="table table-bordered table-striped table-hover" id="results">
+</style>
+    <div class="col-md-12 table-scrollable ">
+      <table style="table-layout:fixed;min-width:100%;max-width:100%;overflow-x:scroll;" class="table table-bordered table-striped table-hover" id="results">
         <thead>
           <tr>
             <th>image</th>
-            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "title" %></th>
-            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "price" %></i></th>
-            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "cost" %></i></th>
-            <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "margin" %></i></th>
+            <th><i style="display:inline;"> <%= sortable "title" %></th>
+            <th><i style="display:inline;"> <%= sortable "price" %></i></th>
+            <th><i style="display:inline;"> <%= sortable "cost" %></i></th>
+            <th><i style="display:inline;"> <%= sortable "margin" %></i></th>
             <th>listing</th>
           </tr>
         </thead>
@@ -37,7 +39,8 @@
         <tbody>
         <% @inactive_boards.each do |board| %>
             <tr>
-              <td><%= link_to attachment_image_tag(board.images.first, :file, :fill, 80, 80), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
+              <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 80, 80), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
+              <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 40, 40), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
               <td><%= link_to board.title.truncate(13), board, target: :_blank %></td>
               <td><%= format_amount(board.price * 100) %></td>
               <td><%= format_amount(board.cost * 100)  %></td>
@@ -69,3 +72,25 @@
     </tbody>
   </table>
 </div>
+
+<div>
+<%= form_tag({controller: :boards, action: :search_dash}, {method: :get, remote: true}) do  %>
+
+<div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
+  <div class="input-group">
+    <span class="input-group-btn">
+      <%= grouped_collection_select  nil, :category_id, Type.all, :categories,
+            :name, :id, :name, {prompt: "Select type" },
+            { id: 'category-select' , class: "form-control"} %>
+    </span>
+  </div><!-- /input-group -->
+</div><!-- /.col-lg-6 -->
+<div class="col-md-4 search-bar">
+   <div class="input-group">
+     <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+     <span class="input-group-btn">
+       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+     </span>
+   </div><!-- /input-group -->
+ </div><!-- /.col-lg-6 -->
+ <% end %>
