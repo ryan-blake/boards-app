@@ -1367,7 +1367,9 @@ right: 63px;
     width: 95% !important;
     left: 66px !important;
   }
-
+  .dash-nav-desktop.bcg {
+        z-index: 3;
+  }
   div#sales{
     display: block;
     top: 75px;

@@ -1,7 +1,5 @@
-
-<div>
+<div class="top-dash">
 <%= form_tag({controller: :events, action: :search_rental}, {method: :get, remote: true}) do  %>
-
 <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
   <div class="input-group">
     <span class="input-group-btn">
@@ -31,4 +29,5 @@
 
 <div id="rental_calendar" style="display:block;max-width:100%;padding-bottom:30px;">
   <%= render 'boards/calendar', locals: { board: @rental_boards} %>
+</div>
 </div>
