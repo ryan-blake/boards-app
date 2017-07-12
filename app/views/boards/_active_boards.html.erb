@@ -44,8 +44,8 @@
         <tbody>
         <% @active_boards.each do |board| %>
             <tr>
-              <td desktop-items-img><%= link_to attachment_image_tag(board.images.first, :file, :fill, 80, 80), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
-              <td mobile-items-img><%= link_to attachment_image_tag(board.images.first, :file, :fill, 40, 40), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
+              <td class= "desktop-items-img"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 80, 80), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
+              <td class=" mobile-items-img"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 40, 40), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
               <td><%= link_to board.title.truncate(13), board, target: :_blank %></td>
               <td><%= format_amount(board.price * 100) %></td>
               <td><%= format_amount(board.cost * 100)  %></td>
