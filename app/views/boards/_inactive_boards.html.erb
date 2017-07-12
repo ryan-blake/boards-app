@@ -1,8 +1,7 @@
 <div id="results">
 <h4 class="dash-data-title"> Active Inventory </h4>
-
   <div class="row" id="pending-table">
-    <% if @inactive_boards.length == 0 %>
+    <% if @inactive_boards.count == 0 %>
       <%= render partial: 'boards/none' %>
     <% end %>
     <thead>
@@ -74,7 +73,7 @@
 </div>
 
 <div>
-<%= form_tag({controller: :boards, action: :search_dash}, {method: :get, remote: true}) do  %>
+<%= form_tag({controller: :boards, action: :search_inactive}, {method: :get, remote: true}) do  %>
 
 <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
   <div class="input-group">

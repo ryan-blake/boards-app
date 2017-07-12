@@ -97,19 +97,30 @@ end
     @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
   def search_dash
-    type = Category.find(params[:category_id]).type_id
-    @active_boards = Board.where(type_id: type, user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
+    @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true)
+    unless params[:category_id] == ""
+      type = Category.find(params[:category_id]).type_id
+      @active_boards = @active_boards.where(type_id: type)
+    end
       @active_boards = @active_boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
-              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
-
   def inactive_boards
     @user = current_user
     @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
 
+def search_inactive
+  @inactive_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: false)
+  unless params[:category_id] == ""
+    type = Category.find(params[:category_id]).type_id
+    @inactive_boards = @inactive_boards.where(type_id: type)
+  end
+    @inactive_boards = @inactive_boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+    "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+end
 
   def shipped_boards
     @user = current_user
@@ -362,7 +373,6 @@ end
               @boards = Board.where(:id => (one + @boards))
             end
              else
-
                @boards = @boards.where(:rental => false)
              end
 
@@ -372,7 +382,7 @@ end
                   @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
               else
 
-                @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+              @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
               respond_to do |format|
                      format.js
