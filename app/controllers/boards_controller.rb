@@ -86,7 +86,6 @@ end
     # end new data from connect
     end
 
-
     else
       redirect_to root_path
     end

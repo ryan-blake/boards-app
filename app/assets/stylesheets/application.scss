@@ -1308,6 +1308,12 @@ margin-top:-65px;
   width: 89px
 }
 
+.table-scrollable {
+table-layout:fixed;
+min-width:100%;
+max-width:100%;
+overflow-x:scroll;
+}
 // responsive
 
 @media (max-width: 484px) {
@@ -1355,6 +1361,21 @@ right: 63px;
 }
 // greater than
 @media (min-width:995px) {
+  .top-dash {
+    position: relative;
+    top: 111px !important;
+    width: 95% !important;
+    left: 66px !important;
+  }
+
+  div#sales{
+    display: block;
+    top: 75px;
+    width: 92%;
+    margin-left: 67px;
+    overflow-y: scroll;
+    margin-right: 5px;
+  }
 
   .btn-group-vertical {
     max-width: 80px;
@@ -1371,9 +1392,6 @@ right: 63px;
 // less than
 @media (max-width:995px) {
 
-  .pagination {
-
-  }
 
  .dash-nav-desktop {
    display: none;

@@ -1,6 +1,6 @@
 $("#sales").html("<%=j render partial: 'sales_boards' %>");
 <% if current_user.stripe_account %>
-$('#paginate_active').html('<%= escape_javascript(paginate(@payments, window: 1, :remote => true)) %>');
+
 <% else %>
-$('#paginate_active').html('<%= escape_javascript(paginate(@purchases, window: 1, :remote => true)) %>');
+
 <% end %>
