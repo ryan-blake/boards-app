@@ -416,7 +416,7 @@ $(document).ajaxStop(function(){
 </div>
 
 <!-- nav desktop -->
-<div class="dash-nav-desktop btn-group-vertical pull-left" role="group" aria-label="...">
+<div class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
   <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
   <button type="button" class="btn btn-default" id="btn-pending">pending</button>
   <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
@@ -429,7 +429,9 @@ $(document).ajaxStop(function(){
   <button style="display:none;" type="hidden" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <% end %>
   <button type="button" class="btn btn-default" id="btn-accessory"><%= link_to 'accessories', table_accessories_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+
 </div>
+
 <style>
 #btn-accessory a {
   margin-left:-9px;
