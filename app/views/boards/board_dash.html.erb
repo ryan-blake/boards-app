@@ -358,10 +358,9 @@ $(document).ajaxStop(function(){
 
   <% end %>
   <span id="dashboard"></span>
-
+  <div class="div-wrapper">
   <% if @user.stripe_account %>
 <div class="jumbotron gel" id="msg-area" style="top: 50px;background: black;top: 50px;">
-
   <div class="pull-left" style="top:50px;left:1px;width:190px;position:fixed;z-index:1;">
       <h3 class="btn btn-sort" style="max-width:100px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
       <h3 class="btn btn-danger" style="max-width:100px;display:none;position: relative;bottom: 2px;left: 11px;" id="closePartial">CLOSE</h3>
@@ -372,27 +371,26 @@ $(document).ajaxStop(function(){
   <%= submit_tag "Upload" %>
 <% end %>
 <% end %>
-
 </div>
     <div id="tokenPartial" class="" style="border:4px solid black;left:calc(50% - 150px);display:none;z-index:990;top:150px;position:absolute;">
       <div style="width:300px;min-height:200px;max-height240px;background-color:#f5f5f5;z-index:989;">
       <%= render partial: 'tokens/new' %>
       </div>
     </div>
+    <div class="pull-left" style="top:85px;left:10px;width:190px;position:fixed;z-index:1;">
+      <% if  current_user.tokens > 2 && current_user.stripe_account %>
+        <h3 class="btn btn-sort"><%= link_to 'Listing', new_board_path %></h3>
+        <h3 class="btn btn-sort"><%= link_to "accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></td></h3>
+     <% end %>
+    </div>
 </div>
 <% end %>
 
 
-<div class="pull-left" style="top:85px;left:10px;width:190px;position:fixed;z-index:1;">
-  <% if  current_user.tokens > 2 && current_user.stripe_account %>
-    <h3 class="btn btn-sort"><%= link_to 'Listing', new_board_path %></h3>
-    <h3 class="btn btn-sort"><%= link_to "accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></td></h3>
- <% end %>
-</div>
 
 
   <% if current_user && !current_user.stripe_account %>
-  <div class="jumbotron" style="position:fixed;width:100%; height:100px;z-index:2;top:50px;">
+  <div id="userDash" class="jumbotron bcg" style="">
     <div class="center-text" style="right:0px;position:absolute;top:50px;position:fixed;z-index:1;">
     <%= link_to 'new managed', new_stripe_account_path, class: 'btn-sort btn', style: 'color:black' %>
     </div>
@@ -464,9 +462,7 @@ $(document).ajaxStop(function(){
   display:none;
 }
 
-.main-form {
-  max-width:100%;
-}
+
 </style>
 <!-- !nav mobile -->
 <div class="dash-data">
@@ -487,6 +483,7 @@ $(document).ajaxStop(function(){
 <div  style="display:none;" class="col-md-12 center-text" id="rental">
 </div>
 <div  style="display:none;" class="col-md-12 center-text" id="accessories">
+</div>
 </div>
 </div>
 

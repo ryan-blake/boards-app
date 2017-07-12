@@ -76,6 +76,13 @@ div#feature-divs.bcg {
   font-size:13px;
 }
 
+#userDash.bcg {
+  position:fixed;width:100%; height:100px;z-index:2;top:50px;
+}
+.table-scrollable{
+    overflow: auto;
+}
+
 .dropdown-menu-right {
   left: -70px !important;
 }
