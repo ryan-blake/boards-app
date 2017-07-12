@@ -240,14 +240,15 @@ $(document).ajaxStop(function(){
   var open = document.getElementById('showTokens');
   var tokenpartial = document.getElementById('tokenPartial');
   var closePartial = document.getElementById('closePartial');
-
+  var dashData = document.getElementById('dashData');
+  var dashBoard = document.getElementById('dashBoard');
 
   open.onclick = function() {
     if (tokenpartial.style.display == 'none') {
        tokenpartial.style['display'] = 'block';
        closePartial.style['display'] = 'block';
        open.style['display'] = 'none';
-
+       dashData.style['overflow-y'] = 'hidden'
       //  elemelons
               $(function(){
                 // Set your Stripe publishable API key here
@@ -332,6 +333,8 @@ $(document).ajaxStop(function(){
       closePartial.style['display'] = 'none';
       tokenpartial.style['display'] = 'none';
       open.style['display'] = 'block';
+      dashData.style['overflow-y'] = 'scroll'
+
     }
     };
   };
@@ -358,7 +361,7 @@ $(document).ajaxStop(function(){
 
   <% end %>
   <span id="dashboard"></span>
-  <div class="div-wrapper">
+  <div class="div-wrapper" id="dashBoard">
   <% if @user.stripe_account %>
 <div class="jumbotron gel bcg" id="msg-area" style="">
   <div class="pull-left" style="top:50px;left:1px;width:190px;position:fixed;z-index:1;">
@@ -467,7 +470,7 @@ $(document).ajaxStop(function(){
 
 </style>
 <!-- !nav mobile -->
-<div class="dash-data">
+<div class="dash-data" id="dashData">
 <!-- Need to finish payment -->
 <div style="display:none;" class="col-md-12 center-text"  id="active">
 </div>
