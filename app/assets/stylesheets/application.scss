@@ -36,13 +36,16 @@ overflow-y:scroll;
 }
 
 
-
+.about-text {
+  position:relative;
+  top:50%;
+}
 div#about.bcg {
 
   top: 0px;
 height: 200px;
 position: relative;
-background-color: yellow;
+background-color: darkslategrey;
 }
 div#feature-divs.bcg {
   position: relative;
@@ -55,12 +58,16 @@ div#feature-divs.bcg {
   position:relative;
   display:none;
   background-color: white;
+  top:10px;
 }
 
 #search-result-partial.bcg {
-  min-height:740px !important;
-position:relative;
+  min-height:840px !important;
+  position:relative;
+}
 
+.index-results {
+  min-height:740px;
 }
 
 #pay_now_rent.stripe-button-el {

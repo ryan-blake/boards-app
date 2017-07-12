@@ -1,5 +1,7 @@
 <table class="container-fluid index-results" id="results" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;width:100%;">
   <thead>
+
+
     <td>
       <div class="center-text" id="paginator">
       <%= paginate @boards, remote: true %>
@@ -11,6 +13,7 @@
           <ti class="btn btn-sort"><%= sortable "price" %></ti>
           <ti class="btn btn-sort center-text" ><%= sortable "length", "Height" %></ti>
         </td>
+
       </tr>
     </td>
   </thead>
@@ -20,6 +23,7 @@
   <% end %>
 
   <% @boards.each do |board| %>
+  
     <tbody class="tbody-search col-sm-6 col-md-4 center-text" style="background-color:white;margin-right:30%;">
         <!-- if no image load other boards image in results -->
         <td class="center-text" >

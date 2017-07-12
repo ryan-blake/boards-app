@@ -103,6 +103,7 @@ end
      "$#{price}.00 "
   end
 
+
   def sellable?
     self.for_sale && self.inventory >= 1
   end
@@ -125,7 +126,7 @@ end
     self.type_id == 1
   end
 
-  
+
   private
 
 

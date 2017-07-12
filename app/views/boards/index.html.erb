@@ -21,13 +21,19 @@
     top: 0px;
     left: calc(50% - 90px);
 }
+
+
 #type-select {
+  z-index: 999;
+  position: fixed;
+  top: 8px;
   background-color: white;
-    color: black;
-    height: 34px;
-    width: 137px;
-    font-size: 19px;
-    border: black solid 1px;
+  color: black;
+  height: 34px;
+  width: 137px;
+  font-size: 19px;
+  border: black solid 1px;
+  left: calc(50% - 72px);
 }
 /**/
 #div-wrapper {
@@ -127,14 +133,15 @@ type_select.onchange = function() {
   featuredDiv.style['display'] = 'none';
   type_value.style['top'] = '50px';
   type_select.style['z-index'] = '1';
-  type_select.style['top'] = '0px';
+  type_select.style['top'] = '20px';
   type_select.style['position'] = 'absolute';
   searchSigned.style['display'] = 'block';
   searchBar.style['display'] = 'block';
   type_select.style['position'] = 'absolute';
-
   }
+
 });
+
 function updateTextArea(source){
  var value = source;
  var type_val = document.getElementById('show_type');
@@ -154,7 +161,7 @@ $(window).scroll(function(){
 
 <!--  -->
 <div id="div-wrapper" style="">
-  <div id="type_select" style="position: fixed;left: calc(50% - 50px);z-index: 999;top:10px;">
+  <div id="type_select" style="">
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
     <span id="type-value" class="type_collection" style="">
       <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
@@ -165,13 +172,12 @@ $(window).scroll(function(){
 
   <div id="featured-boards"  class="single-div" style="">
     <div id="about" class="bcg">
-      <div class="about-text">
-          <h1 class="center-text" id="kuivir-header" style="padding: 0px 15px;border-bottom: 1px solid white;left: calc(50% - 63px);position: absolute;top: 45%;color: white;"> kuivir </h1>
-           <h3 style="left: calc(50% - 113px);color: white;top:65%;position: absolute;">board market place</h3>
-      </div>
+          <h1 class="center-text" id="kuivir-header" style="padding: 0px 15px;border-bottom: 1px solid white;left: calc(50% - 63px);position: absolute;top: 15%;color: white;"> kuivir </h1>
+           <h3 style="left: calc(50% - 104px);color: white;top:45%;position: absolute;font-weight:300;">board market place</h3>
     </div>
 
   <div id="feature-divs" class="single-div bcg" style="">
+    <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
     <div class="featured" style="">
       <% if current_user %>
       <% @surf = current_user.not_my_boards(@surf) %>
@@ -183,7 +189,6 @@ $(window).scroll(function(){
     <div class="featured" style="">
       <% if current_user %>
       <% @snow = current_user.not_my_boards(@snow) %>
-
       <% end %>
       <%= render partial: 'featured', locals: {boards: @snow} %>
     </div>
