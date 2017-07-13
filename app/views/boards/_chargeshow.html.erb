@@ -5,6 +5,8 @@
   <%= f.hidden_field :board_id, value:  @board.id %>
   <%= f.hidden_field :shipping, value:  true  %>
 
+  <%= f.hidden_field :accessories, id: 'accArray', value: 'none' %>
+
 
     <script async src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"

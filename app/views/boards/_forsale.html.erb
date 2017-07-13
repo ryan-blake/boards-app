@@ -25,7 +25,7 @@
     <%= f.hidden_field :list_time, value: "" %>
     <div class="actions">
      <%= f.hidden_field :for_sale , value: false %>
-     <%= button_tag "Cancel", id: 'cancel-btn', class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> canceling..."}, remote: true %>
+     <!-- cancel btn? -->
     </div>
   <% elsif @board.for_sale == true && @board.pending == false %>
       <%= f.hidden_field :pending, value: false %>
@@ -38,5 +38,6 @@
     <% else %>
       uh oh - forsale
     <% end %>
+    <br>
 <% end %>
 </div>

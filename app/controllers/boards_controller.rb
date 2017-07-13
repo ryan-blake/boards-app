@@ -5,7 +5,6 @@ class BoardsController < ApplicationController
   def import
     count = Board.import params[:file]
     redirect_to dash_path notice: "imported #{count} boards"
-
   end
 
   def index
@@ -264,6 +263,7 @@ transactions = Stripe::BalanceTransaction.all(
         format.json { render json: @board.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /boards/1

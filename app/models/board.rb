@@ -94,7 +94,7 @@ def full_address
   [address, city, state, zipcode].join(', ')
 end
   def check_for_tracking_number
-    if tracking_changed?
+    if tracking_changed? && self.tracking != ""
        BoardMailer.tracking_number(self).deliver_now
      end
   end

@@ -22,6 +22,8 @@ class ChargesController < ApplicationController
             "board" => @board.title, "vendor" => User.find(@charge.vendor).name, "vendor_id" => User.find(@charge.vendor).id,  "customer" => User.find(@charge.user).name, "customer_id" => @charge.user_id }
        },
       )
+
+      # subtract board inventory & create format charge receipt with Board Params
       @charge.charge_stripe = charge['id']
       @charge.update_attribute(:completed, true)
       @board.update_attribute(:arrived, true)
