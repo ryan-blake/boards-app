@@ -1,0 +1,8 @@
+<% modal ||= false %>
+<% remote = modal ? true : false %>
+<%= form_for(@board, html: {role: :form, 'data-model' => 'board'}, :remote => true) do |f| %>
+  <div class="actions  text-center">
+  <div class="actions" >
+    <%= f.check_box_tag :arrived , value: @board.arrived %>
+<% end %>
+</div>
