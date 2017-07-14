@@ -49,11 +49,16 @@ end
   get'dash' => 'boards#board_dash'
 get 'featured' => 'boards#show'
 
-  resources :charges
-  resources :tokens, only: [:new, :create]
-
+  resources :charges do
+    collection do
+      get 'shipped_boards', 'search_shipped', 'picked_boards', 'search_picked'
+    end
+  end
   get 'complete_charge' => 'charges#complete'
   get 'complete_charge' => 'charges#retrieve'
+
+  resources :tokens, only: [:new, :create]
+
 
   get'msg' => 'conversations#msg'
   get 'messages/create'

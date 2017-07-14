@@ -1,16 +1,15 @@
 # == Schema Information
 #
-# Table name: tails
+# Table name: rockers
 #
 #  id         :integer          not null, primary key
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  board_id   :integer
 #
 
-FactoryGirl.define do
-  factory :tail do
-    name "MyString"
-  end
+require 'rails_helper'
+
+RSpec.describe Rocker, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

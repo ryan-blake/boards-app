@@ -251,34 +251,34 @@ end
       end
     end
 
-    def pickup_boards
+    def picked_boards
       @user = current_user
-      @pickup_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+      @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
     end
 
-    def search_pickup
+    def search_picked
       @user = current_user
-      @pickup_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+      @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         if params[:category_id].present?
-            @pickup_boards = @pickup_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+            @picked_boards = @picked_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         else
-            @pickup_boards = @pickup_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+            @picked_boards = @picked_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         end
     end
 
-    def shipping_boards
+    def shipped_boards
       @user = current_user
-      @shipping_boards = Charge.where(vendor_id: @user.id, shipping: true, shipped: false || nil ).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+      @shipped_boards = Charge.where(vendor_id: @user.id, shipping: true, shipped: false || nil ).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
     end
 
-    def search_shipping
+    def search_shipped
       @user = current_user
 
-      @shipping_boards = Charge.where(vendor_id: @user.id, shipping: true, shipped: false || nil )
+      @shipped_boards = Charge.where(vendor_id: @user.id, shipping: true, shipped: false || nil )
         if params[:category_id].present?
-            @shipping_boards = @shipping_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+            @shipped_boards = @shipped_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         else
-            @shipping_boards = @shipping_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+            @shipped_boards = @shipped_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         end
     end
 

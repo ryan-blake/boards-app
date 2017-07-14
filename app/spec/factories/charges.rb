@@ -21,6 +21,8 @@
 #  rental        :boolean
 #  charge_stripe :string
 #  accessories   :string
+#  picked        :string
+#  shipped       :string
 #
 
 FactoryGirl.define do

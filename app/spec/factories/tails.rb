@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: rockers
+# Table name: tails
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -8,5 +8,8 @@
 #  updated_at :datetime         not null
 #
 
-class Rocker < ApplicationRecord
+FactoryGirl.define do
+  factory :tail do
+    name "MyString"
+  end
 end
