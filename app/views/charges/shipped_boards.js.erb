@@ -1,0 +1,3 @@
+$("#shipped").html("<%=j render partial: 'charges/shipped_boards' %>");
+$('#results').html('<%= j render partial: 'shipped_boards' %>');
+$('#shipping-table').append('<%= escape_javascript(paginate(@shipped_boards, window: 1, :remote => true)) %>');
