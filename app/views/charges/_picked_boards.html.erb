@@ -23,7 +23,7 @@
 <div id="results">
  <div class="top-dash">
   <div class="row" id="pending-table">
-    <% if !@picked_boards.exists? %>
+    <% if @picked_boards.count == 0 %>
       <%= render partial: 'boards/none' %>
     <% end %>
     <thead>
