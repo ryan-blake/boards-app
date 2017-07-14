@@ -25,11 +25,20 @@
 
 class Charge < ApplicationRecord
   belongs_to :user
+  belongs_to :board
   belongs_to :vendor, class_name: 'User', foreign_key: 'vendor_id'
 
 
   def rent_time(board)
     board.end_time - board.start_time
+  end
+
+  def chargeBoard
+    Board.find(self.board_id)
+  end
+
+  def non_acc(att)
+    att['title'].blank? && new_record?
   end
 
 end

@@ -1,4 +1,6 @@
 class ChargesController < ApplicationController
+  before_action :set_charge, only: [ :update]
+  helper_method :sort_column, :sort_direction, :c_ft ,:c_cm, :c_mm
 
   def new
     # Stripe::Charge.all(
@@ -237,6 +239,79 @@ end
       redirect_to dash_path
     end
   end
+  def update
+      respond_to do |format|
+        if @charge.update(charge_params)
+          format.html { redirect_to @charge, notice: 'Event was successfully updated.' }
+          format.json { render :show, status: :ok, location: @charge }
+        else
+          format.html { render :edit }
+          format.json { render json: @charge.errors, status: :unprocessable_entity }
+        end
+      end
+    end
 
+    def pickup_boards
+      @user = current_user
+      @pickup_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+    end
+
+    def search_pickup
+      @user = current_user
+      @pickup_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        if params[:category_id].present?
+            @pickup_boards = @pickup_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        else
+            @pickup_boards = @pickup_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        end
+    end
+
+    def shipping_boards
+      @user = current_user
+      @shipping_boards = Charge.where(vendor_id: @user.id, shipping: true, shipped: false || nil ).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+    end
+
+    def search_shipping
+      @user = current_user
+
+      @shipping_boards = Charge.where(vendor_id: @user.id, shipping: true, shipped: false || nil )
+        if params[:category_id].present?
+            @shipping_boards = @shipping_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        else
+            @shipping_boards = @shipping_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        end
+    end
+
+      def set_charge
+        @charge = Charge.find(params[:id])
+      end
+
+      def charge_params
+        params.permit(:extras, :accessories, :amount ,:picked, :shipped, :id, :price, :item ,:user_id, :vendor_id, :token, :customer_id, :completed, :boolean, :board_id, :address, :shipping, :start_time, :end_time, :rental, :charge_stripe)
+      end
+
+    private
+    def sort_column
+      Board.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_updated
+      Board.column_names.include?(params[:sort]) ? params[:sort] : "updated_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "desc"
+    end
+
+    def c_ft(a)
+      a = (a * 12)
+    end
+
+    def c_cm(param)
+      param = (param / 2.54)
+    end
+    def c_mm(param)
+      param = (param / 25.4)
+    end
 
 end

@@ -343,6 +343,8 @@ puts "#{Board.count} at board/1"
   end
 
     75.times do
+      kind = Kind.all.sample
+      category = Category.find(kind.category_id)
       Accessory.create!(
         brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
         price: rand(10..25),
@@ -350,7 +352,8 @@ puts "#{Board.count} at board/1"
         color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample,
         title: ['title1','43title1','title15','title16','title112','title232','title53','title231','title8','titl21'].sample,
         user_id: User.all.sample.id,
-        kind_id: Kind.all.sample.id,
+        kind_id: kind.id,
+        category_id: category.id,
         unit_id: Unit.all.sample.id,
         measure: rand(1.15..25.88)
       )
@@ -358,7 +361,8 @@ puts "#{Board.count} at board/1"
     puts "#{Board.count} at access/1"
     75.times do
       board = Board.where(user_id: 1).sample
-      kind =  Kind.where(category_id: board.category_id).sample
+      category = board.category_id
+      kind =  Kind.where(category_id: category).sample
 
       Accessory.create!(
         brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
@@ -369,6 +373,7 @@ puts "#{Board.count} at board/1"
         board_id: board.id,
         user_id: board.user.id,
         kind_id: kind.id,
+        category_id: category,
         unit_id: Unit.all.sample.id,
         measure: rand(3.9..25.1)
       )
