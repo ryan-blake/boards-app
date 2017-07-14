@@ -251,9 +251,9 @@ end
       end
     end
 
-    def pickup_boards
+    def picked_boards
       @user = current_user
-      @pickup_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+      @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
     end
 
     def search_picked
