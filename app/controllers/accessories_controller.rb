@@ -18,10 +18,7 @@ def search_table
   @accessories = Accessory.where(user_id: current_user.id).where("cast( kind_id as text) like ? and cast( brand as text) like ? and cast( category_id as text) like ? and (title like ? or color like ? or brand like ?)",
 
           "%#{params[:kind_id]}%", "%#{params[:brand]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
-          @acc_array = []
-             @accessories.each do |a|
-               @acc_array << (a.price)
-           end
+        
 
 end
 
