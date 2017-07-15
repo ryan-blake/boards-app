@@ -258,7 +258,7 @@ end
 
     def search_picked
       @user = current_user
-      @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+      @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil )
         if params[:category_id].present?
             @picked_boards = @picked_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         else
@@ -273,6 +273,7 @@ end
 
     def search_shipped
       @user = current_user
+
       @shipped_boards = Charge.where(vendor_id: @user.id, shipping: true, shipped: false || nil )
         if params[:category_id].present?
             @shipped_boards = @shipped_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)

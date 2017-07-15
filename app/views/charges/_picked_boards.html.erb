@@ -1,25 +1,4 @@
-<div>
-<%= form_tag({controller: :charges, action: :search_picked}, {method: :get, remote: true}) do  %>
 
-<div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
-  <div class="input-group">
-    <span class="input-group-btn">
-      <%= grouped_collection_select  nil, :category_id, Type.all, :categories,
-            :name, :id, :name, {prompt: "Select type" },
-            { id: 'category-select' , class: "form-control"} %>
-    </span>
-  </div><!-- /input-group -->
-</div><!-- /.col-lg-6 -->
-<div class="col-md-4 search-bar">
-   <div class="input-group">
-     <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
-     <span class="input-group-btn">
-       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
-     </span>
-   </div><!-- /input-group -->
- </div><!-- /.col-lg-6 -->
-<% end %>
-</div>
 <div id="results">
  <div class="top-dash">
   <div class="row" id="pending-table">
@@ -91,4 +70,26 @@
       </td>
     </tbody>
   </table>
+</div>
+<div>
+<%= form_tag({controller: :charges, action: :search_picked}, {method: :get, remote: true}) do  %>
+
+<div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
+  <div class="input-group">
+    <span class="input-group-btn">
+      <%= grouped_collection_select  nil, :category_id, Type.all, :categories,
+            :name, :id, :name, {prompt: "Select type" },
+            { id: 'category-select' , class: "form-control"} %>
+    </span>
+  </div><!-- /input-group -->
+</div><!-- /.col-lg-6 -->
+<div class="col-md-4 search-bar">
+   <div class="input-group">
+     <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+     <span class="input-group-btn">
+       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+     </span>
+   </div><!-- /input-group -->
+ </div><!-- /.col-lg-6 -->
+<% end %>
 </div>
