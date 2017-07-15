@@ -27,11 +27,12 @@
         <thead>
           <tr>
             <th>image</th>
-              <th><i style="display:inline;"> <%= sortable "User.name", "user" %></th>
+              <th><i style="display:inline;"> User </th>
+              <th><i style="display:inline;"> <%= sortable "id" %></i></th>
               <th><i style="display:inline;"> <%= sortable "item", "Title" %></th>
               <th><i style="display:inline;"> <%= sortable "price" %></i></th>
               <th><i style="display:inline;"> <%= sortable "created_at", "purchased" %></i></th>
-              <th><i style="display:inline;"> <%= sortable "id" %></i></th>
+              <th><i style="display:inline;"> UPC </i></th>
             <th>listing</th>
           </tr>
         </thead>
@@ -43,15 +44,20 @@
               <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 40, 40), charge, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
               <td><%= charge.user.name  %>
                             <%= charge.user.email  %></td>
-              <td><%= link_to charge.item.truncate(13), charge, target: :_blank %>
-                <%=
+                <td><%= charge.id  %>
+                Picked:<%=
                   check_box_tag 'picked', true, charge.picked,
                     onchange: "$(this).data('params', 'picked=' + this.checked)",
                     data: { remote: true, url: charge_path(charge.id), method: :patch }
                     %>
+                    </td>
+                    <td><%= charge.item.truncate(13) %></td>
               <td><%= format_amount(charge.price * 100) %></td>
               <td><%= format_date(charge.created_at) %></td>
-              <td><%= charge.id  %>%</td>
+              <td> <%if charge.board.upc.present? %>
+                    <%= charge.board.upc %>
+                    <% end %>
+              </td>
               <td class="text-center">
                 <small><%=charge.chargeBoard.type.name %>: </small>
                 <small><%=charge.chargeBoard.category.name %> </small>

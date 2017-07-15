@@ -52,37 +52,43 @@
      <table style="" class="table table-bordered table-striped table-hover" id="">
        <thead>
          <tr>
-            <th>image</th>
-            <th><i style="display:inline;"> <%= sortable "User.name", "user" %></th>
-            <th><i style="display:inline;"> <%= sortable "item", "Title" %></th>
-            <th><i style="display:inline;"> <%= sortable "price" %></i></th>
-            <th><i style="display:inline;"> <%= sortable "created_at", "purchased" %></i></th>
-            <th><i style="display:inline;"> <%= sortable "id" %></i></th>
-            <th>listing</th>
+           <th>image</th>
+             <th><i style="display:inline;"> User </th>
+             <th><i style="display:inline;"> <%= sortable "id" %></i></th>
+             <th><i style="display:inline;"> <%= sortable "item", "Title" %></th>
+             <th><i style="display:inline;"> <%= sortable "price" %></i></th>
+             <th><i style="display:inline;"> <%= sortable "created_at", "purchased" %></i></th>
+             <th><i style="display:inline;"> UPC </i></th>
+           <th>listing</th>
           </tr>
         </thead>
 
         <tbody>
         <% @shipped_boards.each do |charge| %>
-            <tr>
-              <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 80, 80), charge, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
-              <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 40, 40), charge, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
-              <td><%= charge.user.name  %>
-                            <%= charge.user.email  %></td>
-              <td><%= link_to charge.item.truncate(13), charge, target: :_blank %>
-                <%=
-                  check_box_tag 'shipped', true, charge.shipped,
-                    onchange: "$(this).data('params', 'shipped=' + this.checked)",
-                    data: { remote: true, url: charge_path(charge.id), method: :patch }
-                    %>
-                    <td><%= format_amount(charge.price * 100) %></td>
-                    <td><%= format_date(charge.created_at) %></td>
-                    <td><%= charge.id  %>%</td>
-                    <td class="text-center">
-                      <small><%=charge.chargeBoard.type.name %>: </small>
-                      <small><%=charge.chargeBoard.category.name %> </small>
-                    </td>
-                  </tr>
+              <tr>
+                <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 80, 80), charge, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
+                <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 40, 40), charge, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
+                <td><%= charge.user.name  %>
+                              <%= charge.user.email  %></td>
+                  <td><%= charge.id  %>
+                  Shipped:<%=
+                    check_box_tag 'shipped', true, charge.shipped,
+                      onchange: "$(this).data('params', 'shipped=' + this.checked)",
+                      data: { remote: true, url: charge_path(charge.id), method: :patch }
+                      %>
+                      </td>
+                      <td><%= charge.item.truncate(13) %></td>
+                <td><%= format_amount(charge.price * 100) %></td>
+                <td><%= format_date(charge.created_at) %></td>
+                <td> <%if charge.board.upc.present? %>
+                      <%= charge.board.upc %>
+                      <% end %>
+                </td>
+                <td class="text-center">
+                  <small><%=charge.chargeBoard.type.name %>: </small>
+                  <small><%=charge.chargeBoard.category.name %> </small>
+                </td>
+              </tr>
             <% end %>
         </tbody>
       </table>

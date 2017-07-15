@@ -2,9 +2,13 @@
   <div class="row">
     <div class="col-md-12">
       <h2 class="page-header">
-        <strong>Receipt No: </strong><%= @charge.id %> <span class="pull-right ">$<%= @charge.price / 100%>.00</span>
+        <strong>Receipt No: </strong><%= @charge.id %> <span class="pull-right "><%= format_amount(@charge.price * 100)  %></span>
       |<strong>  <%= @charge.vendor.company %> </strong>|
+
       </h2>
+      <hr>
+      <dt> <%= @board.type.name %>:<%= @board.category.name %></dt>
+
       <% if @charge.rental %>
       <hr>
         <strong> Pick up:</strong><dd><%= @charge.start_time.to_s.split('00').first %> 8am </dd>
@@ -15,15 +19,28 @@
         <div class="panel-body">
           <dl>
             <dt>Purchase From:</dt>
-            <dd><%= @charge.user.name %></dd>
+            <dd>
+              <% if @charge.user.name %>
+              <strong>Customer Name:</strong> <%= @charge.user.name %>
+              <% end %>
+              <br>
+              <strong>Customer Email:</strong> <%= @charge.user.email %>
+
+            </dd>
+            <dd>
+              <%= image_tag(attachment_url(@charge.board.images.first, :file, :fill, 150, 150, format: 'jpg')) %>
+            </dd>
             <hr>
             <% if current_user.stripe_account %>
-            <dt>Payment method:</dt>
-            <dd><%= @payments['source']['brand']%></dd>
+             <dt>Payment method:</dt>
+             <dd><%= @payments['source']['brand']%></dd>
+              <% if @board.upc.present? %>
+               <dt> UPC:</dt>
+               <dd><%= @board.upc %></dd>
+              <% end %>
+              <dt> Board:</dt>
+              <dd><%= link_to @board.title, board_path(@board) %></dd>
             <% end %>
-            <hr>
-            <dt>For <%= @board.category.name %>:</dt>
-            <dd><%= link_to @board.title, board_path(@board) %></dd>
             <hr>
             <% if @charge.shipping == false || @charge.rental == true %>
               <dd>In store pick Up</dd>
@@ -33,7 +50,7 @@
             <hr>
             <dt>Created:</dt>
             <dd><%= format_date(@charge.created_at) %></dd>
-      <hr>
+            <hr>
           </dl>
         </div>
       </div>
