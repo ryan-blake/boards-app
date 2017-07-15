@@ -26,36 +26,32 @@
 
 <% end %>
 </div>
+<div class="top-dash">
 <div id="results">
- <div class="top-dash">
-<h4 class="dash-data-title"> </h4>
-  <div id="pending-table">
-    <% if @shipped_boards.count == 0 %>
-      <%= render partial: 'boards/none' %>
-    <% end %>
-    <thead>
-      <td>
-        <div class="center-text" id="shipping_boards">
-        <%= paginate @shipped_boards, remote: true, window: 1 %>
-        </div>
-        <tr>
-          <td class="filtering center-text">
-            <span> <strong style="position:relative;margin-bottom:20px;text-decoration:underline;">Waiting to Ship </strong></span>
-            <br>
-
-            <ti> <strong> Sort by: </strong> </ti>
-            <i style="display:inline;"> <%= sortable "updated_at", "Time" %></i>
-           </ti>
-          </td>
-        </tr>
-      </td>
-    </thead>
-<style>
-</style>
-    <div class="table-scrollable ">
-      <table style="table-layout:fixed;min-width:100%;max-width:100%;overflow-x:scroll;" class="table table-bordered table-striped table-hover" id="results">
-        <thead>
-          <tr>
+ <div id="shipped-table">
+   <% if @shipped_boards.count == 0 %>
+     <%= render partial: 'boards/none' %>
+   <% end %>
+   <thead>
+     <td>
+       <div class="center-text" id="shipped_boards">
+       <%= paginate @shipped_boards, remote: true, window: 1 %>
+       </div>
+       <tr>
+         <td class="filtering center-text">
+           <span> <strong style="position:relative;margin-bottom:20px;text-decoration:underline;">Need to ship </strong></span>
+           <br>
+           <ti> <strong> Sort by: </strong> </ti>
+           <i style="display:inline;"> <%= sortable "updated_at", "Time" %></i>
+          </ti>
+         </td>
+       </tr>
+     </td>
+   </thead>
+   <div class="table-scrollable ">
+     <table style="" class="table table-bordered table-striped table-hover" id="">
+       <thead>
+         <tr>
             <th>image</th>
             <th><i style="display:inline;"> <%= sortable "User.name", "user" %></th>
             <th><i style="display:inline;"> <%= sortable "item", "Title" %></th>
