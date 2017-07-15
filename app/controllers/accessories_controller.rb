@@ -10,7 +10,7 @@ def index
   @accessories = accessory.all
 end
 def table
-  @accessories = Accessory.all.order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
+  @accessories = Accessory.all.order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 end
 
 def search_table
