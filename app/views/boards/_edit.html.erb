@@ -148,7 +148,7 @@
 
             <div>
               <%= f.fields_for :accessories do |builder| %>
-                <%= render "accessories/edit", :f => builder %>
+                <%= render "accessories/form", :f => builder %>
               <% end %>
 
             <hr>
