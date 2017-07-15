@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170709011210) do
+ActiveRecord::Schema.define(version: 20170714195919) do
 
   create_table "accessories", force: :cascade do |t|
     t.string   "brand"
@@ -110,6 +110,8 @@ ActiveRecord::Schema.define(version: 20170709011210) do
     t.boolean  "rental"
     t.string   "charge_stripe"
     t.string   "accessories"
+    t.string   "picked"
+    t.string   "shipped"
     t.index ["user_id"], name: "index_charges_on_user_id"
   end
 

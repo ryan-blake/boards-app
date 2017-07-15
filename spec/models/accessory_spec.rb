@@ -17,6 +17,7 @@
 #  kind_id     :integer
 #  unit_id     :integer
 #  measure     :decimal(5, 2)
+#  measured    :decimal(5, 2)
 #
 
 require 'rails_helper'

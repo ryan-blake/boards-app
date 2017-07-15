@@ -1,5 +1,5 @@
 class AddBoardIdToCharges < ActiveRecord::Migration[5.0]
   def change
-    add_column :charges, :board_id, :string
+    add_reference :charges, :board, index: true, foreign_key: true
   end
 end

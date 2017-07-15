@@ -32,12 +32,15 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
-#  list_time   :datetime         default("2017-06-21 23:06:12")
+#  list_time   :datetime         default("2017-07-14 18:58:18")
 #  inventory   :integer          default("0")
 #  cost        :integer
 #  margin      :integer
 #  upc         :string
 #  company     :string
+#  tail_id     :integer
+#  fin_id      :integer
+#  rocker_id   :integer
 #
 
 class Board < ApplicationRecord

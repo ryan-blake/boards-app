@@ -7,7 +7,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  board_id   :integer
-#  unit_id    :integer
+#  unit_id    :integer          default("1")
 #  feet       :integer
 #  inches     :integer
 #  length     :decimal(5, 2)
