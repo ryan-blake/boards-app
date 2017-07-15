@@ -44,7 +44,10 @@
             <tr>
               <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 80, 80), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
               <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(board.images.first, :file, :fill, 40, 40), board, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
-              <td><%= link_to board.title.truncate(13), board, target: :_blank %></td>
+              <td><%= link_to board.title.truncate(13), board, target: :_blank %>
+                <br>
+              <%= link_to "Edit", edit_board_path(board), class: 'center-text btn-btn-sm btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#editModal" } %>
+              </td>
               <td><%= board.inventory %></td>
               <td><%= format_amount(board.price * 100) %></td>
               <td><%= format_amount(board.cost * 100)  %></td>

@@ -1,6 +1,8 @@
 <% if user_signed_in?%>
   <%= content_for :page_title,   current_user.name.capitalize   + "'s Dashboard" %>
   <% content_for(:header) do %>
+  <%= render partial: 'layouts/spinner' %>
+
   <script>
 $( document ).ready(function() {
 // hide spinner
@@ -423,8 +425,8 @@ $(document).ajaxStop(function(){
   <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
   <button type="button" class="btn btn-default" id="btn-pending">pending</button>
   <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
-  <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_charges_path, remote:true %></button>
-  <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  picked_boards_charges_path, remote:true %></button>
+  <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+  <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  picked_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
   <button type="button" class="btn btn-default" id="btn-sales"><%= link_to 'Sales', sales_boards_boards_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
   <% if !@user.stripe_account  %>
   <button type="button" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>

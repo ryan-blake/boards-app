@@ -259,10 +259,14 @@ end
     def search_picked
       @user = current_user
       @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil )
+
         if params[:category_id].present?
-            @picked_boards = @picked_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+            @picked_boards = @picked_boards.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         else
-            @picked_boards = @picked_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+            @picked_boards = @picked_boards.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        end
+        if params[:user].present?
+            @picked_boards = @picked_boards.joins(:user).where("(name like ? or email like ?)","%#{params[:user]}%", "%#{params[:user]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         end
     end
 
@@ -273,12 +277,14 @@ end
 
     def search_shipped
       @user = current_user
-
       @shipped_boards = Charge.where(vendor_id: @user.id, shipping: true, shipped: false || nil )
         if params[:category_id].present?
-            @shipped_boards = @shipped_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+            @shipped_boards = @shipped_boards.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         else
-            @shipped_boards = @shipped_boards.joins(:board).where("(title like ? or description like ? or make like ?)","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+            @shipped_boards = @shipped_boards.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        end
+        if params[:user].present?
+            @shipped_boards = @shipped_boards.joins(:user).where("(name like ? or email like ?)","%#{params[:user]}%", "%#{params[:user]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         end
     end
 
