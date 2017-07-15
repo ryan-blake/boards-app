@@ -4,11 +4,31 @@
       <h2 class="page-header">
         <strong>Receipt No: </strong><%= @charge.id %> <span class="pull-right "><%= format_amount(@charge.price * 100)  %></span>
       |<strong>  <%= @charge.vendor.company %> </strong>|
-
       </h2>
       <hr>
       <dt> <%= @board.type.name %>:<%= @board.category.name %></dt>
+      <% if @charge.accessories.present? %>
+      <dt>:Add On: Accessories</dt>
+      <% @accessories.each do |a| %>
+      <hr>
 
+          <dd><strong> Title:</strong>
+            <%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
+          </dd>
+          <dd><strong> Kind:</strong><%= a.kind.name %> <dd><%= %> </dd>
+          <dd><strong> Price:</strong><%= format_amount(a.price * 100) %> <dd><%= %> </dd>
+          <% end %>
+      <% end %>
+      <hr>
+      <% if @charge.board.accessories.exists? %>
+      <dt>Accessories</dt>
+      <% @completeAccessories.each do |i| %>
+      <hr>
+      <dd><strong> Title:</strong><%= a.title %> <dd><%=  %>  </dd>
+      <dd><strong> Kind:</strong><%= a.kind.name %> <dd><%= %> </dd>
+      <dd><strong> Price:</strong><%= a.price %> <dd><%= %> </dd>
+      <% end %>
+      <% end %>
       <% if @charge.rental %>
       <hr>
         <strong> Pick up:</strong><dd><%= @charge.start_time.to_s.split('00').first %> 8am </dd>
@@ -39,13 +59,15 @@
                <dd><%= @board.upc %></dd>
               <% end %>
               <dt> Board:</dt>
-              <dd><%= link_to @board.title, board_path(@board) %></dd>
+              <dd>
+              <%= @board.title %>
+              </dd>
             <% end %>
             <hr>
             <% if @charge.shipping == false || @charge.rental == true %>
               <dd>In store pick Up</dd>
             <% else %>
-             <dt>Shipped</dt>
+             <dt>Shipping to :address</dt>
              <% end %>
             <hr>
             <dt>Created:</dt>

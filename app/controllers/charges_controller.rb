@@ -153,6 +153,12 @@ end
 
     begin
       @charge = Charge.find(params[:id])
+      #
+      @accessories = @charge.accessories
+      @accessories = @accessories.split(',')
+      @accessories = Accessory.where(id: @accessories)
+      # 
+      @completeAccessories = @charge.board.accessories
       @board = Board.where(:id => @charge.board_id)[0]
       @payments = Stripe::Charge.retrieve(id: @charge.charge_stripe)
       {

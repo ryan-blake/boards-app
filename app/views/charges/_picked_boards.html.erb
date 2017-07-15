@@ -40,8 +40,8 @@
         <tbody>
         <% @picked_boards.each do |charge| %>
             <tr>
-              <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 80, 80), charge, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
-              <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 40, 40), charge, remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
+              <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 80, 80), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
+              <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 40, 40), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
               <td><%= charge.user.name  %>
                             <%= charge.user.email  %></td>
                 <td><%= charge.id  %>
@@ -92,7 +92,7 @@
 
   </div><!-- /input-group -->
   <div class="row">
-  <div class="input-group" style="float:right">
+  <div class="input-group" style="float:right;margin-right:16px;">
     <%= text_field_tag :user, nil, class: 'form-control', :placeholder => "Customer Name or email.."  %>
 </div>
 </div>
