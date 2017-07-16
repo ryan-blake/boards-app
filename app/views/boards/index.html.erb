@@ -109,6 +109,7 @@ $(document).ready(function() {
 var openExtended = document.getElementById('open-extended');
 var extended = document.getElementById('extended-search');
 var type_select = document.getElementById('type_select');
+var typeSelect = document.getElementById('type-select');
 var mainSearch = document.getElementById('mainsearch');
 var type_value = document.getElementById('type-value');
 var featuredDiv = document.getElementById('featured-boards');
@@ -134,13 +135,17 @@ type_select.onchange = function() {
   featuredDiv.style['display'] = 'none';
   type_value.style['top'] = '50px';
   type_select.style['z-index'] = '1';
-  type_select.style['top'] = '20px';
-  type_select.style['position'] = 'absolute';
+  type_select.style['position'] = '';
   searchSigned.style['display'] = 'block';
   searchBar.style['display'] = 'block';
-  type_select.style['position'] = 'absolute';
-  }
+  typeSelect.style['position'] = 'relative';
+  typeSelect.style['margin-right'] = '10px';
+  typeSelect.style['z-index'] = '1';
+  typeSelect.style['top'] = '95px';
+  typeSelect.style['background'] = 'darkslategrey';
+  typeSelect.style['color'] = 'white';
 
+  }
 });
 
 function updateTextArea(source){

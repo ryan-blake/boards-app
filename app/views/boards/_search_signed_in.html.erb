@@ -1,7 +1,4 @@
   <table class="container-fluid index-results " id="results" style="min-width:95%;max-width:95%''">
-    <% if @boards.length == 0 %>
-        <%= render partial: 'boards/none' %>
-      <% end %>
       <% if current_user %>
         <% @boards = current_user.not_my_boards(@boards) %>
       <% end %>
@@ -14,7 +11,7 @@
         <tr>
           <td class="center-text sorting-row">
             <div class="btn-group">
-              <button style="margin-bottom:10px;right:9%;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <button style="margin-bottom:10px;right:9%;border:1px solid darkslategrey;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                 Sort Options <span class="caret"></span>
               </button>
               <ul class="dropdown-menu" role="menu">
@@ -31,6 +28,14 @@
         </tr>
       </td>
     </thead>
+    <% if @boards.length == 0 %>
+    <tbody style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;background-color:white;">
+      <td style="max-height: 150px;min-width:150px;max-width: 150px;margin-right: 5%;
+            margin-left: 10%;background-color:white;font-size:10px;">
+        <%= render partial: 'boards/none' %>
+      </td>
+    </tbody>
+      <% end %>
   <% @boards.each do |board| %>
     <tbody class="items" style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;background-color:white;">
       <td class="" style="max-height: 150px;min-width:150px;max-width: 150px;    margin-right: 5%;
