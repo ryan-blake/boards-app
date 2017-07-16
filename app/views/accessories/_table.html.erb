@@ -29,15 +29,14 @@
         <tbody>
         <% @accessories.each do |a| %>
             <tr>
-                <td class= "desktop-items-img" style="margin:0px;">
-                  <%= link_to attachment_image_tag(a.images.first, :file, :fill, 80, 80), a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
-                  <%= link_to "Edit", edit_accessory_path(a), class: 'center-text btn-btn-sm btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#accEdit" } %>
-                </td>
-                <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;">
-                  <%= link_to attachment_image_tag(a.images.first, :file, :fill, 40, 40), a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
-                  <%= link_to "Edit", edit_accessory_path(a), class: 'center-text btn-btn-sm btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#accEdit" } %>
-                </td>
-
+              <td class= "desktop-items-img" style="margin:0px;">
+                <%= link_to attachment_image_tag(a.images.first, :file, :fill, 80, 80), accessory_path(a), remote: true, data: { toggle: "modal", target: "#accModal" } %>
+                <%= link_to "Edit", edit_accessory_path(a), class: 'center-text btn-btn-sm btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#accEdit" } %>
+              </td>
+              <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;">
+                <%= link_to attachment_image_tag(a.images.first, :file, :fill, 40, 40), a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
+                <%= link_to "Edit", edit_accessory_path(a), class: 'center-text btn-btn-sm btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#accEdit" } %>
+              </td>
               <td><%=link_to a.id, accessory_path(a), remote: true, data: { toggle: "modal", target: "#accModal" } %></td>
               <td><%= a.inventory %>%</td>
               <td><%=  a.title.truncate(13) %></td>

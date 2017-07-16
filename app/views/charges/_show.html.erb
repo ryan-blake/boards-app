@@ -22,7 +22,7 @@
       <hr>
       <% if @charge.board.accessories.exists? %>
       <dt>Accessories</dt>
-      <% @completeAccessories.each do |i| %>
+      <% @completeAccessories.each do |a| %>
       <hr>
       <dd><strong> Title:</strong><%= a.title %> <dd><%=  %>  </dd>
       <dd><strong> Kind:</strong><%= a.kind.name %> <dd><%= %> </dd>
@@ -48,7 +48,9 @@
 
             </dd>
             <dd>
+              <% if @charge.board.images.exists? %>
               <%= image_tag(attachment_url(@charge.board.images.first, :file, :fill, 150, 150, format: 'jpg')) %>
+              <% end %>
             </dd>
             <hr>
             <% if current_user.stripe_account %>

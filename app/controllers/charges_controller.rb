@@ -25,17 +25,7 @@ class ChargesController < ApplicationController
        },
       )
       @charge.charge_stripe = charge['id']
-      @charge.update_attribute(:completed, true)
-      @board.update_attribute(:arrived, true)
-      @board.user_id = @charge.user_id
-      @board.update_attribute(:shipping, nil)
-      @board.update_attribute(:shipped, nil)
-      @board.update_attribute(:customer_id, nil)
-      @board.update_attribute(:address, nil)
-      @board.update_attribute(:pending, false)
-      @board.update_attribute(:customer_id, nil)
-      @board.update_attribute(:company, nil)
-
+      @board.inventory += -1
       @board.save
       if @new_user
         redirect_to new_user_session_path, :notice => "HOWDY, Your board is ordered! Check your email to create your password and confirm your email."
@@ -69,6 +59,7 @@ class ChargesController < ApplicationController
     accessories: params[:charge]["accessories"]
   )
 
+  # arraytest = params[:charge]["accessories"].split(",")
   array = @charge.accessories.split(",")
   if array.count >= 1
     @accessories = Accessory.where(id: array)
@@ -79,13 +70,6 @@ class ChargesController < ApplicationController
   end
   @charge.update_attribute(:boolean, true)
   @charge.save
-  @board = Board.where(id: @charge.board_id).first
-  @board.shipping = params[:charge]["shipping"]
-  @board.update_attribute(:arrived, false)
-  @board.customer_id = current_user.id
-  @board.update_attribute(:pending, true)
-  @board.for_sale = false
-  @board.save
   @new_user = false
   complete
 
@@ -134,11 +118,7 @@ class ChargesController < ApplicationController
     @charge.update_attribute(:boolean, true)
     @charge.save
     @board = Board.where(id: @charge.board_id).first
-    @board.update_attribute(:arrived, false)
-    @board.shipping = params[:charge]["shipping"]
-    @board.customer_id = current_user.id
-    @board.update_attribute(:pending, true)
-    @board.for_sale = false
+
     @board.save
 
     @new_user = true
@@ -159,7 +139,7 @@ end
       @accessories = Accessory.where(id: @accessories)
       #
       @completeAccessories = @charge.board.accessories
-      
+
       @board = Board.where(:id => @charge.board_id)[0]
       @payments = Stripe::Charge.retrieve(id: @charge.charge_stripe)
       {

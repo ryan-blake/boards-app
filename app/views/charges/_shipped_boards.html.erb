@@ -92,8 +92,7 @@
                   <% if index >=1 %>
                     :
                     <% end %>
-                  <%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
-
+                  <%= link_to a.title, accessory_path(a), remote: true, data: { toggle: "modal", target: "#accModal" } %>
                   <% end %>
                 </td>
                 <td class="text-center">
