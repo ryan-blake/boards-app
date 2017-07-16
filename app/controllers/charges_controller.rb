@@ -25,7 +25,8 @@ class ChargesController < ApplicationController
        },
       )
       @charge.charge_stripe = charge['id']
-      @board.inventory += -1
+      @charge.update_attribute(:completed, true)
+      @charge.save
       @board.save
       if @new_user
         redirect_to new_user_session_path, :notice => "HOWDY, Your board is ordered! Check your email to create your password and confirm your email."
@@ -59,7 +60,6 @@ class ChargesController < ApplicationController
     accessories: params[:charge]["accessories"]
   )
 
-  # arraytest = params[:charge]["accessories"].split(",")
   array = @charge.accessories.split(",")
   if array.count >= 1
     @accessories = Accessory.where(id: array)
@@ -70,6 +70,9 @@ class ChargesController < ApplicationController
   end
   @charge.update_attribute(:boolean, true)
   @charge.save
+  @board = Board.where(id: @charge.board_id).first
+  @board.inventory += -1
+  @board.save
   @new_user = false
   complete
 
