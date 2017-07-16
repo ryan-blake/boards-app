@@ -103,7 +103,6 @@ end
 def show
   # @board = Spot.find(params[:spot_id])
   # @accessory = accessory.find(params[:id])
-
   @accessory = Accessory.find(params[:id])
   if @accessory.board
     @board = @accessory.board
