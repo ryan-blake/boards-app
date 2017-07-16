@@ -182,7 +182,6 @@ $(window).scroll(function(){
       <% if current_user %>
        <% @surf = current_user.not_my_boards(@surf) %>
         <% if @surf.count >= 1%>
-          <hr class="style13" style="margin:0;">
           <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
           <%= render partial: 'featured', locals: {boards: @surf} %>
         <% elsif @surf.count >= 1 %>
