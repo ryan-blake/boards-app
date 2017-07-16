@@ -10,6 +10,7 @@
 #search-result-partial {
   position: relative;
   display:none;
+  background-color:white;
 }
 .swiper-button-white {
   background-color: rgba( 05, 134, 12, .5);
@@ -177,38 +178,61 @@ $(window).scroll(function(){
     </div>
 
   <div id="feature-divs" class="single-div bcg" style="">
-    <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
     <div class="featured" style="">
       <% if current_user %>
-      <% @surf = current_user.not_my_boards(@surf) %>
+       <% @surf = current_user.not_my_boards(@surf) %>
+        <% if @surf.count >= 1%>
+          <hr class="style13" style="margin:0;">
+          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
+          <%= render partial: 'featured', locals: {boards: @surf} %>
+        <% elsif @surf.count >= 1 %>
+          <hr class="style13" style="margin:0;">
+          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
+          <%= render partial: 'featured', locals: {boards: @surf} %>
+        <% end %>
       <% end %>
-      <%= render partial: 'featured', locals: {boards: @surf} %>
     </div>
-    <hr class="style13" style="margin:0;">
-    <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
     <div class="featured" style="">
       <% if current_user %>
-      <% @snow = current_user.not_my_boards(@snow) %>
+       <% @snow = current_user.not_my_boards(@snow) %>
+        <% if @snow.count >= 1%>
+          <hr class="style13" style="margin:0;">
+          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
+          <%= render partial: 'featured', locals: {boards: @snow} %>
+        <% elsif @snow.count >= 1 %>
+          <hr class="style13" style="margin:0;">
+          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
+          <%= render partial: 'featured', locals: {boards: @snow} %>
+        <% end %>
       <% end %>
-      <%= render partial: 'featured', locals: {boards: @snow} %>
     </div>
-    <hr class="style13">
-
-    <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
     <div class="featured" style="">
       <% if current_user %>
-      <% @skate = current_user.not_my_boards(@skate) %>
+       <% @skate = current_user.not_my_boards(@skate) %>
+        <% if @skate.count >= 1%>
+          <hr class="style13" style="margin:0;">
+          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
+          <%= render partial: 'featured', locals: {boards: @skate} %>
+        <% elsif @skate.count >= 1 %>
+          <hr class="style13" style="margin:0;">
+          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
+          <%= render partial: 'featured', locals: {boards: @skate} %>
+        <% end %>
       <% end %>
-      <%= render partial: 'featured', locals: {boards: @skate} %>
     </div>
-    <hr class="style13">
-
-    <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
     <div class="featured" style="">
       <% if current_user %>
-      <% @wake = current_user.not_my_boards(@wake) %>
+       <% @wake = current_user.not_my_boards(@wake) %>
+        <% if @wake.count >= 1%>
+          <hr class="style13" style="margin:0;">
+          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
+          <%= render partial: 'featured', locals: {boards: @wake} %>
+        <% elsif @wake.count >= 1 %>
+          <hr class="style13" style="margin:0;">
+          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
+          <%= render partial: 'featured', locals: {boards: @wake} %>
+        <% end %>
       <% end %>
-      <%= render partial: 'featured', locals: {boards: @wake} %>
     </div>
   </div>
 </div>
