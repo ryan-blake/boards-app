@@ -52,7 +52,7 @@
      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Accessories.."  %>
      <span class="input-group-btn">
        <%= hidden_field_tag :board_id, @board.id%>
-       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+       <%= button_tag "Go!", class: "btn btn-success", style: 'border:1px solid darkslategrey;background-color:darkslategrey;', data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
      </span>
    </div><!-- /input-group -->
  </div><!-- /.col-lg-6 -->
