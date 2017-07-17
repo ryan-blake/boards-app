@@ -422,18 +422,20 @@ $(document).ajaxStop(function(){
 
 <!-- nav desktop -->
 <div class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
-  <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-  <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
-  <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
-  <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-  <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  picked_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-  <button type="button" class="btn btn-default" id="btn-sales"><%= link_to 'Sales', sales_boards_boards_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+
   <% if !@user.stripe_account  %>
   <button type="button" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <% else %>
-  <button style="display:none;" type="hidden" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
-  <% end %>
+  <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+  <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <button type="button" class="btn btn-default" id="btn-accessory"><%= link_to 'accessories', table_accessories_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+  <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  picked_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} , style: 'color:white;'%></button>
+  <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+  <button type="button" class="btn btn-default" id="btn-sales"><%= link_to 'Sales', sales_boards_boards_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+  <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
+  <button type="button" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
+
+  <% end %>
 
 </div>
 
