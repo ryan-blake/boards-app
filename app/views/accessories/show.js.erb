@@ -1,2 +1,6 @@
 $("#accModal .modal-content").html('<%= j render partial: "accessories/show" %>');
 $("#accModal").modal()
+
+$('#dismissAccModal').on('click', function() {
+$("#accModal").modal('hide')
+}
