@@ -218,7 +218,7 @@ end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def accessory_params
-    params.require(:accessory).permit(:measured ,:measure, :unit_id, :kind_id, :brand ,:price, :inventory, :color, :title, :type_id, :category_id, :user_id, :board_id,images_files: [], images_attributes: [ :id, :file, :_destroy])
+    params.require(:accessory).permit(:upc,:measured ,:measure, :unit_id, :kind_id, :brand ,:price, :inventory, :color, :title, :type_id, :category_id, :user_id, :board_id,images_files: [], images_attributes: [ :id, :file, :_destroy])
   end
 
   def set_current_accessories

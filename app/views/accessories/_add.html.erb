@@ -75,6 +75,12 @@
 </div>
 <div class="col-md-4">
     <div class="form-group">
+      <%= f.label :upc %>
+      <%= f.text_field :upc, class: 'form-control', id: 'accUpc' %>
+    </div>
+  </div>
+<div class="col-md-4">
+    <div class="form-group">
       <%= f.label :inventory %>
       <%= f.number_field :inventory, min: 1, class: 'form-control', id: 'accInventory' %>
     </div>

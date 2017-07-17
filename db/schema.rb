@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714195919) do
+ActiveRecord::Schema.define(version: 20170717183829) do
 
   create_table "accessories", force: :cascade do |t|
     t.string   "brand"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170714195919) do
     t.integer  "unit_id"
     t.decimal  "measure",     precision: 5, scale: 2
     t.decimal  "measured",    precision: 5, scale: 2
+    t.string   "upc"
     t.index ["board_id"], name: "index_accessories_on_board_id"
     t.index ["category_id"], name: "index_accessories_on_category_id"
     t.index ["kind_id"], name: "index_accessories_on_kind_id"

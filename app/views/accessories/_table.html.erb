@@ -16,6 +16,7 @@
         <thead>
           <tr>
             <th>images</th>
+            <th><i style="display:inline;" class="btn btn-sort">UPC</th>
             <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "id" %></th>
             <th><i style="display:inline;" class="btn btn-sort"> <%=  sortable "inventory" %></i></th>
             <th><i style="display:inline;" class="btn btn-sort"> <%= sortable "title" %></th>
@@ -37,6 +38,7 @@
                 <%= link_to attachment_image_tag(a.images.first, :file, :fill, 40, 40),accessory_path(a), remote: true, data: { toggle: "modal", target: "#accModal" } %>
                 <%= link_to "Edit", edit_accessory_path(a), class: 'center-text btn-btn-sm btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#accEdit" } %>
               </td>
+              <td><%= a.upc %> </td>
               <td><%= link_to "#{a.id}  #{a.title}", accessory_path(a), remote: true, data: { toggle: "modal", target: "#accModal" } %></td>
 
               <td><%= a.inventory %>%</td>
