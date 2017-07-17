@@ -69,7 +69,8 @@
             <% if @charge.shipping == false || @charge.rental == true %>
               <dd>In store pick Up</dd>
             <% else %>
-             <dt>Shipping to :address</dt>
+             <dt>Shipping to</dt>
+             <dd> <%= @charge.full_address %> </dd>
              <% end %>
             <hr>
             <dt>Created:</dt>
