@@ -1,4 +1,4 @@
-<div class="panel panel-default topspace">
+<div id="boardForm" class="panel panel-default topspace">
   <div class="panel-body">
 <%= form_for(board) do |f| %>
   <% if board.errors.any? %>
@@ -17,7 +17,7 @@
     <div class="col-md-12">
       <div class="form-group">
       <%= f.label :title %>
-      <%= f.text_field :title, class: 'btn-width form-control input-lg' %>
+      <%= f.text_field :title, class: 'btn-width form-control input-lg', id: 'boardTitle' %>
     </div>
   </div>
 </div>
@@ -35,28 +35,26 @@
     <%= f.attachment_field :images_files, multiple: true, presigned: true, direct: true, id: 'file-input', type: 'file'  %></btn>
 
     <div id="image"></div>
-
 <hr>
-<div id="preview"></div>
+<div style="max-height:100px;overflow-x:scroll;float:right;" id="preview"></div>
   </div>
-
     <div class="row">
       <div class="col-md-5">
         <div class="form-group">
           <%= f.label :make, "Brand"%>
-          <%= f.text_field :make, class: "form-control input-lg", placeholder: "Enter Brand" %>
+          <%= f.text_field :make, class: "form-control input-lg", placeholder: "Enter Brand", id: 'boardMake' %>
         </div>
       </div>
       <div class="col-md-5">
         <div class="form-group">
 <label> Category </label>
-          <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Choose Category'} , { :class => 'form-control input-lg' } %>
+          <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id , :name,   { :include_blank => 'Choose Category'} , { :class => 'form-control input-lg', id: 'boardCat' } %>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div id="surfBtn" style="width: 50%;position: relative;" class="btn btn-primary">Surf Dimensions</div>
+      <div id="surfBtn" style="width: 50%;position: relative;" class="btn btn-success">Surf Dimensions</div>
       <div id="sizeForm" style="display:block;width:100%;">
         <%= f.fields_for :size do |builder| %>
           <%= render "sizes/form", :f => builder %>
@@ -66,14 +64,14 @@
             <div class="form-group">
               <%= f.label :tail_id, "Tail Type" %>
               <%=  f.collection_select( :tail_id, Tail.all, :id, :name,
-                { :include_blank => 'Tail'} , { :class => 'form-control input-lg' }) %>
+                { :include_blank => 'Tail'} , { :class => 'form-control input-lg', id: 'boardTail' }) %>
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Fin Type</label>
-              <%=  f.collection_select :fin_id, Fin.all, :id, :name,
-                { :include_blank => 'Fin'} , { class: "form-control input-lg" } %>
+              <%=  f.collection_select :fin_id, Fin.all, :id , :name,
+                { :include_blank => 'Fin'} , { class: "form-control input-lg", id:'boardFin' } %>
             </div>
           </div>
         </div>
@@ -84,7 +82,7 @@
     <div class="col-md-4">
       <div class="form-group">
         <label>inventory:</label>
-          <%= f.number_field :inventory, min: 0,class: 'btn-width form-control input-lg' %>
+          <%= f.number_field :inventory, min: 0, value: '', class: 'btn-width form-control input-lg', id: 'boardInventory' %>
       </div>
     </div>
     <div class="col-md-1">
@@ -98,19 +96,19 @@
     <div class="col-md-4">
       <div class="form-group">
         <label>Cost:</label>
-        <%= f.number_field :cost, min: 1, class: 'form-control input-lg' %> <br />
+        <%= f.number_field :cost, min: 1, class: 'form-control input-lg', id: 'boardCost' %> <br />
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label>Margin:</label>
-          <%= f.number_field :margin, min: 0, class: 'btn-width form-control input-lg' %>
+          <%= f.number_field :margin, min: 0, class: 'btn-width form-control input-lg', id: 'boardMargin' %>
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label>Sale Price:</label>
-        <%= f.number_field :price, min: 0, class: 'input-lg btn-width form-control' %>
+        <%= f.number_field :price, min: 0, class: 'input-lg btn-width form-control', id: 'boardPrice' %>
       </div>
     </div>
 
@@ -122,7 +120,7 @@
       <div class="col-md-11">
         <div class="form-group">
           <%= f.label :description %>
-          <%= f.text_area :description, class: 'form-control', placeholder: "Enter Description", style: 'min-height:80px;min-width:100%;'%>
+          <%= f.text_area :description, class: 'form-control', placeholder: "Enter Description", style: 'min-height:80px;min-width:100%;' , id: 'boardDescription'%>
         </div>
       </div>
     </div>
@@ -140,7 +138,7 @@
           <div id="accessoryForm" style="margin-bottom:50px;display:none;position:relative;min-height:400px;min-width:100%;">
             <hr class="style14">
             <div id="AccBtn" class="center-text" style="position:relative;bottom:20px;">
-              <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
+              <%= f.submit 'Create', class: 'form-control', id:'submitBoard' ,style: 'background-color:darkslategrey;' %>
             </div>
             <div>
               <%= f.fields_for :accessories do |builder| %>
@@ -187,7 +185,7 @@
     <div class="row">
       <div class="col-md-12">
           <div class="center-text" style="display:none;position: absolute;bottom: -40px;width: 100%;">
-            <%= f.submit 'Create', class: 'form-control', style: 'background-color:lightgrey;' %>
+            <%= f.submit 'Create', class: 'form-control', style: 'background-color:darkslategrey;border: none;' %>
           </div>
       </div>
     </div>
@@ -310,7 +308,69 @@ document.querySelector('#file-input').addEventListener("change", previewImages, 
   </script>
   <script>
 
-  alert('ji')
+  $('#createBTN').on('click', function(){
+    var boardTitle = document.getElementById('boardTitle');
+    var boardMake = document.getElementById('boardMake');
+    var boardCat = document.getElementById('boardCat');
+    var boardInventory = document.getElementById('boardInventory');
+    var boardPrice = document.getElementById('boardPrice');
+    var boardDescription = document.getElementById('boardDescription');
+    var missingItems = 0;
+
+
+   if($('#boardTitle').val() == ""  )
+    {
+     boardTitle.style['background-color'] = 'beige';
+    } else {
+     boardTitle.style['background-color'] = 'white';
+    }
+   if($('#boardMake').val() == ""  )
+    {
+      boardMake.style['background-color'] = 'beige';
+    } else {
+      boardMake.style['background-color'] = 'white';
+    }
+    if($('#boardCat').val() == ""  )
+     {
+       boardCat.style['background-color'] = 'beige';
+     } else {
+       boardCat.style['background-color'] = 'white';
+     }
+     if($('#boardInventory').val() == ""  )
+      {
+        boardInventory.style['background-color'] = 'beige';
+      } else {
+        boardInventory.style['background-color'] = 'white';
+      }
+      if($('#boardPrice').val() == ""  )
+       {
+         boardPrice.style['background-color'] = 'beige';
+       } else {
+         boardPrice.style['background-color'] = 'white';
+       }
+       if($('#boardDescription').val() == ""  )
+        {
+          boardDescription.style['background-color'] = 'beige';
+
+        } else {
+          boardDescription.style['background-color'] = 'white';
+        }
+
+
+  // submit disable
+      $('#boardForm').submit(function()
+      {
+        // $('#accPrice').val() == ""
+        if( boardTitle.style['background-color'] == 'beige' || boardMake.style['background-color'] == 'beige' || boardCat.style['background-color'] == 'beige' || boardInventory.style['background-color'] == 'beige' || boardPrice.style['background-color'] == 'beige' ||
+            boardDescription.style['background-color'] == 'beige' )
+         {
+            return false;
+         }
+      });
+
+  });
+
+//
 
   function previewImages() {
 
