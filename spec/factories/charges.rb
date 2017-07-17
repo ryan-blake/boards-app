@@ -23,6 +23,10 @@
 #  accessories   :string
 #  picked        :string
 #  shipped       :string
+#  zipcode       :string
+#  country       :string
+#  state         :string
+#  city          :string
 #
 
 FactoryGirl.define do

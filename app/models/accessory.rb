@@ -18,6 +18,7 @@
 #  unit_id     :integer
 #  measure     :decimal(5, 2)
 #  measured    :decimal(5, 2)
+#  upc         :string
 #
 
 class Accessory < ApplicationRecord
