@@ -2,68 +2,6 @@
 <!--  -->
 <%= content_for :page_title,   "Wojoi"%>
 <% content_for(:header) do %>
-<style>
-
-#search-bar {
-  display:none;
-}
-#search-result-partial {
-  position: relative;
-  display:none;
-  background-color:white;
-}
-.swiper-button-white {
-  background-color: rgba( 05, 134, 12, .5);
-  border-radius:: 100%;
-  color:white;
-}
-#type-value {
-    position: relative;
-    top: 0px;
-    left: calc(50% - 90px);
-}
-
-
-#type-select {
-  z-index: 999;
-  position: fixed;
-  top: 8px;
-  background-color: white;
-  color: black;
-  height: 34px;
-  width: 137px;
-  font-size: 19px;
-  border: black solid 1px;
-  left: calc(50% - 72px);
-}
-/**/
-#div-wrapper {
-   white-space: nowrap;
-   max-width: 100%;
-   -webkit-overflow-scrolling: touch;
- }
- #header {
-  display:block;
-  width:100%;
-  position:relative;
-  background-color: darkslategrey;
-  top:-20px;
-  height:260px;
-}
-#footer.bcg {
-  display:block;
-  width:100%;
-  position:relative;
-  background-color: darkseagreen;
-  height:80px;
-  margin-top:20px;
-
-}
-
-
-
-</style>
-
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
    <div class="modal-dialog modal-lg" role="document">
      <div class="modal-header">
@@ -98,7 +36,6 @@
      </div>
    </div>
 <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAIDdA5C2oS2Opd5tIqc8B9Fe-Z1NsrBes"></script>
-
 <script>
 $(function() {
 $("#geo-input").geocomplete();
@@ -186,57 +123,34 @@ $(window).scroll(function(){
     <div class="featured" style="">
       <% if current_user %>
        <% @surf = current_user.not_my_boards(@surf) %>
-        <% if @surf.count >= 1%>
-          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
-          <%= render partial: 'featured', locals: {boards: @surf} %>
-        <% elsif @surf.count >= 1 %>
-          <hr class="style13" style="margin:0;">
-          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
-          <%= render partial: 'featured', locals: {boards: @surf} %>
-        <% end %>
-      <% end %>
+       <% end %>
+       <hr class="style13" style="margin:0;">
+       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
+       <%= render partial: 'featured', locals: {boards: @surf} %>
     </div>
     <div class="featured" style="">
       <% if current_user %>
-       <% @snow = current_user.not_my_boards(@snow) %>
-        <% if @snow.count >= 1%>
-          <hr class="style13" style="margin:0;">
-          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
-          <%= render partial: 'featured', locals: {boards: @snow} %>
-        <% elsif @snow.count >= 1 %>
-          <hr class="style13" style="margin:0;">
-          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
-          <%= render partial: 'featured', locals: {boards: @snow} %>
-        <% end %>
-      <% end %>
+       <% @surf = current_user.not_my_boards(@snow) %>
+       <% end %>
+       <hr class="style13" style="margin:0;">
+       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
+       <%= render partial: 'featured', locals: {boards: @snow} %>
     </div>
     <div class="featured" style="">
       <% if current_user %>
        <% @skate = current_user.not_my_boards(@skate) %>
-        <% if @skate.count >= 1%>
-          <hr class="style13" style="margin:0;">
-          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
-          <%= render partial: 'featured', locals: {boards: @skate} %>
-        <% elsif @skate.count >= 1 %>
-          <hr class="style13" style="margin:0;">
-          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
-          <%= render partial: 'featured', locals: {boards: @skate} %>
-        <% end %>
-      <% end %>
+       <% end %>
+       <hr class="style13" style="margin:0;">
+       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
+       <%= render partial: 'featured', locals: {boards: @skate} %>
     </div>
     <div class="featured" style="">
       <% if current_user %>
        <% @wake = current_user.not_my_boards(@wake) %>
-        <% if @wake.count >= 1%>
-          <hr class="style13" style="margin:0;">
-          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
-          <%= render partial: 'featured', locals: {boards: @wake} %>
-        <% elsif @wake.count >= 1 %>
-          <hr class="style13" style="margin:0;">
-          <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
-          <%= render partial: 'featured', locals: {boards: @wake} %>
-        <% end %>
-      <% end %>
+       <% end %>
+       <hr class="style13" style="margin:0;">
+       <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
+       <%= render partial: 'featured', locals: {boards: @wake} %>
     </div>
   </div>
 </div>
