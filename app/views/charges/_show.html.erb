@@ -7,11 +7,10 @@
       </h2>
       <hr>
       <dt> <%= @board.type.name %>:<%= @board.category.name %></dt>
-      <% if @charge.accessories.present? %>
+      <% if @charge.accessories.exists? %>
       <dt>:Add On: Accessories</dt>
       <% @accessories.each do |a| %>
       <hr>
-
           <dd><strong> Title:</strong>
             <%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
           </dd>
@@ -24,7 +23,7 @@
       <dt>Accessories</dt>
       <% @completeAccessories.each do |a| %>
       <hr>
-      <dd><strong> Title:</strong><%= a.title %> <dd><%=  %>  </dd>
+      <dd><%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %></dd>
       <dd><strong> Kind:</strong><%= a.kind.name %> <dd><%= %> </dd>
       <dd><strong> Price:</strong><%= a.price %> <dd><%= %> </dd>
       <% end %>
