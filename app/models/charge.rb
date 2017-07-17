@@ -43,4 +43,7 @@ class Charge < ApplicationRecord
     att['title'].blank? && new_record?
   end
 
+  def receipts(charges)
+   @receipts = Charge.where(id: charges)
+  end
 end

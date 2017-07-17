@@ -18,7 +18,7 @@ $(document).ajaxStop(function(){
 });
   $(document).ready(function() {
     var activeBtn = document.getElementById('btn-active');
-    var pendingBtn = document.getElementById('btn-pending');
+    var receiptBtn = document.getElementById('btn-receipt');
     var inventoryBtn = document.getElementById('btn-inventory');
     var shippedBtn = document.getElementById('btn-shipped');
     var pickUpBtn = document.getElementById('btn-pickup');
@@ -26,7 +26,7 @@ $(document).ajaxStop(function(){
     var rentalBtn = document.getElementById('btn-rental');
     var accessoryBtn = document.getElementById('btn-accessory');
     var activeBtnM = document.getElementById('btn-active-m');
-    var pendingBtnM = document.getElementById('btn-pending-m');
+    var receiptBtnM = document.getElementById('btn-receipt-m');
     var inventoryBtnM = document.getElementById('btn-inventory-m');
     var shippedBtnM = document.getElementById('btn-shipped-m');
     var pickUpBtnM = document.getElementById('btn-pickup-m');
@@ -34,7 +34,7 @@ $(document).ajaxStop(function(){
     var rentalBtnM = document.getElementById('btn-rental-m');
     var accessoryBtnM = document.getElementById('btn-accessory-m');
 
-    var pendingPG = document.getElementById('pending');
+    var receiptPG = document.getElementById('receipts');
     var activePG = document.getElementById('active');
     var inventoryPG = document.getElementById('inventory');
     var shippedPG = document.getElementById('shipped');
@@ -45,7 +45,7 @@ $(document).ajaxStop(function(){
 
       activeBtn.onclick = function() {
           activePG.style['display'] = 'block';
-          pendingPG.style['display'] = 'none';
+          receiptPG.style['display'] = 'none';
           inventoryPG.style['display'] = 'none';
           shippedPG.style['display'] = 'none';
           pickUpPG.style['display'] = 'none';
@@ -55,8 +55,8 @@ $(document).ajaxStop(function(){
 
 
        };
-       pendingBtn.onclick = function() {
-          pendingPG.style['display'] = 'block';
+       receiptBtn.onclick = function() {
+          receiptPG.style['display'] = 'block';
           activePG.style['display'] = 'none';
           inventoryPG.style['display'] = 'none';
           shippedPG.style['display'] = 'none';
@@ -70,7 +70,7 @@ $(document).ajaxStop(function(){
        inventoryBtn.onclick = function() {
           inventoryPG.style['display'] = 'block';
           activePG.style['display'] = 'none';
-          pendingPG.style['display'] = 'none';
+          receiptPG.style['display'] = 'none';
           shippedPG.style['display'] = 'none';
           pickUpPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
@@ -83,7 +83,7 @@ $(document).ajaxStop(function(){
           shippedPG.style['display'] = 'block';
           activePG.style['display'] = 'none';
           inventoryPG.style['display'] = 'none';
-          pendingPG.style['display'] = 'none';
+          receiptPG.style['display'] = 'none';
           pickUpPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
@@ -95,7 +95,7 @@ $(document).ajaxStop(function(){
           pickUpPG.style['display'] = 'block';
           activePG.style['display'] = 'none';
           inventoryPG.style['display'] = 'none';
-          pendingPG.style['display'] = 'none';
+          receiptPG.style['display'] = 'none';
           shippedPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
@@ -107,7 +107,7 @@ $(document).ajaxStop(function(){
           pickUpPG.style['display'] = 'none';
           activePG.style['display'] = 'none';
           inventoryPG.style['display'] = 'none';
-          pendingPG.style['display'] = 'none';
+          receiptPG.style['display'] = 'none';
           shippedPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
           salesPG.style['display'] = 'block';
@@ -118,7 +118,7 @@ $(document).ajaxStop(function(){
           pickUpPG.style['display'] = 'none';
           activePG.style['display'] = 'none';
           inventoryPG.style['display'] = 'none';
-          pendingPG.style['display'] = 'none';
+          receiptPG.style['display'] = 'none';
           shippedPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'block';
@@ -130,7 +130,7 @@ $(document).ajaxStop(function(){
           pickUpPG.style['display'] = 'none';
           activePG.style['display'] = 'none';
           inventoryPG.style['display'] = 'none';
-          pendingPG.style['display'] = 'none';
+          receiptPG.style['display'] = 'none';
           shippedPG.style['display'] = 'none';
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
@@ -139,7 +139,7 @@ $(document).ajaxStop(function(){
       //mobile
       activeBtnM.onclick = function() {
          activePG.style['display'] = 'block';
-         pendingPG.style['display'] = 'none';
+         receiptPG.style['display'] = 'none';
          inventoryPG.style['display'] = 'none';
          shippedPG.style['display'] = 'none';
          pickUpPG.style['display'] = 'none';
@@ -149,8 +149,8 @@ $(document).ajaxStop(function(){
 
 
       };
-      pendingBtnM.onclick = function() {
-         pendingPG.style['display'] = 'block';
+      receiptBtnM.onclick = function() {
+         receiptPG.style['display'] = 'block';
          activePG.style['display'] = 'none';
          inventoryPG.style['display'] = 'none';
          shippedPG.style['display'] = 'none';
@@ -164,7 +164,7 @@ $(document).ajaxStop(function(){
       inventoryBtnM.onclick = function() {
          inventoryPG.style['display'] = 'block';
          activePG.style['display'] = 'none';
-         pendingPG.style['display'] = 'none';
+         receiptPG.style['display'] = 'none';
          shippedPG.style['display'] = 'none';
          pickUpPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
@@ -177,7 +177,7 @@ $(document).ajaxStop(function(){
          shippedPG.style['display'] = 'block';
          activePG.style['display'] = 'none';
          inventoryPG.style['display'] = 'none';
-         pendingPG.style['display'] = 'none';
+         receiptPG.style['display'] = 'none';
          pickUpPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
@@ -189,7 +189,7 @@ $(document).ajaxStop(function(){
          pickUpPG.style['display'] = 'block';
          activePG.style['display'] = 'none';
          inventoryPG.style['display'] = 'none';
-         pendingPG.style['display'] = 'none';
+         receiptPG.style['display'] = 'none';
          shippedPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
@@ -202,7 +202,7 @@ $(document).ajaxStop(function(){
          pickUpPG.style['display'] = 'none';
          activePG.style['display'] = 'none';
          inventoryPG.style['display'] = 'none';
-         pendingPG.style['display'] = 'none';
+         receiptPG.style['display'] = 'none';
          shippedPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
          accessoryPG.style['display'] = 'none';
@@ -213,7 +213,7 @@ $(document).ajaxStop(function(){
          pickUpPG.style['display'] = 'none';
          activePG.style['display'] = 'none';
          inventoryPG.style['display'] = 'none';
-         pendingPG.style['display'] = 'none';
+         receiptPG.style['display'] = 'none';
          shippedPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
          accessoryPG.style['display'] = 'none';
@@ -225,7 +225,7 @@ $(document).ajaxStop(function(){
          pickUpPG.style['display'] = 'none';
          activePG.style['display'] = 'none';
          inventoryPG.style['display'] = 'none';
-         pendingPG.style['display'] = 'none';
+         receiptPG.style['display'] = 'none';
          shippedPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
       };
@@ -423,7 +423,7 @@ $(document).ajaxStop(function(){
 <!-- nav desktop -->
 <div class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
   <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-  <button type="button" class="btn btn-default" id="btn-pending">pending</button>
+  <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
   <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  picked_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
@@ -453,7 +453,7 @@ $(document).ajaxStop(function(){
      </button>
      <ul class="dropdown-menu mobile-drop-dash" style="min-width: 10px;max-width: 100px;">
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-active-m"><%= link_to 'Active',  active_boards_boards_path, remote:true %></button></li>
-       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-pending-m">pending</button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-receipt-m"><%= link_to 'Receipts', receipts_charges_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-inventory-m"><%= link_to "Inactive", inactive_boards_boards_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-shipped-m"><%= link_to 'shipping',  shipped_boards_charges_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-pickup-m"><%= link_to 'Pick Up',  picked_boards_charges_path, remote:true %></button></li>
@@ -477,8 +477,8 @@ $(document).ajaxStop(function(){
 <!-- Need to finish payment -->
 <div style="display:none;" class="col-md-12 center-text"  id="active">
 </div>
-<div style="display:block;" class="dashTable col-md-12 center-text" id="pending">
-  <%= render partial: 'pages/pending_boards' %>
+<div style="display:block;" class="dashTable col-md-12 center-text" id="receipts">
+
 </div>
 <div  style="display:none;" class="dashTable col-md-12 center-text" id="inventory">
 </div>

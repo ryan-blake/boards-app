@@ -37,7 +37,7 @@
               <%= number_field :min, params[:min], id: 'accMin', class: 'form-control', min: 1, placeholder: "min price" %>
             </span>
             <span style="">
-              <%= number_field :max, params[:max], style: 'float:right;', style: 'right: 0px;',id: 'accMax', class: 'form-control',min: 1, placeholder: "max price" %>
+              <%= number_field :max, params[:max], style: 'float:right;right: 0px;',id: 'accMax', class: 'form-control',min: 1, placeholder: "max price" %>
             </span>
             <span class="input-group-btn">
               <%= collection_select(nil, :color, Accessory.where(category_id: @board.category_id, :user_id => @board.user_id).where("inventory >= ?", 1).select(:color).uniq, :color, :color, {:include_blank => "Color", },{ id:'accColorForm' , class: "form-control"}) %>

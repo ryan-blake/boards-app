@@ -241,6 +241,27 @@ end
       end
     end
 
+    def receipts
+      @user = current_user
+      @receipts = Charge.where(vendor_id: @user.id, shipped: "true").or(Charge.where(vendor_id: @user.id, picked: "true")).pluck(:id)
+      @receipts = Charge.where(id: @receipts).order(sort_column + ' ' + sort_direction).page(params[:page]).per(12)
+    end
+
+    def search_receipts
+      @user = current_user
+      @receipts = Charge.where(vendor_id: @user.id, shipped: "true").or(Charge.where(vendor_id: @user.id, picked: "true")).pluck(:id)
+      @receipts = Charge.where(id: @receipts)
+
+        if params[:category_id].present?
+            @receipts = @receipts.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        else
+            @receipts = @receipts.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        end
+        if params[:user].present?
+            @receipts = @receipts.joins(:user).where("(name like ? or email like ?)","%#{params[:user]}%", "%#{params[:user]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+        end
+    end
+
     def picked_boards
       @user = current_user
       @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)

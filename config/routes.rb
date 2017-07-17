@@ -51,10 +51,10 @@ get 'featured' => 'boards#show'
 
   resources :charges do
     collection do
-        get 'shipped_boards','search_shipped','picked_boards', 'search_picked'
+        get 'shipped_boards','search_shipped','picked_boards', 'search_picked', 'receipts', 'search_receipts'
       end
   end
-  
+
   resources :tokens, only: [:new, :create]
 
   get 'complete_charge' => 'charges#complete'

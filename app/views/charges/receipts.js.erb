@@ -1,0 +1,3 @@
+$("#receipts").html("<%=j render partial: 'charges/receipts' %>");
+$('#results').html('<%= j render partial: 'charges/receipts' %>');
+$('#receipts-table').append('<%= escape_javascript(paginate(@receipts, window: 1, :remote => true)) %>');

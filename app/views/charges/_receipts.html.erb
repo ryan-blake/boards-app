@@ -1,17 +1,16 @@
-<div class="top-dash">
 <div id="results">
-  <div id="picked-table">
-    <% if @picked_boards.count == 0 %>
+  <div id="receipts-table" class="top-dash">
+    <% if @receipts.count == 0 %>
       <%= render partial: 'boards/none' %>
     <% end %>
     <thead>
       <td>
         <div class="center-text" id="active_boards">
-        <%= paginate @picked_boards, remote: true, window: 1 %>
+        <%= paginate @receipts, remote: true, window: 1 %>
         </div>
         <tr>
           <td class="filtering center-text">
-            <span> <strong style="position:relative;margin-bottom:20px;text-decoration:underline;">Waiting for Pick up </strong></span>
+            <span> <strong style="position:relative;margin-bottom:20px;text-decoration:underline;">Completed Transactions </strong></span>
             <br>
             <ti> <strong> Sort by: </strong> </ti>
             <i style="display:inline;"> <%= sortable "updated_at", "Time" %></i>
@@ -21,7 +20,7 @@
       </td>
     </thead>
     <div class="table-scrollable ">
-      <table style="" class="table table-bordered table-striped table-hover" id="">
+      <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
             <th>image</th>
@@ -36,23 +35,16 @@
             <th>listing</th>
           </tr>
         </thead>
-
         <tbody>
-        <% @picked_boards.each do |charge| %>
+        <% @receipts.each do |charge| %>
             <tr>
               <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 80, 80), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
               <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 40, 40), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
               <td><%= charge.user.name  %>
                             <%= charge.user.email  %></td>
                 <td><%= charge.id  %>
-                Picked:<%=
-                  check_box_tag 'picked', true, charge.picked,
-                    onchange: "$(this).data('params', 'picked=' + this.checked)",
-                    data: { remote: true, url: charge_path(charge.id), method: :patch }
-                    %>
                     </td>
-                      <td> <%= link_to charge.item.truncate(13), board_path(charge.board.id), remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
-
+                    <td> <%= link_to charge.item.truncate(13), board_path(charge.board.id), remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
               <td><%= format_amount(charge.price * 100) %></td>
               <td><%= format_date(charge.created_at) %></td>
               <td> <%if charge.board.upc.present? %>
@@ -67,7 +59,6 @@
                   :
                   <% end %>
                 <%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
-
                 <% end %>
               </td>
               <td class="text-center">
@@ -81,18 +72,10 @@
     </div>
   </div>
   <!--  -->
-
-    <tbody >
-      <td>
-        <div class="center-text pagination" id="active_boards">
-        <%= paginate @picked_boards, remote: true, window: 1 %>
-        </div>
-      </td>
-    </tbody>
   </table>
 </div>
 <div>
-<%= form_tag({controller: :charges, action: :search_picked}, {method: :get, remote: true}) do  %>
+<%= form_tag({controller: :charges, action: :search_receipts}, {method: :get, remote: true}) do  %>
 
 <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
   <div class="input-group">
