@@ -1,11 +1,13 @@
   <table class="container-fluid index-results " id="results" style="min-width:95%;max-width:95%''">
-      <% if current_user %>
+      <% if current_user && @boards %>
         <% @boards = current_user.not_my_boards(@boards) %>
       <% end %>
     <thead>
       <td>
         <div class="center-text" style="" id="paginator">
+          <% if @boards %>
           <%= paginate @boards, remote: true, window: 1 %>
+          <% end %>
         </div>
 
         <tr>
@@ -28,7 +30,7 @@
         </tr>
       </td>
     </thead>
-    <% if @boards.length == 0 %>
+    <% if @boards && @boards.length == 0 %>
 
     <tbody style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;background-color:white;">
       <td style="max-height: 150px;min-width:150px;max-width: 150px;margin-right: 5%;
@@ -37,6 +39,7 @@
       </td>
     </tbody>
       <% end %>
+      <% if @boards %>
   <% @boards.each do |board| %>
     <tbody class="items" style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;background-color:white;">
       <td class="" style="max-height: 150px;min-width:150px;max-width: 150px;    margin-right: 5%;
@@ -66,10 +69,14 @@
       </td>
     </tbody>
 <% end %>
+<% end %>
+
       <tbody>
         <td>
           <div class="center-text" id="paginator">
+            <% if @boards %>
             <%= paginate @boards, remote: true, window: 1 %>
+            <% end %>
           </div>
         </td>
       </tbody>
