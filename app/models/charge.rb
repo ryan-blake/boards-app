@@ -1,5 +1,6 @@
 # == Schema Information
-#
+#, "CountryCode"=>"US", "Zip"=>"24224", "stripeShippingAddressLine1"=>"tha street", "City"=>"o4j", "State"=>"VA"}
+
 # Table name: charges
 #
 #  id            :integer          not null, primary key

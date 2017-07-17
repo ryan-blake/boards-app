@@ -27,6 +27,14 @@ class ChargesController < ApplicationController
       @charge.charge_stripe = charge['id']
       @charge.update_attribute(:completed, true)
       @charge.save
+      array = @charge.accessories.split(",")
+      if array.count >= 1
+        @accessories = Accessory.where(id: array)
+        @accessories.each do |i|
+          i.inventory += -1
+          i.save
+        end
+      end
       @board.save
       if @new_user
         redirect_to new_user_session_path, :notice => "HOWDY, Your board is ordered! Check your email to create your password and confirm your email."
@@ -57,17 +65,15 @@ class ChargesController < ApplicationController
     completed: false,
     board_id: params[:charge]["board_id"],
     shipping: params[:charge]["shipping"],
-    accessories: params[:charge]["accessories"]
+    accessories: params[:charge]["accessories"],
+    address: params["stripeShippingAddressLine1"],
+    zipcode: params["stripeShippingAddressZip"],
+    city: params["stripeShippingAddressCity"],
+    state: params["stripeShippingAddressState"],
+    country: params["stripeShippingAddressCountryCode"],
   )
 
-  array = @charge.accessories.split(",")
-  if array.count >= 1
-    @accessories = Accessory.where(id: array)
-    @accessories.each do |i|
-      i.inventory += -1
-      i.save
-    end
-  end
+
   @charge.update_attribute(:boolean, true)
   @charge.save
   @board = Board.where(id: @charge.board_id).first
@@ -110,14 +116,7 @@ class ChargesController < ApplicationController
       shipping: params[:charge]["shipping"],
       accessories: params[:charge]["accessories"].to_s
     )
-    array = @charge.accessories.split(",")
-    if array.count >= 1
-      @accessories = Accessory.where(id: array)
-      @accessories.each do |i|
-        i.inventory += -1
-        i.save
-      end
-    end
+
     @charge.update_attribute(:boolean, true)
     @charge.save
     @board = Board.where(id: @charge.board_id).first
@@ -304,7 +303,7 @@ end
       end
 
       def charge_params
-        params.permit(:extras, :accessories, :amount ,:picked, :shipped, :id, :price, :item ,:user_id, :vendor_id, :token, :customer_id, :completed, :boolean, :board_id, :address, :shipping, :start_time, :end_time, :rental, :charge_stripe)
+        params.permit(:zipcode, :city, :state, :country, :extras, :accessories, :amount ,:picked, :shipped, :id, :price, :item ,:user_id, :vendor_id, :token, :customer_id, :completed, :boolean, :board_id, :address, :shipping, :start_time, :end_time, :rental, :charge_stripe)
       end
 
     private

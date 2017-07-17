@@ -1,16 +1,10 @@
-<script>
-
-</script>
 <%= form_for Charge.new do |f| %>
-
+  <%= f.hidden_field :accessories, class: 'accArray', value: ' '%>
   <%= f.hidden_field :amount, id: 'total', value:  @board.price.round  %>
   <%= f.hidden_field :item, value:  @board.title %>
   <%= f.hidden_field :owner_id, value:  @board.user_id %>
   <%= f.hidden_field :board_id, value:  @board.id %>
   <%= f.hidden_field :shipping, value:  false %>
-  <%= f.hidden_field :accessories, id: 'accArray', value: 'none' %>
-
-
     <script async src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
         <% if current_user.present? %>
@@ -20,5 +14,4 @@
         data-name="<%=  @board.title %> "
         data-description= <%=  (@board.price) + (@board.price) %>  >
     </script>
-
-  <% end %>
+<% end %>

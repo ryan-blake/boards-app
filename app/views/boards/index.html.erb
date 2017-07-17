@@ -124,33 +124,42 @@ $(window).scroll(function(){
       <% if current_user %>
        <% @surf = current_user.not_my_boards(@surf) %>
        <% end %>
+       <% if @surf.count >= 1 %>
        <hr class="style13" style="margin:0;">
        <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Surf </h3></span>
        <%= render partial: 'featured', locals: {boards: @surf} %>
+       <% end %>
     </div>
     <div class="featured" style="">
       <% if current_user %>
        <% @surf = current_user.not_my_boards(@snow) %>
        <% end %>
+       <% if @snow.count >= 1 %>
        <hr class="style13" style="margin:0;">
        <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Snow </h3></span>
        <%= render partial: 'featured', locals: {boards: @snow} %>
+       <% end %>
     </div>
     <div class="featured" style="">
       <% if current_user %>
        <% @skate = current_user.not_my_boards(@skate) %>
        <% end %>
+       <% if @skate.count >= 1 %>
        <hr class="style13" style="margin:0;">
        <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Skate </h3></span>
        <%= render partial: 'featured', locals: {boards: @skate} %>
+       <% end %>
     </div>
     <div class="featured" style="">
       <% if current_user %>
        <% @wake = current_user.not_my_boards(@wake) %>
        <% end %>
+       <% if @wake.count >= 1 %>
        <hr class="style13" style="margin:0;">
        <span class="center-text"><h3 style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;"> Wake </h3></span>
        <%= render partial: 'featured', locals: {boards: @wake} %>
+       <% end %>
+
     </div>
   </div>
 </div>

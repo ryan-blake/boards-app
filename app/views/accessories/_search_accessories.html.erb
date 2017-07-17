@@ -116,8 +116,10 @@ function saveClickedAccessories(clickedAccessories, accessoriesPrice, accessorie
   sessionStorage.clickedAccessories = JSON.stringify(clickedAccessories);
   sessionStorage.accessoriesPrice = JSON.stringify(accessoriesPrice);
   sessionStorage.accessoriesPriceTotal = JSON.stringify(accessoriesPriceTotal);
-  $("#total").get(0).value = sessionStorage.accessoriesPriceTotal;
-  $("#accArray").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
+    $("#total").get(0).value = sessionStorage.accessoriesPriceTotal;
+    $(".accArray").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
+    $("#totalShip").get(0).value = sessionStorage.accessoriesPriceTotal;
+    $(".accArrayShip").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
 }
 function clickAccessory(accessory_div, price) {
   $(accessory_div).addClass('panel-success');
