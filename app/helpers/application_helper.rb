@@ -47,14 +47,15 @@ end
 
 def sortableAsc(column, title = nil)
   title ||= column.titleize
+
   direction = (column == sort_column && sort_direction == "asc") ? "asc" : "asc"
-  link_to title + ": #{direction}", params.merge(:sort => column, :direction => direction, :page => nil).permit!, remote: true
+  link_to title + " Ascending", params.merge(:sort => column, :direction => direction, :page => nil).permit!, remote: true
 end
 
 def sortableDesc(column, title = nil)
   title ||= column.titleize
   direction = (column == sort_column && sort_direction == "desc" ? "desc" : "desc")
-  link_to title + ": #{direction}", params.merge(:sort => column, :direction => direction, :page => nil).permit!, remote: true
+  link_to title + " Descending", params.merge(:sort => column, :direction => direction, :page => nil).permit!, remote: true
 end
 
   def signed_on
