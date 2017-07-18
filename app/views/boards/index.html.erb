@@ -1,7 +1,7 @@
-
 <!--  -->
 <%= content_for :page_title,   "Wojoi"%>
 <% content_for(:header) do %>
+<span style="position:relative;top:100px;z-index:999999;"><%= render 'layouts/spinner' %></span>
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
    <div class="modal-dialog modal-lg" role="document">
      <div class="modal-header">
@@ -177,10 +177,7 @@ $(window).scroll(function(){
   <div style="z-index: 999;position:fixed;bottom:20px;right:30px;">
     <a href="#top"> <i class="fa fa-caret-up" aria-hidden="true"></i></a>
   </div>
-  <%= render 'layouts/spinner' %>
   <div id="footer" class="bcg single-div">
-
-
       <a href="https://www.google.com">
         Info
       </a>
