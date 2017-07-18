@@ -110,6 +110,7 @@
         <label>Sale Price:</label>
         <%= f.number_field :price, min: 0, class: 'input-lg btn-width form-control', id: 'boardPrice' %>
       </div>
+      <small> Fee:<span id="boardFee" style="position:relative;">  </span></small>
     </div>
 
     <%= f.hidden_field :user_id, :value => current_user.id %>
@@ -406,6 +407,24 @@ function readAndPreview(file) {
 
 document.querySelector('#file-input-acc').addEventListener("change", previewImages, false);
 
+
+
+$(document).on('change', '#boardPrice', function() {
+  var priceVal = $("#boardPrice").get(0).value
+  // if cost.present on margin change update price
+  //  if margin present and cost change update price
+  // if margin present and price change update cost
+// if cost present and sale change update margin
+  var cost = $('#boardCost');
+  var margin = $('#boardMargin');
+  var boardFee = document.getElementById('boardFee');
+  var fee = 0.075
+  alert(priceVal)
+    priceVal = Math.ceil((priceVal *  fee)* 100 )/100;
+  $('#boardCost').val(priceVal)
+  boardFee.innerHTML = priceVal
+
+});
   </script>
 
 </div>

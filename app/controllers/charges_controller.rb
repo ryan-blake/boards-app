@@ -229,20 +229,20 @@ end
     end
   end
   def update
-      respond_to do |format|
-        if @charge.update(charge_params)
-          format.html { redirect_to @charge, notice: 'Event was successfully updated.' }
-          format.json { render :show, status: :ok, location: @charge }
-        else
-          format.html { render :edit }
-          format.json { render json: @charge.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @charge.update(charge_params)
+        format.html { redirect_to @charge, notice: 'Event was successfully updated.' }
+        format.json { render :show, status: :ok, location: @charge }
+      else
+        format.html { render :edit }
+        format.json { render json: @charge.errors, status: :unprocessable_entity }
       end
     end
+  end
 
     def receipts
       @user = current_user
-      @receipts = Charge.where(vendor_id: @user.id, shipped: "true").or(Charge.where(vendor_id: @user.id, picked: "true")).pluck(:id)
+      @receipts = Charge.where(vendor_id: @user.id, shipped: "true").or(Charge.where(vendor_id: @user.id, picked: 1)).pluck(:id)
       @receipts = Charge.where(id: @receipts).order(sort_column + ' ' + sort_direction).page(params[:page]).per(12)
     end
 
