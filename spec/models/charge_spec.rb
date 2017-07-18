@@ -27,6 +27,7 @@
 #  country       :string
 #  state         :string
 #  city          :string
+#  tracking      :string
 #
 
 require 'rails_helper'

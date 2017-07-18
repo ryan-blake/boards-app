@@ -1,0 +1,29 @@
+<% modal ||= false %>
+<% remote = modal ? true : false %>
+<%= form_for(@charge, :remote => true, html: {id: 'trackingForm', role: :form, 'data-model' => 'charge'}) do |f| %>
+  <% if @charge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@charge.errors.count, "error") %> prohibited this person from being saved:</h2>
+      <ul>
+      <% @charge.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :tracking_number, class: 'control-label' %><br>
+    <%= f.text_field :tracking, class: 'form-control' %>
+    <%= f.hidden_field :shipped, value: true %>
+
+    <span class="help-block"></span>
+  </div>
+  <%# Added Bootstrap classes %>
+  <div class="actions" id="sendTracking">
+    <%= button_tag "send!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Sending..."} %>
+  </div>
+<% end %>
+
+<script>
+
+</script>

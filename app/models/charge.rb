@@ -1,4 +1,5 @@
 # == Schema Information
+#
 # Table name: charges
 #
 #  id            :integer          not null, primary key
@@ -22,6 +23,11 @@
 #  accessories   :string
 #  picked        :string
 #  shipped       :string
+#  zipcode       :string
+#  country       :string
+#  state         :string
+#  city          :string
+#  tracking      :string
 #
 
 class Charge < ApplicationRecord

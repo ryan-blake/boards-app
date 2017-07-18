@@ -303,7 +303,7 @@ end
       end
 
       def charge_params
-        params.permit(:zipcode, :city, :state, :country, :extras, :accessories, :amount ,:picked, :shipped, :id, :price, :item ,:user_id, :vendor_id, :token, :customer_id, :completed, :boolean, :board_id, :address, :shipping, :start_time, :end_time, :rental, :charge_stripe)
+        params.require(:charge).permit(:tracking, :zipcode, :city, :state, :country, :extras, :accessories, :amount ,:picked, :shipped, :id, :price, :item ,:user_id, :vendor_id, :token, :customer_id, :completed, :boolean, :board_id, :address, :shipping, :start_time, :end_time, :rental, :charge_stripe)
       end
 
     private
