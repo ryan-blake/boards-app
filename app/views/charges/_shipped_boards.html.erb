@@ -49,7 +49,7 @@
                 shipped:<%=
                   check_box_tag 'shipped', true, charge.shipped,
                     onchange: "$(this).data('params', 'shipped=' + this.checked)",
-                    data: { remote: true, url: charge_path(charge.id), method: :patch }
+                    data: { remote: true, url: charge_path(charge.id), method: :patch}
                     %>
                     </td>
                       <td> <%= link_to charge.item.truncate(13), board_path(charge.board.id), remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
