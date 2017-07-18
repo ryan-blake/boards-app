@@ -14,8 +14,9 @@
         <td class="vendor-link" style="cursor:pointer;">
      <div class="center-text">
        <span id="acc-link"><%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></span>
+       <%= link_to attachment_image_tag(i.images.first, :file, :fill, 90, 90), accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></td>
+
        <div class="accessoryImage" id="aImage" style="cursor:pointer">
-         <%= link_to attachment_image_tag(i.images.first, :file, :fill, 90, 90), accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></td>
        </div>
        <div class="accessoryImage1" id="aImage1">
          <%= link_to attachment_image_tag(i.images.first, :file, :fill, 80, 80), accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></td>
