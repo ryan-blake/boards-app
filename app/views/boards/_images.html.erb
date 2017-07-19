@@ -3,9 +3,8 @@
 <div class="swiper-container-images">
 <div class="swiper-wrapper">
     <% @board.images.each_with_index do |photo, index| %>
-            <div>
+            <div class="swiper-slide">
                 <%= image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')) %>
-                <span style="position: absolute;top: 356px;"><%= index + 1 %>/<%= @board.images.count %>  </span>
              </div>
     <% end %>
     <% end %>
@@ -17,18 +16,13 @@
 
      <div class="swiper-pagination"></div>
     </div>
+
     <script>
-    $(document).ready(function(){
-
       var swiperImages = new Swiper('.swiper-container-images', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 1,
-        nextButton: '.swiper-button-next',
-         prevButton: '.swiper-button-prev',
-        paginationClickable: true,
-        spaceBetween: 30,
-        freeMode: true
-    });
-    })
-
+          nextButton: '.swiper-button-next',
+          prevButton: '.swiper-button-prev',
+          pagination: '.swiper-pagination',
+          paginationType: 'progress'
+      });
+      </script>
     </script>
