@@ -11,14 +11,29 @@
 </div>
   <div class="image-box-accessory center-text" id="images">
     <div class="center-text" style="max-height:220px;">
-      <div class="siema-acc">
+      <!--  -->
+      <% if @accessory.images.count >= 1%>
+      <div class="swiper-container-accessory" style="overflow-x:hidden;">
+      <div class="swiper-wrapper">
         <% @accessory.images.each_with_index do |photo, index| %>
-                <div>
+                 <div class="swiper-slide">
                     <%= image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')) %>
                  </div>
-                 <span style="position: absolute;top: 156px;"><%= index + 1 %>/<%= @accessory.images.count %>  </span>g
         <% end %>
     </div>
+    <% else %>
+    <div class="swiper-slide">
+     <%=  image_tag("surf_girl.jpg", height: 100, width: 150) %>
+    </div>
+    <% end %>
+  </div>
+         <!-- Add Pagination -->
+         <div class="swiper-button-next swiper-button-white"></div>
+         <div class="swiper-button-prev swiper-button-white"></div>
+
+         <div class="swiper-pagination"></div>
+        </div>
+        <!--  -->
   </div>
   <hr class="style13">
 </div>
@@ -63,42 +78,13 @@
 <br>
 <br>
 <hr class="style13">
-<script>
-const siemas = document.querySelectorAll('.siema-acc');
-// Extend prototype with method that adds arrows to DOM
-// Style the arrows with CSS or JS — up to you mate
-Siema.prototype.addArrows = function() {
-  // make buttons & append them inside Siema's container
-  this.prevArrow = document.createElement('button');
-  this.nextArrow = document.createElement('button');
-
-  this.nextArrow.style['background-color'] = 'rgba( 05, 134, 12, .63)';
-  this.nextArrow.style['font-size'] = '13px';
-  this.nextArrow.style['border-radius'] = '100%';
-  this.nextArrow.style['color'] = 'white';
-  this.nextArrow.textContent = '>';
-  this.prevArrow.style['background-color'] = 'rgba( 05, 134, 12, .63)';
-  this.prevArrow.style['font-size'] = '13px';
-  this.prevArrow.style['border-radius'] = '100%';
-  this.prevArrow.style['color'] = 'white';
-  this.prevArrow.textContent = '<';
-  this.selector.appendChild(this.prevArrow)
-  this.selector.appendChild(this.nextArrow)
-  // event handlers on buttons
-  this.prevArrow.addEventListener('click', () => this.prev());
-  this.nextArrow.addEventListener('click', () => this.next());
-
-}
-
-// this is fairly new way of looping through DOM Elements
-// More about ithere: https://pawelgrzybek.com/loop-through-a-collection-of-dom-elements/
-// For better compatibility I suggest using for loop
-for(const siema of siemas) {
-  const instance = new Siema({
-    selector: siema,
-  });
-  instance.addArrows();
-}
 
 
-</script>
+    <script>
+      var swiperImages = new Swiper('.swiper-container-accessory', {
+          nextButton: '.swiper-button-next',
+          prevButton: '.swiper-button-prev',
+          pagination: '.swiper-pagination',
+          paginationType: 'progress'
+      });
+    </script>
