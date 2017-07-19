@@ -61,13 +61,11 @@ $(function(){
          <% user_names << i.user %>
         <% end %>
         <% end %>
-
 <!-- if conversations user exists data_conversations_id -->
 <!-- else conversations_id is blank nothing -->
 <%= user_names.count %>
     <% if user_names %>
         <% user_names.uniq.each do |i| %>
-
         <% @charge_convo = Conversation.where(:recipient => i).or(Conversation.where(:sender => i)) %>
     <% if @charge_convo.count > 0 %>
             <div class="convo-button"data-conversation-id="<%= @charge_convo.first.id %>">

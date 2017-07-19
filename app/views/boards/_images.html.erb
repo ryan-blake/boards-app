@@ -3,28 +3,35 @@
     <div class="siema">
     <% @board.images.each_with_index do |photo, index| %>
             <div>
-
                 <%= image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')) %>
+                <span>   <%= index + 1 %>/<%= @board.images.count %>  </span>
              </div>
+
     <% end %>
     </div>
     <!-- Initialize Swiper -->
 
     <script>
     const siemas = document.querySelectorAll('.siema');
-
     // Extend prototype with method that adds arrows to DOM
     // Style the arrows with CSS or JS — up to you mate
     Siema.prototype.addArrows = function() {
-
       // make buttons & append them inside Siema's container
       this.prevArrow = document.createElement('button');
       this.nextArrow = document.createElement('button');
-      this.prevArrow.textContent = 'back';
-      this.nextArrow.textContent = 'next';
+
+      this.nextArrow.style['background-color'] = 'rgba( 05, 134, 12, .63)';
+      this.nextArrow.style['font-size'] = '16px';
+      this.nextArrow.style['border-radius'] = '100%';
+      this.nextArrow.style['color'] = 'white';
+      this.nextArrow.textContent = '>';
+      this.prevArrow.style['background-color'] = 'rgba( 05, 134, 12, .63)';
+      this.prevArrow.style['font-size'] = '16px';
+      this.prevArrow.style['border-radius'] = '100%';
+      this.prevArrow.style['color'] = 'white';
+      this.prevArrow.textContent = '<';
       this.selector.appendChild(this.prevArrow)
       this.selector.appendChild(this.nextArrow)
-
       // event handlers on buttons
       this.prevArrow.addEventListener('click', () => this.prev());
       this.nextArrow.addEventListener('click', () => this.next());
