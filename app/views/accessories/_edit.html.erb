@@ -46,19 +46,19 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :brand %>
       <%= f.text_field :brand, class: 'btn-width form-control' %>
     </div>
   </div>
   <div class="col-md-6">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :category %>
       <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Category'} , { :class => 'form-control input-lg' } %>
     </div>
   </div>
   <div class="col-md-6">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :kind %>
       <%= f.grouped_collection_select :kind_id, Category.order(:name), :kinds, :name, :id, :name,   { :include_blank => 'Accssory-type'} , { :class => 'form-control input-lg' } %>
     </div>
@@ -66,32 +66,32 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :size %>
     <%= f.number_field :measure, class: 'form-control',:step => 0.01 , min: 0 %>
       <spam id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name,
       { :include_blank => 'Unit'} , { :class => 'form-control' })%> </spam></td>    </div>
   </div>
   <div class="col-md-4">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :color %>
       <td ><%= f.text_field :color , class: 'form-control' %></td>
   </div>
 </div>
 <div class="col-md-4">
-    <div class="form-group">
+  <div class="center-text form-group">
       <%= f.label :upc %>
       <%= f.text_field :upc, class: 'form-control' %>
     </div>
   </div>
 <div class="col-md-4">
-    <div class="form-group">
+  <div class="center-text form-group">
       <%= f.label :inventory %>
       <%= f.number_field :inventory, min: 1, class: 'form-control' %>
     </div>
   </div>
   <div class="col-md-4">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :price %>
       <td ><%= f.number_field :price, min: 1, class: 'form-control' %></td>    </div>
 </div>
