@@ -1,6 +1,6 @@
 
 <% if @board.images.count >= 1%>
-<div class="swiper-container-images">
+<div class="swiper-container-images" style="overflow-x:hidden;">
 <div class="swiper-wrapper">
     <% @board.images.each_with_index do |photo, index| %>
             <div class="swiper-slide">
@@ -9,7 +9,7 @@
     <% end %>
     <% end %>
 
-     </div>
+  </div>g
      <!-- Add Pagination -->
      <div class="swiper-button-next swiper-button-white"></div>
      <div class="swiper-button-prev swiper-button-white"></div>
