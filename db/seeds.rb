@@ -96,6 +96,10 @@ Kind.find_or_create_by(
   category_id: Category.find_by(name: "Stand Up Paddle").id
 )
 Kind.find_or_create_by(
+  name: "Board Bag",
+  category_id: Category.find_by(name: "Stand Up Paddle").id
+)
+Kind.find_or_create_by(
   name: "Boots",
   category_id: Category.find_by(name: "Snowboard").id
 )
@@ -112,10 +116,6 @@ Kind.find_or_create_by(
   category_id: 7
 )
 Kind.find_or_create_by(
-  name: "Wax",
-  category_id: Category.find_by(name: "Longboard").id
-)
-Kind.find_or_create_by(
   name: "Bindings",
   category_id: Category.find_by(name: "Wakeboard").id
 )
@@ -128,15 +128,23 @@ Kind.find_or_create_by(
   category_id: Category.find_by(name: "Longboard").id
 )
 Kind.find_or_create_by(
+  name: "Board Bag",
+  category_id: Category.find_by(name: "Longboard").id
+)
+Kind.find_or_create_by(
+  name: "Wax",
+  category_id: Category.find_by(name: "Longboard").id
+)
+Kind.find_or_create_by(
   name: "Stomp Pad",
   category_id: Category.find_by(name: "Shortboard").id
 )
 Kind.find_or_create_by(
-  name: "Bearings",
-  category_id: Category.find_by(name: "Cruiser").id
+  name: "Leash",
+  category_id: Category.find_by(name: "Shortboard").id
 )
 Kind.find_or_create_by(
-  name: "Leash",
+  name: "Board Bag",
   category_id: Category.find_by(name: "Shortboard").id
 )
 Kind.find_or_create_by(
@@ -150,6 +158,18 @@ Kind.find_or_create_by(
 Kind.find_or_create_by(
   name: "Trucks",
   category_id: Category.find_by(name: "Skateboard").id
+)
+Kind.find_or_create_by(
+  name: "Griptape",
+  category_id: Category.find_by(name: "Skateboard").id
+)
+Kind.find_or_create_by(
+  name: "Bearings",
+  category_id: Category.find_by(name: "Cruiser").id
+)
+Kind.find_or_create_by(
+  name: "Griptape",
+  category_id: Category.find_by(name: "Cruiser").id
 )
 Kind.find_or_create_by(
   name: "Trucks",

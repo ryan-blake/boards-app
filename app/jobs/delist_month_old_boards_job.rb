@@ -10,6 +10,15 @@ class DelistMonthOldBoardsJob < ApplicationJob
       i.list_time = " "
       i.save
     end
-
+  end
+  def perform(*args)
+    a = []
+    convos = Conversation.where(['created_at < ?', 15.days.ago])
+    convos.each do |i|
+      adminR = User.where(id: i.recipient_id).role
+      adminS = User.where(id: i.sender_id).role
+      unless ( adminR == "admin" || adminS == "admin" )
+      i.destroy
+    end
   end
 end
