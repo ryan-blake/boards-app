@@ -18,7 +18,8 @@ class DelistMonthOldBoardsJob < ApplicationJob
       adminR = User.where(id: i.recipient_id).role
       adminS = User.where(id: i.sender_id).role
       unless ( adminR == "admin" || adminS == "admin" )
-      i.destroy
+       i.destroy
+      end
     end
   end
 end
