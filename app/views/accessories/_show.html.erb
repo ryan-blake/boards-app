@@ -16,6 +16,8 @@
                 <div>
                     <%= image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')) %>
                  </div>
+                 <span style="position: absolute;top: 156px;"><%= index + 1 %>/<%= @accessory.images.count %>  </span>
+
         <% end %>
     </div>
   </div>
@@ -63,20 +65,26 @@
 <br>
 <hr class="style13">
 <script>
-const siemas = document.querySelectorAll('.siema-acc');
-
+const siemas = document.querySelectorAll('.siema');
 // Extend prototype with method that adds arrows to DOM
 // Style the arrows with CSS or JS — up to you mate
 Siema.prototype.addArrows = function() {
-
   // make buttons & append them inside Siema's container
   this.prevArrow = document.createElement('button');
   this.nextArrow = document.createElement('button');
-  this.prevArrow.textContent = 'back';
-  this.nextArrow.textContent = 'next';
+
+  this.nextArrow.style['background-color'] = 'rgba( 05, 134, 12, .63)';
+  this.nextArrow.style['font-size'] = '13px';
+  this.nextArrow.style['border-radius'] = '100%';
+  this.nextArrow.style['color'] = 'white';
+  this.nextArrow.textContent = '>';
+  this.prevArrow.style['background-color'] = 'rgba( 05, 134, 12, .63)';
+  this.prevArrow.style['font-size'] = '13px';
+  this.prevArrow.style['border-radius'] = '100%';
+  this.prevArrow.style['color'] = 'white';
+  this.prevArrow.textContent = '<';
   this.selector.appendChild(this.prevArrow)
   this.selector.appendChild(this.nextArrow)
-
   // event handlers on buttons
   this.prevArrow.addEventListener('click', () => this.prev());
   this.nextArrow.addEventListener('click', () => this.next());
@@ -92,5 +100,6 @@ for(const siema of siemas) {
   });
   instance.addArrows();
 }
+
 
 </script>
