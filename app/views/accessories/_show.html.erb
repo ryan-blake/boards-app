@@ -16,7 +16,6 @@
                 <div>
                     <%= image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')) %>
                  </div>
-                 <span style="position: absolute;top: 156px;"><%= index + 1 %>/<%= @accessory.images.count %>  </span>
 
         <% end %>
     </div>
@@ -65,7 +64,7 @@
 <br>
 <hr class="style13">
 <script>
-const siemas = document.querySelectorAll('.siema');
+const siemas = document.querySelectorAll('.siema-acc');
 // Extend prototype with method that adds arrows to DOM
 // Style the arrows with CSS or JS — up to you mate
 Siema.prototype.addArrows = function() {
