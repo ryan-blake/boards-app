@@ -7,15 +7,21 @@
                 <%= image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')) %>
              </div>
     <% end %>
-    <% end %>
+    <% else %>
+    <div class="swiper-slide">
+      <!-- <%=  image_tag("surf_girl.jpg", height: 280, width: 330) %> -->
 
-  </div>g
+     <%=  image_tag("surf_girl.jpg", height: 300, width: 350) %>
+    </div>
+    <% end %>
+  </div>
      <!-- Add Pagination -->
      <div class="swiper-button-next swiper-button-white"></div>
      <div class="swiper-button-prev swiper-button-white"></div>
 
      <div class="swiper-pagination"></div>
     </div>
+
 
     <script>
       var swiperImages = new Swiper('.swiper-container-images', {
@@ -24,5 +30,4 @@
           pagination: '.swiper-pagination',
           paginationType: 'progress'
       });
-      </script>
     </script>
