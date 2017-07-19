@@ -46,20 +46,24 @@ $(function(){
 
     <div class="panel-body" style="width:100%" id="chat-list">
       <ul>
-            <% @charge = Charge.where(:user_id => @user.id) %>
-            <% @my_sales = Charge.where(:vendor_id => @user.id) %>
+            <% @charge = Charge.where(:user_id => @user.id, shipping: false) %>
+            <% @my_sales = Charge.where(:vendor_id => @user.id, shipping: false)  %>
             <% if @charge %>
-        <!-- links to VENODRS that user has purchased from. Need  -->
-       <% user_names = [] %>
-        <% @charge.each do |i| %>
-          <% user_names << i.vendor %>
-        <% end %>
+        <!-- links to VENODRS that user has purchased for pick up w/ in 15 days -->
+           <% user_names = [] %>
+            <% @charge.each do |i| %>
+            <% if  i.created_at >= 15.days.ago %>
+              <% user_names << i.vendor %>
+              <% end %>
+            <% end %>
         <% end %>
         <% if @my_sales %>
-        <!-- lnks to Users who have purchased from  -->
-        <% @my_sales.each do |i| %>
-         <% user_names << i.user %>
-        <% end %>
+        <!-- lnks to Users who have purchased from w/ in 15 days for puckup -->
+          <% @my_sales.each do |i| %>
+              <% if i.created_at >= 15.days.ago %>
+                <% user_names << i.user %>
+              <% end %>
+          <% end %>
         <% end %>
 <!-- if conversations user exists data_conversations_id -->
 <!-- else conversations_id is blank nothing -->
