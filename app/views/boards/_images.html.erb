@@ -4,7 +4,7 @@
     <% @board.images.each_with_index do |photo, index| %>
             <div>
                 <%= image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')) %>
-                <span style="position: absolute;top: 356px;right: calc(20% - 81px);"><%= index + 1 %>/<%= @board.images.count %>  </span>
+                <span style="position: absolute;top: 356px;"><%= index + 1 %>/<%= @board.images.count %>  </span>
              </div>
     <% end %>
     </div>
