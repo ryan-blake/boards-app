@@ -1340,7 +1340,12 @@ z-index: 1;
     clear: none !important; } }
 
 // daterange
-
+.accessoryImage {
+  display:block;
+}
+.accessoryImage1 {
+  display:none;
+}
 
 .items {
   padding-left:9% !important;
@@ -1387,9 +1392,16 @@ margin-top:-65px;
 
 @media (max-width: 484px) {
 
+.accessoryImage {
+ display:none;
+}
+
+.accessoryImage1 {
+ display:block;
+}
 
 #accColorForm {
-right: 63px;
+ right: 63px;
 }
 
 .table a {

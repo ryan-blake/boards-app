@@ -5,7 +5,7 @@
     <% @theTotal += i.price %>
   <% end %>
 <div class="" style="width:25%;">
-  includes
+  <span class="center-te"> includes </span>
   </div>
   <div class="max-height:150px;max-width:100%;">
    <%  @accessories_boards.each do |i| %>
@@ -14,7 +14,7 @@
      <td class="vendor-link" style="cursor:pointer;">
      <div class="center-text">
        <span id="acc-link"><%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></span>
-    
+
        <div class="accessoryImage1" id="aImage1">
          <%= link_to attachment_image_tag(i.images.first, :file, :fill, 80, 80), accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></td>
         </div>
