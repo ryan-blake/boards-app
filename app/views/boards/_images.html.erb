@@ -1,7 +1,6 @@
-
-<% if @board.images.count >= 1%>
 <div class="swiper-container-images" style="overflow-x:hidden;">
 <div class="swiper-wrapper">
+<% if @board.images.count >= 1%>
     <% @board.images.each_with_index do |photo, index| %>
             <div class="swiper-slide">
                 <%= image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')) %>
@@ -10,9 +9,9 @@
     <% else %>
     <div class="swiper-slide">
       <!-- <%=  image_tag("surf_girl.jpg", height: 280, width: 330) %> -->
-
      <%=  image_tag("surf_girl.jpg", height: 300, width: 350) %>
-    </div>
+   </div>
+     
     <% end %>
   </div>
      <!-- Add Pagination -->
