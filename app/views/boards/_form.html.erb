@@ -397,18 +397,12 @@ function readAndPreview(file) {
     preview.appendChild(image);
   }, false);
   reader.readAsDataURL(file);
-
 }
 
 }
 
 document.querySelector('#file-input-acc').addEventListener("change", previewImages, false);
 
-
-// if cost.present on margin change update price
-//  if margin present and cost change update price
-// if margin present and price change update cost
-// if cost present and sale change update margin
 $(document).on('change', '#boardPrice', function() {
   var priceVal = $("#boardPrice").get(0).value;
   var cost = $('#boardCost').get(0).value;
