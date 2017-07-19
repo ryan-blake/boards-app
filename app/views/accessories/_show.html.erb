@@ -16,7 +16,7 @@
                 <div>
                     <%= image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')) %>
                  </div>
-
+                 <span style="position: absolute;top: 156px;"><%= index + 1 %>/<%= @accessory.images.count %>  </span>
         <% end %>
     </div>
   </div>
