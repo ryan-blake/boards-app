@@ -14,7 +14,7 @@
 <br>
 <div class="row">
   <div class="col-md-11">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :Accessory_title %>
         <td ><%= f.text_field :title , class: 'form-control', id: 'accTitle' %></td>
         <%= f.hidden_field :user_id, :value => current_user.id %>
@@ -37,7 +37,7 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :brand %>
       <%= f.text_field :brand, class: 'btn-width form-control', id: 'accBrand' %>
     </div>
@@ -45,13 +45,13 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :category %>
       <%= f.grouped_collection_select :category_id, Type.order(:name), :categories, :name, :id, :name,   { :include_blank => 'Category'} , { :class => 'form-control input-lg' , id: 'accCategory'} %>
     </div>
   </div>
   <div class="col-md-6">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :kind %>
       <%= f.grouped_collection_select :kind_id, Category.order(:name), :kinds, :name, :id, :name,   { :include_blank => 'Accssory-type'} , { :class => 'form-control input-lg' , id: 'accKind'} %>
 </div>
@@ -59,39 +59,39 @@
 </div>
 <div class="row">
   <div class="col-md-4">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :size %>
     <%= f.number_field :measure, id: 'accMeasure' , class: 'form-control',:step => 0.01 , min: 0 %>
       <spam id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name,
       { :include_blank => 'Unit'} , { :class => 'form-control', id: 'accUnit' })%> </spam></td>    </div>
   </div>
   <div class="col-md-4">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :color %>
       <td ><%= f.text_field :color , class: 'form-control', id: 'accColor' %></td>
   </div>
 </div>
 <div class="col-md-4">
-    <div class="form-group">
+  <div class="center-text form-group">
       <%= f.label :upc %>
       <%= f.text_field :upc, class: 'form-control', id: 'accUpc' %>
     </div>
   </div>
 <div class="col-md-4">
-    <div class="form-group">
+  <div class="center-text form-group">
       <%= f.label :inventory %>
       <%= f.number_field :inventory, min: 1, class: 'form-control', id: 'accInventory' %>
     </div>
   </div>
   <div class="col-md-4">
-    <div class="form-group">
+    <div class="center-text form-group">
       <%= f.label :price %>
       <td ><%= f.number_field :price, min: 1, class: 'form-control', id: 'accPrice' %></td>    </div>
       <div class="form-group">
       </div>
   </div>
     <div class="col-md-4">
-      <div class="form-group">
+      <div class="center-text form-group">
           <%= f.button "Create", id:'accSubmit', class: "btn btn-primary btn-lg btn-block btn-custom", data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> Creating accessory..."} %>
       </div>
     </div>
