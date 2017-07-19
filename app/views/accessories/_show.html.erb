@@ -12,21 +12,22 @@
   <div class="image-box-accessory center-text" id="images">
     <div class="center-text" style="max-height:220px;">
       <!--  -->
-      <% if @accessory.images.count >= 1%>
       <div class="swiper-container-accessory" style="overflow-x:hidden;">
       <div class="swiper-wrapper">
+      <% if @accessory.images.count >= 1%>
         <% @accessory.images.each_with_index do |photo, index| %>
                  <div class="swiper-slide">
                     <%= image_tag(attachment_url(photo, :file, :fill, 150, 150, format: 'jpg')) %>
                  </div>
         <% end %>
-    </div>
     <% else %>
     <div class="swiper-slide">
      <%=  image_tag("surf_girl.jpg", height: 100, width: 150) %>
     </div>
     <% end %>
   </div>
+</div>
+
          <!-- Add Pagination -->
          <div class="swiper-button-next swiper-button-white"></div>
          <div class="swiper-button-prev swiper-button-white"></div>
