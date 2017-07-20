@@ -17,9 +17,9 @@ end
 
 def search_table
   @user = current_user
-  @accessories = @user.accessories.where("cast( kind_id as text) like ? and cast( brand as text) like ? and cast( color as text) like ? and (title like ? or color like ? or brand like ?)",
+  @accessories = @user.accessories.where("cast( kind_id as text) like ? and cast( brand as text) like ? and cast( color as text) like ? and (title like ? or color like ? or brand like ? or upc like ?)",
 
-        "%#{params[:kind_id]}%", "%#{params[:brand]}%", "%#{params[:color]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+        "%#{params[:kind_id]}%", "%#{params[:brand]}%", "%#{params[:color]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
         # price
       if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
         @accessories  = @accessories.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
