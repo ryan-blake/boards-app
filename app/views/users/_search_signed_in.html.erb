@@ -18,7 +18,8 @@
   <% if @boards.length == 0 %>
     <%= render partial: 'boards/none' %>
   <% end %>
-  <thead>
+  
+  <thead id="pgn8r" style="min-height:40px;">
   <td><div class="center-text" id="paginator">
   <%= paginate @boards, remote: true %>
 </td></div>
