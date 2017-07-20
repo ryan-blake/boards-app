@@ -1,4 +1,4 @@
 <% if params[:type_id] == "1" %>
   <%= collection_select(nil, :fin_id, Fin.all.order(:name), :id, :name, {prompt: "Fins"},{ class: "form-control", id: "fin_search", style:'min-width: 60px;width: 33%;' }) %>
-  <%= collection_select(nil, :tail_id, Tail.all.order(:name), :id, :name, {prompt: "Tail"},{ class: "form-control", id: "tail_search", style: 'min-width: 60px;left: 46%;width: 32%;position: relative;bottom: 33.5px;'}) %>
+  <%= collection_select(nil, :tail_id, Tail.all.order(:name), :id, :name, {prompt: "Tail"},{ class: "form-control", id: "tail_search", style: 'min-width: 60px;left: 47%;width: 32%;position: relative;bottom: 33.5px;'}) %>
 <% end %>
