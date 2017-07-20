@@ -3,9 +3,6 @@
 
 
     <td>
-      <div class="center-text" id="paginator">
-      <%= paginate @boards, remote: true %>
-      </div>
       <tr>
         <td class="filtering center-text">
           <ti> <strong> Sort by: </strong> </ti>
@@ -21,9 +18,11 @@
   <% if @boards.length == 0 %>
     <%= render partial: 'boards/none' %>
   <% end %>
-
+  <div class="center-text" id="paginator">
+  <%= paginate @boards, remote: true %>
+  </div>
   <% @boards.each do |board| %>
-  
+
     <tbody class="tbody-search col-sm-6 col-md-4 center-text" style="background-color:white;margin-right:30%;">
         <!-- if no image load other boards image in results -->
         <td class="center-text" >
