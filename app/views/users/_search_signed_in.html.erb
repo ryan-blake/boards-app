@@ -18,9 +18,11 @@
   <% if @boards.length == 0 %>
     <%= render partial: 'boards/none' %>
   <% end %>
-  <div class="center-text" id="paginator">
+  <thead>
+  <td><div class="center-text" id="paginator">
   <%= paginate @boards, remote: true %>
-  </div>
+</td></div>
+</thead>
   <% @boards.each do |board| %>
 
     <tbody class="tbody-search col-sm-6 col-md-4 center-text" style="background-color:white;margin-right:30%;">
