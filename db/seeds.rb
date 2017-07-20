@@ -229,7 +229,9 @@ users = User.all
   arrived: false,
   zipcode: [76210, 90277, 76262, 76135].sample,
   for_sale: true,
-  list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
+  list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample,
+  fin_id: ["1", "2", "3", "4"].sample,
+  tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
 
   )
 end
@@ -254,7 +256,9 @@ end
   zipcode: [76210, 90277, 76262, 76135].sample,
   for_sale: true,
   inventory: rand(1..3),
-  list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
+  list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample,
+  fin_id: ["1", "2", "3", "4"].sample,
+  tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
   )
 end
 50.times do
@@ -279,7 +283,9 @@ end
   zipcode: [76210, 90277, 76262, 76135].sample,
   for_sale: false,
   inventory: rand(1..3),
-  list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
+  list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample,
+  fin_id: ["1", "2", "3", "4"].sample,
+  tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
 
   )
 end
@@ -307,7 +313,9 @@ puts "#{Board.count} at board/1"
     rental: true,
     cost: rand(5..10),
     inventory: rand(1..3),
-    list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample
+    list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample,
+    fin_id: ["1", "2", "3", "4"].sample,
+    tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
     )
   end
   boards = Board.all
