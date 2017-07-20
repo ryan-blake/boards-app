@@ -12,42 +12,52 @@
 <!-- new ^ -->
        </span>
     </div>
+    <!--  -->
     <div class="row">
-      <div class="col-md-4">
-        <div class="input-group">
-          <span>
-            <%= number_field :minimum, params[:minimum], style: 'width: 120px;', class: 'form-control', min: 1, placeholder: "min length" %>
-          </span>
-        </div>
+    <div class="input-group pull-left"style="max-width:30%;left: 3%;">
+      <span class="input-group-btn">
+        <span>
+          <%= number_field :minimum, params[:minimum], style: '', class: 'form-control', min: 1, placeholder: "min length" %>
+        </span>
+      </span>
+    </div>
+      <div class="input-group" style="max-width: 29%;left: 3%;">
+        <span class="input-group-btn">
+          <%= number_field :maximum, params[:maximum], style: '', class: 'form-control',min: 1, placeholder: "max length" %>
+  <!-- new ^ -->
+         </span>
       </div>
-      <div class="col-md-4" style="position: absolute;top: 34px;left: 123px;">
-        <div class="input-group" style="width: 112px;">
-            <span style="">
-              <%= number_field :maximum, params[:maximum], class: 'form-control',min: 1, placeholder: "max length" %>
-            </span>
-            <span style="width: 56px;position: absolute;float: right;top: 0px;">
-              <%= collection_select(nil, :unit_id, Unit.all, :id, :name,
-                { :include_blank => 'Unit'} , { :class => 'form-control' })%>
-            </span>
-          </div>
-        </div>
-        <div class="row" style="position: relative;top: 0px;left: 29px;">
-          <div class="input-group">
-            <span>
-              <%= number_field :min, params[:min], id: 'accMin', class: 'form-control', min: 1, placeholder: "min price" %>
-            </span>
-            <span style="">
-              <%= number_field :max, params[:max], style: 'float:right;right:20%;',id: 'accMax', class: 'form-control',min: 1, placeholder: "max price" %>
-            </span>
-            <span class="input-group-btn">
-              <%= collection_select(nil, :color, Accessory.where(category_id: @board.category_id, :user_id => @board.user_id).where("inventory >= ?", 1).select(:color).uniq, :color, :color, {:include_blank => "Color", },{ id:'accColorForm' , class: "form-control"}) %>
-      <!-- new ^ -->
-             </span>
-          </div>
+      <div class="input-group pull-right" style="max-width: 34%;clear: right;bottom: 33px;right: 4%;">
+        <span class="input-group-btn">
+          <%= collection_select(nil, :unit_id, Unit.all, :id, :name,
+            { :include_blank => 'Unit'} , { :class => 'form-control' })%>
+  <!-- new ^ -->
+         </span>
       </div>
+    <!--  -->
+    <div class="input-group pull-left"style="max-width:30%;left: 3%;">
+      <span class="input-group-btn">
+        <span>
+          <%= number_field :min, params[:min], class: 'form-control', min: 1, placeholder: "min price" %>
+        </span>
+      </span>
+    </div>
+      <div class="input-group" style="max-width: 29%;left: 3%;">
+        <span class="input-group-btn">
+          <%= number_field :max, params[:max], style: '', class: 'form-control',min: 1, placeholder: "max price" %>
+  <!-- new ^ -->
+         </span>
+      </div>
+      <div class="input-group pull-right" style="max-width: 34%;clear: right;bottom: 33px;right: 4%;">
+        <span class="input-group-btn">
+          <%= collection_select(nil, :color, Accessory.where(category_id: @board.category_id, :user_id => @board.user_id).where("inventory >= ?", 1).select(:color).uniq, :color, :color, {:include_blank => "Color", },{ id:'' , class: "form-control"}) %>
+  <!-- new ^ -->
+         </span>
+      </div>
+    <!--  -->
 
     </div>
-<div class="col-md-4" style="width:100%;">
+<div class="col-md-4" style="width:100%;bottom: 19px;">
    <div class="input-group">
      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Accessories.."  %>
      <span class="input-group-btn">
