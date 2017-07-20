@@ -2,7 +2,7 @@
   <thead>
 
 
-    <td id="paginateTD">
+    <td>
       <tr>
         <td class="filtering center-text">
           <ti> <strong> Sort by: </strong> </ti>
@@ -17,7 +17,7 @@
   <div class="center-text" id="paginator">
     <%= paginate @boards, remote: true %>
   </div>
-  </td>
+</td>
   </thead>
   <% if @boards.length == 0 %>
     <%= render partial: 'boards/none' %>
