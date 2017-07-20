@@ -289,10 +289,15 @@ end
    end
 
    if params[:search].empty?
+     if  params[:type_id] == "1"
+        @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and cast( fin_id as text) like ? and cast( tail_id as text) like ? and (title like ? or description like ? or make like ?)",
 
-     @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+          "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%","%#{params[:fin_id]}%", "%#{params[:tail_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1)
+      else
+        @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
-             "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1)
+          "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1)
+      end
              # price
              if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
                @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
@@ -391,50 +396,53 @@ end
 
 
 
-   # casting seems to have changed geocoder locally but works on heroku.
-  #  @boardies = Board.where(:for_sale => [true]).where("cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ?)",
 
 else
-  # rentals must be filtered before .near because of left outer join of events doesnt include distance.
-  if params[:rental] == "on"
-    @boards =  Board.where(:rental => true, :for_sale => [true])
-   #  get boards that also havent been rented once unless inventory > 1
-   one = @boards
-   unless params[:start_date][0].to_s == "" && params[:end_date][0].to_s == ""
-      startDate = Date.parse(params[:start_date].join(', '))
-      endDate = Date.parse(params[:end_date].join(', '))
-      @boards = @boards.start_search(startDate, endDate)
-      @boards = @boards.end_search(startDate, endDate).pluck(:id)
-  #  strange behaviour inside scoped starts and stops
-   one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
-   @boards = Board.where(:id => (@boards + one))
-
-   else
-
+    # rentals must be filtered before .near because of left outer join of events doesnt include distance.
+    if params[:rental] == "on"
+      @boards =  Board.where(:rental => true, :for_sale => [true])
+     #  get boards that also havent been rented once unless inventory > 1
+     one = @boards
+     unless params[:start_date][0].to_s == "" && params[:end_date][0].to_s == ""
+        startDate = Date.parse(params[:start_date].join(', '))
+        endDate = Date.parse(params[:end_date].join(', '))
+        @boards = @boards.start_search(startDate, endDate)
+        @boards = @boards.end_search(startDate, endDate).pluck(:id)
+    #  strange behaviour inside scoped starts and stops
      one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
-     @boards = Board.where(:id => (one + @boards))
-   end
-  else
-    @boards = Board.where(:rental => false, :for_sale => true)
-  end
+     @boards = Board.where(:id => (@boards + one))
 
-   @boards = @boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+     else
 
-           "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1) \
-            .near(params[:search], distance_in_miles)
-            # price
-            if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
-              @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
+       one = one.left_joins(:events).where("board_id IS NULL").pluck(:id)
+       @boards = Board.where(:id => (one + @boards))
+     end
+    else
+      @boards = Board.where(:rental => false, :for_sale => true)
+    end
+    if  params[:type_id] == "1"
+       @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and cast( fin_id as text) like ? and cast( tail_id as text) like ? and (title like ? or description like ? or make like ?)",
+
+         "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%","%#{params[:fin_id]}%", "%#{params[:tail_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1)\
+          .near(params[:search], distance_in_miles)
+     else
+       @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+
+         "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1)\
+          .near(params[:search], distance_in_miles)
+     end
+          # price
+          if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
+            @boards  = @boards.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
+          else
+            if params[:max][0].to_i <= 0 && params[:min][0].to_i >= 1
+              @boards  = @boards.min_price(params[:min][0].to_i).max_price(9999)
+            elsif params[:min][0].to_i <= 0 && params[:max][0].to_i >= 1
+              @boards  = @boards.min_price(1).max_price(params[:max][0].to_i)
             else
-              if params[:max][0].to_i <= 0 && params[:min][0].to_i >= 1
-                @boards  = @boards.min_price(params[:min][0].to_i).max_price(9999)
-              elsif params[:min][0].to_i <= 0 && params[:max][0].to_i >= 1
-                @boards  = @boards.min_price(1).max_price(params[:max][0].to_i)
-              else
-                @boards  = @boards.min_price(1).max_price(9999)
-              end
+              @boards  = @boards.min_price(1).max_price(9999)
             end
-
+          end
             #  length / height
             if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
               @boards  = @boards.min_length_search(params[:minimum][0].to_i).max_length_search(params[:maximum][0].to_i)
@@ -448,21 +456,19 @@ else
               end
           end
 
-
 # reverse params between :start_time..:end_time
 
-
         if (params[:new] == "on") && (params[:used] != params[:new])
-                     @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-                   elsif (params[:used] == "on") && (params[:used] != params[:new])
-                       @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-                   else
-                        @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+               @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+             elsif (params[:used] == "on") && (params[:used] != params[:new])
+                 @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+             else
+                  @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 
-                   respond_to do |format|
-                          format.js
-                      end
-                    end
+             respond_to do |format|
+                    format.js
+                end
+              end
 
 end
 
