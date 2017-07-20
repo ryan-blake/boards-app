@@ -2,7 +2,7 @@
   <thead>
 
 
-    <td>
+    <td id="paginateTD">
       <tr>
         <td class="filtering center-text">
           <ti> <strong> Sort by: </strong> </ti>
@@ -13,7 +13,7 @@
 
       </tr>
     </td>
-  <td id="paginateTD">
+  <td >
   <div class="center-text" id="paginator">
     <%= paginate @boards, remote: true %>
   </div>
