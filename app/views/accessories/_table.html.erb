@@ -57,41 +57,65 @@
   </div>
  </div>
 </div>
+<!--  -->
 
+<!--  -->
 
  <%= form_tag({controller: :accessories, action: :search_table}, {method: :get, remote: true}) do  %>
-
  <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
-   <div class="input-group">
-     <span class="input-group-btn">
-     <%= grouped_collection_select  nil, :kind_id, Category.all, :kinds,
-           :name, :id, :name, {prompt: "Select Kind" },
-           { id: 'Kind-select' , class: "form-control"} %>
-     </span>
-   </div><!-- /input-group -->
+   <span class="input-group-btn">
+   <%= grouped_collection_select  nil, :kind_id, Category.all, :kinds,
+         :name, :id, :name, {prompt: "Select Kind" },
+         { id: 'Kind-select' , class: "form-control"} %>
+   </span>
+   <span class="input-group-btn">
+     <%= collection_select(nil, :brand, Accessory.where(:user_id => current_user.id).select(:brand).uniq, :brand, :brand, {:include_blank => "Select Brand", },{  class: "form-control"}) %>
+<!-- new ^ -->
+    </span>
    <div>
 
-   <span class="input-group-btn">
-   <%= grouped_collection_select  nil, :category_id, Type.all, :categories,
-         :name, :id, :name, {prompt: "Select type" },
-         { id: 'category-select' , class: "form-control"} %>
-   </span>
- </div><!-- /input-group -->
-   <div class="col-lg-6">
-     <div class="input-group">
-       <span class="input-group-btn">
-         <%= collection_select(nil, :brand, Accessory.where(:user_id => current_user.id).order(:brand).distinct.sort, :brand, :brand, {prompt: "Choose make"},{ class: "form-control" }) %>
-        </span>
+     <div class="row">
+       <div class="col-md-4">
+         <div class="input-group">
+           <span>
+             <%= number_field :minimum, params[:minimum], style: 'width: 120px;', class: 'form-control', min: 1, placeholder: "min length" %>
+           </span>
+         </div>
+       </div>
+       <div class="col-md-4" style="position: absolute;top: 34px;left: 123px;">
+         <div class="input-group" style="width: 112px;">
+             <span style="">
+               <%= number_field :maximum, params[:maximum], class: 'form-control',min: 1, placeholder: "max length" %>
+             </span>
+             <span style="width: 56px;position: absolute;float: right;top: 0px;">
+               <%= collection_select(nil, :unit_id, Unit.all, :id, :name,
+                 { :include_blank => 'Unit'} , { :class => 'form-control' })%>
+             </span>
+           </div>
+         </div>
+         <div class="row" style="position: relative;top:35px;left: 19px;">
+           <div class="input-group">
+             <span>
+               <%= number_field :min, params[:min], style: 'width:40%;' , class: 'form-control', min: 1, placeholder: "min price" %>
+             </span>
+             <span style="">
+               <%= number_field :max, params[:max], style: 'width:40%;float:right;right:20%;', class: 'form-control',min: 1, placeholder: "max price" %>
+             </span>
+             <span class="input-group-btn">
+               <%= collection_select(nil, :color, Accessory.where(:user_id => current_user.id).select(:color).uniq, :color, :color, {:include_blank => "Color", },{ id:'accColorForm' , class: "form-control", style: 'right:30px;'}) %>
+       <!-- new ^ -->
+              </span>
+           </div>
+       </div>
      </div>
    </div>
- </div><!-- /.col-lg-6 -->
- <div class="col-md-4 search-bar">
-    <div class="input-group">
-      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
-      <span class="input-group-btn">
-        <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
+ </div>
+   <div class="col-md-4 search-bar">
+      <div class="input-group">
+        <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+        <span class="input-group-btn">
+          <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
   <% end %>
-   </div>
