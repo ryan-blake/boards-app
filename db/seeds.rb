@@ -383,7 +383,7 @@ puts "#{Board.count} at board/1"
       category = Category.find(kind.category_id)
       Accessory.create!(
         brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
-        price: rand(10..25),
+        price: rand(10.25..25.59),
         inventory: rand(1..5),
         color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample,
         title: ['title1','43title1','title15','title16','title112','title232','title53','title231','title8','titl21'].sample,

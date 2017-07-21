@@ -1,5 +1,4 @@
-
- <div class="top-dash">
+<div class="top-dash">
 <div id="results">
   <div id="shipped-table">
     <% if @shipped_boards.count == 0 %>
@@ -28,13 +27,13 @@
             <th>image</th>
               <th><i style="display:inline;"> User </th>
               <th><i style="display:inline;"> <%= sortable "id" %></i></th>
-              <th><i style="display:inline;"> <%= sortable "item", "Title" %></th>
+              <th><i style="display:inline;"> <%= sortable "item" %></th>
               <th><i style="display:inline;"> <%= sortable "price" %></i></th>
               <th><i style="display:inline;"> <%= sortable "created_at", "purchased" %></i></th>
-              <th><i style="display:inline;"> UPC </i></th>
-              <th><i style="display:inline;"> Accessories </i></th>
+              <th><i style="display:inline;"> <%= sortable "upc" %> </i></th>
+              <th><i style="display:inline;"> Extra Accessories </i></th>
 
-            <th>listing</th>
+            <th>type</th>
           </tr>
         </thead>
 
