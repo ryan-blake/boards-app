@@ -80,7 +80,7 @@ hideAccess.onclick = function() {
         <div class="rent-dates">
           <span class="center-text">
             <div id="invisible" data-rubyvar="<%= @board.price %>"></div>
-          <div id="number" style="font-size:30px;"><%= @board.price  %> </div>
+          <div id="number" style="font-size:30px;"><%= @board.price.to_i  %> </div>
           <%= render 'events/form', locals: {events: @events, board: @board} %>
         <!-- section -->
         </span>
