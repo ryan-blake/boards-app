@@ -7,7 +7,7 @@
 #  updated_at  :datetime         not null
 #  make        :string
 #  used        :boolean
-#  price       :integer
+#  price       :decimal(8, 2)
 #  footgear    :boolean
 #  user_id     :integer
 #  description :string
@@ -32,7 +32,7 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
-#  list_time   :datetime         default("2017-07-14 18:58:18")
+#  list_time   :datetime         default("2017-07-21 19:08:58")
 #  inventory   :integer          default("0")
 #  cost        :integer
 #  margin      :integer
@@ -41,6 +41,8 @@
 #  tail_id     :integer
 #  fin_id      :integer
 #  rocker_id   :integer
+#  shippable   :boolean
+#  rate        :decimal(5, 2)
 #
 
 require 'rails_helper'

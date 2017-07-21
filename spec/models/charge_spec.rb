@@ -3,7 +3,6 @@
 # Table name: charges
 #
 #  id            :integer          not null, primary key
-#  price         :integer
 #  item          :string
 #  user_id       :integer
 #  vendor_id     :integer
@@ -13,7 +12,7 @@
 #  boolean       :boolean          default("f")
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  board_id      :string
+#  board_id      :integer
 #  address       :string
 #  shipping      :boolean
 #  start_time    :datetime
@@ -28,6 +27,7 @@
 #  state         :string
 #  city          :string
 #  tracking      :string
+#  price         :decimal(8, 2)
 #
 
 require 'rails_helper'

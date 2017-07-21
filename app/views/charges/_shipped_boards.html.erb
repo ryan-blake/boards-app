@@ -47,7 +47,7 @@
                 <td><%= charge.id  %>
                     </td>
               <td> <%= link_to charge.item.truncate(13), board_path(charge.board.id), remote: true, data: { toggle: "modal", target: "#newModal" } %></td>
-              <td><%= format_amount(charge.price * 100) %></td>
+              <td><%= format_amount(charge.price ) %></td>
               <td><%= format_date(charge.created_at) %></td>
               <td> <%if charge.board.upc.present? %>
                     <%= charge.board.upc %>

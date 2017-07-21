@@ -14,12 +14,12 @@ class ChargesController < ApplicationController
       Stripe.api_key = ENV["STRIPE_API_KEY"]
       token = @charge.token
       charge = Stripe::Charge.create({
-        :amount => @charge.price*100,
+        :amount => (@charge.price.to_i),
         :description => 'Rails Stripe customer',
         :customer => @charge.customer_id,
         :currency => 'usd',
         :destination => @charge.vendor.stripe_account,
-        :application_fee => 200+(@charge.price*3)+ 31,
+        :application_fee =>  (@charge.price * 0.1).to_i,
          metadata: { "shipping" => @charge.shipping, "charge_id" => @charge.id,
             "board" => @board.title, "vendor" => User.find(@charge.vendor).name, "vendor_id" => User.find(@charge.vendor).id,  "customer" => User.find(@charge.user).name, "customer_id" => @charge.user_id }
        },

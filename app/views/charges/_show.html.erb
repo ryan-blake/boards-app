@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <h2 class="page-header">
         <strong>Receipt No: </strong><%= @charge.id %> <span class="pull-right ">
-        <%= format_amount(@charge.price * 100)  %></span>
+        <%= format_amount(@charge.price)  %></span>
       |<strong>  <%= @charge.vendor.company %> </strong>|
       </h2>
 

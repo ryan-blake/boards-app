@@ -88,7 +88,6 @@ if (sessionStorage.accessoriesPriceTotal){
     if ($(this).hasClass("panel-success")) {
       // prices -= price
     } else {
-      alert(price)
       // $(".accessory_div.panel[data-id="+id+"]").removeClass('panel-success')
       // prices += price
     }
@@ -118,10 +117,9 @@ function saveClickedAccessories(clickedAccessories, accessoriesPrice, accessorie
   sessionStorage.clickedAccessories = JSON.stringify(clickedAccessories);
   sessionStorage.accessoriesPrice = JSON.stringify(accessoriesPrice);
   sessionStorage.accessoriesPriceTotal = JSON.stringify(accessoriesPriceTotal);
-    $("#total").get(0).value = sessionStorage.accessoriesPriceTotal;
+    $("#total").get(0).value = parseFloat(sessionStorage.accessoriesPriceTotal * 100);
     $(".accArray").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
-    $("#totalShip").get(0).value = parseFloat(addRate) + parseFloat(sessionStorage.accessoriesPriceTotal);
-    alert( parseFloat(addRate) + parseFloat(sessionStorage.accessoriesPriceTotal))
+    $("#totalShip").get(0).value = parseFloat(addRate * 100) + parseFloat(sessionStorage.accessoriesPriceTotal * 100);
     $(".accArrayShip").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
 }
 function clickAccessory(accessory_div, price) {

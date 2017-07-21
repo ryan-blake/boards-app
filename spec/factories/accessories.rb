@@ -4,7 +4,6 @@
 #
 #  id          :integer          not null, primary key
 #  brand       :string
-#  price       :integer
 #  inventory   :integer
 #  color       :string
 #  title       :string
@@ -15,6 +14,7 @@
 #  user_id     :integer
 #  board_id    :integer
 #  kind_id     :integer
+#  price       :decimal(8, 2)
 #  unit_id     :integer
 #  measure     :decimal(5, 2)
 #  measured    :decimal(5, 2)
