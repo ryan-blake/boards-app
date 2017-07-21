@@ -222,7 +222,7 @@ users = User.all
   category: categories.sample,
   footgear: [true, false].sample,
   rental: [true, false].sample,
-  price: rand(10..40),
+  price: rand(5.19..70.88),
   cost: rand(5..9),
   user_id: User.all.sample.id,
   pending: false,
@@ -250,7 +250,7 @@ end
   category: categories.sample,
   footgear: [true, false].sample,
   rental: [true, false].sample,
-  price: rand(10..40),
+  price: rand(5.19..70.88),
   cost: rand(5..9),
   user_id: User.all.sample.id,
   pending: false,
@@ -279,7 +279,7 @@ end
   fin: fins.sample,
   footgear: [true, false].sample,
   rental: [true, false].sample,
-  price: rand(10..40),
+  price: rand(5.19..70.88),
   cost: rand(5..9),
   user_id: User.all.sample.id,
   pending: true,
@@ -310,7 +310,7 @@ puts "#{Board.count} at board/1"
     tail: tails.sample,
     fin: fins.sample,
     footgear: [true, false].sample,
-    price: rand(10..40),
+    price: rand(5.19..70.88),
     user_id: User.all.sample.id,
     pending: false,
     arrived: false,
@@ -383,7 +383,7 @@ puts "#{Board.count} at board/1"
       category = Category.find(kind.category_id)
       Accessory.create!(
         brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
-        price: rand(10.25..25.59),
+        price: rand(5.19..70.88),
         inventory: rand(1..5),
         color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample,
         title: ['title1','43title1','title15','title16','title112','title232','title53','title231','title8','titl21'].sample,
@@ -402,7 +402,7 @@ puts "#{Board.count} at board/1"
 
       Accessory.create!(
         brand: ['brand1', 'brand2', 'brand3', 'brand3', 'brand4', 'brand5', 'brand6', 'brand7'].sample,
-        price: rand(10..25),
+        price: rand(5.19..70.88),
         inventory: rand(1..5),
         color: ['red', 'white', 'blue', 'orange', 'yellow', 'teal', 'turqoise'].sample,
         title: Faker::Hipster.word,

@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20170721180456) do
     t.integer  "user_id"
     t.integer  "board_id"
     t.integer  "kind_id"
-    t.decimal  "price",       precision: 2, scale: 2
+    t.decimal  "price",       precision: 8, scale: 2
     t.integer  "unit_id"
     t.decimal  "measure",     precision: 5, scale: 2
     t.decimal  "measured",    precision: 5, scale: 2
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170721180456) do
     t.datetime "updated_at",                                                          null: false
     t.string   "make"
     t.boolean  "used"
-    t.decimal  "price",       precision: 2, scale: 2
+    t.decimal  "price",       precision: 8, scale: 2
     t.boolean  "footgear"
     t.integer  "user_id"
     t.string   "description"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170721180456) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",                              default: false
-    t.datetime "list_time",                           default: '2017-07-21 18:41:28'
+    t.datetime "list_time",                           default: '2017-07-21 19:08:58'
     t.integer  "inventory",                           default: 0
     t.integer  "cost"
     t.integer  "margin"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 20170721180456) do
     t.string   "state"
     t.string   "city"
     t.string   "tracking"
-    t.decimal  "price",         precision: 2, scale: 2
+    t.decimal  "price",         precision: 8, scale: 2
     t.index ["board_id"], name: "index_charges_on_board_id"
     t.index ["user_id"], name: "index_charges_on_user_id"
   end
