@@ -2,7 +2,6 @@ class CreateAccessories < ActiveRecord::Migration[5.0]
   def change
     create_table :accessories do |t|
       t.string :brand
-      t.integer :price
       t.integer :inventory
       t.string :color
       t.string :title

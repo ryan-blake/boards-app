@@ -232,6 +232,8 @@ users = User.all
   list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample,
   fin_id: ["1", "2", "3", "4"].sample,
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
+  shippable: true,
+  rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample
 
   )
 end
@@ -259,6 +261,8 @@ end
   list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample,
   fin_id: ["1", "2", "3", "4"].sample,
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
+  shippable: true,
+  rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample
   )
 end
 50.times do
@@ -286,6 +290,8 @@ end
   list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample,
   fin_id: ["1", "2", "3", "4"].sample,
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
+  shippable: true,
+  rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample
 
   )
 end
@@ -316,6 +322,8 @@ puts "#{Board.count} at board/1"
     list_time: [Time.now, Time.now - 2.weeks, Time.now - 4.weeks].sample,
     fin_id: ["1", "2", "3", "4"].sample,
     tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
+    shippable: [true, false].sample,
+    rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample
     )
   end
   boards = Board.all

@@ -116,6 +116,18 @@
     <%= f.hidden_field :company, :value => current_user.company ? current_user.company : nil %>
     <%= f.hidden_field :list_time, :value => Time.now %>
   </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Shippable:</label>
+      <%= f.check_box :shippable, class: 'form-control input-sm', id:'boardShips' %>
+    </div>
+  </div>
+  <div class="col-md-4" id ="boardRate" style="display:none;">
+    <div class="form-group">
+      <label>Flat Rate: $</label>
+        <%= f.number_field :rate, min: 0, class: 'btn-width form-control input-md' %>
+    </div>
+  </div>
     <div class="row">
       <div class="col-md-11">
         <div class="form-group">
@@ -430,6 +442,16 @@ $(document).on('change', '#boardMargin', function() {
   $('#boardPrice').val(price)
  }
 });
+$('#boardShips').on('click', function(){
+  var rate = document.getElementById('boardRate');
+  if (this.checked) {
+    rate.style['display'] = 'block';
+  } else {
+    rate.style['display'] = 'none'
+  }
+});
+
+
 </script>
 
 </div>

@@ -1,3 +1,6 @@
+<% if @board.rate? %>
+  <stronng><small>Shipping:</small><span id="shippableForm" data-rate="<%= @board.rate %>">><%= format_amount(@board.rate * 100) %></span></stronng>
+<% end%>
 <%= form_for Charge.new do |f| %>
   <%= f.hidden_field :amount, id: 'totalShip' ,value:  @board.price.round  %>
   <%= f.hidden_field :item, value:  @board.title %>

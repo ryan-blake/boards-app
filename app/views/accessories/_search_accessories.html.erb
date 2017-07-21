@@ -75,11 +75,12 @@ $(document).ready(function() {
 var pricing = document.getElementById('showPrice');
 if (sessionStorage.accessoriesPriceTotal){
   pricing.innerHTML = sessionStorage.accessoriesPriceTotal
+
 } else {
   var prices = $('#showPrice').data('board');
+
   pricing.innerHTML = prices
 }
-
 
    $( ".accessory_div" ).click(function() {
     id = $(this).data("id");
