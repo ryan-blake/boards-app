@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170721180456) do
     t.datetime "updated_at",                                                          null: false
     t.string   "make"
     t.boolean  "used"
-    t.decimal  "price",      scale: 2
+    t.decimal  "price",       precision: 2, scale: 2
     t.boolean  "footgear"
     t.integer  "user_id"
     t.string   "description"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170721180456) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",                              default: false
-    t.datetime "list_time",                           default: '2017-07-21 18:13:35'
+    t.datetime "list_time",                           default: '2017-07-21 18:33:16'
     t.integer  "inventory",                           default: 0
     t.integer  "cost"
     t.integer  "margin"
