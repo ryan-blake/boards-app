@@ -107,7 +107,33 @@ end
      "$#{price}.00 "
   end
 
+  def add_accessories
+    if self.accessories.exists?
+      price = self.price
+      acc = self.accessories
+      acc.each do |i|
+        price += i.price
+      end
+      price
+    else
+      price = self.price
+    end
+  end
 
+def get_total
+  if self.shippable == true
+ if self.rate && self.accessories.exists?
+  price = self.rate + self.price
+    a = self.accessories
+    a.each do |i|
+      price += i.price
+    end
+    price
+  else
+  price = self.rate + self.price
+ end
+ end
+end
   def sellable?
     self.for_sale && self.inventory >= 1
   end

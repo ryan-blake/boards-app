@@ -132,7 +132,7 @@ $(window).scroll(function(){
     </div>
     <div class="featured" style="">
       <% if current_user %>
-       <% @surf = current_user.not_my_boards(@snow) %>
+       <% @snow = current_user.not_my_boards(@snow) %>
        <% end %>
        <% if @snow.count >= 1 %>
        <hr class="style13" style="margin:0;">
