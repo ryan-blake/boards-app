@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720223502) do
+ActiveRecord::Schema.define(version: 20170721180456) do
 
   create_table "accessories", force: :cascade do |t|
     t.string   "brand"
-    t.integer  "price"
     t.integer  "inventory"
     t.string   "color"
     t.string   "title"
@@ -25,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170720223502) do
     t.integer  "user_id"
     t.integer  "board_id"
     t.integer  "kind_id"
+    t.decimal  "price",       precision: 2, scale: 2
     t.integer  "unit_id"
     t.decimal  "measure",     precision: 5, scale: 2
     t.decimal  "measured",    precision: 5, scale: 2
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170720223502) do
     t.datetime "updated_at",                                                          null: false
     t.string   "make"
     t.boolean  "used"
-    t.integer  "price"
+    t.decimal  "price",      scale: 2
     t.boolean  "footgear"
     t.integer  "user_id"
     t.string   "description"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170720223502) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",                              default: false
-    t.datetime "list_time",                           default: '2017-07-14 18:58:18'
+    t.datetime "list_time",                           default: '2017-07-21 18:13:35'
     t.integer  "inventory",                           default: 0
     t.integer  "cost"
     t.integer  "margin"
@@ -95,17 +95,16 @@ ActiveRecord::Schema.define(version: 20170720223502) do
   end
 
   create_table "charges", force: :cascade do |t|
-    t.integer  "price"
     t.string   "item"
     t.integer  "user_id"
     t.integer  "vendor_id"
     t.string   "token"
     t.string   "customer_id"
-    t.boolean  "completed",     default: false
-    t.boolean  "boolean",       default: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.string   "board_id"
+    t.boolean  "completed",                             default: false
+    t.boolean  "boolean",                               default: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.integer  "board_id"
     t.string   "address"
     t.boolean  "shipping"
     t.datetime "start_time"
@@ -120,6 +119,8 @@ ActiveRecord::Schema.define(version: 20170720223502) do
     t.string   "state"
     t.string   "city"
     t.string   "tracking"
+    t.decimal  "price",         precision: 2, scale: 2
+    t.index ["board_id"], name: "index_charges_on_board_id"
     t.index ["user_id"], name: "index_charges_on_user_id"
   end
 
