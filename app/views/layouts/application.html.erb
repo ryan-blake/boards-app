@@ -10,13 +10,6 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
 
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>" style="position:absolute;top:10px:left:50%;">
-        <%= value %>
-        <button type="button" style="color:black;" class="close" data-dismiss="alert"> &times; </button>
-      </div>
-    <% end %>
-
     <%= yield(:header) %>
   </head>
   <body>
@@ -26,6 +19,12 @@
 
     <%if current_user %>
      <%= render 'conversations/chat' %>
+    <% end %>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>" style="width:100%;z=index:-1;">
+        <%= value %>
+        <button type="button" style="color:black;" class="close" data-dismiss="alert"> &times; </button>
+      </div>
     <% end %>
 
     <!-- <%= render 'layouts/footer' %> -->

@@ -71,14 +71,15 @@ class User < ApplicationRecord
   def full_address
     [address, city, state, zipcode].join(', ')
   end
-def not_my_boards(boards)
-  boards.where.not(user_id: self)
-end
 
+  def not_my_boards(boards)
+    boards.where.not(user_id: self)
+  end
 
   def owner?(item)
     self.id == item.user_id
   end
+  
   def email_confirmation
     "#{@email}"
   end
