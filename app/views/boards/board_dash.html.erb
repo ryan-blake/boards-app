@@ -383,9 +383,12 @@ $(document).ajaxStop(function(){
       </div>
     </div>
     <div class="pull-left" style="max-height: 30px;margin: 0px;top:108px;left:10px;width:190px;position:fixed;z-index:1;">
-      <% if  current_user.tokens > 2 && current_user.stripe_account %>
+      <% if  current_user.tokens > 2 && current_user.stripe_account != nil %>
         <h3 class="btn btn-sort" style="max-height: 30px;margin: 0px;"><%= link_to 'Listing', new_board_path, target: :_blank  %></h3>
         <h3 class="btn btn-sort" style="max-height: 30px;margin: 0px;"><%= link_to "accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></td></h3>
+        <% unless @stripe_account.transfers_enabled == true %>
+          <h3 class="btn btn-sort pull-right" style="top: -37px;max-height: 30px;margin: 0px;position: absolute;right: 17px;"><%= link_to 'add Bank', new_bank_account_path, target: :_blank  %></h3>
+        <% end %>
       <% end %>
     </div>
     <% end %>
