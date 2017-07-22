@@ -106,7 +106,7 @@ end
   end
 
   def pretty_price
-     "$#{price}.00 "
+     "$#{price} "
   end
 
   def add_accessories

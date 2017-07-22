@@ -11,8 +11,9 @@
     <%= javascript_include_tag 'application' %>
 
     <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>" style="position:absolute;top:50px;right:0;">
+      <div class="alert alert-<%= key %>" style="position:absolute;top:10px:left:50%;">
         <%= value %>
+        <button type="button" style="color:black;" class="close" data-dismiss="alert"> &times; </button>
       </div>
     <% end %>
 

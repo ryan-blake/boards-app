@@ -127,7 +127,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
     <div class="payment center-text">
       <% if current_user && current_user.owner?(@board)%>
         <strong data-board="<%= @board.price %>"style="font-size:30px;">$</strong>
-        <% elsif @board.sellable? %>
+        <% elsif @board.sellable? && @board.shippable == true %>
          <strong style="font-size:30px;">$</strong><strong data-board="<%= @board.price + @theTotal %>" id="showPrice" style="font-size:30px;">.00</strong>
          <div class="form-group">
            pick up
@@ -147,7 +147,8 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
          </div>
          <% else %>
          <div class="form-group">
-           Not Available
+            Pick Up Only:
+           <%= render partial: 'charge', locals: {board: @board} %>
          </div>
        <% end %>
     </div>
