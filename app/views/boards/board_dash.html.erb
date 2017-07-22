@@ -452,8 +452,8 @@ $(document).ajaxStop(function(){
 <!-- nav mobile  starts at < 835px-->
 <div class="dash-nav-mobile btn-group-vertical pull-left bcg" style="" role="group" aria-label="...">
    <div class="btn-group" role="group">
-     <button type="button" class="btn btn-default dropdown-toggle">
-       Dropdown
+     <button type="button" style="min-width:95px;border:1px solid black;" class="btn btn-default dropdown-toggle-mobile">
+       Dashboard
        <span class="caret"></span>
      </button>
      <ul class="dropdown-menu mobile-drop-dash" style="min-width: 10px;max-width: 100px;">
@@ -618,7 +618,8 @@ $(window).on('popstate', function() {
 $('.mobNavLi').on('click', function(){
   $('.mobile-drop-dash').toggle()
 })
-$('.dropdown-toggle').on('click', function(){
+$('.dropdown-toggle-mobile').on('click', function(){
   $('.mobile-drop-dash').toggle()
 })
+
 </script>
