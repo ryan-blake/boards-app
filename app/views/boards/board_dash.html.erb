@@ -366,8 +366,7 @@ $(document).ajaxStop(function(){
   <% if @user.stripe_account %>
 <div class="jumbotron gel bcg" id="msg-area" style="">
   <div class="pull-left" style="top:50px;left:1px;width:190px;position:fixed;z-index:1;">
-      <h3 class="btn btn-sort" style="max-width:100px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
-      <h3 class="btn btn-danger" style="max-width:100px;display:none;position: relative;bottom: 2px;left: 11px;" id="closePartial">CLOSE</h3>
+      <h3 class="btn btn-sort" style="max-width:76px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
   </div>
 <% if current_user.role == "admin" %>
 <div id="csv-upload"><%= form_tag import_boards_path, multipart: true do %>
@@ -378,6 +377,7 @@ $(document).ajaxStop(function(){
 </div>
 
     <div id="tokenPartial" class="" style="    min-height: 285px;border:4px solid black;left:calc(50% - 150px);display:none;z-index:990;top:150px;position:absolute;">
+      <h3 class="btn btn-danger" style="height: 31px;left: calc(50% - 150px);display: block;z-index: 990;top: -56px;width: 300px;position: absolute;" id="closePartial">CLOSE</h3>
       <div style="width:300px;min-height:200px;max-height240px;background-color:#f5f5f5;z-index:989;">
       <%= render partial: 'tokens/new' %>
       </div>
@@ -387,15 +387,12 @@ $(document).ajaxStop(function(){
         <h3 class="btn btn-sort" style="max-height: 30px;margin: 0px;"><%= link_to 'Listing', new_board_path, target: :_blank  %></h3>
         <h3 class="btn btn-sort" style="max-height: 30px;margin: 0px;"><%= link_to "accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></td></h3>
         <% unless @stripe_account.transfers_enabled == true %>
-          <h3 class="btn btn-sort pull-right" style="top: -37px;max-height: 30px;margin: 0px;position: absolute;right: 17px;"><%= link_to 'add Bank', new_bank_account_path, target: :_blank  %></h3>
+          <h3 class="btn btn-sort pull-right" style="top: -40px;max-height: 34px;margin: 0px;position: absolute;right: 22px;width: 82px;"><%= link_to 'add Bank', new_bank_account_path, target: :_blank  %></h3>
         <% end %>
       <% end %>
     </div>
     <% end %>
 </div>
-
-
-
 
   <% if current_user && !current_user.stripe_account %>
   <div id="userDash" class="jumbotron bcg" style="">

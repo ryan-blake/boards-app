@@ -13,7 +13,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <label>Dollar amount </label> <small> (A token is two dollars: One token per listing: Recieve 1 free token per $10 spent)</small>
+              <label>Dollar amount </label> <small> (Recieve 30 tokens monthly, each listing is 1 token. Accessories do not require tokens)</small>
               <input class="form-control input-lg" id="amount" name="amount" type="text" placeholder="$10.00 minumum">
             </div>
           </div>
@@ -30,7 +30,7 @@
         <div class="row">
           <div class="col-md-12">
             <input type="hidden" name="email" value="<%= @user.email %>">
-            <button class="btn btn-lg btn-block btn-primary btn-custom" id="submit_payment" type="submit">
+            <button style="color:black;" class="btn btn-lg btn-block btn-info" id="submit_payment" type="submit">
               Purchase Tokens
             </button>
           </div>
