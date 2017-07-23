@@ -367,7 +367,6 @@ $(document).ajaxStop(function(){
 <div class="jumbotron gel bcg" id="msg-area" style="">
   <div class="pull-left" style="top:50px;left:1px;width:190px;position:fixed;z-index:1;">
       <h3 class="btn btn-sort" style="max-width:100px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
-      <h3 class="btn btn-danger" style="max-width:100px;display:none;position: relative;bottom: 2px;left: 11px;" id="closePartial">CLOSE</h3>
   </div>
 <% if current_user.role == "admin" %>
 <div id="csv-upload"><%= form_tag import_boards_path, multipart: true do %>
@@ -377,7 +376,9 @@ $(document).ajaxStop(function(){
 <% end %>
 </div>
 
+
     <div id="tokenPartial" class="" style="    min-height: 285px;border:4px solid black;left:calc(50% - 150px);display:none;z-index:990;top:150px;position:absolute;">
+      <h3 class="btn btn-danger" style="max-width:100%;display:none;position:relative;bottom:20px;" id="closePartial">CLOSE</h3>
       <div style="width:300px;min-height:200px;max-height240px;background-color:#f5f5f5;z-index:989;">
       <%= render partial: 'tokens/new' %>
       </div>
@@ -408,14 +409,12 @@ $(document).ajaxStop(function(){
     <%  @stripe_account.verification.fields_needed.each do |i| array << i end %>
     <% array.include? 'legal_entity.ssn_last_4'%>
     <% if @stripe_account.verification.fields_needed  %>
-    <div class="row" style="top: -2px;position: absolute;width: 156%;right: 166%;">
-        <div class="alert alert-warning text-center shadow-sm">
+      <div class="alert alert-warning" style="left:1px;min-height:50px;">
           <p style="font-size:10px;">
             We need some information to continue processing your acct
             <%= link_to "Update your information", edit_stripe_account_path(@stripe_account.id), class: "btn btn-sm btn-warning btn-custom" %>
           </p>
         </div>
-    </div>
     <% else %>
     <p style="font-size:10px;">
       <%= link_to "Update your information", edit_stripe_account_path(@stripe_account.id), class: "btn btn-sm btn-warning btn-custom" %>
