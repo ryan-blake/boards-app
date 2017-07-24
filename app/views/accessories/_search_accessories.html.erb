@@ -109,6 +109,7 @@ function saveClickedAccessories(clickedAccessories, accessoriesPrice, accessorie
     $(".accArray").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
     $("#totalShip").get(0).value = parseFloat(addRate * 100) + parseFloat(sessionStorage.accessoriesPriceTotal * 100);
     $(".accArrayShip").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
+    alert(sessionStorage.accessoriesPriceTotal)
 }
 function clickAccessory(accessory_div, price) {
   $(accessory_div).addClass('panel-success');
