@@ -16,15 +16,13 @@
       <!-- begin view -->
 <div class="title center-text">
   <strong><%= @board.title %></strong>
-    <strong><%= @board.length %></strong>
 </div>
   <div class="image-box center-text" id="images" style="">
     <%= render partial: 'images', locals: {board: @board}  %>
     <!-- <%=  image_tag("surf_girl.jpg", height: 280, width: 330) %> -->
   </div>
 <hr class="style13" style="top:440px;">
-<%= render partial: 'datatable', locals: {board: @board}  %>
-
+  <%= render partial: 'datatable', locals: {board: @board}  %>
 <!-- section -->
   <div class="description-modal pull-right" style="padding:30px 7px;position:relative;clear:all;min-width: 75%;">
     <%= @board.description %>
@@ -36,6 +34,8 @@
   </tbody>
 </div>
 </div>
+
+<% if @board.user.accessories.exists? %>
 <script>
 $(document).ready(function() {
 var openAccess = document.getElementById('accessoryBtnOpen');
@@ -59,23 +59,22 @@ hideAccess.onclick = function() {
  }
 };
 });
-
 </script>
+
 <div style="position: relative;max-height: 27px;z-index: 99;float:right;min-width: 100%;" class="col-sm-12 col-md-12 col-lg-12">
   <div id="accessoryBtnOpen" style="width:100%; display:flex;" class="btn btn-success">Search Accessories </div>
-
   <div id="accessoryBtnHide" style="width:100%; display:none;background-color:darkgreen;" class="btn btn-primary">Hide</div>
 </div>
-<div id="searchAccessories"  style="top: 10px;display:none;width: 100%;" class="col-md-9">
+<div id="searchAccessories"  style="top:10px;display:none;width: 100%;" class="col-md-9">
   <%= render 'accessories/search_accessories_form' %>
 </div>
 <!-- shop accessories by type -->
 <div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
  </div>
-<!--  -->
+ <% end %>
+
 <!-- section -->
   <% if @board.rental %>
-
   <div class="rental-div" style="min-height:100%;">
         <div class="rent-dates">
           <span class="center-text">
