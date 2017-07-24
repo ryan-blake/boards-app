@@ -72,7 +72,6 @@ class Board < ApplicationRecord
   after_save :check_for_tracking_number
   after_update :update_tokens
   after_update :update_margin
-  after_validation :add_accessories, if: ->(obj){ obj.accessories.exists? }
 
   # mapping
   geocoded_by :full_address
@@ -162,17 +161,6 @@ end
 
   private
 
-  def accessoryPricing
-    if @board.accessories
-      accs = @board.accessories
-      prices = 0;
-      accs.each do |i|
-        prices << i.price
-      end
-      self.price += prices
-    end
-  end
-
   def update_tokens
     if for_sale_changed? == true
       if self.changes["for_sale"][1]
@@ -206,8 +194,7 @@ end
   end
 
   def save_type
-    a = self
-    a.type_id = a.category.type_id
+    self.type_id = self.category.type_id
   end
 
   def self.import(file)
