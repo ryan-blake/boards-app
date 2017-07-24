@@ -72,7 +72,7 @@ class Board < ApplicationRecord
   after_save :check_for_tracking_number
   after_update :update_tokens
   after_update :update_margin
-
+  after_validation :add_accessories, if: ->(obj){ obj.accessories.exists? }
 
   # mapping
   geocoded_by :full_address
@@ -142,6 +142,7 @@ end
   def boardSold?
     self.shipping != true || false
   end
+
   def assignedAccessory?
     if self.accessories.count >= 1
       self.accessories.each do |i|
@@ -161,6 +162,16 @@ end
 
   private
 
+  def accessoryPricing
+    if @board.accessories
+      accs = @board.accessories
+      prices = 0;
+      accs.each do |i|
+        prices << i.price
+      end
+      self.price += prices
+    end
+  end
 
   def update_tokens
     if for_sale_changed? == true
@@ -198,6 +209,7 @@ end
     a = self
     a.type_id = a.category.type_id
   end
+
   def self.import(file)
     counter = 0
     CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|

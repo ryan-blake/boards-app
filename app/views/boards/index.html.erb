@@ -197,24 +197,23 @@ $(window).scroll(function(){
       <% if current_user %>
        <% @surf = current_user.not_my_boards(@surf) %>
        <% end %>
-       <% if @surf.count >= 1 %>
        <hr class="style13" style="margin:0;">
        <span class="center-text "><%= link_to 'Surf', search_type_boards_path(type_id: 1), class: 'type_button', id:'type_button-surf', style:'color:darkslategrey;text-shadow:2px 0px snow;position:relative;    font-size: 27px;
     left: calc(50% - 32px);',  :method => :get, remote: true %></span>
 
+       <% if @surf.count >= 1 %>
        <%= render partial: 'featured', locals: {boards: @surf} %>
        <% end %>
     </div>
     <div class="featured" style="">
       <% if current_user %>
-       <% @snow = current_user.not_my_boards(@snow) %>
-       <% end %>
+      <% @snow = current_user.not_my_boards(@snow) %>
+      <% end %>
+      <hr class="style13" style="margin:0;">
+      <span class="center-text "><%= link_to 'Snow', search_type_boards_path(type_id: 2), class: 'type_button', id:'type_button-snow', style:'color:darkslategrey;text-shadow:2px 0px snow;position:relative;    font-size: 27px;
+   left: calc(50% - 32px);', :method => :get, remote: true %></span>
+
        <% if @snow.count >= 1 %>
-       <hr class="style13" style="margin:0;">
-
-       <span class="center-text "><%= link_to 'Snow', search_type_boards_path(type_id: 2), class: 'type_button', id:'type_button-snow', style:'color:darkslategrey;text-shadow:2px 0px snow;position:relative;    font-size: 27px;
-    left: calc(50% - 32px);', :method => :get, remote: true %></span>
-
        <%= render partial: 'featured', locals: {boards: @snow} %>
        <% end %>
     </div>
@@ -222,10 +221,10 @@ $(window).scroll(function(){
       <% if current_user %>
        <% @skate = current_user.not_my_boards(@skate) %>
        <% end %>
-       <% if @skate.count >= 1 %>
        <hr class="style13" style="margin:0;">
        <span class="center-text "><%= link_to 'Skate', search_type_boards_path(type_id: 3), class: 'type_button', id:'type_button-skate', style:'color:darkslategrey;text-shadow:2px 0px snow;position:relative;    font-size: 27px;
     left: calc(50% - 32px);', :method => :get, remote: true %></span>
+       <% if @skate.count >= 1 %>
        <%= render partial: 'featured', locals: {boards: @skate} %>
        <% end %>
     </div>
@@ -233,10 +232,10 @@ $(window).scroll(function(){
       <% if current_user %>
          <% @wake = current_user.not_my_boards(@wake) %>
        <% end %>
+       <hr class="style13" style="margin:0;">
+       <span class="center-text"><%= link_to 'Wake', search_type_boards_path(type_id: 4),  class: 'type_button', id:'type_button-wake', style:'color:darkslategrey;text-shadow:2px 0px snow;position:relative;font-size: 27px;left: calc(50% - 32px);',  :method => :get, remote: true %></span>
+       <%= render partial: 'featured', locals: {boards: @wake} %>
        <% if @wake.count >= 1 %>
-         <hr class="style13" style="margin:0;">
-         <span class="center-text"><%= link_to 'Wake', search_type_boards_path(type_id: 4),  class: 'type_button', id:'type_button-wake', style:'color:darkslategrey;text-shadow:2px 0px snow;position:relative;font-size: 27px;left: calc(50% - 32px);',  :method => :get, remote: true %></span>
-         <%= render partial: 'featured', locals: {boards: @wake} %>
        <% end %>
     </div>
   </div>

@@ -51,7 +51,7 @@
       <%= f.label :size %>
     <%= f.number_field :measure, class: 'form-control',:step => 0.01 , min: 0 %>
       <spam id="sizeUnits" style="display:block"><%= f.collection_select( :unit_id, Unit.all, :id, :name,
-      { :include_blank => 'Unit'} , { :class => 'form-control' })%> </spam></td>    </div>
+      { :include_blank => 'Unit', value: 1} , { :class => 'form-control' })%> </spam></td>    </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
