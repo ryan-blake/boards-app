@@ -32,7 +32,7 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
-#  list_time   :datetime         default("2017-07-21 19:08:58")
+#  list_time   :datetime         default("2017-07-23 19:33:55")
 #  inventory   :integer          default("0")
 #  cost        :integer
 #  margin      :integer
@@ -43,6 +43,7 @@
 #  rocker_id   :integer
 #  shippable   :boolean
 #  rate        :decimal(5, 2)
+#  sale_price  :decimal(8, 2)
 #
 
 class Board < ApplicationRecord
@@ -68,6 +69,7 @@ class Board < ApplicationRecord
   validates :category, :presence => true
 
   before_validation :load_costs
+
   after_validation :save_type
   after_save :check_for_tracking_number
   after_update :update_tokens
@@ -135,6 +137,7 @@ def get_total
  end
  end
 end
+
   def sellable?
     self.for_sale && self.inventory >= 1
   end
@@ -194,7 +197,16 @@ end
   end
 
   def save_type
-    self.type_id = self.category.type_id
+      self.type_id = self.category.type_id
+      if self.accessories.count >= 1
+        accPrice = 0
+        self.accessories.each do |i|
+        accPrice += i.price
+        end
+        self.price = (accPrice + self.sale_price)
+      else
+      self.price = self.sale_price
+    end
   end
 
   def self.import(file)

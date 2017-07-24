@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170721180456) do
+ActiveRecord::Schema.define(version: 20170724190354) do
 
   create_table "accessories", force: :cascade do |t|
     t.string   "brand"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20170721180456) do
     t.integer  "rocker_id"
     t.boolean  "shippable"
     t.decimal  "rate",        precision: 5, scale: 2
+    t.decimal  "sale_price",  precision: 8, scale: 2
     t.index ["category_id"], name: "index_boards_on_category_id"
     t.index ["fin_id"], name: "index_boards_on_fin_id"
     t.index ["rocker_id"], name: "index_boards_on_rocker_id"

@@ -32,7 +32,7 @@
 #  shipped     :boolean
 #  tracking    :string
 #  rental      :boolean          default("f")
-#  list_time   :datetime         default("2017-07-21 19:08:58")
+#  list_time   :datetime         default("2017-07-23 19:33:55")
 #  inventory   :integer          default("0")
 #  cost        :integer
 #  margin      :integer
@@ -43,6 +43,7 @@
 #  rocker_id   :integer
 #  shippable   :boolean
 #  rate        :decimal(5, 2)
+#  sale_price  :decimal(8, 2)
 #
 
 require 'rails_helper'
