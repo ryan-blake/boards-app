@@ -234,7 +234,8 @@ users = User.all
   fin_id: ["1", "2", "3", "4"].sample,
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
   shippable: true,
-  rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample
+  rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
+  upc:  [11249, 551233, 12421, 124234, 9222, 940].sample,
 
   )
 end
@@ -264,8 +265,10 @@ end
   fin_id: ["1", "2", "3", "4"].sample,
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
   shippable: true,
-  rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample
+  rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
+  upc:  [11249, 551233, 12421, 124234, 9222, 940].sample,
   )
+
 end
 50.times do
   Board.create!(
@@ -294,7 +297,8 @@ end
   fin_id: ["1", "2", "3", "4"].sample,
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
   shippable: true,
-  rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample
+  rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
+  upc:  [11249, 551233, 12421, 124234, 9222, 940].sample,
 
   )
 end
@@ -327,7 +331,9 @@ puts "#{Board.count} at board/1"
     fin_id: ["1", "2", "3", "4"].sample,
     tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
     shippable: [true, false].sample,
-    rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample
+    rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
+    upc:  [11249, 551233, 12421, 124234, 9222, 940].sample,
+
     )
   end
   boards = Board.all
@@ -395,7 +401,9 @@ puts "#{Board.count} at board/1"
         kind_id: kind.id,
         category_id: category.id,
         unit_id: Unit.all.sample.id,
-        measure: rand(1.15..25.88)
+        measure: rand(1.15..25.88),
+        upc:  [214, 424, 231, 53, 224, 922, 241].sample,
+
       )
     end
     puts "#{Board.count} at access/1"
@@ -415,7 +423,9 @@ puts "#{Board.count} at board/1"
         kind_id: kind.id,
         category_id: category,
         unit_id: Unit.all.sample.id,
-        measure: rand(3.9..25.1)
+        measure: rand(3.9..25.1),
+        upc:  [214, 424, 231, 53, 224, 922, 241].sample,
+
       )
     end
     i = 1
