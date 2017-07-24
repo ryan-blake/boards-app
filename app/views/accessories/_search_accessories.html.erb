@@ -1,11 +1,10 @@
 <% if @accessories.count >= 1%>
 <div class="swiper-container">
-<div class="swiper-wrapper">
- <%  @accessories.each do |i| %>
-     <div class="swiper-slide" style="border: black 1px solid;
-    max-height: 250px;">
-          <td class="vendor-link" style="cursor:pointer;">
-       <div class="center-text">
+  <div class="swiper-wrapper">
+   <%  @accessories.each do |i| %>
+     <div class="swiper-slide" style="border: black 1px solid;max-height: 250px;">
+       <td class="vendor-link" style="cursor:pointer;">
+        <div class="center-text">
          <span id="acc-link"><%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></span>
          <div class="accessoryImage" id="aImage" style="cursor:pointer">
            <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
@@ -13,31 +12,21 @@
          <div class="accessoryImage1" id="aImage1">
            <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
          </div>
-           <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %></strong></span>
-           <div style="z-index:999;position:relative;bottom:0;"  data-id="<%= i.id %>" data-price="<%= i.price %>" id="<%=i.id %>" class="accessory_div btn btn-success">Add</div>
-       </div>
-</td>
-</div>
-<% end %>
-<% end %>
-</div>
+          <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %></strong></span>
+          <div style="z-index:999;position:relative;bottom:0;"  data-id="<%= i.id %>" data-price="<%= i.price %>" id="<%=i.id %>" class="accessory_div btn btn-success">Add</div>
+        </div>
+       </td>
+     </div>
+  <% end %>
+  <% end %>
+  </div>
  <!-- Add Pagination -->
  <div class="swiper-button-next swiper-button-white"></div>
  <div class="swiper-button-prev swiper-button-white"></div>
 
  <div style="" class="swiper-pagination"></div>
-  </div>
+</div>
 
-<style>
-.swiper-pagination-bullet {
-  margin:0px;
-}
-
-.fixed-position {
-
-  overflow:hidden !important;
-}
-</style>
 <script>
 
 $(document).ready(function() {
@@ -93,7 +82,7 @@ if (sessionStorage.accessoriesPriceTotal){
     }
   });
 });
-//
+
 function loadSelectedAccessories() {
   clickedAccessoriesString = sessionStorage.clickedAccessories
   return clickedAccessoriesString
@@ -194,7 +183,6 @@ $(function(){
   });
 
   var w = window.innerWidth
-
     if (w <= 700 && w >= 551) {
       var slides = 3
     } else if (w <= 450){
@@ -211,11 +199,7 @@ $(function(){
     paginationClickable: true,
     spaceBetween: 1,
     freeMode: true
-});
+  });
 
 })();
-
 </script>
-
-
-<!--  -->

@@ -17,8 +17,6 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require refile
-//= require lightbox
-//= require siema.min
 //= require jquery.slick
 //= require Chart.bundle
 //= require chartkick
