@@ -32,10 +32,13 @@
           <tr>
             <th>image</th>
             <th><i style="display:inline;"> <%= sortable "title" %></th>
-            <th><i style="display:inline;"> <%= sortable "price" %></i></th>
+            <th><i style="display:inline;"> <%= sortable "upc", "UPC" %></th>
+            <th><i style="display:inline;"> <%= sortable "price", "Price" %></i></th>
+            <th><i style="display:inline;"> <%= sortable "sale_price", "Board Price" %></i></th>
             <th><i style="display:inline;"> <%= sortable "cost" %></i></th>
             <th><i style="display:inline;"> <%= sortable "margin" %></i></th>
-            <th>listing</th>
+            <th><strong>Type</strong></th>
+            <th><strong>Accessory</strong></th>
           </tr>
         </thead>
 
@@ -48,21 +51,25 @@
                 <br>
               <%= link_to "Edit", edit_board_path(board), class: 'center-text btn-btn-sm btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#editModal" } %>
               </td>
+              <td><%= board.upc %></td>
               <td><%= format_amount(board.price * 100) %></td>
+              <td><%= format_amount(board.sale_price * 100) %></td>
               <td><%= format_amount(board.cost * 100)  %></td>
               <td><%= board.margin  %>%</td>
               <td class="text-center">
                 <small><%=board.category.name %> </small>
-                <% if board.for_sale == false %>
-                  <span class="text-danger">
-                    inactive
-                  </span>
-                <% else %>
-                active
+              </td>
+              <td class="text-center">
+                <% board_accessories = Accessory.where(board_id: board) %>
+                <% board_accessories.each_with_index do |a, index|  %>
+                <% if index >=1 %>
+                  :
+                  <% end %>
+                <%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
+                <% end %>
               </td>
             </tr>
             <% end %>
-          <% end %>
         </tbody>
       </table>
     </div>

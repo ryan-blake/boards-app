@@ -86,6 +86,8 @@
               <dd>In store pick Up</dd>
             <% else %>
              <dt>Shipping to</dt>
+             <td> <% @charge.board.rate %></td>
+             
              <dd> <%= @charge.full_address %> </dd>
              <% end %>
             <hr>

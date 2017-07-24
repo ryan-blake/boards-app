@@ -74,7 +74,7 @@
   <div class="col-md-4">
     <div class="form-group">
       <%= f.label :price %>
-      <td ><%= f.number_field :price, min: 1, class: 'form-control' %></td>    </div>
+      <td ><%= f.number_field :price, min: 1, :step => 0.01, class: 'form-control' %></td>    </div>
 </div>
 
 </div>
