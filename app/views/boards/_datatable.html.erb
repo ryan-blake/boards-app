@@ -3,7 +3,7 @@
       <thead>
         <th class="center-text single_table top" style="margin-left:20%;min-width:30%;max-width:30%;padding: 0px 4px;">Brand</th>
         <th class="center-text single_table top" style="nax-width:30%;padding: 0px 4px;"> Dimensions</th>
-        <% if @board.tail_id%>
+        <% if @board.surfable?%>
           <th class="center-text single_table top" style="width:30%;padding: 0px 4px;">Tail</th>
         <% end %>
       </thead>
@@ -14,7 +14,7 @@
           <td class="center-text single_table" style="min-width:150px;max-width:35%;border:black 1px solid;padding: 0px 4px;">
             <%= @board.size.pretty_surf %>
           </td>
-          <% if @board.tail_id%>
+          <% if @board.tail_id %>
           <td class="center-text single_table" style="width:30%;padding: 0px 4px;">
            <%= @board.tail.name%>
            </td>
@@ -30,15 +30,18 @@
       <% if @board.surfable? %>
         <thead>
           <% if !@board.used %>
-            <th class="single_table center-text top" style="padding:top:10px;nax-width:15%;padding: 0px 4px;">Used</th>
+            <th class="single_table center-text top" style="padding:top:10px;nax-width:15%;padding: 0px 4px;"></th>
             <% else %>
             <th class="single_table center-text top" style="padding:top:10px;nax-width:15%;padding: 0px 4px;"></th>
           <% end %>
-          <th class="single_table center-text top" style="width:30%;padding: 0px 4px;">Volume:</th>
-          <th class="single_table center-text top" style="width:30%;padding: 0px 4px;"> Finbox: </th>
+          <th class="single_table center-text top" style="width:30%;padding: 0px 4px;">Volume</th>
+          <th class="single_table center-text top" style="width:30%;padding: 0px 4px;">Finbox</th>
         </thead>
         <tbody >
           <td class="single_table center-text" style="width:30%;padding: 0px 4px;">
+            <% if !@board.used %>
+             <strong> Used </strong>
+             <% end %>
           </td>
          <td class="single_table center-text" style="width:30%;padding: 0px 4px;">
            <% if @board.size %>
