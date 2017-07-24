@@ -2,7 +2,7 @@
   <stronng><small>Shipping:</small><span id="shippableForm" data-rate="<%= @board.rate %>"><%= format_amount(@board.rate.to_f * 100) %></span></stronng>
 <% end%>
 <%= form_for Charge.new do |f| %>
-  <%= f.hidden_field :amount, id: 'totalShip' , value:  @board.price.to_f * 100 %>
+  <%= f.hidden_field :amount, id: 'totalShip' , value:  (@board.price.to_f + @board.rate.to_f) * 100 %>
   <%= f.hidden_field :item, value:  @board.title %>
   <%= f.hidden_field :owner_id, value:  @board.user_id %>
   <%= f.hidden_field :board_id, value:  @board.id %>
