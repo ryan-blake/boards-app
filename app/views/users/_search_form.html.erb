@@ -26,9 +26,10 @@
           New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
           Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
         </div>
-        <span style="display: flex;width: 45%;margin-left: 2%;width: 51%;"><%= grouped_collection_select nil, :category_id, Type.all, :categories,
-            :name, :id, :name, { include_blank: true },
-                { id: 'category-select-user' , class: " cat-width form-control"} %></span>
+        <span style="display: flex;width: 50%;margin-left: 3%;">
+        <%= grouped_collection_select nil, :category_id, Type.all, :categories,
+            :name, :id, :name, { prompt: "Category" },
+                { id: 'category-select-user' , class: "form-control", style:"top:-20px;position:relative;"} %></span>
       <span id="brand_user" style="margin-top:14px;width: 45%;float: left;top: -34px;position: relative;margin-left: 50%;"> <%= collection_select(nil, :make, Board.where(rental: false, :for_sale => true, user_id: @user.id).where("inventory >= ?", 1).select(:make).uniq, :make, :make, {:include_blank => "Brands", },
              { class: "form-control"}) %></span>
       <div class="input-group" style="margin-left: 2%;bottom: 34px;width: 51%;">
@@ -141,3 +142,11 @@
 </div><!-- /.row -->
 <% end %>
 </div>
+
+<script>
+var typeSelectUser = document.getElementById('type-select-user');
+var brandUser = document.getElementById('brand_user')
+typeSelectUser.onchange = function(){
+  brandUser.style['margin-top'] = '-20px'
+}
+</script>
