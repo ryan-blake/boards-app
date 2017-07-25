@@ -231,7 +231,7 @@ end
   def update
     respond_to do |format|
       if @charge.update(charge_params)
-        format.html { redirect_to @charge, notice: 'Charge successfully updated.' }
+        format.html { redirect_to @charge}
         format.json { render :show, status: :ok, location: @charge }
       else
         format.html { render :edit }
@@ -263,7 +263,7 @@ end
 
     def picked_boards
       @user = current_user
-      @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: false || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+      @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: "0" || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
     end
 
     def search_picked

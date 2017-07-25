@@ -5,7 +5,6 @@ class BoardsController < ApplicationController
   def import
     count = Board.import params[:file]
     redirect_to dash_path notice: "imported #{count} boards"
-
   end
 
   def index
@@ -93,11 +92,9 @@ end
   end
   def active_boards
     @user = current_user
-
     @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
   def search_dash
-
     @active_boards = Board.where(user_id: current_user.id, pending: nil || false, for_sale: true)
     unless params[:category_id] == ""
       type = Category.find(params[:category_id]).type_id
