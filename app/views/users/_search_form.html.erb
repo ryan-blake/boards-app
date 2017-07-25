@@ -12,14 +12,15 @@
 <%= form_tag({controller: :users, action: :search_signed_in}, {method: :get, remote: true}) do  %>
     <div class="row board-search-form">
       <div class="main-form" style="">
+        <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select-user' })  %>
         <div style="position: relative;display: inline;bottom: -121px;left: calc(50% - 54px);">
           New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
           Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>
         </div>
         <div>
-          <%= collection_select(nil, :category_id, Type.all.order(:name), :id, :name, {prompt: "type"},{ class: "form-control", id: "type-select", style:"position: relative;top: 25px;margin-left: 10px;max-height: 26px;" }) %>
+          <%= collection_select(nil, :category_id, Type.all.order(:name), :id, :name, {prompt: "type"},{ class: "form-control", id: "category-select", style:"position: relative;top: 25px;margin-left: 10px;max-height: 26px;" }) %>
         </div>
-        <%= collection_select(nil, :category_id, Category.where(:type_id => params[:type_id]).order(:name), :id, :name, {prompt: "Categories"},{ class: "form-control", id: "category-select", style:'display: block;width: 150px;' }) %>
+        <%= collection_select(nil, :category_id, Category.all.order(:name), :id, :name, {prompt: "Categories"},{ class: "form-control", id: "category-select-user", style:'display: block;width: 150px;' }) %>
         <span style="display: flex;width: 45%;margin-left: 2%;width: 51%;"></span>
         <%= collection_select(nil, :make, Board.where(rental: false, :for_sale => true, :type_id => params[:type_id], user_id: @user.id).where("inventory >= ?", 1).select(:make).uniq, :make, :make, {:include_blank => "Brands", },{style: 'width:150px;margin-top: -33px;right: 150px;margin-left: 21%;' , class: "form-control"}) %>
       <span style="width: 45%;float: left;top: -34px;position: relative;margin-left: 50%;margin-bottom:35px;"></span>
@@ -49,8 +50,6 @@
         </span>
       </div>
 </div>
-
-
 
 <div style="position:absolute;left:5%;">
        <span class="pull-right" style="cursor:pointer;text-decoration:underline;">  </span>

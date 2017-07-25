@@ -48,3 +48,21 @@ $ ->
         console.log("AJAX Error: #{textStatus}")
       success: (data, textStatus, jqXHR) ->
         console.log("Dynamic country select OK!")
+
+ jQuery ->
+  $("#category-select-user").hide();
+
+  $("#type-select-user").change ->
+    $("#category-select-user").show(0);
+
+jQuery ->
+  subcat = $('#category-select-user').html()
+  $('#category-select-user').click ->
+    type = jQuery('#type-select-user').children('option').filter(':selected').text()
+    options = $(subcat).filter("optgroup[label='#{type}']").html()
+    if options
+      $('#category-select-user').html("<option value=''></option>" + options)
+      $('#category-select-user option:first').attr("selected", "selected");
+      $('#category-select-user').html(options)
+    else
+      $('#category-select-user').empty()

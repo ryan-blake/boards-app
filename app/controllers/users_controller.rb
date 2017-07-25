@@ -106,8 +106,6 @@ def destroy
 end
 
 
-
-
  def search_signed_in
    @user = User.find(params[:id])
    @boards = @user.boards.where(:for_sale => true)
