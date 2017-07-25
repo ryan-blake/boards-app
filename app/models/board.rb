@@ -72,7 +72,7 @@ class Board < ApplicationRecord
   after_save :check_for_tracking_number
   after_update :update_tokens
   after_update :update_margin
-  after_validation :add_accessories, if: ->(obj){ obj.accessories.exists? }
+
 
   # mapping
   geocoded_by :full_address
@@ -109,33 +109,18 @@ end
      "$#{price} "
   end
 
-  def add_accessories
-    if self.accessories.exists?
-      price = self.price.to_f
-      acc = self.accessories
-      acc.each do |i|
-        price += i.price.to_f
-      end
-      price.to_f * 100
-    else
+  def add_price
       price = self.price.to_f * 100
+  end
+
+  def get_total
+    if self.shippable == true && self.rate != nil
+      price = self.rate.to_f + self.price.to_f
+    else
+      price = self.price.to_f
     end
   end
 
-def get_total
-  if self.shippable == true
- if self.rate && self.accessories.exists?
-  price = self.rate.to_f + self.price.to_f
-    a = self.accessories
-    a.each do |i|
-      price += i.price.to_f
-    end
-    price.to_f
-  else
-  price = self.rate.to_f + self.price.to_f
- end
- end
-end
   def sellable?
     self.for_sale && self.inventory >= 1
   end
