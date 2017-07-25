@@ -18,6 +18,9 @@ if (featured) {
 } else {
 
 };
+$("#boardModal .modal-content").html('<%= j render partial: "boards/show" %>');
+$("#boardModal").modal()
+
 $("#pickup").html("<%=j render partial: 'charge' %>");
 $("#delivery").html("<%=j render partial: 'chargeshow' %>");
 $("#boardAccessories").html("<%=j render partial: 'accessories/search_accessories' %>");

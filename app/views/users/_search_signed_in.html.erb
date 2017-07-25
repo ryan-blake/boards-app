@@ -1,100 +1,92 @@
-<table class="container-fluid index-results" id="results" style="overflow-y:scroll;-webkit-overflow-scrolling: touch;width:100%;">
+<table class="container-fluid index-results " id="results" style="min-width:95%;max-width:95%''">
   <thead>
-
-
     <td>
-      <tr>
-        <td class="filtering center-text">
-          <ti> <strong> Sort by: </strong> </ti>
-          <ti class="btn btn-sort" style="padding-left:8px;"><%= sortable "created_at", "Date" %> </ti>
-          <ti class="btn btn-sort"><%= sortable "price" %></ti>
-          <ti class="btn btn-sort center-text" ><%= sortable "length", "Height" %></ti>
-        </td>
+      <div class="center-text" style="" id="paginator">
+        <% if @boards %>
+        <%= paginate @boards, remote: true, window: 1 %>
+        <% end %>
+      </div>
 
+      <tr>
+        <td class="center-text sorting-row">
+          <div class="btn-group">
+            <button style="margin-bottom:10px;right:9%;border:1px solid darkslategrey;" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              Sort Options <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><%= sortableAsc "created_at", "Date" %> </li>
+              <li><%= sortableAsc "price", "Price" %></li>
+              <li><%= sortableAsc "length", "Height" %></li>
+              <li class="divider"></li>
+              <li><%= sortableDesc "created_at", "Date" %></li>
+              <li><%= sortableDesc "price", "Price" %></li>
+              <li><%= sortableDesc "length", "Height" %></li>
+            </ul>
+          </div>
+        </td>
       </tr>
     </td>
-  <td >
-  <div class="center-text" id="paginator">
-    <%= paginate @boards, remote: true %>
-  </div>
-</td>
   </thead>
-  <% if @boards.length == 0 %>
-    <%= render partial: 'boards/none' %>
-  <% end %>
-  <% @boards.each do |board| %>
-
-    <tbody class="tbody-search col-sm-6 col-md-4 center-text" style="background-color:white;margin-right:30%;">
-        <!-- if no image load other boards image in results -->
-        <td class="center-text" >
-          <div  style="min-height:240px;">
-          <% if board.images.first != nil %>
-              <%= link_to attachment_image_tag(board.images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
-            <% else %>
-              <%= link_to attachment_image_tag(Board.find(3).images.first, :file, :fill, 240, 240), board, remote: true, data: { toggle: "modal", target: "#newModal" }%>
-          <% end %>
-          </div>
-
-      <ul class="main-well-ul">
-         <li class="center-text title-link">
-           <!-- new link to modal -->
-           <div class="title-bar center-text">
-             <%= link_to board.title.truncate(18), board, target: :_blank  %>
-          </div>
-          <%if current_user && board.user_id == current_user.id %>
-           <li><%= link_to 'Edit', edit_board_path(board) %></li>
-          <% end %>
-          <div class="length-ribbon">
-          </div>
-         </li>
-         <li class="center-text">
-          <%=  board.description.truncate(33)  %>
-         </li>
-         <li class="center-text">
-           <strong class="make-li"><%=  board.make %></strong>
-         </li>
-         <li class="center-text" style="padding-top:5px;">
-           <strong class="pull-left" style="padding:5px;font-weight:lighter;font-size:20px;">$<%= board.price %></strong>
-             <button class="btn btn-sort pull-right view_btn"><%= link_to 'view', board, target: :_blank  %></button>
-             <br>
-             <hr class="style13">
-           </td>
-           </ul>
-        </tbody>
-        <% end %>
-
-
-
-      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="newModal">
-         <div class="modal-dialog modal-lg" role="document">
-           <div class="modal-header">
-             <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-           </div>
-           <div class="modal-content">
-           </div>
-         </div>
-       </div>
-
-       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="editModal">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-header">
-              <button type="button" class="close" style="color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-content">
-            </div>
-          </div>
-          <div class="center-text" id="paginator">
-          </div>
+  <% if @boards && @boards.length == 0 %>
+  <tbody style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;background-color:white;">
+    <td style="max-height: 150px;min-width:150px;max-width: 150px;margin-right: 5%;
+          margin-left: 10%;background-color:white;font-size:10px;">
+      <%= render partial: 'boards/none' %>
+    </td>
+  </tbody>
+    <% end %>
+    <% if @boards %>
+<% @boards.each do |board| %>
+  <tbody class="items" style="min-height:150px;min-width:120px !important;float:left;display:inline-flex;background-color:white;">
+    <td class="" style="max-height: 150px;min-width:150px;max-width: 150px;    margin-right: 5%;
+  margin-left: 10%;background-color:white;">
+        <div class="desktop-items-img" style="width:150px;height:150px;">
+        <!-- <%= link_to  image_tag("surf_girl.jpg", width: 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
+          <%= link_to attachment_image_tag(board.images.last, :file, :fill, 150, 150), board, remote: true, data: { toggle: "modal", target: "#boardModal" }%>
         </div>
+        <div class="mobile-items-img center-text" style="width:120px;height:120px;">
+          <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#boardModal" }%>
+<!-- <%= link_to  image_tag("surf_girl.jpg", width: 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
+        </div>
+        <span class="center-text" style="position:relative;overflow-x:hide;margin-top:15px;">
+          <%= board.items? %>
+        <br>
+        </span>
+        <span class="center-text" style="max-width:140px;position:relative;overflow-x:hidden;margin-top:15px;">
+          <% if !board.surfable? && board.size%>
+          <strong style="font-weight:200;"><%= board.size.pretty_dimensions %></strong>
+          <% elsif board.size %>
+          <strong style="font-weight:200;">  <%= board.size.pretty_surf %></strong>
+          <% end %>
+          <strong class="center-text" style="margin-right:50%;float:left;">  <%= board.pretty_price%></strong>
 
+        </span>
+    </td>
+  </tbody>
+<% end %>
+<% end %>
 
-
-
-    <tbody >
+    <tbody>
       <td>
         <div class="center-text" id="paginator">
-        <%= paginate @boards, remote: true %>
+          <% if @boards %>
+          <%= paginate @boards, remote: true, window: 1 %>
+          <% end %>
         </div>
       </td>
     </tbody>
   </table>
+<script>
+  $( document ).ready(function() {
+// hide spinner
+$(".sk-circle").hide();
+// show spinner on AJAX start
+$(document).ajaxStart(function(){
+  $(".sk-circle").show();
+});
+$(document).ajaxStop(function(){
+  $(".sk-circle").delay(400).hide(0);
+});
+// hide spinner on AJAX stop
+});
+</script>
