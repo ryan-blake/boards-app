@@ -1,3 +1,28 @@
+<script>
+$(document).ready(function() {
+var openTracking = document.getElementById('openTracking');
+var trackpartial = document.getElementById('trackPartial');
+var closeTracking = document.getElementById('closeTracking');
+
+openTracking.onclick = function() {
+  if (trackpartial.style.display == 'none') {
+     trackpartial.style['display'] = 'block';
+     closeTracking.style['display'] = 'block';
+     openTracking.style['display'] = 'none';
+   }
+
+   alert('i')
+}
+
+closeTracking.onclick = function() {
+if (trackPartial.style.display == 'block') {
+  closeTracking.style['display'] = 'none';
+  trackPartial.style['display'] = 'none';
+  openTracking.style['display'] = 'block';
+  }
+ }
+});
+</script>
 <%= content_for :page_title, 'Review charge' %>
   <div class="row">
     <div class="col-md-12">
@@ -97,26 +122,3 @@
       </div>
     </div>
   </div>
-<script>
-$(document).ready(function() {
-var openTracking = document.getElementById('openTracking');
-var trackpartial = document.getElementById('trackPartial');
-var closeTracking = document.getElementById('closeTracking');
-
-openTracking.onclick = function() {
-  if (trackpartial.style.display == 'none') {
-     trackpartial.style['display'] = 'block';
-     closeTracking.style['display'] = 'block';
-     openTracking.style['display'] = 'none';
-   }
-}
-
-closeTracking.onclick = function() {
-if (trackPartial.style.display == 'block') {
-  closeTracking.style['display'] = 'none';
-  trackPartial.style['display'] = 'none';
-  openTracking.style['display'] = 'block';
-  }
- }
-});
-</script>
