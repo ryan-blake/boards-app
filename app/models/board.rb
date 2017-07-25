@@ -208,6 +208,15 @@ end
   def save_type
     a = self
     a.type_id = a.category.type_id
+    if self.accessories.count >= 1
+      accPrice = 0
+      self.accessories.each do |i|
+        accPrice += i.price
+      end
+        self.price = (accPrice + self.board_price)
+      else
+        self.price = self.board_price
+    end
   end
 
   def self.import(file)
