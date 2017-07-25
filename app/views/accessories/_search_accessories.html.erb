@@ -109,7 +109,7 @@ function saveClickedAccessories(clickedAccessories, accessoriesPrice, accessorie
     $(".accArray").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
     $("#totalShip").get(0).value = parseFloat(addRate * 100) + parseFloat(sessionStorage.accessoriesPriceTotal * 100);
     $(".accArrayShip").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
-    alert(sessionStorage.accessoriesPriceTotal)
+    alert(sessionStorage.accessoriesPrice)
 }
 function clickAccessory(accessory_div, price) {
   $(accessory_div).addClass('panel-success');
@@ -126,7 +126,7 @@ function clickAccessory(accessory_div, price) {
       var pricing = document.getElementById('showPrice');
       pricing.innerHTML = accessoriesPriceTotal
       sessionStorage.pricing = pricing.innerHTML
-      document.getElementById('showPrice').innerHTML = sessionStorage.pricing;
+      document.getElementById('showPrice').innerHTML = parseFloat(sessionStorage.pricing);
       }
   } else {
     accessoriesPriceTotal += accessoriesPrice[0];
