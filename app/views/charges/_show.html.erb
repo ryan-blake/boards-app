@@ -3,15 +3,15 @@ $(document).ready(function() {
 var openTracking = document.getElementById('openTracking');
 var trackpartial = document.getElementById('trackPartial');
 var closeTracking = document.getElementById('closeTracking');
-
+$('#chargeModal').on('hide.bs.modal', function (e) {
+  trackpartial.style.display == 'none'
+});
 openTracking.onclick = function() {
   if (trackpartial.style.display == 'none') {
      trackpartial.style['display'] = 'block';
      closeTracking.style['display'] = 'block';
      openTracking.style['display'] = 'none';
    }
-
-   alert('i')
 }
 
 closeTracking.onclick = function() {
