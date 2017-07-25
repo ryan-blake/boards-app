@@ -108,9 +108,9 @@
     <div class="col-md-4">
       <div class="form-group">
         <label>Sale Price:</label>
-        $<%= f.number_field :price, :step => 0.01, min: 0, class: 'input-lg btn-width form-control', id: 'boardPrice' %>
+        $<%= f.number_field :sale_price,:step => 0.01, min: 0,class: 'input-lg btn-width form-control', id: 'boardPrice' %>
       </div>
-      <small> Fee:<span id="boardFee" style="position:relative;">  </span></small>
+      <small>Fee:<span id="boardFee" style="position:relative;"> </span></small>
     </div>
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.hidden_field :company, :value => current_user.company ? current_user.company : nil %>

@@ -16,75 +16,75 @@ end
 
 
 def search_table
-  @user = current_user
-  @accessories = @user.accessories.where("cast( kind_id as text) like ? and cast( brand as text) like ? and cast( color as text) like ? and (title like ? or color like ? or brand like ? or upc like ?)",
+ @user = current_user
+ @accessories = @user.accessories.where("cast( kind_id as text) like ? and cast( brand as text) like ? and cast( color as text) like ? and (title like ? or color like ? or brand like ? or upc like ?)",
 
-        "%#{params[:kind_id]}%", "%#{params[:brand]}%", "%#{params[:color]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-        # price
-      if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
-        @accessories  = @accessories.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
-      else
-        if params[:max][0].to_i <= 0 && params[:min][0].to_i >= 1
-          @accessories  = @accessories.min_price(params[:min][0].to_i).max_price(9999)
-        elsif params[:min][0].to_i <= 0 && params[:max][0].to_i >= 1
-          @accessories  = @accessories.min_price(1).max_price(params[:max][0].to_i)
-        else
-          @accessories  = @accessories.min_price(1).max_price(9999)
-        end
-      end
+       "%#{params[:kind_id]}%", "%#{params[:brand]}%", "%#{params[:color]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+       # price
+     if params[:min][0].to_i >= 1 && params[:max][0].to_i >= 1
+       @accessories  = @accessories.min_price(params[:min][0].to_i).max_price(params[:max][0].to_i)
+     else
+       if params[:max][0].to_i <= 0 && params[:min][0].to_i >= 1
+         @accessories  = @accessories.min_price(params[:min][0].to_i).max_price(9999)
+       elsif params[:min][0].to_i <= 0 && params[:max][0].to_i >= 1
+         @accessories  = @accessories.min_price(1).max_price(params[:max][0].to_i)
+       else
+         @accessories  = @accessories.min_price(1).max_price(9999)
+       end
+     end
 
-        #  length / height
-        if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
-          c = params[:unit_id][0].to_i
-          a = params[:minimum][0].to_i
-          b = params[:maximum][0].to_i
-           unless c == 1
-             if c == 2
-               a = c_ft(a)
-               b = c_ft(b)
-             elsif c == 3
-               a = c_cm(a)
-               b = c_cm(b)
-             else
-               a = c_mm(a)
-               b = c_mm(b)
-             end
-           end
-          @accessories  = @accessories.min_length_search(a).max_length_search(b).limit(40)
-        else
-          if params[:maximum][0].to_i <= 0 && params[:minimum][0].to_i >= 1
-            c = params[:unit_id][0].to_i
-            a = params[:minimum][0].to_i
-             unless c == 1
-               if c == 2
-                 a = c_ft(a)
-               elsif c == 3
-                 a = c_cm(a)
-               else
-                 a = c_mm(a)
-               end
-             end
-            @accessories  = @accessories.min_length_search(a).max_length_search(9999).limit(40)
-          elsif params[:minimum][0].to_i <= 0 && params[:maximum][0].to_i >= 1
-            c = params[:unit_id][0].to_i
-            b = params[:maximum][0].to_i
-             unless c == 1
-               if c == 2
-                 b = c_ft(b)
-               elsif c == 3
-                 b = c_cm(b)
-               else
-                 b = c_mm(b)
-               end
-             end
-            @accessories  = @accessories.min_length_search(1).max_length_search(b).limit(40)
-          else
-            @accessories  = @accessories.min_length_search(0).max_length_search(9999).limit(40)
-
+       #  length / height
+       if params[:minimum][0].to_i >= 1 && params[:maximum][0].to_i >= 1
+         c = params[:unit_id][0].to_i
+         a = params[:minimum][0].to_i
+         b = params[:maximum][0].to_i
+          unless c == 1
+            if c == 2
+              a = c_ft(a)
+              b = c_ft(b)
+            elsif c == 3
+              a = c_cm(a)
+              b = c_cm(b)
+            else
+              a = c_mm(a)
+              b = c_mm(b)
+            end
           end
-        end
-        @accessories = @accessories.order(sort_column + ' ' + sort_direction).page(params[:page]).per(12)
-      end
+         @accessories  = @accessories.min_length_search(a).max_length_search(b).limit(40)
+       else
+         if params[:maximum][0].to_i <= 0 && params[:minimum][0].to_i >= 1
+           c = params[:unit_id][0].to_i
+           a = params[:minimum][0].to_i
+            unless c == 1
+              if c == 2
+                a = c_ft(a)
+              elsif c == 3
+                a = c_cm(a)
+              else
+                a = c_mm(a)
+              end
+            end
+           @accessories  = @accessories.min_length_search(a).max_length_search(9999).limit(40)
+         elsif params[:minimum][0].to_i <= 0 && params[:maximum][0].to_i >= 1
+           c = params[:unit_id][0].to_i
+           b = params[:maximum][0].to_i
+            unless c == 1
+              if c == 2
+                b = c_ft(b)
+              elsif c == 3
+                b = c_cm(b)
+              else
+                b = c_mm(b)
+              end
+            end
+           @accessories  = @accessories.min_length_search(1).max_length_search(b).limit(40)
+         else
+           @accessories  = @accessories.min_length_search(0).max_length_search(9999).limit(40)
+
+         end
+       end
+       @accessories = @accessories.order(sort_column + ' ' + sort_direction).page(params[:page]).per(12)
+     end
 
 def search_accessories
   @board = Board.find(params[:board_id])

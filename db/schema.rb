@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170725144621) do
     t.boolean  "shipped"
     t.string   "tracking"
     t.boolean  "rental",                              default: false
-    t.datetime "list_time",                           default: '2017-07-23 19:33:55'
+    t.datetime "list_time",                           default: '2017-07-25 15:08:29'
     t.integer  "inventory",                           default: 0
     t.integer  "cost"
     t.integer  "margin"
@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 20170725144621) do
     t.integer  "rocker_id"
     t.boolean  "shippable"
     t.decimal  "rate",        precision: 5, scale: 2
-    t.decimal  "sale_price",  precision: 8, scale: 2
     t.decimal  "board_price", precision: 8, scale: 2
     t.index ["category_id"], name: "index_boards_on_category_id"
     t.index ["fin_id"], name: "index_boards_on_fin_id"
