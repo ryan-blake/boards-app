@@ -231,7 +231,7 @@ end
   def update
     respond_to do |format|
       if @charge.update(charge_params)
-        format.html { redirect_to @charge, notice: 'Event was successfully updated.' }
+        format.html { redirect_to @charge, notice: 'Charge successfully updated.' }
         format.json { render :show, status: :ok, location: @charge }
       else
         format.html { render :edit }
