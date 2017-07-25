@@ -125,16 +125,8 @@ end
 
 def get_total
   if self.shippable == true
- if self.rate && self.accessories.exists?
+
   price = self.rate.to_f + self.price.to_f
-    a = self.accessories
-    a.each do |i|
-      price += i.price.to_f
-    end
-    price.to_f
-  else
-  price = self.rate.to_f + self.price.to_f
- end
  end
 end
 
