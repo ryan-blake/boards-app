@@ -26,6 +26,8 @@ class ChargesController < ApplicationController
       )
       @charge.charge_stripe = charge['id']
       @charge.update_attribute(:completed, true)
+      @charge.update_attribute(:picked, "0")
+
       @charge.save
       array = @charge.accessories.split(",")
       if array.count >= 1
@@ -242,15 +244,24 @@ end
 
     def receipts
       @user = current_user
-      @receipts = Charge.where(vendor_id: @user.id, shipped: "true").or(Charge.where(vendor_id: @user.id, picked: 1)).pluck(:id)
-      @receipts = Charge.where(id: @receipts).order(sort_column + ' ' + sort_direction).page(params[:page]).per(12)
+      if !@user.stripe_account
+        @receipts = Charge.where(user_id: @user.id).pluck(:id)
+        @receipts = Charge.where(id: @receipts).order(sort_column + ' ' + sort_direction).page(params[:page]).per(12)
+      else
+        @receipts = Charge.where(vendor_id: @user.id, shipped: "true").or(Charge.where(vendor_id: @user.id, picked: 1)).pluck(:id)
+        @receipts = Charge.where(id: @receipts).order(sort_column + ' ' + sort_direction).page(params[:page]).per(12)
+      end
     end
 
     def search_receipts
       @user = current_user
-      @receipts = Charge.where(vendor_id: @user.id, shipped: "true").or(Charge.where(vendor_id: @user.id, picked: "true")).pluck(:id)
-      @receipts = Charge.where(id: @receipts)
-
+      if @user.stripe_account == nil
+        @receipts = Charge.where(user_id: @user.id).pluck(:id)
+        @receipts = Charge.where(id: @receipts)
+      else
+        @receipts = Charge.where(vendor_id: @user.id, shipped: "true").or(Charge.where(vendor_id: @user.id, picked: 1)).pluck(:id)
+        @receipts = Charge.where(id: @receipts)
+      end
         if params[:category_id].present?
             @receipts = @receipts.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
         else
@@ -263,7 +274,7 @@ end
 
     def picked_boards
       @user = current_user
-      @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: "0" || nil).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+      @picked_boards = Charge.where(vendor_id: @user.id, shipping: false, picked: "0" ).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
     end
 
     def search_picked

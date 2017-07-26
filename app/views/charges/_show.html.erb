@@ -33,102 +33,99 @@ if (trackPartial.style.display == 'block') {
 });
 </script>
 <%= content_for :page_title, 'Review charge' %>
+<% if current_user == @charge.vendor %>
+<h3 class="btn btn-sort" style="max-width: 100px;border: 1px solid black;left: 11px;display: block;" id="openTracking"><%= tracking = @charge.shipping == true ? "Tracking #" : "Picked Up" %></h3>
+<h3 class="btn btn-danger" style="display:none;max-width: 100px;border: 1px solid black;position:relative;" id="closeTracking">&times</h3>
+  <div id="trackPartial" style="max-height:69px;min-height:45px;border:4px solid black;left:calc(50% - 160px);display:none;z-index:990;top:88px;position:absolute;">
+    <div style="width:300px;min-height:50px;max-height50px;background-color:#f5f5f5;z-index:989;">
+      <h3 class="btn btn-danger" style="display:none;max-width: 100px;border: 1px solid black;position:relative;" id="closeTracking">&times</h3>
+      <%= render partial: 'charges/tracking', locals: {charge: @charge} %>
+    </div>
+  </div>
+  <% end %>
   <div class="row">
     <div class="col-md-12">
       <h2 class="page-header">
-        <strong>Receipt No: </strong><%= @charge.id %> <span class="pull-right ">
-        <%= format_amount(@charge.price)  %></span>
-      |<strong>  <%= @charge.vendor.company %> </strong>|
+        <strong>Receipt No: </strong><%= @charge.id %>
+        <span class="pull-right">
+          <%= format_amount(@charge.price)  %>
+        </span>
+      |<strong><%= @charge.vendor.company %></strong>|
       </h2>
-
-      <hr>
-      <dt> <%= @board.type.name %>:<%= @board.category.name %></dt>
-      <% if @charge.accessories? %>
-      <dt>:Add On: Accessories</dt>
-      <% @accessories.each do |a| %>
-      <hr>
+      <% if @charge.shipping == true %>
+        <small><strong>Tracking No.: </strong><%= @charge.tracking %></small>
+      <% end %>
+    <hr>
+    <dt class="center-text"><%= @board.title.truncate(14) %> |<%= @board.type.name %>:<%= @board.category.name %>|</dt>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <% if @charge.rental %>
+        <hr>
+          <strong> Pick up:</strong><dd><%= @charge.start_time.to_s.split('00').first %> 8am </dd>
+          <strong> Drop Off:</strong><dd><%= @charge.end_time.to_s.split('00').first %> 5pm</dd>
+        <% end %>
+        <dl>
+          <dd>
+            <% if @charge.user.name %>
+            <strong>Customer Name:</strong> <%= @charge.user.name %>
+            <% end %>
+            <br>
+            <strong>Customer Email:</strong> <%= @charge.user.email %>
+            <dt>Date: <%= format_date(@charge.created_at) %></dt>
+            <hr>
+          </dd>
+          <dd>
+            <% if @charge.board.images.exists? %>
+            <%= image_tag(attachment_url(@charge.board.images.first, :file, :fill, 150, 150, format: 'jpg')) %>
+            <% end %>
+          </dd>
+          <hr>
+          <% if current_user.stripe_account %>
+           <dt>Payment method:</dt>
+           <dd><%= @payments['source']['brand']%></dd>
+            <% if @board.upc.present? %>
+             <dt> UPC:</dt>
+             <dd><%= @board.upc %></dd>
+            <% end %>
+            <% end %>
+          <hr>
+          <% if @charge.shipping == false || @charge.rental == true %>
+            <dd>In store pick Up</dd>
+          <% else %>
+           <dt>Shipping to</dt>
+           <dd> <%= @charge.full_address %> </dd>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+    <% if @accessories.count >=1 %>
+      <div class="panel panel-default">
+        <div class="panel-body">
+        <dt style="text-decoration:underline;">Add On: Accessories</dt>
+          <% @accessories.each do |a| %>
           <dd><strong> Title:</strong>
             <%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
           </dd>
-          <dd><strong> Kind:</strong><%= a.kind.name %> <dd><%= %> </dd>
-          <dd><strong> Price:</strong><%= format_amount(a.price * 100) %> <dd><%= %> </dd>
+          <dd><strong>Item: </strong><%= a.kind.name %><strong> Color: </strong><%= a.color %><strong> Size: </strong> <%= a.measure.to_s + " " + a.unit.name %>
+          <dd><strong> Price: </strong><%= format_amount(a.price * 100) %></dd>
           <% end %>
-      <% end %>
-      <hr>
-
-      <% if current_user == @charge.vendor %>
-      <h3 class="btn btn-sort" style="max-width: 100px;border: 1px solid black;left: 11px;display: block;" id="openTracking"><%= tracking = @charge.shipping == true ? "Tracking #" : "Picked Up" %></h3>
-      <h3 class="btn btn-danger" style="display:none;max-width: 100px;border: 1px solid black;position:relative;" id="closeTracking">&times</h3>
-        <div id="trackPartial" style="max-height:69px;min-height:45px;border:4px solid black;left:calc(50% - 160px);display:none;z-index:990;top:88px;position:absolute;">
-          <div style="width:300px;min-height:50px;max-height50px;background-color:#f5f5f5;z-index:989;">
-            <h3 class="btn btn-danger" style="display:none;max-width: 100px;border: 1px solid black;position:relative;" id="closeTracking">&times</h3>
-            <%= render partial: 'charges/tracking', locals: {charge: @charge} %>
-          </div>
-        </div>
-        <% if @charge.shipping == true %>
-          <small>Tracking:<%= @charge.tracking %></small>
-        <% end %>
-        <% end %>
-
-        <hr>
-      <% if @charge.board.accessories.exists? %>
-      <dt>Accessories</dt>
-      <% @completeAccessories.each do |a| %>
-      <hr>
-      <dd><%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %></dd>
-      <dd><strong> Kind:</strong><%= a.kind.name %> <dd><%= %> </dd>
-      <dd><strong> Price:</strong><%= a.price %> <dd><%= %> </dd>
-      <% end %>
-      <% end %>
-      <% if @charge.rental %>
-      <hr>
-        <strong> Pick up:</strong><dd><%= @charge.start_time.to_s.split('00').first %> 8am </dd>
-        <strong> Drop Off:</strong><dd><%= @charge.end_time.to_s.split('00').first %> 5pm</dd>
-      <% end %>
-      <hr>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <dl>
-            <dt>Purchase From:</dt>
-            <dd>
-              <% if @charge.user.name %>
-              <strong>Customer Name:</strong> <%= @charge.user.name %>
-              <% end %>
-              <br>
-              <strong>Customer Email:</strong> <%= @charge.user.email %>
-
-            </dd>
-            <dd>
-              <% if @charge.board.images.exists? %>
-              <%= image_tag(attachment_url(@charge.board.images.first, :file, :fill, 150, 150, format: 'jpg')) %>
-              <% end %>
-            </dd>
-            <hr>
-            <% if current_user.stripe_account %>
-             <dt>Payment method:</dt>
-             <dd><%= @payments['source']['brand']%></dd>
-              <% if @board.upc.present? %>
-               <dt> UPC:</dt>
-               <dd><%= @board.upc %></dd>
-              <% end %>
-              <dt> Board:</dt>
-              <dd>
-              <%= @board.title %>
-              </dd>
-            <% end %>
-            <hr>
-            <% if @charge.shipping == false || @charge.rental == true %>
-              <dd>In store pick Up</dd>
-            <% else %>
-             <dt>Shipping to</dt>
-             <dd> <%= @charge.full_address %> </dd>
-             <% end %>
-            <hr>
-            <dt>Created:</dt>
-            <dd><%= format_date(@charge.created_at) %></dd>
-            <hr>
-          </dl>
         </div>
       </div>
+      <% end %>
+      <% if @charge.board.accessories.exists? %>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <dt style="text-decoration:underline;">Accessories</dt>
+          <% @completeAccessories.each do |a| %>
+          <dd><strong> Title:</strong>
+            <%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
+          </dd>
+          <dd><strong>Item: </strong><%= a.kind.name %><strong> Color: </strong><%= a.color %><strong> Size: </strong> <%= a.measure.to_s + " " + a.unit.name %>
+          <dd><strong> Price: </strong><%= format_amount(a.price * 100) %></dd>
+          <hr>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
     </div>
   </div>

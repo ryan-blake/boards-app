@@ -10,7 +10,11 @@
         </div>
         <tr>
           <td class="filtering center-text">
+            <% if @user.stripe_account %>
             <span> <strong style="position:relative;margin-bottom:20px;text-decoration:underline;">Completed Transactions </strong></span>
+            <% else %>
+            <span><strong style="position:relative;margin-bottom:20px;text-decoration:underline;">purchases </strong></span>
+            <% end %>
             <br>
             <ti> <strong> Sort by: </strong> </ti>
             <i style="display:inline;"> <%= sortable "updated_at", "Time" %></i>
@@ -23,21 +27,51 @@
       <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
-            <th>image</th>
+            <% if !@user.stripe_account %>
+            <th>Receipt</th>
+              <th><i style="display:inline;"> Seller </th>
+              <th><i style="display:inline;"> <%= sortable "item", "Title" %></th>
+              <th><i style="display:inline;"> <%= sortable "price" %></i></th>
+              <th><i style="display:inline;"> <%= sortable "created_at", "purchased" %></i></th>
+              <th><i style="display:inline;"> Accessories </i></th>
+            <th>Type</th>
+            <% else %>
+            <th>Receipt</th>
               <th><i style="display:inline;"> User </th>
               <th><i style="display:inline;"> <%= sortable "id" %></i></th>
-              <th><i style="display:inline;"> <%= sortable "item", "Title" %></th>
               <th><i style="display:inline;"> <%= sortable "price" %></i></th>
               <th><i style="display:inline;"> <%= sortable "created_at", "purchased" %></i></th>
               <th><i style="display:inline;"> UPC </i></th>
               <th><i style="display:inline;"> Accessories </i></th>
-
-            <th>listing</th>
+            <th>Type</th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
         <% @receipts.each do |charge| %>
             <tr>
+             <% if !@user.stripe_account %>
+              <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 80, 80), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
+              <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 40, 40), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
+              <td><%= charge.vendor.name %></td>
+              <td> <%= link_to charge.item.truncate(13) %></td>
+              <td><%= format_amount(charge.price) %></td>
+              <td><%= format_date(charge.created_at) %></td>
+              <td class="text-center">
+                <% a = charge.accessories.split(",") %>
+                <% a = Accessory.where(id: a) %>
+                <% a.each_with_index do |a, index|  %>
+                <% if index >=1 %>
+                  :
+                  <% end %>
+                <%= a.title + " " + a.kind.name %>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <small><%=charge.chargeBoard.type.name %>: </small>
+                <small><%=charge.chargeBoard.category.name %> </small>
+              </td>
+              <% else %>
               <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 80, 80), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
               <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(charge.chargeBoard.images.first, :file, :fill, 40, 40), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
               <td><%= charge.user.name  %>
@@ -65,6 +99,7 @@
                 <small><%=charge.chargeBoard.type.name %>: </small>
                 <small><%=charge.chargeBoard.category.name %> </small>
               </td>
+              <% end %>
             </tr>
             <% end %>
         </tbody>
@@ -84,13 +119,14 @@
             :name, :id, :name, {prompt: "Select type" },
             { id: 'category-select' , class: "form-control"} %>
     </span>
-
-  </div><!-- /input-group -->
+  </div>
+  <% unless !@user.stripe_account %>
   <div class="row">
-  <div class="input-group" style="float:right;margin-right:16px;">
-    <%= text_field_tag :user, nil, class: 'form-control', :placeholder => "Customer Name or email.."  %>
-</div>
-</div>
+    <div class="input-group" style="float:right;margin-right:16px;">
+      <%= text_field_tag :user, nil, class: 'form-control', :placeholder => "Customer Name or email.."  %>
+    </div>
+  </div>
+<% end %>
 </div><!-- /.col-lg-6 -->
 <div class="col-md-4 search-bar">
    <div class="input-group">

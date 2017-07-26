@@ -368,11 +368,11 @@ $(document).ajaxStop(function(){
   <div class="pull-left" style="top:50px;left:1px;width:190px;position:fixed;z-index:1;">
       <h3 class="btn btn-sort" style="max-width:100px;link-style:none;position:relative;bottom:2px;left:11px;" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
   </div>
-<% if current_user.role == "admin" %>
-<div id="csv-upload"><%= form_tag import_boards_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Upload" %>
-<% end %>
+  <% if current_user.role == "admin" %>
+  <div id="csv-upload"><%= form_tag import_boards_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Upload" %>
+  <% end %>
 <% end %>
 </div>
 
@@ -425,9 +425,8 @@ $(document).ajaxStop(function(){
 
 <!-- nav desktop -->
 <div class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
-
   <% if !@user.stripe_account  %>
-  <button type="button" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
+  <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <% else %>
   <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
   <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
@@ -457,6 +456,10 @@ $(document).ajaxStop(function(){
        <span class="caret"></span>
      </button>
      <ul class="dropdown-menu mobile-drop-dash" style="min-width: 10px;max-width: 100px;">
+
+     <% if !@user.stripe_account  %>
+     <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-receipt-m"><%= link_to 'Receipts', receipts_charges_path, remote:true %></button></li>
+     <% else %>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-active-m"><%= link_to 'Active',  active_boards_boards_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-receipt-m"><%= link_to 'Receipts', receipts_charges_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-inventory-m"><%= link_to "Inactive", inactive_boards_boards_path, remote:true %></button></li>
@@ -466,6 +469,7 @@ $(document).ajaxStop(function(){
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-rental-m"><%= link_to 'Rental', rental_boards_events_path , remote: true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-accessory-m"><%= link_to 'accessories', table_accessories_path , remote: true %></button></li>
      </ul>
+     <% end %>
    </div>
 </div>
 <style>
