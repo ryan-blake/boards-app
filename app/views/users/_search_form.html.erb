@@ -28,7 +28,7 @@
         </div>
         <span style="display: flex;width: 50%;margin-left: 3%;">
         <%= grouped_collection_select nil, :category_id, Type.all, :categories,
-            :name, :id, :name, { prompt: "Category" },
+            :name, :id, :name, { prompt: "Categories" },
                 { id: 'category-select-user' , class: "form-control", style:"top:-20px;position:relative;"} %></span>
       <span id="brand_user" style="margin-top:14px;width: 45%;float: left;top: -34px;position: relative;margin-left: 50%;"> <%= collection_select(nil, :make, Board.where(rental: false, :for_sale => true, user_id: @user.id).where("inventory >= ?", 1).select(:make).uniq, :make, :make, {:include_blank => "Brands", },
              { class: "form-control"}) %></span>
@@ -135,7 +135,7 @@
    <div class="input-group">
      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
      <span class="input-group-btn" >
-       <%= button_tag "Go!", style:'background-color:darkslategrey;border:1px solid darkslategrey;' ,class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+       <%= button_tag "Go!", style:'background-color:darkslategrey;border:1px solid darkslategrey;left: -30px;' ,class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
      </span>
    </div><!-- /input-group -->
  </div><!-- /.col-lg-6 -->

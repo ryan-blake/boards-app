@@ -1,7 +1,7 @@
 <table class="container-fluid index-results " id="results" style="min-width:95%;max-width:95%''">
   <thead>
     <td>
-      <div class="center-text" style="" id="paginator">
+      <div class="center-text" style="" id="paginator-user">
         <% if @boards %>
         <%= paginate @boards, remote: true, window: 1 %>
         <% end %>
@@ -68,7 +68,7 @@
 
     <tbody>
       <td>
-        <div class="center-text" id="paginator">
+        <div class="center-text" id="paginator-user">
           <% if @boards %>
           <%= paginate @boards, remote: true, window: 1 %>
           <% end %>

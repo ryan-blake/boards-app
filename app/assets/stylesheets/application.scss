@@ -1228,6 +1228,14 @@ left: calc(50% - 202px);
 height: 64px;
 }
 
+#paginator-user {
+max-width: 374px;
+min-width:374px;
+position: relative;
+left: calc(50% - 185px);
+height: 64px;
+}
+
 #sizeForm {
 margin-top:-65px;
 }
@@ -1261,6 +1269,14 @@ margin-top:-65px;
 
 #accColorForm {
  right: 63px;
+}
+
+#paginator-user {
+max-width: 374px;
+min-width:374px;
+position: relative;
+left: calc(50% - 202px);
+height: 64px;
 }
 
 .table a {
