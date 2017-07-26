@@ -126,6 +126,18 @@
     <%= f.hidden_field :company, :value => current_user.company ? current_user.company : nil %>
     <%= f.hidden_field :list_time, :value => Time.now %>
   </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Shippable:</label>
+      <%= f.check_box :shippable, class: 'form-control input-sm', id:'boardShips' %>
+    </div>
+  </div>
+  <div class="col-md-4" id ="boardRate" style="display:none;">
+    <div class="form-group">
+      <label>Flat Rate: $</label>
+        <%= f.number_field :rate, :step => 0.01, min: 0, class: 'btn-width form-control input-md' %>
+    </div>
+  </div>
     <div class="row">
       <div class="col-md-11">
         <div class="form-group">
@@ -139,13 +151,11 @@
       <div class="">
         <div class="form-group">
           <div id="accessoryForm" style="margin-bottom:50px;display:block;position:relative;min-height:400px;min-width:100%;">
-            <hr class="style14">
-
+            <hr style="background-color:darkseagreen;height:8px;"class="style14">
             <div>
               <%= f.fields_for :accessories do |builder| %>
                 <%= render "accessories/form", :f => builder %>
               <% end %>
-
             <hr>
             </div>
          </div>
@@ -176,6 +186,20 @@
   <% end %>
 
   <script>
+  var shippable = document.getElementById('boardShips')
+  var rate = document.getElementById('boardRate');
+  if (shippable.checked) {
+    rate.style['display'] = 'block'
+  }
+  $('#boardShips').on('click', function(){
+    var rate = document.getElementById('boardRate');
+    if (this.checked) {
+      rate.style['display'] = 'block';
+    } else {
+      rate.style['display'] = 'none'
+    }
+  });
+
 
   $('.editUpdateBtn').on('click', function(){
     var boardTitle = document.getElementById('boardTitle');
@@ -185,7 +209,7 @@
     var boardPrice = document.getElementById('boardPrice');
     var boardDescription = document.getElementById('boardDescription');
     var missingItems = 0;
-alert('hi')
+
    if($('#boardTitle').val() == ""  )
     {
      boardTitle.style['background-color'] = 'beige';

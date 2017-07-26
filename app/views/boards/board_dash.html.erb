@@ -436,16 +436,9 @@ $(document).ajaxStop(function(){
   <button type="button" class="btn btn-default" id="btn-sales"><%= link_to 'Sales', sales_boards_boards_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
   <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <button type="button" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
-
   <% end %>
-
 </div>
 
-<style>
-  #btn-accessory a {
-    margin-left:-9px;
-  }
-</style>
 <!--!nav desktop  -->
 
 <!-- nav mobile  starts at < 835px-->
@@ -456,7 +449,6 @@ $(document).ajaxStop(function(){
        <span class="caret"></span>
      </button>
      <ul class="dropdown-menu mobile-drop-dash" style="min-width: 10px;max-width: 100px;">
-
      <% if !@user.stripe_account  %>
      <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-receipt-m"><%= link_to 'Receipts', receipts_charges_path, remote:true %></button></li>
      <% else %>
