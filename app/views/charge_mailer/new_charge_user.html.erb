@@ -1,4 +1,4 @@
-<h2> NEW CHARGE </h2>
-
+<h2> Charge Complete For </h2>
 <h4> <%= @charge.item %>
-  for <strong> $<%=@charge.price %></strong></h4>
+  for <strong> $<%= @charge.price.to_f / 100 %></strong></h4>
+  From <%= @charge.vendor.company %>

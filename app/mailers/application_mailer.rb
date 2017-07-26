@@ -1,6 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'alert@stillshreds.com'
+  default from: 'alerts@kuivir.com'
   layout 'mailer'
-
-
 end

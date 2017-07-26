@@ -6,8 +6,7 @@ class ConversationMailer < ApplicationMailer
     @sender = @sender.opposed_user(conversation.user)
     @deliver = []
     @deliver.push(@sender)
-
-  mail to: @sender.email, subject: "new message #{@conversation.body.truncate(15)}"
+    mail to: @sender.email, subject: "new message #{@conversation.body.truncate(15)}"
   end
 
   private

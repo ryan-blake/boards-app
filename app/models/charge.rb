@@ -34,6 +34,8 @@ class Charge < ApplicationRecord
   belongs_to :user
   belongs_to :board
   belongs_to :vendor, class_name: 'User', foreign_key: 'vendor_id'
+  after_save :check_for_tracking_number
+
 
   def full_address
     [address, city, state, zipcode].join(', ')
@@ -53,5 +55,11 @@ class Charge < ApplicationRecord
 
   def receipts(charges)
    @receipts = Charge.where(id: charges)
+  end
+
+  def check_for_tracking_number
+    if tracking_changed?
+       ChargeMailer.tracking_number(self).deliver_now
+     end
   end
 end

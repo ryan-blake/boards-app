@@ -69,7 +69,6 @@ class Board < ApplicationRecord
 
   before_validation :load_costs
   after_validation :save_type
-  after_save :check_for_tracking_number
   after_update :update_tokens
   after_update :update_margin
 
@@ -99,11 +98,7 @@ scope :end_search, -> (startDate, endDate) {
 def full_address
   [address, city, state, zipcode].join(', ')
 end
-  def check_for_tracking_number
-    if tracking_changed?
-       BoardMailer.tracking_number(self).deliver_now
-     end
-  end
+
 
   def pretty_price
      "$#{price} "

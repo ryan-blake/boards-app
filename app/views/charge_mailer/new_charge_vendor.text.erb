@@ -1,3 +1,4 @@
-new charge on <%= @charge.item %>
-for $<%= @charge.price %>
-new charge
+New charge <%= @charge.item %>
+for $<%= @charge.price.to_f / 100 %>
+<br>
+<%= link_to 'view', dash_url  %>

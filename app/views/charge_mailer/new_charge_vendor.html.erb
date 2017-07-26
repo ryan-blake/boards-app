@@ -1,3 +1,4 @@
 <h2> NEW CHARGE </h2>
 <h4> <%= @charge.item %>
-  for <strong> $<%=@charge.price %></strong></h4>
+  for <strong> $<%= @charge.price.to_f / 100 %></strong></h4>
+<%= link_to 'view', dash_url  %>
