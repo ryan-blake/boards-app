@@ -28,6 +28,7 @@
 </div>
 
 <script>
+
 $(document).ready(function() {
   $('#accModal').on('show.bs.modal', function (e) {
     if ( $('#newModal').is(':visible') ) {
@@ -43,21 +44,12 @@ $(document).ready(function() {
       $('#surfModal').removeClass('fixed-position');
     }
   });
-  $('#surfModal').on('show.bs.modal', function (e) {
-    sessionStorage.clear()
 
-  });
   $('#surfModal').on('hide.bs.modal', function (e) {
     sessionStorage.clear()
-
   });
   $('#newModal').on('hide.bs.modal', function (e) {
     sessionStorage.clear()
-
-  });
-  $('#newModal').on('show.bs.modal', function (e) {
-    sessionStorage.clear()
-
   });
 // loads board price and resets if accessoriesPriceTotal returns to nil
 var pricing = document.getElementById('showPrice');
@@ -66,7 +58,6 @@ if (sessionStorage.accessoriesPriceTotal){
 
 } else {
   var prices = $('#showPrice').data('board');
-
   pricing.innerHTML = Math.floor(prices * 100)/100
 }
 

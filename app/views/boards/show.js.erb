@@ -8,12 +8,16 @@ var featured = $('#featured-boards').is(':visible')
 if (seeing_search || dashboard) {
   $("#newModal .modal-content").html('<%= j render partial: "show" %>');
   $("#newModal").modal()
+
+  sessionStorage.clear()
+
 } else {
 
 };
 if (featured) {
   $("#surfModal .modal-content").html('<%= j render partial: "show" %>');
   $("#surfModal").modal()
+  sessionStorage.clear()
 
 } else {
 

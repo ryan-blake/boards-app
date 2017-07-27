@@ -10,7 +10,6 @@ class ChargesController < ApplicationController
 
     def complete
        @board = Board.find_by(id: @charge.board_id,  arrived: false)
-
       Stripe.api_key = ENV["STRIPE_API_KEY"]
       token = @charge.token
       charge = Stripe::Charge.create({
@@ -46,7 +45,7 @@ class ChargesController < ApplicationController
 
       rescue Stripe::CardError => e
         flash[:error] = e.message
-        redirect_to charges_path
+        redirect_to root_path
       end
 
 
