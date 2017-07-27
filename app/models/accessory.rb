@@ -33,6 +33,7 @@ class Accessory < ApplicationRecord
   accepts_nested_attributes_for :images, allow_destroy: true
   validates :kind_id, :presence => true
   validates :category_id, :presence => true
+  validates_uniqueness_of :upc, scope: :user_id
   after_validation :save_category
   after_validation :accessory_length
   after_update :accessory_length, if: ->(obj){ obj.measure_changed?}
@@ -42,7 +43,7 @@ class Accessory < ApplicationRecord
    scope :max_length_search, ->(maximum) { where('measured <= ?', maximum) }
    scope :min_price, ->(min) { where('price >= ?', min) }
    scope :max_price, ->(max) { where('price <= ?', max) }
-   
+
   def save_category
     a = self
     if a.category.present?

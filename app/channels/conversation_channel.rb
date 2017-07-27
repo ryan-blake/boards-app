@@ -13,7 +13,7 @@ class ConversationChannel < ApplicationCable::Channel
      end
      @newMessage = Message.create(message_params)
     #  send email to users about new messages
-    #  ConversationMailer.new_message(@newMessage).deliver_now
+     ConversationMailer.new_message(@newMessage).deliver_now
 
    end
 end

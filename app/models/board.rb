@@ -66,6 +66,7 @@ class Board < ApplicationRecord
   validates :make, :presence => true
   validates :price, :presence => true
   validates :category, :presence => true
+  validates_uniqueness_of :upc, scope: :user_id
 
   before_validation :load_costs
   after_validation :save_type
