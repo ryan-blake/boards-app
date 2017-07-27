@@ -100,9 +100,9 @@ end
       type = Category.find(params[:category_id]).type_id
       @active_boards = @active_boards.where(type_id: type)
     end
-      @active_boards = @active_boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
+      @active_boards = @active_boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ? or upc like ?)",
 
-              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+              "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
   end
   def inactive_boards
     @user = current_user
@@ -115,8 +115,8 @@ def search_inactive
     type = Category.find(params[:category_id]).type_id
     @inactive_boards = @inactive_boards.where(type_id: type)
   end
-    @inactive_boards = @inactive_boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
-    "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+    @inactive_boards = @inactive_boards.where("cast( make as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ? or upc like ?)",
+    "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%","%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 end
 
   def shipped_boards
