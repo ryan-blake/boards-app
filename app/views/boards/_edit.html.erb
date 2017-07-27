@@ -128,6 +128,14 @@
   </div>
   <div class="col-md-4">
     <div class="form-group">
+    <div class="center-text form-group">
+        <%= f.label :upc %>:
+        <%= f.text_field :upc, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
       <label>Shippable:</label>
       <%= f.check_box :shippable, class: 'form-control input-sm', id:'boardShips' %>
     </div>
