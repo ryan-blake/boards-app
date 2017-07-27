@@ -10,9 +10,11 @@ $('#chargeModal').on('hide.bs.modal', function (e) {
 });
 
 trackBtn.onclick = function() {
-  closeTracking.style['display'] = 'none';
-  trackPartial.style['display'] = 'none';
-  openTracking.style['display'] = 'block';
+  setTimeout(function() {
+    closeTracking.style['display'] = 'none';
+    trackPartial.style['display'] = 'none';
+    openTracking.style['display'] = 'block';
+  }, 500);
 };
 
 openTracking.onclick = function() {

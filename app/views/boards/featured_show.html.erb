@@ -1,4 +1,5 @@
-<div id="show-view">
+<!-- delete -->
+<!-- <div id="show-view">
 <% if ( user_signed_in? && current_user.id === i.user.id || i.customer_id) || (i.for_sale == true ) %>
 <%= render 'layouts/spinner' %>
   <div class="well-sm pull-left" style="position:absolute;top:0;z-index:929;">
@@ -13,7 +14,7 @@
         </div>
       <% end %>
   </div>
-      <!-- begin view -->
+
 <div class="title center-text">
   <strong><%= i.title %></strong>
     <strong><%= i.length %></strong>
@@ -21,16 +22,16 @@
   <div class="image-box center-text" id="images" style="">
     <%= render partial: 'images', locals: {board: i}  %>
     <%=  image_tag("surf_girl.jpg", height: 280, width: 330) %>
-z
+
   </div>
 <hr class="style13" style="top:440px;">
 <%= render partial: 'datatable', locals: {board: i}  %>
 
-<!-- section -->
+
   <div class="description-modal pull-right" style="padding:40px 15px;position:relative;clear:all;">
     <%= i.description %>
   </div>
-<!-- board accesories -->
+
 <div class="center-text">
   <tbody>
     <%= render partial: 'accessories/collection' %>
@@ -71,11 +72,10 @@ hideAccess.onclick = function() {
   <%= render 'accessories/search_accessories_form' %>
 
 </div>
-<!-- shop accessories by type -->
+
 <div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
  </div>
-<!--  -->
-<!-- section -->
+
   <% if i.rental %>
 
   <div class="rental-div" style="min-height:100%;">
@@ -84,7 +84,7 @@ hideAccess.onclick = function() {
             <div id="invisible" data-rubyvar="<%= i.price  %>"></div>
           <div id="number" style="font-size:30px;"><%= i.price %> </div>
           <%= render 'events/form', locals: {events: @events, board: i} %>
-        <!-- section -->
+
         </span>
         </div>
     <div id="events_calendar" style="max-width:100%;padding-bottom:30px;">
@@ -125,7 +125,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
 });
 </script>
   <% else %>
-<!-- section -->
+
     <div class="payment center-text">
       <% if current_user && current_user.owner?(i)%>
         <strong data-board="<%= i.price %>"style="font-size:30px;">$</strong>
