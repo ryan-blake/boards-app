@@ -173,10 +173,10 @@ $(function(){
     price = $(this).data("price");
     if (loadSelectedAccessories().indexOf(accessory_div.id) < 0) {
       // not taken
-      this.innerHTML = "Remove"
+
       clickAccessory(accessory_div, price);
     } else {
-      this.innerHTML = "Add"
+
       unclickAccessory(accessory_div, price);
     }
   });
