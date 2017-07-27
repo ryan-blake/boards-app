@@ -182,9 +182,12 @@ top: 50px;background: black;top: 50px;
   position:fixed;width:100%; height:100px;z-index:2;top:50px;
 }
 
+.new-btn {
+  background-color: deepskyblue !important;
+}
 .dash-nav-desktop.bcg{
   position: fixed;
-  margin: 100px 0px;
+  margin: 0px 0px;
 }
 #preview-acc {
   margin-top: 27px;
@@ -196,7 +199,9 @@ top: 50px;background: black;top: 50px;
 #btn-accessory a {
   margin-left:-9px;
 }
-
+#new-accessory a {
+  margin-left:-5px;
+}
 .table-scrollable{
     overflow: auto;
 }
@@ -548,7 +553,7 @@ color:white;
 border-color:white;
 a {
 max-width: 75px;
-}
+  }
 }
 .dash-nav-desktop button:hover,
 .dash-nav-desktop button:focus,

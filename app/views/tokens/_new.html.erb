@@ -37,3 +37,10 @@
         </div>
         </div>
         <% @token = true %>
+<script>
+  document.forms['payment-form'].onsubmit = function(){
+     document.getElementById("showToens").innerHTML = "<%= current_user.tokens.to_i %> + Tokens";
+     return false;
+  }
+
+  </script>
