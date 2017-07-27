@@ -424,7 +424,7 @@ $(document).ajaxStop(function(){
 </div>
 
 <!-- nav desktop -->
-<div class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
+<div style="height:350px;clear:right;position:absolute;" class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
   <% if !@user.stripe_account  %>
   <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <% else %>

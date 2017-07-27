@@ -3,7 +3,7 @@
       <thead>
         <th class="center-text single_table top" style="margin-left:20%;min-width:30%;max-width:30%;padding: 0px 4px;">Brand</th>
         <th class="center-text single_table top" style="nax-width:30%;padding: 0px 4px;"> Dimensions</th>
-        <% if @board.tail_id%>
+        <% if @board.surfable? %>
           <th class="center-text single_table top" style="width:30%;padding: 0px 4px;">Tail</th>
         <% end %>
       </thead>
