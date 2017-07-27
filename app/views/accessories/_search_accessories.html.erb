@@ -62,12 +62,12 @@ $(document).ready(function() {
 // loads board price and resets if accessoriesPriceTotal returns to nil
 var pricing = document.getElementById('showPrice');
 if (sessionStorage.accessoriesPriceTotal){
-  pricing.innerHTML = sessionStorage.accessoriesPriceTotal
+  pricing.innerHTML = Math.ceil(sessionStorage.accessoriesPriceTotal * 100)/100;
 
 } else {
   var prices = $('#showPrice').data('board');
 
-  pricing.innerHTML = prices
+  pricing.innerHTML = Math.ceil(prices * 100)/100
 }
 
    $( ".accessory_div" ).click(function() {
@@ -115,23 +115,23 @@ function clickAccessory(accessory_div, price) {
   $(accessory_div).addClass('snow-background');
   var clickedAccessories = loadSelectedAccessories();
   var accessoriesPrice = loadSelectedAccessoriesPrice();
-  var accessoriesPriceTotal = $('#showPrice').data('board');
+  var accessoriesPriceTotal = Math.ceil($('#showPrice').data('board') * 100 )/100
 
   accessoriesPrice.push(price);
   clickedAccessories.push(accessory_div.id);
   if (accessoriesPrice.length > 1){
     for(i = 0; i < accessoriesPrice.length; i++) {
-      accessoriesPriceTotal += accessoriesPrice[i];
+      accessoriesPriceTotal += Math.ceil(accessoriesPrice[i] * 100)/100;
       var pricing = document.getElementById('showPrice');
-      pricing.innerHTML = accessoriesPriceTotal
-      sessionStorage.pricing = pricing.innerHTML
+      pricing.innerHTML = Math.ceil(accessoriesPriceTotal * 100)/100
+      sessionStorage.pricing = Math.ceil(pricing.innerHTML * 100)/100
       document.getElementById('showPrice').innerHTML = Math.ceil(sessionStorage.pricing * 100)/100;
       }
   } else {
-    accessoriesPriceTotal += accessoriesPrice[0];
+    accessoriesPriceTotal += Math.ceil(accessoriesPrice[0] * 100)/100;
     var pricing = document.getElementById('showPrice');
-    pricing.innerHTML = accessoriesPriceTotal
-    sessionStorage.pricing = pricing.innerHTML
+    pricing.innerHTML = Math.ceil(accessoriesPriceTotal * 100)/100
+    sessionStorage.pricing =  Math.ceil(pricing.innerHTML * 100)/100
     document.getElementById('showPrice').innerHTML = Math.ceil(sessionStorage.pricing * 100)/100;
 };
   saveClickedAccessories(clickedAccessories, accessoriesPrice, accessoriesPriceTotal);
@@ -152,13 +152,13 @@ function unclickAccessory(accessory_div, price) {
     accessoriesPrice.splice(removeThisP, 1)
   );
   if (accessoriesPrice.length > 0) {
-    accessoriesPriceTotal -= price;
+    accessoriesPriceTotal -= Math.ceil(price * 100)/100;
     var pricing = document.getElementById('showPrice');
     pricing.innerHTML = Math.ceil(accessoriesPriceTotal * 100) / 100
     sessionStorage.accessoriesPriceTotal = Math.ceil(accessoriesPriceTotal * 100) / 100
   } else {
-    accessoriesPriceTotal -= price;
-    document.getElementById('showPrice').innerHTML = $('#showPrice').data('board')
+    accessoriesPriceTotal -= Math.ceil(price * 100)/100;
+    document.getElementById('showPrice').innerHTML = Math.ceil($('#showPrice').data('board') * 100)/100
   }
   saveClickedAccessories(clickedAccessories, accessoriesPrice, accessoriesPriceTotal);
 }
