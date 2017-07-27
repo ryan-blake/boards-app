@@ -1272,6 +1272,20 @@ margin-top:-65px;
   max-width:100%;
   overflow-x:scroll;
 }
+
+  .refresh-btn {
+    top: -39px;
+    left: 117px;
+    position:absolute;
+  }
+
+  #showTokens {
+    max-width:100px;
+    link-style:none;
+    position:relative;
+    bottom:2px;
+    right: 86px;
+  }
 // responsive
 
 @media (max-width: 484px) {
@@ -1334,6 +1348,16 @@ height: 64px;
     top: 100px !important;
     width: 95% !important;
     left: 65px !important;
+  }
+
+  #showTokens {
+    right:0px;
+    left:11px;
+  }
+
+  .refresh-btn {
+    left:85px;
+    top:1px;
   }
 
   .dash-nav-desktop.bcg {

@@ -9,6 +9,8 @@
         <%= paginate @receipts, remote: true, window: 1 %>
         </div>
         <tr>
+          <button type="button" class="btn btn-success refresh-btn"><%= link_to 'Refresh',  receipts_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Updating... "} , style: 'color:white;'%></button>
+
           <td class="filtering center-text">
             <% if @user.stripe_account %>
             <span> <strong style="position:relative;margin-bottom:20px;text-decoration:underline;">Completed Transactions </strong></span>

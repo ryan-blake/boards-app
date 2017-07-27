@@ -2,7 +2,7 @@
 <div class="top-dash">
 <thead class="" >
   <td>
-    <div style="margin-top:20px;" class="center-text pagination" id="accessories_boards">
+    <div style="margin-top:20px;min-height:30px;" class="center-text pagination" id="accessories_boards">
     <%= paginate @accessories, remote: true, window: 1 %>
     </div>
   </td>
@@ -10,6 +10,7 @@
 <br>
   <strong style="position:relative;margin-bottom:20px;text-decoration:underline;">Accessories</strong>
 </td>
+<button type="button" class="btn btn-success refresh-btn"><%= link_to 'Refresh',  table_accessories_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Updating... "} , style: 'color:white;'%></button>
 </thead>
 <div class=" table-scrollable">
   <table style="" class="table table-bordered table-striped table-hover" id="">

@@ -10,12 +10,10 @@
         <%= paginate @active_boards, remote: true, window: 1 %>
         </div>
         <tr>
-          <th>
-            Active:
-            </th>
           <td class="filtering center-text">
-            <ti> <strong> Sort by: </strong> </ti>
-           </ti>
+            <button type="button" class="btn btn-success refresh-btn"><%= link_to 'Refresh',  active_boards_boards_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Updating... "} , style: 'color:white;'%></button>
+
+            <ti> <strong> Sort <ti style="text-decoration:underline;">Active</ti> by: </strong> </ti>
             <div  <i style="display:inline;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
            </ti>
           </td>

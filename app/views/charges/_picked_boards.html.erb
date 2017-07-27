@@ -11,6 +11,8 @@
         </div>
         <tr>
           <td class="filtering center-text">
+            <button type="button" class="btn btn-success refresh-btn"><%= link_to 'Refresh',  picked_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Updating... "} , style: 'color:white;'%></button>
+
             <span> <strong style="position:relative;margin-bottom:20px;text-decoration:underline;">Waiting for Pick up </strong></span>
             <br>
             <ti> <strong> Sort by: </strong> </ti>
