@@ -60,6 +60,7 @@ gem "chartkick"
 gem "sidekick"
 gem "sinatra", github:'sinatra/sinatra'
 gem "sidekiq-cron", "~> 0.4.0"
+gem 'rack-mini-profiler', '~> 0.10'
 
 
 # gem 'data-confirm-modal'

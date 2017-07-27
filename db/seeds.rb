@@ -210,7 +210,7 @@ User.create(
 users = User.all
 
 
-50.times do
+250.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -235,12 +235,12 @@ users = User.all
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
   shippable: true,
   rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
-  upc:  [11249, 551233, 12421, 124234, 9222, 940].sample,
+  upc:  rand(1000..1300)
 
   )
 end
 
-50.times do
+250.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -266,11 +266,12 @@ end
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
   shippable: true,
   rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
-  upc:  [11249, 551233, 12421, 124234, 9222, 940].sample,
+  upc:  rand(500..900)
+
   )
 
 end
-50.times do
+250.times do
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -298,12 +299,13 @@ end
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
   shippable: true,
   rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
-  upc:  [11249, 551233, 12421, 124234, 9222, 940].sample,
+  upc:  rand(300..500)
+
 
   )
 end
 puts "#{Board.count} at board/1"
-  50.times do
+  250.times do
     Board.create!(
     title:       Faker::Hipster.word,
     make:       Faker::Hipster.word,
@@ -332,7 +334,7 @@ puts "#{Board.count} at board/1"
     tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
     shippable: [true, false].sample,
     rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
-    upc:  [11249, 551233, 12421, 124234, 9222, 940].sample,
+    upc:  rand(1..300)
 
     )
   end
@@ -407,7 +409,7 @@ puts "#{Board.count} at board/1"
       )
     end
     puts "#{Board.count} at access/1"
-    75.times do
+    505.times do
       board = Board.where(user_id: 1).sample
       category = board.category_id
       kind =  Kind.where(category_id: category).sample
