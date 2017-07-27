@@ -9,7 +9,7 @@
           <p><%= flash[:error] %></p>
         <% end %>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-        <div id="card-errors" class="alert alert-danger"></div>
+        <div id="card-errors"></div>
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
@@ -37,10 +37,3 @@
         </div>
         </div>
         <% @token = true %>
-<script>
-  document.forms['payment-form'].onsubmit = function(){
-     document.getElementById("showToens").innerHTML = "<%= current_user.tokens.to_i %> + Tokens";
-     return false;
-  }
-
-  </script>
