@@ -100,7 +100,6 @@ def full_address
   [address, city, state, zipcode].join(', ')
 end
 
-
   def pretty_price
      "$#{price} "
   end

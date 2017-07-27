@@ -20,6 +20,7 @@ end
     Time.at(created).getutc.strftime("%m/%d/%Y")
   end
 
+
   def rental_cost(event)
     a = (((event.end_time - event.start_time) / 86400) * event.board.price).floor
     a =  a * 100

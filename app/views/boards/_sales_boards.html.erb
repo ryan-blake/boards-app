@@ -102,15 +102,17 @@
     </table>
   </div>
 </div>
-<div style="margin-bottom:50px;">
+<!-- <div style="margin-bottom:50px;width:50%;">
   <% if current_user %>
   <strong> Sales </strong>
-  <% @charges = Charge.where(:vendor_id => current_user.id) %>
-    <%= line_chart @charges.group(:created_at).sum(:price), colors: ["#00bfff"] %>
+  <% @charges = Charge.where(:vendor_id => current_user.id) %> d
+    <%= bar_chart @charges.group(:created_at).sum(:price), colors: ["#00bfff"] %>
   <% @board_all = Board.where(:user_id => current_user.id) %>
-    <!-- <%= pie_chart current_user.boards.group(:title).sum(:price) %> -->
-  <% end %>
+    <!-- <%= pie_chart current_user.boards.group(:title).sum(:price) %>
+  </div>
+  <% end %> -->
   <!--  add board_type and category to charges as metadata or otherwise-->
   <!-- manipulate chart data group by_data_range, type, category, price, margins on the fly, -->
-</div>
+
+
 <% end %>

@@ -104,8 +104,8 @@ if (trackPartial.style.display == 'block') {
       <div class="panel panel-default">
         <div class="panel-body">
         <dt style="text-decoration:underline;">Add On: Accessories</dt>
-          <% @accessories.each do |a| %>
-          <dd><strong> Title:</strong>
+          <% @accessories.each_with_index do |a, index| %>
+           <dd><%=index +1%>)<strong> Title:</strong>
             <%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
           </dd>
           <dd><strong>Item: </strong><%= a.kind.name %><strong> Color: </strong><%= a.color %><strong> Size: </strong> <%= a.measure.to_s + " " + a.unit.name %>
@@ -118,14 +118,14 @@ if (trackPartial.style.display == 'block') {
       <div class="panel panel-default">
         <div class="panel-body">
           <dt style="text-decoration:underline;">Accessories</dt>
-          <% @completeAccessories.each do |a| %>
-          <dd><strong> Title:</strong>
+          <% @completeAccessories.each_with_index do |a, index| %>
+           <dd><%=index +1%>)<strong> Title:</strong>
             <%= link_to a.title, a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
           </dd>
           <dd><strong>Item: </strong><%= a.kind.name %><strong> Color: </strong><%= a.color %><strong> Size: </strong> <%= a.measure.to_s + " " + a.unit.name %>
           <dd><strong> Price: </strong><%= format_amount(a.price * 100) %></dd>
-          <hr>
           <% end %>
+          <hr>
         </div>
       </div>
       <% end %>

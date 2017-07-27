@@ -1,3 +1,4 @@
+<div class="build-form">
 <%= form_for(@accessory, remote: true)  do |f| %>
   <% if @accessory.errors.any? %>
     <div id="error_explanation">
@@ -137,10 +138,11 @@ function readAndPreview(file) {
 
   reader.readAsDataURL(file);
 
-}
+  }
 
 }
 
 document.querySelector('#file-input-edit-acc').addEventListener("change", previewImages, false);
 
   </script>
+</div>

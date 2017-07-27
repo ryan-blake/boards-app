@@ -1,5 +1,5 @@
 <% if ( current_user && current_user.stripe_account != nil ) && (@board.shipping != true || false ) %>
-<div id="boardForm" class="panel panel-default topspace">
+<div id="boardForm" class="panel panel-default topspace build-form">
   <div class="panel-body">
   <%= form_for(@board, remote: true)  do |f| %>
   <% if @board.errors.any? %>

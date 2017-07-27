@@ -1,13 +1,170 @@
-<% content_for(:header) do %>
+<div id="show-view">
+<% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
+<!--  -->
+  <div class="well-sm pull-left" style="position:absolute;top:0;z-index:929;">
+    <% if (current_user && current_user.owner?(@board)) && (@board.boardSold?) %>
+    <div id="editModalBtn"><%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#editModal" } %></div>
+       <div style="z-index:1000;min-width:50px;min-height:50px;background-color:white;">
+        <% if @board.shipping == true %>
+          <% if @board.tracking != true || false %>
+          <%= render partial: 'tracking', locals: {board: @board} %>
+          <% end %>
+        <% end %>
+        </div>
+      <% end %>
+  </div>
+      <!-- begin view -->
+<div class="title center-text">
+  <strong><%= @board.title %></strong>
+</div>
+  <div class="image-box center-text" id="images" style="">
+    <%= render partial: 'images', locals: {board: @board}  %>
+    <!-- <%=  image_tag("surf_girl.jpg", height: 280, width: 330) %> -->
+  </div>
+<hr class="style13" style="top:440px;">
+  <%= render partial: 'datatable', locals: {board: @board}  %>
+<!-- section -->
+  <div class="description-modal pull-right" style="padding:30px 7px;position:relative;clear:all;min-width: 75%;">
+    <%= @board.description %>
+  </div>
+<!-- board accesories -->
+<div class="center-text">
+  <tbody style=position:relative;max-width:25%;>
+    <%= render partial: 'accessories/collection' %>
+  </tbody>
+</div>
+</div>
 
+<% if @board.user.accessories.exists? %>
 <script>
 $(document).ready(function() {
-var checkbox = document.getElementById('checkbox');
-var delivery_div = document.getElementById('delivery');
-var pickup_div = document.getElementById('pickup');
-delivery_div.style['display'] = 'block';
+var openAccess = document.getElementById('accessoryBtnOpen');
+var hideAccess = document.getElementById('accessoryBtnHide');
+var access = document.getElementById('searchAccessories');
+openAccess.style.display = 'flex';
+hideAccess.style.display = 'none';
 
-checkbox.onclick = function() {
+openAccess.onclick = function() {
+ if(this.style.display == 'flex') {
+   this.style['display'] = 'none';
+   hideAccess.style['display'] = 'flex';
+   access.style['display'] = 'flex';
+ }
+};
+hideAccess.onclick = function() {
+ if(this.style.display == 'flex') {
+   this.style['display'] = 'none';
+   openAccess.style['display'] = 'flex';
+   access.style['display'] = 'none';
+ }
+};
+});
+</script>
+
+<div style="position: relative;max-height: 27px;z-index: 99;float:right;min-width: 100%;" class="col-sm-12 col-md-12 col-lg-12">
+  <div id="accessoryBtnOpen" style="width:100%; display:flex;" class="btn btn-success">Search Accessories </div>
+  <div id="accessoryBtnHide" style="width:100%; display:none;background-color:darkgreen;" class="btn btn-primary">Hide</div>
+</div>
+<div id="searchAccessories"  style="top:10px;display:none;width: 100%;" class="col-md-9">
+  <%= render 'accessories/search_accessories_form' %>
+</div>
+<!-- shop accessories by type -->
+<div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
+ </div>
+ <% end %>
+
+<!-- section -->
+  <% if @board.rental %>
+  <div class="rental-div" style="min-height:100%;">
+        <div class="rent-dates">
+          <span class="center-text">
+            <div id="invisible" data-rubyvar="<%= @board.price %>"></div>
+          <div id="number" style="font-size:30px;"><%= @board.price.to_i  %> </div>
+          <%= render 'events/form', locals: {events: @events, board: @board} %>
+        <!-- section -->
+        </span>
+        </div>
+    <div id="events_calendar" style="max-width:100%;padding-bottom:30px;">
+      <%= render 'events/calendar', locals: {events: @events, board: @board} %>
+    </div>
+
+</div>
+
+<hr>
+<script>
+$('input[name="daterange"]').daterangepicker(
+{
+   locale: {
+     format: 'YYYY-MM-DD'
+   },
+   startDate: "<%= Time.now %>",
+   endDate: '<%= Time.now + 1.days%>',
+   showDropdowns: true,
+   autoApply: true,
+   orientation: 'auto top',
+   parentEl: '.modal-content'
+},
+function(start, end, label) {
+   if ( start.format('YYYY-MM-DD') < end.format('YYYY-MM-DD') ) {
+     var depDate = moment(start);
+     var arrDate = moment(end);
+     var nbDays = depDate.diff(arrDate, 'days');
+     var one = 1;
+     var rubyVar = $('#invisible').data('rubyvar');
+
+     alert("A " + (-nbDays + one ) * (rubyVar) +" date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+   }
+});
+$('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+
+  alert("A old date range was changed: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+
+});
+</script>
+  <% else %>
+<!-- section -->
+    <div class="payment center-text">
+      <strong style="font-size:30px;">$</strong><strong data-board="<%= @board.price + @theTotal %>" id="showPrice" style="font-size:30px;">.00</strong>
+      <% if current_user && current_user.owner?(@board)%>
+        <% elsif @board.sellable? && @board.shippable == true %>
+         <div class="form-group">
+           pick up
+           <input id="checkbox" type="checkbox", "true">
+         </div>
+         <div id="delivery" style="display:none;">
+           <div class="form-group">
+             ship it
+             <%= render partial: 'chargeshow', locals: {board: @board} %>
+           </div>
+         </div>
+         <div id="pickup" style="display:none;">
+           <div class="form-group">
+             pick up
+             <%= render partial: 'charge', locals: {board: @board} %>
+           </div>
+         </div>
+         <% else %>
+         <div class="form-group">
+            Pick Up Only:
+           <%= render partial: 'charge', locals: {board: @board} %>
+         </div>
+       <% end %>
+    </div>
+  <% end %>
+</div>
+<script>
+
+  $(document).ready(function() {
+  var checkbox = document.getElementById('checkbox');
+  var delivery_div = document.getElementById('delivery');
+  var pickup_div = document.getElementById('pickup');
+
+  delivery_div.style['display'] = 'block';
+  var prices = $('#showPrice').data('board');
+  var pricing = document.getElementById('showPrice');
+  pricing.innerHTML = prices
+
+  checkbox.onclick = function() {
    if(this.checked) {
      pickup_div.style['display'] = 'block';
      delivery_div.style['display'] = 'none';
@@ -16,116 +173,14 @@ checkbox.onclick = function() {
      delivery_div.style['display'] = 'block';
      pickup_div.style['display'] = 'none';
    }
-};
+  };
 });
-
 </script>
-
 <% end %>
-<% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
-<div class="container-fluid">
-      </div>
-    </div>
-    <!-- edit button plus contact for shipping, is contact for shipping necessary -->
-  <div class="well-sm pull-left" style="position:absolute;top:0;">
-    <% if (current_user && current_user.id == @board.user_id)%>
-      <%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right' %>
-      <% if @board.shipping == nil && (@board.customer_id != nil && @board.customer_id != "nil") && @board.for_sale == false %>
-      <td><%= link_to 'delete', @board, method: :delete, data: { confirm: 'Are you sure you want to delete this listing? '}, class: 'btn btn-warning' %></td>
-        <% @a = @board.customer_id %>
-        <% b = User.find(@a).email %>
-        contact <%= b %> for shipping info
-         <% if !@board.tracking%>
-          <%= render partial: 'tracking', locals: {board: @board} %>
-         <% end %>
-      <% elsif @board.shipping == false %>
-        <% @a = @board.customer_id %>
-        contact <% b = User.find(@a).email %>
-        <%= b %>
-        for pickup info
-      <% end %>
+  <div id="forsale">
+  <% if current_user %>
+    <% if current_user.owner?(@board) %>
+    <%= render partial: 'forsale', locals: {board: @board} %>
     <% end %>
+   <% end %>
   </div>
-    <!-- begin view -->
-<div class="title center-text">
-  <strong><%= @board.title %></strong>
-
-</div>
-  <div class="image-box center-text" id="images">
-    <%= render partial: 'images' %>
-  </div>
-
-  <hr class="style13">
-</div>
-
-
-<div class="dimensions" style="min-height:250px;">
-  <table class="col-sm-3 col-md-5" style="position:absolute;top:0px;">
-    <thead>
-      <th class="col-sm-3"> Height: </th>
-      <th class="col-sm-3"> Width: </th>
-      <th class="col-sm-3"> Make: </th>
-      <th class="col-sm-3"> New: </th>
-      <th class="col-sm-3"> Addon: </th>
-      <% if @board.type_id == 1 %>
-       <td class="col-sm-3">Voume:</td>
-       <% end %>
-    </thead>
-    <tbody>
-      <td class="col-sm-3"> <%= @board.length %> </td>
-      <td class="col-sm-3"> <%= @board.width %> </td>
-      <td class="col-sm-3"> <%= @board.make %> </td>
-      <td class="col-sm-3"> <%= @board.used %> </td>
-      <td class="col-sm-3"> <%= @board.footgear %> </td>
-      <% if @board.type_id == 1 %>
-       <td class="col-sm-3">
-       <%= @board.volume %>
-      <% end %>
-    </tbody>
-</div>
-</table>
-<div class="description pull-right" style="top:30px;">
-  <%= @board.description %>
-
-</div>
-<br>
-<br>
-<hr class="style13">
-
-<div class="payment center-text" style="padding-top:30px;padding-bottom:30px;">
- <% if current_user && current_user.id == @board.user_id %>
-  <strong style="font-size:30px;">
-    $<%= @board.price %>
-  </strong>
-   <% else %>
-   <% if @board.for_sale == true %>
-      <strong style="font-size:30px;">$<%= @board.price %></strong>
-      <div class="form-group">
-        pick up
-        <input id="checkbox" type="checkbox", "true">
-      </div>
-      <div id="delivery" style="display:none;">
-        <div class="form-group">
-          ship it
-          <%= render partial: 'chargeshow', locals: {board: @board} %>
-        </div>
-      </div>
-      <div id="pickup" style="display:none;">
-        <div class="form-group">
-          pick up
-          <%= render partial: 'charge', locals: {board: @board} %>
-        </div>
-      </div>
-    <% end %>
-  <% end %>
-</div>
-
-<% if !current_user %>
-  <% elsif @board.for_sale === true && @board.user_id == current_user.id %>
-      <%= render partial: 'forsale', locals: {board: @board} %>
-  <% elsif @board.for_sale == false  && @board.user_id == current_user.id%>
-  <%= render partial: 'forsale', locals: {board: @board} %>
- <% end %>
-</div>
-
-<% end %>
