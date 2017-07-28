@@ -93,20 +93,7 @@ type_select.onchange = function() {
 
   button.addEventListener('click', function (e) {
       sel.options[3].selected = true;
-      mainSearch.style['display'] = 'block';
-      featuredDiv.style['display'] = 'none';
-      type_value.style['top'] = '50px';
-      type_select.style['z-index'] = '1';
-      type_select.style['position'] = '';
-      searchSigned.style['display'] = 'block';
-      searchBar.style['display'] = 'block';
-      typeSelect.style['position'] = 'relative';
-      typeSelect.style['margin-right'] = '10px';
-      typeSelect.style['z-index'] = '1';
-      typeSelect.style['top'] = '96px';
-      typeSelect.style['background'] = 'darkslategrey';
-      typeSelect.style['color'] = 'white';
-      document.location = '#top'
+      
 
       if ("createEvent" in document) {
           var evt = document.createEvent("HTMLEvents");
@@ -125,20 +112,7 @@ type_select.onchange = function() {
   });
   button1.addEventListener('click', function (e) {
       sel.options[2].selected = true;
-      mainSearch.style['display'] = 'block';
-      featuredDiv.style['display'] = 'none';
-      type_value.style['top'] = '50px';
-      type_select.style['z-index'] = '1';
-      type_select.style['position'] = '';
-      searchSigned.style['display'] = 'block';
-      searchBar.style['display'] = 'block';
-      typeSelect.style['position'] = 'relative';
-      typeSelect.style['margin-right'] = '10px';
-      typeSelect.style['z-index'] = '1';
-      typeSelect.style['top'] = '96px';
-      typeSelect.style['background'] = 'darkslategrey';
-      typeSelect.style['color'] = 'white';
-      document.location = '#top'
+
 
       if ("createEvent" in document) {
           var evt = document.createEvent("HTMLEvents");
@@ -159,20 +133,6 @@ type_select.onchange = function() {
 
   button2.addEventListener('click', function (e) {
       sel.options[1].selected = true;
-      mainSearch.style['display'] = 'block';
-      featuredDiv.style['display'] = 'none';
-      type_value.style['top'] = '50px';
-      type_select.style['z-index'] = '1';
-      type_select.style['position'] = '';
-      searchSigned.style['display'] = 'block';
-      searchBar.style['display'] = 'block';
-      typeSelect.style['position'] = 'relative';
-      typeSelect.style['margin-right'] = '10px';
-      typeSelect.style['z-index'] = '1';
-      typeSelect.style['top'] = '96px';
-      typeSelect.style['background'] = 'darkslategrey';
-      typeSelect.style['color'] = 'white';
-      document.location = '#top'
 
       if ("createEvent" in document) {
           var evt = document.createEvent("HTMLEvents");
@@ -191,20 +151,7 @@ type_select.onchange = function() {
   });
   button3.addEventListener('click', function (e) {
       sel.options[4].selected = true;
-      mainSearch.style['display'] = 'block';
-      featuredDiv.style['display'] = 'none';
-      type_value.style['top'] = '50px';
-      type_select.style['z-index'] = '1';
-      type_select.style['position'] = '';
-      searchSigned.style['display'] = 'block';
-      searchBar.style['display'] = 'block';
-      typeSelect.style['position'] = 'relative';
-      typeSelect.style['margin-right'] = '10px';
-      typeSelect.style['z-index'] = '1';
-      typeSelect.style['top'] = '96px';
-      typeSelect.style['background'] = 'darkslategrey';
-      typeSelect.style['color'] = 'white';
-      document.location = '#top'
+
       if ("createEvent" in document) {
           var evt = document.createEvent("HTMLEvents");
           evt.initEvent("change", false, true);
@@ -219,6 +166,22 @@ type_select.onchange = function() {
           data: { type_id: 4
          }
       });
+  });
+  sel.addEventListener('change', function (e) {
+    mainSearch.style['display'] = 'block';
+    featuredDiv.style['display'] = 'none';
+    type_value.style['top'] = '50px';
+    type_select.style['z-index'] = '1';
+    type_select.style['position'] = '';
+    searchSigned.style['display'] = 'block';
+    searchBar.style['display'] = 'block';
+    typeSelect.style['position'] = 'relative';
+    typeSelect.style['margin-right'] = '10px';
+    typeSelect.style['z-index'] = '1';
+    typeSelect.style['top'] = '96px';
+    typeSelect.style['background'] = 'darkslategrey';
+    typeSelect.style['color'] = 'white';
+    document.location = '#top'
   });
 
 
