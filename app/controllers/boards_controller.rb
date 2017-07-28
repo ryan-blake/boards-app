@@ -287,6 +287,12 @@ end
         @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and cast( fin_id as text) like ? and cast( tail_id as text) like ? and (title like ? or description like ? or make like ?)",
 
           "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%","%#{params[:fin_id]}%", "%#{params[:tail_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1)
+          if params[:tail_id].present?
+            @boards = @boards.joins(:tail).where(tails: {id: params[:tail_id]}).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+          end
+          if params[:fin_id].present?
+            @boards = @boards.joins(:fin).where(fins: {id: params[:fin_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+          end
       else
         @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
@@ -376,9 +382,9 @@ end
              end
 
              if (params[:new] == "on") && (params[:used] != params[:new])
-                @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+                @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
               elsif (params[:used] == "on") && (params[:used] != params[:new])
-                  @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+                  @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
               else
 
               @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
@@ -419,7 +425,14 @@ else
 
          "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%","%#{params[:fin_id]}%", "%#{params[:tail_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1)\
           .near(params[:search], distance_in_miles)
+          if params[:tail_id].present?
+            @boards = @boards.joins(:tail).where(tails: {id: params[:tail_id][0].to_i }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+          end
+          if params[:fin_id].present?
+            @boards = @boards.joins(:fin).where(fins: {id: params[:fin_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+          end
      else
+
        @boards = Board.where(:for_sale => [true]).where("cast( make as text) like ? and cast( type_id as text) like ? and cast( category_id as text) like ? and (title like ? or description like ? or make like ?)",
 
          "%#{params[:make]}%", "%#{params[:type_id]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where("inventory >= ?", 1)\
@@ -453,9 +466,9 @@ else
 # reverse params between :start_time..:end_time
 
         if (params[:new] == "on") && (params[:used] != params[:new])
-               @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+               @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
              elsif (params[:used] == "on") && (params[:used] != params[:new])
-                 @boards = @boards.where(:used => false ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+                 @boards = @boards.where(:used => true ).reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
              else
                   @boards = @boards.reorder(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 

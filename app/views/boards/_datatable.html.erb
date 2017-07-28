@@ -20,9 +20,9 @@
           <td class="center-text single_table" style="min-width:150px;max-width:35%;border:black 1px solid;padding: 0px 4px;">
             <%= @board.size.pretty_surf %>
           </td>
-          <% if @board.tail_id%>
-          <td class="center-text single_table" style="width:30%;padding: 0px 4px;">
-           <%= @board.tail.name%>
+          <% if @board.tail_id %>
+           <td class="center-text single_table" style="width:30%;padding: 0px 4px;">
+            <%= @board.tail.name%>
            </td>
           <% end %>
         <% else %>
@@ -34,7 +34,7 @@
           <td class="center-text" style="max-width: 35%;border: black solid 1px;padding: 0px 4px;">
             <% if @board.used == true %>
                used
-           <% end %>
+            <% end %>
           </td>
         <% end %>
       </tbody>
@@ -45,22 +45,31 @@
             <% else %>
             <th class="single_table center-text top" style="padding:top:10px;nax-width:15%;padding: 0px 4px;"></th>
           <% end %>
-          <th class="single_table center-text top" style="width:30%;padding: 0px 4px;">Volume:</th>
-          <th class="single_table center-text top" style="width:30%;padding: 0px 4px;"> Finbox: </th>
+          <th class="single_table center-text top" style="width:30%;padding: 0px 4px;">Volume </th>
+          <th class="single_table center-text top" style="width:30%;padding: 0px 4px;"> Finbox </th>
+
         </thead>
         <tbody >
-          <td class="single_table center-text" style="width:30%;padding: 0px 4px;">Used
+          <% if @board.used %>
+           <td class="single_table center-text" style="width:30%;padding: 0px 4px;">Used
+          <% end %>
           </td>
          <td class="single_table center-text" style="width:30%;padding: 0px 4px;">
            <% if @board.size %>
             <%= @board.size.volume%>
            <% end%>
          </td>
-         <% if @board.fin_id %>
+         <% if @board.fin.name.present? %>
          <td class="single_table center-text" style="width:30%;padding: 0px 4px;">
-          <%= @board.fin.name%>
-         </td>
-         <% end %>
+              <%= @board.fin.name%>
+            </td>
+            <% else %>
+            <td class="single_table center-text" style="width:30%;padding: 0px 4px;">
+            </td>
+            <td class="single_table center-text" style="width:30%;padding: 0px 4px;">
+            </td>
+
+          <% end %>
         <% end %>
       </tbody>
     </table>

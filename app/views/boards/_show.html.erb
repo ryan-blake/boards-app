@@ -133,13 +133,11 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
          </div>
          <div id="delivery" style="display:none;">
            <div class="form-group">
-             ship it
              <%= render partial: 'chargeshow', locals: {board: @board} %>
            </div>
          </div>
          <div id="pickup" style="display:none;">
            <div class="form-group">
-             pick up
              <%= render partial: 'charge', locals: {board: @board} %>
            </div>
          </div>

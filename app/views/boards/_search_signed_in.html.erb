@@ -70,7 +70,7 @@
 
       <tbody>
         <td>
-          <div style="top: 50px;" class="center-text" id="paginator">
+          <div class="btm-paginate center-text" id="paginator">
             <% if @boards %>
             <%= paginate @boards, remote: true, window: 1 %>
             <% end %>

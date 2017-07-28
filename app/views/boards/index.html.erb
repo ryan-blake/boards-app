@@ -93,7 +93,7 @@ type_select.onchange = function() {
 
   button.addEventListener('click', function (e) {
       sel.options[3].selected = true;
-      
+
 
       if ("createEvent" in document) {
           var evt = document.createEvent("HTMLEvents");
@@ -276,11 +276,12 @@ $(window).scroll(function(){
 
   <div id="mainsearch" class="bcg single-div" style="">
    <%= render partial: 'search_form' %>
+   <hr class="style14" style="margin-top:1px;">
+
   </div>
 
   <div id="search-result-partial" class=" bcg single-div" style="">
     <%= render partial: 'search_signed_in'%>
-    <hr class="style14" style="margin-top:1px;">
   </diV>
 
   </div>
