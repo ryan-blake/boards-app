@@ -42,10 +42,10 @@
   margin-left: 10%;background-color:white;">
         <div class="desktop-items-img" style="width:150px;height:150px;">
         <!-- <%= link_to  image_tag("surf_girl.jpg", width: 150), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
-          <%= link_to attachment_image_tag(board.images.last, :file, :fill, 150, 150), board, remote: true, data: { toggle: "modal", target: "#boardModal" }%>
+          <%= link_to attachment_image_tag(board.images.last, :file, :fill, 150, 150), board, remote: true, data: { toggle: "modal", target: "#" }%>
         </div>
         <div class="mobile-items-img center-text" style="width:120px;height:120px;">
-          <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#boardModal" }%>
+          <%= link_to attachment_image_tag(board.images.last, :file, :fill, 120, 120), board, remote: true, data: { toggle: "modal", target: "#" }%>
 <!-- <%= link_to  image_tag("surf_girl.jpg", width: 120), board, remote: true, data: { toggle: "modal", target: "#newModal" }%> -->
         </div>
         <span class="center-text" style="position:relative;overflow-x:hide;margin-top:15px;">

@@ -64,9 +64,7 @@ class Board < ApplicationRecord
   validates :title, :presence => true
   validates :description, :presence => true
   validates :make, :presence => true
-  validates :price, :presence => true
   validates :category, :presence => true
-  validates_uniqueness_of :upc, scope: :user_id
 
   before_validation :load_costs
   after_validation :save_type
@@ -173,14 +171,14 @@ end
   end
   def load_costs
     if self.cost != nil && self.margin == nil
-      r = self.price.to_f
+      r = self.board_price.to_f
       p = r - self.cost.to_f
       self.margin = ((p) / (r)) * 100
-    elsif self.margin != nil && self.price == nil
+    elsif self.margin != nil && self.board_price == nil
       c = self.cost.to_f
       m = self.margin.to_f
       r = c / (1 - (m / 100))
-      self.price = r.ceil
+      self.board_price = r.ceil
       self.save
     end
   end

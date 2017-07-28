@@ -49,6 +49,7 @@ $ ->
       success: (data, textStatus, jqXHR) ->
         console.log("Dynamic country select OK!")
 
+
  jQuery ->
   $("#category-select-user").hide();
 

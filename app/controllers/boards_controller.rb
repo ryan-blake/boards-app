@@ -49,45 +49,48 @@ end
       @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(4)
       @users = User.all.where.not(id: current_user)
       # stripe account data
-      if current_user.stripe_account
-        @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
-        @payments = Stripe::Charge.list(
-        {
-          limit: 100,
-          expand: ['data.source_transfer', 'data.application_fee']
-        },
-        { stripe_account: current_user.stripe_account }
-        )
-        @transfers = Stripe::Transfer.list(
-          {
-            limit: 100
-          },
-          { stripe_account: current_user.stripe_account }
-        )
-        @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
-    # Retrieve transactions with an available_on date in the future
-    transactions = Stripe::BalanceTransaction.all(
+      @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
+    else
+      redirect_to root_path
+    end
+  end
+
+  def sales_boards
+    if current_user.stripe_account
+      @stripe_account = Stripe::Account.retrieve(current_user.stripe_account)
+      @payments = Stripe::Charge.list(
       {
         limit: 100,
-        available_on: {gte: Time.now.to_i}
-      },{ stripe_account: current_user.stripe_account })
+        expand: ['data.source_transfer', 'data.application_fee']
+      },
+      { stripe_account: current_user.stripe_account }
+      )
+      @transfers = Stripe::Transfer.list(
+        {
+          limit: 100
+        },
+        { stripe_account: current_user.stripe_account }
+      )
+      @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
+    # Retrieve transactions with an available_on date in the future
+    transactions = Stripe::BalanceTransaction.all(
+    {
+      limit: 100,
+      available_on: {gte: Time.now.to_i}
+    },{ stripe_account: current_user.stripe_account })
     balances = Hash.new
 
     # Iterate through transactions and sum values for each available_on date
     transactions.auto_paging_each do |txn|
-      if balances.key?(txn.available_on)
-        balances[txn.available_on] += txn.net
-      else
-        balances[txn.available_on] = txn.net
-      end
+    if balances.key?(txn.available_on)
+      balances[txn.available_on] += txn.net
+    else
+      balances[txn.available_on] = txn.net
+    end
     end
     # Sort the results
     @transactions = balances.sort_by {|date,net| date}
     # end new data from connect
-    end
-
-    else
-      redirect_to root_path
     end
   end
   def active_boards
@@ -119,10 +122,7 @@ def search_inactive
     "%#{params[:make]}%", "%#{params[:category_id]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%","%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
 end
 
-  def shipped_boards
-    @user = current_user
-    @shipping_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-  end
+
   def pending_boards
     # to become offers on boards
     @user = current_user
@@ -140,38 +140,32 @@ end
     end
   end
 
-  def pick_boards
-    @user = current_user
-     @pickup_boards = Board.where(user_id: current_user.id, for_sale: false, shipping: false).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
-  end
 
   def sales_boards
       @purchases = Charge.where(:user_id  => current_user.id).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
     if current_user.stripe_account != nil
-   @sales_user = current_user.name
+       @sales_user = current_user.name
        @payments = Stripe::Charge.list(
          {
-           limit: 100,
+           limit: 1,
            expand: ['data.source_transfer', 'data.application_fee']
          },
          { stripe_account: current_user.stripe_account }
        )
        @transfers = Stripe::Transfer.list(
   {
-    limit: 100
+    limit: 1
   },
   { stripe_account: current_user.stripe_account }
 )
-       @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
-       # Retrieve transactions with an available_on date in the future
-transactions = Stripe::BalanceTransaction.all(
-  {
-    limit: 100,
-    available_on: {gte: Time.now.to_i}
-  },{ stripe_account: current_user.stripe_account })
-
+   @balance = Stripe::Balance.retrieve(stripe_account: current_user.stripe_account)
+     # Retrieve transactions with an available_on date in the future
+    transactions = Stripe::BalanceTransaction.all(
+          {
+            limit: 1,
+            available_on: {gte: Time.now.to_i}
+          },{ stripe_account: current_user.stripe_account })
        balances = Hash.new
-
              # Iterate through transactions and sum values for each available_on date
              transactions.auto_paging_each do |txn|
                if balances.key?(txn.available_on)
@@ -180,7 +174,6 @@ transactions = Stripe::BalanceTransaction.all(
                  balances[txn.available_on] = txn.net
                end
              end
-
        @transactions = balances.sort_by {|date,net| date}
      end
   end

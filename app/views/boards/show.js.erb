@@ -1,6 +1,3 @@
-$("#forsale").html("<%=j render partial: 'forsale' %>");
-$("#images").html("<%=j render partial: 'images' %>");
-
 var seeing_search = $('#category_ids').is(':visible')
 var dashboard = $('#dashboard').is(':visible')
 var featured = $('#featured-boards').is(':visible')
@@ -8,23 +5,17 @@ var featured = $('#featured-boards').is(':visible')
 if (seeing_search || dashboard) {
   $("#newModal .modal-content").html('<%= j render partial: "show" %>');
   $("#newModal").modal()
-
   sessionStorage.clear()
-
 } else {
-
 };
 if (featured) {
   $("#surfModal .modal-content").html('<%= j render partial: "show" %>');
   $("#surfModal").modal()
   sessionStorage.clear()
-
 } else {
-
 };
-$("#boardModal .modal-content").html('<%= j render partial: "boards/show" %>');
-$("#boardModal").modal()
 
-$("#pickup").html("<%=j render partial: 'charge' %>");
-$("#delivery").html("<%=j render partial: 'chargeshow' %>");
+
+$("#images").html("<%=j render partial: 'images' %>");
 $("#boardAccessories").html("<%=j render partial: 'accessories/search_accessories' %>");
+$("#forsale").html("<%=j render partial: 'forsale' %>");

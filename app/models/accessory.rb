@@ -33,7 +33,6 @@ class Accessory < ApplicationRecord
   accepts_nested_attributes_for :images, allow_destroy: true
   validates :kind_id, :presence => true
   validates :category_id, :presence => true
-  validates_uniqueness_of :upc, scope: :user_id
   after_validation :save_category
   after_validation :accessory_length
   after_update :accessory_length, if: ->(obj){ obj.measure_changed?}

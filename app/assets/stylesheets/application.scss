@@ -669,18 +669,14 @@ border: none;
    line-height: 38px;
    text-decoration: none;
    background-color: white;
-   border: 1px solid #DDD;
-   border-left-width: 1;
-   border-left-color:black;
-   border-color:black;
    color: darkgrey;
-
+   box-shadow: -2px 1px 7px 0px #8c8b8b;
+  border-radius: 10%;
 }
 
 .pagination {
   margin-top:10px;
   max-height:40px;
-  border-left: 1px solid #ddd;
   background-color: white;
   a {
      color: black;
@@ -1481,6 +1477,14 @@ margin-top:-100px;
  }
 
 }
+@media(max-width: 678px) {
+  .mobile-items-img {
+    display:block;
+  }
+  .desktop-items-img {
+    display:none;
+  }
+}
 
 // effective for width < 400px
 @media (max-width: 400px) {
@@ -1514,12 +1518,7 @@ margin-top:-100px;
  .items {
    padding-left:7.5% !important;
  }
- .mobile-items-img {
-   display:block;
- }
- .desktop-items-img {
-   display:none;
- }
+
   .items {
    max-width:155px !important;
  }
@@ -1540,7 +1539,7 @@ margin-top:-100px;
   min-width: 374px;
   max-width: 374px;
   position: relative;
-  left: calc(50% - 202px);
+  left: calc(50% - 214px);
  }
 
 

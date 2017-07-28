@@ -209,8 +209,11 @@ User.create(
 
 users = User.all
 
+i = 1
 
 250.times do
+  i += 1
+
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -235,12 +238,14 @@ users = User.all
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
   shippable: true,
   rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
-  upc:  rand(1000..1300)
-
+  upc:  i.to_s + ["k4n3", "i21n4", "j3", "kj3n24"].sample
   )
 end
+i = 251
 
 250.times do
+  i += 1
+
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -266,12 +271,11 @@ end
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
   shippable: true,
   rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
-  upc:  rand(500..900)
-
+  upc:  i.to_s + ["k4n3", "i21n4", "j3", "kj3n24"].sample
   )
-
 end
 250.times do
+  i = 502
   Board.create!(
   title:       Faker::Hipster.word,
   make:       Faker::Hipster.word,
@@ -299,13 +303,14 @@ end
   tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
   shippable: true,
   rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
-  upc:  rand(300..500)
-
-
+  upc:  i.to_s + ["k4n3", "i21n4", "j3", "kj3n24"].sample
   )
+  i += 1
 end
 puts "#{Board.count} at board/1"
+
   250.times do
+    i = 753
     Board.create!(
     title:       Faker::Hipster.word,
     make:       Faker::Hipster.word,
@@ -334,9 +339,9 @@ puts "#{Board.count} at board/1"
     tail_id: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"].sample,
     shippable: [true, false].sample,
     rate: [11.99, 55.33, 12.01, 12.34, 9.22, 99.00].sample,
-    upc:  rand(1..300)
-
+    upc:  i.to_s + ["k4n3", "i21n4", "j3", "kj3n24"].sample
     )
+    i += 1
   end
   boards = Board.all
   a = 0

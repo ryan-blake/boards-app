@@ -40,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @transfers.each do |transfer| %>
+        <% @transfers.auto_paging_each do |transfer| %>
           <tr>
             <td><%= transfer.id %></td>
             <td><%= transfer.bank_account.bank_name %> ending in <%= transfer.bank_account.last4%></td>
@@ -79,10 +79,9 @@
       </thead>
 
       <tbody>
-        <% @payments.each do |payment| %>
+        <% @payments.auto_paging_each do |payment| %>
         <% customer_path = meta_stripe_customer(payment.source_transfer.source_transaction) %>
           <tr>
-
             <td><%= link_to customer_path.metadata.charge_id, charge_path(customer_path.metadata.charge_id ),  remote: true, data: { toggle: "modal", target: "#chargeModal" }%></td>
             <td><%= number_to_currency(payment.amount/100) %></td>
             <td><%= format_amount(payment.amount - payment.application_fee.amount) %></td>

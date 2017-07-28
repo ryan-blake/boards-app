@@ -57,8 +57,6 @@ var type_button1 = document.getElementById('type_button-surf');
 var type_button2 = document.getElementById('type_button-snow');
 var type_button3 = document.getElementById('type_button-skate');
 var type_button4 = document.getElementById('type_button-wake');
-
-
 openExtended.onclick = function() {
    if(extended.style.display == 'none') {
      this.innerHTNL = 'Close Extended';
@@ -70,7 +68,6 @@ openExtended.onclick = function() {
      searchResults.style['top'] = '190px';
    }
 };
-
 type_select.onchange = function() {
   mainSearch.style['display'] = 'block';
   featuredDiv.style['display'] = 'none';
@@ -86,76 +83,146 @@ type_select.onchange = function() {
   typeSelect.style['background'] = 'darkslategrey';
   typeSelect.style['color'] = 'white';
   document.location = '#top'
-
   }
+  var sel = document.getElementById('type-select')
+  var button = document.getElementById('type_button-surf');
+  var button1 = document.getElementById('type_button-snow');
+  var button2 = document.getElementById('type_button-skate');
+  var button3 = document.getElementById('type_button-wake');
 
-  type_button1.onclick = function() {
-    mainSearch.style['display'] = 'block';
-    featuredDiv.style['display'] = 'none';
-    type_value.style['top'] = '50px';
-    type_select.style['z-index'] = '1';
-    type_select.style['position'] = '';
-    searchSigned.style['display'] = 'block';
-    searchBar.style['display'] = 'block';
-    typeSelect.style['position'] = 'relative';
-    typeSelect.style['margin-right'] = '10px';
-    typeSelect.style['z-index'] = '1';
-    typeSelect.style['top'] = '96px';
-    typeSelect.style['background'] = 'darkslategrey';
-    typeSelect.style['color'] = 'white';
-    document.location = '#top'
 
-  }
-  type_button2.onclick = function() {
-    mainSearch.style['display'] = 'block';
-    featuredDiv.style['display'] = 'none';
-    type_value.style['top'] = '50px';
-    type_select.style['z-index'] = '1';
-    type_select.style['position'] = '';
-    searchSigned.style['display'] = 'block';
-    searchBar.style['display'] = 'block';
-    typeSelect.style['position'] = 'relative';
-    typeSelect.style['margin-right'] = '10px';
-    typeSelect.style['z-index'] = '1';
-    typeSelect.style['top'] = '96px';
-    typeSelect.style['background'] = 'darkslategrey';
-    typeSelect.style['color'] = 'white';
-    document.location = '#top'
+  button.addEventListener('click', function (e) {
+      sel.options[3].selected = true;
+      mainSearch.style['display'] = 'block';
+      featuredDiv.style['display'] = 'none';
+      type_value.style['top'] = '50px';
+      type_select.style['z-index'] = '1';
+      type_select.style['position'] = '';
+      searchSigned.style['display'] = 'block';
+      searchBar.style['display'] = 'block';
+      typeSelect.style['position'] = 'relative';
+      typeSelect.style['margin-right'] = '10px';
+      typeSelect.style['z-index'] = '1';
+      typeSelect.style['top'] = '96px';
+      typeSelect.style['background'] = 'darkslategrey';
+      typeSelect.style['color'] = 'white';
+      document.location = '#top'
 
-  }
-  type_button3.onclick = function() {
-    mainSearch.style['display'] = 'block';
-    featuredDiv.style['display'] = 'none';
-    type_value.style['top'] = '50px';
-    type_select.style['z-index'] = '1';
-    type_select.style['position'] = '';
-    searchSigned.style['display'] = 'block';
-    searchBar.style['display'] = 'block';
-    typeSelect.style['position'] = 'relative';
-    typeSelect.style['margin-right'] = '10px';
-    typeSelect.style['z-index'] = '1';
-    typeSelect.style['top'] = '96px';
-    typeSelect.style['background'] = 'darkslategrey';
-    typeSelect.style['color'] = 'white';
-    document.location = '#top'
+      if ("createEvent" in document) {
+          var evt = document.createEvent("HTMLEvents");
+          evt.initEvent("change", false, true);
+          sel.dispatchEvent(evt);
+      }
+      else {
+          sel.fireEvent("onchange");
+      }
+      $.ajax({
+          url:  "/boards/search_type",
+          type: "GET",
+          data: { type_id: 1
+         }
+      });
+  });
+  button1.addEventListener('click', function (e) {
+      sel.options[2].selected = true;
+      mainSearch.style['display'] = 'block';
+      featuredDiv.style['display'] = 'none';
+      type_value.style['top'] = '50px';
+      type_select.style['z-index'] = '1';
+      type_select.style['position'] = '';
+      searchSigned.style['display'] = 'block';
+      searchBar.style['display'] = 'block';
+      typeSelect.style['position'] = 'relative';
+      typeSelect.style['margin-right'] = '10px';
+      typeSelect.style['z-index'] = '1';
+      typeSelect.style['top'] = '96px';
+      typeSelect.style['background'] = 'darkslategrey';
+      typeSelect.style['color'] = 'white';
+      document.location = '#top'
 
-  }
-  type_button4.onclick = function() {
-    mainSearch.style['display'] = 'block';
-    featuredDiv.style['display'] = 'none';
-    type_value.style['top'] = '50px';
-    type_select.style['z-index'] = '1';
-    type_select.style['position'] = '';
-    searchSigned.style['display'] = 'block';
-    searchBar.style['display'] = 'block';
-    typeSelect.style['position'] = 'relative';
-    typeSelect.style['margin-right'] = '10px';
-    typeSelect.style['z-index'] = '1';
-    typeSelect.style['top'] = '96px';
-    typeSelect.style['background'] = 'darkslategrey';
-    typeSelect.style['color'] = 'white';
-    document.location = '#top'
-  }
+      if ("createEvent" in document) {
+          var evt = document.createEvent("HTMLEvents");
+          evt.initEvent("change", false, true);
+          sel.dispatchEvent(evt);
+      }
+      else {
+          sel.fireEvent("onchange");
+      }
+      $.ajax({
+          url:  "/boards/search_type",
+          type: "GET",
+          data: { type_id: 2
+         }
+      });
+  });
+
+
+  button2.addEventListener('click', function (e) {
+      sel.options[1].selected = true;
+      mainSearch.style['display'] = 'block';
+      featuredDiv.style['display'] = 'none';
+      type_value.style['top'] = '50px';
+      type_select.style['z-index'] = '1';
+      type_select.style['position'] = '';
+      searchSigned.style['display'] = 'block';
+      searchBar.style['display'] = 'block';
+      typeSelect.style['position'] = 'relative';
+      typeSelect.style['margin-right'] = '10px';
+      typeSelect.style['z-index'] = '1';
+      typeSelect.style['top'] = '96px';
+      typeSelect.style['background'] = 'darkslategrey';
+      typeSelect.style['color'] = 'white';
+      document.location = '#top'
+
+      if ("createEvent" in document) {
+          var evt = document.createEvent("HTMLEvents");
+          evt.initEvent("change", false, true);
+          sel.dispatchEvent(evt);
+      }
+      else {
+          sel.fireEvent("onchange");
+      }
+      $.ajax({
+          url:  "/boards/search_type",
+          type: "GET",
+          data: { type_id: 3
+         }
+      });
+  });
+  button3.addEventListener('click', function (e) {
+      sel.options[4].selected = true;
+      mainSearch.style['display'] = 'block';
+      featuredDiv.style['display'] = 'none';
+      type_value.style['top'] = '50px';
+      type_select.style['z-index'] = '1';
+      type_select.style['position'] = '';
+      searchSigned.style['display'] = 'block';
+      searchBar.style['display'] = 'block';
+      typeSelect.style['position'] = 'relative';
+      typeSelect.style['margin-right'] = '10px';
+      typeSelect.style['z-index'] = '1';
+      typeSelect.style['top'] = '96px';
+      typeSelect.style['background'] = 'darkslategrey';
+      typeSelect.style['color'] = 'white';
+      document.location = '#top'
+      if ("createEvent" in document) {
+          var evt = document.createEvent("HTMLEvents");
+          evt.initEvent("change", false, true);
+          sel.dispatchEvent(evt);
+      }
+      else {
+          sel.fireEvent("onchange");
+      }
+      $.ajax({
+          url:  "/boards/search_type",
+          type: "GET",
+          data: { type_id: 4
+         }
+      });
+  });
+
+
+
 });
 
 function updateTextArea(source){
@@ -171,6 +238,8 @@ $(window).scroll(function(){
         $('html, body').animate({scrollTop : 200},0);
     });
   });
+
+
 </script>
 
 <% end %>
@@ -198,8 +267,8 @@ $(window).scroll(function(){
        <% @surf = current_user.not_my_boards(@surf) %>
        <% end %>
        <hr class="style13" style="margin:0;">
-       <span class="center-text "><%= link_to 'Surf', search_type_boards_path(type_id: 1), class: 'type_button', id:'type_button-surf', style:'color:darkslategrey;text-shadow:2px 0px snow;position:relative;    font-size: 27px;
-    left: calc(50% - 32px);',  :method => :get, remote: true %></span>
+       <span id="type_button-surf" class="center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
+       font-size: 27px;left: calc(50% - 32px);">Surf</span>
 
        <% if @surf.count >= 1 %>
        <%= render partial: 'featured', locals: {boards: @surf} %>
@@ -210,8 +279,8 @@ $(window).scroll(function(){
       <% @snow = current_user.not_my_boards(@snow) %>
       <% end %>
       <hr class="style13" style="margin:0;">
-      <span class="center-text "><%= link_to 'Snow', search_type_boards_path(type_id: 2), class: 'type_button', id:'type_button-snow', style:'color:darkslategrey;text-shadow:2px 0px snow;position:relative;    font-size: 27px;
-   left: calc(50% - 32px);', :method => :get, remote: true %></span>
+      <span id="type_button-snow" class="center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
+      font-size: 27px;left: calc(50% - 32px);">Snow</span>
 
        <% if @snow.count >= 1 %>
        <%= render partial: 'featured', locals: {boards: @snow} %>
@@ -222,10 +291,10 @@ $(window).scroll(function(){
        <% @skate = current_user.not_my_boards(@skate) %>
        <% end %>
        <hr class="style13" style="margin:0;">
-       <span class="center-text "><%= link_to 'Skate', search_type_boards_path(type_id: 3), class: 'type_button', id:'type_button-skate', style:'color:darkslategrey;text-shadow:2px 0px snow;position:relative;    font-size: 27px;
-    left: calc(50% - 32px);', :method => :get, remote: true %></span>
+       <span id="type_button-skate" class="center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
+       font-size: 27px;left: calc(50% - 32px);">Skate</span>
        <% if @skate.count >= 1 %>
-       <%= render partial: 'featured', locals: {boards: @skate} %>
+        <%= render partial: 'featured', locals: {boards: @skate} %>
        <% end %>
     </div>
     <div class="featured" style="">
@@ -233,7 +302,8 @@ $(window).scroll(function(){
          <% @wake = current_user.not_my_boards(@wake) %>
        <% end %>
        <hr class="style13" style="margin:0;">
-       <span class="center-text"><%= link_to 'Wake', search_type_boards_path(type_id: 4),  class: 'type_button', id:'type_button-wake', style:'color:darkslategrey;text-shadow:2px 0px snow;position:relative;font-size: 27px;left: calc(50% - 32px);',  :method => :get, remote: true %></span>
+       <span id="type_button-wake" class="center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
+       font-size: 27px;left: calc(50% - 32px);">Wake</span>
        <%= render partial: 'featured', locals: {boards: @wake} %>
        <% if @wake.count >= 1 %>
        <% end %>

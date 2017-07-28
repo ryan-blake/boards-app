@@ -1,3 +1,4 @@
+
 class ChargesController < ApplicationController
   before_action :set_charge, only: [ :update]
   helper_method :sort_column, :sort_direction, :c_ft ,:c_cm, :c_mm
@@ -134,7 +135,6 @@ end
 
     def show
 
-    begin
       @charge = Charge.find(params[:id])
       #
       @accessories = @charge.accessories
@@ -144,6 +144,7 @@ end
       @completeAccessories = @charge.board.accessories
 
       @board = Board.where(:id => @charge.board_id)[0]
+      begin
       @payments = Stripe::Charge.retrieve(id: @charge.charge_stripe)
       {
         expand: ['data.source_transfer', 'data.application_fee']
