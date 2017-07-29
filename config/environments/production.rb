@@ -67,7 +67,7 @@ Rails.application.configure do
 
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
-
+config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=31536000' }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'secret-reef-80535.herokuapp.com'}
   config.action_mailer.delivery_method = :smtp

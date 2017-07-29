@@ -439,7 +439,7 @@ puts "#{Board.count} at board/1"
     a = 1
 150.times do
   Image.create!(
-  file_id: ['04c86fb9b07208fcea64889aea5059d7c4939b5a3f5ba5edf7f00f313b9f','04c86fb9b07208fcea64889aea5059d7c4939b5a3f5ba5edf7f00f313b9f','15a33afca32c3f5b59b8035b17c324f198a76919bb09105dc3035a458a4d','f8ed69e4e3bcce539e368bf9509f1389c4afc0d3d5af6e37ada037a50c95'].sample,
+  file_id: ['f48465f5da5dc6f8e7aa23eb264daf0f77288f5dd4d1bf6ce047d87abfb6','04c86fb9b07208fcea64889aea5059d7c4939b5a3f5ba5edf7f00f313b9f','15a33afca32c3f5b59b8035b17c324f198a76919bb09105dc3035a458a4d','93936faec4e7760dc743744fa4def90eddab1dbd6c82ac21e373edca3b0c'].sample,
   board_id: a,
   )
   if i % 2 == 0
@@ -451,7 +451,7 @@ end
   i = 1
 150.times do
   Image.create!(
-  file_id: ['04c86fb9b07208fcea64889aea5059d7c4939b5a3f5ba5edf7f00f313b9f','04c86fb9b07208fcea64889aea5059d7c4939b5a3f5ba5edf7f00f313b9f','15a33afca32c3f5b59b8035b17c324f198a76919bb09105dc3035a458a4d','f8ed69e4e3bcce539e368bf9509f1389c4afc0d3d5af6e37ada037a50c95'].sample,
+  file_id: ['f48465f5da5dc6f8e7aa23eb264daf0f77288f5dd4d1bf6ce047d87abfb6','04c86fb9b07208fcea64889aea5059d7c4939b5a3f5ba5edf7f00f313b9f','15a33afca32c3f5b59b8035b17c324f198a76919bb09105dc3035a458a4d','93936faec4e7760dc743744fa4def90eddab1dbd6c82ac21e373edca3b0c'].sample,
   accessory_id: i
   )
     i += 1
