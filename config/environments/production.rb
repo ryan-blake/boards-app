@@ -24,7 +24,6 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
-
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
@@ -74,7 +73,6 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
 
-
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
@@ -82,6 +80,9 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
+
+  # cloudfront
+  config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=31536000' }
   #redis
   config.action_controller.asset_host = 'd19qkfznh6cgmt.cloudfront.net'
   config.web_socket_server_url = "wss://secret-reef-80535.herokuapp.com/cable"
