@@ -11,8 +11,8 @@
   <div class="boardImage" id="surfModalBtn" style="padding: 0 9px;cursor:pointer">
     <!-- <%= link_to  image_tag("surf_girl.jpg", width: 130), board, remote: true, data: { toggle: "modal", target: "#surfModal" }%> -->
     <% if board.images.count >= 1 %>
-    <%= link_to(image_tag(attachment_url(board.images.last, :file, :fit, 100, 100, format: 'jpg')), board, remote: true, data: { toggle: "modal", target: "#surfModal" }) %>
-    <% end %>
+ <%= link_to(image_tag(attachment_url(board.images.last, :file, :fit, 100, 100, format: 'jpg')), board, remote: true, data: { toggle: "modal", target: "#surfModal" }) %>     
+ <% end %>
     <span id='window'></span>
   </div>
     <span class="center-text"><%= board.make %> </span>
