@@ -62,6 +62,7 @@
      <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Accessories.."  %>
      <span class="input-group-btn">
        <%= hidden_field_tag :board_id, @board.id%>
+       <%= hidden_field_tag :searched_accessory, true%>
        <%= button_tag "Go!", class: "btn btn-success", style: 'border:1px solid darkslategrey;background-color:darkslategrey;', data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
      </span>
    </div><!-- /input-group -->

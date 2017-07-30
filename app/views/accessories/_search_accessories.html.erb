@@ -194,6 +194,10 @@ $(function(){
 </script>
 <% if @accessories.count <= 0 %>
   <div style="position:relative;width:80%;margin-left:11%;margin-right:10%;height:20px;top:30px;">
+    <% unless params[:searched_accessory] %>
      <h4 class=""> Accessories unavailable for item </h4>
+     <% else %>
+     <h4 class=""> Accessories unavailable for search </h4>
+     <% end %>
   </div>
 <% end %>
