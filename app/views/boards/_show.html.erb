@@ -125,7 +125,12 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
 <!-- section -->
     <div class="payment center-text">
       <strong style="font-size:30px;">$</strong><strong data-board="<%= @board.price %>" id="showPrice" style="font-size:30px;">.00</strong>
-        <% if @board.sellable? && @board.shippable == true %>
+        <% unless @board.sellable? && @board.shippable == true %>
+        <div class="form-group">
+           Pick Up Only:
+          <%= render partial: 'charge', locals: {board: @board} %>
+        </div>
+        <% else %>
          <div class="form-group">
            pick up
            <input id="checkbox" type="checkbox", "true">
@@ -139,11 +144,6 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
            <div class="form-group">
              <%= render partial: 'charge', locals: {board: @board} %>
            </div>
-         </div>
-         <% else %>
-         <div class="form-group">
-            Pick Up Only:
-           <%= render partial: 'charge', locals: {board: @board} %>
          </div>
     </div>
 </div>
