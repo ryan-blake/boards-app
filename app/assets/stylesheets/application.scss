@@ -145,10 +145,25 @@ div#about.bcg {
   position: relative;
   background-color: darkslategrey;
 }
+
 div#feature-divs.bcg {
   position: relative;
   min-height: 600px;
   background-color: white;
+}
+
+div#show_kuivir.bcg {
+top: 0px;
+height: 200px;
+position: relative;
+background-color: darkslategrey;
+}
+#kuivir-show a {
+  padding: 0px 15px;
+  border-bottom: 1px solid white;
+  left: calc(50% - 63px);
+  position: absolute;
+  top: 15%;color: white;
 }
 
 #mainsearch.bcg {

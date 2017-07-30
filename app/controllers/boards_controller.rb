@@ -198,8 +198,7 @@ end
     else
        @accessories_boards = nil
     end
-
-
+    @featuredshow = Board.where(type_id: @board.type_id,:for_sale => [true], :rental => false).where(:arrived => [false]).where("inventory >= ?", 1).limit(10)
   end
 
   # GET /boards/new

@@ -183,5 +183,61 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
     <% if current_user.owner?(@board) %>
     <%= render partial: 'forsale', locals: {board: @board} %>
     <% end %>
+    <% else %>
    <% end %>
-  </div>
+   <% if !@board.sellable? %>
+</div>
+<span id="featured-boards"></span>
+
+<script>
+var button = document.getElementById('type_available');
+
+button.addEventListener('click', function (e) {
+    sel.options[3].selected = true;
+
+
+    if ("createEvent" in document) {
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent("change", false, true);
+        sel.dispatchEvent(evt);
+    }
+    else {
+        sel.fireEvent("onchange");
+    }
+    $.ajax({
+        url:  "/boards/search_type",
+        type: "GET",
+        data: { type_id: 1
+       }
+    });
+});
+</script>
+<h2> |Item unavailable| <br> Featured items for type: <%= @board.type.name %></h2>
+      <%= render partial: 'featured', locals: {boards: @featuredshow} %>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="surfModal">
+   <div class="modal-dialog modal-lg" role="document">
+     <div class="modal-header">
+       <button type="button" class="close" style="background-color:black;width:100%;height:30px;border-radius:2%;color:white;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="closeModal">&times</span></button>
+     </div>
+     <div class="modal-content">
+     </div>
+   </div>
+   <div class="center-text" id="paginator">
+   </div>
+ </div>
+ <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"  id="accModal">
+     <div class="modal-dialog modal-lg" role="document">
+       <div class="modal-header">
+         <button type="button" class="close" style="background-color:black;width:100%;height:30px;border-radius:2%;color:white;" id="dismissAccModal" aria-label="Close"><span aria-hidden="true" class="closeModal">&times</span></button>
+       </div>
+       <div style="background-color:azure;" class="modal-content">
+       </div>
+     </div>
+     <div class="center-text" id="paginator">
+     </div>
+   </div>
+   <div id="show_kuivir" class="bcg" style="height: 53px;">
+         <h1 class="center-text" id="kuivir-show" style="">
+           <%= link_to 'kuivir', root_path %> </h1>
+   </div>
+<% end %>

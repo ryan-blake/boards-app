@@ -6,19 +6,18 @@
       <%= render partial: 'boards/none' %>
     <% end %>
     <thead>
+      <tr>
+        <td class="filtering center-text">
+          <button type="button" class="btn btn-success refresh-btn"><%= link_to 'Refresh',  active_boards_boards_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Updating... "} , style: 'color:white;'%></button>
+          <ti> <strong> Sort <ti style="text-decoration:underline;">Inactive</ti> by: </strong> </ti>
+          <div  <i style="display:inline;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
+         </ti>
+        </td>
+      </tr>
       <td>
-        <div class="center-text" id="active_boards">
+        <div class="center-text" id="inactive_boards" style="position: relative;bottom: 10px;">
         <%= paginate @inactive_boards, remote: true, window: 1 %>
         </div>
-        <tr>
-          <td class="filtering center-text">
-            <button type="button" class="btn btn-success refresh-btn"><%= link_to 'Refresh',  inactive_boards_boards_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Updating... "} , style: 'color:white;'%></button>
-
-            <ti> <strong> Sort <ti style="text-decoration:underline;">Inactive</ti> by: </strong> </ti>
-            <div  <i style="display:inline;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
-           </ti>
-          </td>
-        </tr>
       </td>
     </thead>
 <style>
@@ -76,7 +75,7 @@
 
     <tbody >
       <td>
-        <div class="center-text pagination" id="active_boards">
+        <div class="center-text pagination" id="active_boards" style="position:relative;top:-15px;">
         <%= paginate @inactive_boards, remote: true, window: 1 %>
         </div>
       </td>
