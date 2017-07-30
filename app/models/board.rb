@@ -93,7 +93,12 @@ class Board < ApplicationRecord
 scope :end_search, -> (startDate, endDate) {
   joins(:events).where.not(:events => {end_time: (startDate.beginning_of_day)..(endDate.end_of_day)})
 }
+def unscope
+Board.unscoped.where("id > ? AND id < ?", 50, 60)
+# OR
+Board.unscoped.find((50..60).to_a)
 #
+end 
 def full_address
   [address, city, state, zipcode].join(', ')
 end
