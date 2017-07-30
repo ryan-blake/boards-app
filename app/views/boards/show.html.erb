@@ -1,186 +1,203 @@
-<div id="show-view">
-<% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
-<!--  -->
-  <div class="well-sm pull-left" style="position:absolute;top:0;z-index:929;">
-    <% if (current_user && current_user.owner?(@board)) && (@board.boardSold?) %>
-    <div id="editModalBtn"><%= link_to "Edit", edit_board_path, class: 'btn btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#editModal" } %></div>
-       <div style="z-index:1000;min-width:50px;min-height:50px;background-color:white;">
-        <% if @board.shipping == true %>
-          <% if @board.tracking != true || false %>
-          <%= render partial: 'tracking', locals: {board: @board} %>
-          <% end %>
-        <% end %>
+<% if @accessories.count >= 1%>
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+   <%  @accessories.each do |i| %>
+     <div class="swiper-slide" style="border: black 1px solid;max-height: 250px;">
+       <td class="vendor-link" style="cursor:pointer;">
+        <div class="center-text">
+         <span id="acc-link"><%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></span>
+         <div class="accessoryImage" id="aImage" style="cursor:pointer">
+           <%= attachment_image_tag(i.images.first, :file, :fill, 120, 120) %>
+         </div>
+         <div class="accessoryImage1" id="aImage1">
+           <%= attachment_image_tag(i.images.first, :file, :fill, 80, 80) %>
+         </div>
+          <span class="center-text"><%= i.kind.name %></span><strong><br><span>$<%= i.price %></strong></span>
+          <div style="z-index:999;position:relative;bottom:0;"  data-id="<%= i.id %>" data-price="<%= i.price %>" id="<%=i.id %>" class="accessory_div btn btn-success">Add</div>
         </div>
-      <% end %>
+       </td>
+     </div>
+     <% end %>
   </div>
-      <!-- begin view -->
-<div class="title center-text">
-  <strong><%= @board.title %></strong>
+ <!-- Add Pagination -->
+ <div class="swiper-button-next swiper-button-white"></div>
+ <div class="swiper-button-prev swiper-button-white"></div>
+
+ <div style="" class="swiper-pagination"></div>
 </div>
-  <div class="image-box center-text" id="images" style="">
-    <%= render partial: 'images', locals: {board: @board}  %>
-    <!-- <%=  image_tag("surf_girl.jpg", height: 280, width: 330) %> -->
-  </div>
-<hr class="style13" style="top:440px;">
-  <%= render partial: 'datatable', locals: {board: @board}  %>
-<!-- section -->
-  <div class="description-modal pull-right" style="padding:30px 7px;position:relative;clear:all;min-width: 75%;">
-    <%= @board.description %>
-  </div>
-<!-- board accesories -->
-<div class="center-text">
-  <tbody style=position:relative;max-width:25%;>
-    <%= render partial: 'accessories/collection' %>
-  </tbody>
-</div>
-</div>
-
-<% if @board.user.accessories.exists? %>
-<script>
-$(document).ready(function() {
-var openAccess = document.getElementById('accessoryBtnOpen');
-var hideAccess = document.getElementById('accessoryBtnHide');
-var access = document.getElementById('searchAccessories');
-openAccess.style.display = 'flex';
-hideAccess.style.display = 'none';
-
-openAccess.onclick = function() {
- if(this.style.display == 'flex') {
-   this.style['display'] = 'none';
-   hideAccess.style['display'] = 'flex';
-   access.style['display'] = 'flex';
- }
-};
-hideAccess.onclick = function() {
- if(this.style.display == 'flex') {
-   this.style['display'] = 'none';
-   openAccess.style['display'] = 'flex';
-   access.style['display'] = 'none';
- }
-};
-});
-</script>
-
-<div style="position: relative;max-height: 27px;z-index: 99;float:right;min-width: 100%;" class="col-sm-12 col-md-12 col-lg-12">
-  <div id="accessoryBtnOpen" style="width:100%; display:flex;" class="btn btn-success">Search Accessories </div>
-  <div id="accessoryBtnHide" style="width:100%; display:none;background-color:darkgreen;" class="btn btn-primary">Hide</div>
-</div>
-<div id="searchAccessories"  style="top:10px;display:none;width: 100%;" class="col-md-9">
-  <%= render 'accessories/search_accessories_form' %>
-</div>
-<!-- shop accessories by type -->
-<div id="boardAccessories" style="display:flex;position:relative;min-height:100px;min-width:100%;overflow-x:scroll;">
- </div>
- <% end %>
-
-<!-- section -->
-  <% if @board.rental %>
-  <div class="rental-div" style="min-height:100%;">
-        <div class="rent-dates">
-          <span class="center-text">
-            <div id="invisible" data-rubyvar="<%= @board.price %>"></div>
-          <div id="number" style="font-size:30px;"><%= @board.price.to_i  %> </div>
-          <%= render 'events/form', locals: {events: @events, board: @board} %>
-        <!-- section -->
-        </span>
-        </div>
-    <div id="events_calendar" style="max-width:100%;padding-bottom:30px;">
-      <%= render 'events/calendar', locals: {events: @events, board: @board} %>
-    </div>
-
-</div>
-
-<hr>
-<script>
-$('input[name="daterange"]').daterangepicker(
-{
-   locale: {
-     format: 'YYYY-MM-DD'
-   },
-   startDate: "<%= Time.now %>",
-   endDate: '<%= Time.now + 1.days%>',
-   showDropdowns: true,
-   autoApply: true,
-   orientation: 'auto top',
-   parentEl: '.modal-content'
-},
-function(start, end, label) {
-   if ( start.format('YYYY-MM-DD') < end.format('YYYY-MM-DD') ) {
-     var depDate = moment(start);
-     var arrDate = moment(end);
-     var nbDays = depDate.diff(arrDate, 'days');
-     var one = 1;
-     var rubyVar = $('#invisible').data('rubyvar');
-
-     alert("A " + (-nbDays + one ) * (rubyVar) +" date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-   }
-});
-$('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
-
-  alert("A old date range was changed: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-
-});
-</script>
-  <% else %>
-<!-- section -->
-    <div class="payment center-text">
-      <strong style="font-size:30px;">$</strong><strong data-board="<%= @board.price + @theTotal %>" id="showPrice" style="font-size:30px;">.00</strong>
-      <% if current_user && current_user.owner?(@board)%>
-        <% elsif @board.sellable? && @board.shippable == true %>
-         <div class="form-group">
-           pick up
-           <input id="checkbox" type="checkbox", "true">
-         </div>
-         <div id="delivery" style="display:none;">
-           <div class="form-group">
-             ship it
-             <%= render partial: 'chargeshow', locals: {board: @board} %>
-           </div>
-         </div>
-         <div id="pickup" style="display:none;">
-           <div class="form-group">
-             pick up
-             <%= render partial: 'charge', locals: {board: @board} %>
-           </div>
-         </div>
-         <% else %>
-         <div class="form-group">
-            Pick Up Only:
-           <%= render partial: 'charge', locals: {board: @board} %>
-         </div>
-       <% end %>
-    </div>
-  <% end %>
-</div>
-<script>
-
-  $(document).ready(function() {
-  var checkbox = document.getElementById('checkbox');
-  var delivery_div = document.getElementById('delivery');
-  var pickup_div = document.getElementById('pickup');
-
-  delivery_div.style['display'] = 'block';
-  var prices = $('#showPrice').data('board');
-  var pricing = document.getElementById('showPrice');
-  pricing.innerHTML = prices
-
-  checkbox.onclick = function() {
-   if(this.checked) {
-     pickup_div.style['display'] = 'block';
-     delivery_div.style['display'] = 'none';
-
-   } else {
-     delivery_div.style['display'] = 'block';
-     pickup_div.style['display'] = 'none';
-   }
-  };
-});
-</script>
 <% end %>
-  <div id="forsale">
-  <% if current_user %>
-    <% if current_user.owner?(@board) %>
-    <%= render partial: 'forsale', locals: {board: @board} %>
-    <% end %>
-   <% end %>
+<script>
+
+$(document).ready(function() {
+  $('#accModal').on('show.bs.modal', function (e) {
+    if ( $('#newModal').is(':visible') ) {
+      $('#newModal').addClass('fixed-position');
+    } else {
+      $('#surfModal').addClass('fixed-position');
+    }
+  });
+  $('#accModal').on('hide.bs.modal', function (e) {
+    if ( $('#newModal').is(':visible') ) {
+      $('#newModal').removeClass('fixed-position');
+    } else {
+      $('#surfModal').removeClass('fixed-position');
+    }
+  });
+
+  $('#surfModal').on('hide.bs.modal', function (e) {
+    sessionStorage.clear()
+  });
+  $('#newModal').on('hide.bs.modal', function (e) {
+    sessionStorage.clear()
+  });
+// loads board price and resets if accessoriesPriceTotal returns to nil
+var pricing = document.getElementById('showPrice');
+if (sessionStorage.accessoriesPriceTotal){
+  pricing.innerHTML = Math.floor(sessionStorage.accessoriesPriceTotal * 100)/100;
+
+} else {
+  var prices = $('#showPrice').data('board');
+  pricing.innerHTML = Math.floor(prices * 100)/100
+}
+
+   $( ".accessory_div" ).click(function() {
+    id = $(this).data("id");
+    price = $(this).data("price");
+    if ($(this).hasClass("panel-success")) {
+      // prices -= price
+    } else {
+      // $(".accessory_div.panel[data-id="+id+"]").removeClass('panel-success')
+      // prices += price
+    }
+  });
+});
+
+function loadSelectedAccessories() {
+  clickedAccessoriesString = sessionStorage.clickedAccessories
+  return clickedAccessoriesString
+    ? JSON.parse(clickedAccessoriesString)
+    : [];
+  }
+function loadSelectedAccessoriesPrice() {
+accessoriesPriceString = sessionStorage.accessoriesPrice
+  return accessoriesPriceString
+    ? JSON.parse(accessoriesPriceString)
+    : [];
+  }
+function loadSelectedAccessoriesTotal() {
+accessoriesPriceTotal = sessionStorage.accessoriesPrice
+  return accessoriesPriceTotal
+    ? JSON.parse(accessoriesPriceTotal)
+    : [];
+  }
+function saveClickedAccessories(clickedAccessories, accessoriesPrice, accessoriesPriceTotal) {
+  var addRate = $('#shippableForm').data('rate');
+  sessionStorage.clickedAccessories = JSON.stringify(clickedAccessories);
+  sessionStorage.accessoriesPrice = JSON.stringify(accessoriesPrice);
+  sessionStorage.accessoriesPriceTotal = JSON.stringify(accessoriesPriceTotal);
+    $("#total").get(0).value = parseFloat(sessionStorage.accessoriesPriceTotal * 100);
+    $(".accArray").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
+    $("#totalShip").get(0).value = parseFloat(addRate * 100) + parseFloat(sessionStorage.accessoriesPriceTotal * 100);
+    $(".accArrayShip").get(0).value = JSON.parse(sessionStorage.clickedAccessories);
+}
+function clickAccessory(accessory_div, price) {
+  $(accessory_div).addClass('panel-success');
+  $(accessory_div).addClass('snow-background');
+  var clickedAccessories = loadSelectedAccessories();
+  var accessoriesPrice = loadSelectedAccessoriesPrice();
+  var accessoriesPriceTotal = Math.floor($('#showPrice').data('board') * 100 )/100
+
+  accessoriesPrice.push(price);
+  clickedAccessories.push(accessory_div.id);
+  if (accessoriesPrice.length > 1){
+    for(i = 0; i < accessoriesPrice.length; i++) {
+      accessoriesPriceTotal += Math.floor(accessoriesPrice[i] * 100)/100;
+      var pricing = document.getElementById('showPrice');
+      pricing.innerHTML = Math.floor(accessoriesPriceTotal * 100)/100
+      sessionStorage.pricing = Math.floor(pricing.innerHTML * 100)/100
+      document.getElementById('showPrice').innerHTML = Math.floor(sessionStorage.pricing * 100)/100;
+      }
+  } else {
+    accessoriesPriceTotal += Math.floor(accessoriesPrice[0] * 100)/100;
+    var pricing = document.getElementById('showPrice');
+    pricing.innerHTML = Math.floor(accessoriesPriceTotal * 100)/100
+    sessionStorage.pricing =  Math.floor(pricing.innerHTML * 100)/100
+    document.getElementById('showPrice').innerHTML = Math.floor(sessionStorage.pricing * 100)/100;
+};
+  saveClickedAccessories(clickedAccessories, accessoriesPrice, accessoriesPriceTotal);
+  var accessoriesPriceTotal = loadSelectedAccessoriesTotal();
+}
+function unclickAccessory(accessory_div, price) {
+  $(accessory_div).removeClass('panel-success');
+  $(accessory_div).removeClass('snow-background');
+  var accessoriesPriceTotal = sessionStorage.accessoriesPriceTotal;
+  var clickedAccessories = loadSelectedAccessories();
+  var removeThis = clickedAccessories.indexOf(accessory_div.id);
+  if (removeThis > -1)  (
+    clickedAccessories.splice(removeThis, 1)
+  );
+  var accessoriesPrice = loadSelectedAccessoriesPrice();
+  var removeThisP = accessoriesPrice.indexOf(price);
+  if (removeThisP > -1)  (
+    accessoriesPrice.splice(removeThisP, 1)
+  );
+  if (accessoriesPrice.length > 0) {
+    accessoriesPriceTotal -= Math.floor(price * 100)/100;
+    var pricing = document.getElementById('showPrice');
+    pricing.innerHTML = Math.floor(accessoriesPriceTotal * 100) / 100
+    sessionStorage.accessoriesPriceTotal = Math.floor(accessoriesPriceTotal * 100) / 100
+  } else {
+    accessoriesPriceTotal -= Math.floor(price * 100)/100;
+    document.getElementById('showPrice').innerHTML = Math.floor($('#showPrice').data('board') * 100)/100
+  }
+  saveClickedAccessories(clickedAccessories, accessoriesPrice, accessoriesPriceTotal);
+}
+$(function(){
+  // restore taken seats
+  $.each(loadSelectedAccessories(), function(i, accessory_div, price){
+    $('#'+accessory_div).addClass('panel-success');
+    $('#'+accessory_div).addClass('snow-background');
+  });
+  $('.accessory_div').on('click', function() {
+    var accessory_div = this;
+    price = $(this).data("price");
+    if (loadSelectedAccessories().indexOf(accessory_div.id) < 0) {
+      // not taken
+
+      clickAccessory(accessory_div, price);
+    } else {
+
+      unclickAccessory(accessory_div, price);
+    }
+  });
+
+  var w = window.innerWidth
+    if (w <= 700 && w >= 551) {
+      var slides = 3
+    } else if (w <= 450){
+      var slides = 2
+    } else {
+      var slides = 4
+    };
+
+  var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: slides,
+    nextButton: '.swiper-button-next',
+     prevButton: '.swiper-button-prev',
+    paginationClickable: true,
+    spaceBetween: 1,
+    freeMode: true
+  });
+
+})();
+</script>
+<% if @accessories.count <= 0 %>
+  <div style="position:relative;width:80%;margin-left:11%;margin-right:10%;height:20px;top:30px;">
+    <% unless params[:searched_accessory] %>
+     <h4 class=""> Accessories unavailable for item </h4>
+     <% else %>
+     <h4 class=""> Accessories unavailable for search </h4>
+     <% end %>
   </div>
+<% end %>
