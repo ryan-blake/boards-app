@@ -34,7 +34,7 @@ class Size < ApplicationRecord
 
   def pretty_dimensions
 
-     "#{length} x #{width} #{unit.name}"
+     "#{width} X #{length}  #{unit.name}"
   end
 
 
