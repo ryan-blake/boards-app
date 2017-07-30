@@ -148,6 +148,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
        <% end %>
     </div>
 </div>
+
 <script>
 
   $(document).ready(function() {
@@ -172,6 +173,9 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
   };
 });
 </script>
+<% end %>
+<% end %>
+
   <div id="forsale">
   <% if current_user %>
     <% if current_user.owner?(@board) %>
