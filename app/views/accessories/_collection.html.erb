@@ -6,7 +6,7 @@
   </div>
   <div class="max-height:150px;max-width:100%;">
    <%  @accessories_boards.each do |i| %>
-   <div class="" style="max-height:150px;background-color:lightgrey;width:25%;float:right;">
+   <div class="" style="max-height:150px;background-color:whitesmoke;width:25%;float:right;border:1px solid black;">
      <td class="vendor-link" style="cursor:pointer;">
      <div class="center-text">
        <span id="acc-link"><%= link_to i.title, accessory_path(i), remote: true, data: { toggle: "modal", target: "#accModal" } %></span>

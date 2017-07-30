@@ -21,12 +21,12 @@
            </td>
           <% end %>
         <% else %>
-          <td class="center-text single_table" style="max-width: 35%;border: black solid 1px;padding: 0px 4px;">
+          <td class="center-text single_table" style="max-width: 35%;padding: 0px 4px;">
             <% if @board.size %>
            <%= @board.size.pretty_dimensions %>
            <% end %>
           </td>
-          <td class="center-text single_table" style="max-width: 35%;border: black solid 1px;padding: 0px 4px;">
+          <td class="center-text single_table" style="max-width: 35%;padding: 0px 4px;">
             <% if @board.used == true %>
                Used
                <% else %>
