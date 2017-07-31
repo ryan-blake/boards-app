@@ -78,7 +78,7 @@ hideAccess.onclick = function() {
   <div class="rental-div" style="min-height:100%;">
         <div class="rent-dates">
           <span class="center-text">
-            <div id="invisible" data-vend="<%= @board.user_id %>" data-rubyvar="<%= @board.price %>"></div>
+            <div id="invisible" data-rubyvar="<%= @board.price %>"></div>
           <div id="number" style="font-size:30px;"><%= @board.price.to_i  %> </div>
           <%= render 'events/form', locals: {events: @events, board: @board} %>
         <!-- section -->
@@ -196,8 +196,9 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
     <% end %>
    <% end %>
   </div>
-  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <span id="accessoriesOffer"></span>
 
+  <script src="https://checkout.stripe.com/checkout.js"></script>
   <script>
 
   $(document).ready(function() {
@@ -281,11 +282,13 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
                      hiddenAmount.setAttribute('name', 'charge');
                      hiddenAmount.setAttribute('value', $('#amount').get(0).value);
                      form.appendChild(hiddenAmount);
-                     var hiddenAmount = document.createElement('input');
+                     var hiddenAccessories = document.createElement('input');
                      hiddenAmount.setAttribute('type', 'hidden');
-                     hiddenAmount.setAttribute('name', 'price');
-                     hiddenAmount.setAttribute('value', parseFloat($('#amount').get(0).value));
-                     form.appendChild(hiddenAmount);
+                     hiddenAmount.setAttribute('name', 'accessories');
+                     hiddenAmount.setAttribute('value', $('#accessoriesOffer').get(0).value);
+                     form.appendChild(hiddenAccessories);
+
+
 
                      // Submit the form
                      form.submit();
