@@ -250,7 +250,6 @@ $(document).ajaxStop(function(){
        closePartial.style['display'] = 'block';
        open.style['display'] = 'none';
        dashData.style['overflow-y'] = 'hidden'
-
          //  elemelons
                  $(function(){
                    // Set your Stripe publishable API key here
@@ -265,6 +264,7 @@ $(document).ajaxStop(function(){
                    // Create an instance of the card Element
                    var card = elements.create('card', {style: style});
                    // Add an instance of the card Element into the `card-element` <div>
+
                    card.mount('#card-element');
                    // Listen for errors
                    card.addEventListener('change', function(event) {
@@ -414,18 +414,18 @@ $(document).ajaxStop(function(){
 <!-- nav desktop -->
 <div style="height:550px;clear:right;position:absolute;" class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
   <% if !@user.stripe_account  %>
-  <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
+    <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <% else %>
-  <button type="button" class="btn btn-default new-btn"><%= link_to 'Listing', new_board_path, target: :_blank  %></button>
-  <button type="button" class="btn btn-default new-btn" id="new-accessory" ><%= link_to "Accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></button>
-  <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-  <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
-  <button type="button" class="btn btn-default" id="btn-accessory"><%= link_to 'Accessories', table_accessories_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-  <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  picked_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} , style: 'color:white;'%></button>
-  <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-  <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
-  <button type="button" class="btn btn-default" id="btn-sales"><%= link_to 'Sales', sales_boards_boards_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
-  <button type="button" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
+    <button type="button" class="btn btn-default new-btn"><%= link_to 'Listing', new_board_path, target: :_blank  %></button>
+    <button type="button" class="btn btn-default new-btn" id="new-accessory" ><%= link_to "Accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></button>
+    <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+    <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
+    <button type="button" class="btn btn-default" id="btn-accessory"><%= link_to 'Accessories', table_accessories_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+    <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  picked_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} , style: 'color:white;'%></button>
+    <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+    <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
+    <button type="button" class="btn btn-default" id="btn-sales"><%= link_to 'Sales', sales_boards_boards_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+    <button type="button" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <% end %>
 </div>
 
@@ -440,10 +440,10 @@ $(document).ajaxStop(function(){
      </button>
      <ul class="dropdown-menu mobile-drop-dash" style="min-width: 10px;max-width: 100px;">
      <% if !@user.stripe_account  %>
-     <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-receipt-m"><%= link_to 'Receipts', receipts_charges_path, remote:true %></button></li>
+      <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-receipt-m"><%= link_to 'Receipts', receipts_charges_path, remote:true %></button></li>
      <% else %>
-      <li class="mobNavLi" ><button type="button" class="btn btn-default new-btn"><%= link_to 'Listing', new_board_path, target: :_blank  %></button></li>
-      <li class="mobNavLi" ><button type="button" class="btn btn-default new-btn"><%= link_to "Accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default new-btn"><%= link_to 'Listing', new_board_path, target: :_blank  %></button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default new-btn"><%= link_to "Accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-active-m"><%= link_to 'Active',  active_boards_boards_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-inventory-m"><%= link_to "Inactive", inactive_boards_boards_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-accessory-m"><%= link_to 'Accessories', table_accessories_path , remote: true %></button></li>
@@ -461,7 +461,6 @@ $(document).ajaxStop(function(){
 .dash-nav-mobile button a:active .dropdown-menu {
   display:none;
 }
-
 
 </style>
 <!-- !nav mobile -->
@@ -565,40 +564,6 @@ $(document).ajaxStop(function(){
 
 <script>
 
-var handler = StripeCheckout.configure({
-   key: '<%= Rails.configuration.stripe[:publishable_key] %>',
-  locale: 'auto',
-  name: 'Boards',
-  description: 'Token purchase',
-  token: function(token) {
-    $('input#stripeToken').val(token.id);
-
-    $('form').submit();
-  }
-});
-$('#tokenButton').on('click', function(e) {
-  e.preventDefault();
-
-  $('#error_explanation').html('');
-
-  var amount = $('input#amount').val();
-  amount = amount.replace(/\$/g, '').replace(/\,/g, '')
-
-  amount = parseFloat(amount);
-
-  if (isNaN(amount)) {
-    $('#error_explanation').html('<p>Please enter a valid amount in USD ($).</p>');
-  }
-  else if (amount < 1000) {
-    $('#error_explanation').html('<p> amount must be at least $10.</p>');
-  }
-  else {
-    amount = amount * 100; // Needs to be an integer!
-    handler.open({
-      amount: Math.round(amount)
-    })
-  }
-});
 $(window).on('popstate', function() {
   handler.close();
 });

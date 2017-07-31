@@ -1,0 +1,43 @@
+<script src="https://js.stripe.com/v3/"></script>
+
+<div id="purchaseTokens" style="max-width:300px;width:100%;">
+  <form action="/charges" method="POST" id="payment-form">
+        <% if flash[:error].present? %>
+        <div id="error_explanation">
+          <p><%= flash[:error] %></p>
+        <% end %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <%= hidden_field_tag :offer, true %>
+        <%= hidden_field_tag :user_id, current_user.id %>
+        <%= hidden_field_tag :vendor_id,  @board.user_id %>
+        <%= hidden_field_tag :customer_id, current_user.id %>
+        <%= hidden_field_tag :board_id, @board.id %>
+        <%= hidden_field_tag :item, @board.title %>
+
+        <div id="card-errors"></div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Offer amount </label> <small> </small>
+              <input class="form-control input-lg" id="amount" name="amount" type="text" placeholder="$10.00 minumum">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="card-element">Card details</label>
+              <div id="card-element" class="form-control input-lg field">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <input type="hidden" name="email" value="<%= @user.email %>">
+            <button style="color:black;" class="btn btn-lg btn-block btn-info" id="submit_payment" type="submit">
+              Make Offer
+            </button>
+          </div>
+        </div>
+        </div>

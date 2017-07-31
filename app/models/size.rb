@@ -33,10 +33,12 @@ class Size < ApplicationRecord
   end
 
   def pretty_dimensions
-
      "#{width} X #{length}  #{unit.name}"
   end
 
+  def used?
+    self.used
+  end
 
   def create_length
     a = self

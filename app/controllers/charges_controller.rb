@@ -27,8 +27,12 @@ class ChargesController < ApplicationController
       @charge.charge_stripe = charge['id']
       @charge.update_attribute(:completed, true)
       @charge.update_attribute(:picked, "0")
-
       @charge.save
+
+      @board = Board.where(id: @charge.board_id).first
+      @board.inventory += -1
+      @board.save
+
       array = @charge.accessories.split(",")
       if array.count >= 1
         @accessories = Accessory.where(id: array)
@@ -57,6 +61,29 @@ class ChargesController < ApplicationController
       :email => params[:stripeEmail],
       :card => params[:stripeToken]
   )
+   if params[:offer] == "true"
+     @charge = Charge.new(
+       price: params["amount"].to_i * 100,
+       user_id: current_user.id,
+       vendor_id: params["vendor_id"].to_i,
+       item: params["item"],
+       token: params[:stripeToken],
+       customer_id: customer.id,
+       completed: false,
+       board_id: params["board_id"],
+       shipping: params[:charge]["shipping"],
+       accessories: params[:charge]["accessories"],
+       address: params["stripeShippingAddressLine1"],
+       zipcode: params["stripeShippingAddressZip"],
+       city: params["stripeShippingAddressCity"],
+       state: params["stripeShippingAddressState"],
+       country: params["stripeShippingAddressCountryCode"],
+     )
+     @charge.update_attribute(:boolean, true)
+     @charge.save
+     redirect_to dash_path
+   else
+
   @charge = Charge.new(
     price: params[:charge]["amount"].to_i,
     user_id: current_user.id,
@@ -78,12 +105,9 @@ class ChargesController < ApplicationController
 
   @charge.update_attribute(:boolean, true)
   @charge.save
-  @board = Board.where(id: @charge.board_id).first
-  @board.inventory += -1
-  @board.save
   @new_user = false
   complete
-
+  end
 
   # ChargeMailer.new_charge_user(@charge).deliver_now
   # ChargeMailer.new_charge_vendor(@charge).deliver_now
