@@ -3,7 +3,7 @@
 <% if @board.images.count >= 1%>
     <% @board.images.each_with_index do |photo, index| %>
         <div class="swiper-slide">
-              <%= link_to(image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')), attachment_url(photo, :file, :fit, 550, 550, format: 'jpg')) %> 
+            <%= image_tag(attachment_url(photo, :file, :fill, 350, 350, format: 'jpg')) %>
         </div>
     <% end %>
 <% else %>
