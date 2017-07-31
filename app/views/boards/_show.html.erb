@@ -155,14 +155,12 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
              <%= render partial: 'charge', locals: {board: @board} %>
            </div>
          </div>
-         <h3 class="btn btn-sort" id="showOffer">Make Offer</h3>
-
+         <h3 class="btn btn-sort" style="border:1px solid grey;" id="showOffer">Make Offer</h3>
     </div>
 </div>
 
 
 <script>
-
   $(document).ready(function() {
   var checkbox = document.getElementById('checkbox');
   var delivery_div = document.getElementById('delivery');
@@ -177,7 +175,6 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
    if(this.checked) {
      pickup_div.style['display'] = 'block';
      delivery_div.style['display'] = 'none';
-
    } else {
      delivery_div.style['display'] = 'block';
      pickup_div.style['display'] = 'none';
@@ -196,7 +193,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
     <% end %>
    <% end %>
   </div>
-  <span id="accessoriesOffer"></span>
+  <span id="accessoriesOfferArray"></span>
 
   <script src="https://checkout.stripe.com/checkout.js"></script>
   <script>
@@ -287,7 +284,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
                      var hiddenAccessories = document.createElement('input');
                      hiddenAccessories.setAttribute('type', 'hidden');
                      hiddenAccessories.setAttribute('name', 'accessories');
-                     hiddenAccessories.setAttribute('value', $('#accessoriesOffer').get(0).value);
+                     hiddenAccessories.setAttribute('value', $('#accessoriesOfferArray').get(0).value);
                      form.appendChild(hiddenAccessories);
 
                      var hiddenAddress = document.createElement('input');

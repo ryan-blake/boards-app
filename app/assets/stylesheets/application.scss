@@ -663,7 +663,7 @@ border: none;
   #card-errors {
     color:red;
   }
-  
+
 .alert-alert {
  @extend .alert-warning;
 }
@@ -1314,7 +1314,7 @@ margin-top:-65px;
     left: calc(50% - 150px);
     display: block;
     z-index: 100;
-    top: 30%;
+    bottom: 15%;
     position: fixed !important;
     color: black;
     border-radius: 2%;
