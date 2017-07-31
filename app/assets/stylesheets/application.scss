@@ -667,7 +667,7 @@ border: none;
 .alert {
   width:100%;
   height:50px;
-  top:40px;;
+  top:40px;
   position:fixed;
 }
 
@@ -676,6 +676,9 @@ border: none;
  max-width:100%;
  position:fixed;
  top:50px;
+ background-color: rgba(0, 0, 0, 0.65);
+ color:white;
+ z-index:999999 !important
 }
 
 .pagination a, .pagination span.current, .pagination span.gap {
@@ -1301,6 +1304,26 @@ margin-top:-65px;
   .btm-paginate {
     top:-4px !important;
   }
+
+  #offerPartial {
+    min-height: 100px;
+    border: 4px solid darkseagreen;
+    left: calc(50% - 150px);
+    display: block;
+    z-index: 100;
+    top: 80%;
+    position: fixed !important;
+    color: black;
+    border-radius: 2%;
+    box-shadow: 0px 1px 20px 3px black;
+  }
+
+  #offerInfo {
+    top: 0px;
+    position: absolute;
+    height: 47px;
+    width: 91%;
+  }
 // responsive
 
 @media (max-width: 484px) {
@@ -1440,10 +1463,9 @@ height: 64px;
  }
 
  .messages-list {
-
    min-height:120px !important;
-
  }
+
  textarea.form-control {
       height: 35px !important;
  }

@@ -211,6 +211,7 @@ end
 
   # GET /boards/1/edit
   def edit
+    @user = current_user
     @board = Board.find(params[:id])
     @accessories = @board.accessories
     @size = @board.size
@@ -245,7 +246,7 @@ end
   # PATCH/PUT /boards/1
   # PATCH/PUT /boards/1.json
   def update
-
+    @user = current_user
     respond_to do |format|
 
       @board = Board.find(params[:id])

@@ -133,10 +133,8 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
 
         <% else %>
         <!--  -->
-        <h3 class="btn btn-sort" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
-        <h3 class="btn btn-danger pull-right" style="z-index:1;pointer:cursor;max-width:100%;display:none;position:relative;bottom:20px;" id="closePartial">&times 1</h3>
-
-        <div id="tokenPartial" class="" style="min-height: 285px;border:4px solid black;left:calc(50% - 150px);display:none;z-index:990;top:150px;position:fixed;">
+        <div id="offerPartial" class="" style="display:none;">
+          <h3 class="btn btn-danger pull-right" style="z-index: 1;width: 100%;display: none;position: relative;bottom: 59px;background-color: rgba(0, 0, 0, 0.65);" id="closeOffer">&times</h3>
           <div style="width:300px;min-height:200px;max-height240px;background-color:#f5f5f5;z-index:989;">
           <%= render partial: 'charges/chargeoffer' %>
           </div>
@@ -157,6 +155,8 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
              <%= render partial: 'charge', locals: {board: @board} %>
            </div>
          </div>
+         <h3 class="btn btn-sort" id="showOffer">Make Offer</h3>
+
     </div>
 </div>
 
@@ -202,14 +202,14 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
   <script>
 
   $(document).ready(function() {
-  var open = document.getElementById('showTokens');
-  var tokenpartial = document.getElementById('tokenPartial');
-  var closePartial = document.getElementById('closePartial');
+  var open = document.getElementById('showOffer');
+  var offerPartial = document.getElementById('offerPartial');
+  var closePartial = document.getElementById('closeOffer');
 
 
   open.onclick = function() {
-    if (tokenpartial.style.display == 'none') {
-       tokenpartial.style['display'] = 'block';
+    if (offerPartial.style.display == 'none') {
+       offerPartial.style['display'] = 'block';
        closePartial.style['display'] = 'block';
        open.style['display'] = 'none';
 
@@ -301,7 +301,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
   closePartial.onclick = function() {
   if (closePartial.style.display == 'block') {
     closePartial.style['display'] = 'none';
-    tokenpartial.style['display'] = 'none';
+    offerPartial.style['display'] = 'none';
     open.style['display'] = 'block';
   }
   };
