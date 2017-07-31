@@ -1,7 +1,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <div id="purchaseTokens" style="max-width:300px;width:100%;">
-  <form action="/charges" method="POST" id="payment-form">
+  <form action="/charges" method="POST" id="payment-offer">
         <% if flash[:error].present? %>
         <div id="error_explanation">
           <p><%= flash[:error] %></p>
@@ -41,9 +41,62 @@
             <% customerEmail = "nil" %>
             <% end %>
             <input type="hidden" name="email" value="<%= customerEmail %>">
+<!--  -->
+<div class="form-group">
+  <label>Shipping: <small>$<%= @board.rate.to_f %></small></label>
+<input id="shipOfferCheck" type="checkbox" >
+</div>
+<div class="row" id="shippingOffer" style="display:none;">
+  <div class="col-md-12">
+    <div class="form-group">
+      <input  id="name" class="form-control input-lg field" placeholder="name">
+    </div>
+  </div>
+    <div class="col-md-12">
+      <div class="form-group">
+          <input id="address-line1" class="form-control input-lg field" placeholder="address line 1">
+        </div>
+      </div>
+        <div class="col-md-12">
+          <div class="form-group">
+              <input id="address-city" class="form-control input-lg field" placeholder="City">
+            </div>
+          </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <input  id="address-state" class="form-control input-lg field" placeholder="State">
+          </div>
+        </div>
+          <div class="col-md-12">
+            <div class="form-group">
+                <input  id="address-zip" class="form-control input-lg field" placeholder="Zipcode">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                  <input  id="address-country" class="form-control input-lg field" placeholder="Country">
+                </div>
+            </div>
+  </div>
+
+
+<!--  -->
             <button style="color:black;" class="btn btn-lg btn-block btn-info" id="submit_payment" type="submit">
               Make Offer
             </button>
           </div>
         </div>
         </div>
+<script>
+$(function(){
+   var shipOffer = document.getElementById('shipOfferCheck');
+   var shippingDetails = document.getElementById('shippingOffer');
+   shipOffer.onclick = function() {
+     if (this.checked) {
+        shippingDetails.style['display'] = 'block';
+     } else {
+       shippingDetails.style['display'] = 'none';
+     }
+    };
+});
+</script>

@@ -660,7 +660,10 @@ border: none;
     background-color: mediumaquamarine;
     display: table;
   }
-
+  #card-errors {
+    color:red;
+  }
+  
 .alert-alert {
  @extend .alert-warning;
 }
@@ -1311,7 +1314,7 @@ margin-top:-65px;
     left: calc(50% - 150px);
     display: block;
     z-index: 100;
-    top: 80%;
+    top: 30%;
     position: fixed !important;
     color: black;
     border-radius: 2%;
@@ -1319,10 +1322,8 @@ margin-top:-65px;
   }
 
   #offerInfo {
-    top: 0px;
-    position: absolute;
+    position: relative;
     height: 47px;
-    width: 91%;
   }
 // responsive
 

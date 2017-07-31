@@ -71,13 +71,14 @@ class ChargesController < ApplicationController
        customer_id: customer.id,
        completed: false,
        board_id: params["board_id"],
-       shipping: "not set up",
        accessories: params["accessories"],
-       address: params["stripeShippingAddressLine1"],
-       zipcode: params["stripeShippingAddressZip"],
-       city: params["stripeShippingAddressCity"],
-       state: params["stripeShippingAddressState"],
-       country: params["stripeShippingAddressCountryCode"],
+       charge_stripe: params["name"],
+       address: params["address-line1"],
+       zipcode: params["address-zip"],
+       city: params["address-city"],
+       country: params["address-country"],
+       state: params["address-state"],
+       shipping: params["shipping"],
      )
      @charge.update_attribute(:boolean, true)
      @charge.save

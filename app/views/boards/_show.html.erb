@@ -134,7 +134,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
         <% else %>
         <!--  -->
         <div id="offerPartial" class="" style="display:none;">
-          <h3 class="btn btn-danger pull-right" style="z-index: 1;width: 100%;display: none;position: relative;bottom: 59px;background-color: rgba(0, 0, 0, 0.65);" id="closeOffer">&times</h3>
+          <h3 class="btn btn-danger pull-right" style="z-index: 1;width: 100%;display: none;position: relative;bottom: 20px;background-color: rgba(0, 0, 0, 0.65);" id="closeOffer">&times</h3>
           <div style="width:300px;min-height:200px;max-height240px;background-color:#f5f5f5;z-index:989;">
           <%= render partial: 'charges/chargeoffer' %>
           </div>
@@ -242,7 +242,7 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
                      }
                    });
                    // Create a token
-                   var form = document.getElementById('payment-form');
+                   var form = document.getElementById('payment-offer');
                    form.addEventListener('submit', function(event) {
                      event.preventDefault();
                      // Validate the form isn't empty before requesting a token
@@ -271,22 +271,62 @@ $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
                    // Submit the token
                    function stripeTokenHandler(token) {
                      // Insert the token ID into the form so it gets submitted to the server
-                     var form = document.getElementById('payment-form');
+                     var form = document.getElementById('payment-offer');
                      var hiddenInput = document.createElement('input');
                      hiddenInput.setAttribute('type', 'hidden');
                      hiddenInput.setAttribute('name', 'stripeToken');
                      hiddenInput.setAttribute('value', token.id);
                      form.appendChild(hiddenInput);
+
                      var hiddenAmount = document.createElement('input');
                      hiddenAmount.setAttribute('type', 'hidden');
                      hiddenAmount.setAttribute('name', 'charge');
                      hiddenAmount.setAttribute('value', $('#amount').get(0).value);
                      form.appendChild(hiddenAmount);
+
                      var hiddenAccessories = document.createElement('input');
-                     hiddenAmount.setAttribute('type', 'hidden');
-                     hiddenAmount.setAttribute('name', 'accessories');
-                     hiddenAmount.setAttribute('value', $('#accessoriesOffer').get(0).value);
+                     hiddenAccessories.setAttribute('type', 'hidden');
+                     hiddenAccessories.setAttribute('name', 'accessories');
+                     hiddenAccessories.setAttribute('value', $('#accessoriesOffer').get(0).value);
                      form.appendChild(hiddenAccessories);
+
+                     var hiddenAddress = document.createElement('input');
+                     hiddenAddress.setAttribute('type', 'hidden');
+                     hiddenAddress.setAttribute('name', 'address-line1');
+                     hiddenAddress.setAttribute('value', $('#address-line1').get(0).value);
+                     form.appendChild(hiddenAddress);
+                     var hiddenCity = document.createElement('input');
+                     hiddenCity.setAttribute('type', 'hidden');
+                     hiddenCity.setAttribute('name', 'address-city');
+                     hiddenCity.setAttribute('value', $('#address-city').get(0).value);
+                     form.appendChild(hiddenCity);
+                     var hiddenState = document.createElement('input');
+                     hiddenState.setAttribute('type', 'hidden');
+                     hiddenState.setAttribute('name', 'address-state');
+                     hiddenState.setAttribute('value', $('#address-state').get(0).value);
+                     form.appendChild(hiddenState);
+                     var hiddenZip = document.createElement('input');
+                     hiddenZip.setAttribute('type', 'hidden');
+                     hiddenZip.setAttribute('name', 'address-zip');
+                     hiddenZip.setAttribute('value', $('#address-zip').get(0).value);
+                     form.appendChild(hiddenZip);
+                     var hiddenCountry = document.createElement('input');
+                     hiddenCountry.setAttribute('type', 'hidden');
+                     hiddenCountry.setAttribute('name', 'address-country');
+                     hiddenCountry.setAttribute('value', $('#address-country').get(0).value);
+                     form.appendChild(hiddenCountry);
+                     var hiddenName = document.createElement('input');
+                     hiddenCountry.setAttribute('type', 'hidden');
+                     hiddenCountry.setAttribute('name', 'name');
+                     hiddenCountry.setAttribute('value', $('#name').get(0).value);
+                     form.appendChild(hiddenName);
+
+                var hiddenCheck = document.createElement('input');
+                hiddenCheck.setAttribute('type', 'hidden');
+                hiddenCheck.setAttribute('name', 'shipping');
+                hiddenCheck.setAttribute('value', $('#shipOfferCheck').is(":checked"));
+                form.appendChild(hiddenCheck);
+
 
 
 
