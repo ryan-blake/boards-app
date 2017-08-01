@@ -9,8 +9,19 @@ class ChargesController < ApplicationController
     #  stripe_account: connected_account_id).data
   end
 
+  def pending_boards
+    @user = current_user
+    @pending_boards = Charge.where(vendor_id: @user.id, completed: false, boolean: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
+  end
+
     def complete
+      unless @charge
+        @charge = Charge.find_by(id: params[:charge_id].to_i)
+        @board = Board.find_by(id: @charge.board_id)
+
+      else
        @board = Board.find_by(id: @charge.board_id,  arrived: false)
+      end
       Stripe.api_key = ENV["STRIPE_API_KEY"]
       token = @charge.token
       charge = Stripe::Charge.create({
@@ -73,6 +84,7 @@ class ChargesController < ApplicationController
        board_id: params["board_id"],
        accessories: params["accessories"],
        charge_stripe: params["name"],
+       boolean: true,
        address: params["address-line1"],
        zipcode: params["address-zip"],
        city: params["address-city"],
@@ -104,7 +116,6 @@ class ChargesController < ApplicationController
   )
 
 
-  @charge.update_attribute(:boolean, true)
   @charge.save
   @new_user = false
   complete
@@ -144,7 +155,6 @@ class ChargesController < ApplicationController
       accessories: params[:charge]["accessories"].to_s
     )
 
-    @charge.update_attribute(:boolean, true)
     @charge.save
     @board = Board.where(id: @charge.board_id).first
 
@@ -210,6 +220,11 @@ end
   end
 
     def destroy
+      # if @harge.compeleted == false
+        #destroy @charge
+
+      # else  if @charge.completed == true
+      # refund stripe
     begin
       # Retrieve the charge from Stripe
       charge = Stripe::Charge.retrieve(params[:id])

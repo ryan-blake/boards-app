@@ -1,0 +1,106 @@
+<div  id="results_pending">
+  <div class="top-dash">
+  <div class="row" id="pending-table">
+    <% if @pending_boards.count == 0 %>
+      <%= render partial: 'boards/none' %>
+    <% end %>
+    <thead>
+      <tr>
+        <td class="filtering center-text">
+          <button type="button" class="btn btn-success refresh-btn"><%= link_to 'Refresh',  pending_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Updating... "} , style: 'color:white;'%></button>
+          <ti> <strong> Sort <ti style="text-decoration:underline;">pending</ti> by: </strong> </ti>
+          <div  <i style="display:inline;" class="btn btn-sort">  <%= sortable "created_at", "Date" %></i></div>
+         </ti>
+        </td>
+      </tr>
+      <td>
+        <div class="center-text" id="pending_boards" style="position: relative;bottom: 10px;">
+        <%= paginate @pending_boards, remote: true, window: 1 %>
+        </div>
+      </td>
+    </thead>
+<style>
+</style>
+    <div class="col-md-12 table-scrollable ">
+      <table style="" class="table table-bordered table-striped table-hover" id="results">
+        <thead>
+          <tr>
+            <th>Offer</th>
+            <th><i style="display:inline;"> <%= sortable "title" %></th>
+            <th><i style="display:inline;"> <%= sortable "upc", "UPC" %></th>
+            <th><i style="display:inline;"> <%= sortable "inventory" %></i></th>
+            <th><i style="display:inline;"> <%= sortable "price", "offer $" %></i></th>
+            <th><i style="display:inline;"> <%= sortable "sale_price", "Asking Price" %></i></th>
+            <th><i style="display:inline;"> Accessory $ </i></th>
+            <th><i style="display:inline;"> Acc's-inventory </i></th>
+            <th><strong>Type</strong></th>
+            <th><strong>Accessory</strong></th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @pending_boards.each do |charge| %>
+            <tr>
+              <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(charge.board.images.first, :file, :fill, 80, 80), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
+              <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(charge.board.images.first, :file, :fill, 40, 40), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
+              <td><%= link_to charge.board.title.truncate(13), charge.board, target: :_blank %>
+                <br>
+              </td>
+              <td><%= charge.board.upc %></td>
+              <td><%= charge.board.inventory %></td>
+              <td><%= format_amount(charge.price) %></td>
+              <td><%= format_amount(charge.board.price * 100)  %></td>
+              <td><%= format_amount(charge.accessories ? charge.accessory_cost * 100 : "0") %>
+                <td class="text-center">
+                  <% added_accessories = Accessory.where(id: charge.accessories ? charge.accessories.split(",").to_a  : nil)%>
+                  <% added_accessories.each_with_index do |a, index|  %>
+                  <% if index >=1 %>
+                    :
+                    <% end %>
+                  <%= link_to a.title + "-" + a.inventory.to_s, a, remote: true, data: { toggle: "modal", target: "#accModal" } %>
+                  <% end %>
+                </td>
+              <td class="text-center">
+                <small><%=charge.board.category.name %> </small>
+              </td>
+
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--  -->
+
+    <tbody >
+      <td>
+        <div class="center-text pagination" id="pending_boards" style="position:relative;top:-15px;">
+        <%= paginate @pending_boards, remote: true, window: 1 %>
+        </div>
+      </td>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<div>
+<%= form_tag({controller: :boards, action: :search_dash}, {method: :get, remote: true}) do  %>
+<div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
+  <div class="input-group">
+    <span class="input-group-btn">
+      <%= grouped_collection_select  nil, :category_id, Type.all, :categories,
+            :name, :id, :name, {prompt: "Select type" },
+            { id: 'category-select' , class: "form-control"} %>
+    </span>
+  </div><!-- /input-group -->
+</div><!-- /.col-lg-6 -->
+<div class="col-md-4 search-bar">
+   <div class="input-group">
+     <%= text_field_tag :keyword, nil, class: 'form-control', :placeholder => "Search for.."  %>
+     <span class="input-group-btn">
+       <%= button_tag "Go!", class: "btn btn-success", data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Searching..."} %>
+     </span>
+   </div><!-- /input-group -->
+ </div><!-- /.col-lg-6 -->
+ <% end %>
+</div>

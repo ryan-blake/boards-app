@@ -41,6 +41,19 @@ class Charge < ApplicationRecord
     [address, city, state, zipcode].join(', ')
   end
 
+  def accessory_cost
+    if self.accessories?
+
+    a = self.accessories.split(",")
+    a = Accessory.where(id: a).to_a
+    price = []
+    a.each do |i|
+      price << i.price.to_f
+    end
+    price.sum
+    end
+  end
+
   def rent_time(board)
     board.end_time - board.start_time
   end

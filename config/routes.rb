@@ -38,8 +38,8 @@ end
     resources :events, only: [:create, :destroy, :show, :board_dash]
     collection do
       get  'search_dash', 'search_inactive', 'search_type', 'search_signed_in', 'sort_order', 'board_dash',  'active_boards', 'inactive_boards',
-          'pending_boards', 'sales_boards', 'company_search'
-    end
+           'sales_boards', 'company_search'
+      end
     collection do
       post  'import'
     end
@@ -51,7 +51,8 @@ get 'featured' => 'boards#show'
 
   resources :charges do
     collection do
-        get 'shipped_boards','search_shipped','picked_boards', 'search_picked', 'receipts', 'search_receipts'
+        get 'shipped_boards','search_shipped','picked_boards', 'search_picked', 'receipts', 'search_receipts',
+        'pending_boards'
       end
   end
 

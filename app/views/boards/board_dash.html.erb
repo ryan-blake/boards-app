@@ -3,7 +3,7 @@
   <% content_for(:header) do %>
   <%= render partial: 'layouts/spinner' %>
 
-  <script>
+<script>
 $( document ).ready(function() {
 // hide spinner
 $(".sk-circle").hide();
@@ -25,6 +25,8 @@ $(document).ajaxStop(function(){
     var salesBtn = document.getElementById('btn-sales');
     var rentalBtn = document.getElementById('btn-rental');
     var accessoryBtn = document.getElementById('btn-accessory');
+    var pendingBtn = document.getElementById('btn-pending');
+    var pendingBtnM = document.getElementById('btn-pending-m');
     var activeBtnM = document.getElementById('btn-active-m');
     var receiptBtnM = document.getElementById('btn-receipt-m');
     var inventoryBtnM = document.getElementById('btn-inventory-m');
@@ -42,6 +44,8 @@ $(document).ajaxStop(function(){
     var salesPG = document.getElementById('sales');
     var rentalPG = document.getElementById('rental');
     var accessoryPG = document.getElementById('accessories');
+    var pendingPG = document.getElementById('pending');
+
 
       activeBtn.onclick = function() {
           activePG.style['display'] = 'block';
@@ -52,7 +56,7 @@ $(document).ajaxStop(function(){
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
           accessoryPG.style['display'] = 'none';
-
+          pendingPG.style['display'] = 'none';
 
        };
        receiptBtn.onclick = function() {
@@ -64,7 +68,7 @@ $(document).ajaxStop(function(){
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
           accessoryPG.style['display'] = 'none';
-
+          pendingPG.style['display'] = 'none';
 
        };
        inventoryBtn.onclick = function() {
@@ -76,7 +80,7 @@ $(document).ajaxStop(function(){
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
           accessoryPG.style['display'] = 'none';
-
+          pendingPG.style['display'] = 'none';
 
        };
        shippedBtn.onclick = function() {
@@ -88,7 +92,7 @@ $(document).ajaxStop(function(){
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
           accessoryPG.style['display'] = 'none';
-
+          pendingPG.style['display'] = 'none';
 
        };
        pickUpBtn.onclick = function() {
@@ -100,6 +104,8 @@ $(document).ajaxStop(function(){
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'none';
           accessoryPG.style['display'] = 'none';
+          pendingPG.style['display'] = 'none';
+
 
 
        };
@@ -112,6 +118,8 @@ $(document).ajaxStop(function(){
           rentalPG.style['display'] = 'none';
           salesPG.style['display'] = 'block';
           accessoryPG.style['display'] = 'none';
+          pendingPG.style['display'] = 'none';
+
 
        };
        rentalBtn.onclick = function() {
@@ -123,10 +131,25 @@ $(document).ajaxStop(function(){
           salesPG.style['display'] = 'none';
           rentalPG.style['display'] = 'block';
           accessoryPG.style['display'] = 'none';
+          pendingPG.style['display'] = 'none';
+
 
        };
        accessoryBtn.onclick = function() {
          accessoryPG.style['display'] = 'block';
+          pickUpPG.style['display'] = 'none';
+          activePG.style['display'] = 'none';
+          inventoryPG.style['display'] = 'none';
+          receiptPG.style['display'] = 'none';
+          shippedPG.style['display'] = 'none';
+          salesPG.style['display'] = 'none';
+          rentalPG.style['display'] = 'none';
+          pendingPG.style['display'] = 'none';
+
+       };
+       pendingBtn.onclick = function() {
+          pendingPG.style['display'] = 'block';
+          accessoryPG.style['display'] = 'none';
           pickUpPG.style['display'] = 'none';
           activePG.style['display'] = 'none';
           inventoryPG.style['display'] = 'none';
@@ -146,6 +169,8 @@ $(document).ajaxStop(function(){
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
          accessoryPG.style['display'] = 'none';
+         pendingPG.style['display'] = 'none';
+
 
 
       };
@@ -158,6 +183,8 @@ $(document).ajaxStop(function(){
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
          accessoryPG.style['display'] = 'none';
+         pendingPG.style['display'] = 'none';
+
 
 
       };
@@ -170,6 +197,8 @@ $(document).ajaxStop(function(){
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
          accessoryPG.style['display'] = 'none';
+         pendingPG.style['display'] = 'none';
+
 
 
       };
@@ -182,6 +211,8 @@ $(document).ajaxStop(function(){
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
          accessoryPG.style['display'] = 'none';
+         pendingPG.style['display'] = 'none';
+
 
 
       };
@@ -194,6 +225,8 @@ $(document).ajaxStop(function(){
          salesPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
          accessoryPG.style['display'] = 'none';
+         pendingPG.style['display'] = 'none';
+
 
 
       };
@@ -206,6 +239,8 @@ $(document).ajaxStop(function(){
          shippedPG.style['display'] = 'none';
          rentalPG.style['display'] = 'none';
          accessoryPG.style['display'] = 'none';
+         pendingPG.style['display'] = 'none';
+
 
       };
       rentalBtnM.onclick = function() {
@@ -217,6 +252,8 @@ $(document).ajaxStop(function(){
          shippedPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
          accessoryPG.style['display'] = 'none';
+         pendingPG.style['display'] = 'none';
+
 
       };
       accessoryBtnM.onclick = function() {
@@ -228,15 +265,26 @@ $(document).ajaxStop(function(){
          receiptPG.style['display'] = 'none';
          shippedPG.style['display'] = 'none';
          salesPG.style['display'] = 'none';
+         pendingPG.style['display'] = 'none';
+      };
+      pendingBtnM.onclick = function() {
+         pendingPG.style['display'] = 'block';
+         accessoryPG.style['display'] = 'none';
+         rentalPG.style['display'] = 'none';
+         pickUpPG.style['display'] = 'none';
+         activePG.style['display'] = 'none';
+         inventoryPG.style['display'] = 'none';
+         receiptPG.style['display'] = 'none';
+         shippedPG.style['display'] = 'none';
+         salesPG.style['display'] = 'none';
       };
      });
+
      // tokensJS
-     </script>
+  </script>
      <!-- hide tokems partial -->
      <% if @user.stripe_account %>
-     <script>
-
-
+  <script>
   $(document).ready(function() {
   var open = document.getElementById('showTokens');
   var tokenpartial = document.getElementById('tokenPartial');
@@ -384,9 +432,6 @@ $(document).ajaxStop(function(){
     <!--  -->
 </div>
 
-
-
-
   <% if current_user && !current_user.stripe_account %>
   <div id="userDash" class="jumbotron bcg" style="">
     <div class="center-text" style="right:0px;position:absolute;top:50px;position:fixed;z-index:1;">
@@ -397,8 +442,8 @@ $(document).ajaxStop(function(){
     <%  @stripe_account.verification.fields_needed.each do |i| array << i end %>
     <% array.include? 'legal_entity.ssn_last_4'%>
     <% if @stripe_account.verification.fields_needed  %>
-      <div class="alert alert-warning" style="left:1px;min-height:50px;">
-          <p style="font-size:10px;">
+      <div class="alert" style="min-height:50px;">
+          <p style="font-size:10px;color:white;">
             We need some information to continue processing your acct
             <%= link_to "Update your information", edit_stripe_account_path(@stripe_account.id), class: "btn btn-sm btn-warning btn-custom" %>
           </p>
@@ -412,7 +457,7 @@ $(document).ajaxStop(function(){
 </div>
 
 <!-- nav desktop -->
-<div style="height:550px;clear:right;position:absolute;" class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
+<div style="height:593px;clear:right;position:absolute;" class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
   <% if !@user.stripe_account  %>
     <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
   <% else %>
@@ -423,6 +468,7 @@ $(document).ajaxStop(function(){
     <button type="button" class="btn btn-default" id="btn-accessory"><%= link_to 'Accessories', table_accessories_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
     <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  picked_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} , style: 'color:white;'%></button>
     <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+    <button type="button" class="btn btn-default" id="btn-pending"><%= link_to 'Pending',  pending_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
     <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
     <button type="button" class="btn btn-default" id="btn-sales"><%= link_to 'Sales', sales_boards_boards_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
     <button type="button" class="btn btn-default" id="btn-rental"><%= link_to 'Rental',  rental_boards_events_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
@@ -449,6 +495,7 @@ $(document).ajaxStop(function(){
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-accessory-m"><%= link_to 'Accessories', table_accessories_path , remote: true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-pickup-m"><%= link_to 'Pick Up',  picked_boards_charges_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-shipped-m"><%= link_to 'Shipping',  shipped_boards_charges_path, remote:true %></button></li>
+       <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-pending-m"><%= link_to 'Pending',  pending_boards_charges_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-receipt-m"><%= link_to 'Receipts', receipts_charges_path, remote:true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-sales-m"><%= link_to 'Sales', sales_boards_boards_path , remote: true %></button></li>
        <li class="mobNavLi" ><button type="button" class="btn btn-default" id="btn-rental-m"><%= link_to 'Rental', rental_boards_events_path , remote: true %></button></li>
@@ -475,6 +522,8 @@ $(document).ajaxStop(function(){
 <div  style="display:none;" class="dashTable col-md-12 center-text" id="inventory">
 </div>
 <div  style="display:none;" class="dashTable col-md-12 center-text" id="shipped">
+</div>
+<div  style="display:none;" class="dashTable col-md-12 center-text" id="pending">
 </div>
 <div  style="display:none;" class="dashTable col-md-12 center-text" id="pickUp">
 </div>
@@ -574,7 +623,12 @@ $('.mobNavLi').on('click', function(){
 })
 $('.dropdown-toggle-mobile').on('click', function(){
   $('.mobile-drop-dash').toggle()
-})
+    $('#fixed-msg').toggle();
+});
+$('.mobile-drop-dash').on('click', function(){
+  $('#fixed-msg').toggle()
+});
+
 
 
 </script>

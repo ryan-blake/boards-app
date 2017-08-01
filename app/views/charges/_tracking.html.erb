@@ -11,6 +11,11 @@
       </ul>
     </div>
   <% end %>
+  <% unless @charge.completed %>
+  <div class="form-group">
+    <% link_to 'Accept', complete_charge_path(charge_id: @charge.id), class: 'btn-success' %>
+  </div>
+  <% else %>
   <% if @charge.shipping == true %>
   <div class="form-group">
     <%= f.label :tracking_number, class: 'control-label' %><br>
@@ -29,6 +34,7 @@
   <div class="actions" id="sendTracking">
     <%= button_tag "Complete!", class: "btn btn-success", id:'trackBtn', style: 'float: right;bottom: 49px;position: relative;', data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Sending..."} %>
   </div>
+  <% end %>
 <% end %>
 
 <script>

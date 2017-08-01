@@ -1,0 +1,3 @@
+$('#results-pending').html('<%= j render partial: 'pending_boards' %>');
+$("#pending").html("<%=j render partial: 'pending_boards' %>");
+$('#pending_boards').html('<%= escape_javascript(paginate(@pending_boards, window: 1, :remote => true)) %>');
