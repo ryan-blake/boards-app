@@ -146,6 +146,12 @@
         <%= f.number_field :rate, :step => 0.01, min: 0, class: 'btn-width form-control input-md' %>
     </div>
   </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label>Accept Offers:</label>
+      <%= f.check_box :offers, class: 'form-control input-sm' %>
+    </div>
+  </div>
     <div class="row">
       <div class="col-md-11">
         <div class="form-group">

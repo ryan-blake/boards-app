@@ -529,7 +529,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:shippable, :rate, :upc ,:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :used, :footgear, :width, :length, :name, :type_id, :category_id, :tail_id, :fin_id, :list_time, :volume, :address,
+      params.require(:board).permit(:offers, :shippable, :rate, :upc ,:tracking, :customer_id, :shipped, :shipping, :for_sale, :pending, :title, :description, :arrived, :user_id, :price, :lendth, :make, :used, :footgear, :width, :length, :name, :type_id, :category_id, :tail_id, :fin_id, :list_time, :volume, :address,
       :city, :cost, :margin, :company, :state, :remote_image_url, :zipcode, :inventory, images_files: [], images_attributes: [ :id, :file, :_destroy], accessories_attributes: [:id, :upc,:measured, :measure, :unit_id, :price, :color, :inventory, :kind_id, :title, :user_id, :board_id, :category_id, :brand,
          images_files: [], images_attributes: [ :id, :file, :_destroy]], size_attributes: [ :id, :name, :feet, :inches, :volume, :length, :width, :thickness, :unit_id, :_destroy],)
     end

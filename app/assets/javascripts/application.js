@@ -17,7 +17,6 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require refile
-//= require jquery.slick
 //= require Chart.bundle
 //= require chartkick
 //= require_tree .

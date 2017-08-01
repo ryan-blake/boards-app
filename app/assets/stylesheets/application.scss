@@ -19,8 +19,6 @@
 @import 'bootstrap-datetimepicker';
 @import "font-awesome-sprockets";
 @import "font-awesome";
-@import 'slick';
-@import 'slick-theme';
 
 
 
@@ -320,32 +318,6 @@ background-color:lightgrey;
     padding-right: 0 !important;
     padding-left: 0 !important;
 }
-// slickkkccckkc
-.slick-slide img {
-    display: inline !important;
-}
-.slick-track {
-  margin: 0 auto;
-}
-
-.slick-next {
-  font-size:15px;
-  right: 5px;
-  z-index: 400;
-  color:black;
-}
-
-.slick-prev {
-  font-size:15px;
-  left: 5px;
-  z-index: 400;;
-  color:black;
-}
-.slick-dots {
-    position: relative !important;
-    bottom: -30px !important;
-    right: 30px;
-}
 
 /* Preload images */
 body:after {
@@ -591,10 +563,8 @@ display: none;
   right: -30%;
 }
 
-
-
-// powered by google --delete
-.pac-container:after {  /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+// powered by ggle --delete
+.pac-container:after {
    background-image: none !important;
    height: 0px;
 }
@@ -634,25 +604,24 @@ font-size:13px;
 }
 
 
-
 #error_explanation {
-width: 100%;
-padding: 7px;
-padding-bottom: 0;
-margin-bottom: 20px;
-background-color: mediumseagreen;
-border: none;
+  width: 100%;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: mediumseagreen;
+  border: none;
 }
 #error_explanation h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0;
-    background-color: darkslategray;
-    color: #fff;
-    border:none;
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0;
+  background-color: darkslategray;
+  color: #fff;
+  border:none;
 }
 
 .field_with_errors {
@@ -672,6 +641,11 @@ border: none;
   height:50px;
   top:40px;
   position:fixed;
+}
+
+.alert .close {
+  color: #fff;
+  opacity: 1;
 }
 
 .alert-notice {
