@@ -52,14 +52,17 @@ get 'featured' => 'boards#show'
   resources :charges do
     collection do
         get 'shipped_boards','search_shipped','picked_boards', 'search_picked', 'receipts', 'search_receipts',
-        'pending_boards'
+        'pending_boards', 'search_pending','offers_boards', 'search_offers'
       end
   end
+  get 'complete_charge' => 'charges#complete'
+  get 'complete_charge' => 'charges#retrieve'
+  get 'destroy_charge' => 'charges#destroy'
+
 
   resources :tokens, only: [:new, :create]
 
-  get 'complete_charge' => 'charges#complete'
-  get 'complete_charge' => 'charges#retrieve'
+
 
   get'msg' => 'conversations#msg'
   get 'messages/create'

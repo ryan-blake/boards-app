@@ -1,0 +1,3 @@
+$('#results-offers').html('<%= j render partial: 'offers_boards' %>');
+$("#offers").html("<%=j render partial: 'offers_boards' %>");
+$('#offers_boards').html('<%= escape_javascript(paginate(@offers_boards, window: 1, :remote => true)) %>');

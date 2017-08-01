@@ -41,6 +41,9 @@ class Charge < ApplicationRecord
     [address, city, state, zipcode].join(', ')
   end
 
+  def deny
+    self.destroy
+  end
   def accessory_cost
     if self.accessories?
 

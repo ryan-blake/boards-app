@@ -1,7 +1,7 @@
-<div  id="results_pending">
+<div  id="results_offers">
   <div class="top-dash">
   <div class="row" id="pending-table">
-    <% if @pending_boards.count == 0 %>
+    <% if @offers_boards.count == 0 %>
       <%= render partial: 'boards/none' %>
     <% end %>
     <thead>
@@ -15,7 +15,7 @@
       </tr>
       <td>
         <div class="center-text" id="pending_boards" style="position: relative;bottom: 10px;">
-        <%= paginate @pending_boards, remote: true, window: 1 %>
+        <%= paginate @offers_boards, remote: true, window: 1 %>
         </div>
       </td>
     </thead>
@@ -39,7 +39,7 @@
         </thead>
 
         <tbody>
-        <% @pending_boards.each do |charge| %>
+        <% @offers_boards.each do |charge| %>
             <tr>
               <td class= "desktop-items-img" style="margin:0px;"><%= link_to attachment_image_tag(charge.board.images.first, :file, :fill, 80, 80), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
               <td class=" mobile-items-img" style="margin:0px;overflow-x:hidden;"><%= link_to attachment_image_tag(charge.board.images.first, :file, :fill, 40, 40), charge, remote: true, data: { toggle: "modal", target: "#chargeModal" } %></td>
@@ -74,8 +74,8 @@
 
     <tbody >
       <td>
-        <div class="center-text pagination" id="pending_boards" style="position:relative;top:-15px;">
-        <%= paginate @pending_boards, remote: true, window: 1 %>
+        <div class="center-text pagination" id="offers_boards" style="position:relative;top:-15px;">
+        <%= paginate @offers_boards, remote: true, window: 1 %>
         </div>
       </td>
     </tbody>
@@ -84,7 +84,7 @@
 </div>
 
 <div>
-<%= form_tag({controller: :charges, action: :search_pending}, {method: :get, remote: true}) do  %>
+<%= form_tag({controller: :charges, action: :search_offers}, {method: :get, remote: true}) do  %>
 <div class="col-md-4" style="position:fixed;top:50px;z-index:2;left:calc(45%);">
   <div class="input-group">
     <span class="input-group-btn">

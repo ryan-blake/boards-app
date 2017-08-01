@@ -246,6 +246,7 @@ end
   # DELETE /boards/1
   # DELETE /boards/1.json
   def destroy
+
     @board.destroy
     respond_to do |format|
       format.html { redirect_to boards_url, notice: 'Board was successfully destroyed.' }

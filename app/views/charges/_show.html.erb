@@ -36,9 +36,14 @@ if (trackPartial.style.display == 'block') {
 </script>
 
 <%= content_for :page_title, 'Review charge' %>
-<% if current_user == @charge.vendor %>
+<% unless current_user == @charge.vendor %>
+<% if @charge.completed == false %>
+  <%= link_to 'Cancel Offer', destroy_charge_path(id: @charge.id), class: 'btn-danger btn' %>
+  <% end %>
+<% else %>
 <% unless @charge.completed %>
 <%= link_to 'Accept Offer', complete_charge_path(charge_id: @charge.id, token: @charge.token, price: @charge.price, customer_id: @charge.customer_id, destination: @charge.vendor.uid, board_id: @charge.board_id), class: 'btn-success btn' %>
+<%= link_to 'Deny Offer', destroy_charge_path(id: @charge.id), class: 'btn-danger btn' %>
 
 <% else %>
 <h3 class="btn btn-sort" style="max-width: 100px;border: 1px solid black;left: 11px;display: block;" id="openTracking"><%= tracking = @charge.shipping == true ? "Tracking #" : "Picked Up" %></h3>

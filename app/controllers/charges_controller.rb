@@ -1,6 +1,6 @@
 
 class ChargesController < ApplicationController
-  before_action :set_charge, only: [ :update]
+  before_action :set_charge, only: [ :update, :destroy ]
   helper_method :sort_column, :sort_direction, :c_ft ,:c_cm, :c_mm
 
   def new
@@ -9,10 +9,35 @@ class ChargesController < ApplicationController
     #  stripe_account: connected_account_id).data
   end
 
+  def offers_boards
+    @user = current_user
+    @offers_boards = Charge.where(vendor_id: @user.id, completed: false, boolean: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
+  end
+
+  def search_offers
+    @user = current_user
+    @offers_boards = Charge.where(vendor_id: @user.id, completed: false, boolean: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
+    if params[:category_id].present?
+        @offers_boards = @offers_boards.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+    else
+        @offers_boards = @offers_boards.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+    end
+  end
+
   def pending_boards
     @user = current_user
-    @pending_boards = Charge.where(vendor_id: @user.id, completed: false, boolean: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
+    @pending_boards = Charge.where(user_id: @user.id, completed: false, boolean: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
   end
+  def search_pending
+    @user = current_user
+    @pending_boards = Charge.where(vendor_id: @user.id, completed: false, boolean: true).order(sort_column + ' ' + sort_direction).page(params[:page]).per(10)
+    if params[:category_id].present?
+        @pending_boards = @pending_boards.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").where(boards: {category_id: params[:category_id] }).order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+    else
+        @pending_boards = @pending_boards.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
+    end
+  end
+
 
     def complete
       unless @charge
@@ -220,9 +245,14 @@ end
   end
 
     def destroy
-      # if @harge.compeleted == false
+      if @charge.completed == false
         #destroy @charge
-
+        @charge.destroy
+        respond_to do |format|
+          format.html { redirect_to dash_path, notice: 'success' }
+          format.json { head :no_content }
+        end
+      else
       # else  if @charge.completed == true
       # refund stripe
     begin
@@ -269,6 +299,7 @@ end
       flash[:error] = e.message
       redirect_to dash_path
     end
+   end
   end
   def update
     respond_to do |format|

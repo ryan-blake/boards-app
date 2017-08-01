@@ -14,6 +14,7 @@
   <% unless @charge.completed %>
   <div class="form-group">
     <% link_to 'Accept', complete_charge_path(charge_id: @charge.id), class: 'btn-success' %>
+
   </div>
   <% else %>
   <% if @charge.shipping == true %>
