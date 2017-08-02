@@ -98,6 +98,7 @@ class ChargesController < ApplicationController
       :card => params[:stripeToken]
   )
    if params[:offer] == "true"
+
      @charge = Charge.new(
        price: params["amount"].to_i * 100,
        user_id: current_user.id,
