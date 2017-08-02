@@ -16,6 +16,55 @@ $(document).ajaxStop(function(){
 });
 // hide spinner on AJAX stop
 });
+//
+
+$(document).ready(
+   function(){
+       $('input:submit').attr('disabled',true);
+       $('input:file').change(
+           function(){
+               if ($(this).val()){
+                   $('input:submit').removeAttr('disabled');
+               }
+               else {
+                   $('input:submit').attr('disabled',true);
+               }
+           });
+   });
+
+//
+
+  $(document).ready(function() {
+    var receiptBtn = document.getElementById('btn-receipt');
+    var pendingBtn = document.getElementById('btn-pending');
+    var pendingBtnM = document.getElementById('btn-pending-m');
+    var receiptBtnM = document.getElementById('btn-receipt-m');
+    var receiptPG = document.getElementById('receipts');
+    var pendingPG = document.getElementById('pending');
+
+       receiptBtn.onclick = function() {
+          receiptPG.style['display'] = 'block';
+          pendingPG.style['display'] = 'none';
+
+       };
+       pendingBtn.onclick = function() {
+          pendingPG.style['display'] = 'block';
+          receiptPG.style['display'] = 'none';
+       };
+      //mobile
+      receiptBtnM.onclick = function() {
+         receiptPG.style['display'] = 'block';
+         pendingPG.style['display'] = 'none';
+      };
+      pendingBtnM.onclick = function() {
+         pendingPG.style['display'] = 'block';
+         receiptPG.style['display'] = 'none';
+      };
+     });
+  </script>
+<!--  -->
+  <% if @user.stripe_account %>
+  <script>
   $(document).ready(function() {
     var activeBtn = document.getElementById('btn-active');
     var receiptBtn = document.getElementById('btn-receipt');
@@ -187,10 +236,6 @@ $(document).ajaxStop(function(){
          accessoryPG.style['display'] = 'none';
          pendingPG.style['display'] = 'none';
          offersPG.style['display'] = 'none';
-
-
-
-
       };
       receiptBtnM.onclick = function() {
          receiptPG.style['display'] = 'block';
@@ -203,10 +248,6 @@ $(document).ajaxStop(function(){
          accessoryPG.style['display'] = 'none';
          pendingPG.style['display'] = 'none';
          offersPG.style['display'] = 'none';
-
-
-
-
       };
       inventoryBtnM.onclick = function() {
          inventoryPG.style['display'] = 'block';
@@ -219,10 +260,6 @@ $(document).ajaxStop(function(){
          accessoryPG.style['display'] = 'none';
          pendingPG.style['display'] = 'none';
          offersPG.style['display'] = 'none';
-
-
-
-
       };
       shippedBtnM.onclick = function() {
          shippedPG.style['display'] = 'block';
@@ -235,10 +272,6 @@ $(document).ajaxStop(function(){
          accessoryPG.style['display'] = 'none';
          pendingPG.style['display'] = 'none';
          offersPG.style['display'] = 'none';
-
-
-
-
       };
       pickUpBtnM.onclick = function() {
          pickUpPG.style['display'] = 'block';
@@ -251,10 +284,6 @@ $(document).ajaxStop(function(){
          accessoryPG.style['display'] = 'none';
          pendingPG.style['display'] = 'none';
          offersPG.style['display'] = 'none';
-
-
-
-
       };
       salesBtnM.onclick = function() {
         salesPG.style['display'] = 'block';
@@ -322,12 +351,6 @@ $(document).ajaxStop(function(){
 
       };
      });
-
-     // tokensJS
-  </script>
-     <!-- hide tokems partial -->
-     <% if @user.stripe_account %>
-  <script>
   $(document).ready(function() {
   var open = document.getElementById('showTokens');
   var tokenpartial = document.getElementById('tokenPartial');
@@ -424,22 +447,6 @@ $(document).ajaxStop(function(){
     </script>
   </div>
   <% end %>
-  <script>
-  $(document).ready(
-     function(){
-         $('input:submit').attr('disabled',true);
-         $('input:file').change(
-             function(){
-                 if ($(this).val()){
-                     $('input:submit').removeAttr('disabled');
-                 }
-                 else {
-                     $('input:submit').attr('disabled',true);
-                 }
-             });
-     });
-    </script>
-
 
   <% end %>
   <span id="dashboard"></span>
@@ -456,8 +463,6 @@ $(document).ajaxStop(function(){
   <% end %>
 <% end %>
 </div>
-
-
     <div id="tokenPartial" class="" style="    min-height: 285px;border:4px solid black;left:calc(50% - 150px);display:none;z-index:990;top:150px;position:absolute;">
       <h3 class="btn btn-danger pull-right" style="max-width:100%;display:none;position:relative;bottom:20px;" id="closePartial">&times</h3>
       <div style="width:300px;min-height:200px;max-height240px;background-color:#f5f5f5;z-index:989;">
@@ -500,16 +505,16 @@ $(document).ajaxStop(function(){
 </div>
 
 <!-- nav desktop -->
-<div style="height:593px;clear:right;position:absolute;" class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
+<div style="height:453px;clear:right;position:absolute;overflow-y:scroll;" class="dash-nav-desktop btn-group-vertical pull-left bcg" role="group" aria-label="...">
   <% if !@user.stripe_account  %>
     <button type="button" class="btn btn-default" id="btn-receipt"><%= link_to 'Receipts',  receipts_charges_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
-    <button type="button" class="btn btn-default" id="btn-offers"><%= link_to 'Offers',  offers_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+    <button type="button" class="btn btn-default" id="btn-pending"><%= link_to 'Pending',  pending_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
   <% else %>
     <button type="button" class="btn btn-default new-btn"><%= link_to 'Listing', new_board_path, target: :_blank  %></button>
     <button type="button" class="btn btn-default new-btn" id="new-accessory" ><%= link_to "Accessory" , accessoryInventory_path, remote: true, data: { toggle: "modal", target: "#newAcc" } %></button>
     <button type="button" class="btn btn-default" style="display:block;" id="btn-active"><%= link_to 'Active', active_boards_boards_path, remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
     <button type="button" class="btn btn-default" id="btn-inventory"><%= link_to 'Inactive',  inactive_boards_boards_path, remote:true,  data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."}  %></button>
-    <button type="button" class="btn btn-default" id="btn-accessory"><%= link_to 'Accessories', table_accessories_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
+    <button type="button" class="btn btn-default" style="font-size:13px;" id="btn-accessory"><%= link_to 'Accessories', table_accessories_path , remote: true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
     <button type="button" class="btn btn-default" id="btn-pickup"><%= link_to 'PickUp',  picked_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} , style: 'color:white;'%></button>
     <button type="button" class="btn btn-default" id="btn-shipped"><%= link_to 'Shipping',  shipped_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
     <button type="button" class="btn btn-default" id="btn-offers"><%= link_to 'Offers',  offers_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> ..."} %></button>
