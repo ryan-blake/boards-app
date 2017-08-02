@@ -362,6 +362,7 @@ $(document).ready(
     if (tokenpartial.style.display == 'none') {
        tokenpartial.style['display'] = 'block';
        closePartial.style['display'] = 'block';
+       closePartial.style['z-index'] = '3';
        open.style['display'] = 'none';
        dashData.style['overflow-y'] = 'hidden'
          //  elemelons
@@ -439,7 +440,6 @@ $(document).ready(
       tokenpartial.style['display'] = 'none';
       open.style['display'] = 'block';
       dashData.style['overflow-y'] = 'scroll'
-
     }
     };
   };

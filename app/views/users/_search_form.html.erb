@@ -23,7 +23,7 @@
 <%= form_tag({controller: :users, action: :search_signed_in}, {method: :get, remote: true}) do  %>
     <div class="row board-search-form" style="height: 106px;background-color:lightgrey;">
       <div class="main-form" style="">
-        
+
         <div style="position: relative;display: inline;bottom: -88px;left: calc(50% - 54px);">
           New:<span class="check-box-search"><%= check_box_tag :new,params[:new], true%> </span>
           Used:<span class="check-box-search"><%= check_box_tag :used,params[:used], true%> </span>

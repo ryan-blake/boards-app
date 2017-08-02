@@ -42,6 +42,7 @@ $("#geo-input").geocomplete();
   country: "US"
 });
 
+
 $(document).ready(function() {
 var openExtended = document.getElementById('open-extended');
 var extended = document.getElementById('extended-search');
@@ -188,11 +189,58 @@ type_select.onchange = function() {
 
 });
 
-function updateTextArea(source){
+function updateTypeArea(source){
  var value = source;
  var type_val = document.getElementById('show_type');
   type_val.innerHTML = value
   document.getElementById('hidden_type').value = value;
+   var surfSize = document.getElementById('surfTable');
+   var snowSize = document.getElementById('snowTable');
+   var skateSize = document.getElementById('skateTable');
+   var wakeSize = document.getElementById('wakeTable');
+
+  var openGuide = document.getElementById('showGuide');
+  var guidePartial = document.getElementById('guidePartial');
+  var closeGuide = document.getElementById('closeGuide');
+  openGuide.onclick = function() {
+    if (guidePartial.style.display == 'none') {
+       guidePartial.style['display'] = 'block';
+       closeGuide.style['display'] = 'block';
+       openGuide.style['display'] = 'none';
+     }
+     if (value == "1"){
+       surfSize.style['display'] = 'block'
+       snowSize.style['display'] = 'none'
+       skateSize.style['display'] = 'none'
+       wakeSize.style['display'] = 'none'
+     };
+     if (value == "2"){
+       snowSize.style['display'] = 'block'
+       surfSize.style['display'] = 'none'
+       skateSize.style['display'] = 'none'
+       wakeSize.style['display'] = 'none'
+     };
+     if (value == "3"){
+       skateSize.style['display'] = 'block'
+       surfSize.style['display'] = 'none'
+       snowSize.style['display'] = 'none'
+       wakeSize.style['display'] = 'none'
+     };
+     if (value == "4"){
+       wakeSize.style['display'] = 'block'
+       surfSize.style['display'] = 'none'
+       skateSize.style['display'] = 'none'
+       snowSize.style['display'] = 'none'
+     };
+     };
+     closeGuide.onclick = function() {
+       if (guidePartial.style.display == 'block') {
+          guidePartial.style['display'] = 'none';
+          closeGuide.style['display'] = 'none';
+          openGuide.style['display'] = 'block';
+        }
+  };
+
 };
 
 $(window).scroll(function(){
@@ -212,7 +260,7 @@ $(window).scroll(function(){
   <div id="type_select" style="">
     <%= form_tag({controller: :boards, action: :search_type}, {method: :get, remote: true}) do  %>
     <span id="type-value" class="type_collection" style="">
-      <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTextArea(this.value)"})  %>
+      <%= collection_select(nil, :type_id, Type.all.order(:name), :id, :name, options = {prompt: 'Select Type', id:'type-select' ,class: "typesone form-control"}, html_options = {id:'type-select' , :onchange => "updateTypeArea(this.value)"})  %>
     </span>
     <% submit_tag "Submit" %>
     <% end %>
@@ -273,12 +321,26 @@ $(window).scroll(function(){
     </div>
   </div>
 </div>
+<style>
+#guidePartial td{
+  font-size:10px;
+}
+#guidePartial th{
+  font-size:11px;
+}
+</style>
+
 
   <div id="mainsearch" class="bcg single-div" style="">
-
    <%= render partial: 'search_form' %>
    <hr class="style14" style="margin-top:1px;">
-   <span style="color: black !important;background-color: white;position: absolute;top: 121px;right: 28px;text-decoration:underline;"> SIze Guide </span>
+   <span id="showGuide" style="color: black !important;background-color: white;position: absolute;top: 121px;right: 28px;text-decoration:underline;cursor:pointer;"> SIze Guide </span>
+   <div id="guidePartial" class="" style="left:calc(50% - 200px);border:1px solid black;display:none;z-index:990;top:150px;position:absolute;">
+     <h3 class="btn btn-danger pull-right layer" style="height:30px;max-width:100%;display:none;position:relative;bottom:20px;" id="closeGuide">&times</h3>
+     <div style="background-color:#f5f5f5;">
+     <%= render partial: 'layouts/guide' %>
+     </div>
+   </div>
 
   </div>
 
