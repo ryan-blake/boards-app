@@ -1299,6 +1299,11 @@ margin-top:-65px;
     position: relative;
     height: 47px;
   }
+
+  .dash-nav-mobile {
+    height:350px;
+    overflow-y: scroll;
+  }
 // responsive
 
 @media (max-width: 484px) {
