@@ -278,9 +278,8 @@ $(window).scroll(function(){
        <% @surf = current_user.not_my_boards(@surf) %>
        <% end %>
        <hr class="style13" style="margin:0;">
-       <span id="type_button-surf" class="center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
+       <span id="type_button-surf" class="ftr-btn center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
        font-size: 27px;left: calc(50% - 32px);">Surf</span>
-
        <% if @surf.count >= 1 %>
        <%= render partial: 'featured', locals: {boards: @surf} %>
        <% end %>
@@ -290,7 +289,7 @@ $(window).scroll(function(){
       <% @snow = current_user.not_my_boards(@snow) %>
       <% end %>
       <hr class="style13" style="margin:0;">
-      <span id="type_button-snow" class="center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
+      <span id="type_button-snow" class="ftr-btn center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
       font-size: 27px;left: calc(50% - 32px);">Snow</span>
 
        <% if @snow.count >= 1 %>
@@ -302,7 +301,7 @@ $(window).scroll(function(){
        <% @skate = current_user.not_my_boards(@skate) %>
        <% end %>
        <hr class="style13" style="margin:0;">
-       <span id="type_button-skate" class="center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
+       <span id="type_button-skate" class="ftr-btn center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
        font-size: 27px;left: calc(50% - 32px);">Skate</span>
        <% if @skate.count >= 1 %>
         <%= render partial: 'featured', locals: {boards: @skate} %>
@@ -313,7 +312,7 @@ $(window).scroll(function(){
          <% @wake = current_user.not_my_boards(@wake) %>
        <% end %>
        <hr class="style13" style="margin:0;">
-       <span id="type_button-wake" class="center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
+       <span id="type_button-wake" class="ftr-btn center-text" style="color:darkslategrey;text-shadow:2px 0px snow;position:relative;
        font-size: 27px;left: calc(50% - 32px);">Wake</span>
        <%= render partial: 'featured', locals: {boards: @wake} %>
        <% if @wake.count >= 1 %>

@@ -1310,7 +1310,11 @@ margin-top:-65px;
  #wakeTable {
    display:none;
  }
- 
+
+ .ftr-btn {
+   cursor: pointer;
+ }
+
 // responsive
 
 @media (max-width: 484px) {
