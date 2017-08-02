@@ -69,6 +69,10 @@ Category.find_or_create_by(
   type_id: Type.find_by(name: "Wake").id
 )
 Category.find_or_create_by(
+  name: "Surf",
+  type_id: Type.find_by(name: "Wake").id
+)
+Category.find_or_create_by(
   name: "Skis",
   type_id: Type.find_by(name: "Wake").id
 )
@@ -109,6 +113,10 @@ Kind.find_or_create_by(
 )
 Kind.find_or_create_by(
   name: "Bindings",
+  category_id: Category.find_by(name: "Skis").id
+)
+Kind.find_or_create_by(
+  name: "Poles",
   category_id: Category.find_by(name: "Skis").id
 )
 Kind.find_or_create_by(
