@@ -97,6 +97,7 @@ class ChargesController < ApplicationController
       :email => params[:stripeEmail],
       :card => params[:stripeToken]
   )
+
    if params[:offer] == "true"
      @charge = Charge.new(
        price: params["amount"].to_i * 100,
@@ -139,8 +140,6 @@ class ChargesController < ApplicationController
     state: params["stripeShippingAddressState"],
     country: params["stripeShippingAddressCountryCode"],
   )
-
-
   @charge.save
   @new_user = false
   complete
@@ -155,13 +154,8 @@ class ChargesController < ApplicationController
       if User.where(:email => user_email).exists?
         redirect_to new_user_session_path , :notice => "Howdy, Email is already in use, please login or use a different email to complete your purchase."
       else
-      current_user = User.create!(
-      name: user_email,
-      email: user_email,
-      role: 0,
-      password: Faker::Code.asin,
-    )
-    current_user.skip_confirmation!
+      new_user_charge(params[:stripeEmail])
+
     customer = Stripe::Customer.create(
         :email => params[:stripeEmail],
       :card => params[:stripeToken]
@@ -169,7 +163,7 @@ class ChargesController < ApplicationController
 
     @charge = Charge.new(
       price: params[:charge]["amount"].to_i,
-      user_id: current_user.id,
+      user_id: @user.id,
       vendor_id: params[:charge]["owner_id"].to_i,
       item: params[:charge]["item"],
       token: params[:stripeToken],
@@ -186,11 +180,92 @@ class ChargesController < ApplicationController
     @board.save
 
     @new_user = true
-    current_user.send_reset_password_instructions
+    @user.send_reset_password_instructions
     complete
 
    end
  end
+end
+def submit_offer(stripe_customer)
+    if current_user
+      @user = current_user
+    end
+     @charge = Charge.new(
+       price: params["amount"].to_i * 100,
+       user_id: @user.id,
+       vendor_id: params["vendor_id"].to_i,
+       item: params["item"],
+       token: params[:stripeToken],
+       customer_id: stripe_customer,
+       completed: false,
+       board_id: params["board_id"],
+       accessories: params["accessories"],
+       charge_stripe: params["name"],
+       boolean: true,
+       address: params["address-line1"],
+       zipcode: params["address-zip"],
+       city: params["address-city"],
+       country: params["address-country"],
+       state: params["address-state"],
+       shipping: params["shipping"],
+     )
+     @charge.update_attribute(:boolean, true)
+     @charge.save
+     redirect_to dash_path
+   end
+
+   def submit_offer(stripe_customer)
+       if current_user
+         @user = current_user
+       end
+        @charge = Charge.new(
+          price: params["amount"].to_i * 100,
+          user_id: @user.id,
+          vendor_id: params["vendor_id"].to_i,
+          item: params["item"],
+          token: params[:stripeToken],
+          customer_id: stripe_customer,
+          completed: false,
+          board_id: params["board_id"],
+          accessories: params["accessories"],
+          charge_stripe: params["name"],
+          boolean: true,
+          address: params["address-line1"],
+          zipcode: params["address-zip"],
+          city: params["address-city"],
+          country: params["address-country"],
+          state: params["address-state"],
+          shipping: params["shipping"],
+        )
+        @charge.update_attribute(:boolean, true)
+        @charge.save
+        redirect_to dash_path
+      end
+
+   def new_user_charge(user_email)
+     current_user = User.create!(
+     name: user_email,
+     email: user_email,
+     role: 0,
+     password: Faker::Code.asin,
+   )
+   current_user.skip_confirmation!
+     @user = current_user
+     @user
+   end
+
+
+
+def new_user_charge(user_email)
+  current_user = User.create!(
+  name: user_email,
+  email: user_email,
+  role: 0,
+  password: Faker::Code.asin,
+)
+current_user.skip_confirmation!
+  @user = current_user
+  @user
 end
 
     def show

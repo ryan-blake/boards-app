@@ -528,7 +528,7 @@ $(document).ready(
 <!--!nav desktop  -->
 
 <!-- nav mobile  starts at < 835px-->
-<div class="dash-nav-mobile btn-group-vertical pull-left bcg" style="" role="group" aria-label="...">
+<div class="dash-nav-mobile btn-group-vertical pull-left bcg" role="group" aria-label="...">
    <div class="btn-group" role="group">
      <button type="button" style="min-width:95px;border:1px solid black;" class="btn btn-default dropdown-toggle-mobile">
        Dashboard
@@ -674,7 +674,8 @@ $(window).on('popstate', function() {
 
 
 $('.mobNavLi').on('click', function(){
-  $('.mobile-drop-dash').toggle()
+  $('.mobile-drop-dash').toggle();
+
 })
 $('.dropdown-toggle-mobile').on('click', function(){
   $('.mobile-drop-dash').toggle()
