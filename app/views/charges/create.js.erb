@@ -1,0 +1,4 @@
+<% if @returning_user ==  true %>
+  $("#loginModal .modal-content").html('<%= j render partial: "new" %>');
+  $("#loginModal").modal()
+<% end %>

@@ -36,7 +36,7 @@
         <div class="row">
           <div class="col-md-12">
             <% if @user %>
-            <input type="hidden" name="stripeEmail" value="<%= @user.emai %>">
+            <input type="hidden" name="stripeEmail" value="<%= @user.email %>">
             <% else %>
             <input type="email" name="stripeEmail" class="form-control input-lg field" maxlength="40" placeholder="email">
             <% end %>

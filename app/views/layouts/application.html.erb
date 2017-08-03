@@ -13,6 +13,9 @@
     <%= yield(:header) %>
   </head>
   <body>
+    <% if flash[:partial] %>
+      <%= render partial: "sessions/#{flash[:partial]}" %>
+    <% end %>
     <%= render 'layouts/header' %>
 
     <%= yield %>

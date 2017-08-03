@@ -2,6 +2,7 @@
 class ChargesController < ApplicationController
   before_action :set_charge, only: [ :update, :destroy ]
   helper_method :sort_column, :sort_direction, :c_ft ,:c_cm, :c_mm
+  respond_to :html, :json
 
   def new
     # Stripe::Charge.all(
@@ -36,6 +37,10 @@ class ChargesController < ApplicationController
     else
         @pending_boards = @pending_boards.joins(:board).where("(upc like ? or title like ? or description like ? or make like ?)","%#{params[:keyword]}%","%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%").order(sort_column + ' ' + sort_direction).page(params[:page]).per(8)
     end
+  end
+
+  def login
+
   end
 
   def submit_offer(stripe_customer)
@@ -161,7 +166,6 @@ class ChargesController < ApplicationController
        country: params["stripeShippingAddressCountryCode"],
      )
 
-
      @charge.update_attribute(:boolean, true)
      @charge.save
      @board = Board.where(id: @charge.board_id).first
@@ -179,7 +183,10 @@ class ChargesController < ApplicationController
       user_email = params[:stripeEmail]
 
       if User.where(:email => user_email).exists?
-        redirect_to new_user_session_path , :notice => "Howdy, Email is already in use, please login or use a different email to complete your purchase."
+        @returning_user = true
+        @board = Board.where(id: params[:charge]["board_id"])[0]
+        flash[:partial] = "new"
+        redirect_to board_path(@board)
       else
       current_user = User.create!(
       name: user_email,
