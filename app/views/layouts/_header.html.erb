@@ -26,7 +26,7 @@
         </div>
         <button type="button" class="btn btn-inverse" style=""><%= link_to 'Log out', destroy_user_session_path, method: :delete %></button>
         <% else %>
-          <button type="button" class="btn btn-inverse"> <%= link_to "Edit", new_user_session_path, class: 'center-text btn-btn-sm btn-primary pull-right', remote: true, data: { toggle: "modal", target: "#loginModal" } %></button>
+          <button type="button" class="btn btn-inverse"> <%= link_to "Log In", new_user_session_path, remote: true, data: { toggle: "modal", target: "#loginModal" } %></button>
           <button type="button" class="btn btn-inverse"><%= link_to 'Log In', new_user_session_path %></button>
           <button type="button" class="btn btn-inverse"><%= link_to 'Sign Up', new_user_registration_path %></button>
           <button type="button" class="btn btn-success refresh-btn"><%= link_to 'login',  new_user_session_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Updating... "} , style: 'color:white;'%></button>

@@ -17,7 +17,7 @@ mount Sidekiq::Web => '/sidekiq'
     end
   end
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", sessions: 'sessions' }
   resources :users do
      resources :reviews
   collection do

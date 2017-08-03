@@ -1,0 +1,66 @@
+
+    <div class="modal-header">
+      <button class="close" data-dismiss="modal">x</button>
+    </div>
+    <div class="modal-body">
+      <h2>Sign up</h2>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true) do |f| %>
+        <%= devise_error_messages! %>
+        <div class="col-sm-6">
+        <div style="width:150px;"class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div style="width:150px;"class="form-group">
+          <%= f.label :company %>
+          <%= f.text_field :company, class: 'form-control' %>
+        </div>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, class: 'form-control' %>
+        </div>
+        <div class="field">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+        </div>
+      </div>
+        <div class="well col-sm-3">
+        <strong> Address released to Users after payment is received. </strong>
+          <div class="field">
+             <%= f.label :address %><br/>(123 first st)
+             <%= f.text_field :address, class: 'form-control' %><br/>
+           </div>
+
+           <div class="field">
+            <%= f.label :city %><br />
+            <%= f.text_field :city, class: 'form-control' %>
+           </div>
+           <div class="field">
+            <%= f.label :state %>(CA)<br />
+            <%= f.text_field :state, class: 'form-control' %>
+           </div>
+           <div class="field">
+            <%= f.label :zipcode %><br />
+            <%= f.number_field :zipcode, class: 'form-control' %>
+           </div>
+         </div>
+
+
+        <div class="actions">
+          <%= f.submit "Sign up", class: 'form-control btn-info' %>
+        </div>
+      <% end %>
+
+      <%= render "devise/shared/links" %>
+
+</div>
+</div>
