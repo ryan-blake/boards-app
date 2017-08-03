@@ -1,5 +1,5 @@
+<div class="top-dash">
 <div  id="results_pending">
-  <div class="top-dash">
   <div class="row" id="pending-table">
     <% if @pending_boards.count == 0 %>
       <%= render partial: 'boards/none' %>
@@ -14,7 +14,7 @@
         </td>
       </tr>
       <td>
-        <div class="center-text" id="pending_boards" style="position: relative;bottom: 10px;">
+        <div class="center-text dash-paginate" id="pending_boards" style="position: relative;bottom: 10px;">
         <%= paginate @pending_boards, remote: true, window: 1 %>
         </div>
       </td>

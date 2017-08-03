@@ -1,14 +1,11 @@
 <div class="top-dash">
-<div id="results">
+<div id="results-shipped">
   <div id="shipped-table">
     <% if @shipped_boards.count == 0 %>
       <%= render partial: 'boards/none' %>
     <% end %>
     <thead>
       <td>
-        <div class="center-text" id="active_boards">
-        <%= paginate @shipped_boards, remote: true, window: 1 %>
-        </div>
         <tr>
           <td class="filtering center-text">
             <button type="button" class="btn btn-success refresh-btn"><%= link_to 'Refresh',  shipped_boards_charges_path, remote:true, data: {disable_with: "<i class='fa fa-spinner fa-spin' ></i> Updating... "} , style: 'color:white;'%></button>
@@ -20,6 +17,9 @@
           </td>
         </tr>
       </td>
+      <div class="center-text dash-pagination" style="margin-botton:0px !important!" id="active_boards">
+      <%= paginate @shipped_boards, remote: true, window: 1 %>
+      </div>
     </thead>
     <div class="table-scrollable ">
       <table style="" class="table table-bordered table-striped table-hover" id="">

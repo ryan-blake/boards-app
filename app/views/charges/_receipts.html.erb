@@ -1,11 +1,11 @@
-<div id="results">
+<div id="results-receipts">
   <div id="receipts-table" class="top-dash">
     <% if @receipts.count == 0 %>
       <%= render partial: 'boards/none' %>
     <% end %>
     <thead>
       <td>
-        <div class="center-text" id="active_boards">
+        <div class="center-text dash-pagination" id="active_boards">
         <%= paginate @receipts, remote: true, window: 1 %>
         </div>
         <tr>

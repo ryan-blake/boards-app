@@ -1,4 +1,4 @@
-<div id="results">
+<div id="results-inactive">
  <div class="top-dash">
 <h4 class="dash-data-title"> Active Inventory </h4>
   <div class="row" id="pending-table">
@@ -15,7 +15,7 @@
         </td>
       </tr>
       <td>
-        <div class="center-text" id="inactive_boards" style="position: relative;bottom: 10px;">
+        <div class="center-text dash-paginate" id="inactive_boards" style="position: relative;bottom: 10px;">
         <%= paginate @inactive_boards, remote: true, window: 1 %>
         </div>
       </td>

@@ -1,12 +1,12 @@
 <div class="top-dash">
-<div id="results">
+<div id="results-picked">
   <div id="picked-table">
     <% if @picked_boards.count == 0 %>
       <%= render partial: 'boards/none' %>
     <% end %>
     <thead>
       <td>
-        <div class="center-text" id="active_boards">
+        <div class="center-text dash-pagination" id="active_boards">
         <%= paginate @picked_boards, remote: true, window: 1 %>
         </div>
         <tr>
