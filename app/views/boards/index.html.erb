@@ -210,6 +210,8 @@ function updateTypeArea(source){
   var openGuide = document.getElementById('showGuide');
   var guidePartial = document.getElementById('guidePartial');
   var closeGuide = document.getElementById('closeGuide');
+  var overlay = document.getElementById('overlay')
+
   openGuide.onclick = function() {
     if (guidePartial.style.display == 'none') {
        guidePartial.style['display'] = 'block';
@@ -221,6 +223,8 @@ function updateTypeArea(source){
        snowSize.style['display'] = 'none'
        skateSize.style['display'] = 'none'
        wakeSize.style['display'] = 'none'
+       overlay.style['display'] = 'block'
+
      };
      if (value == "2"){
        snowSize.style['display'] = 'block'
@@ -246,6 +250,8 @@ function updateTypeArea(source){
           guidePartial.style['display'] = 'none';
           closeGuide.style['display'] = 'none';
           openGuide.style['display'] = 'block';
+          overlay.style['display'] = 'none'
+
         }
   };
 
@@ -335,17 +341,29 @@ $(window).scroll(function(){
 #guidePartial th{
   font-size:11px;
 }
+div.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: none;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.75); /*this sets the slightly see-through black*/
+    z-index: 100; /*Make this less than the existing popup div*/
+}
 </style>
 
   <div id="mainsearch" class="bcg single-div" style="">
    <%= render partial: 'search_form' %>
    <hr class="style14" style="margin-top:1px;">
    <span id="showGuide" style="color: black !important;background-color: white;position: absolute;top: 121px;right: 28px;text-decoration:underline;cursor:pointer;"> SIze Guide </span>
+   <div class="overlay" id="overlay">
    <div id="guidePartial" class="" style="left:calc(50% - 197px);border:1px solid black;display:none;z-index:990;top:150px;position:absolute;">
      <h3 class="btn btn-danger pull-right layer" style="height:30px;max-width:100%;display:none;position:relative;bottom:20px;" id="closeGuide">&times</h3>
      <div style="background-color:#f5f5f5;">
      <%= render partial: 'layouts/guide' %>
      </div>
+   </div>
    </div>
 
   </div>
