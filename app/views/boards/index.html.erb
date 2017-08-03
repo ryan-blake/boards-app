@@ -231,18 +231,24 @@ function updateTypeArea(source){
        surfSize.style['display'] = 'none'
        skateSize.style['display'] = 'none'
        wakeSize.style['display'] = 'none'
+       overlay.style['display'] = 'block'
+
      };
      if (value == "3"){
        skateSize.style['display'] = 'block'
        surfSize.style['display'] = 'none'
        snowSize.style['display'] = 'none'
        wakeSize.style['display'] = 'none'
+       overlay.style['display'] = 'block'
+
      };
      if (value == "4"){
        wakeSize.style['display'] = 'block'
        surfSize.style['display'] = 'none'
        skateSize.style['display'] = 'none'
        snowSize.style['display'] = 'none'
+       overlay.style['display'] = 'block'
+
      };
      };
      closeGuide.onclick = function() {
@@ -251,7 +257,6 @@ function updateTypeArea(source){
           closeGuide.style['display'] = 'none';
           openGuide.style['display'] = 'block';
           overlay.style['display'] = 'none'
-
         }
   };
 
