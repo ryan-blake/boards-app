@@ -90,13 +90,14 @@ class ChargesController < ApplicationController
       end
 
 
-  def create
+      def create
 
-  if current_user
-  customer = Stripe::Customer.create(
-      :email => params[:stripeEmail],
-      :card => params[:stripeToken]
-  )
+      if current_user
+      customer = Stripe::Customer.create(
+          :email => params[:stripeEmail],
+          :card => params[:stripeToken]
+      )
+
    if params[:offer] == "true"
 
      @charge = Charge.new(
@@ -123,29 +124,33 @@ class ChargesController < ApplicationController
      redirect_to dash_path
    else
 
-  @charge = Charge.new(
-    price: params[:charge]["amount"].to_i,
-    user_id: current_user.id,
-    vendor_id: params[:charge]["owner_id"].to_i,
-    item: params[:charge]["item"],
-    token: params[:stripeToken],
-    customer_id: customer.id,
-    completed: false,
-    board_id: params[:charge]["board_id"],
-    shipping: params[:charge]["shipping"],
-    accessories: params[:charge]["accessories"],
-    address: params["stripeShippingAddressLine1"],
-    zipcode: params["stripeShippingAddressZip"],
-    city: params["stripeShippingAddressCity"],
-    state: params["stripeShippingAddressState"],
-    country: params["stripeShippingAddressCountryCode"],
-  )
+     @charge = Charge.new(
+       price: params[:charge]["amount"].to_i,
+       user_id: current_user.id,
+       vendor_id: params[:charge]["owner_id"].to_i,
+       item: params[:charge]["item"],
+       token: params[:stripeToken],
+       customer_id: customer.id,
+       completed: false,
+       board_id: params[:charge]["board_id"],
+       shipping: params[:charge]["shipping"],
+       accessories: params[:charge]["accessories"],
+       address: params["stripeShippingAddressLine1"],
+       zipcode: params["stripeShippingAddressZip"],
+       city: params["stripeShippingAddressCity"],
+       state: params["stripeShippingAddressState"],
+       country: params["stripeShippingAddressCountryCode"],
+     )
 
 
-  @charge.save
-  @new_user = false
-  complete
-  end
+     @charge.update_attribute(:boolean, true)
+     @charge.save
+     @board = Board.where(id: @charge.board_id).first
+     @board.inventory += -1
+     @board.save
+     @new_user = false
+     complete
+    end
 
   # ChargeMailer.new_charge_user(@charge).deliver_now
   # ChargeMailer.new_charge_vendor(@charge).deliver_now
@@ -195,7 +200,6 @@ class ChargesController < ApplicationController
 end
 
     def show
-
       @charge = Charge.find(params[:id])
       #
       @accessories = @charge.accessories
