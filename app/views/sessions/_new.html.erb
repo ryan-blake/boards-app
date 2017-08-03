@@ -1,6 +1,9 @@
 <div class="modal-header">
       <button class="close" data-dismiss="modal">x</button>
       <h2 class="dark">Log in</h2>
+      <% if @user_exists %>
+            <span> Email in use, login to continue </span>
+      <% end %>
     </div>
     <div class="modal-body">
       <div class="facebook-btn center-text">

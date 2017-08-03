@@ -1,3 +1,28 @@
+<style>
+.alert{
+  position:absolute;
+  top:20px;
+  z-index: 99;
+  left:10px;
+}
+</style>
+<% if flash[:partial] %>
+  <script>
+    $(document).ready(function () {
+      $("#loginModal .modal-content").html('<%= j render partial: "sessions/#{flash[:partial]}" %>');
+      $('#loginModal').modal('show');
+    });
+    alert('email in use login to complete purchase')
+  </script>
+<% end %>
+<div class="modal fade bs-example-modal-xs" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="loginModal">
+   <div class="modal-dialog modal-lg" role="document">
+     <div class="modal-content" style="background-color:whitesmoke;">
+     </div>
+   </div>
+   <div class="center-text" id="paginator">
+   </div>
+ </div>
 <div id="show-view">
 <% if ( user_signed_in? && current_user.id === @board.user.id || @board.customer_id) || (@board.for_sale == true ) %>
 <!--  -->

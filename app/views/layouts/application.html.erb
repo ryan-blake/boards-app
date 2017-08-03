@@ -9,17 +9,20 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-
     <%= yield(:header) %>
   </head>
   <body>
-    <% if flash[:partial] %>
-      <%= render partial: "sessions/#{flash[:partial]}" %>
-    <% end %>
     <%= render 'layouts/header' %>
+    <% if flash[:partial] == "new" %>
+      <script>
+      $(window).load(function(){
+        $("#loginModal .modal-content").html('<%= j render partial: "sessions/new" %>');
+        $("#loginModal").modal('show');
+        });
+      </script>
+    <% end %>
 
     <%= yield %>
-
     <%if current_user %>
      <%= render 'conversations/chat' %>
     <% end %>

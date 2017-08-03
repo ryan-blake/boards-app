@@ -186,7 +186,7 @@ class ChargesController < ApplicationController
         @returning_user = true
         @board = Board.where(id: params[:charge]["board_id"])[0]
         flash[:partial] = "new"
-        redirect_to board_path(@board)
+        redirect_to board_path(@board), flash: {notice: 'Hello, Email is already in use please login.'}
       else
       current_user = User.create!(
       name: user_email,
