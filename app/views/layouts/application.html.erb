@@ -7,22 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content=" is the number one source for selling and buying gently used surf | skate | snow | boards.">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag   'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= yield(:header) %>
+    <div id="bodyHeader">
+        <%= render 'layouts/header' %>
+    </div>
   </head>
   <body>
-  <div id="bodyHeader">
-      <%= render 'layouts/header' %>
-  </div>
-    <% if flash[:partial] == "new" %>
-      <script>
-      $(window).load(function(){
-        $("#loginModal .modal-content").html('<%= j render partial: "sessions/new" %>');
-        $("#loginModal").modal('show');
-        });
-      </script>
-    <% end %>
+
+
 
     <%= yield %>
     <%if current_user %>

@@ -56,6 +56,16 @@
 <span id="top"></span>
 </div>
 
+<% if flash[:partial] == "new" || flash[:partial] == "Invalid User or Password"%>
+  <script>
+  $(window).load(function(){
+    $("#loginModal .modal-content").html('<%= j render partial: "sessions/new" %>');
+    $("#loginModal").modal('show');
+    });
+  </script>
+<% end %>
 <script>
-
+$(document).on('page:load', function(){
+    $.rails.refreshCSRFTokens();
+});
 </script>

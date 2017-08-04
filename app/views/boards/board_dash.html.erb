@@ -456,6 +456,9 @@ $(document).ready(
   <div class="pull-left" style="top:35px;left:90px;width:190px;position:fixed;z-index:1;">
       <h3 class="btn btn-sort" id="showTokens"><%= tokens = current_user.tokens > 0 ? "#{current_user.tokens.to_s} tokens" : "get" + " tokens " %></h3>
   </div>
+  <div class="pull-right" style="top:35px;left:90px;width:190px;position:fixed;z-index:1;">
+    <h3 class="btn btn-sort" id="logout"><%= link_to 'Log out', destroy_user_session_path, method: :delete %></h3>
+  </div>
   <% if current_user.role == "admin" %>
   <div id="csv-upload"><%= form_tag import_boards_path, multipart: true do %>
     <%= file_field_tag :file %>
