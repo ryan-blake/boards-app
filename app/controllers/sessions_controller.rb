@@ -1,5 +1,4 @@
 class SessionsController < Devise::SessionsController
-  self.per_form_csrf_tokens = true
 
   respond_to :html, :js
   def new
@@ -16,7 +15,7 @@ def create
     if @resource.present?
     if @resource.valid_password?(params[:user][:password])
       respond_to do |format|
-        format.js
+        format.js  { flash[:notice] = "Welcome"}
       end
     else
       respond_to do |format|
