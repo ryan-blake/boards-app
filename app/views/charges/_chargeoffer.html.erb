@@ -20,7 +20,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <small id="offerInfo">Offers expire in 48 hours. Accessories will be added if applicable. If shipping is selected the fee will be added to offer total.  </small>
-              <input class="form-control input-lg" id="amount" name="amount" type="text" placeholder="$ Amount '20.00'">
+              <input class="form-control input-lg"  id="amount" name="amount"  min="<%=  (0.8) * (@board.price) %>" step="0.01" type="number" placeholder="$ Amount '20.00'">
             </div>
           </div>
         </div>
