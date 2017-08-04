@@ -31,10 +31,6 @@ $(this).remove();
 });
 }, 5000);
 
-
-
-
-
 // alter to match if board.type (selected) display only makes where boards == type selected
 // $(document).ready(function() {
 //   var subcat;

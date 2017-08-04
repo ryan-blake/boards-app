@@ -9,7 +9,7 @@
       <div class="facebook-btn center-text">
         <%= link_to 'Facebook log in', user_facebook_omniauth_authorize_path, class: 'btn-sort btn' %>
         </div>
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name))  do |f| %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), remote: true)  do |f| %>
       <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, class:'form-control' %>
@@ -30,6 +30,8 @@
       <div class="actions">
         <%= f.submit "Log in", class: "btn btn-md btn-black-line" %>
       </div>
+
       <% end %>
+
       <%= render "devise/shared/links" %>
     </div>

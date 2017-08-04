@@ -12,7 +12,9 @@
     <%= yield(:header) %>
   </head>
   <body>
-    <%= render 'layouts/header' %>
+  <div id="bodyHeader">
+      <%= render 'layouts/header' %>
+  </div>
     <% if flash[:partial] == "new" %>
       <script>
       $(window).load(function(){
