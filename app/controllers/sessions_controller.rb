@@ -1,5 +1,4 @@
 class SessionsController < Devise::SessionsController
-
   respond_to :html, :js
   def new
     self.resource = resource_class.new(sign_in_params)
@@ -19,14 +18,14 @@ def create
       end
     else
       respond_to do |format|
-         format.js { flash[:partial] = "Invalid User or Password"
+         format.js { flash[:partial] = "Invalid Email or Password"
                      render action: 'password.js.erb'
                    }
       end
     end
     else
       respond_to do |format|
-         format.js { flash[:partial] = "Invalid User or Password"
+         format.js { flash[:partial] = "Invalid Email or Password"
                      render action: 'password.js.erb'
                    }
       end
@@ -37,7 +36,7 @@ end
 protected
 
 def invalid_login_attempt
-  set_flash_message(:alert, :invalid)
-  render json: flash[:alert], status: 401
+  set_flash_message(:notice, :invalid)
+  render json: flash[:notice], status: 401
 end
 end

@@ -1323,6 +1323,10 @@ margin-top:-65px;
    bottom: 10px;
  }
 
+ .alert:empty {
+   display: none;
+ }
+
 // responsive
 
 @media (max-width: 484px) {
